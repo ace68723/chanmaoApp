@@ -1,0 +1,120 @@
+{"SboxCategory":{
+  "categoryList": [
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "休闲食品",
+        "image": "./Images/休闲食品.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "泡面",
+        "image": "./Images/泡面.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "饼干",
+        "image": "./Images/饼干.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "糖果",
+        "image": "./Images/糖果.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "坚果",
+        "image": "./Images/坚果.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "蛋糕",
+        "image": "./Images/蛋糕.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "膨化食品",
+        "image": "./Images/膨化食品.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "饮品类",
+        "image": "./Images/饮品类.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "categoryType": 1,
+      "categoryParam": {
+        "name": "饮品类",
+        "image": "./Images/饮品类.png"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    }
+  ],
+  "searchRecordList": [
+    {
+      "searchRecordType": 1,
+      "searchRecordParam": {
+        "name": "浪味仙"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "searchRecordType": 1,
+      "searchRecordParam": {
+        "name": "黄飞红麻辣花生"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "searchRecordType": 1,
+      "searchRecordParam": {
+        "name": "大白兔奶糖"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    },
+    {
+      "searchRecordType": 1,
+      "searchRecordParam": {
+        "name": "大白兔奶糖"
+      },
+      "naviType": 2,
+      "naviParam": "SboxSearch"
+    }
+  ]
+}
+}
