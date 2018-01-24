@@ -106,7 +106,7 @@ export default class MyComponent extends Component {
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
-      this._getSectionHeader = this._getSectionHeader.bind(this);
+      this._getSpecialContentCell = this._getSpecialContentCell.bind(this);
 
       this._processData = this._processData.bind(this);
   }
@@ -153,7 +153,7 @@ export default class MyComponent extends Component {
 	}
   _keyExtractor = (product, index) =>product.pmid + index;
 
-  _getSectionHeader(contentType, title){
+  _getSpecialContentCell(contentType, title){
     if (contentType == 'header-title'){
       return (
         <Text style={{
@@ -208,9 +208,10 @@ export default class MyComponent extends Component {
       )
     }
   }
+
   _renderProduct(product) {
       if (product.item.contentType){
-        return this._getSectionHeader(product.item.contentType, product.item.title);
+        return this._getSpecialContentCell(product.item.contentType, product.item.title);
       }
       else{
         return (
