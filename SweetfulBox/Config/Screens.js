@@ -12,7 +12,6 @@ import SboxHistoryOrderDetail from '../Components/SboxHistoryOrderDetail/SboxHis
 import SboxCategory from '../Components/SboxCategory/SboxCategoryViewController';
 import SboxHomeAlert from '../Components/SboxHomeAlert/SboxHomeAlert';
 
-Navigation.registerComponent('SboxHome', () => SboxHome);
 Navigation.registerComponent('SboxProductDetial', () => SboxProductDetial);
 Navigation.registerComponent('SboxCart', () => SboxCart);
 Navigation.registerComponent('SboxCheckout', () => SboxCheckout);
