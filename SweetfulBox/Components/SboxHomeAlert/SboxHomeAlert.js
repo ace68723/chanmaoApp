@@ -22,11 +22,22 @@ export default class SboxHomeAlert extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={require('./Image/header.png')}
-               style={{width:width*0.7,height:width*0.7/1.76}}
+        <Image source={require('./Image/popup.png')}
+               style={{width:width*0.7,height:width*0.7/4}}
         />
+        <View style={{
+          paddingTop:20,
+          width:width*0.7,
+          height:width*0.55,
+          alignItems:'center',
+          justifyContent:'center',
+        }}>
+          <Image source={require('./Image/Deliveryzone.png')}
+                 style={{width:width*0.6,height:width*0.55}}
+          />
+        </View>
         <View style={{padding:20,paddingLeft:25,paddingRight:25,}}>
-          <Text allowFontScaling={false} style={{fontSize:14,fontFamily:'FZZhunYuan-M02S',textAlign:'left'}}>
+          <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'FZZhunYuan-M02S',textAlign:'left'}}>
               {this.props.message}
           </Text>
         </View>
