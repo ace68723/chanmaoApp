@@ -2,7 +2,7 @@ import { Navigation } from 'react-native-navigation';
 
 import cmHome from './screens/cmHome';
 import SboxLoading from './screens/SboxLoading';
-import SboxHome from './screens/Sbox/SboxHome';
+import SboxHome from './SweetfulBox/Config/Screens';
 // import CmLoading from './screens/CmLoading';
 // import CmEat from './CmEat/Components/Router';
 // import CmLogin from './screens/CmLogin';

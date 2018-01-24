@@ -21,24 +21,7 @@ export default class loading extends Component {
     }
   }
   componentDidMount() {
-    // setTimeout( () => {
       InteractionManager.runAfterInteractions(() => {
-        // Animated.timing(
-        // this.state.viewOpacity,
-        //     {
-        //         delay: 1000,
-        //         toValue: 1,
-        //         duration: 1000,
-        //     }
-        // ).start();
-        // Animated.timing(
-        // this.state.loadingOpacity,
-        //     {
-        //         delay: 2000,
-        //         toValue: 1,
-        //         duration: 1000,
-        //     }
-        // ).start();
         Animated.parallel([
           Animated.timing(
           this.state.viewOpacity,
@@ -58,8 +41,6 @@ export default class loading extends Component {
           )
         ]).start();
       });
-
-    // },200);
     setTimeout( () => {
       InteractionManager.runAfterInteractions(() => {
         Animated.timing(
