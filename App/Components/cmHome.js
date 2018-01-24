@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
   ScrollView,
+  Platform,
 } from 'react-native';
 
 import AuthAction from '../Actions/AuthAction';
@@ -175,63 +176,77 @@ export default class Home extends Component {
         }, 600);
       }
   }
-  _handleSboxPress() {
-    if(this._openStarted) return
-    this._openStarted = true;
-    this._scale = 3.95;
-    this.setState({
-      scale:3.95,
-      translateX:width*0.5 + width*0.39*3.8215/1242*375,
-      translateY:height*0.5 + height*0.21*3.8215/2208*667,
-    })
-    setTimeout(() => {
-      this._openStarted = false
-    }, 5000);
-    InteractionManager.runAfterInteractions(() => {
-      Animated.timing(
-      this.state.open,
-          {
-              toValue: 1,
-              duration: 500,
-          }
-      ).start();
-    });
-    setTimeout(() => {
-      InteractionManager.runAfterInteractions(() => {
-        this.props.navigator.showLightBox({
-          screen: 'SboxLoading',
-          animated: false,
-          navigatorStyle: {navBarHidden: true},
-          style: {
-            flex:1,
-           backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-          //  backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
-         }
-        })
+  _handleSboxPress() { 
+    if (Platform.OS === 'ios') {
+      if(this._openStarted) return
+      this._openStarted = true;
+      this._scale = 3.95;
+      this.setState({
+        scale:3.95,
+        translateX:width*0.5 + width*0.39*3.8215/1242*375,
+        translateY:height*0.5 + height*0.21*3.8215/2208*667,
       })
-    }, 500);
-    setTimeout(() => {
-      InteractionManager.runAfterInteractions(() => {
-        this.props.navigator.push({
-          screen: 'SboxHome',
-          passProps: {handleBackToHome: this._handleBackToHome},
-          animated: false,
-          navigatorStyle: {
-            navBarHidden: true,
-            disabledBackGesture: true,
-          },
-          style: {
-           backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-           backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
-         }
+      setTimeout(() => {
+        this._openStarted = false
+      }, 5000);
+      
+      setTimeout(() => {
+        InteractionManager.runAfterInteractions(() => {
+          this.props.navigator.showLightBox({
+            screen: 'SboxLoading',
+            animated: false,
+            navigatorStyle: {navBarHidden: true},
+            style: {
+              flex:1,
+             backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+            //  backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
+           }
+          })
         })
-      })
-    }, 2500);
-  }
+      }, 500);
+      setTimeout(() => {
+        InteractionManager.runAfterInteractions(() => {
+          this.props.navigator.push({
+            screen: 'SboxHome',
+            passProps: {handleBackToHome: this._handleBackToHome},
+            animated: false,
+            navigatorStyle: {
+              navBarHidden: true,
+              disabledBackGesture: true,
+            },
+            style: {
+             backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+             backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
+           }
+          })
+        })
+      }, 2500);
+    } else if (Platform.OS === 'android') {
+      setTimeout(() => {
+        InteractionManager.runAfterInteractions(() => {
+          this.props.navigator.push({
+            screen: 'SboxHome',
+            passProps: {handleBackToHome: this._handleBackToHome},
+            animated: true, // does the push have transition animation or does it happen immediately (optional)
+            animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the push have different transition animation (optional)
+            navigatorStyle: {
+              navBarHidden: true,
+              disabledBackGesture: true,
+            },
+            style: {
+             backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+             backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
+           }
+          })
+        })
+      }, 1000);
+    }
+    }
+    
   _handleBackToHome() {
     this.props.navigator.pop({
       animated: true, // does the pop have transition animation or does it happen immediately (optional)
-      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+      animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
     });
     InteractionManager.runAfterInteractions(() => {
       Animated.timing(
