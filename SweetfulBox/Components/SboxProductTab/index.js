@@ -20,6 +20,7 @@ export default class MyComponent extends Component {
       this.state = {
         categoryTitles: ['新品速递', '好货热卖', '超值特价'],
         categoryChecked:'new',
+        format_data: [],
         data_list:[
           {
             name: 'OKF芒果果汁',
@@ -40,10 +41,14 @@ export default class MyComponent extends Component {
             header:false,
           },
           {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
+            contentType: 'header-left',
+          },
+          {
+            contentType: 'header-title',
+            title: "新品速递"
+          },
+          {
+            contentType: 'header-right',
           },
           {
             name: 'OKF芒果果汁',
@@ -62,55 +67,66 @@ export default class MyComponent extends Component {
             price:'1.19',
             image: require('./Image/box.png'),
             header:false,
+          }
+        ],
+        data : [
+          {
+            'title' : '新品速递',
+            'items' : [
+              {
+                name: 'OKF芒果果汁',
+                price: '1.19',
+                image: require('./Image/box.png'),
+              }, {
+                name: 'OKF芒果果汁',
+                price: '1.19',
+                image: require('./Image/box.png'),
+              }, {
+                name: 'OKF芒果果汁',
+                price: '1.19',
+                image: require('./Image/box.png'),
+              }
+            ]
           },
           {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
+            'title' : '好货热卖',
+            'items' : [
+              {
+                name: 'OKF芒果果汁',
+                price: '1.19',
+                image: require('./Image/box.png'),
+              }, {
+                name: 'OKF芒果果汁',
+                price: '1.19',
+                image: require('./Image/box.png'),
+              }
+            ]
           },
-
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-
         ]
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
+      this._getSectionHeader = this._getSectionHeader.bind(this);
+
+      this._processData = this._processData.bind(this);
+  }
+
+  _processData(data){
+    // Add item for header & empty cell
+    let newData = [];
+    for(let i = 0; i < this.state.data.length; i++){
+      newData.push({contentType: 'header-left'});
+      newData.push({contentType: 'header-title', title: this.state.data[i].title});
+      newData.push({contentType: 'header-right'});
+      for(let j = 0; j < this.state.data[i].items.length; j++){
+        newData.push(this.state.data[i].items[j]);
+    	}
+      while (newData.length % 3 != 0){
+        newData.push({contentType: 'empty'});
+      }
+  	}
+    console.log('gg', newData);
+    this.setState({format_data: newData});
   }
   componentWillMount() {
    let arr = [];
@@ -123,6 +139,9 @@ export default class MyComponent extends Component {
    this.setState({
      stickyHeaderIndices: arr
    });
+
+   // do process
+   this._processData(this.state.data);
  }
   componentDidMount(){
     const index = this.props.index;
@@ -133,12 +152,73 @@ export default class MyComponent extends Component {
 
 	}
   _keyExtractor = (product, index) =>product.pmid + index;
-  _renderProduct(product) {
+
+  _getSectionHeader(contentType, title){
+    if (contentType == 'header-title'){
       return (
-        <SboxProductView goToSboxProductDetial={this.props.goToSboxProductDetial}
-          product={product.item}
-        />
+        <Text style={{
+            marginTop: Settings.getY(72),
+            height: Settings.getY(120),
+            fontWeight: 'bold',
+          }}>{title}</Text>
       );
+    }
+    if (contentType == 'header-left'){
+      return (
+        <View
+          style={{
+            borderBottomColor: '#a5a5a5',
+            borderBottomWidth: 0.4,
+            alignItems:'center',
+            justifyContent:'center',
+            width: Settings.getX(258),
+            marginRight: Settings.getX(148),
+            height: Settings.getY(100),
+          }}
+        />
+      )
+    }
+    if (contentType == 'header-right'){
+      return (
+        <View
+          style={{
+            alignItems:'center',
+            justifyContent:'center',
+            borderBottomColor: '#a5a5a5',
+            borderBottomWidth: 0.4,
+            width: Settings.getX(258),
+            marginLeft: Settings.getX(148),
+            height: Settings.getY(100),
+          }}
+        />
+      )
+    }
+    if (contentType == 'empty'){
+      return (
+        // empty cell
+        <View
+          style={{
+            alignItems:'center',
+            justifyContent:'center',
+            width: Settings.getX(258),
+            marginLeft: Settings.getX(148),
+            height: Settings.getY(100),
+          }}
+        />
+      )
+    }
+  }
+  _renderProduct(product) {
+      if (product.item.contentType){
+        return this._getSectionHeader(product.item.contentType, product.item.title);
+      }
+      else{
+        return (
+          <SboxProductView goToSboxProductDetial={this.props.goToSboxProductDetial}
+            product={product.item}
+          />
+        );
+      }
   }
   _selectCategory(category){
     this.setState({
@@ -179,7 +259,7 @@ export default class MyComponent extends Component {
             onEndReached={this.props.reachEnd}
             onEndReachedThreshold={0.3}
             onScroll={this.props.scrollEventBind()}
-            data={this.state.data_list}
+            data={this.state.format_data}
             renderItem={this._renderProduct}
             keyExtractor={this._keyExtractor}
             getItemLayout={(data, index) => (
