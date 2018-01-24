@@ -16,7 +16,7 @@ import SboxHomeStore from '../../Stores/SboxHomeStore';
 
 import SboxHomeHeader from './SboxHomeHeader';
 import HeaderWithBanner from './HeaderWithBanner';
-import SboxProductTab from '../SboxProductTab/SboxProductTabViewController';
+import SboxProductTab from '../SboxProductTab/';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import DefaultTabBar from './DefaultTabBar';
