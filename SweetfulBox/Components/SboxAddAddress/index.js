@@ -82,7 +82,7 @@ export default class MyComponent extends Component {
     console.log(addressObject.place_id);
 
     const url = "https://maps.googleapis.com/maps/api/place/details/" +
-        "json?placeid=" + addressObject.cbid +
+        "json?placeid=" + addressObject.place_id +
         // "&key="+AppConstants.GOOGLE_API_KEY
         "&key=" + GOOGLE_API_KEY
         let options = {
@@ -96,39 +96,48 @@ export default class MyComponent extends Component {
         fetch(url,options)
           .then((res) => res.json())
           .then((res)=>{
+            console.log("123");
             if(res.status == "OK"){
               console.log(res.result);
               const placeDetails = res.result;
 
               let addrInfo = {};
-              addrInfo.latitude  = placeDetails.geometry.location.lat;
-              addrInfo.longitude  = placeDetails.geometry.location.lng;
-              _forEach(placeDetails.address_components, function(component, key) {
-                  _forEach(component.types, function(type, key) {
-                    switch(type) {
-                      case "postal_code":
-                        addrInfo.postalCode = component.long_name;
-                        break;
-                      case "locality":
-                        addrInfo.city = component.long_name;
-                        break;
-                      case "sublocality":
-                        addrInfo.city = component.long_name;
-                        break;
-                      case "neighborhood":
-                        addrInfo.city = component.long_name;
-                      break;
-                    }
-                  });
-              });
+              addrInfo.iv_lag  = placeDetails.geometry.location.lat;
+              addrInfo.iv_lng  = placeDetails.geometry.location.lng;
+
               // if(!addrInfo.city){
               //   addrInfo.city = 'GTA';
               // }
-              addrInfo.address = placeDetails.formatted_address;
+              addrInfo.iv_addr = placeDetails.formatted_address;
+              addrInfo.iv_province = placeDetails.formatted_address.split(',')[2].replace(' ', '').substring(0, 2);
               console.log(addrInfo);
-              dispatch({
-                  actionType: AppConstants.FORMAT_ADDRESS, addrInfo
-              })
+              // Check if in the area
+              // if (1 > 0) {
+              //     // SboxAddressAction.showAddressAlert("对不起");
+              //     this.props.navigator.showLightBox({
+              //        screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
+              //        passProps: {
+              //          message:`对不起, 您输入的地址暂时无法配送`}, // simple serializable object that will pass as props to the lightbox (optional)
+              //        style: {
+              //          flex: 1,
+              //          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+              //         //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
+              //        },
+              //        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+              //       });
+              // }
+              // else {
+              //     SboxAddressAction.updateSelectedAddress(addressObject);
+              //     this.props.navigator.showModal({
+              //       screen: "SboxAddAddressInfo",
+              //       passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
+              //       navigatorStyle: {navBarHidden:true},
+              //       animationType: 'slide-up'
+              //     });
+              // }
+              // dispatch({
+              //     actionType: AppConstants.FORMAT_ADDRESS, addrInfo
+              // })
             }else{
               throw 'error'
             }
@@ -136,31 +145,7 @@ export default class MyComponent extends Component {
           .catch((error) => {throw error})
 
 
-    console.log("address Clicked!!!", addressObject);
-    // Check if in the area
-    if (1 > 0) {
-        // SboxAddressAction.showAddressAlert("对不起");
-        this.props.navigator.showLightBox({
-           screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
-           passProps: {
-             message:`对不起, 您输入的地址暂时无法配送`}, // simple serializable object that will pass as props to the lightbox (optional)
-           style: {
-             flex: 1,
-             backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-            //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
-           },
-           adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-          });
-    }
-    else {
-        SboxAddressAction.updateSelectedAddress(addressObject);
-        this.props.navigator.showModal({
-          screen: "SboxAddAddressInfo",
-          passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
-          navigatorStyle: {navBarHidden:true},
-          animationType: 'slide-up'
-        });
-    }
+
     return Object.assign({},addressObject,{selected:true})
   }
 
