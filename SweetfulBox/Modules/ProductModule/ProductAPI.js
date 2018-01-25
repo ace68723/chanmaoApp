@@ -1,6 +1,12 @@
+import { API_CATEGORY,
+         API_CATEGORY_QUERY,
+         API_THEME_QUERY,
+         API_HOME_DATA,
+         API_SINGLE_PRODUCT
+        } from '../../Config/API';
 export default  {
   getCategoryList(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/category';
+    const url = API_CATEGORY;
 
     let options = {
         method: 'POST',
@@ -24,7 +30,7 @@ export default  {
   },
 
   searchCategoryList(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/category_query';
+    const url = API_CATEGORY_QUERY;
 
     let options = {
         method: 'POST',
@@ -49,7 +55,7 @@ export default  {
             .catch((error) => {throw error})
   },
   searchThemeList(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/theme_query';
+    const url = API_THEME_QUERY;
 
     let options = {
         method: 'POST',
@@ -74,7 +80,7 @@ export default  {
             .catch((error) => {throw error})
   },
   getHomeData(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/home_data';
+    const url = API_HOME_DATA;
 
     let options = {
         method: 'GET',
@@ -88,13 +94,13 @@ export default  {
     options.headers = Object.assign(options.headers,{
         uuid: io_data.uuid,
     })
-
+    console.log(url)
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})
   },
   getSingleProduct(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/prod_base';
+    const url = API_SINGLE_PRODUCT;
 
     let options = {
         method: 'POST',
@@ -110,7 +116,7 @@ export default  {
     options.body = JSON.stringify({
       iv_pmid: io_data.iv_pmid,
     })
-    
+
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

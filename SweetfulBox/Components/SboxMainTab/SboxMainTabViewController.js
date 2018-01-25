@@ -9,9 +9,8 @@ import {
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import SboxHome from '../SboxHome/SboxHome';
 import SboxHistory from '../SboxHistory/SboxHistoryViewController';
-import SboxCart from '../SboxCart/SboxCart';
+import SboxCheckout from '../SboxCheckout/SboxCheckout';
 import TabBar from './TabBar';
-
 export default class MyComponent extends Component {
   render() {
     return (
@@ -36,7 +35,7 @@ export default class MyComponent extends Component {
               activeIconImage={require("./Image/order.png")}
               inactiveIconImage={require("./Image/ordergrey.png")}
               navigator={this.props.navigator}/>
-        <SboxCart
+        <SboxCheckout
               tabLabel="购物车"
               activeIconImage={require("./Image/box.png")}
               inactiveIconImage={require("./Image/box.png")}
