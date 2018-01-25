@@ -54,6 +54,8 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
         case SboxConstants.UPDATE_TEXTINPUT:
           SboxAddressStore.updateTextInput(action.data.textInput);
           break;
+        case SboxConstants.NOT_IN_RANGE:
+          break;
         default:
          // do nothing
 		  }
