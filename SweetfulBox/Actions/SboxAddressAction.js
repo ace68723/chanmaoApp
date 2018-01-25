@@ -42,5 +42,13 @@ export default {
       dispatch({
         actionType: SboxConstants.UPDATE_TEXTINPUT, data
       })
+    },
+    showAddressAlert(msg) {
+      const data = {
+        message: msg
+      }
+      dispatch({
+        actionType: SboxConstants.UPDATE_TEXTINPUT, data
+      })
     }
 }

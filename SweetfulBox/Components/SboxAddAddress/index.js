@@ -168,13 +168,18 @@ export default class MyComponent extends Component {
 
     console.log("address Clicked!!!", addressObject);
     // Check if in the area
-    // SboxAddressAction.updateSelectedAddress(addressObject);
-    // this.props.navigator.showModal({
-    //   screen: "SboxAddAddressInfo",
-    //   passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
-    //   navigatorStyle: {navBarHidden:true},
-    //   animationType: 'slide-up'
-    // });
+    if (1 > 0) {
+        SboxAddressAction.showAddressAlert("对不起");
+    }
+    else {
+        SboxAddressAction.updateSelectedAddress(addressObject);
+        this.props.navigator.showModal({
+          screen: "SboxAddAddressInfo",
+          passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
+          navigatorStyle: {navBarHidden:true},
+          animationType: 'slide-up'
+        });
+    }
     return Object.assign({},addressObject,{selected:true})
   }
 
