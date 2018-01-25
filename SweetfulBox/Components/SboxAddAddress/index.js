@@ -79,97 +79,78 @@ export default class MyComponent extends Component {
   * @param {Boolean} selected the flag whether the condo address is selected or not
   */
   handleAddressSelected(addressObject, selected) {
-    // var selected = !selected;
-    // const newItems = this.state.items.map((item) => {
-    //   if (item.cbid !== key) return item;
-    //   return {
-    //     ...item,
-    //     selected
-    //   }
-    // })
     console.log(addressObject.place_id);
+
     // const url = "https://maps.googleapis.com/maps/api/place/details/" +
-    // "json?placeid="+ addressObject.cbid +
-    // // "&language=en" +
-    // // "&components=country:ca"+
-    // // "&types=address" +
-    // "&key=AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8"
-    // let options = {
-    //     method: 'GET',
-    //     mode:'cors',
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
+    //     "json?placeid=" + addressObject.cbid +
+    //     // "&key="+AppConstants.GOOGLE_API_KEY
+    //     "&key=" + GOOGLE_API_KEY
+    //     let options = {
+    //         method: 'GET',
+    //         mode:'cors',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         }
     //     }
-    // }
-
-    // fetch(url,options)
-    //   .then((res) => res.json())
-    //   .then((res)=>{
-    //     console.log("ggg");
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {throw error});
-
-    const url = "https://maps.googleapis.com/maps/api/place/details/" +
-        "json?placeid=" + addressObject.cbid +
-        // "&key="+AppConstants.GOOGLE_API_KEY
-        "&key=" + GOOGLE_API_KEY
-        let options = {
-            method: 'GET',
-            mode:'cors',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }
-        fetch(url,options)
-          .then((res) => res.json())
-          .then((res)=>{
-            if(res.status == "OK"){
-              console.log(res.result);
-              const placeDetails = res.result;
-
-              let addrInfo = {};
-              addrInfo.latitude  = placeDetails.geometry.location.lat;
-              addrInfo.longitude  = placeDetails.geometry.location.lng;
-              _forEach(placeDetails.address_components, function(component, key) {
-                  _forEach(component.types, function(type, key) {
-                    switch(type) {
-                      case "postal_code":
-                        addrInfo.postalCode = component.long_name;
-                        break;
-                      case "locality":
-                        addrInfo.city = component.long_name;
-                        break;
-                      case "sublocality":
-                        addrInfo.city = component.long_name;
-                        break;
-                      case "neighborhood":
-                        addrInfo.city = component.long_name;
-                      break;
-                    }
-                  });
-              });
-              // if(!addrInfo.city){
-              //   addrInfo.city = 'GTA';
-              // }
-              addrInfo.address = placeDetails.formatted_address;
-              console.log(addrInfo);
-              // dispatch({
-              //     actionType: AppConstants.FORMAT_ADDRESS, addrInfo
-              // })
-            }else{
-              throw 'error'
-            }
-          })
-          .catch((error) => {throw error})
+    //     fetch(url,options)
+    //       .then((res) => res.json())
+    //       .then((res)=>{
+    //         if(res.status == "OK"){
+    //           console.log(res.result);
+    //           const placeDetails = res.result;
+    //
+    //           let addrInfo = {};
+    //           addrInfo.latitude  = placeDetails.geometry.location.lat;
+    //           addrInfo.longitude  = placeDetails.geometry.location.lng;
+    //           _forEach(placeDetails.address_components, function(component, key) {
+    //               _forEach(component.types, function(type, key) {
+    //                 switch(type) {
+    //                   case "postal_code":
+    //                     addrInfo.postalCode = component.long_name;
+    //                     break;
+    //                   case "locality":
+    //                     addrInfo.city = component.long_name;
+    //                     break;
+    //                   case "sublocality":
+    //                     addrInfo.city = component.long_name;
+    //                     break;
+    //                   case "neighborhood":
+    //                     addrInfo.city = component.long_name;
+    //                   break;
+    //                 }
+    //               });
+    //           });
+    //           // if(!addrInfo.city){
+    //           //   addrInfo.city = 'GTA';
+    //           // }
+    //           addrInfo.address = placeDetails.formatted_address;
+    //           console.log(addrInfo);
+    //           // dispatch({
+    //           //     actionType: AppConstants.FORMAT_ADDRESS, addrInfo
+    //           // })
+    //         }else{
+    //           throw 'error'
+    //         }
+    //       })
+    //       .catch((error) => {throw error})
 
 
     console.log("address Clicked!!!", addressObject);
     // Check if in the area
     if (1 > 0) {
-        SboxAddressAction.showAddressAlert("对不起");
+        // SboxAddressAction.showAddressAlert("对不起");
+        this.props.navigator.showLightBox({
+           screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
+           passProps: {
+             message:`对不起, 您输入的地址暂时无法配送`}, // simple serializable object that will pass as props to the lightbox (optional)
+           style: {
+             flex: 1,
+             backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+            //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
+           },
+           adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+          });
     }
     else {
         SboxAddressAction.updateSelectedAddress(addressObject);

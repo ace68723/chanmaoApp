@@ -48,7 +48,7 @@ export default {
         message: msg
       }
       dispatch({
-        actionType: SboxConstants.UPDATE_TEXTINPUT, data
+        actionType: SboxConstants.NOT_IN_RANGE, data
       })
     }
 }
