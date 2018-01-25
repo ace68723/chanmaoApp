@@ -1,6 +1,7 @@
+import { API_ORDER_HISTORY } from '../../Config/API';
 export default  {
   getDefaultData(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/order_history';
+    const url = API_ORDER_HISTORY;
 
     let options = {
         method: 'POST',
