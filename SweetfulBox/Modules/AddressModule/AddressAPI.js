@@ -1,6 +1,6 @@
 import { API_CAN_DELIVER} from '../../Config/API';
 export default  {
- 
+
   checkCanDeliver(lat,lng){
     const url = API_CAN_DELIVER;
 
@@ -14,7 +14,7 @@ export default  {
     }
 
     options.headers = Object.assign(options.headers,{
-        
+
     })
 
     options.body = JSON.stringify({

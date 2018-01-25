@@ -14,11 +14,13 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
     'Richmond Hill', 'York'],
     selectedAddress:{},
     textInput: '',
+    showAlert: 0,
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
 	},
 	addChangeListener(callback){
+      // console.log(callback);
 			this.on(CHANGE_EVENT, callback)
 	},
 	removeChangeListener(callback){
@@ -38,13 +40,23 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
   updateTextInput(textInput) {
     this.state = Object.assign({},this.state,{textInput:textInput});
   },
+  checkWhetherInRange(data) {
+    console.log(this.state);
+    console.log(data.ev_can_deliver);
+    this.state = Object.assign({},this.state,{showAlert: data.ev_can_deliver});
+  },
   getState(){
     return this.state;
+  },
+  getAlertState() {
+    return this.state.showAlert;
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
 				case SboxConstants.CHECK_CAN_DELIVER:
-          SboxAddressStore.updateCondoListState(action.data.condoList);
+          console.log("In store,", action.data);
+          SboxAddressStore.checkWhetherInRange(action.data);
+          console.log("In store after check, ", this.state.showAlert);
           SboxAddressStore.emitChange();
 					break;
         case SboxConstants.UPDATE_SELECTED_ADDRESS:

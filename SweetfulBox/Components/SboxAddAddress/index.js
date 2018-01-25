@@ -21,30 +21,62 @@ export default class MyComponent extends Component {
       super(props);
       // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       this.state = {
-        filter: "ALL",
         predictionsData: [],
+<<<<<<< HEAD
         items: [
          
       ],
+=======
+        items: [],
+        showAlert: 0,
+>>>>>>> 852f9cf89a9b89b5950835491f136a4dd81f70df
       // dataSource: ds.cloneWithRows([])
       }
       // this.setSource = this.setSource.bind(this);
       this.handleAddressSelected = this.handleAddressSelected.bind(this);
       this.onChangeTextInput = this.onChangeTextInput.bind(this);
+      this._onChange = this._onChange.bind(this);
   }
 
   componentWillMount() {
-    // AsyncStorage.getItem("items").then((json) => {
-    // 	try {
-    // 		const items = JSON.parse(json);
-    // 		this.setSource(items, items);
-    // 	} catch(e) {
-    // 		console.log("GG");
-    // 	}
-    // })
-    // console.log(this.state);
-    // this.setSource(this.state.items, this.state.items);
     console.log(this.state.items);
+  }
+
+  comonentDidMount() {
+    SboxAddressStore.addChangeLister(this._onChange);
+  }
+  componentWillUnmount() {
+    SboxAddressStore.removeChangeListener(this._onChange)
+  }
+
+  _onChange() {
+    console.log("onChange");
+    const showAlert = SboxAddressStore.getAlertState();
+    this.setState(Object.assign({}, this.state, {showAlert: newState}))
+    // Object.assign({},this.state,SboxAddressStore.getState());
+
+    if (showAlert == 1) {
+      this.props.navigator.showLightBox({
+         screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
+         passProps: {
+           message:`对不起, 您输入的地址暂时无法配送`}, // simple serializable object that will pass as props to the lightbox (optional)
+         style: {
+           flex: 1,
+           backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+          //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
+         },
+         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+        });
+    }
+    else {
+        SboxAddressAction.updateSelectedAddress(addressObject);
+        this.props.navigator.showModal({
+          screen: "SboxAddAddressInfo",
+          passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
+          navigatorStyle: {navBarHidden:true},
+          animationType: 'slide-up'
+        });
+    }
   }
 
   /**
@@ -78,37 +110,34 @@ export default class MyComponent extends Component {
               let addrInfo = {};
               addrInfo.iv_lag  = placeDetails.geometry.location.lat;
               addrInfo.iv_lng  = placeDetails.geometry.location.lng;
-
-              // if(!addrInfo.city){
-              //   addrInfo.city = 'GTA';
-              // }
               addrInfo.iv_addr = placeDetails.formatted_address;
               addrInfo.iv_province = placeDetails.formatted_address.split(',')[2].replace(' ', '').substring(0, 2);
               console.log(addrInfo);
               // Check if in the area
-              // if (1 > 0) {
-              //     // SboxAddressAction.showAddressAlert("对不起");
-              //     this.props.navigator.showLightBox({
-              //        screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
-              //        passProps: {
-              //          message:`对不起, 您输入的地址暂时无法配送`}, // simple serializable object that will pass as props to the lightbox (optional)
-              //        style: {
-              //          flex: 1,
-              //          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-              //         //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
-              //        },
-              //        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-              //       });
-              // }
-              // else {
-              //     SboxAddressAction.updateSelectedAddress(addressObject);
-              //     this.props.navigator.showModal({
-              //       screen: "SboxAddAddressInfo",
-              //       passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
-              //       navigatorStyle: {navBarHidden:true},
-              //       animationType: 'slide-up'
-              //     });
-              // }
+              SboxAddressAction.checkCanDeliver(addrInfo.iv_lag, addrInfo.iv_lng);
+              if (0 == 0) {
+                  // SboxAddressAction.showAddressAlert("对不起");
+                  // this.props.navigator.showLightBox({
+                  //    screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
+                  //    passProps: {
+                  //      message:`对不起, 您输入的地址暂时无法配送`}, // simple serializable object that will pass as props to the lightbox (optional)
+                  //    style: {
+                  //      flex: 1,
+                  //      backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+                  //     //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
+                  //    },
+                  //    adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+                  //   });
+              }
+              else {
+                  // SboxAddressAction.updateSelectedAddress(addressObject);
+                  // this.props.navigator.showModal({
+                  //   screen: "SboxAddAddressInfo",
+                  //   passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
+                  //   navigatorStyle: {navBarHidden:true},
+                  //   animationType: 'slide-up'
+                  // });
+              }
               // dispatch({
               //     actionType: AppConstants.FORMAT_ADDRESS, addrInfo
               // })

@@ -17,10 +17,10 @@ class Row extends Component {
 	 * @param {Object} nextState new states
 	 */
 	shouldComponentUpdate(nextProps, nextState){
-		if(nextProps.selected != this.props.selected){
-			return true
+		if(nextProps.place_id != this.props.place_id){
+			return true;
 		}else{
-			return false
+			return false;
 		}
 	}
 	render() {

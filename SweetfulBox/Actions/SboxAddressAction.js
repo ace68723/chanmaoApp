@@ -4,12 +4,14 @@ import AddressModule from '../Modules/AddressModule/AddressModule'
 export default {
     async checkCanDeliver(lat,lng){
         try{
+          console.log(lat, lng);
           const data = await AddressModule.checkCanDeliver(lat,lng);
+          console.log(data);
           dispatch({
               actionType: SboxConstants.CHECK_CAN_DELIVER, data
           })
         }catch(error){
-          console.log(error)
+          console.log(error);
         }
       },
     updateSelectedAddress(selectedAddress){
