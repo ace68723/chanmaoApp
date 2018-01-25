@@ -79,6 +79,7 @@ export default class SboxAddressList extends Component {
         return addressObject;
       }else{
         SboxAddressAction.updateSelectedAddress(addressObject);
+        console.log(addressObject);
         this.props.navigator.showModal({
           screen: "SboxAddAddressInfo",
           passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},

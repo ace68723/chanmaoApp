@@ -1,6 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 import SboxHome from '../Components/SboxHome/SboxHome';
-import SboxMainTab from '../Components/SboxMainTab/SboxMainTabViewController';
+// import SboxMainTab from '../Components/SboxMainTab/SboxMainTabViewController';
+import SboxAddAddress from '../Components/SboxAddAddress/index';
 import SboxProductDetial from '../Components/SboxProductDetial/SboxProductDetial';
 import SboxCart from '../Components/SboxCart/SboxCart';
 import SboxCheckout from '../Components/SboxCheckout/SboxCheckout';
@@ -23,4 +24,5 @@ Navigation.registerComponent('SboxHistoryOrderDetail', () => SboxHistoryOrderDet
 Navigation.registerComponent('SboxCategory', () => SboxCategory);
 Navigation.registerComponent('SboxHomeAlert', () => SboxHomeAlert);
 
-module.exports = SboxMainTab;
+// module.exports = SboxMainTab;
+module.exports = SboxAddAddress;
