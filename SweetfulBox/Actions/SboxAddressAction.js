@@ -2,30 +2,14 @@ import SboxConstants from '../Constants/SboxConstants';
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import AddressModule from '../Modules/AddressModule/AddressModule'
 export default {
-    async getCondoList(lastid){
+    async checkCanDeliver(lat,lng){
         try{
-          const io_data = {
-            lastid:lastid
-          }
-          const data = await AddressModule.getCondoList(io_data);
+          const data = await AddressModule.checkCanDeliver(lat,lng);
           dispatch({
-              actionType: SboxConstants.GET_CONDO_LIST, data
+              actionType: SboxConstants.CHECK_CAN_DELIVER, data
           })
         }catch(error){
           console.log(error)
-        }
-      },
-    async getCondoFuzzy(keyword){
-        try{
-          const io_data = {
-            keyword: keyword
-          }
-          const data = await AddressModule.getCondoFuzzy(io_data);
-          dispatch({
-              actionType: SboxConstants.GET_CONDO_FUZZY, data
-          })
-        }catch(error){
-          console.log(error);
         }
       },
     updateSelectedAddress(selectedAddress){

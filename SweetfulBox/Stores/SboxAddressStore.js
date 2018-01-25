@@ -43,14 +43,10 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
-				case SboxConstants.GET_CONDO_LIST:
+				case SboxConstants.CHECK_CAN_DELIVER:
           SboxAddressStore.updateCondoListState(action.data.condoList);
           SboxAddressStore.emitChange();
 					break;
-        case SboxConstants.GET_CONDO_FUZZY:
-          SboxAddressStore.refreshCondoListState(action.data.condoList, action.data.textInput);
-          SboxAddressStore.emitChange();
-          break;
         case SboxConstants.UPDATE_SELECTED_ADDRESS:
           SboxAddressStore.updateSelectedAddress(action.data.selectedAddress);
           SboxAddressStore.emitChange();

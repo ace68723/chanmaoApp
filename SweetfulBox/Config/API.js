@@ -7,6 +7,7 @@ const APIConstants ={
     //Address
     API_CONDO_LIST: Server + 'condo_list',
     API_CONDO_FUZZY: Server + 'condo_fuzzy',
+    API_CAN_DELIVER: Server + 'can_deliver',
 
     //Order
     API_ORDER_BEFORE: Server + 'order_before',
