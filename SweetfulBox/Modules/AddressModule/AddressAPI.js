@@ -18,8 +18,8 @@ export default  {
     })
 
     options.body = JSON.stringify({
-      iv_lng = lng,
-      iv_lat = lat
+      iv_lng: lng,
+      iv_lat: lat
     })
 
 

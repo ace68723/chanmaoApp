@@ -24,33 +24,7 @@ export default class MyComponent extends Component {
         filter: "ALL",
         predictionsData: [],
         items: [
-          {"cbid": 123,
-          "zmid": 647,
-          "addr": "5508 Yonge St,North York,M2N 7G5,Canada",
-          "province": "Ontario",
-          "lat": 42,
-          "lng": 30,
-          "notes":"ok",
-          "selected": false
-          },
-          {"cbid": 124,
-          "zmid": 647,
-          "addr": "20 Olive St,North York,M2N 7G5,Canada",
-          "province": "Ontario",
-          "lat": 42,
-          "lng": 30,
-          "notes":"ok",
-          "selected": false
-          },
-          {"cbid": 125,
-          "zmid": 647,
-          "addr": "111 Granton Dr,Richmond Hill,M2N 7G5,Canada",
-          "province": "Ontario",
-          "lat": 42,
-          "lng": 30,
-          "notes":"ok",
-          "selected": false
-          }
+         
       ],
       // dataSource: ds.cloneWithRows([])
       }
@@ -176,6 +150,7 @@ export default class MyComponent extends Component {
            items: address_list
         });
         console.log(res.predictions);
+        console.log(this.state.items)
       })
       .catch((error) => {throw error});
   }

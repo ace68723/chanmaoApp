@@ -30,7 +30,7 @@ class Row extends Component {
 		const viewWidth = Dimensions.get('window').width;
 		const rowHeight = viewHeight * 0.11;
 		const checkboxWidth = viewWidth * 0.07;
-
+    console.log(this.props)
 		const str1 = this.props.addr.split(',');
 		const locationText = str1[0] + ",\n" + str1[1] + ", "
 			+ str1[2] + ", "+ str1[3];
