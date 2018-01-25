@@ -186,10 +186,19 @@ export default class Home extends Component {
         translateX:width*0.5 + width*0.39*3.8215/1242*375,
         translateY:height*0.5 + height*0.21*3.8215/2208*667,
       })
+
       setTimeout(() => {
         this._openStarted = false
       }, 5000);
-      
+      InteractionManager.runAfterInteractions(() => {
+        Animated.timing(
+        this.state.open,
+            {
+                toValue: 1,
+                duration: 500,
+            }
+        ).start();
+      });
       setTimeout(() => {
         InteractionManager.runAfterInteractions(() => {
           this.props.navigator.showLightBox({
