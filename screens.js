@@ -2,6 +2,7 @@ import { Navigation } from 'react-native-navigation';
 
 import cmHome from './screens/cmHome';
 import SboxLoading from './screens/SboxLoading';
+import SboxNotification from './SweetfulBox/Components/SboxNotification/SboxNotification';
 import SboxHome from './SweetfulBox/Config/Screens';
 // import CmLoading from './screens/CmLoading';
 // import CmEat from './CmEat/Components/Router';
@@ -14,6 +15,8 @@ export function registerScreens() {
   Navigation.registerComponent('cmHome', () => cmHome);
   Navigation.registerComponent('SboxHome', () => SboxHome);
   Navigation.registerComponent('SboxLoading', () => SboxLoading);
+  Navigation.registerComponent('SboxNotification', () => SboxNotification);
+
   // Navigation.registerComponent('CmLoading', () => CmLoading);
   // Navigation.registerComponent('CmEat', () => CmEat);
   // Navigation.registerComponent('CmLogin', () => CmLogin);
