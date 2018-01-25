@@ -1,6 +1,7 @@
+import { API_THEME_QUERY } from '../../Config/API';
 export default  {
   getProductList(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/theme_query';
+    const url = API_THEME_QUERY;
 
     let options = {
         method: 'POST',

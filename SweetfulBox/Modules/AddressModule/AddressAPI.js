@@ -1,8 +1,9 @@
+import { API_CONDO_LIST, API_CONDO_FUZZY } from '../../Config/API';
 export default  {
   getCondoList(io_data){
     // console.log('getdata')
     // console.log("io_data",io_data)
-    const url = 'https://chanmao.us/api/sb/v1/condo_list';
+    const url = API_CONDO_LIST;
 
     let options = {
         method: 'POST',
@@ -28,7 +29,7 @@ export default  {
   },
 
   getCondoFuzzy(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/condo_fuzzy';
+    const url = API_CONDO_FUZZY;
 
     let options = {
         method: 'POST',

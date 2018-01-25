@@ -1,6 +1,7 @@
+import { API_ORDER_BEFORE, API_ADD_CARD, API_ADD_ORDER } from '../../Config/API';
 export default  {
   getOrderBefore(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/order_before';
+    const url = API_ORDER_BEFORE;
 
     let options = {
         method: 'POST',
@@ -25,7 +26,7 @@ export default  {
   },
   addCard(io_data) {
 
-    const url = 'https://chanmao.us/api/sb/v1/stripe_card';
+    const url = API_ADD_CARD;
 
     let options = {
         method: 'POST',
@@ -49,7 +50,7 @@ export default  {
             .catch((error) => {throw error})
   },
   checkout(io_data) {
-    const url = 'https://chanmao.us/api/sb/v1/add_order';
+    const url = API_ADD_ORDER;
 
     let options = {
         method: 'POST',

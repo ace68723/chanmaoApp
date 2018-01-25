@@ -9,28 +9,41 @@ import {
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import SboxHome from '../SboxHome/SboxHome';
 import SboxHistory from '../SboxHistory/SboxHistoryViewController';
+import SboxCart from '../SboxCart/SboxCart';
+import TabBar from './TabBar';
 
 export default class MyComponent extends Component {
   render() {
     return (
-      <ScrollableTabView style={{}}
-                          tabBarPosition={'bottom'}
-                          tabBarBackgroundColor={'#fff'}
-                          tabBarActiveTextColor={'#ff7685'}
-                          tabBarUnderlineColor={'#ff7685'}
-                          tabBarUnderlineStyle={{'backgroundColor':'#ff7685'}}
-                          tabBarTextStyle={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
-                          tabBarInactiveTextColor={'#666666'}
-                          initialPage={0}
-                          prerenderingSiblingsNumber={2}>
-            <SboxHome tabLabel="首页"
-              {...{navigator:this.props.navigator,handleBackToHome:this.props.handleBackToHome}}
-            />
-            <SboxHistory tabLabel="订单"
-              {...{navigator:this.props.navigator}}
-            />
+      <ScrollableTabView
+        tabBarBackgroundColor={'#fff'}
+        tabBarActiveTextColor={'#ff7685'}
+        tabBarUnderlineColor={'#ff7685'}
+        tabBarUnderlineStyle={{'backgroundColor':'#ff7685'}}
+        tabBarTextStyle={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
+        tabBarInactiveTextColor={'#666666'}
+        prerenderingSiblingsNumber={2}
+        tabBarPosition = "bottom"
+        initialPage={0}
+        style={{flex:1, }}
+        renderTabBar={() => <TabBar />}
+      >
+        <SboxHome tabLabel="首页"
+              activeIconImage={require("./Image/home.png")}
+              inactiveIconImage={require("./Image/homegrey.png")}
+              navigator={this.props.navigator}/>
+        <SboxHistory tabLabel="订单"
+              activeIconImage={require("./Image/order.png")}
+              inactiveIconImage={require("./Image/ordergrey.png")}
+              navigator={this.props.navigator}/>
+        <SboxCart
+              tabLabel="购物车"
+              activeIconImage={require("./Image/box.png")}
+              inactiveIconImage={require("./Image/box.png")}
+              navigator={this.props.navigator}/>
       </ScrollableTabView>
-    );
+
+  );
   }
 }
 
