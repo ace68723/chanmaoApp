@@ -8,9 +8,12 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  ScrollableTabView,
 } from 'react-native';
 import SboxProductView from './SboxProductView';
 import Settings from '../../Config/Setting';
+import SboxProductTabSectionHeaderCell from "./SboxProductTabSectionHeaderCell"
+
 const { width, height } = Dimensions.get('window');
 
 export default class MyComponent extends Component {
@@ -19,6 +22,7 @@ export default class MyComponent extends Component {
       this.state = {
         prod_list:props.prod_list,
         section_list:props.section_list,
+        headerIndex: props.section_list[0].section_id,
         // categoryTitles: ['新品速递', '好货热卖', '超值特价'],
         // categoryChecked:'new',
         // format_data: [],
@@ -107,6 +111,9 @@ export default class MyComponent extends Component {
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
+
+      this._pressedSectionHeader = this._pressedSectionHeader.bind(this);
+
   }
 
   componentDidMount(){
@@ -115,7 +122,6 @@ export default class MyComponent extends Component {
 		const scrollViewContent = this._scrollViewContent;
 		const ref = Object.assign({},{index,scrollView,scrollViewContent})
 		this.props.getScrollViewRefs(ref);
-
 	}
 
   _renderProduct(product) {
@@ -162,15 +168,43 @@ export default class MyComponent extends Component {
       categoryChecked: category,
     })
   }
+  _renderHeaderSection(){
+    let sectionList = [];
+    for (var index = 0; index < this.state.section_list.length; index++) {
+      const section = this.state.section_list[index];
+       sectionList.push(
+         <SboxProductTabSectionHeaderCell
+           icon={section.section_icon}
+           name={section.section_name}
+           currentIndex={this.state.headerIndex}
+           index={section.section_id}
+           onPress={this._pressedSectionHeader}
+         />
+        )
+    }
+    return (sectionList)
+  }
   _renderHeader() {
     // height * 0.4106 + 80
     return(
-      <View style={{ marginTop:  width*0.4831*1.3699 + 20, height: 0 }}
-            ref={(comp) => this._scrollViewContent = comp }/>
+      <View style={{
+          marginTop: width*0.4831*1.3699 + 20,
+          marginBottom: Settings.getY(72),
+          height: 30,
+          flex: 1,
+          flexDirection: 'row',
+        }}
+        ref={(comp) => this._scrollViewContent = comp }>
+          {this._renderHeaderSection()}
+      </View>
     )
   }
   _keyExtractor = (product, index) => product.section_id+'index'+index;
 
+  _pressedSectionHeader(index){
+    console.log(index);
+    this.setState({headerIndex:index});
+  }
   render() {
     return (
         <FlatList
