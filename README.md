@@ -1,6 +1,19 @@
 # sweetfulBox_1.1
 
-#single product spu data sample
+## 2018-01-26更新
+- spu价格参数 spu_price （skulist中最低的sku_price）
+- sku价格参数 sku_original_price sku_price
+- sku通过 sku_original_price === sku_price 判断sku是否打折 
+- 所有结算价格以sku_price 为准
+
+* [1. data sample](#1)
+* [1.1 single product spu data sample](#1.1)
+* [1.2 home data sample](#1.2)
+
+<h2 id="1">1. data sample</h2>
+<h3 id="1.1"> 1.1 single product spu data sample<h3/>
+
+
 ```
 {
   spu_id:5,
@@ -43,8 +56,8 @@
       amount:329,
       sku_image_id:762,
       sku_fact_image_id:852,
-      sku_retail_price:10.86,
-      sku_wholesale_price:10.86,
+      sku_original_price:10.86,
+      sku_price:10.86,
       
     },
     {
@@ -55,8 +68,8 @@
       amount:182,
       sku_image_id:762,
       sku_fact_image_id:523,
-      sku_retail_price:7.53,
-      sku_wholesale_price:5.22
+      sku_original_price:7.53,
+      sku_price:5.22
     },
     {
       spu_id:5,
@@ -66,8 +79,8 @@
       amount:0, //check amount || status
       sku_image_id:835,
       sku_fact_image_id:632,
-      sku_retail_price:5.23,
-      sku_wholesale_price:2.33
+      sku_original_price:5.23,
+      sku_price:2.33
     },
     {
       spu_id:5,
@@ -77,14 +90,17 @@
       amount:235,
       sku_image_id:275,
       sku_fact_image_id:523,
-      sku_retail_price:8.23,
-      sku_wholesale_price:6.59
+      sku_original_price:8.23,
+      sku_price:6.59
     }
   ]
 }
 ```
 
-#home data sample
+
+<h3 id="1.2"> 1.2 home data sample<h3/>
+
+
 
 ```
 {
@@ -153,8 +169,8 @@
                 {
                     "sku_id": 1,
                     "name": "张君雅海苔味10G",
-                    "retail_price": "10.99",
-                    "wholesale_price": "10.99",
+                    "sku_original_price": "10.99",
+                    "sku_price": "10.99",
                     "image": "https://chanmao.us/storage/image/sb_app/2.0/tmp/1_20170828.png",
                     "section_id": 1,
                     "type": "sku"
@@ -162,8 +178,8 @@
                 {
                     "sku_id": 2,
                     "name": "张君雅原味味10G",
-                    "retail_price": "10.99",
-                    "wholesale_price": "10.99",
+                    "sku_original_price": "10.99",
+                    "sku_price": "10.99",
                     "image": "https://chanmao.us/storage/image/sb_app/2.0/tmp/2_20170828.png",
                     "section_id": 1,
                     "type": "sku"
@@ -187,8 +203,8 @@
                 {
                     "sku_id": 3,
                     "name": "浪味仙田园蔬菜10G",
-                    "retail_price": "16.99",
-                    "wholesale_price": "12.99",
+                    "sku_original_price": "16.99",
+                    "sku_price": "12.99",
                     "image": "https://chanmao.us/storage/image/sb_app/2.0/tmp/3_20170828.png",
                     "section_id": 2,
                     "type": "sku"
@@ -196,8 +212,8 @@
                 {
                     "sku_id": 4,
                     "name": "浪味仙烧烤味10G",
-                    "retail_price": "16.99",
-                    "wholesale_price": "12.99",
+                    "sku_original_price": "16.99",
+                    "sku_price": "12.99",
                     "image": "https://chanmao.us/storage/image/sb_app/2.0/tmp/4_20170828.png",
                     "section_id": 2,
                     "type": "sku"
@@ -221,7 +237,7 @@
                 {
                     "spu_id": 1,
                     "name": "浪味仙",
-                    "retail_price": "10.99",
+                    "spu_price": "10.99",
                     "image": "https://chanmao.us/storage/image/sb_app/2.0/tmp/zjy_big.png",
                     "section_id": 3,
                     "type": "spu"
@@ -229,7 +245,7 @@
                 {
                     "spu_id": 2,
                     "name": "张君雅",
-                    "retail_price": "12.99",
+                    "spu_price": "12.99",
                     "image": "https://chanmao.us/storage/image/sb_app/2.0/tmp/lwx_big.png",
                     "section_id": 3,
                     "type": "spu"
