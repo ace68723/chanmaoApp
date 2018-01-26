@@ -13,25 +13,25 @@ const testData =
     ev_error: 0,
     ev_message: "",
     ea_banner: [
-        {
-            id: 3,
-            image: "https://chanmao.us/storage/image/sb_app/home_banner/3_20170828.png",
-            type: 3,
-            param: "param3"
-        },
-        {
-            id: 2,
-            image: "https://chanmao.us/storage/image/sb_app/home_banner/2_20170828.png",
-            type: 2,
-            param: "param2"
-        },
-        {
-            id: 1,
-            image: "https://chanmao.us/storage/image/sb_app/home_banner/1_20170828.png",
-            type: 1,
-            param: "param"
-        }
-    ],
+      {
+          id: 3,
+          image: "https://chanmao.us/storage/image/sb_app/home_banner/3_20170828.png",
+          type: 3,
+          param: "param3"
+      },
+      {
+          id: 1,
+          image: "https://chanmao.us/storage/image/sb_app/home_banner/1_20170828.png",
+          type: 1,
+          param: "param"
+      },
+      {
+          id: 2,
+          image: "https://chanmao.us/storage/image/sb_app/home_banner/2_20170828.png",
+          type: 2,
+          param: "param2"
+      }
+  ],
     ea_theme: [
         {
             tmid: 6,
@@ -267,36 +267,37 @@ export default  {
 
   },
   async getHomeData(io_data){
-    const returnData = {
-      banner: testData.ea_banner,
-      theme: testData.ea_theme,
-      ev_error: testData.ev_error,
-      ev_message:testData.ev_message
+    // console.log(testData)
+    // const returnData = {
+    //   banner: testData.ea_banner,
+    //   theme: testData.ea_theme,
+    //   ev_error: testData.ev_error,
+    //   ev_message:testData.ev_message
+    // }
+    // return returnData
+    try {
+      const lo_data ={
+        uuid: 1,
+      }
+      const homeDataResult = await ProductAPI.getHomeData(lo_data);
+
+      if(homeDataResult.ev_error === 0 ){
+        const eo_data ={
+          bannerList:testData.ea_banner,
+          themeList: testData.ea_theme,
+        }
+        this.updateAPICache(eo_data);
+        return eo_data
+      }else{
+
+        const errorMessage = homeDataResult.ev_message;
+        throw errorMessage
+      }
+    } catch (e) {
+      console.log(e)
+      const errorMessage = 'error';
+      throw errorMessage
     }
-    return returnData
-  //   try {
-  //     const lo_data ={
-  //       uuid: 1,
-  //     }
-  //     const homeDataResult = await ProductAPI.getHomeData(lo_data);
-
-  //     if(homeDataResult.ev_error === 0 ){
-  //       const eo_data ={
-  //         bannerList:homeDataResult.ea_banner,
-  //         themeList: homeDataResult.ea_theme,
-  //       }
-  //       this.updateAPICache(eo_data);
-  //       return eo_data
-  //     }else{
-
-  //       const errorMessage = homeDataResult.ev_message;
-  //       throw errorMessage
-  //     }
-  //   } catch (e) {
-  //     console.log(e)
-  //     const errorMessage = 'error';
-  //     throw errorMessage
-  //   }
 
   },
   updateAPICache(iv_json) {
