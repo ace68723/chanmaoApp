@@ -24,6 +24,10 @@ export default class MyComponent extends Component {
         predictionsData: [],
         items: [],
         showAlert: 0,
+<<<<<<< HEAD
+=======
+        selectedAddress: '',
+>>>>>>> 881b821d7cbff6fe6814f4372ebc7f49698ca416
       // dataSource: ds.cloneWithRows([])
       }
       // this.setSource = this.setSource.bind(this);
@@ -37,19 +41,25 @@ export default class MyComponent extends Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     SboxAddressStore.addChangeListener(this._onChange);
+=======
+      SboxAddressStore.addChangeListener(this._onChange);
+>>>>>>> 881b821d7cbff6fe6814f4372ebc7f49698ca416
   }
   componentWillUnmount() {
-    SboxAddressStore.removeChangeListener(this._onChange)
+      SboxAddressStore.removeChangeListener(this._onChange)
   }
 
   _onChange() {
     console.log("onChange");
-    const showAlert = SboxAddressStore.getAlertState();
-    this.setState(Object.assign({}, this.state, {showAlert: newState}))
+    const newState = SboxAddressStore.getState();
+    console.log(newState);
+    this.setState(Object.assign({}, this.state, {showAlert: newState.showAlert}));
+    this.setState(Object.assign({}, this.state, {selectedAddress: newState.selectedAddress}));
     // Object.assign({},this.state,SboxAddressStore.getState());
-
-    if (showAlert == 1) {
+    console.log(this.state);
+    if (this.state.showAlert == 0) {
       this.props.navigator.showLightBox({
          screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
          passProps: {
@@ -63,10 +73,10 @@ export default class MyComponent extends Component {
         });
     }
     else {
-        SboxAddressAction.updateSelectedAddress(addressObject);
+        // SboxAddressAction.updateSelectedAddress(this.state.addressObject);
         this.props.navigator.showModal({
           screen: "SboxAddAddressInfo",
-          passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
+          passProps: {addressObject:this.state.selectedAddress,setUserInfo:this.props.setUserInfo},
           navigatorStyle: {navBarHidden:true},
           animationType: 'slide-up'
         });
@@ -102,39 +112,17 @@ export default class MyComponent extends Component {
               const placeDetails = res.result;
 
               let addrInfo = {};
-              addrInfo.iv_lag  = placeDetails.geometry.location.lat;
-              addrInfo.iv_lng  = placeDetails.geometry.location.lng;
-              addrInfo.iv_addr = placeDetails.formatted_address;
-              addrInfo.iv_province = placeDetails.formatted_address.split(',')[2].replace(' ', '').substring(0, 2);
+              addrInfo.lat  = placeDetails.geometry.location.lat;
+              addrInfo.lng  = placeDetails.geometry.location.lng;
+              addrInfo.addr = placeDetails.formatted_address;
+              addrInfo.province = placeDetails.formatted_address.split(',')[2].replace(' ', '').substring(0, 2);
               console.log(addrInfo);
               // Check if in the area
-              SboxAddressAction.checkCanDeliver(addrInfo.iv_lag, addrInfo.iv_lng);
-              if (0 == 0) {
-                  // SboxAddressAction.showAddressAlert("对不起");
-                  // this.props.navigator.showLightBox({
-                  //    screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
-                  //    passProps: {
-                  //      message:`对不起, 您输入的地址暂时无法配送`}, // simple serializable object that will pass as props to the lightbox (optional)
-                  //    style: {
-                  //      flex: 1,
-                  //      backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-                  //     //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
-                  //    },
-                  //    adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-                  //   });
-              }
-              else {
-                  // SboxAddressAction.updateSelectedAddress(addressObject);
-                  // this.props.navigator.showModal({
-                  //   screen: "SboxAddAddressInfo",
-                  //   passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
-                  //   navigatorStyle: {navBarHidden:true},
-                  //   animationType: 'slide-up'
-                  // });
-              }
-              // dispatch({
-              //     actionType: AppConstants.FORMAT_ADDRESS, addrInfo
-              // })
+              // SboxAddressAction.updateSelectedAddress(addrInfo);
+              SboxAddressAction.checkCanDeliver(addrInfo);
+              // this.setState({
+              //    selectedAddress: addrInfo
+              // });
             }else{
               throw 'error'
             }
