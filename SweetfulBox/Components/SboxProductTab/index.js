@@ -19,6 +19,7 @@ const { width, height } = Dimensions.get('window');
 export default class MyComponent extends Component {
   constructor(props) {
       super(props);
+      console.log('ll', props);
       this.state = {
         prod_list:props.prod_list,
         section_list:props.section_list,
@@ -111,7 +112,6 @@ export default class MyComponent extends Component {
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
-
       this._pressedSectionHeader = this._pressedSectionHeader.bind(this);
 
   }
@@ -133,7 +133,18 @@ export default class MyComponent extends Component {
           />
         );
 
-      }else if(product.item.type === "section"){
+      }
+      else if (product.item.type === "empty") {
+        return (
+          <View style={{
+             flex:1,
+             alignItems:'center',
+             justifyContent:'center',
+           }}>
+          </View>
+        )
+      }
+      else if(product.item.type === "section"){
         return (
           <View style={{
              flex:1,

@@ -15,7 +15,6 @@ import Settings from '../../Config/Setting';
 
 export default class SboxProductView extends Component {
   _renderPriceText(){
-    console.log(this.props.product);
     if (this.props.product.type == 'sku'){
       if (this.props.product.sku_original_price != this.props.product.sku_price){
         return(
@@ -40,13 +39,16 @@ export default class SboxProductView extends Component {
               );
       }
       else{
-        <Text style={{marginTop:6,
-                      fontSize:12,
-                      fontWeight:"700",
-                      color:"#ff768b",
-                      alignSelf:"center"}}>
-                      ${this.props.product.sku_price}
-        </Text>
+        console.log('xx', this.props.product);
+        return (
+          <Text style={{marginTop:6,
+                                fontSize:12,
+                                fontWeight:"700",
+                                color:"#ff768b",
+                                alignSelf:"center"}}>
+                                ${this.props.product.sku_price}
+                  </Text>
+        )
       }
     }
     return (
@@ -60,7 +62,6 @@ export default class SboxProductView extends Component {
     );
   }
   render() {
-    console.log(this.props)
       return (
           <TouchableWithoutFeedback  onPress={this.props.goToSboxProductDetial.bind(null,this.props.product)}>
             <View style={styles.productContainer}>
@@ -70,7 +71,7 @@ export default class SboxProductView extends Component {
                              alignSelf:'center'}}
               />
               <Text style={{marginTop:6,
-                            fontSize:15,
+                            fontSize:12,
                             fontWeight:"700",
                             color:"#6d6e71",
                             alignSelf:"center"}}
@@ -86,13 +87,9 @@ export default class SboxProductView extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      width:width,
-      height:100,
-    },
     productContainer: {
       flex:1,
-      marginHorizontal:5
+      marginHorizontal:5,
+      marginBottom: Settings.getY(72)
     }
 });

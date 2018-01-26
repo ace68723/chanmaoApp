@@ -184,6 +184,7 @@ export default class SboxHome extends Component {
       <SboxProductTab
                   tmid={theme.tmid}
                   prod_list={theme.prod_list}
+                  section_list={theme.section_list}
                   scrollEventBind={this._scrollEventBind}
                   getScrollViewRefs={this._getScrollViewRefs}
                   goToSboxProductDetial={this._goToSboxProductDetial}/>

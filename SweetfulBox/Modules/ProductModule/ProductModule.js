@@ -280,11 +280,10 @@ export default  {
         uuid: 1,
       }
       const homeDataResult = await ProductAPI.getHomeData(lo_data);
-
       if(homeDataResult.ev_error === 0 ){
         const eo_data ={
-          bannerList:testData.ea_banner,
-          themeList: testData.ea_theme,
+          bannerList:homeDataResult.ea_banner,
+          themeList: homeDataResult.ea_theme,
         }
         this.updateAPICache(eo_data);
         return eo_data
