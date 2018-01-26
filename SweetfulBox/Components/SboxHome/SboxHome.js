@@ -13,6 +13,7 @@ import _forEach from 'lodash/forEach';
 
 import SboxHomeAction from '../../Actions/SboxHomeAction';
 import SboxHomeStore from '../../Stores/SboxHomeStore';
+import {DatabaseInit} from '../../Modules/Database';
 
 import SboxHomeHeader from './SboxHomeHeader';
 import HeaderWithBanner from './HeaderWithBanner';
@@ -54,7 +55,9 @@ export default class SboxHome extends Component {
       this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
       this._backToHome = this._backToHome.bind(this);
   }
-
+  componentWillMount() {
+    DatabaseInit();
+  }
   componentDidMount() {
       SboxHomeStore.addChangeListener(this._onChange);
       SboxHomeAction.getHomeData();
