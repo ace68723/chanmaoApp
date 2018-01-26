@@ -2,13 +2,16 @@ import SboxConstants from '../Constants/SboxConstants';
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import AddressModule from '../Modules/AddressModule/AddressModule'
 export default {
-    async checkCanDeliver(lat,lng){
+    async checkCanDeliver(addrInfo){
         try{
-          console.log(lat, lng);
-          const data = await AddressModule.checkCanDeliver(lat,lng);
-          console.log(data);
+          console.log(addrInfo);
+          const data = await AddressModule.checkCanDeliver(addrInfo.lat,addrInfo.lng);
+          const io_data = {
+            geolocation: data,
+            addrInfo: addrInfo,
+          }
           dispatch({
-              actionType: SboxConstants.CHECK_CAN_DELIVER, data
+              actionType: SboxConstants.CHECK_CAN_DELIVER, io_data
           })
         }catch(error){
           console.log(error);

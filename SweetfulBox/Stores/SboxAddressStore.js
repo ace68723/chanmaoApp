@@ -12,9 +12,9 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
     filter: "ALL",
     locationOptions: ['ALL', 'North York', 'Markham', 'Scarborough',
     'Richmond Hill', 'York'],
-    selectedAddress:{},
+    selectedAddress: {},
     textInput: '',
-    showAlert: 0,
+    showAlert: 1,
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -42,8 +42,10 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
   },
   checkWhetherInRange(data) {
     console.log(this.state);
-    console.log(data.ev_can_deliver);
-    this.state = Object.assign({},this.state,{showAlert: data.ev_can_deliver});
+    // this.state = Object.assign({},this.state,{showAlert: data.ev_can_deliver});
+    this.state.showAlert = data.geolocation.ev_can_deliver;
+    this.state.selectedAddress = data.addrInfo;
+    console.log(data.addrInfo);
   },
   getState(){
     return this.state;
@@ -54,9 +56,9 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
 				case SboxConstants.CHECK_CAN_DELIVER:
-          console.log("In store,", action.data);
-          SboxAddressStore.checkWhetherInRange(action.data);
-          console.log("In store after check, ", this.state.showAlert);
+          console.log("In store,", action.io_data);
+          SboxAddressStore.checkWhetherInRange(action.io_data);
+          console.log("In store after check, ");
           SboxAddressStore.emitChange();
 					break;
         case SboxConstants.UPDATE_SELECTED_ADDRESS:

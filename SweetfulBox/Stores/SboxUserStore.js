@@ -17,7 +17,7 @@ const SboxUserStore = Object.assign({},EventEmitter.prototype,{
 			this.removeListener(CHANGE_EVENT, callback)
 	},
   updateOrderHistoryState(la_orderHistory){
-      
+
       this.state.orderHistory = la_orderHistory;
   },
   getState(){
@@ -31,7 +31,7 @@ const SboxUserStore = Object.assign({},EventEmitter.prototype,{
 					break;
 
         case SboxConstants.PUT_USER_ADDR:
-
+          console.log(action.data);
           SboxUserStore.emitChange()
   				break;
 
