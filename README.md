@@ -9,9 +9,10 @@
 * [1. data sample](#1)
   * [1.1 single product spu data sample](#1.1)
   * [1.2 home data sample](#1.2)
+* [2. database schema ](#2)
 
 <div id="1"> <div/>
- 
+
 ## 1. data sample
 
 <div id="1.1"> <div/>
@@ -280,3 +281,30 @@
     ]
 }
 ```
+
+<div id="2"> <div/>
+
+##  database schema 
+
+| Table              |            |                |                |                  |            |            |            |            |
+| ------------------ | ---------- | -------------- | -------------- | ---------------- | ---------- | ---------- | ---------- | ---------- |
+| sbox_spu           | spu_id     | name           | image_id       | price            | sold_out   | status     | updated_at | updated_by |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_sku_base      | sku_id     | spu_id         | name           | alias            | fullname   | status     | updated_at | updated_by |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_sku_core      | sku_id     | original_price | price          | amount           | threshold  | updated_at | updated_by |            |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_sku_image     | sku_id     | image_id       | fact_image_id  | updated_at       | updated_by |            |            |            |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_image         | image_id   | url            |                |                  |            |            |            |            |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_section       | section_id | name           | icon_id        | rank             | status     | updated_at | updated_by |            |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_section_sku   | section_id | sku_id         | rank           | status           | updated_at | updated_by |            |            |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_section_spu   | section_id | spu_id         | rank           | status           | updated_at | updated_by |            |            |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_theme         | theme_id   | name           | active_icon_id | inactive_icon_id | rank       | status     | updated_at | updated_by |
+|                    |            |                |                |                  |            |            |            |            |
+| sbox_theme_section | theme_id   | section_id     | rank           | status           | updated_at | updated_by |            |            |
+|                    |            |                |                |                  |            |            |            |            |
