@@ -44,6 +44,5 @@ const styles = StyleSheet.create({
   },
   activatedText: {
     color: 'black',
-    fontWeight: 'bold'
   }
 });

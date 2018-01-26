@@ -19,11 +19,11 @@ const { width, height } = Dimensions.get('window');
 export default class MyComponent extends Component {
   constructor(props) {
       super(props);
-      console.log('ll', props);
+      console.log('xxx', props);
       this.state = {
         prod_list:props.prod_list,
         section_list:props.section_list,
-        headerIndex: props.section_list[0].section_id,
+        headerIndex: props.section_list ? props.section_list[0].section_id : 0,
         // categoryTitles: ['新品速递', '好货热卖', '超值特价'],
         // categoryChecked:'new',
         // format_data: [],
@@ -180,6 +180,9 @@ export default class MyComponent extends Component {
     })
   }
   _renderHeaderSection(){
+    if (!this.state.section_list){
+      return;
+    }
     let sectionList = [];
     for (var index = 0; index < this.state.section_list.length; index++) {
       const section = this.state.section_list[index];
@@ -213,7 +216,6 @@ export default class MyComponent extends Component {
   _keyExtractor = (product, index) => product.section_id+'index'+index;
 
   _pressedSectionHeader(index){
-    console.log(index);
     this.setState({headerIndex:index});
   }
   render() {

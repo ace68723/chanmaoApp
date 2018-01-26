@@ -39,7 +39,6 @@ export default class SboxProductView extends Component {
               );
       }
       else{
-        console.log('xx', this.props.product);
         return (
           <Text style={{marginTop:6,
                                 fontSize:12,

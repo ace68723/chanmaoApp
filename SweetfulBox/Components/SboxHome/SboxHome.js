@@ -174,9 +174,11 @@ export default class SboxHome extends Component {
 
     if(!this.state.themeList[0]) return;
 
-    this.state.themeList.push(Object.assign({}, this.state.themeList[0]));
-    this.state.themeList[1].name = '生活用品';
-    console.log('123', this.state.themeList);
+    // this.state.themeList.push(Object.assign({}, this.state.themeList[0]));
+    // this.state.themeList[1].name = '生活用品';
+    //
+    // this.state.themeList.push(Object.assign({}, this.state.themeList[0]));
+    // this.state.themeList[2].name = '其他商品';
 
     if (this.state.themeList.length > 1 && this.state.themeList[1].prod_list.length != 0){
       return this._renderScrollableTabView()
