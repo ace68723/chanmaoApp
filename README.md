@@ -5,33 +5,33 @@
 {
   spu_id:5,
   spu_name:"与美懒人大厨四川冒菜",
-  spu_status:0,
-  spu_image:[
+  spu_status:0, //status = 1, 页面跳回
+  sku_image:[
     {
       image_id:762,
-      image:url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
+      image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
     },
     {
       image_id:835,
-      image:url:"https://chanmao.us/storage/image/sb_app/image/12_20170828.png"
+      image_url:"https://chanmao.us/storage/image/sb_app/image/12_20170828.png"
     },
     {
       image_id:275,
-      image:url:"https://chanmao.us/storage/image/sb_app/image/23_20170828.png"
+      image_url:"https://chanmao.us/storage/image/sb_app/image/23_20170828.png"
     }
   ],
-  spu_fact:[
+  sku_fact:[
     {
       image_id:852,
-      image:url:"https://chanmao.us/storage/image/sb_app/facts/2_20170828.png"
+      image_url:"https://chanmao.us/storage/image/sb_app/facts/2_20170828.png"
     },
     {
       image_id:523,
-      image:url:"https://chanmao.us/storage/image/sb_app/facts/3_20170828.png"
+      image_url:"https://chanmao.us/storage/image/sb_app/facts/3_20170828.png"
     },
     {
       image_id:632,
-      image:url:"https://chanmao.us/storage/image/sb_app/facts/5_20170828.png"
+      image_url:"https://chanmao.us/storage/image/sb_app/facts/5_20170828.png"
     }
   ],
   sku_list:[
@@ -62,8 +62,8 @@
       spu_id:5,
       sku_id:48,
       sku_name:"浓香麻辣",
-      sku_status:2,
-      amount:0,
+      sku_status:1,
+      amount:0, //check amount || status
       sku_image_id:835,
       sku_fact_image_id:632,
       sku_retail_price:5.23,
