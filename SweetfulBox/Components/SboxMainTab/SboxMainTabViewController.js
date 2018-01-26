@@ -9,7 +9,7 @@ import {
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import SboxHome from '../SboxHome/SboxHome';
 import SboxHistory from '../SboxHistory/SboxHistoryViewController';
-import SboxCheckout from '../SboxCheckout/SboxCheckout';
+import SboxCheckout from '../SboxCheckout1.0/SboxCheckout';
 import TabBar from './TabBar';
 export default class MyComponent extends Component {
   render() {
