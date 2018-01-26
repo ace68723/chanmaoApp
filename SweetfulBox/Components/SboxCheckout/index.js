@@ -22,12 +22,14 @@ const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
 const viewWidth = Dimensions.get('window').width;
 const navigationHeight = viewHeight * (212/2208) - 17;
+const checkoutButtonMargin = viewWidth * (60/1242);
 export default class MyComponent extends Component {
   constructor() {
     super();
     this.state = {
       // productList:realm.objects('sbox_cart_product'),
-      productList: [{
+      productList: [
+        {
           spu_id:5,
           sku_id:22,
           spu_name:"与美懒人大厨四川冒菜",
@@ -36,9 +38,22 @@ export default class MyComponent extends Component {
           sku_amount:182,
           sku_original_price:"7.53",
           sku_price:"5.22",
-          sku_quantity:1,
-          sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png",
-      }],
+          sku_quantity:2,
+          sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
+        },
+        {
+            spu_id:5,
+            sku_id:22,
+            spu_name:"与美懒人大厨四川",
+            sku_name:"豚骨菌菇(大包装)",
+            sku_status:0,
+            sku_amount:182,
+            sku_original_price:"7.53",
+            sku_price:"15.22",
+            sku_quantity:1,
+            sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
+        }
+      ],
       box:realm.objectForPrimaryKey('sbox_box',1),
       renderCheckoutBtn:false,
       startCheckout:false,
@@ -249,6 +264,7 @@ export default class MyComponent extends Component {
       const selectedAmount = product.sku_quantity;
       const sku_price = product.sku_price;
       const original_price = product.sku_original_price;
+      // <Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}>${sku_price} <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S', textDecorationLine: 'line-through'}}> ${original_price}</Text></Text>
       productList.push(
 
           <View key={key} style={styles.item}>
@@ -257,18 +273,41 @@ export default class MyComponent extends Component {
             </View>
             <View style={{flex:1,flexDirection:'row',}}>
               <View style={{flex:0.8,paddingRight:10,}}>
-                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>{fullname}</Text>
-                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>${sku_price} <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S', textDecorationLine: 'line-through'}}> ${original_price}</Text></Text>
+                <Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}>{fullname}</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginTop: 10}}>
+                  <TouchableOpacity
+                    style={{justifyContent: 'center'}}>
+                    <Text style={{borderWidth: 0.8,
+                                  width: 20,
+                                  textAlign: 'center'}}>-</Text>
+                  </TouchableOpacity>
+                  <View style={{justifyContent: 'center', marginLeft: -1}}>
+                    <Text style={{borderWidth: 0.8,
+                                  width: 50,
+                                  textAlign: 'center',
+                                  color: '#ff7685'}}>
+                      {selectedAmount}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    style={{justifyContent: 'center', marginLeft: -1}}>
+                    <Text style={{borderWidth: 0.8,
+                                  width: 20,
+                                  textAlign: 'center'}}>+</Text>
+                  </TouchableOpacity>
+
+                </View>
               </View>
-              <View style={{flex:0.2}}>
-                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>x{selectedAmount}</Text>
+              <View style={{flex:0.2, justifyContent: 'space-between', flexDirection: 'column'}}>
+                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}>${sku_price}</Text>
+                <TouchableOpacity
+                  style={{alignItems: 'flex-end'}}
+                  onPress={this._deleteItemAlert.bind(null,product,fullname + ' x' + selectedAmount)}>
+                  <Image  style={{width:18.72,height:20}}
+                          source={require('./Img/icon-delete.png')}/>
+                </TouchableOpacity>
               </View>
             </View>
-            <TouchableOpacity   style={{position:'absolute',right:0,bottom:10}}
-                                onPress={this._deleteItemAlert.bind(null,product,fullname + ' x' + selectedAmount)}>
-              <Image  style={{width:18.72,height:20}}
-                      source={require('./Img/icon-delete.png')}/>
-            </TouchableOpacity>
           </View>
 
 
@@ -502,7 +541,6 @@ export default class MyComponent extends Component {
       <TouchableOpacity style={{paddingTop:22,
                                 paddingLeft:8,
                                 paddingRight:20,
-                                paddingBottom:20,
                                 position:'absolute',
                                 top:-15,
                                 left:0,}}
@@ -514,6 +552,43 @@ export default class MyComponent extends Component {
         </View>
       </TouchableOpacity>
     )
+  }
+  _rederFooter() {
+    const products_list = this.state.productList;
+    var total = 0;
+    var num = 0;
+    for (let product of products_list) {
+        total += product.sku_price*product.sku_quantity;
+        num += product.sku_quantity;
+    }
+    return(
+      <View style={{flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginBottom: checkoutButtonMargin,
+                    marginLeft: checkoutButtonMargin,
+                    marginRight: checkoutButtonMargin}}>
+        <View style={{height: 30, width: 30, justifyContent: 'center'}}>
+          <Image source={require('./Img/box.png')}
+                 style={{height: 30, width: 30, justifyContent: 'center'}}>
+             <Text style={{backgroundColor: 'rgba(0,0,0,0)', textAlign: 'center'}}>{num}
+             </Text>
+          </Image>
+        </View>
+        <Text style={{fontSize: 16,
+                      textAlign:'center',
+                      color: '#ff7685'}}>Before Tax:
+          <Text style={{fontSize: 24,}}> ${total}</Text>
+        </Text>
+        <TouchableOpacity
+          style={{paddingLeft: 36,
+                  paddingRight: 36,
+                  backgroundColor: '#ff7685',
+                  justifyContent: 'center'}}
+          activeOpacity={0.6}>
+          <Text style={{textAlign:'center', color: 'white', fontSize: 16}}>提交订单</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
   // <View style={{
   //               position:'absolute',
@@ -573,8 +648,7 @@ export default class MyComponent extends Component {
           {this._renderProductList()}
 
         </ScrollView>
-
-        {this._renderBtn()}
+        {this._rederFooter()}
         {this._renderGoBackBtn()}
       </View>
     );
