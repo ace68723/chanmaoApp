@@ -8,7 +8,7 @@ import {
   sbox_updateBox,
 } from '../../../App/Modules/Database';
 
-const testData = 
+const testData =
   {
     ev_error: 0,
     ev_message: "",
@@ -173,7 +173,7 @@ const testData =
                 retail_price: "3.59",
                 wholesale_price:"1.52",
                 status:2,
-              }, 
+              },
             ]
         }
     ]
@@ -267,36 +267,36 @@ export default  {
 
   },
   async getHomeData(io_data){
-    const returnData = {
-      banner: testData.ea_banner,
-      theme: testData.ea_theme,
-      ev_error: testData.ev_error,
-      ev_message:testData.ev_message
+    // const returnData = {
+    //   banner: testData.ea_banner,
+    //   theme: testData.ea_theme,
+    //   ev_error: testData.ev_error,
+    //   ev_message:testData.ev_message
+    // }
+    // return returnData
+    try {
+      const lo_data ={
+        uuid: 1,
+      }
+      const homeDataResult = await ProductAPI.getHomeData(lo_data);
+
+      if(homeDataResult.ev_error === 0 ){
+        const eo_data ={
+          bannerList:homeDataResult.ea_banner,
+          themeList: testData.ea_theme,
+        }
+        this.updateAPICache(eo_data);
+        return eo_data
+      }else{
+
+        const errorMessage = homeDataResult.ev_message;
+        throw errorMessage
+      }
+    } catch (e) {
+      console.log(e)
+      const errorMessage = 'error';
+      throw errorMessage
     }
-    return returnData
-  //   try {
-  //     const lo_data ={
-  //       uuid: 1,
-  //     }
-  //     const homeDataResult = await ProductAPI.getHomeData(lo_data);
-
-  //     if(homeDataResult.ev_error === 0 ){
-  //       const eo_data ={
-  //         bannerList:homeDataResult.ea_banner,
-  //         themeList: homeDataResult.ea_theme,
-  //       }
-  //       this.updateAPICache(eo_data);
-  //       return eo_data
-  //     }else{
-
-  //       const errorMessage = homeDataResult.ev_message;
-  //       throw errorMessage
-  //     }
-  //   } catch (e) {
-  //     console.log(e)
-  //     const errorMessage = 'error';
-  //     throw errorMessage
-  //   }
 
   },
   updateAPICache(iv_json) {
