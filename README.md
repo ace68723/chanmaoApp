@@ -1,5 +1,89 @@
 # sweetfulBox_1.1
 
+#single product spu data sample
+```
+{
+  spu_id:5,
+  spu_name:"与美懒人大厨四川冒菜",
+  spu_status:0,
+  spu_image:[
+    {
+      image_id:762,
+      image:url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
+    },
+    {
+      image_id:835,
+      image:url:"https://chanmao.us/storage/image/sb_app/image/12_20170828.png"
+    },
+    {
+      image_id:275,
+      image:url:"https://chanmao.us/storage/image/sb_app/image/23_20170828.png"
+    }
+  ],
+  spu_fact:[
+    {
+      image_id:852,
+      image:url:"https://chanmao.us/storage/image/sb_app/facts/2_20170828.png"
+    },
+    {
+      image_id:523,
+      image:url:"https://chanmao.us/storage/image/sb_app/facts/3_20170828.png"
+    },
+    {
+      image_id:632,
+      image:url:"https://chanmao.us/storage/image/sb_app/facts/5_20170828.png"
+    }
+  ],
+  sku_list:[
+    {
+      spu_id:5,
+      sku_id:52,
+      sku_name:"豚骨菌菇(大包装)",
+      sku_status:0,
+      amount:329,
+      sku_image_id:762,
+      sku_fact_image_id:852,
+      sku_retail_price:10.86,
+      sku_wholesale_price:10.86,
+      
+    },
+    {
+      spu_id:5,
+      sku_id:22,
+      sku_name:"豚骨菌菇(小包装)",
+      sku_status:0,
+      amount:182,
+      sku_image_id:762,
+      sku_fact_image_id:523,
+      sku_retail_price:7.53,
+      sku_wholesale_price:5.22
+    },
+    {
+      spu_id:5,
+      sku_id:48,
+      sku_name:"浓香麻辣",
+      sku_status:2,
+      amount:0,
+      sku_image_id:835,
+      sku_fact_image_id:632,
+      sku_retail_price:5.23,
+      sku_wholesale_price:2.33
+    },
+    {
+      spu_id:5,
+      sku_id:48,
+      sku_name:"黑糖海盐",
+      sku_status:0,
+      amount:235,
+      sku_image_id:275,
+      sku_fact_image_id:523,
+      sku_retail_price:8.23,
+      sku_wholesale_price:6.59
+    }
+  ]
+}
+```
+
 #home data sample
 
 ```
