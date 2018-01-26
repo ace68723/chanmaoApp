@@ -17,10 +17,10 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
     showAlert: 0,
   },
 	emitChange(){
-			this.emit( CHANGE_EVENT)
+      this.emit(CHANGE_EVENT)
+      console.log(CHANGE_EVENT)
 	},
 	addChangeListener(callback){
-      // console.log(callback);
 			this.on(CHANGE_EVENT, callback)
 	},
 	removeChangeListener(callback){
@@ -56,7 +56,7 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
 				case SboxConstants.CHECK_CAN_DELIVER:
           console.log("In store,", action.data);
           SboxAddressStore.checkWhetherInRange(action.data);
-          console.log("In store after check, ", this.state.showAlert);
+          console.log("In store after check, ", );
           SboxAddressStore.emitChange();
 					break;
         case SboxConstants.UPDATE_SELECTED_ADDRESS:

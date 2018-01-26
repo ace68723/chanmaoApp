@@ -22,14 +22,8 @@ export default class MyComponent extends Component {
       // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       this.state = {
         predictionsData: [],
-<<<<<<< HEAD
-        items: [
-         
-      ],
-=======
         items: [],
         showAlert: 0,
->>>>>>> 852f9cf89a9b89b5950835491f136a4dd81f70df
       // dataSource: ds.cloneWithRows([])
       }
       // this.setSource = this.setSource.bind(this);
@@ -42,8 +36,8 @@ export default class MyComponent extends Component {
     console.log(this.state.items);
   }
 
-  comonentDidMount() {
-    SboxAddressStore.addChangeLister(this._onChange);
+  componentDidMount() {
+    SboxAddressStore.addChangeListener(this._onChange);
   }
   componentWillUnmount() {
     SboxAddressStore.removeChangeListener(this._onChange)

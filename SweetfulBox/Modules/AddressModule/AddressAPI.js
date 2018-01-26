@@ -22,7 +22,7 @@ export default  {
       iv_lat: lat
     })
 
-
+   console.log(options)
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

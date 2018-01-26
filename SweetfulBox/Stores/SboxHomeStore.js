@@ -9,7 +9,7 @@ const SboxHomeStore = Object.assign({},EventEmitter.prototype,{
     themeList:[],
   },
 	emitChange(){
-			this.emit( CHANGE_EVENT)
+			this.emit(CHANGE_EVENT)
 	},
 	addChangeListener(callback){
 			this.on(CHANGE_EVENT, callback)
@@ -18,7 +18,6 @@ const SboxHomeStore = Object.assign({},EventEmitter.prototype,{
 			this.removeListener(CHANGE_EVENT, callback)
 	},
   updateThemeList(la_themeList){
-
     this.state.themeList = la_themeList;
   },
   updateHomedata(data) {
