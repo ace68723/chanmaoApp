@@ -9,7 +9,7 @@
 * [1. data sample](#1)
   * [1.1 single product spu data sample](#1.1)
   * [1.2 home data sample](#1.2)
-  * [1.3 shopping cart data simple](#1.3)
+  * [1.3 shopping cart data sample](#1.3)
  
 * [2. database schema ](#2)
 
@@ -286,7 +286,7 @@
 
 <div id="1.3"> <div/>
  
- ## 1.3 shopping cart data simple
+ ## 1.3 shopping cart data sample
  ```
  {
   spu_id:5,
