@@ -295,8 +295,8 @@
   sku_name:"豚骨菌菇(小包装)",
   sku_status:0,
   sku_amount:182,
-  sku_original_price:7.53,
-  sku_price:5.22,
+  sku_original_price:"7.53",
+  sku_price:"5.22",
   sku_quantity:1
   sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
 }
