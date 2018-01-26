@@ -14,7 +14,7 @@
 
 ## 1. data sample
 
-<div id="1.1"> <div/>
+<span id="1.1"> <span/>
 
 ### 1.1 single product spu data sample 
 
