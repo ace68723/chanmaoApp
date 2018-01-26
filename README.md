@@ -5,13 +5,15 @@
 - sku价格参数 sku_original_price sku_price
 - sku通过 sku_original_price === sku_price 判断sku是否打折 
 - 所有结算价格以sku_price 为准
-
+<h1 id="top"></h1>
 * [1. data sample](#1)
-* [1.1 single product spu data sample](#1.1)
-* [1.2 home data sample](#1.2)
+  * [1.1 single product spu data sample](#1.1)
+  * [1.2 home data sample](#1.2)
 
-<h2 id="1">1. data sample</h2>
-<h3 id="1.1"> 1.1 single product spu data sample<h3/>
+<h2 id="1"></h2>
+## 1. data sample
+<h3 id="1.1"> <h3/>
+### 1.1 single product spu data sample 
 
 
 ```
@@ -98,8 +100,8 @@
 ```
 
 
-<h3 id="1.2"> 1.2 home data sample<h3/>
-
+<h3 id="1.2"> <h3/>
+### 1.2 home data sample
 
 
 ```
