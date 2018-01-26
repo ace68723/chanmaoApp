@@ -16,133 +16,99 @@ const { width, height } = Dimensions.get('window');
 export default class MyComponent extends Component {
   constructor(props) {
       super(props);
-      console.log(props)
       this.state = {
-        categoryTitles: ['新品速递', '好货热卖', '超值特价'],
-        categoryChecked:'new',
-        format_data: [],
-        data_list:[
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            contentType: 'header-left',
-          },
-          {
-            contentType: 'header-title',
-            title: "新品速递"
-          },
-          {
-            contentType: 'header-right',
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          }
-        ],
-        data : [
-          {
-            'title' : '新品速递',
-            'items' : [
-              {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }, {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }, {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }
-            ]
-          },
-          {
-            'title' : '好货热卖',
-            'items' : [
-              {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }, {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }
-            ]
-          },
-        ]
+        prod_list:props.prod_list,
+        // categoryTitles: ['新品速递', '好货热卖', '超值特价'],
+        // categoryChecked:'new',
+        // format_data: [],
+        // data_list:[
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     contentType: 'header-left',
+        //   },
+        //   {
+        //     contentType: 'header-title',
+        //     title: "新品速递"
+        //   },
+        //   {
+        //     contentType: 'header-right',
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   }
+        // ],
+        // data : [
+        //   {
+        //     'title' : '新品速递',
+        //     'items' : [
+        //       {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }, {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }, {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }
+        //     ]
+        //   },
+        //   {
+        //     'title' : '好货热卖',
+        //     'items' : [
+        //       {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }, {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }
+        //     ]
+        //   },
+        // ]
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
       this._getSpecialContentCell = this._getSpecialContentCell.bind(this);
-
-      this._processData = this._processData.bind(this);
   }
 
-  _processData(data){
-    // Add item for header & empty cell
-    let newData = [];
-    for(let i = 0; i < this.state.data.length; i++){
-      newData.push({contentType: 'header-left'});
-      newData.push({contentType: 'header-title', title: this.state.data[i].title});
-      newData.push({contentType: 'header-right'});
-      for(let j = 0; j < this.state.data[i].items.length; j++){
-        newData.push(this.state.data[i].items[j]);
-    	}
-      while (newData.length % 3 != 0){
-        newData.push({contentType: 'empty'});
-      }
-  	}
-    console.log('gg', newData);
-    this.setState({format_data: newData});
-  }
-  componentWillMount() {
-   let arr = [];
-   this.state.data_list.map(obj => {
-     if (obj.header) {
-       arr.push(this.state.data_list.indexOf(obj));
-     }
-   });
-   arr.push(0);
-   this.setState({
-     stickyHeaderIndices: arr
-   });
-
-   // do process
-   this._processData(this.state.data);
- }
   componentDidMount(){
     const index = this.props.index;
 		const scrollView = this._scrollVew;
@@ -151,7 +117,6 @@ export default class MyComponent extends Component {
 		this.props.getScrollViewRefs(ref);
 
 	}
-  _keyExtractor = (product, index) =>product.pmid + index;
 
   _getSpecialContentCell(contentType, title){
     if (contentType == 'header-title'){
@@ -210,15 +175,42 @@ export default class MyComponent extends Component {
   }
 
   _renderProduct(product) {
-      if (product.item.contentType){
-        return this._getSpecialContentCell(product.item.contentType, product.item.title);
-      }
-      else{
+      if (product.item.type === "spu" || product.item.type === "sku"){
         return (
-          <SboxProductView goToSboxProductDetial={this.props.goToSboxProductDetial}
+          <SboxProductView
+            goToSboxProductDetial={this.props.goToSboxProductDetial}
             product={product.item}
           />
         );
+
+      }else if(product.item.type === "section"){
+        return (
+          <View style={{
+             flex:1,
+             alignItems:'center',
+             justifyContent:'center',
+           }}>
+           <Text style={{
+               fontWeight: 'bold',
+             }}>{product.item.section_name}
+           </Text>
+          </View>
+        );
+      }else{
+        return(
+          <View
+           style={{
+             flex:1,
+             alignItems:'center',
+             justifyContent:'center',
+           }}>
+           <View style={{ backgroundColor: '#a5a5a5',
+                          height: 1,
+                          width: Settings.getX(258)
+                        }}>
+           </View>
+         </View>
+        )
       }
   }
   _selectCategory(category){
@@ -229,30 +221,33 @@ export default class MyComponent extends Component {
   _renderHeader() {
     // height * 0.4106 + 80
     return(
-      <View style={styles.headerContainer}
-            ref={(comp) => this._scrollViewContent = comp }>
-
-            <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>this._selectCategory('new')}>
-                <Text style={{color:this.state.categoryChecked == 'new' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[0]}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>this._selectCategory('hot')}>
-                <Text style={{color:this.state.categoryChecked == 'hot' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[1]}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>this._selectCategory('cheap')}>
-                <Text style={{color:this.state.categoryChecked == 'cheap' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[2]}</Text>
-            </TouchableOpacity>
-      </View>
-
+      <View style={{ marginTop:  width*0.4831*1.3699 + 20, height: 0 }}
+            ref={(comp) => this._scrollViewContent = comp }/>
     )
+    // return(
+    //   <View style={styles.headerContainer}
+    //         ref={(comp) => this._scrollViewContent = comp }>
+    //
+    //         <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
+    //                           onPress={()=>this._selectCategory('new')}>
+    //             <Text style={{color:this.state.categoryChecked == 'new' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[0]}</Text>
+    //         </TouchableOpacity>
+    //         <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
+    //                           onPress={()=>this._selectCategory('hot')}>
+    //             <Text style={{color:this.state.categoryChecked == 'hot' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[1]}</Text>
+    //         </TouchableOpacity>
+    //         <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
+    //                           onPress={()=>this._selectCategory('cheap')}>
+    //             <Text style={{color:this.state.categoryChecked == 'cheap' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[2]}</Text>
+    //         </TouchableOpacity>
+    //   </View>
+    //
+    // )
   }
-  _keyExtractor = (product, index) => product.pmid+'index'+index;
+  _keyExtractor = (product, index) => product.section_id+'index'+index;
+
   render() {
     return (
-      <View style={styles.container}>
-
         <FlatList
             scrollEventThrottle={1}
             ref={(comp) => this._scrollVew = comp}
@@ -260,7 +255,7 @@ export default class MyComponent extends Component {
             onEndReached={this.props.reachEnd}
             onEndReachedThreshold={0.3}
             onScroll={this.props.scrollEventBind()}
-            data={this.state.format_data}
+            data={this.state.prod_list}
             renderItem={this._renderProduct}
             keyExtractor={this._keyExtractor}
             getItemLayout={(data, index) => (
@@ -270,22 +265,12 @@ export default class MyComponent extends Component {
            numColumns={3}
            columnWrapperStyle={{ marginTop: 10,alignSelf:'center' }}
         />
-
-
-      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  titleContainer:{
-    flexDirection:'row',
-    height: 50,
-    width:width,
-  },
+
   headerContainer: {
     marginTop:  width*0.4831*1.3699 + 20,
     height: Settings.getY(174),

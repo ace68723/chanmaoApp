@@ -11,37 +11,38 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 const { width,height } = Dimensions.get('window');
-
+import Settings from '../../Config/Setting';
 
 export default class SboxProductView extends Component {
   render() {
-    if(this.props.product.header){
+    console.log(this.props)
       return (
-        <View style={styles.container}>
-          <View>
-            <Text style={{fontSize:20}}>{this.props.product.name}</Text>
-          </View>
-        </View>
-      );
-    }
-    else{
-      return (
-
           <TouchableWithoutFeedback  onPress={this.props.goToSboxProductDetial.bind(null,this.props.product)}>
             <View style={styles.productContainer}>
-              <Image source={this.props.product.image}
-                     style={{width:width/5,
-                             height:80,
+              <Image source={{uri:this.props.product.image}}
+                     style={{width:Settings.getX(300),
+                              height:Settings.getY(426),
                              alignSelf:'center'}}
               />
-              <Text style={{fontSize:10}}>{this.props.product.name}</Text>
-              <Text style={{fontSize:5}}>{this.props.product.price}</Text>
+              <Text style={{marginTop:6,
+                            fontSize:15,
+                            fontWeight:"700",
+                            color:"#6d6e71",
+                            alignSelf:"center"}}
+                     numberOfLines={2}>
+                            {this.props.product.name}
+              </Text>
+              <Text style={{marginTop:6,
+                            fontSize:12,
+                            fontWeight:"700",
+                            color:"#ff768b",
+                            alignSelf:"center"}}>
+                            ${this.props.product.retail_price}
+              </Text>
             </View>
           </TouchableWithoutFeedback>
 
       );
-    }
-
   }
 }
 
@@ -52,9 +53,7 @@ const styles = StyleSheet.create({
       height:100,
     },
     productContainer: {
-      width: width/4,
-      height: 120,
-      backgroundColor:'green',
-      marginHorizontal:10
+      flex:1,
+      marginHorizontal:5
     }
 });

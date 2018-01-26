@@ -74,6 +74,9 @@ export default class SboxHome extends Component {
   componentWillUnmount(){
       SboxHomeStore.removeChangeListener(this._onChange);
   }
+  _onChange() {
+      this.setState(SboxHomeStore.getState());
+  }
   _goToSboxProductDetial(product) {
     this.props.navigator.push({
       screen: 'SboxProductDetial',
@@ -114,9 +117,7 @@ export default class SboxHome extends Component {
   _getScrollViewRefs(ref:object){
       this.scrollViewRefs = [...this.scrollViewRefs,ref]
   }
-  _onChange() {
-      this.setState(SboxHomeStore.getState());
-  }
+
   _scrollEventBind(){
     return(
       Animated.event(
@@ -134,6 +135,7 @@ export default class SboxHome extends Component {
                       key={index}
                       index={index}
                       tmid={theme.tmid}
+                      section_list={theme.section_list}
                       prod_list={theme.prod_list}
                       tabLabel={theme.name+ '|' +theme.icon_active + '|' + theme.icon_deactive}
                       scrollEventBind={this._scrollEventBind}
@@ -178,6 +180,7 @@ export default class SboxHome extends Component {
   }
   _renderHeaderWithBanner() {
     if (this.state.bannerList.length > 0) {
+      console.log('this.state.bannerList',this.state.bannerList)
       return(
         <HeaderWithBanner
             bannerList={this.state.bannerList}
