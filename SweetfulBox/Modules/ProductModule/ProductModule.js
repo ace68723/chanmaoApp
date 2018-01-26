@@ -8,30 +8,30 @@ import {
   sbox_updateBox,
 } from '../../../App/Modules/Database';
 
-const testData =
+const testData = 
   {
     ev_error: 0,
     ev_message: "",
     ea_banner: [
-        {
-            id: 3,
-            image: "https://chanmao.us/storage/image/sb_app/home_banner/3_20170828.png",
-            type: 3,
-            param: "param3"
-        },
-        {
-            id: 2,
-            image: "https://chanmao.us/storage/image/sb_app/home_banner/2_20170828.png",
-            type: 2,
-            param: "param2"
-        },
-        {
-            id: 1,
-            image: "https://chanmao.us/storage/image/sb_app/home_banner/1_20170828.png",
-            type: 1,
-            param: "param"
-        }
-    ],
+      {
+          id: 3,
+          image: "https://chanmao.us/storage/image/sb_app/home_banner/3_20170828.png",
+          type: 3,
+          param: "param3"
+      },
+      {
+          id: 1,
+          image: "https://chanmao.us/storage/image/sb_app/home_banner/1_20170828.png",
+          type: 1,
+          param: "param"
+      },
+      {
+          id: 2,
+          image: "https://chanmao.us/storage/image/sb_app/home_banner/2_20170828.png",
+          type: 2,
+          param: "param2"
+      }
+  ],
     ea_theme: [
         {
             tmid: 6,
@@ -267,6 +267,7 @@ export default  {
 
   },
   async getHomeData(io_data){
+    // console.log(testData)
     // const returnData = {
     //   banner: testData.ea_banner,
     //   theme: testData.ea_theme,
@@ -282,7 +283,7 @@ export default  {
 
       if(homeDataResult.ev_error === 0 ){
         const eo_data ={
-          bannerList:homeDataResult.ea_banner,
+          bannerList:testData.ea_banner,
           themeList: testData.ea_theme,
         }
         this.updateAPICache(eo_data);
