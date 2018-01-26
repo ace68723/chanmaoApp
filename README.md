@@ -288,7 +288,7 @@
 
 | Table              |            |                |                |                  |            |            |            |            |
 | ------------------ | ---------- | -------------- | -------------- | ---------------- | ---------- | ---------- | ---------- | ---------- |
-| sbox_spu           | spu_id     | name           | image_id       | price            | sold_out   | status     | updated_at | updated_by |
+| sbox_spu           | spu_id     | name           | image_id       | price            |            | status     | updated_at | updated_by |
 |                    |            |                |                |                  |            |            |            |            |
 | sbox_sku_base      | sku_id     | spu_id         | name           | alias            | fullname   | status     | updated_at | updated_by |
 |                    |            |                |                |                  |            |            |            |            |
@@ -298,7 +298,7 @@
 |                    |            |                |                |                  |            |            |            |            |
 | sbox_image         | image_id   | url            |                |                  |            |            |            |            |
 |                    |            |                |                |                  |            |            |            |            |
-| sbox_section       | section_id | name           | icon_id        | rank             | status     | updated_at | updated_by |            |
+| sbox_section       | section_id | name           | icon_id        |                  | status     | updated_at | updated_by |            |
 |                    |            |                |                |                  |            |            |            |            |
 | sbox_section_sku   | section_id | sku_id         | rank           | status           | updated_at | updated_by |            |            |
 |                    |            |                |                |                  |            |            |            |            |
