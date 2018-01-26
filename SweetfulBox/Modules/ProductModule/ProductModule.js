@@ -267,6 +267,7 @@ export default  {
 
   },
   async getHomeData(io_data){
+    // console.log(testData)
     // const returnData = {
     //   banner: testData.ea_banner,
     //   theme: testData.ea_theme,
@@ -283,7 +284,6 @@ export default  {
       if(homeDataResult.ev_error === 0 ){
         const eo_data ={
           bannerList:testData.ea_banner,
-          // bannerList:homeDataResult.ea_banner,
           themeList: testData.ea_theme,
         }
         this.updateAPICache(eo_data);
