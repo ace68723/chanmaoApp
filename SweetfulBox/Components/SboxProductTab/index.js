@@ -18,6 +18,7 @@ export default class MyComponent extends Component {
       super(props);
       this.state = {
         prod_list:props.prod_list,
+        section_list:props.section_list,
         // categoryTitles: ['新品速递', '好货热卖', '超值特价'],
         // categoryChecked:'new',
         // format_data: [],
@@ -106,7 +107,6 @@ export default class MyComponent extends Component {
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
-      this._getSpecialContentCell = this._getSpecialContentCell.bind(this);
   }
 
   componentDidMount(){
@@ -117,62 +117,6 @@ export default class MyComponent extends Component {
 		this.props.getScrollViewRefs(ref);
 
 	}
-
-  _getSpecialContentCell(contentType, title){
-    if (contentType == 'header-title'){
-      return (
-        <Text style={{
-            marginTop: Settings.getY(72),
-            height: Settings.getY(120),
-            fontWeight: 'bold',
-          }}>{title}</Text>
-      );
-    }
-    if (contentType == 'header-left'){
-      return (
-        <View
-          style={{
-            borderBottomColor: '#a5a5a5',
-            borderBottomWidth: 0.4,
-            alignItems:'center',
-            justifyContent:'center',
-            width: Settings.getX(258),
-            marginRight: Settings.getX(148),
-            height: Settings.getY(100),
-          }}
-        />
-      )
-    }
-    if (contentType == 'header-right'){
-      return (
-        <View
-          style={{
-            alignItems:'center',
-            justifyContent:'center',
-            borderBottomColor: '#a5a5a5',
-            borderBottomWidth: 0.4,
-            width: Settings.getX(258),
-            marginLeft: Settings.getX(148),
-            height: Settings.getY(100),
-          }}
-        />
-      )
-    }
-    if (contentType == 'empty'){
-      return (
-        // empty cell
-        <View
-          style={{
-            alignItems:'center',
-            justifyContent:'center',
-            width: Settings.getX(258),
-            marginLeft: Settings.getX(148),
-            height: Settings.getY(100),
-          }}
-        />
-      )
-    }
-  }
 
   _renderProduct(product) {
       if (product.item.type === "spu" || product.item.type === "sku"){
@@ -224,25 +168,6 @@ export default class MyComponent extends Component {
       <View style={{ marginTop:  width*0.4831*1.3699 + 20, height: 0 }}
             ref={(comp) => this._scrollViewContent = comp }/>
     )
-    // return(
-    //   <View style={styles.headerContainer}
-    //         ref={(comp) => this._scrollViewContent = comp }>
-    //
-    //         <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-    //                           onPress={()=>this._selectCategory('new')}>
-    //             <Text style={{color:this.state.categoryChecked == 'new' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[0]}</Text>
-    //         </TouchableOpacity>
-    //         <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-    //                           onPress={()=>this._selectCategory('hot')}>
-    //             <Text style={{color:this.state.categoryChecked == 'hot' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[1]}</Text>
-    //         </TouchableOpacity>
-    //         <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-    //                           onPress={()=>this._selectCategory('cheap')}>
-    //             <Text style={{color:this.state.categoryChecked == 'cheap' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[2]}</Text>
-    //         </TouchableOpacity>
-    //   </View>
-    //
-    // )
   }
   _keyExtractor = (product, index) => product.section_id+'index'+index;
 
@@ -250,6 +175,7 @@ export default class MyComponent extends Component {
     return (
         <FlatList
             scrollEventThrottle={1}
+            style={this.props.style}
             ref={(comp) => this._scrollVew = comp}
             ListHeaderComponent={this._renderHeader}
             onEndReached={this.props.reachEnd}

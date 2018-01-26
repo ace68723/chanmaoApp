@@ -14,6 +14,40 @@ const { width,height } = Dimensions.get('window');
 import Settings from '../../Config/Setting';
 
 export default class SboxProductView extends Component {
+  _renderPriceText(){
+    if (this.props.product.type == 'sku' &&
+    this.props.product.retail_price != this.props.product.wholesale_price){
+      return(
+        <View style={{flex: 1, flexDirection: 'row', alignSelf:"center"}}>
+          <Text style={{marginTop:6,
+                        fontSize:12,
+                        fontWeight:"700",
+                        color:"#ff768b",
+                        marginRight: 2,
+                        alignSelf:"center"}}>
+                        ${this.props.product.wholesale_price}
+          </Text>
+          <Text style={{marginTop:6,
+                        fontSize:9,
+                        fontWeight:"700",
+                        color:"black",
+                        textDecorationLine: 'line-through',
+                        alignSelf:"center"}}>
+                        $({this.props.product.retail_price})
+          </Text>
+        </View>
+      );
+    }
+    return (
+      <Text style={{marginTop:6,
+                    fontSize:12,
+                    fontWeight:"700",
+                    color:"#ff768b",
+                    alignSelf:"center"}}>
+                    ${this.props.product.retail_price}
+      </Text>
+    );
+  }
   render() {
     console.log(this.props)
       return (
@@ -32,13 +66,7 @@ export default class SboxProductView extends Component {
                      numberOfLines={2}>
                             {this.props.product.name}
               </Text>
-              <Text style={{marginTop:6,
-                            fontSize:12,
-                            fontWeight:"700",
-                            color:"#ff768b",
-                            alignSelf:"center"}}>
-                            ${this.props.product.retail_price}
-              </Text>
+              {this._renderPriceText()}
             </View>
           </TouchableWithoutFeedback>
 
