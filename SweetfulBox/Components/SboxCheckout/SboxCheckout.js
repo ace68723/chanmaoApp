@@ -258,7 +258,7 @@ export default class MyComponent extends Component {
             <View style={{flex:1,flexDirection:'row',}}>
               <View style={{flex:0.8,paddingRight:10,}}>
                 <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>{fullname}</Text>
-                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>${sku_price} <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',text-decoration: 'line-through',}}> ${original_price}</Text></Text>
+                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>${sku_price} <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S'}}> ${original_price}</Text></Text>
               </View>
               <View style={{flex:0.2}}>
                 <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>x{selectedAmount}</Text>
