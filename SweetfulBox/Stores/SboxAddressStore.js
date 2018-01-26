@@ -17,10 +17,10 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
     showAlert: 1,
   },
 	emitChange(){
-			this.emit( CHANGE_EVENT)
+      this.emit(CHANGE_EVENT)
+      console.log(CHANGE_EVENT)
 	},
 	addChangeListener(callback){
-      // console.log(callback);
 			this.on(CHANGE_EVENT, callback)
 	},
 	removeChangeListener(callback){

@@ -154,6 +154,7 @@ export default class MyComponent extends Component {
            items: address_list
         });
         console.log(res.predictions);
+        console.log(this.state.items)
       })
       .catch((error) => {throw error});
   }
