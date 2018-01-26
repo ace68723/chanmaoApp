@@ -15,28 +15,39 @@ import Settings from '../../Config/Setting';
 
 export default class SboxProductView extends Component {
   _renderPriceText(){
-    if (this.props.product.type == 'sku' &&
-    this.props.product.retail_price != this.props.product.wholesale_price){
-      return(
-        <View style={{flex: 1, flexDirection: 'row', alignSelf:"center"}}>
-          <Text style={{marginTop:6,
-                        fontSize:12,
-                        fontWeight:"700",
-                        color:"#ff768b",
-                        marginRight: 2,
-                        alignSelf:"center"}}>
-                        ${this.props.product.wholesale_price}
-          </Text>
-          <Text style={{marginTop:6,
-                        fontSize:9,
-                        fontWeight:"700",
-                        color:"black",
-                        textDecorationLine: 'line-through',
-                        alignSelf:"center"}}>
-                        $({this.props.product.retail_price})
-          </Text>
-        </View>
-      );
+    console.log(this.props.product);
+    if (this.props.product.type == 'sku'){
+      if (this.props.product.sku_original_price != this.props.product.sku_price){
+        return(
+                <View style={{flex: 1, flexDirection: 'row', alignSelf:"center"}}>
+                  <Text style={{marginTop:6,
+                                fontSize:12,
+                                fontWeight:"700",
+                                color:"#ff768b",
+                                marginRight: 2,
+                                alignSelf:"center"}}>
+                                ${this.props.product.sku_price}
+                  </Text>
+                  <Text style={{marginTop:6,
+                                fontSize:9,
+                                fontWeight:"700",
+                                color:"black",
+                                textDecorationLine: 'line-through',
+                                alignSelf:"center"}}>
+                                $({this.props.product.sku_original_price})
+                  </Text>
+                </View>
+              );
+      }
+      else{
+        <Text style={{marginTop:6,
+                      fontSize:12,
+                      fontWeight:"700",
+                      color:"#ff768b",
+                      alignSelf:"center"}}>
+                      ${this.props.product.sku_price}
+        </Text>
+      }
     }
     return (
       <Text style={{marginTop:6,
@@ -44,7 +55,7 @@ export default class SboxProductView extends Component {
                     fontWeight:"700",
                     color:"#ff768b",
                     alignSelf:"center"}}>
-                    ${this.props.product.retail_price}
+                    ${this.props.product.spu_price}
       </Text>
     );
   }
