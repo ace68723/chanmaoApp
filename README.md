@@ -9,6 +9,8 @@
 * [1. data sample](#1)
   * [1.1 single product spu data sample](#1.1)
   * [1.2 home data sample](#1.2)
+  * [1.3 shopping cart data simple](#1.3)
+ 
 * [2. database schema ](#2)
 
 <div id="1"> <div/>
@@ -282,6 +284,24 @@
 }
 ```
 
+<div id="1.3"> <div/>
+ 
+ ## shopping cart data simple
+ ```
+ {
+  spu_id:5,
+  sku_id:22,
+  spu_name:"与美懒人大厨四川冒菜",
+  sku_name:"豚骨菌菇(小包装)",
+  sku_status:0,
+  sku_amount:182,
+  sku_original_price:7.53,
+  sku_price:5.22,
+  sku_quantity:1
+  sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
+}
+ ```
+ 
 <div id="2"> <div/>
 
 ##  database schema 
