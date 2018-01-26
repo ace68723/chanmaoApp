@@ -24,10 +24,7 @@ export default class MyComponent extends Component {
         predictionsData: [],
         items: [],
         showAlert: 0,
-<<<<<<< HEAD
-=======
         selectedAddress: '',
->>>>>>> 881b821d7cbff6fe6814f4372ebc7f49698ca416
       // dataSource: ds.cloneWithRows([])
       }
       // this.setSource = this.setSource.bind(this);
@@ -41,11 +38,7 @@ export default class MyComponent extends Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-    SboxAddressStore.addChangeListener(this._onChange);
-=======
       SboxAddressStore.addChangeListener(this._onChange);
->>>>>>> 881b821d7cbff6fe6814f4372ebc7f49698ca416
   }
   componentWillUnmount() {
       SboxAddressStore.removeChangeListener(this._onChange)
