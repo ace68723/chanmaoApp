@@ -286,7 +286,7 @@
 
 <div id="1.3"> <div/>
  
- ## shopping cart data simple
+ ## 1.3 shopping cart data simple
  ```
  {
   spu_id:5,
