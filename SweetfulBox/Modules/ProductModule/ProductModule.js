@@ -8,7 +8,7 @@ import {
   sbox_updateBox,
 } from '../../../App/Modules/Database';
 
-const testData = 
+const testData =
   {
     ev_error: 0,
     ev_message: "",
@@ -173,7 +173,7 @@ const testData =
                 retail_price: "3.59",
                 wholesale_price:"1.52",
                 status:2,
-              }, 
+              },
             ]
         }
     ]
@@ -267,7 +267,10 @@ export default  {
 
   },
   async getHomeData(io_data){
+<<<<<<< HEAD
     // console.log(testData)
+=======
+>>>>>>> b55c94f42a635bed723bbfb4ede7989eaa2f04c0
     // const returnData = {
     //   banner: testData.ea_banner,
     //   theme: testData.ea_theme,
@@ -283,7 +286,11 @@ export default  {
 
       if(homeDataResult.ev_error === 0 ){
         const eo_data ={
+<<<<<<< HEAD
           bannerList:testData.ea_banner,
+=======
+          bannerList:homeDataResult.ea_banner,
+>>>>>>> b55c94f42a635bed723bbfb4ede7989eaa2f04c0
           themeList: testData.ea_theme,
         }
         this.updateAPICache(eo_data);
