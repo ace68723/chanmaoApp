@@ -3,7 +3,7 @@
 ## 2018-01-29 update
 - 新增API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
 [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
-
+-  Database schema 新增表sbox_addr_base 替换旧表sb_addr_base，移除cbid字段
 
 
 ## 2018-01-26 update
@@ -18,7 +18,7 @@
   * [1.2 Home data sample](#1.2)
   * [1.3 Shopping cart data sample](#1.3)
  
-* [2. Database schema ](#2)
+* [2. Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md)
 
 * [3. API Document (v2)](https://github.com/ace68723/sweetfulBox_1.1/tree/master/Document/API_Document)
   * [3.1 Home data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md)
@@ -315,29 +315,4 @@
 }
  ```
  
-<div id="2"> <div/>
 
-##  database schema 
-
-| Table              |            |                |                |                  |            |            |            |            |
-| ------------------ | ---------- | -------------- | -------------- | ---------------- | ---------- | ---------- | ---------- | ---------- |
-| sbox_spu           | spu_id     | name           | image_id       | price            |            | status     | updated_at | updated_by |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_sku_base      | sku_id     | spu_id         | name           | alias            | fullname   | status     | updated_at | updated_by |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_sku_core      | sku_id     | original_price | price          | amount           | threshold  | updated_at | updated_by |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_sku_image     | sku_id     | image_id       | fact_image_id  | updated_at       | updated_by |            |            |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_image         | image_id   | url            |                |                  |            |            |            |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_section       | section_id | name           | icon_id        |                  | status     | updated_at | updated_by |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_section_sku   | section_id | sku_id         | rank           | status           | updated_at | updated_by |            |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_section_spu   | section_id | spu_id         | rank           | status           | updated_at | updated_by |            |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_theme         | theme_id   | name           | active_icon_id | inactive_icon_id | rank       | status     | updated_at | updated_by |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_theme_section | theme_id   | section_id     | rank           | status           | updated_at | updated_by |            |            |
-|                    |            |                |                |                  |            |            |            |            |
