@@ -1,4 +1,8 @@
 
+
+## 2018-01-29 update
+- 新增返回字段`spu_service_img`
+
 ## 单个商品获取 API
 
 
