@@ -3,7 +3,7 @@
 ## 2018-01-29 update
 - 新增API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
 [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
--  Database schema 新增表sbox_addr_base 替换旧表sb_addr_base，移除cbid字段
+-  [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 新增表sbox_addr_base 替换旧表sb_addr_base，移除cbid字段
 
 
 ## 2018-01-26 update
