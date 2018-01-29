@@ -39,7 +39,7 @@
 | ev_cusid   | string | Customer ID | 空为没有       |
 | ev_last4   | string | 信用卡后4位      | 空为没有       |
 | ev_oos     | number | 库存不足        | 0 为不缺，1为缺货 |
-| ea_prod    | array  | ？           |            |
+| ea_prod    | array  | 返回所有的产品，通过 `quantity` `actual` 判断缺货        |           |
 | eo_addr    | object | 地址信息        |            |
 | ev_deliFee | string | 运费          |            |
 | ev_pretax  | string | 税前总价        |            |
