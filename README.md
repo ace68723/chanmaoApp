@@ -40,6 +40,7 @@
   spu_id:5,
   spu_name:"与美懒人大厨四川冒菜",
   spu_status:0, //status = 1, 页面跳回
+  spu_service_img: "https://chanmao.us/storage/image/sb_app/service.png"
   sku_image:[
     {
       image_id:762,
