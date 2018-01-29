@@ -1,7 +1,10 @@
 # sweetfulBox_1.1
 
 ## 2018-01-29 update
-- 新增两个API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
+- 新增API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
+[3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
+
+
 
 ## 2018-01-26 update
 - spu价格参数 `spu_price` （skulist中最低的sku_price）
@@ -20,7 +23,7 @@
 * [3. API Document (v2)](https://github.com/ace68723/sweetfulBox_1.1/tree/master/Document/API_Document)
   * [3.1 Home data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md)
   * [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
-
+  * [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
 
 
 <div id="1"> <div/>
