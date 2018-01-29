@@ -5,6 +5,7 @@
 [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
 -  [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 新增表`sbox_addr_base` 替换旧表`sb_addr_base`，移除`cbid`字段
 - [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md) 和  [1.1 Single product spu data sample](#1.1) 新增字段`spu_service_img`
+-  [3.3 Add order](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/add_order.md)
 
 ## 2018-01-26 update
 - spu价格参数 `spu_price` （skulist中最低的sku_price）
@@ -24,7 +25,7 @@
   * [3.1 Home data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md)
   * [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
   * [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
-
+  * [3.3 Add order](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/add_order.md)
 
 <div id="1"> <div/>
 
