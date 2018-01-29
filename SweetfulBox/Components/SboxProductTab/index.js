@@ -8,130 +8,170 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  ScrollableTabView,
 } from 'react-native';
 import SboxProductView from './SboxProductView';
 import Settings from '../../Config/Setting';
+import SboxProductTabSectionHeaderCell from "./SboxProductTabSectionHeaderCell"
+
 const { width, height } = Dimensions.get('window');
 
 export default class MyComponent extends Component {
   constructor(props) {
       super(props);
-      console.log(props)
+      console.log('xxx', props);
       this.state = {
-        categoryTitles: ['新品速递', '好货热卖', '超值特价'],
-        categoryChecked:'new',
-        format_data: props.prod_list,
-        categoryHot:0,
-        categorySale: 0,
+        prod_list:props.prod_list,
+        section_list:props.section_list,
+        headerIndex: props.section_list ? props.section_list[0].section_id : 0,
+        // categoryTitles: ['新品速递', '好货热卖', '超值特价'],
+        // categoryChecked:'new',
+        // format_data: [],
+        // data_list:[
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     contentType: 'header-left',
+        //   },
+        //   {
+        //     contentType: 'header-title',
+        //     title: "新品速递"
+        //   },
+        //   {
+        //     contentType: 'header-right',
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   },
+        //   {
+        //     name: 'OKF芒果果汁',
+        //     price:'1.19',
+        //     image: require('./Image/box.png'),
+        //     header:false,
+        //   }
+        // ],
+        // data : [
+        //   {
+        //     'title' : '新品速递',
+        //     'items' : [
+        //       {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }, {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }, {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }
+        //     ]
+        //   },
+        //   {
+        //     'title' : '好货热卖',
+        //     'items' : [
+        //       {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }, {
+        //         name: 'OKF芒果果汁',
+        //         price: '1.19',
+        //         image: require('./Image/box.png'),
+        //       }
+        //     ]
+        //   },
+        // ]
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
-      this._getSpecialContentCell = this._getSpecialContentCell.bind(this);
-      this.scrollToIndex = this.scrollToIndex.bind(this);
+      this._pressedSectionHeader = this._pressedSectionHeader.bind(this);
+
   }
-  componentWillMount() {
-   let arr = [];
-   
- }
- scrollToIndex(index) {
-  console.log(index);
-  this._scrollVew.scrollToIndex({animated: true, index: index});
-}
+
   componentDidMount(){
     const index = this.props.index;
 		const scrollView = this._scrollVew;
 		const scrollViewContent = this._scrollViewContent;
 		const ref = Object.assign({},{index,scrollView,scrollViewContent})
-    this.props.getScrollViewRefs(ref);
-    
-    this.state.format_data.forEach((item,index) => {
-      if(item.section_id === 2 && item.type == 'section_left') {
-        hot = parseInt(index/3 , 10);
-        this.setState({
-          categoryHot:hot
-        }
-      )
-      }
-      if(item.section_id === 3 && item.type == 'section_left') {
-       sale = parseInt(index/3 , 10)-1;
-       console.log(index);
-       this.setState({
-         categorySale:sale
-       }
-      )
-
-      }
-    });
-
+		this.props.getScrollViewRefs(ref);
 	}
-  _keyExtractor = (product, index) =>product.pmid + index;
-  
-  _getSpecialContentCell(item, title){
-    if (item.type == "section"){
-      return (
-        <Text style={{
-            marginTop: Settings.getY(72),
-            height: Settings.getY(120),
-            fontWeight: 'bold',
-          }}>{item.section_name}</Text>
-      );
-    }
-    if (item.type == "section_left"){
-      return (
-        <View
-          style={{
-            borderBottomColor: '#a5a5a5',
-            borderBottomWidth: 0.4,
-            alignItems:'center',
-            justifyContent:'center',
-            width: Settings.getX(258),
-            marginRight: Settings.getX(148),
-            height: Settings.getY(100),
-          }}
-        />
-      )
-    }
-    if (item.type == "section_right"){
-      return (
-        <View
-          style={{
-            alignItems:'center',
-            justifyContent:'center',
-            borderBottomColor: '#a5a5a5',
-            borderBottomWidth: 0.4,
-            width: Settings.getX(258),
-            marginLeft: Settings.getX(148),
-            height: Settings.getY(100),
-          }}
-        />
-      )
-    }
-    if (!item.type){
-      return (
-        // empty cell
-        <View
-          style={{
-            alignItems:'center',
-            justifyContent:'center',
-            width: Settings.getX(258),
-            marginLeft: Settings.getX(148),
-            height: Settings.getY(100),
-          }}
-        />
-      )
-    }
-  }
 
   _renderProduct(product) {
-      if (product.item.type !== 'spu' &&  product.item.type !== 'sku' ){
-        return this._getSpecialContentCell(product.item, product.item.section_name);
-      }
-      else{
+      if (product.item.type === "spu" || product.item.type === "sku"){
         return (
-          <SboxProductView goToSboxProductDetial={this.props.goToSboxProductDetial}
+          <SboxProductView
+            goToSboxProductDetial={this.props.goToSboxProductDetial}
             product={product.item}
           />
         );
+
+      }
+      else if (product.item.type === "empty") {
+        return (
+          <View style={{
+             flex:1,
+             alignItems:'center',
+             justifyContent:'center',
+           }}>
+          </View>
+        )
+      }
+      else if(product.item.type === "section"){
+        return (
+          <View style={{
+             flex:1,
+             alignItems:'center',
+             justifyContent:'center',
+           }}>
+           <Text style={{
+               fontWeight: 'bold',
+             }}>{product.item.section_name}
+           </Text>
+          </View>
+        );
+      }else{
+        return(
+          <View
+           style={{
+             flex:1,
+             alignItems:'center',
+             justifyContent:'center',
+           }}>
+           <View style={{ backgroundColor: '#a5a5a5',
+                          height: 1,
+                          width: Settings.getX(258)
+                        }}>
+           </View>
+         </View>
+        )
       }
   }
   _selectCategory(category){
@@ -139,46 +179,57 @@ export default class MyComponent extends Component {
       categoryChecked: category,
     })
   }
+  _renderHeaderSection(){
+    if (!this.state.section_list){
+      return;
+    }
+    let sectionList = [];
+    for (var index = 0; index < this.state.section_list.length; index++) {
+      const section = this.state.section_list[index];
+       sectionList.push(
+         <SboxProductTabSectionHeaderCell
+           key = {index}
+           icon={section.section_icon}
+           name={section.section_name}
+           currentIndex={this.state.headerIndex}
+           index={section.section_id}
+           onPress={this._pressedSectionHeader}
+         />
+        )
+    }
+    return (sectionList)
+  }
   _renderHeader() {
     // height * 0.4106 + 80
     return(
-      <View style={styles.headerContainer}
-            ref={(comp) => this._scrollViewContent = comp }>
-            <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>{
-                                this._selectCategory('new');
-                                this.scrollToIndex(0)}}>
-                <Text style={{color:this.state.categoryChecked == 'new' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[0]}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>{
-                                this._selectCategory('hot');
-                                this.scrollToIndex(this.state.categoryHot)}}>
-                <Text style={{color:this.state.categoryChecked == 'hot' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[1]}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>{
-                                this._selectCategory('cheap');
-                                this.scrollToIndex(this.state.categorySale)}}>
-                <Text style={{color:this.state.categoryChecked == 'cheap' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[2]}</Text>
-            </TouchableOpacity>
+      <View style={{
+          marginTop: width*0.4831*1.3699 + 20,
+          marginBottom: Settings.getY(72),
+          height: 30,
+          flex: 1,
+          flexDirection: 'row',
+        }}
+        ref={(comp) => this._scrollViewContent = comp }>
+          {this._renderHeaderSection()}
       </View>
-
     )
   }
-  _keyExtractor = (product, index) => product.pmid+'index'+index;
+  _keyExtractor = (product, index) => product.section_id+'index'+index;
+
+  _pressedSectionHeader(index){
+    this.setState({headerIndex:index});
+  }
   render() {
     return (
-      <View style={styles.container}>
-
         <FlatList
             scrollEventThrottle={1}
+            style={this.props.style}
             ref={(comp) => this._scrollVew = comp}
             ListHeaderComponent={this._renderHeader}
             onEndReached={this.props.reachEnd}
             onEndReachedThreshold={0.3}
             onScroll={this.props.scrollEventBind()}
-            data={this.state.format_data}
+            data={this.state.prod_list}
             renderItem={this._renderProduct}
             keyExtractor={this._keyExtractor}
             getItemLayout={(data, index) => (
@@ -188,22 +239,12 @@ export default class MyComponent extends Component {
            numColumns={3}
            columnWrapperStyle={{ marginTop: 10,alignSelf:'center' }}
         />
-
-
-      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  titleContainer:{
-    flexDirection:'row',
-    height: 50,
-    width:width,
-  },
+
   headerContainer: {
     marginTop:  width*0.4831*1.3699 + 20,
     height: Settings.getY(174),

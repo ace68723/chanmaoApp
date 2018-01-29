@@ -56,10 +56,8 @@ export default class SweetProductDetial extends Component {
   }
   componentDidMount(){
       SboxProductStore.addChangeListener(this._onChange);
-      const reqData = {
-        pmid: this.props.pmid
-      }
-      SboxProductAction.getSingleProduct(reqData);
+      const spu_id = this.props.spu_id
+      SboxProductAction.getSingleProduct(spu_id);
       // this._goToSboxCart();
   }
   componentWillUnmount() {
@@ -69,7 +67,7 @@ export default class SweetProductDetial extends Component {
     const productData = SboxProductStore.getSboxProductDetialState();
     const newState = Object.assign({},
       productData);
-    this.setState(Object.assign({}, newState));
+    this.setState(Object.assign({}, newState),() => console.log(this.state));
     this.setState({
       selectedProduct: this.state.sku_list[0]
     })

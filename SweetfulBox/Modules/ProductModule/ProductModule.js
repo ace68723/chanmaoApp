@@ -73,8 +73,16 @@ const testData =
                 section_id:1,
                 type:'spu',
                 spu_id: 54,
-                name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
+                name: "卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋",
+                image: "https://chanmao.us/storage/image/sb_app/image/11_20170828.png",
+                retail_price: "3.59",
+                status:0,
+              }, {
+                section_id:1,
+                type:'spu',
+                spu_id: 54,
+                name: "卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋卫龙馋魔芋",
+                image: "https://chanmao.us/storage/image/sb_app/image/31_20170828.png",
                 retail_price: "3.59",
                 status:0,
               }, {
@@ -82,15 +90,7 @@ const testData =
                 type:'spu',
                 spu_id: 54,
                 name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
-                retail_price: "3.59",
-                status:0,
-              }, {
-                section_id:1,
-                type:'spu',
-                spu_id: 54,
-                name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
+                image: "https://chanmao.us/storage/image/sb_app/image/13_20170828.png",
                 retail_price: "3.59",
                 status:2,
               }, {
@@ -111,7 +111,7 @@ const testData =
                 type:'spu',
                 spu_id: 54,
                 name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
+                image: "https://chanmao.us/storage/image/sb_app/image/1_20170828.png",
                 retail_price: "3.59",
                 status:0,
               }, {
@@ -119,7 +119,7 @@ const testData =
                 type:'spu',
                 spu_id: 54,
                 name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
+                image: "https://chanmao.us/storage/image/sb_app/image/20_20170828.png",
                 retail_price: "3.59",
                 status:0,
               }, {
@@ -127,7 +127,7 @@ const testData =
                 type:'spu',
                 spu_id: 54,
                 name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
+                image: "https://chanmao.us/storage/image/sb_app/image/22_20170828.png",
                 retail_price: "3.59",
                 status:2,
               }, {
@@ -149,7 +149,7 @@ const testData =
                 spu_id: 54,
                 sku_id: 54,
                 name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
+                image: "https://chanmao.us/storage/image/sb_app/image/4_20170828.png",
                 retail_price: "3.59",
                 wholesale_price:"1.52",
                 status:0,
@@ -159,7 +159,7 @@ const testData =
                 spu_id: 54,
                 sku_id: 54,
                 name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
+                image: "https://chanmao.us/storage/image/sb_app/image/45_20170828.png",
                 retail_price: "3.59",
                 wholesale_price:"1.52",
                 status:0,
@@ -169,7 +169,7 @@ const testData =
                 spu_id: 54,
                 sku_id: 54,
                 name: "卫龙馋魔芋",
-                image: "https://chanmao.us/storage/image/sb_app/promo/54_20171229.png",
+                image: "https://chanmao.us/storage/image/sb_app/image/32_20170828.png",
                 retail_price: "3.59",
                 wholesale_price:"1.52",
                 status:2,
@@ -347,13 +347,20 @@ export default  {
 
   },
   async getHomeData(io_data){
-
+    // console.log(testData)
+    // const returnData = {
+    //   banner: testData.ea_banner,
+    //   theme: testData.ea_theme,
+    //   ev_error: testData.ev_error,
+    //   ev_message:testData.ev_message
+    // }
+    // return returnData
     try {
       const lo_data ={
         uuid: 1,
       }
       const homeDataResult = await ProductAPI.getHomeData(lo_data);
-      console.log(homeDataResult)
+      console.log('xxxx', homeDataResult.ea_theme);
       if(homeDataResult.ev_error === 0 ){
         const eo_data ={
           bannerList:homeDataResult.ea_banner,
@@ -383,10 +390,10 @@ export default  {
       let ea_APICache = sbox_getAPICache('home_cache');
       return ea_APICache;
   },
-  async getSingleProduct(io_data){
+  async getSingleProduct(spu_id){
     try {
       const lo_data ={
-        iv_spu_id: 1,
+        iv_spu_id: spu_id,
         authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxODc4NSIsImV4cGlyZWQiOjE0ODkwODk2MDAsImxhc3Rsb2dpbiI6MTQ4MzA0NzU4OH0.EPjeu-klo-ygKwUvdyVspIWeaHoosCNPdaa1pO4_RsY',
       }
       const singleProductResult = await ProductAPI.getSingleProduct(lo_data);

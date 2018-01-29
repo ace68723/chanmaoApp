@@ -29,29 +29,6 @@ function Page(props: { children?: ReactElement<*> }) {
   )
 }
 function Card(props: { page: object, index: number }) {
-  // if (this.props.selectedProduct.amount == 0 && this.props.selectedProduct.status == 1) {
-  //   return (
-  //     <Animated.View style={[style.card, rotateTransform(props.index)]}>
-  //       <Image source={{uri: props.page.image_url}}
-  //              style={{ width: width*0.446,
-  //                       height: width*0.446*1.4043,
-  //                       position: 'absolute',
-  //                       top: 0,
-  //                       bottom: 0,
-  //                       left: 0,
-  //                       right: 0,}}/>
-  //       <Image style= {{backgroundColor: 'rgba(0,0,0,0)'}}  source = {require('./Images/soldout.png')} />>
-  //     </Animated.View>
-  //   );
-  // } else {
-  //   return (
-  //     <Animated.View style={[style.card, rotateTransform(props.index)]}>
-  //       <Image source={{uri: props.page.image_url}}
-  //              style={{ width: width*0.446,
-  //                       height: width*0.446*1.4043}}/>
-  //     </Animated.View>
-  //   );
-  // }
   return (
     <Animated.View style={[style.card, rotateTransform(props.index)]}>
       <Image source={{uri: props.page.image_url}}
@@ -101,6 +78,7 @@ export default class SboxProductDetialScrollView extends Component{
 
   render() {
     const pages = this.props.page.map((page,key)=>{
+      console.log(page)
       return (
         <Page key = {key} >
           <Card page={page} index={key} />

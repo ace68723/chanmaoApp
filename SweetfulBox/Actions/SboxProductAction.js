@@ -63,14 +63,10 @@ export default {
 
               }
             },
-            async getSingleProduct(io_data){
+            async getSingleProduct(spu_id){
               console.log('action')
                 try{
-                  const lo_data = {
-                    pmid: io_data.pmid
-                  }
-                  const data = await ProductModule.getSingleProduct(lo_data);
-
+                  const data = await ProductModule.getSingleProduct(spu_id);
                   dispatch({
                       actionType: SboxConstants.GET_SINGLE_PRODUCT, data
                   })

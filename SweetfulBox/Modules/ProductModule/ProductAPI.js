@@ -114,7 +114,7 @@ export default  {
         authortoken: io_data.authortoken,
     })
     options.body = JSON.stringify({
-      iv_pmid: io_data.iv_pmid,
+        iv_spu_id: io_data.iv_spu_id,
     })
 
     return fetch(url,options)

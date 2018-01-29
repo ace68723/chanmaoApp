@@ -13,7 +13,8 @@ import _forEach from 'lodash/forEach';
 
 import SboxHomeAction from '../../Actions/SboxHomeAction';
 import SboxHomeStore from '../../Stores/SboxHomeStore';
-import SboxProductAction from '../../Actions/SboxProductAction'
+import {DatabaseInit} from '../../Modules/Database';
+
 import SboxHomeHeader from './SboxHomeHeader';
 import HeaderWithBanner from './HeaderWithBanner';
 import SboxProductTab from '../SboxProductTab/';
@@ -54,7 +55,9 @@ export default class SboxHome extends Component {
       this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
       this._backToHome = this._backToHome.bind(this);
   }
-
+  componentWillMount() {
+    DatabaseInit();
+  }
   componentDidMount() {
       SboxHomeStore.addChangeListener(this._onChange);
       SboxHomeAction.getHomeData();
@@ -74,11 +77,14 @@ export default class SboxHome extends Component {
   componentWillUnmount(){
       SboxHomeStore.removeChangeListener(this._onChange);
   }
+  _onChange() {
+      this.setState(SboxHomeStore.getState());
+  }
   _goToSboxProductDetial(product) {
     this.props.navigator.push({
       screen: 'SboxProductDetial',
       navigatorStyle: {navBarHidden: true},
-      passProps:{pmid: product.pmid,},
+      passProps:{spu_id: product.spu_id,},
     })
   }
   _backToHome() {
@@ -113,9 +119,7 @@ export default class SboxHome extends Component {
   _getScrollViewRefs(ref:object){
       this.scrollViewRefs = [...this.scrollViewRefs,ref]
   }
-  _onChange() {
-      this.setState(SboxHomeStore.getState());
-  }
+
   _scrollEventBind(){
     return(
       Animated.event(
@@ -130,14 +134,16 @@ export default class SboxHome extends Component {
       const theme = this.state.themeList[index];
       themeList.push(
           <SboxProductTab
-                      key={index}
-                      index={index}
-                      tmid={theme.tmid}
-                      prod_list={theme.prod_list}
-                      tabLabel={theme.name+ '|' +theme.icon_active + '|' + theme.icon_deactive}
-                      scrollEventBind={this._scrollEventBind}
-                      getScrollViewRefs={this._getScrollViewRefs}
-                      goToSboxProductDetial={this._goToSboxProductDetial}/>
+              key={index}
+              index={index}
+              style={{marginTop:90}}
+              tmid={theme.tmid}
+              section_list={theme.section_list}
+              prod_list={theme.prod_list}
+              tabLabel={theme.name+ '|' +theme.icon_active + '|' + theme.icon_deactive}
+              scrollEventBind={this._scrollEventBind}
+              getScrollViewRefs={this._getScrollViewRefs}
+              goToSboxProductDetial={this._goToSboxProductDetial}/>
       )
     }
     return(
@@ -149,7 +155,7 @@ export default class SboxHome extends Component {
                           tabBarTextStyle={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
                           tabBarInactiveTextColor={'#666666'}
                           initialPage={0}
-                          prerenderingSiblingsNumber={7}
+                          prerenderingSiblingsNumber={3}
                           renderTabBar={() =>
                                       <DefaultTabBar
                                       scrollY = {this.state.scrollY}
@@ -164,12 +170,25 @@ export default class SboxHome extends Component {
     );
   }
   _renderSingleTabView() {
+
     if(!this.state.themeList[0]) return;
+
+    // this.state.themeList.push(Object.assign({}, this.state.themeList[0]));
+    // this.state.themeList[1].name = '生活用品';
+    //
+    // this.state.themeList.push(Object.assign({}, this.state.themeList[0]));
+    // this.state.themeList[2].name = '其他商品';
+
+    if (this.state.themeList.length > 1 && this.state.themeList[1].prod_list.length != 0){
+      return this._renderScrollableTabView()
+    }
+
     const theme = this.state.themeList[0];
     return (
       <SboxProductTab
                   tmid={theme.tmid}
                   prod_list={theme.prod_list}
+                  section_list={theme.section_list}
                   scrollEventBind={this._scrollEventBind}
                   getScrollViewRefs={this._getScrollViewRefs}
                   goToSboxProductDetial={this._goToSboxProductDetial}/>
@@ -177,6 +196,7 @@ export default class SboxHome extends Component {
   }
   _renderHeaderWithBanner() {
     if (this.state.bannerList.length > 0) {
+      console.log('this.state.bannerList',this.state.bannerList)
       return(
         <HeaderWithBanner
             bannerList={this.state.bannerList}
@@ -187,7 +207,7 @@ export default class SboxHome extends Component {
       )
     }
   }
-  // {this._renderScrollableTabView()}
+  //
   render() {
       return (
         <View style={{ flex: 1}}>
