@@ -40,6 +40,7 @@
 | sku_image           | array  | 相关SKU的正面图片  |
 | sku_fact           | array  | 相关SKU的反面/营养表图片  |
 | sku_list           | array  | 相关的SKU  |
+| spu_service_img    | string  | 服务图片 |
 
 
 | sku_image/fact item | 类型及其范围 | 说明      |
