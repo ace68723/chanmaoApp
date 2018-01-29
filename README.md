@@ -17,7 +17,7 @@
  
 * [2. Database schema ](#2)
 
-* [3. API Document ](https://github.com/ace68723/sweetfulBox_1.1/tree/master/Document/API_Document)
+* [3. API Document (v2)](https://github.com/ace68723/sweetfulBox_1.1/tree/master/Document/API_Document)
   * [3.1 Home data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md)
   * [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
 
