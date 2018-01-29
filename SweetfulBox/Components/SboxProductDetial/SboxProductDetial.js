@@ -35,34 +35,25 @@ export default class SweetProductDetial extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-        attr: [],
-        selectAttr: [
-            {
-                value_id: 'attr1',
-                sku_id: 'a',
-                selected: '',
-            },
-            {
-                value_id: 'attr2',
-                sku_id: 'b',
-                selected: '',
-            },
-        ],
-        disable_attr: [],
+        selectedPage: '',
         selectedProduct:{},
         selectedAmount:1,
+        sku_image:[],
+        sku_list:[],
     };
 
     this._onPageChange = this._onPageChange.bind(this);
     this._changeSelectAttr = this._changeSelectAttr.bind(this);
-    this._findProduct = this._findProduct.bind(this);
     this._addAmount = this._addAmount.bind(this);
     this._subAmount = this._subAmount.bind(this);
     this._addToCart = this._addToCart.bind(this);
     this._goToSboxCart = this._goToSboxCart.bind(this);
     this._goBack = this._goBack.bind(this);
     this._onChange = this._onChange.bind(this);
-	}
+  }
+  componentWillMount() {
+    
+  }
   componentDidMount(){
       SboxProductStore.addChangeListener(this._onChange);
       const reqData = {
@@ -77,51 +68,28 @@ export default class SweetProductDetial extends Component {
   _onChange() {
     const productData = SboxProductStore.getSboxProductDetialState();
     const newState = Object.assign({},
-                                   productData.prod_master,
-                                   { prod_base:productData.prod_base });
+      productData);
     this.setState(Object.assign({}, newState));
-    this._findProduct();
-  }
-  _changeSelectAttr({attrIndex,attrValueIndex,disable_attr}) {
-      let newSelectAttr = this.state.selectAttr;
-      newSelectAttr[attrIndex].selected = attrValueIndex;
-      this.setState({ selectAttr: newSelectAttr,disable_attr});
-      this._findProduct();
+    this.setState({
+      selectedProduct: this.state.sku_list[0]
+    })
+}
+  _changeSelectAttr({attr}) {
+      const selectPage = findIndex(this.state.sku_image,{image_id: attr.sku_image_id})
+      this.setState({ 
+        selectedProduct: attr,
+        selectedPage:selectPage
+      });
   }
   _onPageChange(page){
-      let newSelectAttr = this.state.selectAttr;
-      newSelectAttr[0].selected = page;
-      this.setState({ selectAttr: newSelectAttr });
-      this._findProduct();
+      const selectIndex = findIndex(this.state.sku_list,{sku_image_id: this.state.sku_image[page].image_id});
+      this.setState({
+        selectedProduct: this.state.sku_list[selectIndex],
+        selectedPage: page
+      },() => console.log(this.state.selectedProduct))
   }
 
-  _findProduct() {
-    let sku = this.state.pmid;
-    for (var i = 0; i < this.state.selectAttr.length; i++) {
-        sku += this.state.selectAttr[i].sku_id + Number(this.state.selectAttr[i].selected+1);
-    }
-    const productIndex = findIndex(this.state.prod_base, { unikey: sku });
-    if(productIndex !== -1){
-
-      //更新selectedAmount
-      //当切换口味时检查库存，如果当前selectedAmount数量超过库存数量，更新
-      //selectedAmount 为最大库存
-      let selectedAmount = this.state.selectedAmount;
-      if(this.state.prod_base[productIndex].amount < selectedAmount) {
-        selectedAmount = this.state.prod_base[productIndex].amount;
-      }
-      //更新selectedAmount end
-
-      this.setState({
-        selectedProduct: this.state.prod_base[productIndex],
-        selectedAmount: selectedAmount
-      })
-    }else{
-      this.setState({
-        selectedProduct: '',
-      })
-    }
-  }
+  
   _addAmount(){
     if(this.state.selectedAmount<this.state.selectedProduct.amount){
       this.setState({
@@ -167,9 +135,10 @@ export default class SweetProductDetial extends Component {
     }
   }
   _renderProductFacts() {
-    if(this.state.selectedProduct.facts){
+    if(this.state.selectedProduct.sku_fact_image_id){
+      const selectIndex = findIndex(this.state.sku_fact,{image_id: this.state.selectedProduct.sku_fact_image_id});
       return(
-        <SboxProductFacts productFactsImg={this.state.selectedProduct.facts} />
+        <SboxProductFacts productFactsImg={this.state.sku_fact[selectIndex].image_url} />
       )
     }
   }
@@ -192,118 +161,238 @@ export default class SweetProductDetial extends Component {
     )
   }
   _renderAddAmountBtn(){
-    return(
-      <View style={{flexDirection:'row',
-                    alignItems:'flex-start',
-                    paddingLeft:20,
-                    paddingRight:20,
-                  }}>
-        <Text style={{
-                      color:'#848689',
-                      fontWeight:'500',
-                      fontSize:15,
-                      marginTop:25,
-                    }}>
-          数量
-        </Text>
+    if(this.state.selectedProduct.amount > 0 && this.state.selectedProduct.status !== 1 ) {
+      return(
         <View style={{flexDirection:'row',
-                      backgroundColor:"#ffffff",
-                      marginLeft:18,
-                      marginTop:18,
+                      alignItems:'flex-start',
+                      paddingLeft:20,
+                      paddingRight:20,
                     }}>
-            <TouchableOpacity
-                  onPress={this._subAmount}
-                  activeOpacity={0.6}
-                  >
-              <View style={{
-                        width:33,
-                        height:33,
-                        borderColor:'#efefef',
-                        borderWidth:1,
-                        alignItems:'center',
-                        justifyContent:'center',
+          <Text style={{
+                        color:'#848689',
+                        fontWeight:'500',
+                        fontSize:15,
+                        marginTop:25,
                       }}>
-                      <Text style={{
-                                fontSize: 20,
-                                fontFamily:'FZZhunYuan-M02S',
-                                color:'#ff768b',
-                              }}>
-                        -
-                      </Text>
-              </View>
-            </TouchableOpacity>
-
-
-            <View style={{
-                      width:80,
-                      height:33,
-                      borderColor:'#efefef',
-                      borderTopWidth:1,
-                      borderBottomWidth:1,
-                      alignItems:'center',
-                      justifyContent:'center',
-                    }}>
-                <Text style={{
-                          fontSize: 18,
-                          fontFamily:'FZZhunYuan-M02S',
-                          color:'#ff768b',
+            数量
+          </Text>
+          <View style={{flexDirection:'row',
+                        backgroundColor:"#ffffff",
+                        marginLeft:18,
+                        marginTop:18,
+                      }}>
+              <TouchableOpacity
+                    onPress={this._subAmount}
+                    activeOpacity={0.6}
+                    >
+                <View style={{
+                          width:33,
+                          height:33,
+                          borderColor:'#efefef',
+                          borderWidth:1,
+                          alignItems:'center',
+                          justifyContent:'center',
                         }}>
-                  {this.state.selectedAmount}
-                </Text>
-            </View>
-            <TouchableOpacity
-                  onPress={this._addAmount}
-                  activeOpacity={0.6}
-                  >
+                        <Text style={{
+                                  fontSize: 20,
+                                  fontFamily:'FZZhunYuan-M02S',
+                                  color:'#ff768b',
+                                }}>
+                          -
+                        </Text>
+                </View>
+              </TouchableOpacity>
+  
+  
               <View style={{
-                        width:33,
+                        width:80,
                         height:33,
                         borderColor:'#efefef',
-                        borderWidth:1,
+                        borderTopWidth:1,
+                        borderBottomWidth:1,
                         alignItems:'center',
                         justifyContent:'center',
                       }}>
                   <Text style={{
-                            fontSize: 20,
+                            fontSize: 18,
                             fontFamily:'FZZhunYuan-M02S',
                             color:'#ff768b',
                           }}>
-                    +
+                    {this.state.selectedAmount}
                   </Text>
               </View>
-
-            </TouchableOpacity>
-
+              <TouchableOpacity
+                    onPress={this._addAmount}
+                    activeOpacity={0.6}
+                    >
+                <View style={{
+                          width:33,
+                          height:33,
+                          borderColor:'#efefef',
+                          borderWidth:1,
+                          alignItems:'center',
+                          justifyContent:'center',
+                        }}>
+                    <Text style={{
+                              fontSize: 20,
+                              fontFamily:'FZZhunYuan-M02S',
+                              color:'#ff768b',
+                            }}>
+                      +
+                    </Text>
+                </View>
+  
+              </TouchableOpacity>
+  
+          </View>
         </View>
-      </View>
-    )
+      )
+    } else {
+      return(
+        <View style={{flexDirection:'row',
+                      alignItems:'flex-start',
+                      paddingLeft:20,
+                      paddingRight:20,
+                    }}>
+          <Text style={{
+                        color:'#848689',
+                        fontWeight:'500',
+                        fontSize:15,
+                        marginTop:25,
+                      }}>
+            数量
+          </Text>
+          <View style={{flexDirection:'row',
+                        backgroundColor:"#ffffff",
+                        marginLeft:18,
+                        marginTop:18,
+                      }}>
+              <TouchableOpacity
+                    disabled = {true}
+                    onPress={this._subAmount}
+                    activeOpacity={0.6}
+                    >
+                <View style={{
+                          width:33,
+                          height:33,
+                          borderColor:'#efefef',
+                          borderWidth:1,
+                          alignItems:'center',
+                          justifyContent:'center',
+                        }}>
+                        <Text style={{
+                                  fontSize: 20,
+                                  fontFamily:'FZZhunYuan-M02S',
+                                  color:'#ff768b',
+                                }}>
+                          -
+                        </Text>
+                </View>
+              </TouchableOpacity>
+  
+  
+              <View style={{
+                        width:80,
+                        height:33,
+                        borderColor:'#efefef',
+                        borderTopWidth:1,
+                        borderBottomWidth:1,
+                        alignItems:'center',
+                        justifyContent:'center',
+                      }}>
+                  <Text style={{
+                            fontSize: 18,
+                            fontFamily:'FZZhunYuan-M02S',
+                            color:'#ff768b',
+                          }}>
+                    0
+                  </Text>
+              </View>
+              <TouchableOpacity
+                    disabled = {true}
+                    onPress={this._addAmount}
+                    activeOpacity={0.6}
+                    >
+                <View style={{
+                          width:33,
+                          height:33,
+                          borderColor:'#efefef',
+                          borderWidth:1,
+                          alignItems:'center',
+                          justifyContent:'center',
+                        }}>
+                    <Text style={{
+                              fontSize: 20,
+                              fontFamily:'FZZhunYuan-M02S',
+                              color:'#ff768b',
+                            }}>
+                      +
+                    </Text>
+                </View>
+  
+              </TouchableOpacity>
+  
+          </View>
+        </View>
+      )
+    }
+    
   }
   _renderAddCartBtn() {
-    let backgroundColor = this.state.selectedProduct ? '#ff768b' : '#efefef' ;
-    return(
-      <TouchableOpacity
-            onPress={this._addToCart}
-            activeOpacity={0.6}
-            >
-        <View style={{
-                width:width*0.4251,
-                height:width*0.4251*0.25,
-                marginTop:20,
-                backgroundColor:backgroundColor,
-                alignSelf:'center',
-                justifyContent:'center',
-                alignItems:'center',
-              }}>
-              <Text style={{
-                      color:'white',
-                      fontSize:17,
-                      fontFamily:'FZZhunYuan-M02S',
-                    }}>
-                  加入购物箱
-              </Text>
-        </View>
-      </TouchableOpacity>
-    )
+    if(this.state.selectedProduct.amount > 0 && this.state.selectedProduct.status !== 1 ) {
+      let backgroundColor = this.state.selectedProduct ? '#ff768b' : '#efefef' ;
+      return(
+        <TouchableOpacity
+              onPress={this._addToCart}
+              activeOpacity={0.6}
+              >
+          <View style={{
+                  width:width*0.4251,
+                  height:width*0.4251*0.25,
+                  marginTop:20,
+                  backgroundColor:backgroundColor,
+                  alignSelf:'center',
+                  justifyContent:'center',
+                  alignItems:'center',
+                }}>
+                <Text style={{
+                        color:'white',
+                        fontSize:17,
+                        fontFamily:'FZZhunYuan-M02S',
+                      }}>
+                    加入购物箱
+                </Text>
+          </View>
+        </TouchableOpacity>
+      )
+    } else {
+      let backgroundColor = '#efefef' ;
+      return(
+        <TouchableOpacity
+              disabled = {true}
+              onPress={this._addToCart}
+              activeOpacity={0.6}
+              >
+          <View style={{
+                  width:width*0.4251,
+                  height:width*0.4251*0.25,
+                  marginTop:20,
+                  backgroundColor:backgroundColor,
+                  alignSelf:'center',
+                  justifyContent:'center',
+                  alignItems:'center',
+                }}>
+                <Text style={{
+                        color:'white',
+                        fontSize:17,
+                        fontFamily:'FZZhunYuan-M02S',
+                      }}>
+                    加入购物箱
+                </Text>
+          </View>
+        </TouchableOpacity>
+      )
+    }
   }
   _renderHeaderImage() {
     return(
@@ -321,27 +410,26 @@ export default class SweetProductDetial extends Component {
 
   render() {
 
-    if(this.state.attr.length>0){
+    // if(this.state.sku_list.length>0){
       return (
         <View style={{flex:1}}>
           <ScrollView style={styles.container}>
               <SboxProductDetialScrollView
-                page={this.state.attr[0].attr_value}
-                selectedPage={this.state.selectAttr[0].selected}
-                onPageChange={this._onPageChange}/>
+                page={this.state.sku_image}
+                selectedPage={this.state.selectedPage}
+                onPageChange={this._onPageChange}
+                attr={this.state.sku_list}/>
 
-              <SboxProductDetialDesc  attr={this.state.selectAttr[0]}
-                                      selectedProduct={this.state.selectedProduct}
-                                      productName={this.state.fullname}/>
-              <SboxProductDetialAttr  attr={this.state.attr}
-                                      selectAttr={this.state.selectAttr}
+              <SboxProductDetialDesc  selectedProduct={this.state.selectedProduct}
+                                      productName={this.state.spu_name}/>
+              <SboxProductDetialAttr  attr={this.state.sku_list}
+                                      selectAttr={this.state.selectedProduct}
                                       changeSelectAttr={this._changeSelectAttr}
-                                      disable_attr={this.state.disable_attr}
                                       />
               {this._renderAddAmountBtn()}
               {this._renderAddCartBtn()}
               <ScrollableTabView
-                        prerenderingSiblingsNumber = {2}
+                        prerenderingSiblingsNumber = {1}
                         tabBarUnderlineStyle={{backgroundColor:'#ff768b',
                                                width:80,
                                                marginLeft:55,
@@ -358,6 +446,8 @@ export default class SweetProductDetial extends Component {
                 <View tabLabel="产品详情">
                   {this._renderProductFacts()}
                 </View>
+                
+                
              </ScrollableTabView>
           </ScrollView>
           {this._renderHeaderImage()}
@@ -367,13 +457,13 @@ export default class SweetProductDetial extends Component {
 
 
       );
-    } else {
-      return(
-        <View>
-          {this._renderGoBackBtn()}
-        </View>
-      )
-    }
+    // } else {
+    //   return(
+    //     <View>
+    //       {this._renderGoBackBtn()}
+    //     </View>
+    //   )
+    // }
 
   }
 }

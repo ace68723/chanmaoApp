@@ -29,9 +29,32 @@ function Page(props: { children?: ReactElement<*> }) {
   )
 }
 function Card(props: { page: object, index: number }) {
+  // if (this.props.selectedProduct.amount == 0 && this.props.selectedProduct.status == 1) {
+  //   return (
+  //     <Animated.View style={[style.card, rotateTransform(props.index)]}>
+  //       <Image source={{uri: props.page.image_url}}
+  //              style={{ width: width*0.446,
+  //                       height: width*0.446*1.4043,
+  //                       position: 'absolute',
+  //                       top: 0,
+  //                       bottom: 0,
+  //                       left: 0,
+  //                       right: 0,}}/>
+  //       <Image style= {{backgroundColor: 'rgba(0,0,0,0)'}}  source = {require('./Images/soldout.png')} />>
+  //     </Animated.View>
+  //   );
+  // } else {
+  //   return (
+  //     <Animated.View style={[style.card, rotateTransform(props.index)]}>
+  //       <Image source={{uri: props.page.image_url}}
+  //              style={{ width: width*0.446,
+  //                       height: width*0.446*1.4043}}/>
+  //     </Animated.View>
+  //   );
+  // }
   return (
     <Animated.View style={[style.card, rotateTransform(props.index)]}>
-      <Image source={{uri: props.page.image}}
+      <Image source={{uri: props.page.image_url}}
              style={{ width: width*0.446,
                       height: width*0.446*1.4043}}/>
     </Animated.View>
@@ -70,7 +93,7 @@ export default class SboxProductDetialScrollView extends Component{
   constructor(props) {
     super(props)
   }
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps, nextState){
     if(nextProps.selectedPage !== this.props.selectedPage){
       this.refs.CardView.scrollTo({x:nextProps.selectedPage*width,y:0,animated:true})
     }

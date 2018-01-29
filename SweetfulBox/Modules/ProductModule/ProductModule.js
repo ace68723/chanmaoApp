@@ -178,6 +178,86 @@ const testData =
         }
     ]
 }
+const productData = {
+    spu_id:5,
+    spu_name:"与美懒人大厨四川冒菜",
+    spu_status:0, //status = 1, 页面跳回
+    sku_image:[
+      {
+        image_id:762,
+        image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
+      },
+      {
+        image_id:835,
+        image_url:"https://chanmao.us/storage/image/sb_app/image/12_20170828.png"
+      },
+      {
+        image_id:275,
+        image_url:"https://chanmao.us/storage/image/sb_app/image/23_20170828.png"
+      }
+    ],
+    sku_fact:[
+      {
+        image_id:852,
+        image_url:"https://chanmao.us/storage/image/sb_app/facts/2_20170828.png"
+      },
+      {
+        image_id:523,
+        image_url:"https://chanmao.us/storage/image/sb_app/facts/3_20170828.png"
+      },
+      {
+        image_id:632,
+        image_url:"https://chanmao.us/storage/image/sb_app/facts/5_20170828.png"
+      }
+    ],
+    sku_list:[
+      {
+        spu_id:5,
+        sku_id:52,
+        sku_name:"豚骨菌菇(大包装)",
+        sku_status:0,
+        amount:329,
+        sku_image_id:762,
+        sku_fact_image_id:852,
+        sku_original_price:10.86,
+        sku_price:10.86,
+        
+      },
+      {
+        spu_id:5,
+        sku_id:22,
+        sku_name:"豚骨菌菇(小包装)",
+        sku_status:0,
+        amount:182,
+        sku_image_id:762,
+        sku_fact_image_id:523,
+        sku_original_price:7.53,
+        sku_price:5.22
+      },
+      {
+        spu_id:5,
+        sku_id:48,
+        sku_name:"浓香麻辣",
+        sku_status:1,
+        amount:0, //check amount || status
+        sku_image_id:835,
+        sku_fact_image_id:632,
+        sku_original_price:5.23,
+        sku_price:2.33
+      },
+      {
+        spu_id:5,
+        sku_id:49,
+        sku_name:"黑糖海盐",
+        sku_status:0,
+        amount:235,
+        sku_image_id:275,
+        sku_fact_image_id:523,
+        sku_original_price:8.23,
+        sku_price:6.59
+      }
+    ]
+}
 
 export default  {
   async getCategoryList(io_data){
@@ -267,31 +347,17 @@ export default  {
 
   },
   async getHomeData(io_data){
-<<<<<<< HEAD
-    // console.log(testData)
-=======
->>>>>>> b55c94f42a635bed723bbfb4ede7989eaa2f04c0
-    // const returnData = {
-    //   banner: testData.ea_banner,
-    //   theme: testData.ea_theme,
-    //   ev_error: testData.ev_error,
-    //   ev_message:testData.ev_message
-    // }
-    // return returnData
+
     try {
       const lo_data ={
         uuid: 1,
       }
       const homeDataResult = await ProductAPI.getHomeData(lo_data);
-
+      console.log(homeDataResult)
       if(homeDataResult.ev_error === 0 ){
         const eo_data ={
-<<<<<<< HEAD
-          bannerList:testData.ea_banner,
-=======
           bannerList:homeDataResult.ea_banner,
->>>>>>> b55c94f42a635bed723bbfb4ede7989eaa2f04c0
-          themeList: testData.ea_theme,
+          themeList: homeDataResult.ea_theme,
         }
         this.updateAPICache(eo_data);
         return eo_data
@@ -310,7 +376,6 @@ export default  {
   updateAPICache(iv_json) {
       const cache_key = 'home_cache';
       const json = JSON.stringify(iv_json);
-      console.log(json)
       const lo_result = { cache_key, json };
       sbox_addAPICache(lo_result);
   },
@@ -319,25 +384,20 @@ export default  {
       return ea_APICache;
   },
   async getSingleProduct(io_data){
-
     try {
       const lo_data ={
+        iv_spu_id: 1,
         authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxODc4NSIsImV4cGlyZWQiOjE0ODkwODk2MDAsImxhc3Rsb2dpbiI6MTQ4MzA0NzU4OH0.EPjeu-klo-ygKwUvdyVspIWeaHoosCNPdaa1pO4_RsY',
-        iv_pmid: io_data.pmid,
       }
       const singleProductResult = await ProductAPI.getSingleProduct(lo_data);
+      console.log(singleProductResult)
       if(singleProductResult.ev_error === 0 ){
-        const eo_data ={
-          prod_master:singleProductResult.eo_prod_master,
-          prod_base: singleProductResult.ea_prod_base,
-        }
-        return eo_data
+        return singleProductResult.eo_spu_base
       }else{
         const errorMessage = singleProductResult.ev_message;
         throw errorMessage
       }
     } catch (e) {
-
       const errorMessage = 'error';
       throw errorMessage
     }

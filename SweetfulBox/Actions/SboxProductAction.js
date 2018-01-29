@@ -64,6 +64,7 @@ export default {
               }
             },
             async getSingleProduct(io_data){
+              console.log('action')
                 try{
                   const lo_data = {
                     pmid: io_data.pmid

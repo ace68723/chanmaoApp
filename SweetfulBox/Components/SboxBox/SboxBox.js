@@ -51,7 +51,6 @@ export default class MyComponent extends Component {
       this._updateBoxPosition();
     }, 100);
   }
-  _boxId
   _updateBoxPosition() {
     console.log('currentBox',(this.state.boxId!==1 && this._boxId !== this.state.currentBox.boxId))
 

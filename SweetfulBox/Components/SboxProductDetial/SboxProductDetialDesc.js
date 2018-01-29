@@ -11,48 +11,57 @@ import {
 } from 'lodash';
 export default class SboxProductDetialDesc extends Component {
   render() {
-
-    const attr = this.props.attr;
-    return (
-      <View style={{alignItems:'center',}}>
-        <Text style={{fontSize:19,
-                      fontFamily:'FZZhunYuan-M02S',
-                    }}>
-            {this.props.productName}
-        </Text>
-
-
-
-        <View style={{flexDirection:'row',
-                      width:150,
-                      marginTop:10,}}>
-          <Text style={{color:'#ff768b',
+    if (this.props.selectedProduct.sku_original_price == this.props.selectedProduct.sku_price) {
+      return (
+        <View style={{alignItems:'center',}}>
+          <Text style={{fontSize:19,
                         fontFamily:'FZZhunYuan-M02S',
-                        fontSize:15,
-                        textAlign: 'right',
-                        flex:0.55,
-                        paddingRight:20,
                       }}>
-              ${this.props.selectedProduct.price}
+              {this.props.productName} | {this.props.selectedProduct.sku_name}
           </Text>
-          <View style={{flex:0.45,}}>
-            <View style={{backgroundColor:"#ff768b",
-                         width:16,
-                         height:16,
-                         alignItems:'center',
-                         justifyContent:'center',
+  
+  
+  
+          <View style={{flexDirection:'row',
+                        width:150,
+                        marginTop:10,}}>
+            <Text style={{color:'#ff768b',
+                          fontFamily:'FZZhunYuan-M02S',
+                          fontSize:15,
+                          textAlign: 'center',
+                          flex:1,
+                          paddingRight:20,
                         }}>
-                  <Text style={{color:'#ffffff',
-                                fontFamily:'FZZhunYuan-M02S',
-                                fontSize:13,
-                              }}>
-                      {this.props.selectedProduct.weights}
-                  </Text>
-            </View>
+                ${this.props.selectedProduct.sku_price}
+            </Text>
           </View>
         </View>
-      </View>
-    );
+      );
+    } else {
+      return (
+        <View style={{alignItems:'center',}}>
+          <Text style={{fontSize:19,
+                        fontFamily:'FZZhunYuan-M02S',
+                      }}>
+              {this.props.productName} | {this.props.selectedProduct.sku_name}
+          </Text>
+          <View style={{flexDirection:'row',
+                        width:150,
+                        marginTop:10,}}>
+            <Text style={{color:'#ff768b',
+                          fontFamily:'FZZhunYuan-M02S',
+                          fontSize:15,
+                          textAlign: 'center',
+                          flex:1,
+                          paddingRight:20,
+                        }}>
+                $ {this.props.selectedProduct.sku_price} <Text style = {{textDecorationLine: 'line-through',color:'grey'}}>( {this.props.selectedProduct.sku_original_price} )</Text>
+            </Text>
+          </View>
+        </View>
+      );
+    }
+
   }
 }
 // <Text style={{color:'#848689',

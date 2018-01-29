@@ -20,150 +20,63 @@ export default class MyComponent extends Component {
       this.state = {
         categoryTitles: ['新品速递', '好货热卖', '超值特价'],
         categoryChecked:'new',
-        format_data: [],
-        data_list:[
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            contentType: 'header-left',
-          },
-          {
-            contentType: 'header-title',
-            title: "新品速递"
-          },
-          {
-            contentType: 'header-right',
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          },
-          {
-            name: 'OKF芒果果汁',
-            price:'1.19',
-            image: require('./Image/box.png'),
-            header:false,
-          }
-        ],
-        data : [
-          {
-            'title' : '新品速递',
-            'items' : [
-              {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }, {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }, {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }
-            ]
-          },
-          {
-            'title' : '好货热卖',
-            'items' : [
-              {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }, {
-                name: 'OKF芒果果汁',
-                price: '1.19',
-                image: require('./Image/box.png'),
-              }
-            ]
-          },
-        ]
+        format_data: props.prod_list,
+        categoryHot:0,
+        categorySale: 0,
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
       this._getSpecialContentCell = this._getSpecialContentCell.bind(this);
-
-      this._processData = this._processData.bind(this);
-  }
-
-  _processData(data){
-    // Add item for header & empty cell
-    let newData = [];
-    for(let i = 0; i < this.state.data.length; i++){
-      newData.push({contentType: 'header-left'});
-      newData.push({contentType: 'header-title', title: this.state.data[i].title});
-      newData.push({contentType: 'header-right'});
-      for(let j = 0; j < this.state.data[i].items.length; j++){
-        newData.push(this.state.data[i].items[j]);
-    	}
-      while (newData.length % 3 != 0){
-        newData.push({contentType: 'empty'});
-      }
-  	}
-    console.log('gg', newData);
-    this.setState({format_data: newData});
+      this.scrollToIndex = this.scrollToIndex.bind(this);
   }
   componentWillMount() {
    let arr = [];
-   this.state.data_list.map(obj => {
-     if (obj.header) {
-       arr.push(this.state.data_list.indexOf(obj));
-     }
-   });
-   arr.push(0);
-   this.setState({
-     stickyHeaderIndices: arr
-   });
-
-   // do process
-   this._processData(this.state.data);
+   
  }
+ scrollToIndex(index) {
+  console.log(index);
+  this._scrollVew.scrollToIndex({animated: true, index: index});
+}
   componentDidMount(){
     const index = this.props.index;
 		const scrollView = this._scrollVew;
 		const scrollViewContent = this._scrollViewContent;
 		const ref = Object.assign({},{index,scrollView,scrollViewContent})
-		this.props.getScrollViewRefs(ref);
+    this.props.getScrollViewRefs(ref);
+    
+    this.state.format_data.forEach((item,index) => {
+      if(item.section_id === 2 && item.type == 'section_left') {
+        hot = parseInt(index/3 , 10);
+        this.setState({
+          categoryHot:hot
+        }
+      )
+      }
+      if(item.section_id === 3 && item.type == 'section_left') {
+       sale = parseInt(index/3 , 10)-1;
+       console.log(index);
+       this.setState({
+         categorySale:sale
+       }
+      )
+
+      }
+    });
 
 	}
   _keyExtractor = (product, index) =>product.pmid + index;
-
-  _getSpecialContentCell(contentType, title){
-    if (contentType == 'header-title'){
+  
+  _getSpecialContentCell(item, title){
+    if (item.type == "section"){
       return (
         <Text style={{
             marginTop: Settings.getY(72),
             height: Settings.getY(120),
             fontWeight: 'bold',
-          }}>{title}</Text>
+          }}>{item.section_name}</Text>
       );
     }
-    if (contentType == 'header-left'){
+    if (item.type == "section_left"){
       return (
         <View
           style={{
@@ -178,7 +91,7 @@ export default class MyComponent extends Component {
         />
       )
     }
-    if (contentType == 'header-right'){
+    if (item.type == "section_right"){
       return (
         <View
           style={{
@@ -193,7 +106,7 @@ export default class MyComponent extends Component {
         />
       )
     }
-    if (contentType == 'empty'){
+    if (!item.type){
       return (
         // empty cell
         <View
@@ -210,8 +123,8 @@ export default class MyComponent extends Component {
   }
 
   _renderProduct(product) {
-      if (product.item.contentType){
-        return this._getSpecialContentCell(product.item.contentType, product.item.title);
+      if (product.item.type !== 'spu' &&  product.item.type !== 'sku' ){
+        return this._getSpecialContentCell(product.item, product.item.section_name);
       }
       else{
         return (
@@ -231,17 +144,22 @@ export default class MyComponent extends Component {
     return(
       <View style={styles.headerContainer}
             ref={(comp) => this._scrollViewContent = comp }>
-
             <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>this._selectCategory('new')}>
+                              onPress={()=>{
+                                this._selectCategory('new');
+                                this.scrollToIndex(0)}}>
                 <Text style={{color:this.state.categoryChecked == 'new' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[0]}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>this._selectCategory('hot')}>
+                              onPress={()=>{
+                                this._selectCategory('hot');
+                                this.scrollToIndex(this.state.categoryHot)}}>
                 <Text style={{color:this.state.categoryChecked == 'hot' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[1]}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{flex:0.3, alignItems:'center',justifyContent:'center'}}
-                              onPress={()=>this._selectCategory('cheap')}>
+                              onPress={()=>{
+                                this._selectCategory('cheap');
+                                this.scrollToIndex(this.state.categorySale)}}>
                 <Text style={{color:this.state.categoryChecked == 'cheap' ? 'black' : '#a5a5a5'}}>{this.state.categoryTitles[2]}</Text>
             </TouchableOpacity>
       </View>
@@ -266,7 +184,7 @@ export default class MyComponent extends Component {
             getItemLayout={(data, index) => (
                  {length: 250, offset: 250 * index, index}
                )}
-           stickyHeaderIndices={this.state.stickyHeaderIndices}
+           stickyHeaderIndices={[0]}
            numColumns={3}
            columnWrapperStyle={{ marginTop: 10,alignSelf:'center' }}
         />

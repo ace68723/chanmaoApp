@@ -27,7 +27,13 @@ export default class SboxProductFacts extends Component {
        this.setState(Object.assign({}, {imgWidth: screenWidth, imgHeight: imageHeight}));
     })
   }
-  render() {
+  shouldComponentUpdate(nextProps, nextState){
+		if(nextProps.productFactsImg != this.props.productFactsImg){
+			return true;
+		}else{
+			return false;
+		}
+	}  render() {
     return (
         <Image
            style={{ width:this.state.imgWidth,height:this.state.imgHeight }}

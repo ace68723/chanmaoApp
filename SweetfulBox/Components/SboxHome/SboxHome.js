@@ -13,7 +13,7 @@ import _forEach from 'lodash/forEach';
 
 import SboxHomeAction from '../../Actions/SboxHomeAction';
 import SboxHomeStore from '../../Stores/SboxHomeStore';
-
+import SboxProductAction from '../../Actions/SboxProductAction'
 import SboxHomeHeader from './SboxHomeHeader';
 import HeaderWithBanner from './HeaderWithBanner';
 import SboxProductTab from '../SboxProductTab/';
@@ -84,7 +84,6 @@ export default class SboxHome extends Component {
   _backToHome() {
     this.props.handleBackToHome();
   }
-  setPositionStarted = '';
   _setPosition(){
     if (this.setPositionStarted) return
     this.setPositionStarted = true;

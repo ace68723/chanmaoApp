@@ -29,13 +29,14 @@ export default class SboxProductView extends Component {
 
           <TouchableWithoutFeedback  onPress={this.props.goToSboxProductDetial.bind(null,this.props.product)}>
             <View style={styles.productContainer}>
-              <Image source={this.props.product.image}
+              <Image source={{uri:this.props.product.image}}
                      style={{width:width/5,
-                             height:80,
-                             alignSelf:'center'}}
+                             height:0.15*height,
+                             alignSelf:'center',
+                            marginBottom:7}}
               />
-              <Text style={{fontSize:10}}>{this.props.product.name}</Text>
-              <Text style={{fontSize:5}}>{this.props.product.price}</Text>
+              <Text style={{fontSize:14,alignSelf:'center',fontFamily:'FZZhunYuan-M02S',color:'#6d6e71',marginBottom:7}}>{this.props.product.name}</Text>
+              <Text style={{fontSize:13,alignSelf:'center',fontFamily:'FZZhunYuan-M02S',color:'#ff768b'}}>$ {this.props.product.retail_price}</Text>
             </View>
           </TouchableWithoutFeedback>
 
@@ -53,8 +54,7 @@ const styles = StyleSheet.create({
     },
     productContainer: {
       width: width/4,
-      height: 120,
-      backgroundColor:'green',
+      height: '100%',
       marginHorizontal:10
     }
 });
