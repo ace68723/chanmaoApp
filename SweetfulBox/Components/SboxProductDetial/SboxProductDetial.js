@@ -58,7 +58,6 @@ export default class SweetProductDetial extends Component {
       SboxProductStore.addChangeListener(this._onChange);
       const spu_id = this.props.spu_id
       SboxProductAction.getSingleProduct(spu_id);
-      // this._goToSboxCart();
   }
   componentWillUnmount() {
     SboxProductStore.removeChangeListener(this._onChange);
@@ -69,7 +68,8 @@ export default class SweetProductDetial extends Component {
       productData);
     this.setState(Object.assign({}, newState),() => console.log(this.state));
     this.setState({
-      selectedProduct: this.state.sku_list[0]
+      selectedProduct: this.state.sku_list[0],
+      serviceImg: this.state.spu_service_img
     })
 }
   _changeSelectAttr({attr}) {
@@ -84,7 +84,7 @@ export default class SweetProductDetial extends Component {
       this.setState({
         selectedProduct: this.state.sku_list[selectIndex],
         selectedPage: page
-      },() => console.log(this.state.selectedProduct))
+      })
   }
 
   
@@ -133,12 +133,15 @@ export default class SweetProductDetial extends Component {
     }
   }
   _renderProductFacts() {
-    if(this.state.selectedProduct.sku_fact_image_id){
       const selectIndex = findIndex(this.state.sku_fact,{image_id: this.state.selectedProduct.sku_fact_image_id});
-      return(
-        <SboxProductFacts productFactsImg={this.state.sku_fact[selectIndex].image_url} />
-      )
-    }
+      if (selectIndex !== -1) {
+        return(
+          <SboxProductFacts productFactsImg={this.state.sku_fact[selectIndex].image_url} />
+        )
+      } else {
+        return
+      }
+     
   }
   _renderGoBackBtn() {
     return(
@@ -427,7 +430,9 @@ export default class SweetProductDetial extends Component {
               {this._renderAddAmountBtn()}
               {this._renderAddCartBtn()}
               <ScrollableTabView
-                        prerenderingSiblingsNumber = {1}
+                        ref = 'fact'
+                        initialPage = {0}
+                        prerenderingSiblingsNumber = {2}
                         tabBarUnderlineStyle={{backgroundColor:'#ff768b',
                                                width:80,
                                                marginLeft:55,

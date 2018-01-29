@@ -1,7 +1,8 @@
 /* @flow */
 
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity,Dimensions} from 'react-native';
+const {height, width} = Dimensions.get('window');
 
 export default class SboxProductTabSectionHeaderCell extends Component {
   render() {
@@ -13,7 +14,7 @@ export default class SboxProductTabSectionHeaderCell extends Component {
           flexDirection: 'row',
           flex: 1,
           alignItems: 'center',
-          width: 120
+          width: width/3,
         }}
         onPress={()=>{
           this.props.onPress(this.props.index)

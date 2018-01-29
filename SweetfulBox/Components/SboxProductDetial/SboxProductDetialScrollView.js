@@ -78,7 +78,6 @@ export default class SboxProductDetialScrollView extends Component{
 
   render() {
     const pages = this.props.page.map((page,key)=>{
-      console.log(page)
       return (
         <Page key = {key} >
           <Card page={page} index={key} />
