@@ -1,14 +1,15 @@
 # sweetfulBox_1.1
 
-## 2018-01-29更新
+## 2018-01-29 update
 - 新增两个API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
 
-## 2018-01-26更新
+## 2018-01-26 update
 - spu价格参数 spu_price （skulist中最低的sku_price）
 - sku价格参数 sku_original_price sku_price
 - sku通过 sku_original_price === sku_price 判断sku是否打折 
 - 所有结算价格以sku_price 为准
 
+## Contents
 * [1. Data sample](#1)
   * [1.1 Single product spu data sample](#1.1)
   * [1.2 Home data sample](#1.2)
