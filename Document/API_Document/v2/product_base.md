@@ -40,7 +40,7 @@
 | -------------- | ------ | ----- |
 | spu_id           | number | 产品组ID |
 | spu_name       | string | 产品组名字 |
-| status           | number  | 产品组状态 0为正常 1为缺货  |
+| spu_status           | number  | 产品组状态 0为正常 1为缺货  |
 | sku_image           | array  | 相关SKU的正面图片  |
 | sku_fact           | array  | 相关SKU的反面/营养表图片  |
 | sku_list           | array  | 相关的SKU  |
