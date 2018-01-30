@@ -33,20 +33,5 @@ export default {
             actionType: SboxConstants.CHECKOUT_FAIL, error
         })
       }
-    },
-    async getProductList(id) {
-      try{
-        const data = {
-          "id": id
-        }
-        dispatch({
-            actionType: SboxConstants.GET_PRODUCT_LIST, data
-        })
-      }catch(error){
-
-      }
-    },
-    async checkProductStatus() {
-
     }
 }

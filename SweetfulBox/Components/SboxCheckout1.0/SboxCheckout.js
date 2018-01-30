@@ -46,7 +46,7 @@ export default class MyComponent extends Component {
   }
   async componentDidMount() {
     SboxOrderStore.addChangeListener(this._onChange);
-    realm.addListener('change', this._onRealmChange)
+    realm.addListener('change', this._onRealmChange);
   }
   componentWillUnmount() {
     SboxOrderStore.removeChangeListener(this._onChange);

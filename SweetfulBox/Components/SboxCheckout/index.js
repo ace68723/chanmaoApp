@@ -73,10 +73,16 @@ export default class MyComponent extends Component {
     this._handleAddAddress = this._handleAddAddress.bind(this);
     this._onChange = this._onChange.bind(this);
     this._onRealmChange = this._onRealmChange.bind(this);
+    this._getProductList = this._getProductList.bind(this);
+    this._checkProductStatus = this._checkProductStatus.bind(this);
   }
   async componentDidMount() {
     SboxOrderStore.addChangeListener(this._onChange);
     realm.addListener('change', this._onRealmChange)
+  }
+  componentWillMount() {
+    this._getProductList();
+    this._checkProductStatus();
   }
   componentWillUnmount() {
     SboxOrderStore.removeChangeListener(this._onChange);
@@ -197,6 +203,12 @@ export default class MyComponent extends Component {
        }
        realm.delete(product);
     })
+  }
+  _getProductList() {
+    SboxOrderAction.getProductList();
+  }
+  _checkProductStatus() {
+    SboxOrderAction.checkProductStatus();
   }
 
   _startCheckout() {
