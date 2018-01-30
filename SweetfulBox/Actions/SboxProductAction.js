@@ -1,6 +1,7 @@
 import SboxConstants from '../Constants/SboxConstants';
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
-import ProductModule from '../Modules/ProductModule/ProductModule'
+import ProductModule from '../Modules/ProductModule/ProductModule';
+import {sbox_getCartQuantity} from '../Modules/Database';
 export default {
     async getCategoryList(showpm){
 
@@ -79,8 +80,9 @@ export default {
         try {
           return ProductModule.addToCart(selectedProduct);
         } catch (e) {
-
-        }
-
+          }
+      },
+      getCartQuantity() {
+        return sbox_getCartQuantity()
       }
 }

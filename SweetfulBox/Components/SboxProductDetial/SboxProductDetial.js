@@ -53,6 +53,7 @@ export default class SweetProductDetial extends Component {
     this._goToSboxCart = this._goToSboxCart.bind(this);
     this._goBack = this._goBack.bind(this);
     this._onChange = this._onChange.bind(this);
+    this._getCartQuantity = this._getCartQuantity.bind(this);
   }
   componentWillMount() {
     
@@ -61,6 +62,7 @@ export default class SweetProductDetial extends Component {
       SboxProductStore.addChangeListener(this._onChange);
       const spu_id = this.props.spu_id
       SboxProductAction.getSingleProduct(spu_id);
+      this._getCartQuantity();
   }
   componentWillUnmount() {
     SboxProductStore.removeChangeListener(this._onChange);
@@ -100,7 +102,12 @@ export default class SweetProductDetial extends Component {
       })
   }
 
-  
+  _getCartQuantity() {
+    const cartQuantity = SboxProductAction.getCartQuantity();
+    this.setState({
+      totalQuantity:cartQuantity
+    })
+  }
   _addAmount(){
     if(this.state.selectedProduct.sku_quantity<this.state.selectedProduct.sku_amount){
       let selectedProduct = Object.assign({}, this.state.selectedProduct);    //creating copy of object
@@ -129,7 +136,18 @@ export default class SweetProductDetial extends Component {
     const total = SboxProductAction.addToCart(selectedProduct);
     this.setState({
       totalQuantity:total
-    },() => console.log(this.state.totalQuantity))
+    },() => {
+      this.props.navigator.showLightBox({
+        screen: "SboxCartAlert",
+
+        passProps: {
+          message:`成功添加入购物车`}, // simple serializable object that will pass as props to the lightbox (optional)
+        adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+       });
+       setTimeout(() => {
+        this.props.navigator.dismissLightBox();
+      }, 1500);
+    })
   }
 
   //route
