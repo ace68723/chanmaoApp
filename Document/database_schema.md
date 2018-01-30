@@ -33,4 +33,4 @@
 |                    |            |                |                |                  |            |            |            |            |      |        |            |
 | sbox_order_base    | obid       | uid            | abid           | pretax           | delifee    | total      | ptype      | created   | status |      | updated_at |
 |                    |            |                |                |                  |            |            |            |            |      |        |            |
-| sbox_order_item    | id         | obid           | sku_id         | price            | amount     | status     |            |           |        |      |            |
+| sbox_order_item    | id         | obid           | sku_id         | price            | quantit    | status     |            |           |        |      |            |
