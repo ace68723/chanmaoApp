@@ -35,10 +35,7 @@ export function DatabaseInit() {
 export function sbox_getAllItemsFromCart() {
   return realm_sbox.objects('sbox_cart');
 }
-export function sbox_addItemsQuantityFromCart(sku_id) {
-  return realm_sbox.objects('sbox_cart');
-}
-export function sbox_addItemToCart() {
+export function sbox_addItemToCart(io_data) {
   const sku_id = io_data.sku_id
   const spu_id = io_data.spu_id
   const sku_status = io_data.sku_status
@@ -62,7 +59,17 @@ export function sbox_addItemToCart() {
     sku_image_url
   }
   realm.write(() => {
-    realm.create('sbox_cart_product',Object.assign({},data),true);
+    realm.create('sbox_cart',Object.assign({},data),true);
   })
 
+}
+export function sbox_getCartQuantity() {
+  let totalQuantity = 0;
+  const totalItems = realm.objects('sbox_cart');
+  if (totalItems.length === 0) return totalQuantity
+
+  totalItems.forEach((item) => {
+    totalQuantity += item.sku_quantity
+  })
+  return totalQuantity;
 }
