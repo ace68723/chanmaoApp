@@ -36,7 +36,14 @@ export function sbox_getAllItemsFromCart() {
   return realm_sbox.objects('sbox_cart');
 }
 export function sbox_addItemToCart(selectedProduct) {
-  console.log(selectedProduct)
+  const item = realm.objectForPrimaryKey('sbox_cart',selectedProduct.sku_id);
+  console.log(item)
+  if(item){
+    realm.write(() => {
+      item.sku_quantity += selectedProduct.sku_quantity;
+    })
+    return
+  }
   const sku_id = selectedProduct.sku_id
   const spu_id = selectedProduct.spu_id
   const sku_status = selectedProduct.sku_status

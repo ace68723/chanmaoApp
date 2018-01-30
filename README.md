@@ -2,6 +2,7 @@
 
 ## 2018-01-30 update
 - 新增Data sample [1.4 Order history data sample](#1.4) 历史订单
+- 新增API [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
 
 ## 2018-01-29 update
 - 新增API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
@@ -31,6 +32,7 @@
   * [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
   * [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
   * [3.4 Add order](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/add_order.md)
+  * [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
 
 <div id="1"> <div/>
 
