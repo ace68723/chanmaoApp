@@ -59,9 +59,9 @@
 | sku_id         | number | 产品ID         |
 | sku_name       | string | SKU 名称（属性名） |
 | sku_status    | number | 产品状态 0为正常 1为缺货        |
-| price        | string  | 单价           |
-| original_price        | string  | 原售价 |
-| amount       | number | available的数量 |
+| sku_price        | string  | 单价           |
+| sku_original_price        | string  | 原售价 |
+| sku_amount       | number | available的数量 |
 | sku_image_id        | number | 营养表图片ID     |
 | sku_fact_image_id      | number | 正面图片ID  |
 | sku_image_url        | number | 营养表图片Url    |
