@@ -1,6 +1,7 @@
 import SboxConstants from '../Constants/SboxConstants';
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import OrderModule from '../Modules/OrderModule/OrderModule'
+import {sbox_getAllItemsFromCart} from '../Modules/Database'
 export default {
     async getOrderBefore(productList){
         try{
@@ -34,19 +35,26 @@ export default {
         })
       }
     },
-    async getProductList(id) {
+    async getProductList() {
       try{
-        const data = {
-          "id": id
-        }
+        const data = sbox_getAllItemsFromCart();
         dispatch({
             actionType: SboxConstants.GET_PRODUCT_LIST, data
         })
       }catch(error){
-
+        console.log(error);
       }
     },
-    async checkProductStatus() {
-
+    async checkProductStatus(productList) {
+      try{
+        const data = {
+          'productList': productList,
+        }
+        dispatch({
+            actionType: SboxConstants.CHECK_PRODUCT_STATUS, data
+        })
+      }catch(error){
+        console.log(error);
+      }
     }
 }
