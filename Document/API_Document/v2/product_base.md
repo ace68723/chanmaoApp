@@ -40,7 +40,7 @@
 | -------------- | ------ | ----- |
 | spu_id           | number | 产品组ID |
 | spu_name       | string | 产品组名字 |
-| status           | number  | 产品组状态 0为正常 1为缺货  |
+| spu_status           | number  | 产品组状态 0为正常 1为缺货  |
 | sku_image           | array  | 相关SKU的正面图片  |
 | sku_fact           | array  | 相关SKU的反面/营养表图片  |
 | sku_list           | array  | 相关的SKU  |
@@ -105,7 +105,7 @@
                 "sku_id": 3,
                 "sku_name": "田园蔬菜 10G",
                 "sku_status": 0,
-                "amount": 10,
+                "sku_amount": 10,
                 "sku_image_id": 14,
                 "sku_fact_image_id": 18,
                 "sku_original_price": "16.99",
@@ -118,7 +118,7 @@
                 "sku_id": 4,
                 "sku_name": "烧烤味 10G",
                 "sku_status": 0,
-                "amount": 15,
+                "sku_amount": 15,
                 "sku_image_id": 15,
                 "sku_fact_image_id": 19,
                 "sku_original_price": "16.99",
