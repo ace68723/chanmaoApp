@@ -11,6 +11,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 
 import {
@@ -40,6 +41,7 @@ export default class SweetProductDetial extends Component {
         selectedAmount:1,
         sku_image:[],
         sku_list:[],
+        loading:false,
     };
 
     this._onPageChange = this._onPageChange.bind(this);
@@ -67,10 +69,15 @@ export default class SweetProductDetial extends Component {
     const newState = Object.assign({},
       productData);
     this.setState(Object.assign({}, newState),() => console.log(this.state));
+    this.state.sku_list.forEach(item => {
+      this.setState(Object.assign(item, {quantity: 1}),() => console.log(this.state))
+    });
     this.setState({
       selectedProduct: this.state.sku_list[0],
-      serviceImg: this.state.spu_service_img
+      serviceImg: this.state.spu_service_img,
+      loading: true
     })
+
 }
   _changeSelectAttr({attr}) {
       const selectPage = findIndex(this.state.sku_image,{image_id: attr.sku_image_id})
@@ -89,23 +96,30 @@ export default class SweetProductDetial extends Component {
 
   
   _addAmount(){
-    if(this.state.selectedAmount<this.state.selectedProduct.amount){
-      this.setState({
-        selectedAmount: this.state.selectedAmount+1
-      })
+    if(this.state.selectedProduct.quantity<this.state.selectedProduct.amount){
+      let selectedProduct = Object.assign({}, this.state.selectedProduct);    //creating copy of object
+      selectedProduct.quantity  = selectedProduct.quantity + 1 ;
+      selectProductIndex  = findIndex(this.state.sku_list, {sku_id: this.state.selectedProduct.sku_id})
+      let sku_list = [ ...this.state.sku_list ];
+      sku_list[selectProductIndex].quantity = selectedProduct.quantity ;  //new value
+      this.setState({ sku_list },() => console.log(this.state.sku_list));
+      this.setState({selectedProduct});
     }
   }
   _subAmount(){
-    if(this.state.selectedAmount > 1){
-      this.setState({
-        selectedAmount: this.state.selectedAmount-1
-      })
+    if(this.state.selectedProduct.quantity > 1){
+      let selectedProduct = Object.assign({}, this.state.selectedProduct);    //creating copy of object
+      selectedProduct.quantity  = selectedProduct.quantity - 1 ;
+      selectProductIndex  = findIndex(this.state.sku_list, {sku_id: this.state.selectedProduct.sku_id})
+      let sku_list = [ ...this.state.sku_list ];
+      sku_list[selectProductIndex].quantity = selectedProduct.quantity ;  //new value
+      this.setState({ sku_list },() => console.log(this.state.sku_list));
+      this.setState({selectedProduct});
     }
   }
   _addToCart() {
     const selectedProduct = this.state.selectedProduct;
-    const selectedAmount = this.state.selectedAmount;
-    SboxProductAction.addToCart({selectedProduct,selectedAmount});
+    SboxProductAction.addToCart({selectedProduct});
   }
 
   //route
@@ -219,7 +233,7 @@ export default class SweetProductDetial extends Component {
                             fontFamily:'FZZhunYuan-M02S',
                             color:'#ff768b',
                           }}>
-                    {this.state.selectedAmount}
+                    {this.state.selectedProduct.quantity}
                   </Text>
               </View>
               <TouchableOpacity
@@ -410,56 +424,64 @@ export default class SweetProductDetial extends Component {
   }
 
   render() {
-
-    // if(this.state.sku_list.length>0){
-      return (
-        <View style={{flex:1}}>
-          <ScrollView style={styles.container}>
-              <SboxProductDetialScrollView
-                page={this.state.sku_image}
-                selectedPage={this.state.selectedPage}
-                onPageChange={this._onPageChange}
-                attr={this.state.sku_list}/>
-
-              <SboxProductDetialDesc  selectedProduct={this.state.selectedProduct}
-                                      productName={this.state.spu_name}/>
-              <SboxProductDetialAttr  attr={this.state.sku_list}
-                                      selectAttr={this.state.selectedProduct}
-                                      changeSelectAttr={this._changeSelectAttr}
-                                      />
-              {this._renderAddAmountBtn()}
-              {this._renderAddCartBtn()}
-              <ScrollableTabView
-                        ref = 'fact'
-                        initialPage = {0}
-                        prerenderingSiblingsNumber = {2}
-                        tabBarUnderlineStyle={{backgroundColor:'#ff768b',
-                                               width:80,
-                                               marginLeft:55,
-                                               height:3,
-
-                                             }}
-                        style={{marginTop:20}}
-                        tabBarActiveTextColor={"#ff768b"}
-                        tabBarTextStyle={{ fontSize: 15} }
-              >
-                <View tabLabel="服务明细">
-                  {this._renderServiceImage()}
-                </View>
-                <View tabLabel="产品详情">
-                  {this._renderProductFacts()}
-                </View>
-                
-                
-             </ScrollableTabView>
-          </ScrollView>
-          {this._renderHeaderImage()}
-          {this._renderGoBackBtn()}
-          <SboxBox goToSboxCart={this._goToSboxCart}/>
-        </View>
-
-
-      );
+      if(!this.state.loading) {
+        return(
+          <View style={{flex: 1,
+            justifyContent: 'center'}}>
+               <ActivityIndicator size="large" color="red" />
+          </View>
+        )
+      } else {
+        return (
+          <View style={{flex:1}}>
+            <ScrollView style={styles.container}>
+                <SboxProductDetialScrollView
+                  page={this.state.sku_image}
+                  selectedPage={this.state.selectedPage}
+                  onPageChange={this._onPageChange}
+                  attr={this.state.sku_list}/>
+  
+                <SboxProductDetialDesc  selectedProduct={this.state.selectedProduct}
+                                        productName={this.state.spu_name}/>
+                <SboxProductDetialAttr  attr={this.state.sku_list}
+                                        selectAttr={this.state.selectedProduct}
+                                        changeSelectAttr={this._changeSelectAttr}
+                                        />
+                {this._renderAddAmountBtn()}
+                {this._renderAddCartBtn()}
+                <ScrollableTabView
+                          ref = 'fact'
+                          initialPage = {0}
+                          prerenderingSiblingsNumber = {2}
+                          tabBarUnderlineStyle={{backgroundColor:'#ff768b',
+                                                 width:80,
+                                                 marginLeft:55,
+                                                 height:3,
+  
+                                               }}
+                          style={{marginTop:20}}
+                          tabBarActiveTextColor={"#ff768b"}
+                          tabBarTextStyle={{ fontSize: 15} }
+                  >
+                  <View tabLabel="服务明细">
+                    {this._renderServiceImage()}
+                  </View>
+                  <View tabLabel="产品详情">
+                    {this._renderProductFacts()}
+                  </View>
+                  
+                  
+               </ScrollableTabView>
+            </ScrollView>
+            {this._renderHeaderImage()}
+            {this._renderGoBackBtn()}
+            <SboxBox goToSboxCart={this._goToSboxCart}/>
+          </View>
+  
+  
+        );
+      }
+      
     // } else {
     //   return(
     //     <View>
