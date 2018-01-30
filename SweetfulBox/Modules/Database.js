@@ -1,4 +1,5 @@
 'use strict';
+import { SBOX_REALM_PATH } from '../Config/API'
 const Realm               = require('realm');
 //=============================
 //              new
@@ -24,7 +25,7 @@ const sbox_cart_scheam = {
 let realm
 export function DatabaseInit() {
   realm = new Realm({
-      path: 'sbox_1.1.0.realm',
+      path: SBOX_REALM_PATH,
       schema: [
                 sbox_cart_scheam
               ],
