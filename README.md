@@ -1,5 +1,8 @@
 # sweetfulBox_1.1
 
+## 2018-01-30 update
+- 新增Data sample [1.4 Order history data sample](#1.4) 历史订单
+
 ## 2018-01-29 update
 - 新增API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
 [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
@@ -18,6 +21,8 @@
   * [1.1 Single product spu data sample](#1.1)
   * [1.2 Home data sample](#1.2)
   * [1.3 Shopping cart data sample](#1.3)
+  * [1.4 Order history data sample](#1.4)
+  
  
 * [2. Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md)
 
@@ -317,4 +322,64 @@
 }
  ```
  
+ <div id="1.4"> <div/>
+ 
+ ## 1.4 order history data sample 
+ ```
+ {
+    "ev_error": 0,
+    "ev_message": "",
+    "ea_order": [
+            {
+                "obid": 325,
+                "created": 1516162657,
+                "delifee": "0.00",
+                "total": "15.42",
+                "created_date": "2018-01-16 23:17",
+                "addr": {
+                    "abid": 200,
+                    "addr": "122228 Pemberton Ave, North York, ON M2M 4L9, Canada",
+                    "name": "Jacob",
+                    "tel": "6477777777",
+                    "unit": "1211"
+                },
+                "tax": 1.77,
+                "prod": [
+                        {
+                            "sku_id": 9,
+                            "sku_fullname": "好巴食经典豆干乐享装", //spu_name + sku_name = sku_fullname
+                            "sku_quantity": 2,
+                            "sku_price": "1.69",
+                            "sku_image": "https://chanmao.us/storage/image/sb_app/image/9_20170828.png"
+                        },
+                        {
+                            "sku_id": 79,
+                            "sku_fullname": "三足旺华派自加热米线 - 红烧牛肉",
+                            "sku_quantity": 1,
+                            "sku_price": "5.99",
+                            "sku_image": "https://chanmao.us/storage/image/sb_app/image/79_20171129.png"
+                        },
+                        {
+                            "sku_id": 89,
+                            "sku_fullname": "北田 能量99棒 蛋黄味",
+                            "sku_quantity": 1,
+                            "sku_price": "2.99",
+                            "sku_image": "https://chanmao.us/storage/image/sb_app/image/89_20171229.png"
+                        },
+                        {
+                            "sku_id": 94,
+                            "sku_fullname": "娃哈哈乳酸菌饮料 原味 100ml*4",
+                            "sku_quantity": 1,
+                            "sku_price": "1.29",
+                            "sku_image": "https://chanmao.us/storage/image/sb_app/image/94_20171229.png"
+                        }
+                    ],
+                    "trace": {
+                        "status": 10,
+                        "time": "2018-01-30 10:01"
+                    }
+              }
+      ]
+}
+ ```
 
