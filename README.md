@@ -3,6 +3,7 @@
 ## 2018-01-30 update
 - 新增Data sample [1.4 Order history data sample](#1.4) 历史订单
 - 新增API [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
+- [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 旧表`sb_order_base`重命名`sbox_order_base`
 
 ## 2018-01-29 update
 - 新增API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
