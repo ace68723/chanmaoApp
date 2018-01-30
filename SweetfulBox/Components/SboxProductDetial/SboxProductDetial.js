@@ -41,6 +41,7 @@ export default class SweetProductDetial extends Component {
         selectedAmount:1,
         sku_image:[],
         sku_list:[],
+        totalQuantity:0,
         loading:false,
     };
 
@@ -124,8 +125,11 @@ export default class SweetProductDetial extends Component {
   }
   _addToCart() {
     const selectedProduct = this.state.selectedProduct;
-    console.log(selectedProduct)
-    SboxProductAction.addToCart({selectedProduct});
+    selectedProduct.spu_name = this.state.spu_name
+    const total = SboxProductAction.addToCart(selectedProduct);
+    this.setState({
+      totalQuantity:total
+    },() => console.log(this.state.totalQuantity))
   }
 
   //route
@@ -481,7 +485,7 @@ export default class SweetProductDetial extends Component {
             </ScrollView>
             {this._renderHeaderImage()}
             {this._renderGoBackBtn()}
-            <SboxBox goToSboxCart={this._goToSboxCart}/>
+            <SboxBox total={this.state.totalQuantity} goToSboxCart={this._goToSboxCart}/>
           </View>
   
   

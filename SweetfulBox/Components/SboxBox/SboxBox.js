@@ -18,9 +18,10 @@ const Realm = require('realm');
 const realm = new Realm({path: "cm_2.4.0.realm"});
 const AnimatedImageBackground  = Animated.createAnimatedComponent(ImageBackground);
 export default class MyComponent extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
+      totalQuantity:props.total,
       currentBox:{boxWeights:0},
       boxLeft: new Animated.Value(width*0.8),
       boxPosition: new Animated.Value(0),
@@ -31,6 +32,14 @@ export default class MyComponent extends Component {
     realm.addListener('change', this._onRealmChange)
     this._onRealmChange();
   }
+  componentWillReceiveProps(nextProps, nextState){
+		if(nextProps.total !== this.state.totalQuantity){
+      console.log('true')
+			return true;
+		}else{
+			return false;
+		}
+  }  
   componentWillUnmount() {
     realm.removeListener('change',this._onRealmChange);
   }
@@ -73,7 +82,7 @@ export default class MyComponent extends Component {
                     }}
                     source={require('./Image/box.png')}>
                 <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
-                   {this.state.currentBox.boxWeights}/99
+                   {this.props.total}
                 </Text>
               </AnimatedImageBackground>
           </TouchableOpacity>

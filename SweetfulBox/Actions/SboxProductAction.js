@@ -74,9 +74,10 @@ export default {
 
                 }
               },
-      addToCart({selectedProduct}){
+      addToCart(selectedProduct){
+        console.log(selectedProduct)
         try {
-          ProductModule.addToCart({selectedProduct});
+          return ProductModule.addToCart(selectedProduct);
         } catch (e) {
 
         }

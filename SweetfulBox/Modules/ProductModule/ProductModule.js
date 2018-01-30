@@ -5,8 +5,9 @@ import {
   sbox_getAllBoxes,
   sbox_updateAllBoxes,
   sbox_getBox,
-  sbox_updateBox,
-} from '../../../App/Modules/Database';
+  sbox_addItemToCart,
+  sbox_getCartQuantity,
+} from '../Database';
 
 export default  {
   async getCategoryList(io_data){
@@ -96,14 +97,6 @@ export default  {
 
   },
   async getHomeData(io_data){
-    // console.log(testData)
-    // const returnData = {
-    //   banner: testData.ea_banner,
-    //   theme: testData.ea_theme,
-    //   ev_error: testData.ev_error,
-    //   ev_message:testData.ev_message
-    // }
-    // return returnData
     try {
       const lo_data ={
         uuid: 1,
@@ -160,11 +153,14 @@ export default  {
 
   },
 
-  addToCart({selectedProduct}) {
-    if(selectedProduct.quantity <= 0) {
+  addToCart(selectedProduct) {
+    if(selectedProduct.sku_quantity <= 0) {
       return
     }  else {
-      sbox_updateBox(selectedProduct);
-       }
+      sbox_addItemToCart(selectedProduct);
+      const totalQuantity = sbox_getCartQuantity() 
+      console.log(totalQuantity)
+      return totalQuantity;
+    }
   }
 }
