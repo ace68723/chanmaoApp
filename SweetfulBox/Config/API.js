@@ -30,5 +30,8 @@ const APIConstants ={
 
     //Google
     GOOGLE_API_KEY: 'AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8',
+
+    //sbox realm path
+    SBOX_REALM_PATH:'sbox_1.1.0.realm',
 }
 module.exports = APIConstants;
