@@ -1,3 +1,6 @@
+## 2018-01-30 update
+-  表sb_order_base 重命名为sbox_order_base
+
 ## 2018-01-29 update
 -  新增表sbox_addr_base 替换旧表sb_addr_base，移除cbid字段
 
@@ -26,4 +29,6 @@
 | sbox_theme_section | theme_id   | section_id     | rank           | status           | updated_at | updated_by |            |            |      |        |            |
 |                    |            |                |                |                  |            |            |            |            |      |        |            |
 | sbox_addr_base     | abid       | uid            | addr           | province         | lat        | lng        | name       | unit       | tel  | status | updated_at |
+|                    |            |                |                |                  |            |            |            |            |      |        |            |
+| sbox_order_base    | obid       | uid            | abid           | pretax           | delifee    | total      | ptype      | created   | status |      | updated_at |
 
