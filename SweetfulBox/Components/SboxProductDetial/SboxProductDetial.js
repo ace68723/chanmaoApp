@@ -70,14 +70,19 @@ export default class SweetProductDetial extends Component {
       productData);
     this.setState(Object.assign({}, newState),() => console.log(this.state));
     this.state.sku_list.forEach(item => {
-      this.setState(Object.assign(item, {quantity: 1}),() => console.log(this.state))
+      this.setState(Object.assign(item, {sku_quantity: 1}),() => console.log(this.state))
     });
     this.setState({
       selectedProduct: this.state.sku_list[0],
       serviceImg: this.state.spu_service_img,
       loading: true
     })
-
+    if(this.state.spu_status === 1) {
+      this.props.navigator.pop({
+        animated: true, // does the pop have transition animation or does it happen immediately (optional)
+        animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+      });
+    }
 }
   _changeSelectAttr({attr}) {
       const selectPage = findIndex(this.state.sku_image,{image_id: attr.sku_image_id})
@@ -96,29 +101,30 @@ export default class SweetProductDetial extends Component {
 
   
   _addAmount(){
-    if(this.state.selectedProduct.quantity<this.state.selectedProduct.amount){
+    if(this.state.selectedProduct.sku_quantity<this.state.selectedProduct.sku_amount){
       let selectedProduct = Object.assign({}, this.state.selectedProduct);    //creating copy of object
-      selectedProduct.quantity  = selectedProduct.quantity + 1 ;
+      selectedProduct.sku_quantity  = selectedProduct.sku_quantity + 1 ;
       selectProductIndex  = findIndex(this.state.sku_list, {sku_id: this.state.selectedProduct.sku_id})
       let sku_list = [ ...this.state.sku_list ];
-      sku_list[selectProductIndex].quantity = selectedProduct.quantity ;  //new value
+      sku_list[selectProductIndex].sku_quantity = selectedProduct.sku_quantity ;  //new value
       this.setState({ sku_list },() => console.log(this.state.sku_list));
       this.setState({selectedProduct});
     }
   }
   _subAmount(){
-    if(this.state.selectedProduct.quantity > 1){
+    if(this.state.selectedProduct.sku_quantity > 1){
       let selectedProduct = Object.assign({}, this.state.selectedProduct);    //creating copy of object
-      selectedProduct.quantity  = selectedProduct.quantity - 1 ;
+      selectedProduct.sku_quantity  = selectedProduct.sku_quantity - 1 ;
       selectProductIndex  = findIndex(this.state.sku_list, {sku_id: this.state.selectedProduct.sku_id})
       let sku_list = [ ...this.state.sku_list ];
-      sku_list[selectProductIndex].quantity = selectedProduct.quantity ;  //new value
+      sku_list[selectProductIndex].sku_quantity = selectedProduct.sku_quantity ;  //new value
       this.setState({ sku_list },() => console.log(this.state.sku_list));
       this.setState({selectedProduct});
     }
   }
   _addToCart() {
     const selectedProduct = this.state.selectedProduct;
+    console.log(selectedProduct)
     SboxProductAction.addToCart({selectedProduct});
   }
 
@@ -176,7 +182,7 @@ export default class SweetProductDetial extends Component {
     )
   }
   _renderAddAmountBtn(){
-    if(this.state.selectedProduct.amount > 0 && this.state.selectedProduct.status !== 1 ) {
+    if(this.state.selectedProduct.sku_amount > 0 && this.state.selectedProduct.spu_status !== 1 ) {
       return(
         <View style={{flexDirection:'row',
                       alignItems:'flex-start',
@@ -233,7 +239,7 @@ export default class SweetProductDetial extends Component {
                             fontFamily:'FZZhunYuan-M02S',
                             color:'#ff768b',
                           }}>
-                    {this.state.selectedProduct.quantity}
+                    {this.state.selectedProduct.sku_quantity}
                   </Text>
               </View>
               <TouchableOpacity
@@ -354,7 +360,7 @@ export default class SweetProductDetial extends Component {
     
   }
   _renderAddCartBtn() {
-    if(this.state.selectedProduct.amount > 0 && this.state.selectedProduct.status !== 1 ) {
+    if(this.state.selectedProduct.sku_amount > 0 && this.state.selectedProduct.status !== 1 ) {
       let backgroundColor = this.state.selectedProduct ? '#ff768b' : '#efefef' ;
       return(
         <TouchableOpacity
