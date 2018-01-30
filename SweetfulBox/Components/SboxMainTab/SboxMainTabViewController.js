@@ -12,6 +12,34 @@ import SboxHistory from '../SboxHistory/SboxHistoryViewController';
 import SboxCheckout from '../SboxCheckout/SboxCheckout';
 import TabBar from './TabBar';
 export default class MyComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      totalQuantity:props.total,
+      currentBox:{boxWeights:0},
+      boxLeft: new Animated.Value(width*0.8),
+      boxPosition: new Animated.Value(0),
+    }
+    this._onRealmChange = this._onRealmChange.bind(this);
+  }
+  componentDidMount() {
+    realm.addListener('change', this._onRealmChange)
+    this._onRealmChange();
+  }
+  componentWillUnmount() {
+    realm.removeListener('change',this._onRealmChange);
+  }
+  _onRealmChange() {
+    this._allBoxes = realm.objects('sbox_box');
+    const lastIndex = this._allBoxes.length;
+    if(!this._allBoxes[lastIndex-1]) return;
+    this.setState({
+      currentBox:this._allBoxes[lastIndex-1]
+    });
+    setTimeout(() => {
+      this._updateBoxPosition();
+    }, 100);
+  }
   render() {
     return (
       <ScrollableTabView
