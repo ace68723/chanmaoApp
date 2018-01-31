@@ -11,36 +11,23 @@ import SboxHome from '../SboxHome/SboxHome';
 import SboxProductAction from '../../Actions/SboxProductAction'
 import SboxHistory from '../SboxHistory/SboxHistoryViewController';
 import SboxCheckout from '../SboxCheckout';
-import { SBOX_REALM_PATH } from '../../Config/API'
-const Realm = require('realm');
-const realm = new Realm({path: SBOX_REALM_PATH});
+import SboxProductStore from '../../Stores/SboxProductStore'
 import TabBar from './TabBar';
 export default class MyComponent extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      totalQuantity:0,
-    }
-    this._onRealmChange = this._onRealmChange.bind(this);
+    this.state = SboxProductStore.getState();
+    this._onChange = this._onChange.bind(this);
   }
   componentDidMount() {
-    // const total = SboxProductAction.getCartQuantity();
-    // this.setState({
-    //   totalQuantity:10
-    // })
-    // realm.addListener('change', this._onRealmChange)
-    // this._onRealmChange();
+    SboxProductStore.addChangeListener(this._onChange);
   }
   componentWillUnmount() {
-    // realm.removeListener('change',this._onRealmChange);
+    SboxProductStore.removeChangeListener(this._onChange);
   }
-  _onRealmChange() {
-        setTimeout(() => {
-          const total = SboxProductAction.getCartQuantity();
-        this.setState({
-          totalQuantity:total
-        },console.log(this.state.totalQuantity))
-    }, 1000);
+  _onChange() {
+    const total = SboxProductStore.getState();
+    this.setState(Object.assign({},total));
   }
   render() {
     return (
