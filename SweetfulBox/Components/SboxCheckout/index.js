@@ -10,6 +10,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ImageBackground
 } from 'react-native';
 import {Container} from 'flux/utils';
 
@@ -17,6 +18,7 @@ import UserInfo from '../SboxAddAddressInfo/UserInfo';
 
 import SboxOrderAction from '../../Actions/SboxOrderAction'
 import SboxOrderStore from '../../Stores/SboxOrderStore';
+import { SBOX_REALM_PATH } from '../../Config/API'
 
 const Realm = require('realm');
 const realm = new Realm({path: "cm_2.4.0.realm"});
@@ -30,7 +32,6 @@ export default class MyComponent extends Component {
     super();
     this.state = {
       productList:[],
-      box:realm.objectForPrimaryKey('sbox_box',1),
       renderCheckoutBtn:false,
       startCheckout:false,
       checkoutSuccessful:false,
@@ -582,11 +583,11 @@ export default class MyComponent extends Component {
                     marginLeft: checkoutButtonMargin,
                     marginRight: checkoutButtonMargin}}>
         <View style={{height: 30, width: 30, justifyContent: 'center'}}>
-          <Image source={require('./Img/box.png')}
+          <ImageBackground source={require('./Img/box.png')}
                  style={{height: 30, width: 30, justifyContent: 'center'}}>
              <Text style={{backgroundColor: 'rgba(0,0,0,0)', textAlign: 'center'}}>{num}
              </Text>
-          </Image>
+          </ImageBackground>
         </View>
         <Text style={{fontSize: 16,
                       textAlign:'center',

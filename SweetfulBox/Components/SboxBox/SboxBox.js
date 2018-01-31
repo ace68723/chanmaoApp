@@ -14,8 +14,11 @@ import {
 import SboxCart from '../SboxCart/SboxCart';
 
 const {height, width} = Dimensions.get('window');
+import { SBOX_REALM_PATH } from '../../Config/API'
+
 const Realm = require('realm');
-const realm = new Realm({path: "cm_2.4.0.realm"});
+const realm = new Realm({path: SBOX_REALM_PATH});
+
 const AnimatedImageBackground  = Animated.createAnimatedComponent(ImageBackground);
 export default class MyComponent extends Component {
   constructor(props){
@@ -26,11 +29,11 @@ export default class MyComponent extends Component {
       boxLeft: new Animated.Value(width*0.8),
       boxPosition: new Animated.Value(0),
     }
-    this._onRealmChange = this._onRealmChange.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
   componentDidMount() {
-    realm.addListener('change', this._onRealmChange)
-    this._onRealmChange();
+    SboxProductStore.addChangeListener(this._onChange);
+    this._onChange();
   }
   componentWillReceiveProps(nextProps, nextState){
 		if(nextProps.total !== this.state.totalQuantity){
@@ -41,19 +44,19 @@ export default class MyComponent extends Component {
 		}
   }  
   componentWillUnmount() {
-    realm.removeListener('change',this._onRealmChange);
+    SboxProductStore.removeChangeListener(this._onChange);  
   }
   _allBoxes = []
-  _onRealmChange() {
-    this._allBoxes = realm.objects('sbox_box');
-    const lastIndex = this._allBoxes.length;
-    if(!this._allBoxes[lastIndex-1]) return;
-    this.setState({
-      currentBox:this._allBoxes[lastIndex-1]
-    });
-    setTimeout(() => {
-      this._updateBoxPosition();
-    }, 100);
+  _onChange() {
+    // this._allBoxes = realm.objects('sbox_box');
+    // const lastIndex = this._allBoxes.length;
+    // if(!this._allBoxes[lastIndex-1]) return;
+    // this.setState({
+    //   currentBox:this._allBoxes[lastIndex-1]
+    // });
+    // setTimeout(() => {
+    //   this._updateBoxPosition();
+    // }, 100);
   }
 
   _renderBox() {

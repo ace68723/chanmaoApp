@@ -8,10 +8,40 @@ import {
 } from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import SboxHome from '../SboxHome/SboxHome';
+import SboxProductAction from '../../Actions/SboxProductAction'
 import SboxHistory from '../SboxHistory/SboxHistoryViewController';
-import SboxCheckout from '../SboxCheckout/SboxCheckout';
+import SboxCheckout from '../SboxCheckout';
+import { SBOX_REALM_PATH } from '../../Config/API'
+const Realm = require('realm');
+const realm = new Realm({path: SBOX_REALM_PATH});
 import TabBar from './TabBar';
 export default class MyComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      totalQuantity:0,
+    }
+    this._onRealmChange = this._onRealmChange.bind(this);
+  }
+  componentDidMount() {
+    const total = SboxProductAction.getCartQuantity();
+    this.setState({
+      totalQuantity:total
+    })
+    realm.addListener('change', this._onRealmChange)
+    this._onRealmChange();
+  }
+  componentWillUnmount() {
+    realm.removeListener('change',this._onRealmChange);
+  }
+  _onRealmChange() {
+        setTimeout(() => {
+          const total = SboxProductAction.getCartQuantity();
+        this.setState({
+          totalQuantity:total
+        },console.log(this.state.totalQuantity))
+    }, 1000);
+  }
   render() {
     return (
       <ScrollableTabView
@@ -30,16 +60,19 @@ export default class MyComponent extends Component {
         <SboxHome tabLabel="首页"
               activeIconImage={require("./Image/home.png")}
               inactiveIconImage={require("./Image/homegrey.png")}
-              navigator={this.props.navigator}/>
+              navigator={this.props.navigator}
+              />
         <SboxHistory tabLabel="订单"
               activeIconImage={require("./Image/order.png")}
               inactiveIconImage={require("./Image/ordergrey.png")}
-              navigator={this.props.navigator}/>
+              navigator={this.props.navigator}
+              />
         <SboxCheckout
               tabLabel="购物车"
               activeIconImage={require("./Image/box.png")}
               inactiveIconImage={require("./Image/box.png")}
-              navigator={this.props.navigator}/>
+              navigator={this.props.navigator}
+              total = {this.state.totalQuantity}/>
       </ScrollableTabView>
 
   );

@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
-  Animated
+  Animated,
+  ImageBackground
 } from 'react-native';
 
 import createReactClass from 'create-react-class';
-
+const AnimatedImageBackground  = Animated.createAnimatedComponent(ImageBackground);
 import Button from './Button';
 export default class TabBar extends Component {
   constructor(props) {
@@ -30,7 +31,8 @@ export default class TabBar extends Component {
   renderTabOption(name, page) {
   }
 
-  renderTab(name, page, isTabActive, onPressHandler,activeIconImage,inactiveIconImage) {
+  renderTab(name, page, isTabActive, onPressHandler,activeIconImage,inactiveIconImage,total) {
+    console.log(total)
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
@@ -45,7 +47,25 @@ export default class TabBar extends Component {
         onPress={() => onPressHandler(page)}
       >
         <View style={[styles.tab, this.props.tabStyle, ]}>
-          <Image source={iconImage} style={{width:25, height:27,marginBottom:3}}/>
+        <AnimatedImageBackground
+                    style={{width:25,
+                      height:27,
+                      marginBottom:3,
+                      backgroundColor:'transparent',
+                       justifyContent: 'center',alignItems: 'center',}}
+                    source={iconImage}>
+                <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
+                {total}
+                </Text>
+              </AnimatedImageBackground>
+          {/* <Image source={iconImage} 
+                 style={{width:25,
+                  height:27,
+                  marginBottom:3,
+                  backgroundColor:'transparent',
+                   justifyContent: 'center',alignItems: 'center',}}>
+             <Text style = {{}}>{totalAmount}</Text>
+          </Image> */}
           <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
             {name}
           </Text>
@@ -76,7 +96,8 @@ export default class TabBar extends Component {
           const renderTab = this.props.renderTab || this.renderTab;
           const activeIconImage = this.props.activeIconImages[page];
           const inactiveIconImage = this.props.inactiveIconImages[page];
-          return renderTab(name, page, isTabActive, this.props.goToPage,activeIconImage,inactiveIconImage);
+          const totalAmount = this.props.total[page];
+          return renderTab(name, page, isTabActive, this.props.goToPage,activeIconImage,inactiveIconImage,totalAmount);
         })}
         <Animated.View
           style={[

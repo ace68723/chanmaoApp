@@ -6,6 +6,7 @@
 - [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 旧表`sb_order_base`重命名`sbox_order_base`
 - [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 新增表`sbox_order_item`
 - [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 新增表`sbox_order_trace` (替代旧表`sb_box_trace`, 属性bbid改为obid)
+- 新增API [3.6 Order History](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/order_history.md)
 
 
 ## 2018-01-29 update
@@ -37,6 +38,7 @@
   * [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
   * [3.4 Add order](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/add_order.md)
   * [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
+  * [3.6 Order History](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/order_history.md)
 
 <div id="1"> <div/>
 
