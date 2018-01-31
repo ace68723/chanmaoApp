@@ -11,32 +11,42 @@ import {
   Animated,
   ImageBackground
 } from 'react-native';
-
+import SboxProductStore from '../../Stores/SboxProductStore';
 import createReactClass from 'create-react-class';
-const AnimatedImageBackground  = Animated.createAnimatedComponent(ImageBackground);
 import Button from './Button';
 export default class TabBar extends Component {
   constructor(props) {
     super(props);
-    this.renderTab   = this.renderTab.bind(this);
+    this.state = {
+      totalQuantity:0
+    }
+    this.renderTab = this.renderTab.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
-  // getDefaultProps() {
-  //   return {
-  //     activeTextColor: 'navy',
-  //     inactiveTextColor: 'black',
-  //     backgroundColor: null,
-  //   };
-  // }
-
+  componentDidMount(){
+      SboxProductStore.addChangeListener(this._onChange);
+      this.setState({
+        totalQuantity: SboxProductStore.getTotalQuantity()
+      })
+  }
+  componentWillUnmount() {
+    SboxProductStore.removeChangeListener(this._onChange);
+  }
+  _onChange() {
+    this.setState({
+      totalQuantity: SboxProductStore.getTotalQuantity()
+    })
+  }
   renderTabOption(name, page) {
   }
 
-  renderTab(name, page, isTabActive, onPressHandler,activeIconImage,inactiveIconImage,total) {
-    console.log(total)
+  renderTab(name, page, isTabActive, onPressHandler,activeIconImage,inactiveIconImage) {
+
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
     const iconImage = isTabActive ? activeIconImage : inactiveIconImage;
+    const iconText = page === 2 ? this.state.totalQuantity : "";
     return (
       <Button
         style={{flex: 1, }}
@@ -47,7 +57,7 @@ export default class TabBar extends Component {
         onPress={() => onPressHandler(page)}
       >
         <View style={[styles.tab, this.props.tabStyle, ]}>
-        <AnimatedImageBackground
+        <ImageBackground
                     style={{width:25,
                       height:27,
                       marginBottom:3,
@@ -55,17 +65,9 @@ export default class TabBar extends Component {
                        justifyContent: 'center',alignItems: 'center',}}
                     source={iconImage}>
                 <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
-                {total}
+                  {iconText}
                 </Text>
-              </AnimatedImageBackground>
-          {/* <Image source={iconImage}
-                 style={{width:25,
-                  height:27,
-                  marginBottom:3,
-                  backgroundColor:'transparent',
-                   justifyContent: 'center',alignItems: 'center',}}>
-             <Text style = {{}}>{totalAmount}</Text>
-          </Image> */}
+          </ImageBackground>
           <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
             {name}
           </Text>
@@ -96,8 +98,7 @@ export default class TabBar extends Component {
           const renderTab = this.props.renderTab || this.renderTab;
           const activeIconImage = this.props.activeIconImages[page];
           const inactiveIconImage = this.props.inactiveIconImages[page];
-          const totalAmount = this.props.total[page];
-          return renderTab(name, page, isTabActive, this.props.goToPage,activeIconImage,inactiveIconImage,totalAmount);
+          return renderTab(name, page, isTabActive, this.props.goToPage,activeIconImage,inactiveIconImage);
         })}
         <Animated.View
           style={[
