@@ -1,5 +1,9 @@
 # sweetfulBox_1.1
 
+## 2018-01-31 update
+- 新增API [3.7 Theme Query](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/theme_query.md) 首页列表下拉时获取数据用
+
+
 ## 2018-01-30 update
 - 新增Data sample [1.4 Order history data sample](#1.4) 历史订单
 - 新增API [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
@@ -39,7 +43,8 @@
   * [3.4 Add order](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/add_order.md)
   * [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
   * [3.6 Order History](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/order_history.md)
-
+  * [3.7 Theme Query](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/theme_query.md) 首页列表下拉时获取数据用
+  
 <div id="1"> <div/>
 
 ## 1. data sample
