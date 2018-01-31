@@ -10,21 +10,22 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import {
-    findIndex,
-} from 'lodash';
+
+import SboxProductAction from '../../Actions/SboxProductAction';
+
 const {height, width} = Dimensions.get('window');
 export default class SboxProductDetialAttr extends Component {
 
-  renderAttrValue(attr, attrIndex) {
+  renderAttrValue(sku, skuIndex) {
             let borderColor;
-            if (this.props.selectAttr.sku_id == attr.sku_id ){
+            if (this.props.selectedProduct.sku_id == sku.sku_id ){
                 borderColor = '#ff768b';
             } else {
                 borderColor = '#efefef';
             }
             return (
-              <TouchableOpacity key={attrIndex} onPress={this.props.changeSelectAttr.bind(null,{attr})}>
+              <TouchableOpacity key={skuIndex}
+                                onPress={SboxProductAction.changeSelectAttr.bind(null,sku)}>
                 <View
                         style={{
                                   backgroundColor:"#ffffff",
@@ -37,15 +38,15 @@ export default class SboxProductDetialAttr extends Component {
                                   paddingBottom:5,
                                 }}>
                       <Text style={{ fontSize: 14, fontFamily:'FZZhunYuan-M02S', }}>
-                        {attr.sku_name}
+                        {sku.sku_name}
                       </Text>
                 </View>
                 </TouchableOpacity>
             )
   }
   render() {
-    const attrValues = this.props.attr.map((attr, attrIndex)=>{
-      return(this.renderAttrValue(attr, attrIndex))
+    const attrValues = this.props.sku_list.map((sku, skuIndex)=>{
+      return(this.renderAttrValue(sku, skuIndex))
     })
     return (
       <View style={{flexDirection:'row',

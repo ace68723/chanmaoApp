@@ -1,6 +1,6 @@
 import ProductAPI from './ProductAPI';
 import {sbox_addAPICache,sbox_getAPICache} from '../../../App/Modules/Database';
-
+import {sbox_getItemById} from '../Database';
 import {
   sbox_getAllBoxes,
   sbox_updateAllBoxes,
@@ -139,8 +139,11 @@ export default  {
         authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxODc4NSIsImV4cGlyZWQiOjE0ODkwODk2MDAsImxhc3Rsb2dpbiI6MTQ4MzA0NzU4OH0.EPjeu-klo-ygKwUvdyVspIWeaHoosCNPdaa1pO4_RsY',
       }
       const singleProductResult = await ProductAPI.getSingleProduct(lo_data);
-      console.log(singleProductResult)
+
       if(singleProductResult.ev_error === 0 ){
+        singleProductResult.eo_spu_base.sku_list.forEach((sku) => {
+          sku.sku_quantity = 1;
+        })
         return singleProductResult.eo_spu_base
       }else{
         const errorMessage = singleProductResult.ev_message;
@@ -154,13 +157,19 @@ export default  {
   },
 
   addToCart(selectedProduct) {
-    if(selectedProduct.sku_quantity <= 0) {
-      return
+    const {sku_quantity, sku_id, sku_amount} = selectedProduct;
+    let db_sku_quantity = 0;
+    if(sbox_getItemById(sku_id)){
+        db_sku_quantity = sbox_getItemById(sku_id).sku_quantity;
+    }
+
+    if(sku_quantity <= 0 ||
+       sku_quantity + db_sku_quantity > sku_amount
+    ) {
+      throw "库存不足"
     }  else {
       sbox_addItemToCart(selectedProduct);
-      const totalQuantity = sbox_getCartQuantity()
-      console.log(totalQuantity)
-      return totalQuantity;
+      return
     }
   }
 }

@@ -7,6 +7,7 @@ class App extends Component {
 
 
 	render() {
+		console.log(this.props.items);
 		return (
 			<FlatList
 				data={this.props.items}
