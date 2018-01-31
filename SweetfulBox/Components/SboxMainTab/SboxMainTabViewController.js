@@ -11,24 +11,8 @@ import SboxHome from '../SboxHome/SboxHome';
 import SboxProductAction from '../../Actions/SboxProductAction'
 import SboxHistory from '../SboxHistory/SboxHistoryViewController';
 import SboxCheckout from '../SboxCheckout';
-import SboxProductStore from '../../Stores/SboxProductStore'
 import TabBar from './TabBar';
 export default class MyComponent extends Component {
-  constructor(props){
-    super(props);
-    this.state = SboxProductStore.getState();
-    this._onChange = this._onChange.bind(this);
-  }
-  componentDidMount() {
-    SboxProductStore.addChangeListener(this._onChange);
-  }
-  componentWillUnmount() {
-    SboxProductStore.removeChangeListener(this._onChange);
-  }
-  _onChange() {
-    const total = SboxProductStore.getState();
-    this.setState(Object.assign({},total));
-  }
   render() {
     return (
       <ScrollableTabView
@@ -58,8 +42,7 @@ export default class MyComponent extends Component {
               tabLabel="购物车"
               activeIconImage={require("./Image/box.png")}
               inactiveIconImage={require("./Image/box.png")}
-              navigator={this.props.navigator}
-              total = {this.state.totalQuantity}/>
+              navigator={this.props.navigator}/>
       </ScrollableTabView>
 
   );
