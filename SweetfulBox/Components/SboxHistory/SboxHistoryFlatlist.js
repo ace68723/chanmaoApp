@@ -19,16 +19,16 @@ class App extends Component {
 					const obid = item.obid;
 					const delifee = item.delifee;
 					const total = item.total;
-					const boxes = item.boxes;
-					const created = item.created;
+					const prod = item.prod;
+					const created_date = item.created_date;
 					return (
 						<SboxHistoryRow
 							key={obid}
 							{...{obid,
                    delifee,
                    total,
-                   boxes,
-                   created,
+                   prod,
+                   created_date,
                    item,
                    goToSboxHistoryOrderDetail:this.props.goToSboxHistoryOrderDetail
                  }}
