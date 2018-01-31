@@ -57,20 +57,21 @@ const historyData = {
 }
 export default  {
   async getInitData() {
-    // return historyData.ea_order
-    try {
-      const {uid,token,version} = GetUserInfo();
-      const lo_data ={
-        authortoken: token,
-      }
-      const res = await SboxHistoryAPI.getDefaultData(lo_data);
-      for (let lo_order of res.ea_order){
-        // lo_order.key = lo_order.obid;
-        lo_order = Object.assign(lo_order, {key:lo_order.obid})
-      }
-      return res.ea_order;
-    } catch (e) {
-      throw e;
-    }
+    console.log("123", historyData.ea_order);
+    return historyData.ea_order;
+    // try {
+    //   const {uid,token,version} = GetUserInfo();
+    //   const lo_data ={
+    //     authortoken: token,
+    //   }
+    //   const res = await SboxHistoryAPI.getDefaultData(lo_data);
+    //   for (let lo_order of res.ea_order){
+    //     // lo_order.key = lo_order.obid;
+    //     lo_order = Object.assign(lo_order, {key:lo_order.obid})
+    //   }
+    //   return res.ea_order;
+    // } catch (e) {
+    //   throw e;
+    // }
   }
 }

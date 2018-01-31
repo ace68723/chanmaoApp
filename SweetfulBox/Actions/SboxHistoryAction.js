@@ -9,6 +9,7 @@ export default {
         // }
 
         const data = await SboxHistoryModule.getInitData();
+        console.log("In action === ", data);
         dispatch({
             actionType: SboxConstants.GET_HISTORY_LIST, data
         });
