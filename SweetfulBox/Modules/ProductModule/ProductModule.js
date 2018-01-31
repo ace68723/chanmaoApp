@@ -158,7 +158,7 @@ export default  {
       return
     }  else {
       sbox_addItemToCart(selectedProduct);
-      const totalQuantity = sbox_getCartQuantity() 
+      const totalQuantity = sbox_getCartQuantity()
       console.log(totalQuantity)
       return totalQuantity;
     }
