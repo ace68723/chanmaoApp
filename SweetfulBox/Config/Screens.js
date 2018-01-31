@@ -4,7 +4,7 @@ import SboxMainTab from '../Components/SboxMainTab/SboxMainTabViewController';
 import SboxAddAddress from '../Components/SboxAddAddress/index';
 import SboxProductDetial from '../Components/SboxProductDetial/';
 import SboxCart from '../Components/SboxCart/SboxCart';
-import SboxCheckout from '../Components/SboxCheckout/SboxCheckout';
+import SboxCheckout from '../Components/SboxCheckout';
 import SboxAddCard from '../Components/SboxAddCard/SboxAddCard';
 import SboxAddressList from '../Components/SboxAddressList/SboxAddressListViewController';
 import SboxAddAddressInfo from '../Components/SboxAddAddressInfo/SboxAddAddressInfo';
@@ -30,4 +30,4 @@ Navigation.registerComponent('SboxCartAlert', () => SboxCartAlert);
 
 
 module.exports = SboxMainTab;
-// module.exports = SboxAddAddress;
+// module.exports = SboxCheckout;

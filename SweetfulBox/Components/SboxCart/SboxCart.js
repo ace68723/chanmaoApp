@@ -9,9 +9,10 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import { SBOX_REALM_PATH } from '../../Config/API'
 
 const Realm = require('realm');
-const realm = new Realm({path: "cm_2.4.0.realm"});
+const realm = new Realm({path: SBOX_REALM_PATH});
 
 
 const {height, width} = Dimensions.get('window');

@@ -57,6 +57,7 @@ export default class HistoryViewController extends Component {
 
   _onChange() {
     const state = Object.assign({},SboxHistoryStore.getState());
+    console.log(state)
     this.setState(state);
   }
   _renderHistoryView() {
