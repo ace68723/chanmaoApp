@@ -10,7 +10,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import SboxHome from '../SboxHome/SboxHome';
 import SboxProductAction from '../../Actions/SboxProductAction'
 import SboxHistory from '../SboxHistory/SboxHistoryViewController';
-import SboxCheckout from '../SboxCheckout/SboxCheckout';
+import SboxCheckout from '../SboxCheckout';
 import { SBOX_REALM_PATH } from '../../Config/API'
 const Realm = require('realm');
 const realm = new Realm({path: SBOX_REALM_PATH});

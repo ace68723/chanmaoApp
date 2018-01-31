@@ -72,6 +72,12 @@ export default class SweetProductDetial extends Component {
     const newState = Object.assign({},
       productData);
     this.setState(Object.assign({}, newState),() => console.log(this.state));
+    if(this.state.spu_status === 1) {
+      this.props.navigator.pop({
+        animated: true, // does the pop have transition animation or does it happen immediately (optional)
+        animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+      });
+    }
     this.state.sku_list.forEach(item => {
       this.setState(Object.assign(item, {sku_quantity: 1}),() => console.log(this.state))
     });
@@ -80,12 +86,7 @@ export default class SweetProductDetial extends Component {
       serviceImg: this.state.spu_service_img,
       loading: true
     })
-    if(this.state.spu_status === 1) {
-      this.props.navigator.pop({
-        animated: true, // does the pop have transition animation or does it happen immediately (optional)
-        animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
-      });
-    }
+
 }
   _changeSelectAttr({attr}) {
       const selectPage = findIndex(this.state.sku_image,{image_id: attr.sku_image_id})
