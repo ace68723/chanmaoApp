@@ -84,13 +84,12 @@ export default class SboxHome extends Component {
     this.props.navigator.push({
       screen: 'SboxProductDetial',
       navigatorStyle: {navBarHidden: true},
-      passProps:{pmid: product.pmid,},
+      passProps:{spu_id: product.spu_id,},
     })
   }
   _backToHome() {
     this.props.handleBackToHome();
   }
-  setPositionStarted = '';
   _setPosition(){
     if (this.setPositionStarted) return
     this.setPositionStarted = true;

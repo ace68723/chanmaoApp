@@ -19,26 +19,11 @@ import SboxOrderStore from '../../Stores/SboxOrderStore';
 const Realm = require('realm');
 const realm = new Realm({path: "cm_2.4.0.realm"});
 const { height, width } = Dimensions.get('window');
-const viewHeight = Dimensions.get('window').height;
-const viewWidth = Dimensions.get('window').width;
-const navigationHeight = viewHeight * (212/2208) - 17;
 export default class MyComponent extends Component {
   constructor() {
     super();
     this.state = {
-      // productList:realm.objects('sbox_cart_product'),
-      productList: [{
-          spu_id:5,
-          sku_id:22,
-          spu_name:"与美懒人大厨四川冒菜",
-          sku_name:"豚骨菌菇(小包装)",
-          sku_status:0,
-          sku_amount:182,
-          sku_original_price:"7.53",
-          sku_price:"5.22",
-          sku_quantity:1,
-          sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png",
-      }],
+      productList:realm.objects('sbox_cart_product'),
       box:realm.objectForPrimaryKey('sbox_box',1),
       renderCheckoutBtn:false,
       startCheckout:false,
@@ -244,11 +229,10 @@ export default class MyComponent extends Component {
     for (var i = 0; i < this.state.productList.length; i++) {
       const key = 'pl'+i;
       const product = this.state.productList[i]
-      const fullname = product.spu_name + product.sku_name;
-      const image = product.sku_image_url;
-      const selectedAmount = product.sku_quantity;
-      const sku_price = product.sku_price;
-      const original_price = product.sku_original_price;
+      const fullname = product.fullname;
+      const image = product.image;
+      const selectedAmount = product.selectedAmount;
+      const price = product.price;
       productList.push(
 
           <View key={key} style={styles.item}>
@@ -258,7 +242,7 @@ export default class MyComponent extends Component {
             <View style={{flex:1,flexDirection:'row',}}>
               <View style={{flex:0.8,paddingRight:10,}}>
                 <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>{fullname}</Text>
-                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>${sku_price} <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S', textDecorationLine: 'line-through'}}> ${original_price}</Text></Text>
+                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>${price}</Text>
               </View>
               <View style={{flex:0.2}}>
                 <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>x{selectedAmount}</Text>
@@ -504,7 +488,7 @@ export default class MyComponent extends Component {
                                 paddingRight:20,
                                 paddingBottom:20,
                                 position:'absolute',
-                                top:-15,
+                                top:0,
                                 left:0,}}
                         onPress={this._goBack}>
         <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
@@ -551,20 +535,9 @@ export default class MyComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.navigation, {height: navigationHeight}]}>
-			    	<View style={styles.back}>
-			    	</View>
-			    	<View style={styles.title}>
-			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>购物箱</Text>
-			    	</View>
-			    	<View style={{flex:1}}>
-            </View>
-			  </View>
-        <View style={styles.separator}>
-  			</View>
         <ScrollView ref={(ref) => {this._scrollViewRef = ref}}
                     style={{flex:1,
-                            marginTop:0,
+                            marginTop:30,
                             marginBottom:60,
                             paddingLeft:15,
                             paddingRight:15,}}>
@@ -584,26 +557,7 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-		marginTop: 17,
   },
-  navigation: {
-    flexDirection:'row'
-  },
-  back: {
-    flex: 1,
-    justifyContent:'center',
-  },
-  title: {
-    flex:1,
-    backgroundColor: 'white',
-    justifyContent:'center',
-    // backgroundColor: "blue",
-  },
-  separator: {
-		height: 1,
-		borderWidth: 0.6,
-		borderColor: "#D5D5D5"
-	},
   item: {
     height: height * (295 / 2208),
     flexDirection: 'row',

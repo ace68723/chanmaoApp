@@ -1,6 +1,7 @@
 import SboxConstants from '../Constants/SboxConstants';
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
-import ProductModule from '../Modules/ProductModule/ProductModule'
+import ProductModule from '../Modules/ProductModule/ProductModule';
+import {sbox_getCartQuantity} from '../Modules/Database';
 export default {
     async getCategoryList(showpm){
 
@@ -63,13 +64,10 @@ export default {
 
               }
             },
-            async getSingleProduct(io_data){
+            async getSingleProduct(spu_id){
+              console.log('action')
                 try{
-                  const lo_data = {
-                    pmid: io_data.pmid
-                  }
-                  const data = await ProductModule.getSingleProduct(lo_data);
-
+                  const data = await ProductModule.getSingleProduct(spu_id);
                   dispatch({
                       actionType: SboxConstants.GET_SINGLE_PRODUCT, data
                   })
@@ -77,12 +75,14 @@ export default {
 
                 }
               },
-      addToCart({selectedProduct,selectedAmount}){
+      addToCart(selectedProduct){
+        console.log(selectedProduct)
         try {
-          ProductModule.addToCart({selectedProduct,selectedAmount});
+          return ProductModule.addToCart(selectedProduct);
         } catch (e) {
-
-        }
-
+          }
+      },
+      getCartQuantity() {
+        return sbox_getCartQuantity()
       }
 }

@@ -1,17 +1,44 @@
 # sweetfulBox_1.1
 
-## 2018-01-26更新
-- spu价格参数 spu_price （skulist中最低的sku_price）
-- sku价格参数 sku_original_price sku_price
-- sku通过 sku_original_price === sku_price 判断sku是否打折 
-- 所有结算价格以sku_price 为准
+## 2018-01-30 update
+- 新增Data sample [1.4 Order history data sample](#1.4) 历史订单
+- 新增API [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
+- [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 旧表`sb_order_base`重命名`sbox_order_base`
+- [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 新增表`sbox_order_item`
+- [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 新增表`sbox_order_trace` (替代旧表`sb_box_trace`, 属性bbid改为obid)
+- 新增API [3.6 Order History](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/order_history.md)
 
-* [1. data sample](#1)
-  * [1.1 single product spu data sample](#1.1)
-  * [1.2 home data sample](#1.2)
-  * [1.3 shopping cart data sample](#1.3)
+
+## 2018-01-29 update
+- 新增API Document [3.1 Home Data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md) [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
+[3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
+-  [Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md) 新增表`sbox_addr_base` 替换旧表`sb_addr_base`，移除`cbid`字段
+- [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md) 和  [1.1 Single product spu data sample](#1.1) 新增字段`spu_service_img`
+-  [3.3 Add order](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/add_order.md)
+
+## 2018-01-26 update
+- spu价格参数 `spu_price` （skulist中最低的sku_price）
+- sku价格参数 `sku_original_price` `sku_price`
+- sku通过 `sku_original_price` === `sku_price` 判断sku是否打折 
+- 所有结算价格以 `sku_price` 为准
+
+## Contents
+* [1. Data sample](#1)
+  * [1.1 Single product spu data sample](#1.1)
+  * [1.2 Home data sample](#1.2)
+  * [1.3 Shopping cart data sample](#1.3)
+  * [1.4 Order history data sample](#1.4)
+  
  
-* [2. database schema ](#2)
+* [2. Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md)
+
+* [3. API Document (v2)](https://github.com/ace68723/sweetfulBox_1.1/tree/master/Document/API_Document)
+  * [3.1 Home data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md)
+  * [3.2 Product base](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/product_base.md)
+  * [3.3 Before checkout](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/before_checkout.md)
+  * [3.4 Add order](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/add_order.md)
+  * [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
+  * [3.6 Order History](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/order_history.md)
 
 <div id="1"> <div/>
 
@@ -27,6 +54,7 @@
   spu_id:5,
   spu_name:"与美懒人大厨四川冒菜",
   spu_status:0, //status = 1, 页面跳回
+  spu_service_img: "https://chanmao.us/storage/image/sb_app/service.png"
   sku_image:[
     {
       image_id:762,
@@ -302,29 +330,64 @@
 }
  ```
  
-<div id="2"> <div/>
+ <div id="1.4"> <div/>
+ 
+ ## 1.4 order history data sample 
+ ```
+ {
+    "ev_error": 0,
+    "ev_message": "",
+    "ea_order": [
+            {
+                "obid": 325,
+                "created": 1516162657,
+                "delifee": "0.00",
+                "total": "15.42",
+                "created_date": "2018-01-16 23:17",
+                "addr": {
+                    "abid": 200,
+                    "addr": "122228 Pemberton Ave, North York, ON M2M 4L9, Canada",
+                    "name": "Jacob",
+                    "tel": "6477777777",
+                    "unit": "1211"
+                },
+                "tax": 1.77,
+                "prod": [
+                        {
+                            "sku_id": 9,
+                            "sku_fullname": "好巴食经典豆干乐享装", //spu_name + sku_name = sku_fullname
+                            "sku_quantity": 2,
+                            "sku_price": "1.69",
+                            "sku_image": "https://chanmao.us/storage/image/sb_app/image/9_20170828.png"
+                        },
+                        {
+                            "sku_id": 79,
+                            "sku_fullname": "三足旺华派自加热米线 - 红烧牛肉",
+                            "sku_quantity": 1,
+                            "sku_price": "5.99",
+                            "sku_image": "https://chanmao.us/storage/image/sb_app/image/79_20171129.png"
+                        },
+                        {
+                            "sku_id": 89,
+                            "sku_fullname": "北田 能量99棒 蛋黄味",
+                            "sku_quantity": 1,
+                            "sku_price": "2.99",
+                            "sku_image": "https://chanmao.us/storage/image/sb_app/image/89_20171229.png"
+                        },
+                        {
+                            "sku_id": 94,
+                            "sku_fullname": "娃哈哈乳酸菌饮料 原味 100ml*4",
+                            "sku_quantity": 1,
+                            "sku_price": "1.29",
+                            "sku_image": "https://chanmao.us/storage/image/sb_app/image/94_20171229.png"
+                        }
+                    ],
+                    "trace": {
+                        "status": 10,
+                        "time": "2018-01-30 10:01"
+                    }
+              }
+      ]
+}
+ ```
 
-##  database schema 
-
-| Table              |            |                |                |                  |            |            |            |            |
-| ------------------ | ---------- | -------------- | -------------- | ---------------- | ---------- | ---------- | ---------- | ---------- |
-| sbox_spu           | spu_id     | name           | image_id       | price            |            | status     | updated_at | updated_by |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_sku_base      | sku_id     | spu_id         | name           | alias            | fullname   | status     | updated_at | updated_by |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_sku_core      | sku_id     | original_price | price          | amount           | threshold  | updated_at | updated_by |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_sku_image     | sku_id     | image_id       | fact_image_id  | updated_at       | updated_by |            |            |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_image         | image_id   | url            |                |                  |            |            |            |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_section       | section_id | name           | icon_id        |                  | status     | updated_at | updated_by |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_section_sku   | section_id | sku_id         | rank           | status           | updated_at | updated_by |            |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_section_spu   | section_id | spu_id         | rank           | status           | updated_at | updated_by |            |            |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_theme         | theme_id   | name           | active_icon_id | inactive_icon_id | rank       | status     | updated_at | updated_by |
-|                    |            |                |                |                  |            |            |            |            |
-| sbox_theme_section | theme_id   | section_id     | rank           | status           | updated_at | updated_by |            |            |
-|                    |            |                |                |                  |            |            |            |            |

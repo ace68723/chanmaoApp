@@ -4,7 +4,7 @@ import SboxMainTab from '../Components/SboxMainTab/SboxMainTabViewController';
 import SboxAddAddress from '../Components/SboxAddAddress/index';
 import SboxProductDetial from '../Components/SboxProductDetial/SboxProductDetial';
 import SboxCart from '../Components/SboxCart/SboxCart';
-import SboxCheckout from '../Components/SboxCheckout/SboxCheckout';
+import SboxCheckout from '../Components/SboxCheckout/index';
 import SboxAddCard from '../Components/SboxAddCard/SboxAddCard';
 import SboxAddressList from '../Components/SboxAddressList/SboxAddressListViewController';
 import SboxAddAddressInfo from '../Components/SboxAddAddressInfo/SboxAddAddressInfo';
@@ -13,6 +13,7 @@ import SboxHistoryOrderDetail from '../Components/SboxHistoryOrderDetail/SboxHis
 import SboxCategory from '../Components/SboxCategory/SboxCategoryViewController';
 import SboxHomeAlert from '../Components/SboxHomeAlert/SboxHomeAlert';
 import SboxAddressAlert from '../Components/SboxHomeAlert/SboxAddressAlert';
+import SboxCartAlert from '../Components/SboxHomeAlert/SboxCartAlert';
 
 Navigation.registerComponent('SboxProductDetial', () => SboxProductDetial);
 Navigation.registerComponent('SboxCart', () => SboxCart);
@@ -25,6 +26,8 @@ Navigation.registerComponent('SboxHistoryOrderDetail', () => SboxHistoryOrderDet
 Navigation.registerComponent('SboxCategory', () => SboxCategory);
 Navigation.registerComponent('SboxHomeAlert', () => SboxHomeAlert);
 Navigation.registerComponent('SboxAddressAlert', () => SboxAddressAlert);
+Navigation.registerComponent('SboxCartAlert', () => SboxCartAlert);
+
 
 module.exports = SboxMainTab;
 // module.exports = SboxAddAddress;

@@ -188,6 +188,7 @@ export default class MyComponent extends Component {
       const section = this.state.section_list[index];
        sectionList.push(
          <SboxProductTabSectionHeaderCell
+           key = {index}
            icon={section.section_icon}
            name={section.section_name}
            currentIndex={this.state.headerIndex}
@@ -234,7 +235,7 @@ export default class MyComponent extends Component {
             getItemLayout={(data, index) => (
                  {length: 250, offset: 250 * index, index}
                )}
-           stickyHeaderIndices={this.state.stickyHeaderIndices}
+           stickyHeaderIndices={[0]}
            numColumns={3}
            columnWrapperStyle={{ marginTop: 10,alignSelf:'center' }}
         />

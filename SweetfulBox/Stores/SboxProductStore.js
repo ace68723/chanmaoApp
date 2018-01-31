@@ -67,7 +67,8 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
           break;
         case SboxConstants.GET_SINGLE_PRODUCT:
           SboxProductStore.updateSingleProduct(action.data)
-          SboxProductStore.emitChange()
+          SboxProductStore.emitChange();
+          console.log(action.data)
         default:
          // do nothing
 		  }
