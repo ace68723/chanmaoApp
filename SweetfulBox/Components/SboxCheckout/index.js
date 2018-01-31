@@ -39,7 +39,7 @@ export default class MyComponent extends Component {
     // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
     // this._setUserInfo = this._setUserInfo.bind(this);
     // this._startCheckout = this._startCheckout.bind(this);
-    // this._goBack = this._goBack.bind(this);
+    this._goBack = this._goBack.bind(this);
     // this._goToAddCard = this._goToAddCard.bind(this);
     // this._doCheckout = this._doCheckout.bind(this);
     // this._handleLoginSuccessful = this._handleLoginSuccessful.bind(this);
@@ -64,12 +64,6 @@ export default class MyComponent extends Component {
     SboxOrderStore.removeChangeListener(this._onChange);
     // realm.removeListener('change',this._onRealmChange);
   }
-  // _onRealmChange() {
-  //   this.setState({
-  //     productList:realm.objects('sbox_cart_product'),
-  //     box:realm.objectForPrimaryKey('sbox_box',1),
-  //   })
-  // }
   _onChange() {
       console.log("onchange");
       const state = Object.assign({},SboxOrderStore.getState())
@@ -120,13 +114,13 @@ export default class MyComponent extends Component {
   // }
 
 
-  // _goBack() {
-  //   console.log('here',this.props)
-  //   this.props.navigator.pop({
-  //     animated: true,
-  //     animationType: 'slide-horizontal',
-  //   });
-  // }
+  _goBack() {
+    console.log('here',this.props)
+    this.props.navigator.pop({
+      animated: true,
+      animationType: 'slide-horizontal',
+    });
+  }
   // _setUserInfo(userInfo){
   //   this.setState({
   //     userInfo:userInfo
@@ -185,7 +179,6 @@ export default class MyComponent extends Component {
     SboxOrderAction.getProductList();
   }
   _checkProductStatus() {
-    SboxOrderAction.checkProductStatus(this.state.productList);
   }
 
   // _startCheckout() {
@@ -255,53 +248,83 @@ export default class MyComponent extends Component {
       const sku_price = product.sku_price;
       const original_price = product.sku_original_price;
       // <Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}>${sku_price} <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S', textDecorationLine: 'line-through'}}> ${original_price}</Text></Text>
-      productList.push(
+      if (product.sku_quantity < product.sku_amount) {
+        var item_row = (
+            <View key={key} style={styles.item}>
+              <View style={styles.itemImage}>
+                <Image style={styles.image} source={{uri:image}}/>
+              </View>
+              <View style={{flex:1,flexDirection:'row',}}>
+                <View style={{flex:0.8,paddingRight:10,}}>
+                  <Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}>{fullname}</Text>
+                  <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginTop: 10}}>
+                    <TouchableOpacity
+                      style={{justifyContent: 'center'}}>
+                      <Text style={{borderWidth: 0.8,
+                                    width: 20,
+                                    textAlign: 'center'}}>-</Text>
+                    </TouchableOpacity>
+                    <View style={{justifyContent: 'center', marginLeft: -1}}>
+                      <Text style={{borderWidth: 0.8,
+                                    width: 50,
+                                    textAlign: 'center',
+                                    color: '#ff7685'}}>
+                        {selectedAmount}
+                      </Text>
+                    </View>
+                    <TouchableOpacity
+                      style={{justifyContent: 'center', marginLeft: -1}}>
+                      <Text style={{borderWidth: 0.8,
+                                    width: 20,
+                                    textAlign: 'center'}}>+</Text>
+                    </TouchableOpacity>
 
-          <View key={key} style={styles.item}>
-            <View style={styles.itemImage}>
-              <Image style={styles.image} source={{uri:image}}/>
-            </View>
-            <View style={{flex:1,flexDirection:'row',}}>
-              <View style={{flex:0.8,paddingRight:10,}}>
-                <Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}>{fullname}</Text>
-                <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginTop: 10}}>
-                  <TouchableOpacity
-                    style={{justifyContent: 'center'}}>
-                    <Text style={{borderWidth: 0.8,
-                                  width: 20,
-                                  textAlign: 'center'}}>-</Text>
-                  </TouchableOpacity>
-                  <View style={{justifyContent: 'center', marginLeft: -1}}>
-                    <Text style={{borderWidth: 0.8,
-                                  width: 50,
-                                  textAlign: 'center',
-                                  color: '#ff7685'}}>
-                      {selectedAmount}
-                    </Text>
                   </View>
+                </View>
+                <View style={{flex:0.2, justifyContent: 'space-between', flexDirection: 'column'}}>
+                  <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}>${sku_price}</Text>
                   <TouchableOpacity
-                    style={{justifyContent: 'center', marginLeft: -1}}>
-                    <Text style={{borderWidth: 0.8,
-                                  width: 20,
-                                  textAlign: 'center'}}>+</Text>
+                    style={{alignItems: 'flex-end'}}
+                    onPress={this._deleteItemAlert.bind(null,product,fullname + ' x' + selectedAmount)}>
+                    <Image  style={{width:18.72,height:20}}
+                            source={require('./Img/icon-delete.png')}/>
                   </TouchableOpacity>
-
                 </View>
               </View>
-              <View style={{flex:0.2, justifyContent: 'space-between', flexDirection: 'column'}}>
-                <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}>${sku_price}</Text>
-                <TouchableOpacity
-                  style={{alignItems: 'flex-end'}}
-                  onPress={this._deleteItemAlert.bind(null,product,fullname + ' x' + selectedAmount)}>
-                  <Image  style={{width:18.72,height:20}}
-                          source={require('./Img/icon-delete.png')}/>
-                </TouchableOpacity>
+            </View>
+        )
+      }
+      else {
+        var item_row = (
+            <View key={key} style={styles.item}>
+              <View style={styles.itemImage}>
+                <Image style={styles.image} source={{uri:image}}/>
+              </View>
+              <View style={{flex:1,flexDirection:'row',}}>
+                <View style={{flex:0.8,paddingRight:10,}}>
+                  <Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}>{fullname}</Text>
+                  <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginTop: 10}}>
+                    <Text style={{backgroundColor: "#ff7685",
+                                  width: 90,
+                                  textAlign: "center",
+                                  color: "white"}}>Sold Out</Text>
+
+                  </View>
+                </View>
+                <View style={{flex:0.2, justifyContent: 'space-between', flexDirection: 'column'}}>
+                  <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}>${sku_price}</Text>
+                  <TouchableOpacity
+                    style={{alignItems: 'flex-end'}}
+                    onPress={this._deleteItemAlert.bind(null,product,fullname + ' x' + selectedAmount)}>
+                    <Image  style={{width:18.72,height:20}}
+                            source={require('./Img/icon-delete.png')}/>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-
-
-      )
+        );
+      }
+      productList.push(item_row);
     }
     return(productList)
   }
@@ -390,6 +413,7 @@ export default class MyComponent extends Component {
   //     </View>
   //   )
   // }
+
   // _renderBtn(){
   //   if(this.state.showCheckoutLoading){
   //     return this._renderLoadingBtn();
@@ -567,7 +591,7 @@ export default class MyComponent extends Component {
         <Text style={{fontSize: 16,
                       textAlign:'center',
                       color: '#ff7685'}}>Before Tax:
-          <Text style={{fontSize: 24,}}> ${total}</Text>
+          <Text style={{fontSize: 24,}}> ${total.toFixed(2)}</Text>
         </Text>
         <TouchableOpacity
           style={{paddingLeft: 36,

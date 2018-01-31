@@ -34,7 +34,7 @@ export function DatabaseInit() {
   console.log(realm.path)
 }
 export function sbox_getAllItemsFromCart() {
-  return realm_sbox.objects('sbox_cart');
+  return realm.objects('sbox_cart');
 }
 export function sbox_addItemToCart(selectedProduct) {
   const item = realm.objectForPrimaryKey('sbox_cart',selectedProduct.sku_id);
