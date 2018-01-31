@@ -24,15 +24,15 @@ export default class MyComponent extends Component {
     this._onRealmChange = this._onRealmChange.bind(this);
   }
   componentDidMount() {
-    const total = SboxProductAction.getCartQuantity();
-    this.setState({
-      totalQuantity:total
-    })
-    realm.addListener('change', this._onRealmChange)
-    this._onRealmChange();
+    // const total = SboxProductAction.getCartQuantity();
+    // this.setState({
+    //   totalQuantity:10
+    // })
+    // realm.addListener('change', this._onRealmChange)
+    // this._onRealmChange();
   }
   componentWillUnmount() {
-    realm.removeListener('change',this._onRealmChange);
+    // realm.removeListener('change',this._onRealmChange);
   }
   _onRealmChange() {
         setTimeout(() => {

@@ -58,7 +58,7 @@ export default class TabBar extends Component {
                 {total}
                 </Text>
               </AnimatedImageBackground>
-          {/* <Image source={iconImage} 
+          {/* <Image source={iconImage}
                  style={{width:25,
                   height:27,
                   marginBottom:3,

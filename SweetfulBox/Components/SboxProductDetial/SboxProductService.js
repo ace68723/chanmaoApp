@@ -24,6 +24,12 @@ export default class SboxProductService extends Component {
        this.setState(Object.assign({}, {imgWidth: screenWidth, imgHeight: imageHeight}));
     })
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.serviceImg !== nextProps.serviceImg || this.state !== nextState) {
+      return true;
+    }
+    return false;
+  }
   render() {
     return (
         <Image
