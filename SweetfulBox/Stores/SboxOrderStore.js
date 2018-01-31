@@ -90,33 +90,33 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     this.state.showCheckoutLoading = false;
   },
   getProductList(data) {
-    this.state.productList =
-    [
-      {
-        spu_id:5,
-        sku_id:22,
-        spu_name:"与美懒人大厨四川冒菜",
-        sku_name:"豚骨菌菇(小包装)",
-        sku_status:0,
-        sku_amount:182,
-        sku_original_price:"7.53",
-        sku_price:"5.22",
-        sku_quantity:2,
-        sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
-      },
-      {
-          spu_id:5,
-          sku_id:22,
-          spu_name:"与美懒人大厨四川",
-          sku_name:"豚骨菌菇(大包装)",
-          sku_status:0,
-          sku_amount:182,
-          sku_original_price:"7.53",
-          sku_price:"15.22",
-          sku_quantity:1,
-          sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
-      }
-    ];
+    this.state.productList = data;
+    // [
+    //   {
+    //     spu_id:5,
+    //     sku_id:22,
+    //     spu_name:"与美懒人大厨四川冒菜",
+    //     sku_name:"豚骨菌菇(小包装)",
+    //     sku_status:0,
+    //     sku_amount:182,
+    //     sku_original_price:"7.53",
+    //     sku_price:"5.22",
+    //     sku_quantity:2,
+    //     sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
+    //   },
+    //   {
+    //       spu_id:5,
+    //       sku_id:22,
+    //       spu_name:"与美懒人大厨四川",
+    //       sku_name:"豚骨菌菇(大包装)",
+    //       sku_status:0,
+    //       sku_amount:182,
+    //       sku_original_price:"7.53",
+    //       sku_price:"15.22",
+    //       sku_quantity:1,
+    //       sku_image_url:"https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
+    //   }
+    // ];
   },
   checkProductStatus() {
 

@@ -15,6 +15,7 @@ import SboxCart from '../SboxCart/SboxCart';
 
 const {height, width} = Dimensions.get('window');
 import { SBOX_REALM_PATH } from '../../Config/API'
+
 const Realm = require('realm');
 const realm = new Realm({path: SBOX_REALM_PATH});
 
@@ -28,11 +29,11 @@ export default class MyComponent extends Component {
       boxLeft: new Animated.Value(width*0.8),
       boxPosition: new Animated.Value(0),
     }
-    this._onRealmChange = this._onRealmChange.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
   componentDidMount() {
     SboxProductStore.addChangeListener(this._onChange);
-    this._onRealmChange();
+    this._onChange();
   }
   componentWillReceiveProps(nextProps, nextState){
 		if(nextProps.total !== this.state.totalQuantity){
