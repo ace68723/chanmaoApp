@@ -33,7 +33,7 @@
 | ---------- | ------ | ------ | ---------- |
 | ev_error   | number | 请求是否成功 | 0为成功, 1为错误 |
 | ev_message | string | 报错信息   | 空          |
-| ea_prod    | array  | 产品列表   |            |
+| ea_prod    | array  | 产品列表   |  参见        API [homeData](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md)的返回prod_list |
 
 
 返回结果(默认JSON):
@@ -42,24 +42,7 @@
   ev_error: 0,
   ev_message: "",
   ea_prod: [
-    {
-      sku_id: number,
-      fullname: string,
-      description: string,
-      weights: number,
-      price: string,
-      banner: string,
-      related: [
-        {
-          pmid: number,
-          fullname: string,
-          weights: number,
-          price: string,
-          description: string,
-          image: string
-        }
-      ]
-    }
+    {}
   ]
 }
 ```
