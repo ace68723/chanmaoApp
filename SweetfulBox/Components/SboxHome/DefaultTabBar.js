@@ -67,7 +67,7 @@ class DefaultTabBar extends Component {
                 <Image source={{uri:icon}}
                        style={{height:25,}}
                        resizeMode={'contain'}/>
-                <Text style={[{color: textColor, fontWeight, fontFamily:'FZZhunYuan-M02S',marginTop:5,}, textStyle, ]}>
+                     <Text style={[{color: textColor, fontWeight, fontFamily:'FZZhunYuan-M02S',marginTop:8, textAlign: 'center'}, textStyle, ]}>
                   {name}
                 </Text>
               </View>
@@ -161,9 +161,12 @@ export default DefaultTabBar;
 const styles = StyleSheet.create({
   tab: {
     flex: 1,
+    width: deviceWidth / 3 - 35,
     justifyContent: 'center',
+
   },
   tabs: {
+    marginTop: 20,
     height: 40,
     flexDirection: 'row',
   },
