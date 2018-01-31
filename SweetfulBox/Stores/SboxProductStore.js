@@ -3,72 +3,136 @@ import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import {EventEmitter} from 'events';
 const CHANGE_EVENT = 'change4422';
 
+import { SBOX_REALM_PATH } from '../Config/API';
+const Realm               = require('realm');
+let realm = new Realm({ path: SBOX_REALM_PATH });
+// const _cart = realm.objects('sbox_cart');
+
+import {
+    findIndex,
+} from 'lodash';
+
+
 const SboxProductStore = Object.assign({},EventEmitter.prototype,{
   state:{
-    categoryList:[],
-    searchCategoryList:{},
-    themeList:[],
-    homeData:{},
-    singleProduct:{},
+    selectedPage: '',
+    selectedProduct:{},
+    sku_image:[],
+    sku_list:[],
+    sku_fact:[],
+    spu_name:"",
+    totalQuantity:0,
+    loading:true,
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
 	},
 	addChangeListener(callback){
 			this.on(CHANGE_EVENT, callback)
+      this.getTotalQuantity();
 	},
 	removeChangeListener(callback){
 			this.removeListener(CHANGE_EVENT, callback)
 	},
-  updateCategoryListState(la_categoryList){
-      
-      this.state.categoryList = la_categoryList;
-  },
-  updateSearchCategoryState(la_searchCategoryList){
 
-      this.state.searchCategoryList = la_searchCategoryList;
-  },
-  updateThemeList(la_themeList){
-
-    this.state.themeList = la_themeList;
-  },
-  updateHomedata(data){
-
-    this.state.homeData = data;
-  },
   updateSingleProduct(data){
+    const { sku_fact,
+            sku_image,
+            sku_list,
+            spu_id,
+            spu_name,
+            spu_service_img,
+            spu_status } = data;
 
-    this.state.singleProduct = data;
+    const loading         = false;
+    const serviceImg      = data.spu_service_img;
+    const selectedProduct = data.sku_list[0];
+
+    this.state = Object.assign(this.state,{  sku_fact,
+                                             sku_image,
+                                             sku_list,
+                                             spu_id,
+                                             spu_name,
+                                             spu_service_img,
+                                             spu_status,
+                                             loading,
+                                             serviceImg,
+                                             selectedProduct
+                                           });
+
   },
-  getSboxProductDetialState(){
-    const state = this.state.singleProduct
-    return state;
+  changeSelectAttr(selectedProduct){
+    const selectedPage = findIndex(this.state.sku_image,{image_id: selectedProduct.sku_image_id})
+    this.state =  Object.assign(this.state,{selectedProduct,selectedPage})
+  },
+  addQuantity(){
+    if(this.state.selectedProduct.sku_quantity>=this.state.selectedProduct.sku_amount) return;
+    const selectProductIndex  = findIndex(this.state.sku_list, {sku_id: this.state.selectedProduct.sku_id})
+    this.state.sku_list[selectProductIndex].sku_quantity += 1;
+    this.state.selectedProduct.sku_quantity = this.state.sku_list[selectProductIndex].sku_quantity;
+  },
+  subQuantity(){
+    if(this.state.selectedProduct.sku_quantity <= 1) return;
+    const selectProductIndex  = findIndex(this.state.sku_list, {sku_id: this.state.selectedProduct.sku_id})
+    this.state.sku_list[selectProductIndex].sku_quantity -= 1;
+    this.state.selectedProduct.sku_quantity = this.state.sku_list[selectProductIndex].sku_quantity;
+  },
+  changeProductImage(selectedPage){
+    const selectIndex = findIndex(this.state.sku_list,{sku_image_id: this.state.sku_image[selectedPage].image_id});
+    const selectedProduct = this.state.sku_list[selectIndex];
+    this.state =  Object.assign(this.state,{selectedProduct,selectedPage})
+  },
+  getTotalQuantity() {
+    this._cart = realm.objects('sbox_cart');
+    let totalQuantity = 0;
+    this._cart.forEach((item) => {
+      totalQuantity += item.sku_quantity
+    });
+    this.state.totalQuantity = totalQuantity;
+  },
+  initState(){
+    this.state = Object.assign({},{
+      selectedPage: '',
+      selectedProduct:{},
+      selectedAmount:1,
+      sku_image:[],
+      sku_list:[],
+      sku_fact:[],
+      spu_name:"",
+      totalQuantity:0,
+      loading:true,
+    });
   },
   getState(){
     return this.state;
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
-				case SboxConstants.GET_CATEGORY_LIST:
-          SboxProductStore.updateCategoryListState(action.data.categoryList)
-          SboxProductStore.emitChange()
-					break;
-        case SboxConstants.SEARCH_CATEGORY_LIST:
-          SboxProductStore.updateSearchCategoryState(action.data.searchCategoryList)
-          SboxProductStore.emitChange()
-          break;
-        case SboxConstants.SEARCH_THEME_LIST:
-          SboxProductStore.updateThemeList(action.data.themeList)
-          SboxProductStore.emitChange()
-          break;
-        case SboxConstants.GET_HOME_DATA:
-          SboxProductStore.updateHomedata(action.data)
-          SboxProductStore.emitChange()
-          break;
         case SboxConstants.GET_SINGLE_PRODUCT:
           SboxProductStore.updateSingleProduct(action.data)
           SboxProductStore.emitChange();
-          console.log(action.data)
+          break
+        case SboxConstants.CHANGE_SELECT_ATTR:
+          SboxProductStore.changeSelectAttr(action.selectedProduct)
+          SboxProductStore.emitChange();
+          break
+        case SboxConstants.ADD_QUANTITY:
+          SboxProductStore.addQuantity()
+          SboxProductStore.emitChange();
+          break
+        case SboxConstants.SUB_QUANTITY:
+          SboxProductStore.subQuantity()
+          SboxProductStore.emitChange();
+          break
+        case SboxConstants.CHANG_PRODUCT_IMAGE:
+          SboxProductStore.changeProductImage(action.page)
+          SboxProductStore.emitChange();
+          break
+        case SboxConstants.UPDATE_CART_TOTAL_QUANTITY:
+          SboxProductStore.getTotalQuantity()
+          SboxProductStore.emitChange();
+          break
+
         default:
          // do nothing
 		  }

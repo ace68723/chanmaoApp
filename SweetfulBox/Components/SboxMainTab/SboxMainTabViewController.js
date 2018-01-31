@@ -26,7 +26,7 @@ export default class MyComponent extends Component {
   componentDidMount() {
     // const total = SboxProductAction.getCartQuantity();
     // this.setState({
-    //   totalQuantity:total
+    //   totalQuantity:10
     // })
     // realm.addListener('change', this._onRealmChange)
     // this._onRealmChange();
