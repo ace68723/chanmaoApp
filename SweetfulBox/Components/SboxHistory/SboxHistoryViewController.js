@@ -6,6 +6,7 @@ import {
   Dimensions,
 	ListView,
 	StyleSheet,
+	Text,
   View,
 } from 'react-native';
 
@@ -17,6 +18,7 @@ const { height, width } = Dimensions.get('window');
 
 export default class HistoryViewController extends Component {
   constructor() {
+		console.log("starttttt");
     super();
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = Object.assign({},SboxHistoryStore.getState(),{
@@ -29,6 +31,7 @@ export default class HistoryViewController extends Component {
     this._goToSboxHistoryOrderDetail = this._goToSboxHistoryOrderDetail.bind(this);
   }
 	componentDidMount() {
+		console.log("didmount");
     SboxHistoryStore.addChangeListener(this._onChange);
 		SboxHistoryAction.init();
 	}

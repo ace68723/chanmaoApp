@@ -30,4 +30,4 @@ Navigation.registerComponent('SboxCartAlert', () => SboxCartAlert);
 
 
 module.exports = SboxMainTab;
-// module.exports = SboxCheckout;
+// module.exports = SboxHistory;
