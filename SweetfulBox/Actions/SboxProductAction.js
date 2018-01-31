@@ -1,88 +1,82 @@
 import SboxConstants from '../Constants/SboxConstants';
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import ProductModule from '../Modules/ProductModule/ProductModule';
-import {sbox_getCartQuantity} from '../Modules/Database';
+import {sbox_getCartQuantity,sbox_cartQuantityListener} from '../Modules/Database';
 export default {
-    async getCategoryList(showpm){
-
+    async getSingleProduct(spu_id){
         try{
-          const io_data = {
-            showpm:showpm
-          }
-          const data = await ProductModule.getCategoryList(io_data);
-
+          const data = await ProductModule.getSingleProduct(spu_id);
           dispatch({
-              actionType: SboxConstants.GET_CATEGORY_LIST, data
+              actionType: SboxConstants.GET_SINGLE_PRODUCT, data
           })
         }catch(error){
 
         }
       },
-      async searchCategoryList(io_data){
-          try{
-            const io_data = {
-              number:1,
-              lastid:1,
-              cmid:1,
-            }
-            const data = await ProductModule.searchCategoryList(io_data);
-
-            dispatch({
-                actionType: SboxConstants.SEARCH_CATEGORY_LIST, data
-            })
-          }catch(error){
-
-          }
-        },
-        async searchThemeList(io_data){
-            try{
-              const io_data = {
-                number:2,
-                lastid:0,
-                tmid:2,
-              }
-              const data = await ProductModule.searchThemeList(io_data);
-
-              dispatch({
-                  actionType: SboxConstants.SEARCH_THEME_LIST, data
-              })
-            }catch(error){
-
-            }
-          },
-          async getHomeData(io_data){
-              try{
-                const io_data = {
-
-                }
-                const data = await ProductModule.getHomeData(io_data);
-
-                dispatch({
-                    actionType: SboxConstants.GET_HOME_DATA, data
-                })
-              }catch(error){
-
-              }
-            },
-            async getSingleProduct(spu_id){
-              console.log('action')
-                try{
-                  const data = await ProductModule.getSingleProduct(spu_id);
-                  dispatch({
-                      actionType: SboxConstants.GET_SINGLE_PRODUCT, data
-                  })
-                }catch(error){
-
-                }
-              },
-      addToCart(selectedProduct){
-        console.log(selectedProduct)
+    addToCart(selectedProduct,showLightBox,dismissLightBox){
         try {
-          return ProductModule.addToCart(selectedProduct);
-        } catch (e) {
-          }
+          ProductModule.addToCart(selectedProduct);
+
+          showLightBox({
+            screen: "SboxCartAlert",
+            passProps: {
+              message:`成功添加入购物车`}, // simple serializable object that will pass as props to the lightbox (optional)
+            adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+           });
+           setTimeout(() => {
+            dismissLightBox();
+          }, 1500);
+
+          dispatch({
+              actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
+          })
+        } catch (errorMessage) {
+          console.log(errorMessage)
+
+          showLightBox({
+            screen: "SboxCartAlert",
+            passProps: {
+              message:errorMessage}, // simple serializable object that will pass as props to the lightbox (optional)
+            adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+           });
+           setTimeout(() => {
+            dismissLightBox();
+          }, 1500);
+
+        }
       },
-      getCartQuantity() {
-        return sbox_getCartQuantity()
+    changeSelectAttr(selectedProduct){
+      try{
+        dispatch({
+            actionType: SboxConstants.CHANGE_SELECT_ATTR, selectedProduct
+        })
+      }catch(error){
+
       }
+    },
+    addQuantity(){
+      try{
+        dispatch({
+            actionType: SboxConstants.ADD_QUANTITY
+        })
+      }catch(error){
+
+      }
+    },
+    subQuantity(){
+      try{
+        dispatch({
+            actionType: SboxConstants.SUB_QUANTITY
+        })
+      }catch(error){
+      }
+    },
+    changeProductImage(page) {
+      try{
+        dispatch({
+            actionType: SboxConstants.CHANG_PRODUCT_IMAGE,page
+        })
+      }catch(error){
+      }
+    }
 }

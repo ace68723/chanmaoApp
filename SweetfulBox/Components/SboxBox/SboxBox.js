@@ -34,12 +34,11 @@ export default class MyComponent extends Component {
   }
   componentWillReceiveProps(nextProps, nextState){
 		if(nextProps.total !== this.state.totalQuantity){
-      console.log('true')
 			return true;
 		}else{
 			return false;
 		}
-  }  
+  }
   componentWillUnmount() {
     realm.removeListener('change',this._onRealmChange);
   }
@@ -57,6 +56,7 @@ export default class MyComponent extends Component {
   }
 
   _renderBox() {
+    console.log(this.props.total)
       return(
         <View style={{
                   height:20,

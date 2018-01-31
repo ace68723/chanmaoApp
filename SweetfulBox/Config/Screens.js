@@ -2,7 +2,7 @@ import { Navigation } from 'react-native-navigation';
 import SboxHome from '../Components/SboxHome/SboxHome';
 import SboxMainTab from '../Components/SboxMainTab/SboxMainTabViewController';
 import SboxAddAddress from '../Components/SboxAddAddress/index';
-import SboxProductDetial from '../Components/SboxProductDetial/SboxProductDetial';
+import SboxProductDetial from '../Components/SboxProductDetial/';
 import SboxCart from '../Components/SboxCart/SboxCart';
 import SboxCheckout from '../Components/SboxCheckout/SboxCheckout';
 import SboxAddCard from '../Components/SboxAddCard/SboxAddCard';

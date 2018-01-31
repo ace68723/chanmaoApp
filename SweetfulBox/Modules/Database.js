@@ -81,3 +81,6 @@ export function sbox_getCartQuantity() {
   })
   return totalQuantity;
 }
+export function sbox_getItemById(id) {
+    return realm.objectForPrimaryKey('sbox_cart',id);
+}
