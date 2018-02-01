@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: height * (242 / 2208),
-    width: width * (100 / 1242),
+    width: height * (242 / 2208) * 0.72,
     resizeMode: 'contain',
   },
   itemName: {
@@ -94,32 +94,34 @@ const styles = StyleSheet.create({
 export default class SboxHistoryOrderDetailOrderView extends Component {
   constructor(props) {
     super(props);
+    // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
   }
 
   _renderOrderList() {
     let orderList = [];
-    if (!this.props.orderDetail.boxes){
+    if (!this.props.orderDetail.prod){
       return orderList;
     }
-    for (var i = 0; i < this.props.orderDetail.boxes[0].prod.length; i++) {
-      const order = this.props.orderDetail.boxes[0].prod[i];
-      const image = order.image;
-      const name = order.fullname;
-      const amount = order.amount;
-      const price = order.price;
+    for (var i = 0; i < this.props.orderDetail.prod.length; i++) {
+      const order = this.props.orderDetail.prod[i];
+      const image = order.sku_image;
+      const name = order.sku_fullname;
+      const amount = order.sku_quantity;
+      const price = order.sku_price;
+      const spu_id = order.spu_id;
       orderList.push(
-        <View
-        key={['order', i]}
-        style={styles.item}
-        >
-          <View style={styles.itemImage}>
-            <Image style={styles.image} source={{uri:image}}/>
+        <TouchableWithoutFeedback onPress={() => this.props.goToSboxProductDetial(order)}>
+          <View key={['order', i]}
+                style={styles.item}>
+            <View style={styles.itemImage}>
+              <Image style={styles.image} source={{uri:image}}/>
+            </View>
+            <View>
+              <Text style={styles.itemName}>{name} x {amount}</Text>
+              <Text style={styles.itemPrice}>${price}</Text>
+            </View>
           </View>
-          <View>
-            <Text style={styles.itemName}>{name} x {amount}</Text>
-            <Text style={styles.itemPrice}>${price}</Text>
-          </View>
-        </View>
+        </TouchableWithoutFeedback>
       );
     }
     return orderList;
@@ -156,19 +158,19 @@ _renderUserInfo() {
         <View style={styles.content}>
           <View style={styles.orderDetails}>
             <Text style={styles.orderFont}>订单号：#{this.props.orderDetail.obid}</Text>
-            <Text style={styles.orderFont}>{}</Text>
+            <Text style={styles.orderFont}>{this.props.orderDetail.created_date}</Text>
           </View>
 
           {this._renderOrderList()}
           {this._renderUserInfo()}
 
           <View style={styles.extraFee}>
-            <Text style={styles.extraFeeText}>运费: ${this.props.orderDetail.delifee}</Text>
-            <Text style={styles.extraFeeText} >税: ${this.props.orderDetail.tax}</Text>
+            <Text style={styles.extraFeeText}>Delivery Fee: ${this.props.orderDetail.delifee}</Text>
+            <Text style={styles.extraFeeText} >Tax: ${this.props.orderDetail.tax}</Text>
           </View>
 
           <View style={styles.total}>
-            <Text style={styles.totalText}>总价: ${this.props.orderDetail.total}</Text>
+            <Text style={styles.totalText}>Total: ${this.props.orderDetail.total}</Text>
           </View>
         </View>
       </ScrollView>
