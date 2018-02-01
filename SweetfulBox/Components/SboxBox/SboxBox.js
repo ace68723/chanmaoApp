@@ -34,7 +34,6 @@ export default class MyComponent extends Component {
   }
 
   _renderBox() {
-    console.log(this.props.total)
       return(
         <View style={{
                   height:20,

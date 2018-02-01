@@ -57,6 +57,7 @@ export default class HistoryOrderDetailViewController extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex:1
+		flex:1,
+		marginTop: 12,
 	}
 });

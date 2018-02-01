@@ -26,7 +26,7 @@ const realm = new Realm({path: SBOX_REALM_PATH});
 const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
 const viewWidth = Dimensions.get('window').width;
-const navigationHeight = viewHeight * (212/2208) - 17;
+const navigationHeight = viewHeight * (212/2208) - 12;
 const checkoutButtonMargin = viewWidth * (60/1242);
 export default class MyComponent extends Component {
   constructor() {
@@ -640,7 +640,7 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-		marginTop: 17,
+		marginTop: 12,
   },
   navigation: {
     flexDirection:'row'
