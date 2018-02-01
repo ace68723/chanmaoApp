@@ -84,3 +84,18 @@ export function sbox_getCartQuantity() {
 export function sbox_getItemById(id) {
     return realm.objectForPrimaryKey('sbox_cart',id);
 }
+export function sbox_addQuantity(item) {
+  realm.write(() => {
+    item.sku_quantity += 1;
+  })
+}
+export function sbox_subQuantity(item) {
+  realm.write(() => {
+    item.sku_quantity -= 1;
+  })
+}
+export function sbox_deleteItem(item) {
+  realm.write(() => {
+    realm.delete(item);
+  })
+}

@@ -8,16 +8,12 @@ export default {
           const lo_data = {
             productList:productList
           }
-          const data = Object.assign({},await OrderModule.getOrderBefore(lo_data),{shouldDoAuth:false});
-          dispatch({
-              actionType: SboxConstants.GET_ORDER_BEFORE, data
-          })
+          const data = await OrderModule.getOrderBefore(lo_data);
+          // dispatch({
+          //     actionType: SboxConstants.GET_ORDER_BEFORE, data
+          // })
         }catch(error){
-          console.error(error)
-          const data = {shouldDoAuth:true}
-          dispatch({
-              actionType: SboxConstants.GET_ORDER_BEFORE, data
-          })
+          console.log(error)
         }
       },
     async checkout(box) {
