@@ -4,10 +4,12 @@ import React, { Component } from 'react';
 import { View, Text, Image,StyleSheet, Dimensions, TouchableWithoutFeedback } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
+const viewHeight = Dimensions.get('window').height;
+const navigationHeight = viewHeight * (212/2208) - 12;
 
 const styles = StyleSheet.create({
     container: {
-        flex: (212 / 2208),
+        height: navigationHeight,
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
@@ -37,7 +39,7 @@ export default class SboxHistoryOrderDetailHeader extends Component {
   render() {
       return (
           <View style={styles.container}>
-            <View style={{flex:1, top:10,justifyContent:'center'}}>
+            <View style={{flex:1, justifyContent:'center'}}>
               <TouchableWithoutFeedback onPress={this.props.goBack}>
                 <Image source={require('./img/icon_back.png')}
                        style={{

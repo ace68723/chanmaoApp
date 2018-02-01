@@ -28,7 +28,6 @@ const realm = new Realm({path: SBOX_REALM_PATH});
 const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
 const viewWidth = Dimensions.get('window').width;
-
 const navigationHeight = viewHeight * (212/2208) - 17;
 const checkoutButtonMargin = viewWidth * (60/1242);
 
@@ -251,10 +250,16 @@ export default class MyComponent extends Component {
     const products_list = this.state.productList;
     var total = 0;
     var num = 0;
-    for (let product of products_list) {
-        total += product.sku_price*product.sku_quantity;
-        num += product.sku_quantity;
-    }
+    // for (let product of products_list) {
+    //
+    //   console.log(product);
+    //     total += product.sku_price*product.sku_quantity;
+    //     num += product.sku_quantity;
+    // }
+    Array.from(products_list).forEach(product => {
+      total += product.sku_price*product.sku_quantity;
+      num += product.sku_quantity;
+    })
     return(
       <CheckoutButton
         total={total}
@@ -329,7 +334,7 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-		marginTop: 17,
+		marginTop: 12,
   },
   navigation: {
     flexDirection:'row'
