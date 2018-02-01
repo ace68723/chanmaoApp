@@ -54,7 +54,7 @@ export default class CardView extends Component {
       return(
         <ViewPagerAndroid
             scrollEventThrottle={16}
-            ref={(ref) => this.scrollView = ref}
+            ref={'CardView'}
             horizontal
             onMomentumScrollEnd={(e) => {
               const offset = e.nativeEvent.contentOffset;
