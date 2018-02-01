@@ -14,7 +14,7 @@ export default class SboxNotification extends Component {
   {
     super(props);
     this.state={
-      checkoutSuccessful:false,
+      checkoutSuccessful:true,
 
     }
     this._renderNotification=this._renderNotification.bind(this);
@@ -52,9 +52,9 @@ export default class SboxNotification extends Component {
             <Text style={{marginTop:Setting.getY(150),fontSize:20,fontWeight:'bold',}}>
               恭喜您
             </Text>
-            <View style={{marginTop:Setting.getY(100),width:Setting.getX(1100),height:Setting.getY(200)}}>
+            <View style={{marginTop:Setting.getY(100),width:Setting.getX(1000),height:Setting.getY(200)}}>
               <Text style={{fontSize:16, }}>
-                订单支付成功！您可以在【我的订单】中查看您的订单。
+                订单支付成功！您可以在两个工作日内收到您的箱子~
               </Text>
             </View>
             <TouchableOpacity style={{marginTop:Setting.getY(70),}}>
