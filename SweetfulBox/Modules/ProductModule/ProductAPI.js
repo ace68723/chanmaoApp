@@ -2,7 +2,8 @@ import { API_CATEGORY,
          API_CATEGORY_QUERY,
          API_THEME_QUERY,
          API_HOME_DATA,
-         API_SINGLE_PRODUCT
+         API_SINGLE_PRODUCT,
+         API_CHECK_STOCK
         } from '../../Config/API';
 export default  {
   getCategoryList(io_data){
@@ -120,4 +121,27 @@ export default  {
             .then((res) => res.json())
             .catch((error) => {throw error})
   },
+  checkStock(io_data){
+    const url = API_CHECK_STOCK;
+
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    options.headers = Object.assign(options.headers,{
+        authortoken: io_data.authortoken,
+    })
+    options.body = JSON.stringify({
+        ia_prod: io_data.ia_prod,
+    })
+
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
+
 }

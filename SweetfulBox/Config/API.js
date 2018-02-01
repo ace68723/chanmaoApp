@@ -13,13 +13,13 @@ const APIConstants ={
     API_ORDER_BEFORE: Server + 'order_before',
     API_ADD_CARD: Server + 'stripe_card',
     API_ADD_ORDER: Server + 'add_order',
-
     //Product
     API_CATEGORY: Server + 'category',
     API_CATEGORY_QUERY: Server + 'category_query',
     API_THEME_QUERY: Server + 'theme_query',
     API_HOME_DATA: Server + 'home_data',
     API_SINGLE_PRODUCT: Server + 'prod_base',
+    API_CHECK_STOCK: Server+ 'check_stock',
 
     //HISTORY
     API_ORDER_HISTORY: Server + 'order_history',

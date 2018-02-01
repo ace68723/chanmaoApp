@@ -7,6 +7,8 @@ import {
   sbox_getBox,
   sbox_addItemToCart,
   sbox_getCartQuantity,
+  sbox_getAllItemsFromCart,
+  sbox_rewriteCartListStock
 } from '../Database';
 
 export default  {
@@ -170,6 +172,27 @@ export default  {
     }  else {
       sbox_addItemToCart(selectedProduct);
       return
+    }
+  },
+  checkStock() {
+    try {
+      const cart_list = sbox_getAllItemsFromCart();
+      const lo_data ={
+        ia_prod: cart_list,
+        authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxODc4NSIsImV4cGlyZWQiOjE0ODkwODk2MDAsImxhc3Rsb2dpbiI6MTQ4MzA0NzU4OH0.EPjeu-klo-ygKwUvdyVspIWeaHoosCNPdaa1pO4_RsY',
+      }
+      const productStock = await ProductAPI.checkStock(lo_data);
+      sbox_rewriteCartListStock(productStock.ea_prod);
+      if(productStock.ev_error === 0 ){
+
+        return productStock
+      }else{
+        const errorMessage = productStock.ev_message;
+        throw errorMessage
+      }
+    } catch (e) {
+      const errorMessage = 'error';
+      throw errorMessage
     }
   }
 }

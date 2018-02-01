@@ -36,6 +36,16 @@ export function DatabaseInit() {
 export function sbox_getAllItemsFromCart() {
   return realm.objects('sbox_cart');
 }
+export function sbox_rewriteCartListStock(cartList) {
+  for(i = 0; i< cartList.length; i++ ) {
+    const item = realm.objectForPrimaryKey('sbox_cart',cartList[i].sku_id);
+    console.log(item)
+    realm.write(() => {
+      item.sku_amount = cartList[i].sku_amount;
+    })
+  }
+  
+}
 export function sbox_addItemToCart(selectedProduct) {
   const item = realm.objectForPrimaryKey('sbox_cart',selectedProduct.sku_id);
   console.log(item)

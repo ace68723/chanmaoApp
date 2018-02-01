@@ -18,7 +18,8 @@ import UserInfo from '../SboxAddAddressInfo/UserInfo';
 import SboxCart from '../SboxCart';
 import CheckoutButton from './CheckoutButton';
 
-import SboxOrderAction from '../../Actions/SboxOrderAction'
+import SboxOrderAction from '../../Actions/SboxOrderAction';
+import SboxProductAction from '../../Actions/SboxProductAction';
 import SboxOrderStore from '../../Stores/SboxOrderStore';
 import { SBOX_REALM_PATH } from '../../Config/API';
 

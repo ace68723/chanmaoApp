@@ -13,6 +13,13 @@ export default {
 
         }
       },
+      async checkStock(){
+        try{
+          ProductModule.checkStock();
+        }catch(error){
+
+        }
+      },
     addToCart(selectedProduct,showLightBox,dismissLightBox){
         try {
           ProductModule.addToCart(selectedProduct);
