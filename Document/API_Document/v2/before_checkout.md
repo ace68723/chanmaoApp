@@ -27,7 +27,7 @@
 | ia_prod  | 类型及其范围 | 说明   |
 | -------- | ------ | ---- |
 | sku_id   | number | 产品ID |
-| quantity | number | 数量   |
+| sku_quantity | number | 数量   |
 
 
 返回字段说明:
