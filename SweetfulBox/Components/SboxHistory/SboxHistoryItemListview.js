@@ -22,9 +22,10 @@ class itemList extends Component {
 
 	render() {
     var items_ls = this.props.items_ls;
+    console.log(items_ls);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     var dataSource = ds.cloneWithRows(items_ls);
-    // 
+    //
 
 		return (
       <ListView
@@ -32,23 +33,23 @@ class itemList extends Component {
         enableEmptySections
         scrollEnabled={false}
         dataSource={dataSource}
-        renderRow={({focus, pbid, itemIndex, fullname, price, amount}) => {
+        renderRow={({focus, sku_id, index, sku_fullname, sku_price, sku_quantity}) => {
           return (
             <TouchableOpacity style={{marginBottom: 20, flexDirection: "row", justifyContent: "space-between"}}
-              onPress={() => this.props.onSelected(itemIndex, pbid)}>
+              onPress={() => this.props.onSelected(index, sku_id)}>
               <Text style={[{fontSize: 13,
                             fontWeight: "400",
                             fontFamily:'FZZhunYuan-M02S'},
                             focus && {color: "#FF7583"}]}
                     allowFontScaling={false}>
-                    {fullname} x {amount}
+                    {sku_fullname} x {sku_quantity}
               </Text>
               <Text style={[{fontSize: 13,
                             fontWeight: "400",
                             fontFamily:'FZZhunYuan-M02S'},
                             focus && {color: "#FF7583"}]}
                     allowFontScaling={false}>
-                    ${parseFloat(price * amount).toFixed(2)}
+                    ${parseFloat(sku_price * sku_quantity).toFixed(2)}
               </Text>
             </TouchableOpacity>
           )

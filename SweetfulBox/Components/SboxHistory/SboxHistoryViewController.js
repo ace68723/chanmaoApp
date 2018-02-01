@@ -15,6 +15,9 @@ import SboxHistoryStore from '../../Stores/SboxHistoryStore';
 import SboxHistoryFlatlist from './SboxHistoryFlatlist';
 
 const { height, width } = Dimensions.get('window');
+const viewHeight = Dimensions.get('window').height;
+const viewWidth = Dimensions.get('window').width;
+const navigationHeight = viewHeight * (212/2208) - 12;
 
 export default class HistoryViewController extends Component {
   constructor() {
@@ -47,6 +50,7 @@ export default class HistoryViewController extends Component {
 		})
 	}
   _goToSboxHistoryOrderDetail (orderDetail) {
+		console.log(orderDetail);
     this.props.navigator.push({
       screen: 'SboxHistoryOrderDetail',
       navigatorStyle: {navBarHidden: true},
@@ -60,7 +64,6 @@ export default class HistoryViewController extends Component {
 
   _onChange() {
     const state = Object.assign({},SboxHistoryStore.getState());
-    console.log(state)
     this.setState(state);
   }
   _renderHistoryView() {
@@ -78,6 +81,16 @@ export default class HistoryViewController extends Component {
   render() {
     return(
       <View style={styles.viewController}>
+				<View style={[styles.navigation, {height: navigationHeight}]}>
+			    	<View style={styles.back}>
+			    	</View>
+			    	<View style={styles.title}>
+			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>历史订单</Text>
+			    	</View>
+			    	<View style={{flex:1}}>
+            </View>
+			  </View>
+				<View style={styles.separator}></View>
         {this._renderHistoryView()}
       </View>
     )
@@ -87,5 +100,24 @@ export default class HistoryViewController extends Component {
 const styles = StyleSheet.create({
   viewController:{
     flex:1,
-  }
+		marginTop: 12,
+  },
+  navigation: {
+    flexDirection:'row'
+  },
+  back: {
+    flex: 1,
+    justifyContent:'center',
+  },
+  title: {
+    flex:1,
+    backgroundColor: 'white',
+    justifyContent:'center',
+    // backgroundColor: "blue",
+  },
+  separator: {
+		height: 1,
+		borderWidth: 0.6,
+		borderColor: "#D5D5D5"
+	},
 });

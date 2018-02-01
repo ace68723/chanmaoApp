@@ -39,7 +39,7 @@ export default {
       try{
         const data = sbox_getAllItemsFromCart();
         dispatch({
-            actionType: SboxConstants.GET_PRODUCT_LIST, data
+            actionType: SboxConstants.GET_PRODUCT_LISTS, data
         })
       }catch(error){
         console.log(error);

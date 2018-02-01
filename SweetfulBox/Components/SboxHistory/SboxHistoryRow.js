@@ -9,6 +9,7 @@ import SboxHistoryPriceInfo from "./SboxHistoryPriceInfo";
 class Row extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
       items_ls: [],
@@ -48,7 +49,7 @@ class Row extends Component {
 
     var focus = true;
     const newItems = this.state.items_ls.map((item) => {
-			if (item.pbid !== key) return item;
+			if (item.sku_id !== key) return item;
 			return {
 				...item,
 				focus
@@ -56,7 +57,7 @@ class Row extends Component {
 		})
     var focus = false;
 		const newItems_2 = newItems.map((item) => {
-			if (item.pbid == key) return item;
+			if (item.sku_id == key) return item;
 			return {
 				...item,
 				focus
@@ -85,11 +86,12 @@ class Row extends Component {
     var items_ls = [];
     var itemIndex = -1;
     var focus = false;
-		for(let index = 0; index < this.props.boxes.length; index++) {
-			for(let proIndex = 0; proIndex < this.props.boxes[index].prod.length; proIndex++) {
-        itemIndex++;
-				items_ls = [...items_ls, {...this.props.boxes[index].prod[proIndex], itemIndex, focus}];
-			}
+		for(let index = 0; index < this.props.prod.length; index++) {
+			// for(let proIndex = 0; proIndex < this.props.prod[index].prod.length; proIndex++) {
+      //   itemIndex++;
+			// 	items_ls = [...items_ls, {...this.props.prod[index].prod[proIndex], itemIndex, focus}];
+			// }
+      items_ls = [...items_ls, {...this.props.prod[index], index, focus}];
 		}
     this.setState({
       items_ls: items_ls,
@@ -138,29 +140,31 @@ class Row extends Component {
             {...{items_ls: this.state.items_ls, obid: this.props.obid}}
           />
 
+          <SboxHistoryBoxStatus
+              {...{boxes_ls: this.props.prod, created: this.props.created, obid: this.props.obid, trace: this.props.trace}}
+            />
 
-        <SboxHistoryBoxStatus
-            {...{boxes_ls: this.props.boxes, created: this.props.created,obid: this.props.obid}}
-          />
-
-
-        <SboxHistorySeparator/>
-
-
-          <SboxHistoryItemListview
-            onSelected={(itemIndex, pbid) => this.handleItemSelected(itemIndex, pbid)}
-            {...{items_ls: this.state.items_ls}}
-          />
 
           <SboxHistorySeparator/>
 
 
-          <SboxHistoryPriceInfo
-            {...{delifee:this.props.delifee,
-                 total:this.props.total,
-                 item:this.props.item,
-                 goToSboxHistoryOrderDetail:this.props.goToSboxHistoryOrderDetail}}
-          />
+            <SboxHistoryItemListview
+              onSelected={(itemIndex, pbid) => this.handleItemSelected(itemIndex, pbid)}
+              {...{items_ls: this.state.items_ls}}
+            />
+
+            <SboxHistorySeparator/>
+
+
+            <SboxHistoryPriceInfo
+              {...{delifee:this.props.delifee,
+                   total:this.props.total,
+                   item:this.props.item,
+                   goToSboxHistoryOrderDetail:this.props.goToSboxHistoryOrderDetail}}
+            />
+
+
+
 
 				</View>
 		);

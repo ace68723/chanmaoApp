@@ -126,8 +126,9 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
-        case SboxConstants.GET_PRODUCT_LIST:
+        case SboxConstants.GET_PRODUCT_LISTS:
           SboxOrderStore.getProductList(action.data);
+          console.log('store',action.data)
           SboxOrderStore.emitChange();
           break;
         case SboxConstants.CHECK_PRODUCT_STATUS:

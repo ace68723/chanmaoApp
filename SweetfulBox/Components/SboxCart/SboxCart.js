@@ -22,6 +22,7 @@ export default class SboxCart extends Component {
     this.state = {
       _allBoxes: realm.objects('sbox_box'),
     }
+    console.log(this.state)
   }
 
   _renderBoxes(){

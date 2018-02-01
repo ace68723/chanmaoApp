@@ -21,6 +21,7 @@ const historyData = {
               prod: [
                       {
                           sku_id: 9,
+                          spu_id: 12,
                           sku_fullname: "好巴食经典豆干乐享装", //spu_name + sku_name = sku_fulln1ame
                           sku_quantity: 2,
                           sku_price: "1.69",
@@ -28,20 +29,23 @@ const historyData = {
                       },
                       {
                           sku_id: 79,
+                          spu_id: 12,
                           sku_fullname: "三足旺华派自加热米线 - 红烧牛肉",
                           sku_quantity: 1,
                           sku_price: "5.99",
                           sku_image: "https://chanmao.us/storage/image/sb_app/image/79_20171129.png"
                       },
                       {
-                          sku_id: 89,
-                          sku_fullname: "北田 能量99棒 蛋黄味",
+                          sku_id: 22,
+                          spu_id: 12,
+                          sku_fullname: "豚骨菌菇(小包装)",
                           sku_quantity: 1,
                           sku_price: "2.99",
-                          sku_image: "https://chanmao.us/storage/image/sb_app/image/89_20171229.png"
+                          sku_image: "https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
                       },
                       {
                           sku_id: 94,
+                          spu_id: 11,
                           sku_fullname: "娃哈哈乳酸菌饮料 原味 100ml*4",
                           sku_quantity: 1,
                           sku_price: "1.29",
