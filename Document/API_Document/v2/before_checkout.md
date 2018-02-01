@@ -27,7 +27,7 @@
 | ia_prod  | 类型及其范围 | 说明   |
 | -------- | ------ | ---- |
 | sku_id   | number | 产品ID |
-| quantity | number | 数量   |
+| sku_quantity | number | 数量   |
 
 
 返回字段说明:
@@ -49,9 +49,9 @@
 | ea_prod  | 类型及其范围 | 说明   |
 | -------- | ------ | ---- |
 | sku_id   | number | 产品ID |
-| quantity | number | 检查数量 |
-| price    | string | 价钱   |
-| actual   | number | 实际数量 |
+| sku_quantity | number | 检查数量 |
+| sku_price    | string | 价钱   |
+| sku_actual   | number | 实际数量 |
 
 | eo_addr | 类型及其范围 | 说明   |
 | ------- | ------ | ---- |
@@ -72,7 +72,7 @@
  ea_prod: [
   {
    sku_id: number,
-   quantity: number
+   sku_quantity: number
   }
  ]
 
@@ -97,9 +97,9 @@ eo_addr: {
 ea_prod: [
    {
     sku_id: number,
-    quantity: number,
-    actual: number,
-    price: string
+    sku_quantity: number,
+    sku_actual: number,
+    sku_price: string
    }
  ]
 },

@@ -30,6 +30,9 @@ export default {
           dispatch({
               actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
           })
+          dispatch({
+              actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY
+          })
         } catch (errorMessage) {
           console.log(errorMessage)
 

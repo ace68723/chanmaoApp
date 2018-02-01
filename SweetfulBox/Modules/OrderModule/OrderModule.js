@@ -72,13 +72,13 @@ export default  {
   async getOrderBefore(io_data) {
     try {
       const {uid,token,version} = GetUserInfo();
-      if(!token) throw 'no token'
+      if(!token) return {shouldDoAuth:true}
       let _productList = [];
       for (var i = 0; i < io_data.productList.length; i++) {
         const product = io_data.productList[i];
-        const pbid = product.pbid;
-        const amount = product.selectedAmount;
-        const _product = {pbid,amount}
+        const sku_id = product.sku_id;
+        const quantity = product.sku_quantity;
+        const _product = {sku_id,quantity}
         _productList.push(_product);
       }
       const lo_data = {
@@ -86,10 +86,10 @@ export default  {
         ia_prod: _productList,
       }
       const res = await OrderAPI.getOrderBefore(lo_data);
-      console.log(res)
-      return res
+      eo_data = Object.assign(res,{shouldDoAuth:false});
+      return eo_data
     } catch (e) {
-
+      console.log(e)
       throw e
     }
   },
