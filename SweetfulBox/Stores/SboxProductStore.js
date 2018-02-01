@@ -29,7 +29,7 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
 	},
 	addChangeListener(callback){
 			this.on(CHANGE_EVENT, callback)
-      this.getTotalQuantity();
+      this.updateTotalQuantity();
 	},
 	removeChangeListener(callback){
 			this.removeListener(CHANGE_EVENT, callback)
@@ -82,13 +82,16 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
     const selectedProduct = this.state.sku_list[selectIndex];
     this.state =  Object.assign(this.state,{selectedProduct,selectedPage})
   },
-  getTotalQuantity() {
+  updateTotalQuantity() {
     this._cart = realm.objects('sbox_cart');
     let totalQuantity = 0;
     this._cart.forEach((item) => {
       totalQuantity += item.sku_quantity
     });
     this.state.totalQuantity = totalQuantity;
+  },
+  getTotalQuantity(){
+    return this.state.totalQuantity
   },
   initState(){
     this.state = Object.assign({},{
@@ -129,7 +132,7 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
           SboxProductStore.emitChange();
           break
         case SboxConstants.UPDATE_CART_TOTAL_QUANTITY:
-          SboxProductStore.getTotalQuantity()
+          SboxProductStore.updateTotalQuantity()
           SboxProductStore.emitChange();
           break
 

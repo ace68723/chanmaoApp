@@ -11,37 +11,8 @@ import SboxHome from '../SboxHome/SboxHome';
 import SboxProductAction from '../../Actions/SboxProductAction'
 import SboxHistory from '../SboxHistory/SboxHistoryViewController';
 import SboxCheckout from '../SboxCheckout';
-import { SBOX_REALM_PATH } from '../../Config/API'
-const Realm = require('realm');
-const realm = new Realm({path: SBOX_REALM_PATH});
 import TabBar from './TabBar';
 export default class MyComponent extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      totalQuantity:0,
-    }
-    this._onRealmChange = this._onRealmChange.bind(this);
-  }
-  componentDidMount() {
-    // const total = SboxProductAction.getCartQuantity();
-    // this.setState({
-    //   totalQuantity:10
-    // })
-    // realm.addListener('change', this._onRealmChange)
-    // this._onRealmChange();
-  }
-  componentWillUnmount() {
-    // realm.removeListener('change',this._onRealmChange);
-  }
-  _onRealmChange() {
-        setTimeout(() => {
-          const total = SboxProductAction.getCartQuantity();
-        this.setState({
-          totalQuantity:total
-        },console.log(this.state.totalQuantity))
-    }, 1000);
-  }
   render() {
     return (
       <ScrollableTabView
@@ -71,8 +42,7 @@ export default class MyComponent extends Component {
               tabLabel="购物车"
               activeIconImage={require("./Image/box.png")}
               inactiveIconImage={require("./Image/box.png")}
-              navigator={this.props.navigator}
-              total = {this.state.totalQuantity}/>
+              navigator={this.props.navigator}/>
       </ScrollableTabView>
 
   );

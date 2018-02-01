@@ -34,8 +34,12 @@ export default {
                 //
                 // }, 10);
                 const data = await ProductModule.getHomeData(io_data);
+                const {themeList} = data;
                 dispatch({
                     actionType: SboxConstants.GET_HOME_DATA, data
+                })
+                dispatch({
+                    actionType: SboxConstants.INIT_THEME_DATA, themeList
                 })
 
               }catch(error){

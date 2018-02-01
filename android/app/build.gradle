@@ -147,6 +147,9 @@ android {
 dependencies {
     compile project(':react-native-code-push')
     compile project(':react-native-maps')
+    compile 'com.google.android.gms:play-services-base:11.+'
+    compile 'com.google.android.gms:play-services-maps:11.+'
+    compile 'com.google.android.gms:play-services-location:11.+'
     compile project(':react-native-wechat')
     compile project(':react-native-device-info')
     compile project(':realm')
