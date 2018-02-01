@@ -37,15 +37,15 @@ export default class SboxHistoryOrderDetailHeader extends Component {
   render() {
       return (
           <View style={styles.container}>
-            <View style={{flex:1, top:10,justifyContent:'center'}}>
-              <TouchableWithoutFeedback onPress={this.props.goBack}>
+            <TouchableWithoutFeedback onPress={this.props.goBack}>
+              <View style={{flex:0.17, top:10,justifyContent:'center'}}>
                 <Image source={require('./img/icon_back.png')}
                        style={{
                                marginLeft:10,
                                height:height*0.032,
                                width:height*0.032,}}/>
-               </TouchableWithoutFeedback>
-            </View>
+              </View>
+            </TouchableWithoutFeedback>
             <Text style={styles.headTitle}>订单详情</Text>
             <View style={styles.right}/>
           </View>

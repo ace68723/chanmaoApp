@@ -1,16 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, FlatList, Dimensions} from "react-native";
+import { View, Text, StyleSheet, FlatList} from "react-native";
 import SboxHistoryRow from "./SboxHistoryRow";
-
-const { height } = Dimensions.get('window');
-const viewHeight = Dimensions.get('window').height;
-const flatlistPaddingTop = viewHeight * (60/2208);
 
 
 class App extends Component {
 
 
 	render() {
+		console.log(this.props.items);
 		return (
 			<FlatList
 				data={this.props.items}
@@ -24,8 +21,7 @@ class App extends Component {
 					const delifee = item.delifee;
 					const total = item.total;
 					const prod = item.prod;
-					const created = item.created_date;
-					const trace = item.trace;
+					const created_date = item.created_date;
 					return (
 						<SboxHistoryRow
 							key={item.obid}
@@ -33,9 +29,8 @@ class App extends Component {
                    delifee,
                    total,
                    prod,
-                   created,
+                   created_date,
                    item,
-									 trace,
                    goToSboxHistoryOrderDetail:this.props.goToSboxHistoryOrderDetail
                  }}
 						/>
@@ -49,8 +44,7 @@ class App extends Component {
 const styles = StyleSheet.create({
 	list: {
 		flex: 1,
-		backgroundColor: "#f4f4f4",
-		paddingTop: flatlistPaddingTop,
+		backgroundColor: "#f4f4f4"
 	}
 });
 

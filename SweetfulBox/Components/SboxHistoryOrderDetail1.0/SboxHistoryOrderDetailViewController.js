@@ -18,7 +18,6 @@ export default class HistoryOrderDetailViewController extends Component {
     super(props);
 		this.state = Object.assign({},{orderDetail:props.orderDetail});
     this._goBack = this._goBack.bind(this);
-		this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
   }
   _goBack() {
     this.props.navigator.pop({
@@ -26,22 +25,10 @@ export default class HistoryOrderDetailViewController extends Component {
       animationType: 'slide-horizontal',
     });
   }
-
-	_goToSboxProductDetial(product) {
-		console.log("_goToSboxProductDetial");
-		console.log(product);
-    this.props.navigator.push({
-      screen: 'SboxProductDetial',
-      navigatorStyle: {navBarHidden: true},
-      passProps:{spu_id: product.spu_id,},
-    })
-  }
-
   _renderHistoryOrderDetailView() {
     return(
 				<SboxHistoryOrderDetailOrderView
           {...{orderDetail:this.state.orderDetail}}
-					goToSboxProductDetial={this._goToSboxProductDetial}
 				/>
     )
   }
