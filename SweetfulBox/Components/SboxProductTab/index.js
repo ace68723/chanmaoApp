@@ -14,116 +14,48 @@ import SboxProductView from './SboxProductView';
 import Settings from '../../Config/Setting';
 import SboxProductTabSectionHeaderCell from "./SboxProductTabSectionHeaderCell"
 
+import SboxProductTabAction from '../../Actions/SboxProductTabAction';
+import SboxProductTabStore from '../../Stores/SboxProductTabStore';
+
+
 const { width, height } = Dimensions.get('window');
 
 export default class MyComponent extends Component {
   constructor(props) {
       super(props);
-      console.log('xxx', props);
       this.state = {
-        prod_list:props.prod_list,
-        section_list:props.section_list,
-        headerIndex: props.section_list ? props.section_list[0].section_id : 0,
-        // categoryTitles: ['新品速递', '好货热卖', '超值特价'],
-        // categoryChecked:'new',
-        // format_data: [],
-        // data_list:[
-        //   {
-        //     name: 'OKF芒果果汁',
-        //     price:'1.19',
-        //     image: require('./Image/box.png'),
-        //     header:false,
-        //   },
-        //   {
-        //     name: 'OKF芒果果汁',
-        //     price:'1.19',
-        //     image: require('./Image/box.png'),
-        //     header:false,
-        //   },
-        //   {
-        //     name: 'OKF芒果果汁',
-        //     price:'1.19',
-        //     image: require('./Image/box.png'),
-        //     header:false,
-        //   },
-        //   {
-        //     contentType: 'header-left',
-        //   },
-        //   {
-        //     contentType: 'header-title',
-        //     title: "新品速递"
-        //   },
-        //   {
-        //     contentType: 'header-right',
-        //   },
-        //   {
-        //     name: 'OKF芒果果汁',
-        //     price:'1.19',
-        //     image: require('./Image/box.png'),
-        //     header:false,
-        //   },
-        //   {
-        //     name: 'OKF芒果果汁',
-        //     price:'1.19',
-        //     image: require('./Image/box.png'),
-        //     header:false,
-        //   },
-        //   {
-        //     name: 'OKF芒果果汁',
-        //     price:'1.19',
-        //     image: require('./Image/box.png'),
-        //     header:false,
-        //   }
-        // ],
-        // data : [
-        //   {
-        //     'title' : '新品速递',
-        //     'items' : [
-        //       {
-        //         name: 'OKF芒果果汁',
-        //         price: '1.19',
-        //         image: require('./Image/box.png'),
-        //       }, {
-        //         name: 'OKF芒果果汁',
-        //         price: '1.19',
-        //         image: require('./Image/box.png'),
-        //       }, {
-        //         name: 'OKF芒果果汁',
-        //         price: '1.19',
-        //         image: require('./Image/box.png'),
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     'title' : '好货热卖',
-        //     'items' : [
-        //       {
-        //         name: 'OKF芒果果汁',
-        //         price: '1.19',
-        //         image: require('./Image/box.png'),
-        //       }, {
-        //         name: 'OKF芒果果汁',
-        //         price: '1.19',
-        //         image: require('./Image/box.png'),
-        //       }
-        //     ]
-        //   },
-        // ]
+        prod_list:[],
+        section_list:[],
+        headerIndex:[],
       }
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
       this._pressedSectionHeader = this._pressedSectionHeader.bind(this);
-
+      this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount(){
+    // SboxProductTabStore.addThemeData(this.props.tmid,this.props.section_list,this.props.prod_list)
     const index = this.props.index;
 		const scrollView = this._scrollVew;
 		const scrollViewContent = this._scrollViewContent;
 		const ref = Object.assign({},{index,scrollView,scrollViewContent})
 		this.props.getScrollViewRefs(ref);
+    SboxProductTabStore.addChangeListener(this._onChange);
 	}
 
+  componentWillUnmount(){
+    SboxProductTabStore.removeChangeListener(this._onChange);
+  }
+  _onChange(){
+    const {tmid} = this.props;
+    const updatedTmid = SboxProductTabStore.getUpdatedTmid();
+    if(tmid !== updatedTmid && updatedTmid !== -1) return;
+    this.setState(SboxProductTabStore.getStateByTmid(tmid));
+  }
+  _onEndReached() {
+    SboxProductTabAction.getProductList();
+  }
   _renderProduct(product) {
       if (product.item.type === "spu" || product.item.type === "sku"){
         return (
@@ -179,6 +111,9 @@ export default class MyComponent extends Component {
       categoryChecked: category,
     })
   }
+  _pressedSectionHeader(index){
+    this.setState({headerIndex:index});
+  }
   _renderHeaderSection(){
     if (!this.state.section_list){
       return;
@@ -216,9 +151,7 @@ export default class MyComponent extends Component {
   }
   _keyExtractor = (product, index) => product.section_id+'index'+index;
 
-  _pressedSectionHeader(index){
-    this.setState({headerIndex:index});
-  }
+
   render() {
     return (
         <FlatList
@@ -226,7 +159,7 @@ export default class MyComponent extends Component {
             style={this.props.style}
             ref={(comp) => this._scrollVew = comp}
             ListHeaderComponent={this._renderHeader}
-            onEndReached={this.props.reachEnd}
+            onEndReached={this._onEndReached}
             onEndReachedThreshold={0.3}
             onScroll={this.props.scrollEventBind()}
             data={this.state.prod_list}

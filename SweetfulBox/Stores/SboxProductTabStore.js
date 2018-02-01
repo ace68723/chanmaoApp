@@ -5,12 +5,40 @@ const CHANGE_EVENT = 'change';
 import {findIndex} from 'lodash';
 const SboxProductTabStore = Object.assign({},EventEmitter.prototype,{
   state:{
-    theme_list: [],
-    prod_list:[],
+    'updatedTmid': -1,
   },
 	emitChange() {
 			this.emit(CHANGE_EVENT)
 	},
+
+  initThemeData(themeList){
+    for (var index = 0; index < themeList.length; index++) {
+      const theme = themeList[index];
+      this.addThemeData(theme.tmid, theme.section_list, theme.prod_list);
+    }
+    console.log('gg', this.state);
+  },
+
+  addThemeData(tmid, section_list, prod_list){
+    this.state[tmid] = {
+      section_list: section_list,
+      prod_list: prod_list,
+    };
+  },
+
+  getStateByTmid(tmid) {
+    return this.state[tmid];
+  },
+
+  setUpdatedTmid(tmid){
+    this.state.updatedTmid = tmid;
+  },
+
+  getUpdatedTmid(){
+    console.log(1234,this.state.updatedTmid)
+    return this.state.updatedTmid;
+  },
+
 	addChangeListener(callback) {
 			this.on(CHANGE_EVENT, callback)
 	},
@@ -53,21 +81,28 @@ const SboxProductTabStore = Object.assign({},EventEmitter.prototype,{
   getState(){
     return this.state;
   },
-  getStateByTmid(tmid) {
-    const targeIndex =  findIndex(this.state.theme_list, function(o) {
-      return o.tmid === tmid;
-    });
-    if (targeIndex === -1 ) {
-      return {prod_list: [], tmid: 1};
-    }
-    return this.state.theme_list[targeIndex];
-  },
+  // getStateByTmid(tmid) {
+  //   const targeIndex =  findIndex(this.state.theme_list, function(o) {
+  //     return o.tmid === tmid;
+  //   });
+  //   if (targeIndex === -1 ) {
+  //     return {prod_list: [], tmid: 1};
+  //   }
+  //   return this.state.theme_list[targeIndex];
+  // },
+  //
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
 				case SboxConstants.GET_PRODUCT_LIST:
           SboxProductTabStore.updateState(action.data);
           SboxProductTabStore.emitChange();
 					break;
+
+        case SboxConstants.INIT_THEME_DATA:
+            SboxProductTabStore.initThemeData(action.themeList);
+            SboxProductTabStore.emitChange();
+  					break;
+
         default:
          // do nothing
 		  }

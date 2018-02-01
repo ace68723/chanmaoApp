@@ -1,5 +1,6 @@
 module.exports ={
-
+    //Home
+    INIT_THEME_DATA:'INIT_THEME_DATA',
     // address
     GET_CONDO_LIST: 'GET_CONDO_LIST',
     GET_CONDO_FUZZY: 'GET_CONDO_FUZZY',
