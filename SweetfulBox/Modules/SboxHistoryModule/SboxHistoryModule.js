@@ -34,11 +34,12 @@ const historyData = {
                           sku_image: "https://chanmao.us/storage/image/sb_app/image/79_20171129.png"
                       },
                       {
-                          sku_id: 89,
-                          sku_fullname: "北田 能量99棒 蛋黄味",
+                          sku_id: 22,
+                          spu_id: 5,
+                          sku_fullname: "豚骨菌菇(小包装)",
                           sku_quantity: 1,
                           sku_price: "2.99",
-                          sku_image: "https://chanmao.us/storage/image/sb_app/image/89_20171229.png"
+                          sku_image: "https://chanmao.us/storage/image/sb_app/image/1_20170828.png"
                       },
                       {
                           sku_id: 94,

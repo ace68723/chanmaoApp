@@ -54,23 +54,40 @@ class BoxStatus extends Component {
   }
 
 	render() {
-    console.log(this.props);
     var boxes_ls = this.props.boxes_ls;
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     var dataSource = ds.cloneWithRows(boxes_ls);
     const createdTime = Moment(this.props.created * 1000).format('MMM DD, YYYY, hh:mm');
 
 		return (
-        <View style={styles.container}>
-          <View style={{flex: 0.5, justifyContent: "center"}}>
-            <Text style={[styles.text, {fontFamily:'FZZhunYuan-M02S'}]}
-                  allowFontScaling={false}>  订单号:  #{this.props.obid}</Text>
-          </View>
-          <View style={{flex: 0.5, justifyContent: "center"}}>
-            <Text style={[styles.date, {fontFamily:'FZZhunYuan-M02S'}]}
-                  allowFontScaling={false}>{this.props.created}</Text>
-          </View>
-        </View>
+      <ListView
+        style={{marginBottom: 5}}
+        showsHorizontalScrollIndicator={false}
+        enableEmptySections
+        dataSource={dataSource}
+        renderRow={({obid, trace, created}) => {
+          return (
+            <View style={styles.container}>
+              <View style={{flex: 0.2, justifyContent: "center"}}>
+                <Text style={[styles.status,
+                              {fontFamily:'FZZhunYuan-M02S',
+                               color: this._boxStatusChinese(trace.status).color}]}
+                      allowFontScaling={false}>
+                      {this._boxStatusChinese(trace.status).res}
+                </Text>
+              </View>
+              <View style={{flex: 0.3, justifyContent: "center"}}>
+                <Text style={[styles.text, {fontFamily:'FZZhunYuan-M02S'}]}
+                      allowFontScaling={false}>  订单号: #{this.props.obid}</Text>
+              </View>
+              <View style={{flex: 0.5, justifyContent: "center"}}>
+                <Text style={[styles.date, {fontFamily:'FZZhunYuan-M02S'}]}
+                      allowFontScaling={false}>{createdTime}</Text>
+              </View>
+            </View>
+          )
+        }}
+      />
 		)
 	}
 }
