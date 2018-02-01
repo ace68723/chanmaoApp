@@ -12,7 +12,7 @@ import SboxLoading from './screens/SboxLoading';
 import SboxNotification from './SweetfulBox/Components/SboxNotification/SboxNotification';
 
 
-import CmEat from './CmEat/Config/Screens';
+// import CmEat from './CmEat/Config/Screens';
 
 
 
@@ -22,12 +22,13 @@ export function registerScreens() {
   Navigation.registerComponent('CmLoading', () => CmLoading);
   Navigation.registerComponent('CmLogin', () => CmLogin);
   Navigation.registerComponent('AdView', () => AdView);
-
+  Navigation.registerComponent('Notification', () => Notification);
+  Navigation.registerComponent('CmAdvertisement', () => CmAdvertisement);
+  
   Navigation.registerComponent('SboxHome', () => SboxHome);
   Navigation.registerComponent('SboxLoading', () => SboxLoading);
   Navigation.registerComponent('SboxNotification', () => SboxNotification);
 
-  Navigation.registerComponent('CmEat', () => CmEat);
-  Navigation.registerComponent('Notification', () => Notification);
-  Navigation.registerComponent('CmAdvertisement', () => CmAdvertisement);
+  // Navigation.registerComponent('CmEat', () => CmEat);
+
 }
