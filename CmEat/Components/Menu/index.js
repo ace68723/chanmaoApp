@@ -29,6 +29,10 @@ import MenuHeader from './MenuHeader';
 const {width,height} = Dimensions.get('window');
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
 class Menu extends Component {
+    static navigatorStyle = {
+        screenBackgroundColor: 'transparent',
+        modalPresentationStyle: 'overFullScreen'
+    }
     constructor(props){
       super()
       this.state = {
@@ -59,12 +63,12 @@ class Menu extends Component {
 
     componentDidMount(){
       setTimeout( () =>{
-        this._openMenuAnimation()
+
         this.setState({
           renderHeader:true,
 					renderBackgroundCover:true,
-        })
-      }, 100);
+        },this._openMenuAnimation());
+      }, 200);
 
     }
     _openMenuAnimation(){
@@ -122,11 +126,11 @@ class Menu extends Component {
         setTimeout( ()=> {
           // !important for history reorder
           if(!this.props.closeMenu) {
-            this.props.navigator.pop();
+            this.props.navigator.dismissModal({
+                animationType: 'none'
+            })
             return
           };
-          //
-          this.props.closeMenu();
         }, 500);
       })
 
@@ -143,10 +147,14 @@ class Menu extends Component {
 		_goToCheckout(){
 			if(Number(this.state.cartTotals.total)>0){
 				if(Number(this.state.cartTotals.total)>=Number(this.state.restaurant.start_amount)){
-					this.props.navigator.push({
-						id: 'Checkout',
-						restaurant:this.state.restaurant,
-					})
+          this.props.navigator.showModal({
+            screen: 'CmEatCheckout',
+            animated: false,
+            navigatorStyle: {navBarHidden: true},
+            passProps: {
+              restaurant:this.state.restaurant,
+            },
+          });
 				}else{
 					Alert.alert(
 						'馋猫订餐提醒您',
@@ -315,10 +323,6 @@ class Menu extends Component {
         )
       }
     }
-    _renderRestaurantImage(){
-      // return (
-      // )
-    }
 		_renderBackgroundCover(){
 			if(this.state.renderBackgroundCover){
 				return(
@@ -332,74 +336,59 @@ class Menu extends Component {
 
 		}
     render(){
+      if(this.state.renderBackgroundCover){
+        return(
+          <View style={{
+                        flex:1,
+                        backgroundColor:'rgba(0,0,0,0)'}}>
+            <Animated.View style={{position:'absolute',
+                                   backgroundColor:"#ffffff",
+                                   left:0,top:0,right:0,bottom:0,
+                                   opacity:this.state.restaurantViewOpacity
+                                 }}>
+            </Animated.View>
+  					{this._renderBackgroundCover()}
+            <Animated.View style={{top:this.state.restaurantCardTop,
+                                   marginLeft:this.state.restaurantCardMargin,
+                                   marginRight:this.state.restaurantCardMargin,
+                                 }}>
+              <Background
+                   minHeight={0}
+                   maxHeight={230}
+                   offset={this.state.anim}
+                   backgroundImage={{uri:this.props.restaurant.mob_banner}}
+                   backgroundShift={0}
+                   backgroundColor={"rgba(0,0,0,0)"}>
+               </Background>
+               <MenuHeader
+                  ref={(MenuHeader) => { this.MenuHeader = MenuHeader; }}
+                  minHeight={0}
+                  maxHeight={230}
+                  offset={this.state.anim}
+                  restaurant = {this.state.restaurant}
+                  py={this.props.py}
+                  start_time = {this.props.restaurant.start_time}
+                  end_time = {this.props.restaurant.end_time}
+                  />
+            </Animated.View>
+            <View style={{position:'absolute',left:0,top:0,right:0,bottom:0,}}>
+              {this._renderMenuList()}
+            </View>
+
+            {this._header()}
+            {this._renderClose()}
+            {this._renderSearch()}
 
 
-      // Dimensions.get('window').height   style={{flex:1,backgroundColor:'rgba(0, 0, 0,0)'}}
-      //    <Header title={this.state.restaurant.name}
-                //  goBack={this._closeMenuAnimation}
-                //  leftButtonText={'×'}/>
-                // <MenuHeader
-                //    offset={this.state.anim}
-                //    MIV_MTime = {this.state.MIV_MTime}
-                //    start_time = {this.state.start_time}
-                //    end_time = {this.state.end_time}
-                //    showMenuAnimation = {this.state.showMenuAnimation}
-                //    restaurant = {this.state.restaurant}/>
-      return(
-        <View style={{position:'absolute',
-                      left:0,top:0,right:0,bottom:0,
-                      backgroundColor:'rgba(0, 0,0,0)'}}>
-          <Animated.View style={{position:'absolute',
-                                 backgroundColor:"#ffffff",
-                                 left:0,top:0,right:0,bottom:0,
-                                 opacity:this.state.restaurantViewOpacity
-                               }}>
-          </Animated.View>
-					{this._renderBackgroundCover()}
-          <Animated.View style={{top:this.state.restaurantCardTop,
-                                 marginLeft:this.state.restaurantCardMargin,
-                                 marginRight:this.state.restaurantCardMargin,
-                               }}>
-            <Background
-                 minHeight={0}
-                 maxHeight={230}
-                 offset={this.state.anim}
-                 backgroundImage={{uri:this.props.restaurant.mob_banner}}
-                 backgroundShift={0}
-                 backgroundColor={"rgba(0,0,0,0)"}>
-             </Background>
-             <MenuHeader
-                ref={(MenuHeader) => { this.MenuHeader = MenuHeader; }}
-                minHeight={0}
-                maxHeight={230}
-                offset={this.state.anim}
-                restaurant = {this.state.restaurant}
-                py={this.props.py}
-                start_time = {this.props.restaurant.start_time}
-                end_time = {this.props.restaurant.end_time}
-                />
-          </Animated.View>
-          <View style={{position:'absolute',left:0,top:0,right:0,bottom:0,}}>
-            {this._renderMenuList()}
           </View>
+        )
+      }else{
+        return(<View/>)
+      }
 
-          {this._header()}
-          {this._renderClose()}
-          {this._renderSearch()}
-
-
-        </View>
-      )
     }
 }
-// {this.menuListCover()}
 
-// <ScrollView style={[styles.container]}
-// 						scrollEventThrottle= {16}
-// 						onScroll={ (e) => this._handleScroll(e)}
-// 						ref='_scrollView'
-// 						scrollEnabled={this.state.scrollEnabled}>
-// </ScrollView>
 
 let styles = StyleSheet.create({
   rightButton:{

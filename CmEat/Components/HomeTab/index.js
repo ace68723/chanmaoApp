@@ -13,15 +13,7 @@ import {
   View,
 } from 'react-native';
 
-import Swiper from 'react-native-swiper'
-
-
-
 const {width,height} = Dimensions.get('window');
-var cols = 2;
-var boxW = 100;
-// var vMargin = (width-cols*boxW)/(cols+1);
-// var hMargin = 25;
 
 export default class LoginButton extends Component {
 
@@ -34,18 +26,28 @@ export default class LoginButton extends Component {
 		const scrollView = this.refs._scrollVew;
 		const scrollViewContent = this.refs._scrollViewContent;
 		const ref = Object.assign({},{index,scrollView,scrollViewContent})
-		this.props.getScrollViewRefs(ref)
+		this.props.getScrollViewRefs(ref);
 	}
 	_handleOnPress(advertisement){
 		if(advertisement.navitype == 2){
-			this.props.navigator.push({
-				id: 'AdView',
-				url:advertisement.naviparam.url,
-			})
+      const {url} = advertisement.naviparam;
+      this.props.navigator.showModal({
+        screen: 'AdView',
+        animated: true,
+        navigatorStyle: {navBarHidden: true},
+        passProps: {url: url}
+      });
 		}
 		if(advertisement.navitype == 3){
-				advertisement.restaurant = advertisement.naviparam;
-				this.props.openMenu(height,advertisement.naviparam);
+        this.props.navigator.showModal({
+          screen: 'CmEatMenu',
+          animated: false,
+          navigatorStyle: {navBarHidden: true},
+          passProps: {
+            py:height,
+            restaurant:advertisement.naviparam,
+          },
+        });
 		}
 	}
   _renderAdv(){

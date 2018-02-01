@@ -22,21 +22,21 @@ import DefaultTabBar from './DefaultTabBar';
 import HeaderWithBanner from './HeaderWithBanner';
 import CmEatHomeHeader from './CmEatHomeHeader';
 
-import HomeTab from '../Home/HomeTab'
+import HomeTab from '../HomeTab/'
 import RestaurantTab from '../Restaurant/RestaurantTab'
-import Menu from '../Restaurant/Menu';
+// import Menu from '../Restaurant/Menu';
 
 import HomeAction from '../../Actions/HomeAction';
 import RestaurantAction from '../../Actions/RestaurantAction';
 import HomeStore from '../../Stores/HomeStore';
 
-const UIManager = require('NativeModules').UIManager;
 
 const {width,height} = Dimensions.get('window');
 const HEADER_MAX_HEIGHT = 200+height*0.081;
 const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 let _scrollY = 0;
+
 export default class MainTab extends Component {
 
   constructor(){
@@ -103,19 +103,22 @@ export default class MainTab extends Component {
 					 _scrollY = this.state.scrollY._value;
 
 					 _forEach(this.scrollViewRefs,(ref,index)=>{
-             if(!ref.scrollView.scrollTo){console.log(ref,index);return}
+             if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
+             if(!ref.scrollView.scrollToOffset){console.log(ref,index);return}
 						//  if(ref.index != this.state.currentTab){
-							 ref.scrollView.scrollTo({y: this.state.scrollY._value,animated:false});
+							 ref.scrollView.scrollToOffset({offset:this.state.scrollY._value,animated: false});
 						//  }
 					 })
 
 		   }else {
 		     _forEach(this.scrollViewRefs,(ref,index)=>{
-           if(!ref.scrollView.scrollTo){console.log(ref,index);return}
+           if(index == 0) {ref.scrollView.scrollTo({y:200+height*0.081,animated: false});return};
+           if(!ref.scrollView.scrollToOffset){console.log(ref,index);return}
 		      //  if(ref.index != this.state.currentTab){
 		         ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
 		           if(py>40 ){
-		             ref.scrollView.scrollTo({y: 200+height*0.081,animated:false});
+		             ref.scrollView.scrollToOffset({offset:200+height*0.081,animated: false});
+
 		           }
 		          });
 		      //  }
@@ -136,11 +139,6 @@ export default class MainTab extends Component {
 			}
 	}
 	_openMenu(py,restaurant){
-			// this.props.navigator.push({
-			// 	 id: 'Menu',
-			// 	 py:py,
-			// 	 restaurant:restaurant,
-			//  })
 			this.setState({
         py:py,
   			restaurant:restaurant,
@@ -148,35 +146,8 @@ export default class MainTab extends Component {
       })
 	}
 
-	_renderRestaurantCover(){
-      // if(this.state.showAnimatedView){
-      //   return(
-      //     <Animated.View style={{position:'absolute',
-      //                            top:0,
-      //                            left:0,
-      //                            right:0,
-      //                            bottom:0,
-      //                            backgroundColor:'#ffffff',
-      //                            opacity:this.state.restaurantCoverOpacity}}>
-      //     </Animated.View>
-      //   )
-      // }
-  }
+
 	_closeMenu(){
-      // Animated.timing(          // Uses easing functions
-      //   this.state.restaurantCoverOpacity,    // The value to drive
-      //   {toValue: 0,
-      //    duration: 400,
-      //   }            // Configuration
-      // ).start();
-      // setTimeout(() => {
-			// 	this.setState({
-			// 		showAnimatedView:false
-			// 	})
-      // },500)
-			// setTimeout(()=>{
-			// 	this.props.showTabBar();
-			// }, 700);
       this.setState({
         showAnimatedView:false,
       })
@@ -280,7 +251,6 @@ export default class MainTab extends Component {
 						navigator={this.props.navigator}/>
         <CmEatHomeHeader scrollY = {this.state.scrollY}
                          handleBackToHome={this.props.handleBackToHome}/>
-				{this._renderRestaurantCover()}
 				{this._renderMenuView()}
      </View>
     )

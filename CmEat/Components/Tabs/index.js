@@ -15,7 +15,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import MainTab from '../MainTab/MainTab';
+import MainTab from '../MainTab';
 import HistoryTab from '../History/HistoryTab';
 import SettingTab from '../Setting/SettingTab';
 import TabsStore from '../../Stores/TabsStore';
@@ -95,13 +95,7 @@ export default class Tabs extends Component {
 												showTabBar = {this._showTabBar}
                         handleBackToHome={this.props.handleBackToHome}
                         />
-							 <HistoryTab tabLabel='我的订单'
-													 navigator={this.props.navigator}
-													 hideTabBar = {this._hideTabBar}
-													 showTabBar = {this._showTabBar}/>
-							 <SettingTab tabLabel='设置'
-                           navigator={this.props.navigator}
-                           handleBackToHome={this.props.handleBackToHome}/>
+
 		 </ScrollableTabView>
 
     )
@@ -111,3 +105,11 @@ export default class Tabs extends Component {
 const styles = StyleSheet.create({
 
 });
+
+// <HistoryTab tabLabel='我的订单'
+//             navigator={this.props.navigator}
+//             hideTabBar = {this._hideTabBar}
+//             showTabBar = {this._showTabBar}/>
+// <SettingTab tabLabel='设置'
+//             navigator={this.props.navigator}
+//             handleBackToHome={this.props.handleBackToHome}/>

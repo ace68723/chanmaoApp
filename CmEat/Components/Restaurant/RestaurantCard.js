@@ -86,12 +86,15 @@ class RestaurantCard extends Component {
       }
       _openMenu(){
         this.refs[this.state.ref].measure( (fx, fy, width, height, px, py) => {
-           // 	this.props.navigator.push({
-						// 	 id: 'Menu',
-						// 	 py:py,
-						// 	 restaurant:this.state.restaurant,
-						//  })
-						this.props.openMenu(py,this.state.restaurant)
+            this.props.navigator.showModal({
+              screen: 'CmEatMenu',
+              animated: false,
+              navigatorStyle: {navBarHidden: true},
+              passProps: {
+                py:py,
+                restaurant:this.state.restaurant,
+              },
+            });
         })
       }
       _renderDistance(){

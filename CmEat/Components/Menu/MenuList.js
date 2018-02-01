@@ -108,9 +108,9 @@ class Menu extends Component {
 
     renderMenuList(category,categoryIndex){
       return  category.dishes.map((dish,index)=>{
-          const dish_index = categoryIndex+ '-'+index
+          // const dish_index = categoryIndex+ '-'+index
           return(
-              <MenuCard key={dish_index}
+              <MenuCard
                         ds_name = {dish.ds_name}
                         dish = {dish}
                         addToOrder= {this._addToOrder}/>
@@ -162,7 +162,7 @@ class Menu extends Component {
       }else{
         const dish = item;
         return(
-          <MenuCard key={index}
+          <MenuCard
                     ds_name = {dish.ds_name}
                     dish = {dish}
                     qty = {dish.qty}/>
@@ -253,6 +253,7 @@ class Menu extends Component {
 				</View>
 			)
 		}
+    _keyExtractor = (item, index) => item.id;
     render(){
 
       // ==========================================
@@ -302,6 +303,7 @@ class Menu extends Component {
                   data={this.state.menu}
                   renderItem={this._renderMenuList}
                   stickyHeaderIndices={[0]}
+                  keyExtractor={this._keyExtractor}
               />
 
 						<Category categoryList={this.state.categoryList} handleCategoryPress={this._handleCategoryPress}/>

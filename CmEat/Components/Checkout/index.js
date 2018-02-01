@@ -77,25 +77,7 @@ class Confirm extends Component {
         this._handleSubmitComment = this._handleSubmitComment.bind(this);
 				this._closeOrderConfirm = this._closeOrderConfirm.bind(this);
     }
-    componentWillMount(){
-			this._gestureHandlers = {
-				onResponderRelease: ()=>{
-					// console.log('onResponderRelease',this.state.anim._value)
-					// if(this.state.showBanner && this.state.anim._value>10 && this.state.anim._value<114){
-					// 	 this._scrollView.scrollTo({y: 114});
-					// 	 this.setState({
-					// 		 showBanner:false,
-					// 	 })
-					// }
-					// if(!this.state.showBanner && this.state.anim._value<110 && this.state.anim._value<114 ){
-					// 	 this._scrollView.scrollTo({y: 0});
-					// 	 this.setState({
-					// 		showBanner:true,
-					// 	})
-					// }
-				}
-			}
-    }
+
     componentDidMount(){
 			setTimeout(()=>{
 				const rid = this.state.rid;
