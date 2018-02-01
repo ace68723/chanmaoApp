@@ -571,8 +571,9 @@ export default class MyComponent extends Component {
     const products_list = this.state.productList;
     var total = 0;
     var num = 0;
-    console.log(products_list);
     for (let product of products_list) {
+
+      console.log(product);
         total += product.sku_price*product.sku_quantity;
         num += product.sku_quantity;
     }
