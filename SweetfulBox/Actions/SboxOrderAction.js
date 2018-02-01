@@ -38,6 +38,7 @@ export default {
     async getProductList() {
       try{
         const data = sbox_getAllItemsFromCart();
+        console.log(data)
         dispatch({
             actionType: SboxConstants.GET_PRODUCT_LIST, data
         })

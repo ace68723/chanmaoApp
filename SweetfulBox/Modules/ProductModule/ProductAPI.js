@@ -94,7 +94,6 @@ export default  {
     options.headers = Object.assign(options.headers,{
         uuid: io_data.uuid,
     })
-    console.log(url)
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

@@ -22,7 +22,7 @@ export default class MyComponent extends Component {
         tabBarUnderlineStyle={{'backgroundColor':'#ff7685'}}
         tabBarTextStyle={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
         tabBarInactiveTextColor={'#666666'}
-        prerenderingSiblingsNumber={2}
+        prerenderingSiblingsNumber={0}
         tabBarPosition = "bottom"
         initialPage={0}
         style={{flex:1, }}
