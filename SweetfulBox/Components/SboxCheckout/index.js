@@ -248,23 +248,21 @@ export default class MyComponent extends Component {
     )
   }
   _rederFooter() {
-    const products_list = this.state.productList;
-    var total = 0;
-    var num = 0;
-    // for (let product of products_list) {
-    //
-    //   console.log(product);
-    //     total += product.sku_price*product.sku_quantity;
-    //     num += product.sku_quantity;
-    // }
-    Array.from(products_list).forEach(product => {
-      total += product.sku_price*product.sku_quantity;
-      num += product.sku_quantity;
-    })
+    // const products_list = this.state.productList;
+    // var total = 0;
+    // var num = 0;
+    // // for (let product of products_list) {
+    // //
+    // //   console.log(product);
+    // //     total += product.sku_price*product.sku_quantity;
+    // //     num += product.sku_quantity;
+    // // }
+    // Array.from(products_list).forEach(product => {
+    //   total += product.sku_price*product.sku_quantity;
+    //   num += product.sku_quantity;
+    // })
     return(
       <CheckoutButton
-        total={total}
-        num={num}
         doOrderBefore={this._doOrderBefore}
         renderCheckoutBtn={this.state.renderCheckoutBtn}
         checkoutSuccessful={this.state.checkoutSuccessful}
@@ -316,15 +314,14 @@ export default class MyComponent extends Component {
 			  </View>
         <View style={styles.separator}>
   			</View>
-        <ScrollView ref={(ref) => {this._scrollViewRef = ref}}
-                    style={{flex:1,
-                            marginTop:0,
-                            marginBottom:60,
-                            paddingLeft:15,
-                            paddingRight:15,}}>
+        <View style={{flex:1,
+                      marginTop:0,
+                      marginBottom:60,
+                      paddingLeft:15,
+                      paddingRight:15,}}>
         <SboxCart />
 
-        </ScrollView>
+        </View>
         {this._rederFooter()}
         {this._renderGoBackBtn()}
       </View>

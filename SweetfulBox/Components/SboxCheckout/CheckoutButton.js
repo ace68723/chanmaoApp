@@ -22,30 +22,6 @@ export default class CheckoutButton extends Component {
           position:'absolute',
           bottom:0,
           width:width,}}>
-          <View style={{flexDirection:'row',
-                        margin:10,
-                        marginLeft:20,
-                        marginRight:20,}}>
-            <Text style={{
-              flex:1,
-              color:'#ff7685',
-              fontSize:20,
-              fontFamily:'FZZhunYuan-M02S',
-              textAlign:'left',
-            }}>
-                Before Tax: ${this.props.total.toFixed(2)}
-            </Text>
-            <Text style={{
-              flex:1,
-              // justifyContent:'flex-end',
-              color:'#ff7685',
-              fontSize:20,
-              fontFamily:'FZZhunYuan-M02S',
-              textAlign:'right',
-            }}>
-                 {this.props.num}件
-            </Text>
-          </View>
           <TouchableOpacity
               style={{height:60,}}
               onPress={this.props.doOrderBefore}

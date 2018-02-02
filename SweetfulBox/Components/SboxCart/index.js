@@ -132,11 +132,44 @@ export default class SboxCart extends Component {
 
   }
   render() {
+    const products_list = this.state.cartList;
+    var total = 0;
+    var num = 0;
+    Array.from(products_list).forEach(product => {
+      total += product.sku_price*product.sku_quantity;
+      num += product.sku_quantity;
+    })
     return (
-      <FlatList
-          data={this.state.cartList}
-          renderItem={this._renderItem}
-      />
+      <View style={{flex: 1, justifyContent: 'space-between'}}>
+        <FlatList
+            data={this.state.cartList}
+            renderItem={this._renderItem}
+        />
+        <View style={{flexDirection:'row',
+                      margin:10,
+                      marginLeft:20,
+                      marginRight:20,}}>
+          <Text style={{
+            flex:1,
+            color:'#ff7685',
+            fontSize:20,
+            fontFamily:'FZZhunYuan-M02S',
+            textAlign:'left',
+          }}>
+              Before Tax: ${total.toFixed(2)}
+          </Text>
+          <Text style={{
+            flex:1,
+            // justifyContent:'flex-end',
+            color:'#ff7685',
+            fontSize:20,
+            fontFamily:'FZZhunYuan-M02S',
+            textAlign:'right',
+          }}>
+               {num}件
+          </Text>
+        </View>
+      </View>
     );
   }
 }
