@@ -122,6 +122,7 @@ export default  {
             .catch((error) => {throw error})
   },
   checkStock(io_data){
+      console.log(io_data)
     const url = API_CHECK_STOCK;
 
     let options = {

@@ -1,4 +1,5 @@
 import SboxConstants from '../Constants/SboxConstants';
+import ProductModule from '../Modules/ProductModule/ProductModule'
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import {sbox_getAllItemsFromCart, sbox_addQuantity, sbox_subQuantity, sbox_deleteItem} from '../Modules/Database';
 export default {
@@ -19,6 +20,13 @@ export default {
         dispatch({
             actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY
         })
+        dispatch({
+          actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
+      })
+      const data = sbox_getAllItemsFromCart();
+      dispatch({
+          actionType: SboxConstants.GET_PRODUCT_LISTS, data
+      })
       },
       subQuantity(item){
         if(item.sku_quantity<=1) return;
@@ -26,6 +34,13 @@ export default {
         dispatch({
             actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY
         })
+        dispatch({
+          actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
+      })
+      const data = sbox_getAllItemsFromCart();
+      dispatch({
+          actionType: SboxConstants.GET_PRODUCT_LISTS, data
+      })
       },
       deleteItem(item){
         console.log(item)
@@ -33,5 +48,26 @@ export default {
         dispatch({
             actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY
         })
+        dispatch({
+          actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
+      })
+      const data = sbox_getAllItemsFromCart();
+      dispatch({
+          actionType: SboxConstants.GET_PRODUCT_LISTS, data
+      })
+      },
+      async checkStock() {
+          try {
+              const data = await ProductModule.checkStock();
+           
+              if (data.ev_error ===0) {
+                dispatch({
+                    actionType: SboxConstants.CHECK_STOCK, data
+                })
+              }
+             
+          }catch(error){
+
+        }
       }
 }
