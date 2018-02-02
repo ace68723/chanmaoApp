@@ -174,7 +174,7 @@ export default  {
       return
     }
   },
-  checkStock() {
+  async checkStock() {
     try {
       const cart_list = sbox_getAllItemsFromCart();
       const lo_data ={
