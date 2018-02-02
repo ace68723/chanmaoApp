@@ -36,6 +36,7 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
     this._cart = realm.objects('sbox_cart');
     let totalQuantity = 0;
     this._cart.forEach((item) => {
+      console.log(item)
       totalQuantity += item.sku_quantity
     });
     this.state.totalQuantity = totalQuantity;

@@ -22,11 +22,11 @@ export default {
         })
         dispatch({
           actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
-      })
-      const data = sbox_getAllItemsFromCart();
-      dispatch({
-          actionType: SboxConstants.GET_PRODUCT_LISTS, data
-      })
+        })
+        // const data = sbox_getAllItemsFromCart();
+        // dispatch({
+        //     actionType: SboxConstants.GET_PRODUCT_LISTS, data
+        // })
       },
       subQuantity(item){
         if(item.sku_quantity<=1) return;
@@ -36,11 +36,11 @@ export default {
         })
         dispatch({
           actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
-      })
-      const data = sbox_getAllItemsFromCart();
-      dispatch({
-          actionType: SboxConstants.GET_PRODUCT_LISTS, data
-      })
+        })
+        // const data = sbox_getAllItemsFromCart();
+        // dispatch({
+        //     actionType: SboxConstants.GET_PRODUCT_LISTS, data
+        // })
       },
       deleteItem(item){
         console.log(item)
@@ -50,22 +50,24 @@ export default {
         })
         dispatch({
           actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
-      })
-      const data = sbox_getAllItemsFromCart();
-      dispatch({
-          actionType: SboxConstants.GET_PRODUCT_LISTS, data
-      })
+        })
+        // const data = sbox_getAllItemsFromCart();
+        // dispatch({
+        //     actionType: SboxConstants.GET_PRODUCT_LISTS, data
+        // })
       },
       async checkStock() {
           try {
               const data = await ProductModule.checkStock();
-              console.log(data)
               if (data.ev_error ===0) {
                 dispatch({
-                    actionType: SboxConstants.CHECK_STOCK, data
+                    actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY
+                })
+                dispatch({
+                  actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
                 })
               }
-             
+
           }catch(error){
           console.log(error)
         }
