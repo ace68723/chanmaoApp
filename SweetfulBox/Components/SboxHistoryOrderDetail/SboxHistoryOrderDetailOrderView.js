@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
 export default class SboxHistoryOrderDetailOrderView extends Component {
   constructor(props) {
     super(props);
+    this._renderProduct = this._renderProduct.bind(this);
     // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
   }
 
@@ -127,6 +128,24 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
     return orderList;
   }
 
+_renderProduct(itemObject) {
+  console.log(itemObject);
+  var item = itemObject.item;
+  return(
+    <TouchableWithoutFeedback onPress={() => this.props.goToSboxProductDetial(item)}>
+      <View style={styles.item}>
+        <View style={styles.itemImage}>
+          <Image style={styles.image} source={{uri:item.sku_image}}/>
+        </View>
+        <View>
+          <Text style={styles.itemName}>{item.sku_fullname} x {item.sku_quantity}</Text>
+          <Text style={styles.itemPrice}>${item.sku_price}</Text>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+  )
+}
+
 _renderUserInfo() {
   if (!this.props.orderDetail.addr){
     return;
@@ -153,6 +172,7 @@ _renderUserInfo() {
 }
 
   render() {
+    console.log(this.props.orderDetail.prod);
     return (
       <ScrollView >
         <View style={styles.content}>
@@ -160,8 +180,13 @@ _renderUserInfo() {
             <Text style={styles.orderFont}>订单号：#{this.props.orderDetail.obid}</Text>
             <Text style={styles.orderFont}>{this.props.orderDetail.created_date}</Text>
           </View>
+          <FlatList
+            data={this.props.orderDetail.prod}
+    				enableEmptySections
+    				keyExtractor={(item, index) => item.sku_id}
+    				renderItem={this._renderProduct}>
 
-          {this._renderOrderList()}
+          </FlatList>
           {this._renderUserInfo()}
 
           <View style={styles.extraFee}>

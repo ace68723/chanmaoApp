@@ -13,6 +13,7 @@ import {
 import SboxHistoryAction from '../../Actions/SboxHistoryAction';
 import SboxHistoryStore from '../../Stores/SboxHistoryStore';
 import SboxHistoryFlatlist from './SboxHistoryFlatlist';
+import SboxHeader from '../../../App/Components/General/SboxHeader';
 
 const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
@@ -81,15 +82,9 @@ export default class HistoryViewController extends Component {
   render() {
     return(
       <View style={styles.viewController}>
-				<View style={[styles.navigation, {height: navigationHeight}]}>
-			    	<View style={styles.back}>
-			    	</View>
-			    	<View style={styles.title}>
-			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>历史订单</Text>
-			    	</View>
-			    	<View style={{flex:1}}>
-            </View>
-			  </View>
+				<SboxHeader title={"历史订单"}
+                goBack={this._renderGoBackBtn}
+                leftButtonText={'none'}/>
 				<View style={styles.separator}></View>
         {this._renderHistoryView()}
       </View>
