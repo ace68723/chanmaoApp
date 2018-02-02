@@ -29,6 +29,7 @@ export default class SboxCart extends Component {
   }
   componentDidMount(){
       SboxCartStore.addChangeListener(this._onChange);
+      SboxCartAction.checkStock();
   }
   componentWillUnmount() {
     SboxCartStore.removeChangeListener(this._onChange);

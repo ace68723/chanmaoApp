@@ -29,6 +29,9 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
   subQuantity(){
 
   },
+  checkStock(data) {
+    console.log(data)
+  },
   updateTotalQuantity(){
     this._cart = realm.objects('sbox_cart');
     let totalQuantity = 0;
@@ -54,6 +57,10 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
 	   switch(action.actionType){
         case SboxConstants.UPDATE_CART_ITEM_QUANTITY:
              SboxCartStore.updateTotalQuantity();
+        break
+        case SboxConstants.CHECK_STOCK:
+             SboxCartStore.checkStock(action.data);
+             console.log(action.data)
         break
 
         default:
