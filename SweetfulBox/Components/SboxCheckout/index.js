@@ -18,6 +18,7 @@ import {
 import UserInfo from '../SboxAddAddressInfo/UserInfo';
 import SboxCart from '../SboxCart';
 import CheckoutButton from './CheckoutButton';
+import Header from '../../../App/Components/General/SboxHeader';
 
 import SboxOrderAction from '../../Actions/SboxOrderAction';
 import SboxProductAction from '../../Actions/SboxProductAction';
@@ -305,21 +306,23 @@ export default class MyComponent extends Component {
     //   </View>
     // );
   }
-
+  // <View style={[styles.navigation, {height: navigationHeight}]}>
+  //     <View style={{flex:1,justifyContent:'center',}}>
+  //       {this._renderGoBackBtn()}
+  //     </View>
+  //
+  //     <View style={styles.title}>
+  //         <Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>购物箱</Text>
+  //     </View>
+  //     <View style={{flex:1}}>
+  //     </View>
+  // </View>
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.navigation, {height: navigationHeight}]}>
-            <View style={{flex:1,justifyContent:'center',}}>
-              {this._renderGoBackBtn()}
-            </View>
-
-			    	<View style={styles.title}>
-			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>购物箱</Text>
-			    	</View>
-			    	<View style={{flex:1}}>
-            </View>
-			  </View>
+        <Header title={"购物箱"}
+                goBack={this._renderGoBackBtn}
+                leftButtonText={'x'}/>
         <View style={styles.separator}>
   			</View>
         <View style={{flex:1,
