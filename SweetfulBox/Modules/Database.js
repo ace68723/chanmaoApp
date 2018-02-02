@@ -37,13 +37,12 @@ export function sbox_getAllItemsFromCart() {
   return realm.objects('sbox_cart');
 }
 export function sbox_rewriteCartListStock(cartList) {
-  for(i = 0; i< cartList.length; i++ ) {
-    const item = realm.objectForPrimaryKey('sbox_cart',cartList[i].sku_id);
-    console.log(item)
+  cartList.forEach(element => {
+    const item = realm.objectForPrimaryKey('sbox_cart',element.sku_id);
     realm.write(() => {
-      item.sku_amount = cartList[i].sku_amount;
+      item.sku_amount = element.sku_actual;
     })
-  }
+  });
   
 }
 export function sbox_addItemToCart(selectedProduct) {

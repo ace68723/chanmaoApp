@@ -59,7 +59,6 @@ export default {
       async checkStock() {
           try {
               const data = await ProductModule.checkStock();
-
               if (data.ev_error ===0) {
                 dispatch({
                     actionType: SboxConstants.CHECK_STOCK, data
@@ -67,7 +66,7 @@ export default {
               }
 
           }catch(error){
-
+          console.log(error)
         }
       }
 }

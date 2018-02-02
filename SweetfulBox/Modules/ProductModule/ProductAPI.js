@@ -139,7 +139,7 @@ export default  {
     options.body = JSON.stringify({
         ia_prod: io_data.ia_prod,
     })
-
+   console.log(options)
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

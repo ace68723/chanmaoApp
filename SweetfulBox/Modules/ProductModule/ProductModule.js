@@ -176,8 +176,16 @@ export default  {
   },
   async checkStock() {
     try {
-      const cart_list = sbox_getAllItemsFromCart();
-      console.log(cart_list)
+      const cart_data = sbox_getAllItemsFromCart();
+      let cart_list = [];
+      cart_data.forEach(item => {
+        let data = {};
+        data.sku_id = item.sku_id;
+        data.sku_quantity = item.sku_quantity;
+        cart_list.push(data)
+      });
+        
+    
       if(cart_list.length === 0) {
         console.log('cart empty')
         return
@@ -187,6 +195,7 @@ export default  {
           authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxODc4NSIsImV4cGlyZWQiOjE0ODkwODk2MDAsImxhc3Rsb2dpbiI6MTQ4MzA0NzU4OH0.EPjeu-klo-ygKwUvdyVspIWeaHoosCNPdaa1pO4_RsY',
         }
         const productStock = await ProductAPI.checkStock(lo_data);
+        console.log(productStock.ea_prod)
         sbox_rewriteCartListStock(productStock.ea_prod);
         if(productStock.ev_error === 0 ){
   
@@ -197,7 +206,7 @@ export default  {
         }
       }
     } catch (e) {
-      const errorMessage = 'error';
+      const errorMessage = e;
       throw errorMessage
     }
   }
