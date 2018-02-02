@@ -12,6 +12,8 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
   state:{
     totalQuantity:0,
     cartList:[],
+    total:0,
+    totalQuantity:0,
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -35,21 +37,18 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
   updateTotalQuantity(){
     this._cart = realm.objects('sbox_cart');
     let totalQuantity = 0;
+    let _total = 0;
     this._cart.forEach((item) => {
-      console.log(item)
-      totalQuantity += item.sku_quantity
+      totalQuantity += item.sku_quantity;
+      _total += item.sku_price * item.sku_quantity;
     });
     this.state.totalQuantity = totalQuantity;
+    this.state.total = _total;
     this.state.cartList = this._cart;
     SboxCartStore.emitChange();
   },
   getTotalQuantity(){
     return this.state.totalQuantity
-  },
-  initState(){
-    this.state = Object.assign({},{
-
-    });
   },
   getState(){
     return this.state;

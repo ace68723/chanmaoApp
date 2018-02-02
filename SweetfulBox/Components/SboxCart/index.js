@@ -33,7 +33,6 @@ export default class SboxCart extends Component {
   }
   componentWillUnmount() {
     SboxCartStore.removeChangeListener(this._onChange);
-    SboxCartStore.initState();
   }
   _onChange() {
     const cartState = SboxCartStore.getState();
@@ -61,30 +60,42 @@ export default class SboxCart extends Component {
   _renderButton(item) {
       if(item.sku_quantity <= item.sku_amount){
         return (
-          <View style={{flexDirection: 'row', justifyContent: 'flex-start', marginTop: 10}}>
+          <View style={{flexDirection: 'row',  marginTop: 10}}>
             <TouchableOpacity
               activeOpacity={0.4}
-              onPress={this._subQuantity.bind(null,item)}
-              style={{justifyContent: 'center'}}>
-              <Text style={{borderWidth: 0.8,
-                            width: 20,
-                            textAlign: 'center'}}>-</Text>
+              onPress={this._subQuantity.bind(null,item)}>
+
+              <View style={{justifyContent: 'center',
+                            alignItems:'center',
+                            height: 30,
+                            width: 30,
+                            borderWidth: 1,}}>
+                <Text style={{fontSize:20}}>-</Text>
+              </View>
+
             </TouchableOpacity>
-            <View style={{justifyContent: 'center', marginLeft: -1}}>
-              <Text style={{borderWidth: 0.8,
-                            width: 50,
-                            textAlign: 'center',
-                            color: '#ff7685'}}>
+            <View style={{justifyContent: 'center',
+                          width: 50,
+                          borderTopWidth: 1,
+                          borderBottomWidth: 1,
+                          justifyContent: 'center',
+                          alignItems:'center',
+                        }}>
+              <Text style={{ fontSize:18,
+                             color: '#ff7685'}}>
                 {item.sku_quantity}
               </Text>
             </View>
             <TouchableOpacity
               activeOpacity={0.4}
-              onPress={this._addQuantity.bind(null,item)}
-              style={{justifyContent: 'center', marginLeft: -1}}>
-              <Text style={{borderWidth: 0.8,
-                            width: 20,
-                            textAlign: 'center'}}>+</Text>
+              onPress={this._addQuantity.bind(null,item)}>
+              <View style={{justifyContent: 'center',
+                            alignItems:'center',
+                            height: 30,
+                            width: 30,
+                            borderWidth: 1,}}>
+                <Text style={{fontSize:20}}>+</Text>
+              </View>
             </TouchableOpacity>
 
           </View>
@@ -104,17 +115,32 @@ export default class SboxCart extends Component {
     const {sku_image_url,spu_name,sku_name,sku_quantity,sku_amount,sku_price} = item;
     return(
       <View style={styles.item}>
-        <View style={styles.itemImage}>
-          <Image style={styles.image} source={{uri:sku_image_url}}/>
-        </View>
 
-        <View style={{flex:1,flexDirection:'row',}}>
-          <View style={{flex:0.8,paddingRight:10,}}>
-            <Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}>{spu_name}  {sku_name}</Text>
+        <Image style={styles.image} source={{uri:sku_image_url}}/>
+
+        <View style={{flex:1,flexDirection:'row',marginLeft:20}}>
+          <View style={{flex:0.7,paddingRight:10,}}>
+            <Text numberOfLines={2}
+                  style={{fontSize:15,
+                          fontFamily:'FZZhunYuan-M02S',
+
+                        }}>
+                {spu_name}
+            </Text>
+            <Text numberOfLines={1}
+                  style={{fontSize:12,
+                          fontFamily:'FZZhunYuan-M02S',
+                          marginTop:10,
+                          color:"#6d6e71",
+                        }}>
+                {sku_name}
+            </Text>
             {this._renderButton(item)}
           </View>
-          <View style={{flex:0.2, justifyContent: 'space-between', flexDirection: 'column'}}>
-            <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}>${sku_price}</Text>
+          <View style={{flex:0.3, justifyContent: 'space-between', flexDirection: 'column'}}>
+            <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}>
+            ${sku_price}
+            </Text>
             <TouchableOpacity
               activeOpacity={0.4}
               style={{alignItems: 'flex-end'}}
@@ -131,42 +157,36 @@ export default class SboxCart extends Component {
 
 
   }
+  _keyExtractor = (item, index) => item.sku_id;
   render() {
-    const products_list = this.state.cartList;
-    var total = 0;
-    var num = 0;
-    Array.from(products_list).forEach(product => {
-      total += product.sku_price*product.sku_quantity;
-      num += product.sku_quantity;
-    })
     return (
       <View style={{flex: 1, justifyContent: 'space-between'}}>
         <FlatList
             data={this.state.cartList}
             renderItem={this._renderItem}
+            keyExtractor={this._keyExtractor}
         />
         <View style={{flexDirection:'row',
                       margin:10,
                       marginLeft:20,
                       marginRight:20,}}>
           <Text style={{
-            flex:1,
+            flex:0.7,
             color:'#ff7685',
             fontSize:20,
             fontFamily:'FZZhunYuan-M02S',
             textAlign:'left',
           }}>
-              Before Tax: ${total.toFixed(2)}
+              Before Tax: ${Number(this.state.total).toFixed(2)}
           </Text>
           <Text style={{
-            flex:1,
-            // justifyContent:'flex-end',
+            flex:0.3,
             color:'#ff7685',
             fontSize:20,
             fontFamily:'FZZhunYuan-M02S',
             textAlign:'right',
           }}>
-               {num}件
+               {this.state.totalQuantity}件
           </Text>
         </View>
       </View>
@@ -176,7 +196,7 @@ export default class SboxCart extends Component {
 
 const styles = StyleSheet.create({
   item: {
-    height: height * (295 / 2208),
+    // height: height * (295 / 2208),
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: '#DCDCDC',
@@ -184,14 +204,10 @@ const styles = StyleSheet.create({
     padding:10,
     // marginHorizontal: width * (38 / 1242),
   },
-  itemImage: {
-    marginLeft: width * (54 / 1242),
-    marginRight: width * (118 / 1242),
-  },
+  // 620*870 0.7126
   image: {
-    height: height * (400 / 2208),
-    width: width * (165 / 1242),
-    resizeMode: 'contain',
+    height: width * (240 / 1242)/0.7126,
+    width: width * (240 / 1242),
   },
   itemPrice: {
     fontSize: (38 / 0.75) / 2208 * height,

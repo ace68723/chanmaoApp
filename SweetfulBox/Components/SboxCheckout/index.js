@@ -11,6 +11,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Platform,
   ImageBackground
 } from 'react-native';
 
@@ -29,7 +30,14 @@ const realm = new Realm({path: SBOX_REALM_PATH});
 const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
 const viewWidth = Dimensions.get('window').width;
-const navigationHeight = viewHeight * (212/2208) - 17;
+
+let viewMarginTop;
+if(height == 812){
+  viewMarginTop = 45;
+}else{
+  viewMarginTop = 20;
+}
+const navigationHeight = viewHeight * (237/2208) - viewMarginTop;
 const checkoutButtonMargin = viewWidth * (60/1242);
 
 export default class MyComponent extends Component {
@@ -232,14 +240,12 @@ export default class MyComponent extends Component {
   // }
   _renderGoBackBtn() {
     return(
-      <TouchableOpacity style={{paddingTop:22,
-                                paddingLeft:8,
-                                paddingRight:20,
-                                position:'absolute',
-                                top:-15,
-                                left:0,}}
-                        onPress={this._goBack}>
-        <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
+      <TouchableOpacity onPress={this._goBack}>
+        <View style={{width:30,
+                      height:30,
+                      marginLeft:10,
+                      borderRadius:15,
+                      backgroundColor:"rgba(0,0,0,0.4)"}}>
           <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
             ×
           </Text>
@@ -304,8 +310,10 @@ export default class MyComponent extends Component {
     return (
       <View style={styles.container}>
         <View style={[styles.navigation, {height: navigationHeight}]}>
-			    	<View style={styles.back}>
-			    	</View>
+            <View style={{flex:1,justifyContent:'center',}}>
+              {this._renderGoBackBtn()}
+            </View>
+
 			    	<View style={styles.title}>
 			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>购物箱</Text>
 			    	</View>
@@ -323,7 +331,7 @@ export default class MyComponent extends Component {
 
         </View>
         {this._rederFooter()}
-        {this._renderGoBackBtn()}
+
       </View>
     );
   }
@@ -332,7 +340,8 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-		marginTop: 12,
+		marginTop: viewMarginTop,
+    // backgroundColor:'red',
   },
   navigation: {
     flexDirection:'row'
