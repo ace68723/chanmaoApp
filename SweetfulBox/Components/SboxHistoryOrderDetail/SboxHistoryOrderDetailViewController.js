@@ -10,6 +10,7 @@ import {
 
 import SboxHistoryOrderDetailHeader from './SboxHistoryOrderDetailHeader';
 import SboxHistoryOrderDetailOrderView from './SboxHistoryOrderDetailOrderView';
+import SboxHeader from '../../../App/Components/General/SboxHeader';
 
 const { height, width } = Dimensions.get('window');
 
@@ -48,8 +49,10 @@ export default class HistoryOrderDetailViewController extends Component {
   render() {
     return(
 			<View style={styles.container}>
-				<SboxHistoryOrderDetailHeader goBack={this._goBack}/>
-	        {this._renderHistoryOrderDetailView()}
+				<SboxHeader title={"订单详情"}
+                goBack={this._goBack}
+                leftButtonText={'<'}/>
+	      {this._renderHistoryOrderDetailView()}
 			</View>
     )
   }

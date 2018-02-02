@@ -18,7 +18,7 @@ import {
 import UserInfo from '../SboxAddAddressInfo/UserInfo';
 import SboxCart from '../SboxCart';
 import CheckoutButton from './CheckoutButton';
-import Header from '../../../App/Components/General/SboxHeader';
+import SboxHeader from '../../../App/Components/General/SboxHeader';
 
 import SboxOrderAction from '../../Actions/SboxOrderAction';
 import SboxProductAction from '../../Actions/SboxProductAction';
@@ -320,7 +320,7 @@ export default class MyComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header title={"购物箱"}
+        <SboxHeader title={"购物箱"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={'x'}/>
         <View style={styles.separator}>
