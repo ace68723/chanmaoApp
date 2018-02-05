@@ -8,10 +8,13 @@ import AddressModule from '../Modules/AddressModule/AddressModule';
 export default {
     async getRestaurant(){
       try{
+          console.log('getRestaurant1')
           const token = await AuthModule.getToken();
           const userloc = await LocationModule.getCurrentPosition();
           const reqData = {token,userloc}
+          console.log('getRestaurant2')
           const data = await RestaurantModule.getRestaurantData(reqData)
+          console.log('getRestaurant',data)
           const addressList = await AddressModule.getAddress(token);
           dispatch({
               actionType: AppConstants.GET_RESTAURANT_SUCCESS, data

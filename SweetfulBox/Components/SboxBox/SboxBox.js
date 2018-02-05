@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import SboxCart from '../SboxCart/SboxCart';
+import SboxCartStore from '../../Stores/SboxCartStore';
 
 const {height, width} = Dimensions.get('window');
 const AnimatedImageBackground  = Animated.createAnimatedComponent(ImageBackground);
@@ -19,18 +20,23 @@ export default class MyComponent extends Component {
   constructor(props){
     super(props);
     this.state = {
-      totalQuantity:props.total,
+      totalQuantity:"",
       currentBox:{boxWeights:0},
       boxLeft: new Animated.Value(width*0.8),
       boxPosition: new Animated.Value(0),
     }
+    this._onChange = this._onChange.bind(this);
   }
-  componentWillReceiveProps(nextProps, nextState){
-		if(nextProps.total !== this.state.totalQuantity){
-			return true;
-		}else{
-			return false;
-		}
+  componentDidMount(){
+    SboxCartStore.addChangeListener(this._onChange);
+  }
+  componentWillUnmount() {
+    SboxCartStore.removeChangeListener(this._onChange);
+  }
+  _onChange() {
+    this.setState({
+      totalQuantity:SboxCartStore.getTotalQuantity(),
+    })
   }
 
   _renderBox() {
@@ -59,7 +65,7 @@ export default class MyComponent extends Component {
                     }}
                     source={require('./Image/box.png')}>
                 <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
-                   {this.props.total}
+                   {this.state.totalQuantity}
                 </Text>
               </AnimatedImageBackground>
           </TouchableOpacity>

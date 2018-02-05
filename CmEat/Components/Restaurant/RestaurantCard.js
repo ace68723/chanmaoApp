@@ -21,7 +21,7 @@ class RestaurantCard extends Component {
           super();
 					const rid = Number(props.restaurant.rid);
           this.state={
-						restaurantData:cme_GetRestaurantWithRid(rid),
+						// restaurantData:cme_GetRestaurantWithRid(rid),
 						restaurant:props.restaurant,
             ref:props.restaurant.rid,
             imgUrl:{uri:props.restaurant.mob_banner},
@@ -34,7 +34,7 @@ class RestaurantCard extends Component {
 			componentWillReceiveProps(nextProps){
 				const rid = Number(nextProps.restaurant.rid);
 				this.setState({
-					restaurantData:cme_GetRestaurantWithRid(rid),
+					// restaurantData:cme_GetRestaurantWithRid(rid),
 					restaurant:nextProps.restaurant,
 					ref:nextProps.restaurant.rid,
 					imgUrl:{uri:nextProps.restaurant.mob_banner},
@@ -148,7 +148,7 @@ class RestaurantCard extends Component {
                               }}
                           ref={this.state.ref} >
                     <Image
-                      source={{uri:this.state.restaurantData.mob_banner}}
+                      source={{uri:this.state.restaurant.mob_banner}}
                       style={[{height:width/1.25,
                                width:null,}]}
                     />
@@ -164,12 +164,12 @@ class RestaurantCard extends Component {
                               borderLeftWidth:StyleSheet.hairlineWidth,
                               borderRightWidth:StyleSheet.hairlineWidth,}}>
                   <Text style={{color:'#363646',fontSize:15,fontWeight:'500',fontFamily:'FZZongYi-M05S',}}>
-                      {this.state.restaurantData.name}
+                      {this.state.restaurant.name}
                   </Text>
                   <View style={{flexDirection:"row"}}>
                     <View style={{flex:1,}}>
                       <Text style={{color:'#ababb0',fontSize:12,fontWeight:'200',marginTop:5,fontFamily:'FZZhunYuan-M02S'}}>
-                          {this.state.restaurantData.desc}
+                          {this.state.restaurant.desc}
                       </Text>
                     </View>
                     {this._renderDistance()}

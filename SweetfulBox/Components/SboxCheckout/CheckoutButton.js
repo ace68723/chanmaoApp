@@ -24,7 +24,7 @@ export default class CheckoutButton extends Component {
           width:width,}}>
           <TouchableOpacity
               style={{height:60,}}
-              onPress={this.props.doOrderBefore}
+              onPress={this.props.getOrderBefore}
               activeOpacity={0.4}>
             <View style={{
                           flex:1,

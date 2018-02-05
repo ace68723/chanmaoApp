@@ -54,7 +54,7 @@ export default class MyComponent extends Component {
     // this._goToAddressList = this._goToAddressList.bind(this);
     // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
     // this._setUserInfo = this._setUserInfo.bind(this);
-    this._doOrderBefore = this._doOrderBefore.bind(this);
+    this._getOrderBefore = this._getOrderBefore.bind(this);
     this._goBack = this._goBack.bind(this);
     // this._goToAddCard = this._goToAddCard.bind(this);
     // this._doOrderBefore = this._doOrderBefore.bind(this);
@@ -140,7 +140,7 @@ export default class MyComponent extends Component {
   }
   _checkProductStatus() {
   }
-  _doOrderBefore() {
+  _getOrderBefore() {
     this.setState({
       showCheckoutLoading:true,
     })
@@ -270,7 +270,7 @@ export default class MyComponent extends Component {
     // })
     return(
       <CheckoutButton
-        doOrderBefore={this._doOrderBefore}
+        getOrderBefore={this._getOrderBefore}
         renderCheckoutBtn={this.state.renderCheckoutBtn}
         checkoutSuccessful={this.state.checkoutSuccessful}
         showCheckoutLoading={this.state.showCheckoutLoading}

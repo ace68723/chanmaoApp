@@ -39,7 +39,7 @@ export default class RestaurantTab extends Component {
     const restaurant = item;
     // restaurant, sectionID, rowID
 			if(restaurant){
-				restaurant.imgUrl = {uri:restaurant.mob_banner};
+				// restaurant.imgUrl = {uri:restaurant.mob_banner};
 				return <RestaurantCard restaurant={restaurant}
 															 openMenu={this.props.openMenu}
 															 navigator={this.props.navigator}/>

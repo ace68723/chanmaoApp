@@ -39,7 +39,6 @@ export default class SweetProductDetial extends Component {
 	constructor(props) {
     super(props);
     this.state = SboxProductStore.getState();
-
     this._onPageChange = this._onPageChange.bind(this);
     this._addToCart = this._addToCart.bind(this);
     this._goToSboxCart = this._goToSboxCart.bind(this);
@@ -48,8 +47,6 @@ export default class SweetProductDetial extends Component {
   }
   componentDidMount(){
       SboxProductStore.addChangeListener(this._onChange);
-      const {spu_id} = this.props;
-      SboxProductAction.getSingleProduct(spu_id);
   }
   componentWillUnmount() {
     SboxProductStore.removeChangeListener(this._onChange);
@@ -202,14 +199,14 @@ export default class SweetProductDetial extends Component {
   }
 
   render() {
-      if(this.state.loading) {
-        return(
-          <View style={{flex: 1,
-            justifyContent: 'center'}}>
-               <ActivityIndicator size="large" color="red" />
-          </View>
-        )
-      } else {
+      // if(this.state.loading) {
+      //   return(
+      //     <View style={{flex: 1,
+      //       justifyContent: 'center'}}>
+      //          <ActivityIndicator size="large" color="red" />
+      //     </View>
+      //   )
+      // } else {
         return (
           <View style={{flex:1}}>
             <ScrollView style={styles.container}>
@@ -250,12 +247,12 @@ export default class SweetProductDetial extends Component {
             </ScrollView>
             {this._renderHeaderImage()}
             {this._renderGoBackBtn()}
-            <SboxBox total={this.state.totalQuantity} goToSboxCart={this._goToSboxCart}/>
+            <SboxBox  goToSboxCart={this._goToSboxCart}/>
           </View>
 
 
         );
-      }
+      // }
   }
 }
 const styles = StyleSheet.create({

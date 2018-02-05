@@ -17,8 +17,10 @@ const RestaurantModule = {
 
         RestaurantApi.getRestaurantData(userData)
           .then(data =>{
+            console.log('getRestaurant3')
             if(data.result == 0){
               UpdateAllRestaurants(data)
+              console.log('getRestaurant6')
               resolve(data);
             }else{
               Alert.errorAlert(data.message)

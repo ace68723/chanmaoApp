@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 const StripeBridge = NativeModules.StripeBridge;
 
-import {updateCardInfo,GetUserInfo,init_sbox} from '../../../App/Modules/Database';
+import {GetUserInfo} from '../../../App/Modules/Database';
+import {sbox_getAllItemsFromCart} from '../../Modules/Database';
 export default  {
   async putUserAddr(io_data){
     const {uid,token,version} = GetUserInfo();
@@ -73,20 +74,23 @@ export default  {
     try {
       const {uid,token,version} = GetUserInfo();
       if(!token) return {shouldDoAuth:true}
+
+      const allItems = sbox_getAllItemsFromCart();
       let _productList = [];
-      for (var i = 0; i < io_data.productList.length; i++) {
-        const product = io_data.productList[i];
-        const sku_id = product.sku_id;
-        const quantity = product.sku_quantity;
-        const _product = {sku_id,quantity}
-        _productList.push(_product);
-      }
+      allItems.forEach((item)=>{
+          const sku_id = item.sku_id;
+          const sku_quantity = item.sku_quantity;
+          _productList.push({sku_id,sku_quantity});
+      })
       const lo_data = {
         authortoken:token,
         ia_prod: _productList,
       }
+      console.log(lo_data)
       const res = await OrderAPI.getOrderBefore(lo_data);
+      console.log(res)
       eo_data = Object.assign(res,{shouldDoAuth:false});
+
       return eo_data
     } catch (e) {
       console.log(e)

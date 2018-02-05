@@ -52,8 +52,8 @@ export default class SboxHome extends Component {
       this._setPosition = this._setPosition.bind(this);
       this._scrollEventBind = this._scrollEventBind.bind(this);
       this._getScrollViewRefs = this._getScrollViewRefs.bind(this);
-      this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
       this._backToHome = this._backToHome.bind(this);
+      this._renderScrollableTabView = this._renderScrollableTabView.bind(this);
   }
   componentWillMount() {
     DatabaseInit();
@@ -80,13 +80,7 @@ export default class SboxHome extends Component {
   _onChange() {
       this.setState(SboxHomeStore.getState());
   }
-  _goToSboxProductDetial(product) {
-    this.props.navigator.push({
-      screen: 'SboxProductDetial',
-      navigatorStyle: {navBarHidden: true},
-      passProps:{spu_id: product.spu_id,},
-    })
-  }
+
   _backToHome() {
     this.props.handleBackToHome();
   }
@@ -143,11 +137,12 @@ export default class SboxHome extends Component {
               tabLabel={theme.name+ '|' +theme.icon_active + '|' + theme.icon_deactive}
               scrollEventBind={this._scrollEventBind}
               getScrollViewRefs={this._getScrollViewRefs}
-              goToSboxProductDetial={this._goToSboxProductDetial}/>
+              navigator={this.props.navigator}/>
       )
     }
     return(
       <ScrollableTabView style={{}}
+
                           tabBarPosition={'bottom'}
                           tabBarBackgroundColor={'#fff'}
                           tabBarActiveTextColor={'#ff7685'}
@@ -172,13 +167,6 @@ export default class SboxHome extends Component {
   _renderSingleTabView() {
 
     if(!this.state.themeList[0]) return;
-
-    // this.state.themeList.push(Object.assign({}, this.state.themeList[0]));
-    // this.state.themeList[1].name = '生活用品';
-    //
-    // this.state.themeList.push(Object.assign({}, this.state.themeList[0]));
-    // this.state.themeList[2].name = '其他商品';
-
     if (this.state.themeList.length > 1 && this.state.themeList[1].prod_list.length != 0){
       return this._renderScrollableTabView()
     }
@@ -191,7 +179,7 @@ export default class SboxHome extends Component {
                   section_list={theme.section_list}
                   scrollEventBind={this._scrollEventBind}
                   getScrollViewRefs={this._getScrollViewRefs}
-                  goToSboxProductDetial={this._goToSboxProductDetial}/>
+                  navigator={this.props.navigator}/>
     )
   }
   _renderHeaderWithBanner() {
