@@ -12,7 +12,7 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     shouldAddCard:false,
     shouldAddAddress:false,
     checkoutSuccessful:false,
-    productList: [],
+    productList: [{}],
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)

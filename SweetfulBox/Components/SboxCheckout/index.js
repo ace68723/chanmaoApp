@@ -45,7 +45,6 @@ export default class MyComponent extends Component {
   constructor() {
     super();
     this.state = {
-      productList:[],
       startCheckout:false,
       renderCheckoutBtn:false,
       checkoutSuccessful:false,
@@ -65,14 +64,10 @@ export default class MyComponent extends Component {
     // this._handleAddAddress = this._handleAddAddress.bind(this);
     this._onChange = this._onChange.bind(this);
     // this._onRealmChange = this._onRealmChange.bind(this);
-    this._getProductList = this._getProductList.bind(this);
-    this._checkProductStatus = this._checkProductStatus.bind(this);
     // this._rederFooter = this._rederFooter.bind(this);
   }
   componentDidMount() {
     SboxOrderStore.addChangeListener(this._onChange);
-    this._getProductList();
-    this._checkProductStatus();
     // realm.addListener('change', this._onRealmChange)
   }
   componentWillMount() {
@@ -135,11 +130,7 @@ export default class MyComponent extends Component {
       { cancelable: false }
     )
   }
-  _getProductList() {
-    SboxOrderAction.getProductList();
-  }
-  _checkProductStatus() {
-  }
+
   _getOrderBefore() {
     this.setState({
       showCheckoutLoading:true,

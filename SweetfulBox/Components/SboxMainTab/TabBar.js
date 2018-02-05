@@ -12,6 +12,7 @@ import {
   ImageBackground
 } from 'react-native';
 import SboxProductStore from '../../Stores/SboxProductStore';
+import SboxCartStore from '../../Stores/SboxCartStore';
 import createReactClass from 'create-react-class';
 import Button from './Button';
 export default class TabBar extends Component {
@@ -24,14 +25,14 @@ export default class TabBar extends Component {
     this._onChange = this._onChange.bind(this);
   }
   componentDidMount(){
-      SboxProductStore.addChangeListener(this._onChange);
+      SboxCartStore.addChangeListener(this._onChange);
   }
   componentWillUnmount() {
-    SboxProductStore.removeChangeListener(this._onChange);
+    SboxCartStore.removeChangeListener(this._onChange);
   }
   _onChange() {
     this.setState({
-      totalQuantity: SboxProductStore.getTotalQuantity()
+      totalQuantity: SboxCartStore.getTotalQuantity()
     })
   }
 

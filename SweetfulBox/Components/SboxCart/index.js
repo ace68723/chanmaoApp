@@ -28,7 +28,9 @@ export default class SboxCart extends Component {
     this._deleteItem = this._deleteItem.bind(this);
   }
   componentDidMount(){
+    setTimeout(() => {
       SboxCartStore.addChangeListener(this._onChange);
+    }, 150);
   }
   componentWillUnmount() {
     SboxCartStore.removeChangeListener(this._onChange);
@@ -156,15 +158,14 @@ export default class SboxCart extends Component {
 
 
   }
-  _keyExtractor = (item, index) => item.sku_id;
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'space-between'}}>
         <FlatList
             data={this.state.cartList}
             renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-        />
+            enableEmptySections
+    				keyExtractor={(item, index) => item.sku_id+index} />
         <View style={{flexDirection:'row',
                       margin:10,
                       marginLeft:20,

@@ -56,7 +56,7 @@ export default class SweetProductDetial extends Component {
   }
 
   _handleOnPressIn() {
-    SboxCartAction.checkStock();
+    // SboxCartAction.checkStock();
   }
 
   _onChange() {
@@ -96,7 +96,7 @@ export default class SweetProductDetial extends Component {
           navBarHidden: true,
         },
       })
-    }, 150);
+    }, 250);
     
   }
 

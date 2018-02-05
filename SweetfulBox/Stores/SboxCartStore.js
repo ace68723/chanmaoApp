@@ -11,12 +11,12 @@ let realm = new Realm({ path: SBOX_REALM_PATH });
 const SboxCartStore = Object.assign({},EventEmitter.prototype,{
   state:{
     totalQuantity:0,
-    cartList:[],
+    cartList:[{}],
     total:0,
     totalQuantity:0,
   },
 	emitChange(){
-			this.emit( CHANGE_EVENT)
+			this.emit(CHANGE_EVENT)
 	},
 	addChangeListener(callback){
       this.on(CHANGE_EVENT, callback)
@@ -25,12 +25,6 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
 	removeChangeListener(callback){
 			this.removeListener(CHANGE_EVENT, callback)
 	},
-  addQuantity(){
-
-  },
-  subQuantity(){
-
-  },
   checkStock(data) {
     console.log(data)
   },
