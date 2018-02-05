@@ -15,7 +15,16 @@ import {
 import SboxCartAction from '../../Actions/SboxCartAction';
 import SboxCartStore from '../../Stores/SboxCartStore';
 
+import SboxHeader from '../../../App/Components/General/SboxHeader';
+
 const { height, width } = Dimensions.get('window');
+
+  let viewMarginTop;
+  if(height == 812){
+    viewMarginTop = 45;
+  }else{
+    viewMarginTop = 20;
+  }
 
 export default class SboxCart extends Component {
   constructor(props) {
@@ -26,18 +35,22 @@ export default class SboxCart extends Component {
     this._addQuantity = this._addQuantity.bind(this);
     this._subQuantity = this._subQuantity.bind(this);
     this._deleteItem = this._deleteItem.bind(this);
+    this._goToCheckout = this._goToCheckout.bind(this);
+    this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
   }
   componentDidMount(){
       SboxCartStore.addChangeListener(this._onChange);
-      SboxCartAction.checkStock();
   }
   componentWillUnmount() {
     SboxCartStore.removeChangeListener(this._onChange);
   }
+
   _onChange() {
     const cartState = SboxCartStore.getState();
     this.setState(Object.assign({},cartState));
   }
+
+
   _addQuantity(item){
     SboxCartAction.addQuantity(item);
   }
@@ -57,6 +70,18 @@ export default class SboxCart extends Component {
 
   }
 
+  _goToCheckout(){
+    const cartList = this.state.cartList;
+    this.props.navigator.showModal({
+      screen: "SboxCheckout",
+      title: "Modal",
+      navigatorStyle: {navBarHidden: true},
+      animationType: 'none'
+    });
+  }
+  _renderGoBackBtn(){
+    this.props.navigator.pop()
+  }
   _renderButton(item) {
       if(item.sku_quantity <= item.sku_amount){
         return (
@@ -157,44 +182,89 @@ export default class SboxCart extends Component {
 
 
   }
+  _renderConfirmBtn() {
+      return(
+        <View style={{
+          position:'absolute',
+          bottom:0,
+          width:width,}}>
+          <View style={{flexDirection:'row',
+                        margin:10,
+                        marginLeft:20,
+                        marginRight:20,}}>
+            <Text style={{
+              flex:0.7,
+              color:'#ff7685',
+              fontSize:20,
+              fontFamily:'FZZhunYuan-M02S',
+              textAlign:'left',
+            }}>
+                Before Tax: ${Number(this.state.total).toFixed(2)}
+            </Text>
+            <Text style={{
+              flex:0.3,
+              color:'#ff7685',
+              fontSize:20,
+              fontFamily:'FZZhunYuan-M02S',
+              textAlign:'right',
+            }}>
+                 {this.state.totalQuantity}件
+            </Text>
+          </View>
+          <TouchableOpacity
+              style={{height:60,}}
+              onPress={this._goToCheckout}
+              activeOpacity={0.4}>
+            <View style={{
+                          flex:1,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor:'#ff7685',
+                        }}>
+
+                <Text style={{
+                  color:'#ffffff',
+                  fontSize:20,
+                  fontFamily:'FZZhunYuan-M02S',}}>
+                     去结账
+                </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )
+  }
   _keyExtractor = (item, index) => item.sku_id;
   render() {
     return (
-      <View style={{flex: 1, justifyContent: 'space-between'}}>
+      <View style={styles.container}>
+        <SboxHeader title={"购物箱"}
+                goBack={this._renderGoBackBtn}
+                leftButtonText={'x'}/>
+        <View style={styles.separator}>
+        </View>
         <FlatList
             data={this.state.cartList}
             renderItem={this._renderItem}
             keyExtractor={this._keyExtractor}
         />
-        <View style={{flexDirection:'row',
-                      margin:10,
-                      marginLeft:20,
-                      marginRight:20,}}>
-          <Text style={{
-            flex:0.7,
-            color:'#ff7685',
-            fontSize:20,
-            fontFamily:'FZZhunYuan-M02S',
-            textAlign:'left',
-          }}>
-              Before Tax: ${Number(this.state.total).toFixed(2)}
-          </Text>
-          <Text style={{
-            flex:0.3,
-            color:'#ff7685',
-            fontSize:20,
-            fontFamily:'FZZhunYuan-M02S',
-            textAlign:'right',
-          }}>
-               {this.state.totalQuantity}件
-          </Text>
-        </View>
+
+        {this._renderConfirmBtn()}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: viewMarginTop,
+    // backgroundColor:'red',
+  },
+  separator: {
+    height: 1,
+    borderWidth: 0.6,
+    borderColor: "#D5D5D5"
+  },
   item: {
     // height: height * (295 / 2208),
     flexDirection: 'row',

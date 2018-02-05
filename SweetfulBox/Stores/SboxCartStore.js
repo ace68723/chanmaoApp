@@ -19,7 +19,7 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
 			this.emit( CHANGE_EVENT)
 	},
 	addChangeListener(callback){
-			this.on(CHANGE_EVENT, callback)
+      this.on(CHANGE_EVENT, callback)
       this.updateTotalQuantity();
 	},
 	removeChangeListener(callback){

@@ -3,7 +3,7 @@ import SboxHome from '../Components/SboxHome/SboxHome';
 import SboxMainTab from '../Components/SboxMainTab/SboxMainTabViewController';
 import SboxAddAddress from '../Components/SboxAddAddress/index';
 import SboxProductDetial from '../Components/SboxProductDetial/';
-import SboxCart from '../Components/SboxCart/SboxCart';
+import SboxCart from '../Components/SboxCart';
 import SboxCheckout from '../Components/SboxCheckout';
 import SboxAddCard from '../Components/SboxAddCard/SboxAddCard';
 import SboxAddressList from '../Components/SboxAddressList/SboxAddressListViewController';
