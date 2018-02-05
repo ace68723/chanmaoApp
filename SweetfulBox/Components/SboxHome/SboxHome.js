@@ -198,7 +198,7 @@ export default class SboxHome extends Component {
   //
   render() {
       return (
-        <View style={{ flex: 1}}>
+        <View style={{ flex: 1,backgroundColor:'white'}}>
           {this._renderSingleTabView()}
           {this._renderHeaderWithBanner()}
           <SboxHomeHeader scrollY = {this.state.scrollY}
