@@ -18,11 +18,11 @@ const viewWidth = Dimensions.get('window').width;
 
 let viewMarginTop;
 if(height == 812){
-  viewMarginTop = 45;
+  viewMarginTop = 27;
 }else{
-  viewMarginTop = 20;
+  viewMarginTop = 17;
 }
-const navigationHeight = viewHeight * (237/2208) - viewMarginTop;
+const navigationHeight = viewHeight * (210/2208) - viewMarginTop;
 
 
 export default class MyComponent extends Component {
@@ -77,15 +77,19 @@ export default class MyComponent extends Component {
 }
 const styles = StyleSheet.create({
   navigation: {
-    flexDirection:'row'
+    flexDirection:'row',
+    backgroundColor: 'white',
+    marginTop: viewMarginTop
   },
   back: {
     flex: 1,
     justifyContent:'center',
+    backgroundColor: 'white',
   },
   title: {
     flex:1,
     backgroundColor: 'white',
     justifyContent:'center',
+    backgroundColor: 'white',
   }
 })

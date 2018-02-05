@@ -32,14 +32,6 @@ const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
 const viewWidth = Dimensions.get('window').width;
 
-let viewMarginTop;
-if(height == 812){
-  viewMarginTop = 45;
-}else{
-  viewMarginTop = 20;
-}
-const navigationHeight = viewHeight * (237/2208) - viewMarginTop;
-const checkoutButtonMargin = viewWidth * (60/1242);
 
 export default class MyComponent extends Component {
   constructor() {
@@ -343,7 +335,7 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-		marginTop: viewMarginTop,
+		// marginTop: viewMarginTop,
     // backgroundColor:'red',
   },
   navigation: {
