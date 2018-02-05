@@ -50,7 +50,9 @@ export default class MyComponent extends Component {
                   bottom:0,
                   width:width,
                 }}>
-            <TouchableOpacity onPress={this.props.goToSboxCart}>
+            <TouchableOpacity  
+                                onPressIn={this.props.handleOnPressIn}
+                                onPress={this.props.goToSboxCart}>
               <AnimatedImageBackground
                     style={{
                       width:50,
@@ -63,6 +65,7 @@ export default class MyComponent extends Component {
                         {translateY: this.state.boxPosition},
                       ]
                     }}
+
                     source={require('./Image/box.png')}>
                 <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
                    {this.state.totalQuantity}

@@ -42,7 +42,10 @@ export default class HistoryViewController extends Component {
   componentWillUnmount() {
     SboxHistoryStore.removeChangeListener(this._onChange);
   }
-
+  // _handleOnPressIn(product) {
+  //   const {spu_id} = product;
+  //   SboxProductAction.getSingleProduct(spu_id);
+  // }
 	setSource(items, itemsDatasource, otherState) {
 		this.setState({
 			items,

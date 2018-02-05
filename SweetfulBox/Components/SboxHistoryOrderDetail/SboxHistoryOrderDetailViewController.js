@@ -11,6 +11,7 @@ import {
 import SboxHistoryOrderDetailHeader from './SboxHistoryOrderDetailHeader';
 import SboxHistoryOrderDetailOrderView from './SboxHistoryOrderDetailOrderView';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
+import SboxProductAction from '../../Actions/SboxProductAction';
 
 const { height, width } = Dimensions.get('window');
 
@@ -19,7 +20,7 @@ export default class HistoryOrderDetailViewController extends Component {
     super(props);
 		this.state = Object.assign({},{orderDetail:props.orderDetail});
     this._goBack = this._goBack.bind(this);
-		this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
+    this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
   }
   _goBack() {
     this.props.navigator.pop({
@@ -28,21 +29,21 @@ export default class HistoryOrderDetailViewController extends Component {
     });
   }
 
-	_goToSboxProductDetial(product) {
-		console.log("_goToSboxProductDetial");
-		console.log(product);
-    this.props.navigator.push({
-      screen: 'SboxProductDetial',
-      navigatorStyle: {navBarHidden: true},
-      passProps:{spu_id: product.spu_id,},
-    })
+	_goToSboxProductDetial() {
+    setTimeout( () => {
+      this.props.navigator.push({
+        screen: 'SboxProductDetial',
+        navigatorStyle: {navBarHidden: true},
+      })
+    }, 150);
   }
 
   _renderHistoryOrderDetailView() {
     return(
 				<SboxHistoryOrderDetailOrderView
           {...{orderDetail:this.state.orderDetail}}
-					goToSboxProductDetial={this._goToSboxProductDetial}
+          goToSboxProductDetial={this._goToSboxProductDetial}
+          handleOnPressIn = {() => this._handleOnPressIn(item)}
 				/>
     )
   }

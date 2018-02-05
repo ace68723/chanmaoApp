@@ -30,6 +30,7 @@ import SboxBox from '../SboxBox/SboxBox';
 
 import SboxProductAction from '../../Actions/SboxProductAction';
 import SboxProductStore from '../../Stores/SboxProductStore';
+import SboxCartAction from '../../Actions/SboxCartAction';
 
 const {height, width} = Dimensions.get('window');
 
@@ -44,6 +45,7 @@ export default class SweetProductDetial extends Component {
     this._goToSboxCart = this._goToSboxCart.bind(this);
     this._goBack = this._goBack.bind(this);
     this._onChange = this._onChange.bind(this);
+    this._handleOnPressIn = this._handleOnPressIn.bind(this);
   }
   componentDidMount(){
       SboxProductStore.addChangeListener(this._onChange);
@@ -53,6 +55,9 @@ export default class SweetProductDetial extends Component {
     SboxProductStore.initState();
   }
 
+  _handleOnPressIn() {
+    SboxCartAction.checkStock();
+  }
 
   _onChange() {
     const productData = SboxProductStore.getState();
@@ -84,12 +89,15 @@ export default class SweetProductDetial extends Component {
     });
   }
   _goToSboxCart() {
-    this.props.navigator.push({
-      screen: 'SboxCheckout',
-      navigatorStyle: {
-        navBarHidden: true,
-      },
-    })
+    setTimeout( () => {
+      this.props.navigator.push({
+        screen: 'SboxCheckout',
+        navigatorStyle: {
+          navBarHidden: true,
+        },
+      })
+    }, 150);
+    
   }
 
   //render
@@ -247,7 +255,9 @@ export default class SweetProductDetial extends Component {
             </ScrollView>
             {this._renderHeaderImage()}
             {this._renderGoBackBtn()}
-            <SboxBox  goToSboxCart={this._goToSboxCart}/>
+            <SboxBox 
+                 handleOnPressIn = {this._handleOnPressIn}
+                 goToSboxCart={this._goToSboxCart}/>
           </View>
 
 
