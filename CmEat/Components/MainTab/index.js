@@ -58,7 +58,7 @@ export default class MainTab extends Component {
   }
 	componentDidMount(){
     HomeAction.getHomeData();
-		RestaurantAction.getRestaurant();
+		// RestaurantAction.getRestaurant();
     HomeStore.addChangeListener(this._onChange);
 		AppState.addEventListener('change', this._handleAppStateChange);
 	}

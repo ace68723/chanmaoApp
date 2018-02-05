@@ -7,8 +7,6 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
-  TouchableWithoutFeedback,
 } from 'react-native';
 const { width,height } = Dimensions.get('window');
 import Settings from '../../Config/Setting';
@@ -62,7 +60,7 @@ export default class SboxProductView extends Component {
   }
   render() {
       return (
-          <TouchableWithoutFeedback  onPress={this.props.goToSboxProductDetial.bind(null,this.props.product)}>
+
             <View style={styles.productContainer}>
               <Image source={{uri:this.props.product.image}}
                      style={{width:Settings.getX(300),
@@ -74,12 +72,11 @@ export default class SboxProductView extends Component {
                             fontWeight:"700",
                             color:"#6d6e71",
                             alignSelf:"center"}}
-                     numberOfLines={2}>
+                            numberOfLines={2}>
                             {this.props.product.name}
               </Text>
               {this._renderPriceText()}
             </View>
-          </TouchableWithoutFeedback>
 
       );
   }
@@ -87,8 +84,8 @@ export default class SboxProductView extends Component {
 
 const styles = StyleSheet.create({
     productContainer: {
-      flex:1,
-      marginHorizontal:5,
+      width:width / 3,
+      paddingHorizontal:5,
       marginBottom: Settings.getY(72)
     }
 });

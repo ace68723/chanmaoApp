@@ -170,10 +170,16 @@ export function InitUserInfo() {
   })
 }
 export function GetUserInfo() {
-  const uid = realm.objectForPrimaryKey('cm_system','uid').value;
-  const token = realm.objectForPrimaryKey('cm_system','token').value;
-  const version = realm.objectForPrimaryKey('cm_system','version').value;
-  return {uid,token,version}
+  try {
+    const uid = realm.objectForPrimaryKey('cm_system','uid').value;
+    const token = realm.objectForPrimaryKey('cm_system','token').value;
+    const version = realm.objectForPrimaryKey('cm_system','version').value;
+    return {uid,token,version}
+  } catch (e) {
+    console.log(e)
+    return "e"
+  }
+
 }
 export function LogOut() {
   realm.write(() => {
@@ -183,57 +189,60 @@ export function LogOut() {
 }
 
 export function UpdateAllRestaurants(data) {
-  realm.write(() => {
-    let allRestaurants = realm.objects('cme_restaurant');
-      realm.delete(allRestaurants);
-      if(data.open.length>0 ){
-          data.open.forEach((restaurant,id)=>{
-            /**
-             * Restaurant Data
-             * @type {Object}
-             *
-             * rid:         "int",
-             * area:        "int",
-             * desc:        "string",
-             * distance:    "int",
-             * end_time:    "string",
-             * mob_banner:  "string",
-             * name:        "string",
-             * open:        "int",
-             * start_mount: "string",
-             * start_time:  "string",
-             * watermark:   "int"
-             */
-            const rid = Number(restaurant.rid);
-            const area = Number(restaurant.area);
-            const desc = restaurant.desc;
-            const end_time = restaurant.end_time;
-            const mob_banner = restaurant.mob_banner;
-            const name = restaurant.name;
-            const start_amount = restaurant.start_amount;
-            const start_time = restaurant.start_time;
-            const restaurantData = {rid,area,desc,end_time,mob_banner,name,start_amount,start_time}
-            realm.create('cme_restaurant',restaurantData,true);
-          })
-      }
-      // console.log(data)
-      if(data.close.length>0){
-        data.close.forEach((restaurant, id)=>{
-          const rid = Number(restaurant.rid);
-          const area = Number(restaurant.area);
-          const desc = restaurant.desc;
-          const end_time = restaurant.end_time;
-          const mob_banner = restaurant.mob_banner;
-          const name = restaurant.name;
-          const start_amount = restaurant.start_amount;
-          const start_time = restaurant.start_time;
-          const restaurantData = {rid,area,desc,end_time,mob_banner,name,start_amount,start_time}
-          realm.create('cme_restaurant',restaurantData,true);
-        })
-      }
-      //
-
-  });
+  console.log('getRestaurant4')
+  // realm.write(() => {
+  //   let allRestaurants = realm.objects('cme_restaurant');
+  //     realm.delete(allRestaurants);
+  //     if(data.open.length>0 ){
+  //         data.open.forEach((restaurant,id)=>{
+  //           /**
+  //            * Restaurant Data
+  //            * @type {Object}
+  //            *
+  //            * rid:         "int",
+  //            * area:        "int",
+  //            * desc:        "string",
+  //            * distance:    "int",
+  //            * end_time:    "string",
+  //            * mob_banner:  "string",
+  //            * name:        "string",
+  //            * open:        "int",
+  //            * start_mount: "string",
+  //            * start_time:  "string",
+  //            * watermark:   "int"
+  //            */
+  //           const rid = Number(restaurant.rid);
+  //           const area = Number(restaurant.area);
+  //           const desc = restaurant.desc;
+  //           const end_time = restaurant.end_time;
+  //           const mob_banner = restaurant.mob_banner;
+  //           const name = restaurant.name;
+  //           const start_amount = restaurant.start_amount;
+  //           const start_time = restaurant.start_time;
+  //           const restaurantData = {rid,area,desc,end_time,mob_banner,name,start_amount,start_time}
+  //           realm.create('cme_restaurant',restaurantData,true);
+  //           console.log('getRestaurant5')
+  //         })
+  //     }
+  //     // console.log(data)
+  //     if(data.close.length>0){
+  //       data.close.forEach((restaurant, id)=>{
+  //         const rid = Number(restaurant.rid);
+  //         const area = Number(restaurant.area);
+  //         const desc = restaurant.desc;
+  //         const end_time = restaurant.end_time;
+  //         const mob_banner = restaurant.mob_banner;
+  //         const name = restaurant.name;
+  //         const start_amount = restaurant.start_amount;
+  //         const start_time = restaurant.start_time;
+  //         const restaurantData = {rid,area,desc,end_time,mob_banner,name,start_amount,start_time}
+  //         realm.create('cme_restaurant',restaurantData,true);
+  //       })
+  //     }
+  //     console.log('getRestaurant5.5')
+  //     //
+  //
+  // });
 }
 export function cme_beforCheckout({pretax,total,rid,startAmount}) {
   realm.write(() => {

@@ -36,7 +36,7 @@ export function DatabaseInit() {
 export function sbox_getAllItemsFromCart() {
   return realm.objects('sbox_cart');
 }
-export async function sbox_rewriteCartListStock(cartList) {
+export async function sbox_updateCartStock(cartList) {
     realm.write(() => {
       cartList.forEach(element => {
         const item = realm.objectForPrimaryKey('sbox_cart',element.sku_id);

@@ -14,9 +14,10 @@ import SboxProductView from './SboxProductView';
 import Settings from '../../Config/Setting';
 import SboxProductTabSectionHeaderCell from "./SboxProductTabSectionHeaderCell"
 
-import SboxProductTabAction from '../../Actions/SboxProductTabAction';
-import SboxProductTabStore from '../../Stores/SboxProductTabStore';
 
+import SboxProductTabAction from '../../Actions/SboxProductTabAction';
+import SboxProductAction from '../../Actions/SboxProductAction';
+import SboxProductTabStore from '../../Stores/SboxProductTabStore';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,6 +32,8 @@ export default class MyComponent extends Component {
       this._renderProduct = this._renderProduct.bind(this);
       this._renderHeader = this._renderHeader.bind(this);
       this._pressedSectionHeader = this._pressedSectionHeader.bind(this);
+      this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
+      this._handleOnPressIn = this._handleOnPressIn.bind(this);
       this._onChange = this._onChange.bind(this);
   }
 
@@ -53,20 +56,37 @@ export default class MyComponent extends Component {
     if(tmid !== updatedTmid && updatedTmid !== -1) return;
     this.setState(SboxProductTabStore.getStateByTmid(tmid));
   }
+  _handleOnPressIn(product) {
+    const {spu_id} = product;
+    SboxProductAction.getSingleProduct(spu_id);
+  }
+  _goToSboxProductDetial() {
+    setTimeout( () => {
+      this.props.navigator.push({
+        screen: 'SboxProductDetial',
+        navigatorStyle: {navBarHidden: true},
+      })
+    }, 150);
+  }
   _onEndReached() {
     SboxProductTabAction.getProductList();
   }
-  _renderProduct(product) {
-      if (product.item.type === "spu" || product.item.type === "sku"){
+  _renderProduct({item}) {
+      if (item.type === "spu" || item.type === "sku"){
         return (
-          <SboxProductView
-            goToSboxProductDetial={this.props.goToSboxProductDetial}
-            product={product.item}
-          />
+          <TouchableOpacity
+             onPressIn={this._handleOnPressIn.bind(null,item)}
+             onPress={this._goToSboxProductDetial.bind(null,item)}>
+              <SboxProductView
+                goToSboxProductDetial={this._goToSboxProductDetial}
+                handleOnPressIn = {this._handleOnPressIn}
+                product={item}
+              />
+           </TouchableOpacity>
         );
 
       }
-      else if (product.item.type === "empty") {
+      else if (item.type === "empty") {
         return (
           <View style={{
              flex:1,
@@ -76,7 +96,7 @@ export default class MyComponent extends Component {
           </View>
         )
       }
-      else if(product.item.type === "section"){
+      else if(item.type === "section"){
         return (
           <View style={{
              flex:1,
@@ -85,7 +105,7 @@ export default class MyComponent extends Component {
            }}>
            <Text style={{
                fontWeight: 'bold',
-             }}>{product.item.section_name}
+             }}>{item.section_name}
            </Text>
           </View>
         );

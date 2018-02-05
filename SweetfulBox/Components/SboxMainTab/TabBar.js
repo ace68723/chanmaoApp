@@ -25,9 +25,6 @@ export default class TabBar extends Component {
   }
   componentDidMount(){
       SboxProductStore.addChangeListener(this._onChange);
-      this.setState({
-        totalQuantity: SboxProductStore.getTotalQuantity()
-      })
   }
   componentWillUnmount() {
     SboxProductStore.removeChangeListener(this._onChange);
@@ -36,8 +33,6 @@ export default class TabBar extends Component {
     this.setState({
       totalQuantity: SboxProductStore.getTotalQuantity()
     })
-  }
-  renderTabOption(name, page) {
   }
 
   renderTab(name, page, isTabActive, onPressHandler,activeIconImage,inactiveIconImage) {

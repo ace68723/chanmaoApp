@@ -85,12 +85,11 @@ export default class SboxProductDetialScrollView extends Component{
       )
     })
     return (
-      <View >
-        <CardView ref="CardView" onPageChange={this.props.onPageChange} onScroll={onScroll}>
+        <CardView ref="CardView"
+                  onPageChange={this.props.onPageChange} onScroll={onScroll}
+                  >
           {pages}
         </CardView>
-
-      </View>
     );
   }
 
