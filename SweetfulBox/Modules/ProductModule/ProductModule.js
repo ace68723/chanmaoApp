@@ -187,7 +187,6 @@ export default  {
 
 
       if(cart_list.length === 0) {
-        console.log('cart empty')
         return
       } else {
         const lo_data ={

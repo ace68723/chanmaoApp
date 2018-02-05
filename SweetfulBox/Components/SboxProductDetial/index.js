@@ -91,13 +91,13 @@ export default class SweetProductDetial extends Component {
   _goToSboxCart() {
     setTimeout( () => {
       this.props.navigator.push({
-        screen: 'SboxCheckout',
+        screen: 'SboxCart',
         navigatorStyle: {
           navBarHidden: true,
         },
       })
     }, 150);
-    
+
   }
 
   //render
@@ -255,7 +255,7 @@ export default class SweetProductDetial extends Component {
             </ScrollView>
             {this._renderHeaderImage()}
             {this._renderGoBackBtn()}
-            <SboxBox 
+            <SboxBox
                  handleOnPressIn = {this._handleOnPressIn}
                  goToSboxCart={this._goToSboxCart}/>
           </View>

@@ -3,15 +3,30 @@ import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import OrderModule from '../Modules/OrderModule/OrderModule'
 import {sbox_getAllItemsFromCart} from '../Modules/Database'
 export default {
-    async getOrderBefore(productList){
+    async getOrderBefore(){
         try{
-          const lo_data = {
-            productList:productList
+          const data = await OrderModule.getOrderBefore();
+          const {shouldDoAuth,soldOut} = data;
+          if(shouldDoAuth) {
+            dispatch({
+                actionType: SboxConstants.SHOULD_DO_AUTH
+            })
+          }else if(soldOut) {
+            dispatch({
+                actionType: SboxConstants.SOLD_OUT
+            })
+            dispatch({
+                actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY
+            })
+            dispatch({
+              actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
+            })
+          } else {
+            dispatch({
+                actionType: SboxConstants.GET_ORDER_BEFORE, data
+            })
           }
-          const data = await OrderModule.getOrderBefore(lo_data);
-          // dispatch({
-          //     actionType: SboxConstants.GET_ORDER_BEFORE, data
-          // })
+
         }catch(error){
           console.log(error)
         }
@@ -31,26 +46,5 @@ export default {
         })
       }
     },
-    async getProductList() {
-      try{
-        const data = sbox_getAllItemsFromCart();
-        dispatch({
-            actionType: SboxConstants.GET_PRODUCT_LISTS, data
-        })
-      }catch(error){
-        console.log(error);
-      }
-    },
-    async checkProductStatus(productList) {
-      try{
-        const data = {
-          'productList': productList,
-        }
-        dispatch({
-            actionType: SboxConstants.CHECK_PRODUCT_STATUS, data
-        })
-      }catch(error){
-        console.log(error);
-      }
-    }
+
 }
