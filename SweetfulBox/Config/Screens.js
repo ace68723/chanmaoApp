@@ -31,5 +31,5 @@ Navigation.registerComponent('SboxCartAlert', () => SboxCartAlert);
 Navigation.registerComponent('SboxAboutContact', () => SboxAboutContact)
 
 
-module.exports = SboxAddAddress;
+module.exports = SboxMainTab;
 // module.exports = SboxHistory;
