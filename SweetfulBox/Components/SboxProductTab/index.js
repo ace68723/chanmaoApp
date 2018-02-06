@@ -177,6 +177,7 @@ export default class MyComponent extends Component {
     return (
         <FlatList
             scrollEventThrottle={1}
+          
             style={this.props.style}
             ref={(comp) => this._scrollVew = comp}
             ListHeaderComponent={this._renderHeader}

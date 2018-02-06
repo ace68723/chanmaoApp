@@ -9,6 +9,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+Platform,
 } from 'react-native';
 
 import SboxCart from '../SboxCart/SboxCart';
@@ -40,7 +41,9 @@ export default class MyComponent extends Component {
   }
 
   _renderBox() {
+      if (Platform.OS === 'ios') {
       return(
+
         <View style={{
                   height:20,
                   backgroundColor:'#ff768b',
@@ -73,7 +76,45 @@ export default class MyComponent extends Component {
               </AnimatedImageBackground>
           </TouchableOpacity>
         </View>
-      )
+      );
+      }
+      else {
+        return(
+          <View>
+            <View style={{
+                      height:20,
+                      backgroundColor:'#ff768b',
+                      borderColor:'#000000',
+                      borderTopWidth:3,
+                      position:'absolute',
+                      bottom:0,
+                      width:width,
+                    }}>
+
+            </View>
+            <TouchableOpacity style={{
+              position:'absolute',
+              bottom:10,
+              right:10,
+            }} onPress={this.props.goToSboxCart}>
+              <AnimatedImageBackground
+                    style={{
+                      width:50,
+                      height:50,
+
+                      alignItems:'center',
+                      justifyContent:'center',
+                    }}
+                    source={require('./Image/box.png')}>
+                <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
+                   {this.state.totalQuantity}
+                </Text>
+              </AnimatedImageBackground>
+          </TouchableOpacity>
+
+          </View>
+        );
+      }
   }
   render() {
     return (

@@ -24,7 +24,12 @@ export default class CardView extends Component {
 
   scrollTo(position) {
     // this.scrollView.scrollTo(position)
-    this.refs.CardView._component.scrollTo(position)
+    if (Platform.OS==='ios'){
+      this.refs.CardView._component.scrollTo(position);
+    }
+    else {
+      this.refs.CardView._component.setCurrentItem(position, true);
+    }
   }
   render() {
     if (Platform.OS === 'ios') {
