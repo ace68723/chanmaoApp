@@ -326,7 +326,7 @@ export default class CMKeyBoard extends Component {
     }
     render(){
         return(
-          <View style={styles.container}>
+          <View style={{flex:1,backgroundColor:"#ffffff"}}>
               <View style={styles.infoContainer}>
                 <View style={styles.cardNo}>
                   <TouchableWithoutFeedback onPress={()=>{this._showKeyboard("cardNum")}} >

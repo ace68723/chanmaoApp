@@ -50,7 +50,8 @@ export default class MyComponent extends Component {
       checkoutSuccessful:false,
       showCheckoutLoading:true,
     }
-    // this._goToAddressList = this._goToAddressList.bind(this);
+    this._goToAddress = this._goToAddress.bind(this);
+    this._goToAddCard = this._goToAddCard.bind(this);
     // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
     // this._setUserInfo = this._setUserInfo.bind(this);
     this._getOrderBefore = this._getOrderBefore.bind(this);
@@ -148,7 +149,6 @@ export default class MyComponent extends Component {
   _goToLogin() {
     this.props.navigator.showModal({
       screen: 'CmLogin',
-      animated: false,
       navigatorStyle: {navBarHidden: true},
       passProps: {handleBackToHome: this._handleLoginGoBack,
                   handleLoginSuccessful: this._handleLoginSuccessful},
@@ -156,18 +156,14 @@ export default class MyComponent extends Component {
   }
   _goToAddress() {
     this.props.navigator.showModal({
-      screen: 'CmLogin',
-      animated: false,
+      screen: 'SboxAddAddress',
       navigatorStyle: {navBarHidden: true},
-      passProps: {handleBackToHome: this._handleLoginGoBack,
-                  handleLoginSuccessful: this._handleLoginSuccessful},
     })
   }
   _goToAddCard() {
     this.props.navigator.showModal({
-        screen: "SboxAddCard",
+        screen: "SboxChooseCardType",
         navigatorStyle: {navBarHidden:true},
-        animationType: 'slide-up'
       });
   }
 
@@ -244,7 +240,7 @@ export default class MyComponent extends Component {
   _renderUserInfo() {
     if(!this.state.addr.hasOwnProperty('abid')){
       return(
-        <TouchableOpacity onPress={this._goToAddressList}>
+        <TouchableOpacity onPress={this._goToAddress}>
           <View style={{flexDirection:'row',
                         alignItems:'center',
                         borderStyle:'dashed',
@@ -269,7 +265,7 @@ export default class MyComponent extends Component {
 
       return(
         <TouchableOpacity
-                      onPress={this._goToAddressList} style={{  borderStyle:'dashed',
+                      onPress={this._goToAddress} style={{  borderStyle:'dashed',
                         borderWidth:2,
                         borderColor:'#ff7685',
                         padding:10,}}>

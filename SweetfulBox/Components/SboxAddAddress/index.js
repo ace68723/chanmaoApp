@@ -54,15 +54,15 @@ export default class MyComponent extends Component {
     console.log(this.state);
     if (this.state.showAlert == 0) {
       this.props.navigator.showLightBox({
-         screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
+         screen: "SboxAddressAlert",
          passProps: {
-           message:`对不起, 您输入的地址暂时无法配送`}, // simple serializable object that will pass as props to the lightbox (optional)
+           message:`对不起, 您输入的地址暂时无法配送`},
          style: {
            flex: 1,
-           backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-          //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
+           backgroundBlur: "dark",
+
          },
-         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+         adjustSoftInput: "resize",
         });
     }
     else {
@@ -76,11 +76,7 @@ export default class MyComponent extends Component {
     }
   }
 
-  /**
-  * 当用户选中某一condo，修改selected的值并保存到dataSource
-  * @param {String} key the condo id of the selected condo address
-  * @param {Boolean} selected the flag whether the condo address is selected or not
-  */
+
   handleAddressSelected(addressObject, selected) {
     console.log(addressObject.place_id);
 

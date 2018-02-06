@@ -262,6 +262,7 @@ export default class SboxCart extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"#ffffff",
   },
   separator: {
     height: 1,
