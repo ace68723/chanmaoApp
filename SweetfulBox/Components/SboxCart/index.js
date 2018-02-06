@@ -40,13 +40,10 @@ export default class SboxCart extends Component {
   componentWillUnmount() {
     SboxCartStore.removeChangeListener(this._onChange);
   }
-
   _onChange() {
     const cartState = SboxCartStore.getState();
     this.setState(Object.assign({},cartState));
   }
-
-
   _addQuantity(item){
     SboxCartAction.addQuantity(item);
   }
@@ -65,7 +62,6 @@ export default class SboxCart extends Component {
     )
 
   }
-
   _goToCheckout(){
     const cartList = this.state.cartList;
     this.props.navigator.showModal({

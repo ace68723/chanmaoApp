@@ -76,7 +76,7 @@ export default class Content extends Component {
                 <View style={styles.info}>
                     <Image  style={{width:20,height:20}} source={require('./img/unitNum.png')}/>
                     <Text style={{marginLeft:15}}>
-                      {unitNumber}{this.props.addressObject.addr}
+                      {unitNumber}{this.props.addr}
                     </Text>
                 </View>
             </View>

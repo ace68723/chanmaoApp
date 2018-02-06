@@ -6,64 +6,49 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
   state:{
     cusid:"",
     last4:"",
+    cardBrand:"",
     oos:"",
     prod:[],
     addr:{},
-    shouldDoAuth:false,
-    shouldAddCard:false,
-    shouldAddAddress:false,
-    checkoutSuccessful:false,
-    showCheckoutLoading:false,
-    soldOut:false,
+    checkoutStatus:"",
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
 	},
+  initState(){
+    this.state = {  cusid:"",
+                    last4:"",
+                    oos:"",
+                    prod:[],
+                    addr:{},
+                    shouldDoAuth:false,
+                    shouldAddCard:false,
+                    shouldAddAddress:false,
+                    checkoutSuccessful:false,
+                    showCheckoutLoading:false,
+                    soldOut:false,}
+  },
 	addChangeListener(callback){
 			this.on(CHANGE_EVENT, callback)
 	},
 	removeChangeListener(callback){
+      this.initState();
 			this.removeListener(CHANGE_EVENT, callback)
 	},
-  updateOrderBeforeListState(lo_data){
-    console.log(lo_data)
-    this.state.shouldDoAuth = lo_data.shouldDoAuth;
-    if(this.state.shouldDoAuth) return;
-    this.state.shouldAddAddress = Boolean(!lo_data.eo_addr.addr);
-    this.state.shouldAddCard = Boolean(!lo_data.ev_cusid);
-    this.state.cusid = lo_data.ev_cusid;
-    this.state.last4 = lo_data.ev_last4;
-    this.state.deliTime = lo_data.ev_deliTime;
-    this.state.deliFee = lo_data.ev_deliFee;
-    this.state.pretax = lo_data.ev_pretax;
-    this.state.total = lo_data.ev_total;
-    this.state.oos = lo_data.oos;
-    this.state.prod = lo_data.prod;
-    this.state.addr = lo_data.eo_addr;
-    this.state.startCheckout = false;
-    const address = lo_data.eo_addr;
-    this.state.userInfo = {
-      name:address.name,
-      phoneNumber: address.tel,
-      unitNumber: address.unit,
-      addressObject: {
-        abid: address.abid,
-        name:address.name,
-        phoneNumber: address.tel,
-        unitNumber: address.unit,
-        addr: address.addr,
-      }
+  updateCheckoutState({data}){
+    if(data.checkoutStatus === "readyToCheckout"){
+      this.state = Object.assign({},this.state,{showCheckoutLoading:false});
     }
-    this.state.showCheckoutLoading = false;
+
+    this.state = Object.assign({},this.state,data);
   },
-  shouldDoAuth(){
-    this.state.shouldDoAuth = true;
-    this.state.showCheckoutLoading = false;
+  updateCard({data}){
+    this.state.cusid = data[0].card_id;
+    this.state.cardBrand = data[0].brand;
+    this.state.last4 = data[0].last4;
+    this.state.checkoutStatus = "addedCard";
   },
-  soldOut(){
-    this.state.soldOut = false;
-    this.state.showCheckoutLoading = false;
-  },
+
   checkoutSuccessful(){
     this.state = {
       cusid:"",
@@ -95,28 +80,24 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     this.state.checkoutSuccessful = false;
     this.state.showCheckoutLoading = false;
   },
+
   getState(){
     return this.state
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
-      case SboxConstants.SHOULD_DO_AUTH:
-        SboxOrderStore.checkoutSuccessful();
+     case SboxConstants.SBOX_CHECKOUT:
+       SboxOrderStore.updateCheckoutState(action);
+       SboxOrderStore.emitChange();
+       break;
+      case SboxConstants.SBOX_UPDATECARD:
+        SboxOrderStore.updateCard(action);
         SboxOrderStore.emitChange();
         break;
-      case SboxConstants.GET_ORDER_BEFORE:
-        SboxOrderStore.updateOrderBeforeListState(action.data);
-        SboxOrderStore.emitChange();
-  			break;
-      case SboxConstants.SOLD_OUT:
-        SboxOrderStore.checkoutSuccessful();
-        SboxOrderStore.emitChange();
-				break;
 
-        case SboxConstants.CHECKOUT:
-          SboxOrderStore.checkoutSuccessful();
-          SboxOrderStore.emitChange();
-					break;
+
+
+
         case SboxConstants.CHECKOUT_FAIL:
           SboxOrderStore.checkoutFail();
           SboxOrderStore.emitChange();

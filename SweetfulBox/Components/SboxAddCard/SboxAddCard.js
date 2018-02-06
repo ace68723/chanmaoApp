@@ -18,7 +18,7 @@ import KeyboardView from './keyboardView';
 
 const {height, width} = Dimensions.get('window');
 
-import OrderModule from '../../Modules/OrderModule/OrderModule';
+import SboxOrderAction from '../../Actions/SboxOrderAction';
 import GoBack from '../../../App/Components/General/GoBack';
 
 export default class MyComponent extends Component {
@@ -214,32 +214,36 @@ export default class MyComponent extends Component {
       const expYear = this.state.expYear;
       const cvv = this.state.cvv;
       const reqData = {cardNumber,expMonth,expYear,cvv};
-      const result = await OrderModule.addCard(reqData);
-      this.props.setUserInfo();
-      this.setState({showLoading:false})
-      this.props.navigator.dismissAllModals({
-        animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+      const result = await SboxOrderAction.addCard(reqData);
+      this.setState({showLoading:false});
+      this.props.navigator.dismissModal({
+        animationType: 'slide-down'
       });
     } catch (e) {
-      console.log(e)
-      this.setState({showLoading:false})
+      this.setState({showLoading:false});
       this.props.navigator.showInAppNotification({
-       screen: "Notification", // unique ID registered with Navigation.registerScreen
+       screen: "Notification",
        passProps: {
          backgroundColor:'#ff768b',
          title:'甜满箱',
-         content:'您输入的支付信息输入有误'
-       }, // simple serializable object that will pass as props to the in-app notification (optional)
-       autoDismissTimerSec: 3 // auto dismiss notification in seconds
+         content:'您输入的支付信息输入有误',
+       },
+       autoDismissTimerSec: 3
       });
 
     }
 
   }
   _goBack() {
+    // dismissAllModals bug
     this.props.navigator.dismissModal({
-      animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+      animationType: 'slide-down'
     });
+    setTimeout( () => {
+      this.props.navigator.dismissModal({
+        animationType: 'none'
+      });
+    }, 600);
   }
   _renderNumMarker(){
       if(this.state.isNumOpen){

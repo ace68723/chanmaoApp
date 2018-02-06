@@ -52,9 +52,9 @@ export default  {
        expYear = Number(expYear);
        cvv = cvv;
       const cardToken = await StripeBridge.pay( cardNumber,
-                                            expMonth,
-                                            expYear,
-                                            cvv);
+                                                expMonth,
+                                                expYear,
+                                                cvv);
       if(!cardToken) throw 'no cardToken'
       const {uid,token,version} = GetUserInfo();
       const lo_data = {
@@ -62,10 +62,8 @@ export default  {
         iv_token: cardToken
       }
       const res = await OrderAPI.addCard(lo_data);
-
-      const cardInfoList = res.ea_card_info;
-      updateCardInfo(cardInfoList);
-      return res
+      const eo_data = res.ea_card_info;
+      return eo_data
     } catch (e) {
       throw e
     }
@@ -73,7 +71,7 @@ export default  {
   async getOrderBefore() {
     try {
       const {uid,token,version} = GetUserInfo();
-      if(!token) return {shouldDoAuth:true}
+      if(!token) return {checkoutStatus:"shouldDoAuth"}
 
       const allItems = sbox_getAllItemsFromCart();
       let _productList = [];
@@ -86,20 +84,43 @@ export default  {
         authortoken:token,
         ia_prod: _productList,
       }
+      console.log(lo_data)
       const res = await OrderAPI.getOrderBefore(lo_data);
-      if(res.ev_error === 1) return "system error"
+      console.log(res)
+      if(res.ev_error === 1) {
+        if(res.ev_message >= 10000 && res.ev_message <= 20000 ){
+          return {checkoutStatus:"shouldDoAuth"}
+        }else{
+          throw `getOrderBefore ${res.ev_message} `
+        }
+      }
+
       if(res.ev_oos === 1) {
         await sbox_updateCartStock(res.ea_prod);
-        const soldOut = true;
-        return soldOut
+        return {checkoutStatus:"soldOut"}
       }
-      eo_data = Object.assign(res,{shouldDoAuth:false});
+
+      if(!res.eo_addr.hasOwnProperty('abid')){
+        return {checkoutStatus:"shouldAddAddress"}
+      }
+
+      if(!res.ev_cusid){
+        return {checkoutStatus:"shouldAddCard"}
+      }
+
+      const eo_data ={
+        prod: res.ea_prod,
+        addr: res.eo_addr,
+        cusid: res.ev_cusid,
+        deliFee: res.ev_deliFee,
+        last4: res.ev_last4,
+        total:res.ev_total
+      }
+      eo_data = Object.assign(eo_data,{checkoutStatus:"readyToCheckout"});
       return eo_data
+
     } catch ({ev_message}) {
-      if(ev_message >= 10000 && ev_message <= 20000){
-        return {shouldDoAuth:true}
-      }
-      return "System Error"
+      throw `getOrderBefore ${ev_message} `
     }
   },
   async checkout(box) {
