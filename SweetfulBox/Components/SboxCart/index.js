@@ -45,9 +45,26 @@ export default class SboxCart extends Component {
   _onChange() {
     const cartState = SboxCartStore.getState();
     this.setState(Object.assign({},cartState));
+    this.state.cartList.some(item => {
+      console.log(item)
+      if(item.sku_quantity > item.sku_amount) {
+        this.setState({
+          canCheckout: false,
+          checkoutFont: '库存不足'
+        })
+      }
+    });
   }
 
-
+  // this.props.navigator.showLightBox({
+  //   screen: "SboxCartAlert",
+  //   passProps: {
+  //     message:'库存不足'}, // simple serializable object that will pass as props to the lightbox (optional)
+  //   adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+  //  });
+  //  setTimeout(() => {
+  //   this.props.navigator.dismissLightBox();
+  // }, 1500);
   _addQuantity(item){
     SboxCartAction.addQuantity(item);
   }
@@ -66,13 +83,9 @@ export default class SboxCart extends Component {
     )
 
   }
-  canCheckout(item) {
-    return item.sku_quantity > item.sku_amount;
-  }
+
   _goToCheckout(){
     const cartList = this.state.cartList;
-    const canCheckout = cartList.findIndex(canCheckout);
-    console.log(canCheckout)
     this.props.navigator.showModal({
       screen: "SboxCheckout",
       title: "Modal",
@@ -215,20 +228,22 @@ export default class SboxCart extends Component {
           <TouchableOpacity
               style={{height:60,}}
               onPress={this._goToCheckout}
+              disabled = {!this.state.canCheckout}
               activeOpacity={0.4}>
             <View style={{
                           flex:1,
                           alignItems:'center',
                           justifyContent:'center',
-                          backgroundColor:'#ff7685',
+                          backgroundColor: this.state.canCheckout?'#ff7685': 'grey',
                         }}>
 
                 <Text style={{
                   color:'#ffffff',
                   fontSize:20,
                   fontFamily:'FZZhunYuan-M02S',}}>
-                     去结账
+                     {this.state.checkoutFont}
                 </Text>
+                
             </View>
           </TouchableOpacity>
         </View>
