@@ -53,12 +53,15 @@ export default class MyComponent extends Component {
            message:`对不起, 您输入的地址暂时无法配送`},
          style: {
            flex: 1,
-           backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+          //  backgroundBlur: "light", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
            tapBackgroundToDismiss: true,
           //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
          },
          adjustSoftInput: "resize",
         });
+      setTimeout(() => {
+         this.props.navigator.dismissLightBox();
+       }, 5000);
     }
     else {
         // SboxAddressAction.updateSelectedAddress(this.state.addressObject);
