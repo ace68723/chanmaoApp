@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { findIndex } from 'lodash';
 
 import SboxCartAction from '../../Actions/SboxCartAction';
 import SboxCartStore from '../../Stores/SboxCartStore';
@@ -65,9 +66,13 @@ export default class SboxCart extends Component {
     )
 
   }
-
+  canCheckout(item) {
+    return item.sku_quantity > item.sku_amount;
+  }
   _goToCheckout(){
     const cartList = this.state.cartList;
+    const canCheckout = cartList.findIndex(canCheckout);
+    console.log(canCheckout)
     this.props.navigator.showModal({
       screen: "SboxCheckout",
       title: "Modal",
