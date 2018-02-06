@@ -14,6 +14,7 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     shouldAddAddress:false,
     checkoutSuccessful:false,
     showCheckoutLoading:false,
+    soldOut:false,
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -60,7 +61,7 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     this.state.showCheckoutLoading = false;
   },
   soldOut(){
-    this.state.shouldDoAuth = true;
+    this.state.soldOut = false;
     this.state.showCheckoutLoading = false;
   },
   checkoutSuccessful(){
@@ -94,31 +95,24 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     this.state.checkoutSuccessful = false;
     this.state.showCheckoutLoading = false;
   },
-  // getProductList(data) {
-  //   this.state.productList = data;
-  // },
-
   getState(){
     return this.state
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
-        // case SboxConstants.GET_PRODUCT_LISTS:
-        //   SboxOrderStore.getProductList(action.data);
-        //   SboxOrderStore.emitChange();
-        //   break;
       case SboxConstants.SHOULD_DO_AUTH:
         SboxOrderStore.checkoutSuccessful();
         SboxOrderStore.emitChange();
         break;
+      case SboxConstants.GET_ORDER_BEFORE:
+        SboxOrderStore.updateOrderBeforeListState(action.data);
+        SboxOrderStore.emitChange();
+  			break;
       case SboxConstants.SOLD_OUT:
         SboxOrderStore.checkoutSuccessful();
         SboxOrderStore.emitChange();
 				break;
-      case SboxConstants.GET_ORDER_BEFORE:
-        SboxOrderStore.updateOrderBeforeListState(action.data);
-        SboxOrderStore.emitChange();
-				break;
+
         case SboxConstants.CHECKOUT:
           SboxOrderStore.checkoutSuccessful();
           SboxOrderStore.emitChange();
