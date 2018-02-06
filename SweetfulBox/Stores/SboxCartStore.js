@@ -11,7 +11,7 @@ let realm = new Realm({ path: SBOX_REALM_PATH });
 const SboxCartStore = Object.assign({},EventEmitter.prototype,{
   state:{
     totalQuantity:0,
-    cartList:[{}],
+    cartList:[],
     total:0,
     totalQuantity:0,
   },

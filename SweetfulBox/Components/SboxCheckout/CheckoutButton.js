@@ -16,7 +16,6 @@ const { height, width } = Dimensions.get('window');
 export default class CheckoutButton extends Component {
 
   _renderConfirmBtn() {
-    console.log(this.props.startCheckout)
       return(
         <View style={{
           position:'absolute',

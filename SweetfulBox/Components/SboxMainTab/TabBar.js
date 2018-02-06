@@ -42,7 +42,7 @@ export default class TabBar extends Component {
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
     const iconImage = isTabActive ? activeIconImage : inactiveIconImage;
-    const iconText = page === 2 ? this.state.totalQuantity : "";
+    const iconText = page === 1 ? this.state.totalQuantity : "";
     return (
       <Button
         style={{flex: 1, }}

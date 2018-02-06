@@ -5,7 +5,7 @@ import {
 const StripeBridge = NativeModules.StripeBridge;
 
 import {GetUserInfo} from '../../../App/Modules/Database';
-import {sbox_getAllItemsFromCart} from '../../Modules/Database';
+import {sbox_getAllItemsFromCart,sbox_updateCartStock} from '../../Modules/Database';
 export default  {
   async putUserAddr(io_data){
     const {uid,token,version} = GetUserInfo();
@@ -70,7 +70,7 @@ export default  {
       throw e
     }
   },
-  async getOrderBefore(io_data) {
+  async getOrderBefore() {
     try {
       const {uid,token,version} = GetUserInfo();
       if(!token) return {shouldDoAuth:true}
@@ -86,15 +86,20 @@ export default  {
         authortoken:token,
         ia_prod: _productList,
       }
-      console.log(lo_data)
       const res = await OrderAPI.getOrderBefore(lo_data);
-      console.log(res)
+      if(res.ev_error === 1) return "system error"
+      if(res.ev_oos === 1) {
+        await sbox_updateCartStock(res.ea_prod);
+        const soldOut = true;
+        return soldOut
+      }
       eo_data = Object.assign(res,{shouldDoAuth:false});
-
       return eo_data
-    } catch (e) {
-      console.log(e)
-      throw e
+    } catch ({ev_message}) {
+      if(ev_message >= 10000 && ev_message <= 20000){
+        return {shouldDoAuth:true}
+      }
+      return "System Error"
     }
   },
   async checkout(box) {

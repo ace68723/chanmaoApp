@@ -19,6 +19,12 @@ const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
 const viewWidth = Dimensions.get('window').width;
 const navigationHeight = viewHeight * (212/2208) - 12;
+let viewMarginTop;
+if(height == 812){
+  viewMarginTop = 45;
+}else{
+  viewMarginTop = 20;
+}
 
 export default class HistoryViewController extends Component {
   constructor() {
@@ -32,6 +38,7 @@ export default class HistoryViewController extends Component {
     })
     this._onChange = this._onChange.bind(this);
 		this.setSource = this.setSource.bind(this);
+		this._goBack = this._goBack.bind(this);
     this._goToSboxHistoryOrderDetail = this._goToSboxHistoryOrderDetail.bind(this);
   }
 	componentDidMount() {
@@ -61,6 +68,13 @@ export default class HistoryViewController extends Component {
       passProps: {orderDetail:orderDetail},
     })
   }
+	_goBack() {
+    console.log('here',this.props)
+    this.props.navigator.pop({
+      animated: true,
+      animationType: 'slide-horizontal',
+    });
+  }
 	_onRefresh() {
 		this.setState({refreshing: true});
 		SboxHistoryAction.init();
@@ -86,8 +100,8 @@ export default class HistoryViewController extends Component {
     return(
       <View style={styles.viewController}>
 				<SboxHeader title={"历史订单"}
-                goBack={this._renderGoBackBtn}
-                leftButtonText={'none'}/>
+                goBack={this._goBack}
+                leftButtonText={'<'}/>
 				<View style={styles.separator}></View>
         {this._renderHistoryView()}
       </View>
@@ -98,7 +112,6 @@ export default class HistoryViewController extends Component {
 const styles = StyleSheet.create({
   viewController:{
     flex:1,
-		marginTop: 12,
   },
   navigation: {
     flexDirection:'row'

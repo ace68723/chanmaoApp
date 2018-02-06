@@ -1,5 +1,5 @@
 import UserAPI from './UserAPI';
-import {GetUserInfo} from '../../../App/Modules/Database';
+import {GetUserInfo, InitUserInfo} from '../../../App/Modules/Database';
 export default  {
   async getOrderHistory(io_data){
     const {uid,token,version} = GetUserInfo();
@@ -55,6 +55,19 @@ export default  {
       throw errorMessage
     }
 
+  },
+
+  checkUserLogin() {
+     const {uid,token,version} = GetUserInfo();
+     if (token.length > 0) {
+       return false;
+     }else {
+       return true;
+     }
+  },
+  clearToken() {
+     const {uid,token,version} = InitUserInfo();
+     return true;
   }
 
 }

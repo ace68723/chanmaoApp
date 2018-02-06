@@ -9,10 +9,11 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     oos:"",
     prod:[],
     addr:{},
+    shouldDoAuth:false,
     shouldAddCard:false,
     shouldAddAddress:false,
     checkoutSuccessful:false,
-    productList: [{}],
+    showCheckoutLoading:false,
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -24,8 +25,8 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
 			this.removeListener(CHANGE_EVENT, callback)
 	},
   updateOrderBeforeListState(lo_data){
+    console.log(lo_data)
     this.state.shouldDoAuth = lo_data.shouldDoAuth;
-    console.log(this.state.shouldDoAuth)
     if(this.state.shouldDoAuth) return;
     this.state.shouldAddAddress = Boolean(!lo_data.eo_addr.addr);
     this.state.shouldAddCard = Boolean(!lo_data.ev_cusid);
@@ -38,7 +39,7 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     this.state.oos = lo_data.oos;
     this.state.prod = lo_data.prod;
     this.state.addr = lo_data.eo_addr;
-    this.state.startCheckout = true;
+    this.state.startCheckout = false;
     const address = lo_data.eo_addr;
     this.state.userInfo = {
       name:address.name,
@@ -53,7 +54,14 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
       }
     }
     this.state.showCheckoutLoading = false;
-
+  },
+  shouldDoAuth(){
+    this.state.shouldDoAuth = true;
+    this.state.showCheckoutLoading = false;
+  },
+  soldOut(){
+    this.state.shouldDoAuth = true;
+    this.state.showCheckoutLoading = false;
   },
   checkoutSuccessful(){
     this.state = {
@@ -86,39 +94,43 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     this.state.checkoutSuccessful = false;
     this.state.showCheckoutLoading = false;
   },
-  getProductList(data) {
-    this.state.productList = data;
-  },
-  checkProductStatus() {
+  // getProductList(data) {
+  //   this.state.productList = data;
+  // },
 
-  },
   getState(){
     return this.state
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
-        case SboxConstants.GET_PRODUCT_LISTS:
-          SboxOrderStore.getProductList(action.data);
-          console.log('store',action.data)
-          SboxOrderStore.emitChange();
-          break;
-        case SboxConstants.CHECK_PRODUCT_STATUS:
-          SboxOrderStore.checkProductStatus();
-          SboxOrderStore.emitChange();
-          break;
-				case SboxConstants.GET_ORDER_BEFORE:
-          SboxOrderStore.updateOrderBeforeListState(action.data)
-          SboxOrderStore.emitChange()
-					break;
+        // case SboxConstants.GET_PRODUCT_LISTS:
+        //   SboxOrderStore.getProductList(action.data);
+        //   SboxOrderStore.emitChange();
+        //   break;
+      case SboxConstants.SHOULD_DO_AUTH:
+        SboxOrderStore.checkoutSuccessful();
+        SboxOrderStore.emitChange();
+        break;
+      case SboxConstants.SOLD_OUT:
+        SboxOrderStore.checkoutSuccessful();
+        SboxOrderStore.emitChange();
+				break;
+      case SboxConstants.GET_ORDER_BEFORE:
+        SboxOrderStore.updateOrderBeforeListState(action.data);
+        SboxOrderStore.emitChange();
+				break;
         case SboxConstants.CHECKOUT:
-          SboxOrderStore.checkoutSuccessful()
-          SboxOrderStore.emitChange()
+          SboxOrderStore.checkoutSuccessful();
+          SboxOrderStore.emitChange();
 					break;
         case SboxConstants.CHECKOUT_FAIL:
-          SboxOrderStore.checkoutFail()
-          SboxOrderStore.emitChange()
+          SboxOrderStore.checkoutFail();
+          SboxOrderStore.emitChange();
 					break;
-
+        case SboxConstants.CHECKOUT_FAIL:
+          SboxOrderStore.shouldDoAuth();
+          SboxOrderStore.emitChange();
+          break;
         default:
          // do nothing
 		  }
