@@ -39,7 +39,6 @@ class Header extends Component {
                 goBack={this.props.goBack}
                 leftButtonText={'x'}/>
 
-        <Separator/>
         <View style={{height: searchBarHeight, width: viewWidth}}>
           <View style={[styles.searchBar, {margin: 2,
                                            height: searchBarHeight - 4,
