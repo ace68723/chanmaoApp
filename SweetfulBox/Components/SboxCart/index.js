@@ -244,8 +244,6 @@ export default class SboxCart extends Component {
         <SboxHeader title={"购物箱"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={'x'}/>
-        <View style={styles.separator}>
-        </View>
         <FlatList
           	enableEmptySections
             data={this.state.cartList}
@@ -263,11 +261,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor:"#ffffff",
-  },
-  separator: {
-    height: 1,
-    borderWidth: 0.6,
-    borderColor: "#D5D5D5"
   },
   item: {
     // height: height * (295 / 2208),

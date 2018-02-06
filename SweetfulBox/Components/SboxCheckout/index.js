@@ -359,8 +359,6 @@ export default class MyComponent extends Component {
         <SboxHeader title={"结账"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={'x'}/>
-        <View style={styles.separator}>
-        </View>
 
         <FlatList
            	enableEmptySections
@@ -418,11 +416,6 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     // backgroundColor: "blue",
   },
-  separator: {
-		height: 1,
-		borderWidth: 0.6,
-		borderColor: "#D5D5D5"
-	},
   item: {
     height: height * (295 / 2208),
     flexDirection: 'row',
