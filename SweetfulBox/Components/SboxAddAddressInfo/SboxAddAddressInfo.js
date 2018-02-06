@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import Header from './header';
 import Content from './content';
+import SboxHeader from '../../../App/Components/General/SboxHeader';
+
 import SboxUserAction from '../../Actions/SboxUserAction';
 import SboxUserStore from '../../Stores/SboxUserStore';
 
@@ -20,7 +22,6 @@ const styles = StyleSheet.create({
 export default class App extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.state = {
             address: props.addressObject.addr,
             name: '',
@@ -108,7 +109,9 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header goBack={this._goBack}/>
+                <SboxHeader title={"添加地址"}
+                        goBack={this._goBack}
+                        leftButtonText={'x'}/>
                 <Content
                     address={this.state.address}
                     onAddressChange={(address) => this.setState({ address: address })}

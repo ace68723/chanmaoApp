@@ -28,13 +28,10 @@ export default class MyComponent extends Component {
       // dataSource: ds.cloneWithRows([])
       }
       // this.setSource = this.setSource.bind(this);
+      this._goBack = this._goBack.bind(this);
       this.handleAddressSelected = this.handleAddressSelected.bind(this);
       this.onChangeTextInput = this.onChangeTextInput.bind(this);
       this._onChange = this._onChange.bind(this);
-  }
-
-  componentWillMount() {
-    console.log(this.state.items);
   }
 
   componentDidMount() {
@@ -45,13 +42,10 @@ export default class MyComponent extends Component {
   }
 
   _onChange() {
-    console.log("onChange");
     const newState = SboxAddressStore.getState();
-    console.log(newState);
     this.setState(Object.assign({}, this.state, {showAlert: newState.showAlert}));
     this.setState(Object.assign({}, this.state, {selectedAddress: newState.selectedAddress}));
     // Object.assign({},this.state,SboxAddressStore.getState());
-    console.log(this.state);
     if (this.state.showAlert == 0) {
       this.props.navigator.showLightBox({
          screen: "SboxAddressAlert", // unique ID registered with Navigation.registerScreen
@@ -60,6 +54,7 @@ export default class MyComponent extends Component {
          style: {
            flex: 1,
            backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+           tapBackgroundToDismiss: true,
           //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
          },
          adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
@@ -76,14 +71,13 @@ export default class MyComponent extends Component {
     }
   }
 
-  /**
-  * 当用户选中某一condo，修改selected的值并保存到dataSource
-  * @param {String} key the condo id of the selected condo address
-  * @param {Boolean} selected the flag whether the condo address is selected or not
-  */
-  handleAddressSelected(addressObject, selected) {
-    console.log(addressObject.place_id);
+  _goBack() {
+    this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+      });
+  }
 
+  handleAddressSelected(addressObject, selected) {
     const url = "https://maps.googleapis.com/maps/api/place/details/" +
         "json?placeid=" + addressObject.place_id +
         // "&key="+AppConstants.GOOGLE_API_KEY
@@ -99,9 +93,7 @@ export default class MyComponent extends Component {
         fetch(url,options)
           .then((res) => res.json())
           .then((res)=>{
-            console.log("123");
             if(res.status == "OK"){
-              console.log(res.result);
               const placeDetails = res.result;
 
               let addrInfo = {};
@@ -109,7 +101,6 @@ export default class MyComponent extends Component {
               addrInfo.lng  = placeDetails.geometry.location.lng;
               addrInfo.addr = placeDetails.formatted_address;
               addrInfo.province = placeDetails.formatted_address.split(',')[2].replace(' ', '').substring(0, 2);
-              console.log(addrInfo);
               // Check if in the area
               // SboxAddressAction.updateSelectedAddress(addrInfo);
               SboxAddressAction.checkCanDeliver(addrInfo);
@@ -128,7 +119,6 @@ export default class MyComponent extends Component {
   }
 
   onChangeTextInput(text) {
-    console.log(text);
     const url = "https://maps.googleapis.com/maps/api/place/autocomplete/" +
     "json?input="+ text +
     "&language=en" +
@@ -153,8 +143,6 @@ export default class MyComponent extends Component {
         this.setState({
            items: address_list
         });
-        console.log(res.predictions);
-        console.log(this.state.items)
       })
       .catch((error) => {throw error});
   }
@@ -172,22 +160,24 @@ export default class MyComponent extends Component {
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <Header
-      onFilter={this.handleFilter}
-      onSubmitText={this.onSubmitText}
-      onChangeTextInput={(text) => this.onChangeTextInput(text)}
-      {...this.state}
-      />
+          <Header
+              onFilter={this.handleFilter}
+              goBack={this._goBack}
+              onSubmitText={this.onSubmitText}
+              onChangeTextInput={(text) => this.onChangeTextInput(text)}
+              {...this.state}
+          />
 
-      <View style={styles.content}>
-      <FlatList
-      data={this.state.items}
-      renderItem={({item}) => this._renderRow(item)}
-      ItemSeparatorComponent={(sectionId, rowId) => {
-        return <Separator/>
-      }}
-      />
-      </View>
+          <View style={styles.content}>
+          <FlatList
+              data={this.state.items}
+              keyExtractor={(item, index) => item.cbid}
+              renderItem={({item}) => this._renderRow(item)}
+              ItemSeparatorComponent={(sectionId, rowId) => {
+                return <Separator/>
+              }}
+              />
+          </View>
       </KeyboardAvoidingView >
     );
   }
