@@ -59,8 +59,12 @@ export default class App extends Component {
       const unitNumber = this.state.unitNum;
       const userInfo = {addressObject,name,phoneNumber,unitNumber}
       this.props.setUserInfo(userInfo);
+      
+      this.props.navigator.dismissModal({
+        animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+      });
       setTimeout(() =>{
-        this.props.navigator.dismissAllModals({
+        this.props.navigator.dismissModal({
           animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
         });
       }, 500);

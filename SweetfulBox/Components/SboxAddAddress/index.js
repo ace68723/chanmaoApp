@@ -169,14 +169,14 @@ export default class MyComponent extends Component {
           />
 
           <View style={styles.content}>
-          <FlatList
-              data={this.state.items}
-              keyExtractor={(item, index) => index}
-              renderItem={({item}) => this._renderRow(item)}
-              ItemSeparatorComponent={(sectionId, rowId) => {
-                return <Separator/>
-              }}
-              />
+            <FlatList
+                data={this.state.items}
+                keyExtractor={(item, index) => index}
+                renderItem={({item}) => this._renderRow(item)}
+                ItemSeparatorComponent={(sectionId, rowId) => {
+                  return <Separator/>
+                }}
+                />
           </View>
       </KeyboardAvoidingView >
     );

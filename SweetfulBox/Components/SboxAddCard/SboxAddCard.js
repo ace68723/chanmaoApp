@@ -19,7 +19,7 @@ import KeyboardView from './keyboardView';
 const {height, width} = Dimensions.get('window');
 
 import SboxOrderAction from '../../Actions/SboxOrderAction';
-import GoBack from '../../../App/Components/General/GoBack';
+import SboxHeader from '../../../App/Components/General/SboxHeader';
 
 export default class MyComponent extends Component {
   constructor(props){
@@ -235,15 +235,14 @@ export default class MyComponent extends Component {
 
   }
   _goBack() {
-    // dismissAllModals bug
-    this.props.navigator.dismissModal({
-      animationType: 'slide-down'
-    });
-    setTimeout( () => {
-      this.props.navigator.dismissModal({
-        animationType: 'none'
-      });
-    }, 600);
+    this.props.navigator.pop();
+    // // dismissAllModals bug
+
+    // setTimeout( () => {
+    //   this.props.navigator.dismissModal({
+    //     animationType: 'none'
+    //   });
+    // }, 600);
   }
   _renderNumMarker(){
       if(this.state.isNumOpen){
@@ -435,6 +434,9 @@ export default class MyComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <SboxHeader title={this.props.title}
+                goBack={this._goBack}
+                leftButtonText={'<'}/>
           <View style={styles.infoContainer}>
             {this._renderCardNo()}
             {this._rednerCardDetails()}
@@ -444,7 +446,6 @@ export default class MyComponent extends Component {
                         isDateOpen:this.state.isDateOpen,
                         isCVVOpen:this.state.isCVVOpen,
                       })}
-          <GoBack goBack={this._goBack}/>
       </View>
     );
   }

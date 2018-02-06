@@ -18,20 +18,7 @@ export default class SboxChooseCardType extends Component {
 
   constructor(){
     super()
-    this.state = {
-      settingButtonList: [
-        {
-          name: '信用卡',
-          navitype: 2,
-          naviparam: 'SboxService',
-        }, {
-          name: 'Debit Card',
-          navitype: 2,
-          naviparam: '',
-        },
-
-      ],
-    };
+    this.state = {};
     this._goBack = this._goBack.bind(this);
     this._goToCredit = this._goToCredit.bind(this);
     this._goToDebit = this._goToDebit.bind(this);
@@ -47,11 +34,23 @@ export default class SboxChooseCardType extends Component {
   }
 
   _goToCredit() {
-
+    this.props.navigator.push({
+        screen: "SboxAddCard",
+        navigatorStyle: {navBarHidden:true},
+        passProps:{
+          title:"添加信用卡"
+        }
+      });
   }
 
   _goToDebit() {
-
+    this.props.navigator.push({
+        screen: "SboxAddCard",
+        navigatorStyle: {navBarHidden:true},
+        passProps:{
+          title:"添加 Debit Card"
+        }
+      });
   }
 
   _renderGoBackBtn() {
@@ -94,16 +93,40 @@ export default class SboxChooseCardType extends Component {
         <ScrollView style={{backgroundColor: '#D5D5D5'}}>
             <TouchableOpacity onPress={this._goToCredit}
                 activeOpacity={0.4}
-                style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
-                <Text style={{flex: 1, fontSize: 18, textAlign: 'left', marginLeft :20}}>信用卡</Text>
-                <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./Img/right.png')}/>
+                style={{flexDirection: 'row',
+                        paddingTop: 20,
+                        paddingBottom: 20,
+                        alignItems: 'center',
+                        backgroundColor: 'white'}}>
+                <Text style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20}}>
+                          信用卡
+                </Text>
+                <Image style={{height: 20,
+                              width: 20,
+                              marginRight:20,
+                        }} source={require('./Img/right.png')}/>
             </TouchableOpacity>
             <View style={styles.separator}></View>
             <TouchableOpacity onPress={this._goToDebit}
                 activeOpacity={0.4}
-                style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
-                <Text style={{flex: 1, fontSize: 18, textAlign: 'left', marginLeft :20}}>Debit卡</Text>
-                <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./Img/right.png')}/>
+                style={{flexDirection: 'row',
+                        paddingTop: 20,
+                        paddingBottom: 20,
+                        alignItems: 'center',
+                        backgroundColor: 'white'}}>
+                <Text style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20}}>
+                              Debit Card
+                </Text>
+                <Image style={{height: 20,
+                              width: 20,
+                              marginRight:20,}}
+                       source={require('./Img/right.png')}/>
             </TouchableOpacity>
         </ScrollView>
       </View>
