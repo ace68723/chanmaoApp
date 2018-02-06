@@ -121,7 +121,7 @@ export default class Home extends Component {
         setTimeout(() => {
           this.props.navigator.showModal({
             screen: 'CmLogin',
-            animated: false,
+            animationType: 'slide-up',
             navigatorStyle: {navBarHidden: true},
             passProps: {handleBackToHome: this._handleBackToHome,
                         handleLoginSuccessful: this._handleLoginSuccessful,
@@ -145,15 +145,10 @@ export default class Home extends Component {
         // }, 500);
         setTimeout(() => {
           InteractionManager.runAfterInteractions(() => {
-            this.props.navigator.showLightBox({
+            this.props.navigator.showModal({
               screen: 'CmAdvertisement',
-              animated: false,
+              animationType: 'none',
               navigatorStyle: {navBarHidden: true},
-              style: {
-                flex:1,
-               backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-              //  backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
-             }
             })
           })
         }, 500);
@@ -168,15 +163,15 @@ export default class Home extends Component {
                   disabledBackGesture: true,
                 },
                 style: {
-                 backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-                 backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
+                 backgroundBlur: "none",
+                 backgroundColor: "rgba(0,0,0,0)"
                }
             })
           })
         }, 600);
       }
   }
-  _handleSboxPress() { 
+  _handleSboxPress() {
     if (Platform.OS === 'ios') {
       if(this._openStarted) return
       this._openStarted = true;
@@ -251,7 +246,6 @@ export default class Home extends Component {
       }, 1000);
     }
     }
-    
   _handleBackToHome() {
     this.props.navigator.pop({
       animated: true, // does the pop have transition animation or does it happen immediately (optional)
@@ -286,37 +280,14 @@ export default class Home extends Component {
     })
   }
   render() {
-        const cmScale = this.state.open.interpolate({inputRange: [0, 1], outputRange: [1, this.state.scale]}) //3.8215  275 320
-        const cmtranslateX = this.state.open.interpolate({inputRange: [0, 1], outputRange: [0, this.state.translateX]})
-        const cmtranslateY = this.state.open.interpolate({inputRange: [0, 1], outputRange: [0, this.state.translateY]})
-        const cmTransform = {transform:[{translateX:cmtranslateX},{translateY:cmtranslateY},{scale:cmScale}]}
-        // <Image source={require('./Img/HOME-PAGE-ORDERS.png')}
-        //     style={{ width: width * 0.4573,
-        //               height: width * 0.4573 * 1.4084,
-        //               position: 'absolute',
-        //               left:0,
-        //               bottom:0,
-        //     }}
-        // />
-        //
-        //
-           // <Image source={require('./Img/HOME-PAGE-SETTING.png')}
-           //      style={{ width: width * 0.186,
-           //                height: width * 0.186 * 3.303,
-           //                top: height * 0.0462,
-           //                position: 'absolute',
-           //                right: width * 0.2254,
-           //      }}
-           //  />
-            //
-            // Sbox
-            //
+      const cmScale = this.state.open.interpolate({inputRange: [0, 1], outputRange: [1, this.state.scale]}) //3.8215  275 320
+      const cmtranslateX = this.state.open.interpolate({inputRange: [0, 1], outputRange: [0, this.state.translateX]})
+      const cmtranslateY = this.state.open.interpolate({inputRange: [0, 1], outputRange: [0, this.state.translateY]})
+      const cmTransform = {transform:[{translateX:cmtranslateX},{translateY:cmtranslateY},{scale:cmScale}]}
 
       return (
-        // <ScrollView showsVerticalScrollIndicator={false}>
           <Animated.View style={[styles.container,cmTransform]}>
               <View style={{ flex: 1,}}>
-
                 <TouchableWithoutFeedback onPress={this._handleSboxPress}>
                   <Animated.View style={{ flex: 0.55, right: this.state.boxRight,}}>
                       <Image source={require('./Img/HOME-PAGE-SBOX.png')}
@@ -368,10 +339,20 @@ export default class Home extends Component {
                   </TouchableWithoutFeedback>
               </View>
           </Animated.View>
-          // <View  style={{ height: height }}>
-          // </View>
-        // </ScrollView>
 
       );
   }
 }
+// <View style={{
+//   position:'absolute',
+//   right:0,
+//   left:0,
+//   bottom:height*0.025,
+//   height: 10,
+//   alignItems:'center',
+// }}>
+//   <Text style={{
+//     fontSize:12,
+//     color:'#000000'
+//   }}>Chanmao Inc. All Copyrights Reserved</Text>
+// </View>

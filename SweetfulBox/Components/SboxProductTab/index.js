@@ -57,6 +57,7 @@ export default class MyComponent extends Component {
     this.setState(SboxProductTabStore.getStateByTmid(tmid));
   }
   _handleOnPressIn(product) {
+    console.log(product)
     const {spu_id} = product;
     SboxProductAction.getSingleProduct(spu_id);
   }

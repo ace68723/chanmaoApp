@@ -135,7 +135,7 @@ class DefaultTabBar extends Component {
     });
     const tabTop = this.props.scrollY.interpolate({
       inputRange: [0, this.props.HEADER_SCROLL_DISTANCE-height*0.0811],
-      outputRange: [this.props.HEADER_SCROLL_DISTANCE+10, height*0.0811 ],
+      outputRange: [width*0.45+50, 50],
       extrapolate: 'clamp',
     });
     // ========Tab bar under line============
@@ -175,7 +175,7 @@ class DefaultTabBar extends Component {
             })}
           </ScrollView>
           <Image  source={require('./Images/feather_cover.png')}
-                  style={{ position:"absolute",height:40,width:50,top:0,right:-30,}}/>
+                  style={{ position:"absolute",height:30,width:50,top:0,right:-30,}}/>
         </Animated.View>
 
     );

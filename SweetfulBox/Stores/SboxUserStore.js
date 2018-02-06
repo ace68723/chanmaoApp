@@ -5,10 +5,11 @@ const CHANGE_EVENT = 'change4422';
 
 const SboxUserStore = Object.assign({},EventEmitter.prototype,{
   state:{
-    orderHistory:[]
+    orderHistory:[],
+    shouldDoAuth: true,
   },
 	emitChange(){
-			this.emit( CHANGE_EVENT)
+			this.emit(CHANGE_EVENT)
 	},
 	addChangeListener(callback){
 			this.on(CHANGE_EVENT, callback)
@@ -20,11 +21,25 @@ const SboxUserStore = Object.assign({},EventEmitter.prototype,{
 
       this.state.orderHistory = la_orderHistory;
   },
+  updateUserAuth(flag) {
+      this.state.shouldDoAuth = flag;
+  },
+  clearUserAuth(flag) {
+      this.state.shouldDoAuth = flag;
+  },
   getState(){
     return this.state
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
+        case SboxConstants.UPDATE_USER_AUTH:
+          SboxUserStore.updateUserAuth(action.data);
+          SboxUserStore.emitChange();
+          break;
+        case SboxConstants.CLEAR_USER_AUTH:
+          SboxUserStore.clearUserAuth(action.data);
+          SboxUserStore.emitChange();
+          break;
 				case SboxConstants.GET_ORDER_HISTORY:
           SboxUserStore.updateOrderHistoryState(action.data.orderHistory)
           SboxUserStore.emitChange()

@@ -11,9 +11,12 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { findIndex } from 'lodash';
 
 import SboxCartAction from '../../Actions/SboxCartAction';
 import SboxCartStore from '../../Stores/SboxCartStore';
+
+import SboxHeader from '../../../App/Components/General/SboxHeader';
 
 const { height, width } = Dimensions.get('window');
 
@@ -26,18 +29,42 @@ export default class SboxCart extends Component {
     this._addQuantity = this._addQuantity.bind(this);
     this._subQuantity = this._subQuantity.bind(this);
     this._deleteItem = this._deleteItem.bind(this);
+    this._goToCheckout = this._goToCheckout.bind(this);
+    this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
   }
   componentDidMount(){
+    setTimeout(() => {
       SboxCartStore.addChangeListener(this._onChange);
       SboxCartAction.checkStock();
+    }, 150);
   }
   componentWillUnmount() {
     SboxCartStore.removeChangeListener(this._onChange);
   }
+
   _onChange() {
     const cartState = SboxCartStore.getState();
     this.setState(Object.assign({},cartState));
+    this.state.cartList.some(item => {
+      console.log(item)
+      if(item.sku_quantity > item.sku_amount) {
+        this.setState({
+          canCheckout: false,
+          checkoutFont: '库存不足'
+        })
+      }
+    });
   }
+
+  // this.props.navigator.showLightBox({
+  //   screen: "SboxCartAlert",
+  //   passProps: {
+  //     message:'库存不足'}, // simple serializable object that will pass as props to the lightbox (optional)
+  //   adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+  //  });
+  //  setTimeout(() => {
+  //   this.props.navigator.dismissLightBox();
+  // }, 1500);
   _addQuantity(item){
     SboxCartAction.addQuantity(item);
   }
@@ -57,6 +84,18 @@ export default class SboxCart extends Component {
 
   }
 
+  _goToCheckout(){
+    const cartList = this.state.cartList;
+    this.props.navigator.showModal({
+      screen: "SboxCheckout",
+      title: "Modal",
+      navigatorStyle: {navBarHidden: true},
+      animationType: 'none'
+    });
+  }
+  _renderGoBackBtn(){
+    this.props.navigator.pop()
+  }
   _renderButton(item) {
       if(item.sku_quantity <= item.sku_amount){
         return (
@@ -157,44 +196,90 @@ export default class SboxCart extends Component {
 
 
   }
+  _renderConfirmBtn() {
+      return(
+        <View style={{
+          position:'absolute',
+          bottom:0,
+          width:width,}}>
+          <View style={{flexDirection:'row',
+                        margin:10,
+                        marginLeft:20,
+                        marginRight:20,}}>
+            <Text style={{
+              flex:0.7,
+              color:'#ff7685',
+              fontSize:20,
+              fontFamily:'FZZhunYuan-M02S',
+              textAlign:'left',
+            }}>
+                Before Tax: ${Number(this.state.total).toFixed(2)}
+            </Text>
+            <Text style={{
+              flex:0.3,
+              color:'#ff7685',
+              fontSize:20,
+              fontFamily:'FZZhunYuan-M02S',
+              textAlign:'right',
+            }}>
+                 {this.state.totalQuantity}件
+            </Text>
+          </View>
+          <TouchableOpacity
+              style={{height:60,}}
+              onPress={this._goToCheckout}
+              disabled = {!this.state.canCheckout}
+              activeOpacity={0.4}>
+            <View style={{
+                          flex:1,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: this.state.canCheckout?'#ff7685': 'grey',
+                        }}>
+
+                <Text style={{
+                  color:'#ffffff',
+                  fontSize:20,
+                  fontFamily:'FZZhunYuan-M02S',}}>
+                     {this.state.checkoutFont}
+                </Text>
+                
+            </View>
+          </TouchableOpacity>
+        </View>
+      )
+  }
   _keyExtractor = (item, index) => item.sku_id;
   render() {
     return (
-      <View style={{flex: 1, justifyContent: 'space-between'}}>
+      <View style={styles.container}>
+        <SboxHeader title={"购物箱"}
+                goBack={this._renderGoBackBtn}
+                leftButtonText={'x'}/>
+        <View style={styles.separator}>
+        </View>
         <FlatList
+          	enableEmptySections
             data={this.state.cartList}
             renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
+            keyExtractor={(item, index) => item.sku_id}
         />
-        <View style={{flexDirection:'row',
-                      margin:10,
-                      marginLeft:20,
-                      marginRight:20,}}>
-          <Text style={{
-            flex:0.7,
-            color:'#ff7685',
-            fontSize:20,
-            fontFamily:'FZZhunYuan-M02S',
-            textAlign:'left',
-          }}>
-              Before Tax: ${Number(this.state.total).toFixed(2)}
-          </Text>
-          <Text style={{
-            flex:0.3,
-            color:'#ff7685',
-            fontSize:20,
-            fontFamily:'FZZhunYuan-M02S',
-            textAlign:'right',
-          }}>
-               {this.state.totalQuantity}件
-          </Text>
-        </View>
+
+        {this._renderConfirmBtn()}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  separator: {
+    height: 1,
+    borderWidth: 0.6,
+    borderColor: "#D5D5D5"
+  },
   item: {
     // height: height * (295 / 2208),
     flexDirection: 'row',

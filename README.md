@@ -1,5 +1,8 @@
 # sweetfulBox_1.1
 
+## 2018-02-5 update
+- 新增 [2.1 Database migration](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_migration.md)
+
 ## 2018-01-31 update
 - 新增API [3.7 Theme Query](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/theme_query.md) 首页列表下拉时获取数据用
 
@@ -35,6 +38,7 @@
   
  
 * [2. Database schema ](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_schema.md)
+ * [2.1 Database migration](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/database_migration.md)
 
 * [3. API Document (v2)](https://github.com/ace68723/sweetfulBox_1.1/tree/master/Document/API_Document)
   * [3.1 Home data](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/home_data.md)
@@ -43,7 +47,7 @@
   * [3.4 Add order](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/add_order.md)
   * [3.5 Check Stock](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/check_stock.md)
   * [3.6 Order History](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/order_history.md)
-  * [3.7 Theme Query](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/theme_query.md) 首页列表下拉时获取数据用
+  * [3.7 Theme Query](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/API_Document/v2/theme_query.md) 
   
 <div id="1"> <div/>
 

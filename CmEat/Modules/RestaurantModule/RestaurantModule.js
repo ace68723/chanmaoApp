@@ -12,46 +12,18 @@ import {
 } from '../../../App/Modules/Database';
 
 const RestaurantModule = {
-  getRestaurantData(userData){
-      return new Promise((resolve, reject) => {
-
-        RestaurantApi.getRestaurantData(userData)
-          .then(data =>{
-            console.log('getRestaurant3')
-            if(data.result == 0){
-              UpdateAllRestaurants(data)
-              console.log('getRestaurant6')
-              resolve(data);
-            }else{
-              Alert.errorAlert(data.message)
-              reject()
-            }
-
-          })
-          .catch(error =>{
-            console.log(error)
-            error = error.toString()
-            Alert.errorAlert('餐馆列表未知错误: '+error)
-            reject()
-          })
-      })
-  },
-  getMenu(reqData){
-      return new Promise((resolve, reject) => {
-        RestaurantApi.getMenu(reqData)
-          .then(data =>{
-            if(data.result == 0){
-              resolve(data);
-            }else{
-              Alert.errorAlert(data.message)
-              reject()
-            }
-          })
-          .catch(error =>{
-            Alert.errorAlert('菜单未知错误')
-            reject()
-          })
-      })
+  async getMenu(reqData){
+    try {
+      const data = await RestaurantApi.getMenu(reqData);
+      if(data.result == 0){
+        return data
+      }else{
+        Alert.errorAlert(data.message)
+        return
+      }
+    } catch (e) {
+      Alert.errorAlert('菜单未知错误')
+    }
   },
   async beforCheckout(reqData){
       try{
@@ -71,7 +43,6 @@ const RestaurantModule = {
             return eo_data
           }else{
             Alert.errorAlert(data.message)
-            // throw 'get reuslt 1'
           }
 
       }catch (error){

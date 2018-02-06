@@ -184,10 +184,7 @@ export default  {
         data.sku_quantity = item.sku_quantity;
         cart_list.push(data)
       });
-
-
       if(cart_list.length === 0) {
-        console.log('cart empty')
         return
       } else {
         const lo_data ={

@@ -149,7 +149,7 @@ class Menu extends Component {
 				if(Number(this.state.cartTotals.total)>=Number(this.state.restaurant.start_amount)){
           this.props.navigator.showModal({
             screen: 'CmEatCheckout',
-            animated: false,
+            animated: true,
             navigatorStyle: {navBarHidden: true},
             passProps: {
               restaurant:this.state.restaurant,

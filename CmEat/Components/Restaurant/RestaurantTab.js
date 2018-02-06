@@ -3,6 +3,7 @@ import React, {
 	Component,
 } from 'react';
 import  {
+  Dimensions,
   StyleSheet,
   Text,
   View,
@@ -11,6 +12,7 @@ import  {
   FlatList
 } from 'react-native';
 import RestaurantCard from './RestaurantCard';
+const {width,height} = Dimensions.get('window');
 export default class RestaurantTab extends Component {
   constructor(props){
 		super(props)
@@ -29,24 +31,16 @@ export default class RestaurantTab extends Component {
 		this.props.getScrollViewRefs(ref)
 		this._scrollVew.scrollToOffset({y: this.props.scrollY,animated:false});
 	}
-	componentWillReceiveProps(nextProps){
-		if(nextProps.restaurantList != this.props.restaurantList){
-				this.setState({dataSource: this.state.dataSource.cloneWithRows(nextProps.restaurantList)})
-		}
-	}
   _renderRestaurant({item}) {
-    // console.log(item)
     const restaurant = item;
-    // restaurant, sectionID, rowID
 			if(restaurant){
-				// restaurant.imgUrl = {uri:restaurant.mob_banner};
 				return <RestaurantCard restaurant={restaurant}
 															 openMenu={this.props.openMenu}
 															 navigator={this.props.navigator}/>
 			}
   }
 	_renderHeader(){
-		return	<View style={{marginTop:200,height:0}}
+		return	<View style={{marginTop:width*0.45+80,height:0}}
 						 ref={(comp) => this._scrollViewContent = comp}/>
 	}
    _keyExtractor = (item, index) => item.area + item.rid;
@@ -77,30 +71,10 @@ export default class RestaurantTab extends Component {
              )}
       />
     )
-    // return (
-		// 	<ListView   style={styles.scrollView}
-		// 							key={this.props.index}
-		// 							ref={(comp) => this._scrollVew = comp}
-		// 							scrollEventThrottle={1}
-		// 							onScroll={this.props.scrollEventBind()}
-		// 							initialListSize={5}
-		// 							removeClippedSubviews={false}
-		// 							pageSize={5}
-		// 							scrollRenderAheadDistance={10}
-		// 							dataSource={this.state.dataSource}
-		// 							enableEmptySections={true}
-		// 							renderHeader={this._renderHeader.bind(this)}
-		// 							renderRow={(restaurant, sectionID, rowID) => this._renderRestaurant(restaurant,rowID)}
-		// 						>
-    //
-		// 	</ListView>
-    // );
   }
 };
 const styles = StyleSheet.create({
   scrollView:{
     flex: 1,
-    marginTop: 18,
-    paddingTop:20,
   },
 });

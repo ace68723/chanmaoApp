@@ -12,6 +12,7 @@ import {
   ImageBackground
 } from 'react-native';
 import SboxProductStore from '../../Stores/SboxProductStore';
+import SboxCartStore from '../../Stores/SboxCartStore';
 import createReactClass from 'create-react-class';
 import Button from './Button';
 export default class TabBar extends Component {
@@ -24,14 +25,14 @@ export default class TabBar extends Component {
     this._onChange = this._onChange.bind(this);
   }
   componentDidMount(){
-      SboxProductStore.addChangeListener(this._onChange);
+      SboxCartStore.addChangeListener(this._onChange);
   }
   componentWillUnmount() {
-    SboxProductStore.removeChangeListener(this._onChange);
+    SboxCartStore.removeChangeListener(this._onChange);
   }
   _onChange() {
     this.setState({
-      totalQuantity: SboxProductStore.getTotalQuantity()
+      totalQuantity: SboxCartStore.getTotalQuantity()
     })
   }
 
@@ -41,7 +42,7 @@ export default class TabBar extends Component {
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
     const iconImage = isTabActive ? activeIconImage : inactiveIconImage;
-    const iconText = page === 2 ? this.state.totalQuantity : "";
+    const iconText = page === 1 ? this.state.totalQuantity : "";
     return (
       <Button
         style={{flex: 1, }}

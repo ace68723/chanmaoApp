@@ -88,7 +88,6 @@ class ActivityHeaderWithBanner extends Component {
                           onPress={this._handleOnPress.bind(null,banner)}>
                 <View style={{flex:1,justifyContent:'center'}}>
                     <Animated.Image
-
                       style={[
                         styles.backgroundImage,
                         { transform: [{translateY: imageTranslate}]},
@@ -113,7 +112,7 @@ class ActivityHeaderWithBanner extends Component {
 			return(
         <Swiper showsButtons={false}
                 showsPagination={false}
-                height={200}
+                height={width*0.45}
                 autoplay
                 loop
                 horizontal
@@ -126,7 +125,7 @@ class ActivityHeaderWithBanner extends Component {
 		render() {
 			const headerHeight = this.props.scrollY.interpolate({
 	      inputRange: [0, HEADER_SCROLL_DISTANCE],
-	      outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+	      outputRange: [width*0.45, HEADER_MIN_HEIGHT],
 	      extrapolate: 'clamp',
 	    });
 			const imageOpacity = this.props.scrollY.interpolate({
@@ -134,12 +133,8 @@ class ActivityHeaderWithBanner extends Component {
 	      outputRange: [1, 1, 0],
 	      extrapolate: 'clamp',
 	    });
-			// opacity:imageOpacity,
 	    return (
 				<Animated.View style={[styles.header, {height: headerHeight,opacity:imageOpacity,}]}>
-					<StatusBar
-							barStyle="default"
-						/>
 					{this._renderSwiper()}
         </Animated.View>
 	    );
@@ -149,23 +144,17 @@ class ActivityHeaderWithBanner extends Component {
 const styles = StyleSheet.create({
   header: {
     position: 'absolute',
-    top: 0,
+    top: 50,
     left: 0,
-    right: 0,
+    width: width,
+    height: width*0.45,
     overflow: 'hidden',
   },
   backgroundImage: {
-    // position: 'absolute',
     alignSelf:'center',
-    // left: 20,
-    // right: 20,
-    // borderRadius:10,
     width: width,
-    height: width*0.5323,
+    height: width*0.45,
     alignSelf:'center',
-    // resizeMode: 'cover',
-    // width: width*0.7,
-    // height: width*0.7*0.5
   },
 });
 

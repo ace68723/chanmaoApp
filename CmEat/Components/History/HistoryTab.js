@@ -24,7 +24,6 @@ import {
 import Order from './Order';
 import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
-import RestaurantStore from '../../Stores/RestaurantStore';
 import Header from '../General/Header';
 import HistoryOrderDetail from './HistoryOrderDetail';
 import Modal from 'react-native-modalbox';
@@ -49,7 +48,7 @@ class HistoryTab extends Component {
 	      this._doAutoRefresh();
 				HistoryStore.autoRefresh();
         console.log('need rebuild currentRoutes')
-	      const currentRoutes = this.props.navigator.getCurrentRoutes();
+	      // const currentRoutes = this.props.navigator.getCurrentRoutes();
 				AppState.addEventListener('change', this._handleAppStateChange);
       }, 4000);
     }
@@ -87,13 +86,13 @@ class HistoryTab extends Component {
 
     _doAutoRefresh(){
       console.log('need rebuild _doAutoRefresh')
-      const currentRoutes = this.props.navigator.getCurrentRoutes();
-      if(currentRoutes.length == 1 && currentRoutes[0].name == 'Home'){
-        this.setState({
-          isRefreshing: true,
-        })
-        HistoryAction.getOrderData()
-      }
+      // const currentRoutes = this.props.navigator.getCurrentRoutes();
+      // if(currentRoutes.length == 1 && currentRoutes[0].name == 'Home'){
+      //   this.setState({
+      //     isRefreshing: true,
+      //   })
+      //   HistoryAction.getOrderData()
+      // }
     }
     _onRefresh(){
       this.setState({
@@ -126,21 +125,12 @@ class HistoryTab extends Component {
 			return this.currentPosition
 		}
 		_reorder(rid){
-			this.props.navigator.push({
-				 id: 'Menu',
-				 py:800,
-				 restaurant:RestaurantStore.getRestaurantWithRid(rid),
-			 })
+			// this.props.navigator.push({
+			// 	 id: 'Menu',
+			// 	 py:800,
+			// 	 restaurant:RestaurantStore.getRestaurantWithRid(rid),
+			//  })
 		}
-    // _reorder(reorderItems){
-    //   // const restaurant = RestaurantStore.getRestaurantWithRid(this.state.rid);
-    //   // this.props.navigator.push({
-    //   //   id: 'Menu',
-    //   //   restaurant: restaurant,
-    //   //   // reorderItems:reorderItems,
-    //   // })
-    // }
- // <Text style={{alignSelf:'center',color:'#ff8b00',fontFamily:'FZZhunYuan-M02S',}}> 订单状态每30秒会自动刷新</Text>
     render(){
 			let orderList = this.state.orderData.map( order => {
 				return <Order key={ order.oid }

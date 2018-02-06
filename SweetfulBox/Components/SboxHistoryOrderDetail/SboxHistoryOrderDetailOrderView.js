@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import SboxProductAction from '../../Actions/SboxProductAction';
 
 const { height, width } = Dimensions.get('window');
 
@@ -95,9 +96,14 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
   constructor(props) {
     super(props);
     this._renderProduct = this._renderProduct.bind(this);
+    this._handleOnPressIn = this._handleOnPressIn.bind(this);
     // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
   }
-
+  _handleOnPressIn(item) {
+    console.log(item);
+    const {spu_id} = item;
+    SboxProductAction.getSingleProduct(spu_id);
+  }
   _renderOrderList() {
     let orderList = [];
     if (!this.props.orderDetail.prod){
@@ -132,7 +138,9 @@ _renderProduct(itemObject) {
   console.log(itemObject);
   var item = itemObject.item;
   return(
-    <TouchableWithoutFeedback onPress={() => this.props.goToSboxProductDetial(item)}>
+    <TouchableWithoutFeedback 
+    onPressIn={this._handleOnPressIn.bind(null,item)}
+    onPress={() => this.props.goToSboxProductDetial()}>
       <View style={styles.item}>
         <View style={styles.itemImage}>
           <Image style={styles.image} source={{uri:item.sku_image}}/>

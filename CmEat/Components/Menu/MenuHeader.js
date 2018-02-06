@@ -15,7 +15,6 @@ export default class LoginButton extends Component {
 
   constructor(props){
     super();
-		// props.py+
 		this.state = {
 			restaurantCardTop:new Animated.Value(200),
 			margin:new Animated.Value(0),
@@ -26,7 +25,6 @@ export default class LoginButton extends Component {
 
   }
 	componentDidMount(){
-		// setTimeout( ()=> {
 			InteractionManager.runAfterInteractions(() => {
 				Animated.parallel([
 					Animated.timing(this.state.margin, {
@@ -48,7 +46,6 @@ export default class LoginButton extends Component {
 					}),
 				]).start()
 			})
-		// }, 0);
 	}
 	close(){
 		InteractionManager.runAfterInteractions(() => {
@@ -100,7 +97,6 @@ export default class LoginButton extends Component {
     return(
 			<Animated.View style={{backgroundColor:'#ffffff',
 										padding:8,
-										// paddingBottom:23,
 										borderColor:"#e2e2e4",
 										shadowColor: "#e2e2e4",
 										shadowOpacity: 1,
@@ -115,9 +111,9 @@ export default class LoginButton extends Component {
 										marginLeft:this.state.margin,
 										marginRight:this.state.margin,
 										maxHeight:this.state.height,
-										paddingBottom:23
+										paddingBottom:23,
 									}}>
-				<Animated.View style={{opacity:this.state.intrOpacity,}}>
+				<Animated.View style={{opacity:this.state.intrOpacity}}>
 					<Text style={{color:'#363646',fontSize:15,fontWeight:'500',fontFamily:'FZZongYi-M05S',}}>
 							{this.props.restaurant.name}
 					</Text>
@@ -129,12 +125,11 @@ export default class LoginButton extends Component {
 						</View>
 					</View>
 				</Animated.View>
-				<Animated.View style={{opacity:this.state.rrOpacity,}}>
+				<Animated.View style={{opacity:this.state.rrOpacity,marginTop:-25,}}>
 					<Text style={{color:'#363646',
 																	fontSize:25,
 																	fontWeight:'500',
 																	fontFamily:'FZZongYi-M05S',
-																	marginTop:-20,
 																	textAlign:'center',
 																	}}>
 							{this.props.restaurant.name}
@@ -157,5 +152,3 @@ export default class LoginButton extends Component {
     )
   }
 }
-const styles = StyleSheet.create({
-});
