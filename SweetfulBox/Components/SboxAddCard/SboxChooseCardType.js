@@ -5,6 +5,8 @@ import {
   Dimensions,
   View,
   Text,
+  Image,
+  ScrollView,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
@@ -30,8 +32,25 @@ export default class SboxChooseCardType extends Component {
 
       ],
     };
+    this._goBack = this._goBack.bind(this);
+    this._goToCredit = this._goToCredit.bind(this);
+    this._goToDebit = this._goToDebit.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
     this._renderButton = this._renderButton.bind(this);
+
+  }
+
+  _goBack() {
+    this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+      });
+  }
+
+  _goToCredit() {
+
+  }
+
+  _goToDebit() {
 
   }
 
@@ -69,15 +88,24 @@ export default class SboxChooseCardType extends Component {
     return (
       <View style={styles.container}>
         <SboxHeader title={"支付方式"}
-                goBack={this._renderGoBackBtn}
+                goBack={this._goBack}
                 leftButtonText={'x'}/>
-          <View style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}>
-            {this._renderButton()}
-          </View>
+        <View style={styles.separator}></View>
+        <ScrollView style={{backgroundColor: '#D5D5D5'}}>
+            <TouchableOpacity onPress={this._goToCredit}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
+                <Text style={{flex: 1, fontSize: 18, textAlign: 'left', marginLeft :20}}>信用卡</Text>
+                <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./Img/right.png')}/>
+            </TouchableOpacity>
+            <View style={styles.separator}></View>
+            <TouchableOpacity onPress={this._goToDebit}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
+                <Text style={{flex: 1, fontSize: 18, textAlign: 'left', marginLeft :20}}>Debit卡</Text>
+                <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./Img/right.png')}/>
+            </TouchableOpacity>
+        </ScrollView>
       </View>
     );
   }
@@ -105,4 +133,9 @@ const styles = StyleSheet.create({
     paddingBottom: height * (100 / 2208),
     paddingTop: height * (54 / 2208),
   },
+  separator: {
+    height: 1,
+		borderWidth: 0.6,
+		borderColor: "#D5D5D5"
+  }
 });
