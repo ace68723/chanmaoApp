@@ -67,13 +67,9 @@ export default class MyComponent extends Component {
   componentDidMount() {
     SboxOrderAction.getOrderBefore();
     SboxOrderStore.addChangeListener(this._onChange);
-    // realm.addListener('change', this._onRealmChange)
-  }
-  componentWillMount() {
   }
   componentWillUnmount() {
     SboxOrderStore.removeChangeListener(this._onChange);
-    // realm.removeListener('change',this._onRealmChange);
   }
   _onChange() {
       const state = Object.assign({},SboxOrderStore.getState())
@@ -104,17 +100,13 @@ export default class MyComponent extends Component {
          }, // simple serializable object that will pass as props to the in-app notification (optional)
          autoDismissTimerSec: 3 // auto dismiss notification in seconds
         });
-
       }
-
   }
   _renderGoBackBtn() {
     this.props.navigator.dismissModal({
       animationType: 'none'
     });
   }
-
-
   _deleteItemAlert(product,productName) {
     Alert.alert(
       '删除',
@@ -204,8 +196,7 @@ export default class MyComponent extends Component {
   render() {
     if(this.state.showCheckoutLoading){
       return(
-        <View style={{flex:1,
-                      marginTop: viewMarginTop,}}>
+        <View style={{flex:1,}}>
           <View style={{position:'absolute',
                         alignItems:'center',
                         justifyContent:'center',
