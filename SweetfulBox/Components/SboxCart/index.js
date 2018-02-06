@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { findIndex } from 'lodash';
 
 import SboxCartAction from '../../Actions/SboxCartAction';
 import SboxCartStore from '../../Stores/SboxCartStore';
@@ -43,6 +44,15 @@ export default class SboxCart extends Component {
   _onChange() {
     const cartState = SboxCartStore.getState();
     this.setState(Object.assign({},cartState));
+    this.state.cartList.some(item => {
+      console.log(item)
+      if(item.sku_quantity > item.sku_amount) {
+        this.setState({
+          canCheckout: false,
+          checkoutFont: '库存不足'
+        })
+      }
+    });
   }
   _addQuantity(item){
     SboxCartAction.addQuantity(item);
@@ -206,20 +216,22 @@ export default class SboxCart extends Component {
           <TouchableOpacity
               style={{height:60,}}
               onPress={this._goToCheckout}
+              disabled = {!this.state.canCheckout}
               activeOpacity={0.4}>
             <View style={{
                           flex:1,
                           alignItems:'center',
                           justifyContent:'center',
-                          backgroundColor:'#ff7685',
+                          backgroundColor: this.state.canCheckout?'#ff7685': 'grey',
                         }}>
 
                 <Text style={{
                   color:'#ffffff',
                   fontSize:20,
                   fontFamily:'FZZhunYuan-M02S',}}>
-                     去结账
+                     {this.state.checkoutFont}
                 </Text>
+
             </View>
           </TouchableOpacity>
         </View>
