@@ -209,7 +209,13 @@ export default class SweetProductDetial extends Component {
       // } else {
         return (
           <View style={{flex:1}}>
-            <ScrollView style={styles.container}>
+
+
+
+            <ScrollView style={styles.container} >
+
+
+
                 <SboxProductDetialScrollView
                   page={this.state.sku_image}
                   selectedPage={this.state.selectedPage}
