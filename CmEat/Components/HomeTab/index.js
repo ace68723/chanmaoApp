@@ -79,7 +79,7 @@ export default class LoginButton extends Component {
 				            onScroll={this.props.scrollEventBind()}
 										showsVerticalScrollIndicator={false}>
 
-             <View style={{marginTop:202,height:0}}
+             <View style={{marginTop:width*0.45+80,height:0}}
                    ref={'_scrollViewContent'}/>
 						 {this._renderAdv()}
         </ScrollView>
@@ -96,11 +96,8 @@ const styles = StyleSheet.create({
 	},
 	scrollView:{
 		flex: 1,
-		marginTop: 18,
-		paddingTop:20,
 	},
 	autoViewStyle:{
-
 		alignItems:'center',
 		width:(width-9)/2,
 		height:(width-9)/(2*1.157),

@@ -27,7 +27,6 @@ import RestaurantTab from '../Restaurant/RestaurantTab'
 // import Menu from '../Restaurant/Menu';
 
 import HomeAction from '../../Actions/HomeAction';
-import RestaurantAction from '../../Actions/RestaurantAction';
 import HomeStore from '../../Stores/HomeStore';
 
 
@@ -50,15 +49,12 @@ export default class MainTab extends Component {
     this._onChange = this._onChange.bind(this);
     this._scrollEventBind = this._scrollEventBind.bind(this);
     this._getScrollViewRefs= this._getScrollViewRefs.bind(this);
-		this._openMenu = this._openMenu.bind(this);
-		this._closeMenu = this._closeMenu.bind(this);
 		this._onChangeTab = this._onChangeTab.bind(this);
 		this._handleAppStateChange = this._handleAppStateChange.bind(this);
 		this.showBanner = true;
   }
 	componentDidMount(){
     HomeAction.getHomeData();
-		// RestaurantAction.getRestaurant();
     HomeStore.addChangeListener(this._onChange);
 		AppState.addEventListener('change', this._handleAppStateChange);
 	}
@@ -97,34 +93,34 @@ export default class MainTab extends Component {
   }
 
   setPosition(){
-		if(_scrollY != this.state.scrollY._value ){
-		   if(this.state.scrollY._value<=200+height*0.081){
+  		if(_scrollY != this.state.scrollY._value ){
+  		   if(this.state.scrollY._value<=200+height*0.081){
 
-					 _scrollY = this.state.scrollY._value;
+  					 _scrollY = this.state.scrollY._value;
 
-					 _forEach(this.scrollViewRefs,(ref,index)=>{
-             if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
+  					 _forEach(this.scrollViewRefs,(ref,index)=>{
+               if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
+               if(!ref.scrollView.scrollToOffset){console.log(ref,index);return}
+  						//  if(ref.index != this.state.currentTab){
+  							 ref.scrollView.scrollToOffset({offset:this.state.scrollY._value,animated: false});
+  						//  }
+  					 })
+
+  		   }else {
+  		     _forEach(this.scrollViewRefs,(ref,index)=>{
+             if(index == 0) {ref.scrollView.scrollTo({y:200+height*0.081,animated: false});return};
              if(!ref.scrollView.scrollToOffset){console.log(ref,index);return}
-						//  if(ref.index != this.state.currentTab){
-							 ref.scrollView.scrollToOffset({offset:this.state.scrollY._value,animated: false});
-						//  }
-					 })
+  		      //  if(ref.index != this.state.currentTab){
+  		         ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
+  		           if(py>40 ){
+  		             ref.scrollView.scrollToOffset({offset:200+height*0.081,animated: false});
 
-		   }else {
-		     _forEach(this.scrollViewRefs,(ref,index)=>{
-           if(index == 0) {ref.scrollView.scrollTo({y:200+height*0.081,animated: false});return};
-           if(!ref.scrollView.scrollToOffset){console.log(ref,index);return}
-		      //  if(ref.index != this.state.currentTab){
-		         ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
-		           if(py>40 ){
-		             ref.scrollView.scrollToOffset({offset:200+height*0.081,animated: false});
-
-		           }
-		          });
-		      //  }
-		     })
-		   }
-		}
+  		           }
+  		          });
+  		      //  }
+  		     })
+  		   }
+  		}
   }
 	_onChangeTab(tabRef){
 		this.setState(
@@ -138,35 +134,12 @@ export default class MainTab extends Component {
 				// this.props.hideTabBar();
 			}
 	}
-	_openMenu(py,restaurant){
-			this.setState({
-        py:py,
-  			restaurant:restaurant,
-        showAnimatedView:true,
-      })
-	}
 
-
-	_closeMenu(){
-      this.setState({
-        showAnimatedView:false,
-      })
-    }
-	_renderMenuView(){
-		if(this.state.showAnimatedView){
-			return(
-				<Menu  restaurant={this.state.restaurant}
-							 py={this.state.py}
-							 closeMenu={this._closeMenu}
-							 navigator={this.props.navigator}/>
-			)
-		}
-	}
 	renderScrollableTabView(){
 		if(this.state.areaList && this.state.areaList.length>0){
       let restaurantTabs
       if(Platform.OS === 'ios') {
-        restaurantTabs = this.state.areaList.map( (area,key) => {
+          restaurantTabs = this.state.areaList.map( (area,key) => {
   					return 	(<RestaurantTab
   														tabLabel={area.name}
   														key={key+2}
@@ -182,29 +155,28 @@ export default class MainTab extends Component {
   														hideTabBar = {this.props.hideTabBar}
   														showTabBar = {this.props.showTabBar}
   														scrollY = {this.state.scrollY._value}/>)
-
   				});
       } else {
-        const areaListAndroid = [this.state.areaList[0]]
-        restaurantTabs = areaListAndroid.map( (area,key) => {
-  					return 	(<RestaurantTab
-  														tabLabel={area.name}
-  														key={key+2}
-  														index={key+2}
-  														restaurantList={area.restaurantList}
-  														currentTab={this.state.currentTab}
-  														area={area.area}
-  														navigator={this.props.navigator}
-  														openMenu={this._openMenu}
-  														scrollEventBind={this._scrollEventBind}
-  														getScrollViewRefs={this._getScrollViewRefs}
-  														refsCurrentScrollView= {this.refsCurrentScrollView}
-  														hideTabBar = {this.props.hideTabBar}
-  														showTabBar = {this.props.showTabBar}
-  														scrollY = {this.state.scrollY._value}/>)
+          const areaListAndroid = [this.state.areaList[0]]
+          restaurantTabs = areaListAndroid.map( (area,key) => {
+    					return 	(<RestaurantTab
+    														tabLabel={area.name}
+    														key={key+2}
+    														index={key+2}
+    														restaurantList={area.restaurantList}
+    														currentTab={this.state.currentTab}
+    														area={area.area}
+    														navigator={this.props.navigator}
+    														openMenu={this._openMenu}
+    														scrollEventBind={this._scrollEventBind}
+    														getScrollViewRefs={this._getScrollViewRefs}
+    														refsCurrentScrollView= {this.refsCurrentScrollView}
+    														hideTabBar = {this.props.hideTabBar}
+    														showTabBar = {this.props.showTabBar}
+    														scrollY = {this.state.scrollY._value}/>)
 
-  				});
-      }
+    				});
+       }
 
 			return(
 				<ScrollableTabView  style={{}}
@@ -251,7 +223,6 @@ export default class MainTab extends Component {
 						navigator={this.props.navigator}/>
         <CmEatHomeHeader scrollY = {this.state.scrollY}
                          handleBackToHome={this.props.handleBackToHome}/>
-				{this._renderMenuView()}
      </View>
     )
   }

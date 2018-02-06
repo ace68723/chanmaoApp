@@ -28,14 +28,12 @@ import Header from '../General/Header';
 import Loading from '../Helpers/Loading';
 import CheckoutItem from './CheckoutItem';
 import CheckoutComment from './CheckoutComment';
-import RestaurantService from '../../Services/RestaurantService';
 import CommentModal from 'react-native-modalbox';
 import OrderConfirm from './OrderConfirm';
 
-// import RestaurantStore from '../../Stores/RestaurantStore';
-import RestaurantStore from '../../Stores/RestaurantStore';
+import CheckoutAction from '../../Actions/CheckoutAction';
+import CheckoutStore from '../../Stores/CheckoutStore';
 import MenuStore from '../../Stores/MenuStore';
-import RestaurantAction from '../../Actions/RestaurantAction';
 import HistoryAction from '../../Actions/HistoryAction';
 
 // device(size): get device height and width
@@ -63,7 +61,7 @@ class Confirm extends Component {
 											loading: true,
 											showOrderConfirm:false,
                     }
-				this.state = Object.assign({},state,RestaurantStore.getCheckoutSate())
+				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
         this._updateUaid = this._updateUaid.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
@@ -84,18 +82,26 @@ class Confirm extends Component {
 				const pretax = MenuStore.getCartTotals().total;
 				const navigator = this.props.navigator;
 				const startAmount = this.state.startAmount;
-				RestaurantAction.beforCheckout(rid,pretax,navigator,startAmount);
+				CheckoutAction.beforCheckout(rid,pretax,startAmount);
 				this.setState({renderAddress:true})
 			}, 500);
-      RestaurantStore.addChangeListener(this._onChange);
+      CheckoutStore.addChangeListener(this._onChange);
     }
     componentWillUnmount() {
-      RestaurantStore.removeChangeListener(this._onChange);
+      CheckoutStore.removeChangeListener(this._onChange);
     }
     _onChange(){
-				const state = Object.assign({},RestaurantStore.getCheckoutSate(),{loading:false})
-        console.log('onchange',state)
+				const state = Object.assign({},CheckoutStore.getState());
         this.setState(state);
+
+        if(this.state.shouldAddAddress){
+          this.props.navigator.showModal({
+            screen: 'CmEatAddress',
+            animated: true,
+            navigatorStyle: {navBarHidden: true},
+          });
+        }
+
 				if(this.state.checkoutSuccessful){
 					this._goToHistory();
 				}
@@ -163,16 +169,16 @@ class Confirm extends Component {
 			this.setState({showOrderConfirm:false});
 		}
     _goBack(){
-			if(!this.state.loading){
-	      this.props.navigator.pop();
-			}
+      this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+      });
     }
     _goToAddressList(){
-			if(!this.state.loading){
-				this.props.navigator.push({
-					id: 'AddressList',
-				});
-			}
+			// if(!this.state.loading){
+			// 	this.props.navigator.push({
+			// 		id: 'AddressList',
+			// 	});
+			// }
     }
     _goToHistory(){
 			HistoryAction.getOrderData()
@@ -198,10 +204,6 @@ class Confirm extends Component {
         TheSixAction.submitComment(data);
       }
     }
-		_goBack(){
-			if(this.state.loading)return
-			this.props.navigator.pop();
-		}
 		_handleScroll(e) {
       if(e.nativeEvent.contentOffset.y < 300){
         this.state.anim.setValue(e.nativeEvent.contentOffset.y);
@@ -209,15 +211,6 @@ class Confirm extends Component {
       }
     }
 		renderCheckoutButton(){
-			//  && this.state.dltype!= -1
-			// <View style={{alignItems:'center'}}>
-			// 	<Text style={{textAlign:'center',color:'#9c9ea1',}}>
-			// 				*以上费用均未含小费{"\n"}
-			// 	</Text>
-			//
-			//
-			// </View>
-
       if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
         return(
             <TouchableOpacity style={styles.acceptButton}

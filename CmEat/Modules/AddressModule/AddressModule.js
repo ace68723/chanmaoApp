@@ -16,6 +16,7 @@ const AddressModule = {
           .then(data =>{
             if(data.result == 0){
 							const ea_address = data.address;
+              console.log(ea_address)
               cme_saveAddress(ea_address);
               resolve(ea_address);
             }else{

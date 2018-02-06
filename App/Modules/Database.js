@@ -129,26 +129,29 @@ export function DatabaseInit() {
       schemaVersion: 1,
   })
   realm.write(() => {
-    let init_cme_address = {
-      addr:"",
-      apt_no:"",
-      buzz:"",
-      city:"",
-      del:"",
-      loc_la:"",
-      loc_lo:"",
-      name:"",
-      postal:"",
-      province:"",
-      status:"",
-      tel:"",
-      uaid:"",
-      uid:"",
-      selected:false
+    if(realm.objects('cme_address').length == 0){
+      let init_cme_address = {
+        addr:"",
+        apt_no:"",
+        buzz:"",
+        city:"",
+        del:"",
+        loc_la:"",
+        loc_lo:"",
+        name:"",
+        postal:"",
+        province:"",
+        status:"",
+        tel:"",
+        uaid:"",
+        uid:"",
+        selected:false
+      }
+      realm.create('cme_address',Object.assign({},init_cme_address,{type:'H'}), true );
+      realm.create('cme_address',Object.assign({},init_cme_address,{type:'W'}), true );
+      realm.create('cme_address',Object.assign({},init_cme_address,{type:'O'}), true );
     }
-    realm.create('cme_address',Object.assign({},init_cme_address,{type:'H'}), true );
-    realm.create('cme_address',Object.assign({},init_cme_address,{type:'W'}), true );
-    realm.create('cme_address',Object.assign({},init_cme_address,{type:'O'}), true );
+
 
     let init_cme_cart = realm.objects('cme_cart');
     realm.delete(init_cme_cart);

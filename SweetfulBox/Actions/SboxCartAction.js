@@ -58,7 +58,6 @@ export default {
       },
       async checkStock() {
           try {
-            console.log('done')
               const data = await ProductModule.checkStock();
               if (data.ev_error ===0) {
                 dispatch({

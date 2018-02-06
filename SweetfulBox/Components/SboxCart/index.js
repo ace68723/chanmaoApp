@@ -41,6 +41,7 @@ export default class SboxCart extends Component {
   componentDidMount(){
     setTimeout(() => {
       SboxCartStore.addChangeListener(this._onChange);
+      SboxCartAction.checkStock();
     }, 150);
   }
   componentWillUnmount() {

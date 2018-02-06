@@ -25,7 +25,7 @@ class MenuCard extends Component {
     let _decreaseButton = () => {
       if(this.props.qty > 0){
         return(
-          <View style={{flex:1,flexDirection:'row',}}>
+          <View style={{flex:0.4,flexDirection:'row',}}>
             <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
               <Text style={styles.quantity}>
                 数量: {this.props.dish.qty}
@@ -43,15 +43,14 @@ class MenuCard extends Component {
       }
     }
     return (
-      <TouchableOpacity style={{overflow:"hidden"}}
-												activeOpacity={0.5}
+      <TouchableOpacity activeOpacity={0.4}
                         onPress={()=>{
-                          //  this.props.addItem(this.props.dish)
                             OrderActions.addItem( this.props.dish)
                           }}>
          <View style={styles.container}>
-            <View style={{flex:1}}>
-              <Text style={styles.itemTitle}>
+            <View style={{flex:0.6}}>
+              <Text style={styles.itemTitle}
+                    numberOfLines={2}>
                 {this.props.ds_name}
               </Text>
               <Text style={styles.price}>
@@ -68,12 +67,13 @@ class MenuCard extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    height:80,
+    height:100,
     backgroundColor: '#ffffff',
     borderColor:"#e2e2e4",
     borderBottomWidth: StyleSheet.hairlineWidth,
     padding:20,
     flexDirection:'row',
+    alignItems:'center'
 
   },
   itemTitle:{

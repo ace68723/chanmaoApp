@@ -48,6 +48,12 @@ export default class SweetProductDetial extends Component {
     this._handleOnPressIn = this._handleOnPressIn.bind(this);
   }
   componentDidMount(){
+      if(this.state.spu_status === 1) {
+          this.props.navigator.pop({
+            animated: true,
+            animationType: 'slide-horizontal',
+        })
+      }
       SboxProductStore.addChangeListener(this._onChange);
   }
   componentWillUnmount() {
