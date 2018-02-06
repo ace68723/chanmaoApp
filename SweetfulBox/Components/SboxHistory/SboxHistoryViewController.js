@@ -102,7 +102,6 @@ export default class HistoryViewController extends Component {
 				<SboxHeader title={"历史订单"}
                 goBack={this._goBack}
                 leftButtonText={'<'}/>
-				<View style={styles.separator}></View>
         {this._renderHistoryView()}
       </View>
     )

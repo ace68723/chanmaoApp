@@ -79,7 +79,9 @@ const styles = StyleSheet.create({
   navigation: {
     flexDirection:'row',
     backgroundColor: 'white',
-    marginTop: viewMarginTop
+    marginTop: viewMarginTop,
+    borderBottomWidth: 1,
+    borderColor: "#D5D5D5",
   },
   back: {
     flex: 1,
