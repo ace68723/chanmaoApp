@@ -19,13 +19,6 @@ import SboxHeader from '../../../App/Components/General/SboxHeader';
 
 const { height, width } = Dimensions.get('window');
 
-  let viewMarginTop;
-  if(height == 812){
-    viewMarginTop = 45;
-  }else{
-    viewMarginTop = 20;
-  }
-
 export default class SboxCart extends Component {
   constructor(props) {
     super(props);
@@ -261,8 +254,6 @@ export default class SboxCart extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: viewMarginTop,
-    // backgroundColor:'red',
   },
   separator: {
     height: 1,
