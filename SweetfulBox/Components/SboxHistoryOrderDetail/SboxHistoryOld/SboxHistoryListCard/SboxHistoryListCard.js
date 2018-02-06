@@ -111,7 +111,7 @@ export default class SboxHistoryListCard extends Component {
   _renderSeparator() {
       const separator = {
           height: 1,
-          borderWidth: 0.6,
+          borderWidth: 1,
           borderColor: '#D5D5D5',
           marginLeft: 10,
           marginRight: 10,
