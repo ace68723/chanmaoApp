@@ -104,7 +104,6 @@ export default  {
         uuid: 1,
       }
       const homeDataResult = await ProductAPI.getHomeData(lo_data);
-      console.log('xxxx', homeDataResult.ea_theme);
       if(homeDataResult.ev_error === 0 ){
         const eo_data ={
           bannerList:homeDataResult.ea_banner,

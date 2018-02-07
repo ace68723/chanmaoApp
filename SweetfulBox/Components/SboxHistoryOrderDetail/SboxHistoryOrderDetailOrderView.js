@@ -100,7 +100,6 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
     // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
   }
   _handleOnPressIn(item) {
-    console.log(item);
     const {spu_id} = item;
     SboxProductAction.getSingleProduct(spu_id);
   }
@@ -138,7 +137,7 @@ _renderProduct(itemObject) {
   console.log(itemObject);
   var item = itemObject.item;
   return(
-    <TouchableWithoutFeedback 
+    <TouchableWithoutFeedback
     onPressIn={this._handleOnPressIn.bind(null,item)}
     onPress={() => this.props.goToSboxProductDetial()}>
       <View style={styles.item}>

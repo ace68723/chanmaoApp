@@ -86,7 +86,6 @@ export default class SboxProductView extends Component {
     );
   }
   render() {
-      console.log("product Tab ======", this.props.product);
       return (
 
             <View style={styles.productContainer}>
