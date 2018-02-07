@@ -57,17 +57,19 @@ export default class MyComponent extends Component {
     this.setState(SboxProductTabStore.getStateByTmid(tmid));
   }
   _handleOnPressIn(product) {
-    console.log(product)
+    if (product.status === 1) return;
     const {spu_id} = product;
     SboxProductAction.getSingleProduct(spu_id);
   }
-  _goToSboxProductDetial() {
+  _goToSboxProductDetial(item) {
+    if (item.status === 1) return;
     setTimeout( () => {
       this.props.navigator.push({
         screen: 'SboxProductDetial',
         navigatorStyle: {navBarHidden: true},
       })
     }, 150);
+
   }
   _onEndReached() {
     SboxProductTabAction.getProductList();
@@ -177,7 +179,7 @@ export default class MyComponent extends Component {
     return (
         <FlatList
             scrollEventThrottle={1}
-          
+
             style={this.props.style}
             ref={(comp) => this._scrollVew = comp}
             ListHeaderComponent={this._renderHeader}
