@@ -4,7 +4,6 @@ import ProductModule from '../Modules/ProductModule/ProductModule';
 import {sbox_getCartQuantity,sbox_cartQuantityListener} from '../Modules/Database';
 export default {
     async getSingleProduct(spu_id){
-      console.log(spu_id)
         try{
           const data = await ProductModule.getSingleProduct(spu_id);
           dispatch({

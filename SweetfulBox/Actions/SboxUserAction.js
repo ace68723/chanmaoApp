@@ -29,7 +29,6 @@ export default {
 
       async checkUserLogin() {
         try{
-          console.log('SboxUserAction');
           // const data = await UserModule.checkUserLogin();
           const data = false;
           dispatch({
@@ -41,7 +40,6 @@ export default {
       },
       async clearToken() {
         try{
-          console.log('SboxUserAction');
           // const data = await UserModule.clearToken();
           const data = true;
           dispatch({

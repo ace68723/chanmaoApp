@@ -16,7 +16,6 @@ const SboxProductTabStore = Object.assign({},EventEmitter.prototype,{
       const theme = themeList[index];
       this.addThemeData(theme.tmid, theme.section_list, theme.prod_list);
     }
-    console.log('gg', this.state);
   },
 
   addThemeData(tmid, section_list, prod_list){
@@ -35,7 +34,6 @@ const SboxProductTabStore = Object.assign({},EventEmitter.prototype,{
   },
 
   getUpdatedTmid(){
-    console.log(1234,this.state.updatedTmid)
     return this.state.updatedTmid;
   },
 

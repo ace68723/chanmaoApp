@@ -90,7 +90,7 @@ export default class SboxChooseCardType extends Component {
                 goBack={this._goBack}
                 leftButtonText={'x'}/>
         <View style={styles.separator}></View>
-        <ScrollView style={{backgroundColor: '#D5D5D5'}}>
+        <ScrollView style={{backgroundColor: '#f4f4f4'}}>
             <TouchableOpacity onPress={this._goToCredit}
                 activeOpacity={0.4}
                 style={{flexDirection: 'row',
@@ -101,7 +101,8 @@ export default class SboxChooseCardType extends Component {
                 <Text style={{flex: 1,
                               fontSize: 18,
                               textAlign: 'left',
-                              marginLeft :20}}>
+                              marginLeft :20,
+                              color:"#808080",}}>
                           信用卡
                 </Text>
                 <Image style={{height: 20,
@@ -109,7 +110,7 @@ export default class SboxChooseCardType extends Component {
                               marginRight:20,
                         }} source={require('./Img/right.png')}/>
             </TouchableOpacity>
-            <View style={styles.separator}></View>
+            <View style={styles.separator}/>
             <TouchableOpacity onPress={this._goToDebit}
                 activeOpacity={0.4}
                 style={{flexDirection: 'row',
@@ -120,14 +121,16 @@ export default class SboxChooseCardType extends Component {
                 <Text style={{flex: 1,
                               fontSize: 18,
                               textAlign: 'left',
-                              marginLeft :20}}>
-                              Debit Card
+                              marginLeft :20,
+                              color:"#808080",}}>
+                              Debit Visa Mastercard
                 </Text>
                 <Image style={{height: 20,
                               width: 20,
                               marginRight:20,}}
                        source={require('./Img/right.png')}/>
             </TouchableOpacity>
+            <View style={styles.separator}/>
         </ScrollView>
       </View>
     );

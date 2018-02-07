@@ -23,7 +23,7 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            address: props.addressObject.addr,
+            address: props.addrInfo.addr,
             name: '',
             phoneNumDisplay: '',
             unitNum: '',
@@ -59,7 +59,7 @@ export default class App extends Component {
       const unitNumber = this.state.unitNum;
       const userInfo = {addressObject,name,phoneNumber,unitNumber}
       this.props.setUserInfo(userInfo);
-      
+
       this.props.navigator.dismissModal({
         animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
       });
@@ -95,14 +95,13 @@ export default class App extends Component {
             Alert.alert('错误', '请填写所有信息', { text: 'OK' });
             return;
         }
-        const addressObject = this.props.addressObject;
+        const addressObject = this.props.addrInfo;
         const name  = this.state.name;
         const phoneNumber = this.state.phoneNum;
         const unitNumber = this.state.unitNum;
         const userInfo = {addressObject,name,phoneNumber,unitNumber}
-        SboxUserAction.putUserAddr(userInfo);
-
-
+        console.log(userInfo)
+        // SboxUserAction.putUserAddr(userInfo);
     }
     _goBack(){
       this.props.navigator.dismissModal({

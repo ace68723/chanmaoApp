@@ -112,7 +112,6 @@ export default class About extends Component {
   }
 
   _handleLoginSuccessful() {
-    console.log('here',this.props)
     this.props.navigator.pop({
       animated: true,
       animationType: 'slide-horizontal',
@@ -120,7 +119,6 @@ export default class About extends Component {
   }
 
   _goBack() {
-    console.log('here',this.props)
     this.props.navigator.pop({
       animated: true,
       animationType: 'slide-horizontal',
@@ -128,7 +126,6 @@ export default class About extends Component {
   }
 
   _renderLoginOrHistory() {
-    console.log("SboxAbout, _renderLoginOrHistory", this.state.shouldDoAuth);
     if (this.state.shouldDoAuth == false) {
       return (
         <TouchableOpacity onPress={this._goToHistory}
@@ -179,8 +176,6 @@ export default class About extends Component {
   }
 
   render() {
-    console.log("SboxAbout");
-    console.log(this.state);
     return(
       <View style={styles.viewController}>
           <SboxHeader title={"设置"}

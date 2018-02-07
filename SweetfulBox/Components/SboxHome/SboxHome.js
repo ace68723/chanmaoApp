@@ -184,7 +184,6 @@ export default class SboxHome extends Component {
   }
   _renderHeaderWithBanner() {
     if (this.state.bannerList.length > 0) {
-      console.log('this.state.bannerList',this.state.bannerList)
       return(
         <HeaderWithBanner
             bannerList={this.state.bannerList}

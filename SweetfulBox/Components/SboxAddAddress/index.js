@@ -19,15 +19,12 @@ import SboxAddressAction from '../../Actions/SboxAddressAction';
 export default class MyComponent extends Component {
     constructor(props) {
       super(props);
-      // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       this.state = {
         predictionsData: [],
         items: [],
         showAlert: 0,
         selectedAddress: '',
-      // dataSource: ds.cloneWithRows([])
       }
-      // this.setSource = this.setSource.bind(this);
       this._goBack = this._goBack.bind(this);
       this.handleAddressSelected = this.handleAddressSelected.bind(this);
       this.onChangeTextInput = this.onChangeTextInput.bind(this);
@@ -45,7 +42,6 @@ export default class MyComponent extends Component {
     const newState = SboxAddressStore.getState();
     this.setState(Object.assign({}, this.state, {showAlert: newState.showAlert}));
     this.setState(Object.assign({}, this.state, {selectedAddress: newState.selectedAddress}));
-    // Object.assign({},this.state,SboxAddressStore.getState());
     if (this.state.showAlert == 0) {
       this.props.navigator.showLightBox({
          screen: "SboxAddressAlert",
@@ -53,9 +49,7 @@ export default class MyComponent extends Component {
            message:`对不起, 您输入的地址暂时无法配送`},
          style: {
            flex: 1,
-          //  backgroundBlur: "light", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
            tapBackgroundToDismiss: true,
-          //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
          },
          adjustSoftInput: "resize",
         });
@@ -64,10 +58,9 @@ export default class MyComponent extends Component {
        }, 5000);
     }
     else {
-        // SboxAddressAction.updateSelectedAddress(this.state.addressObject);
         this.props.navigator.showModal({
           screen: "SboxAddAddressInfo",
-          passProps: {addressObject:this.state.selectedAddress,setUserInfo:this.props.setUserInfo},
+          passProps: {addrInfo:this.state.addrInfo},
           navigatorStyle: {navBarHidden:true},
           animationType: 'slide-up'
         });
@@ -83,7 +76,6 @@ export default class MyComponent extends Component {
   handleAddressSelected(addressObject, selected) {
     const url = "https://maps.googleapis.com/maps/api/place/details/" +
         "json?placeid=" + addressObject.place_id +
-        // "&key="+AppConstants.GOOGLE_API_KEY
         "&key=" + GOOGLE_API_KEY
         let options = {
             method: 'GET',
@@ -98,18 +90,13 @@ export default class MyComponent extends Component {
           .then((res)=>{
             if(res.status == "OK"){
               const placeDetails = res.result;
-
               let addrInfo = {};
               addrInfo.lat  = placeDetails.geometry.location.lat;
               addrInfo.lng  = placeDetails.geometry.location.lng;
               addrInfo.addr = placeDetails.formatted_address;
               addrInfo.province = placeDetails.formatted_address.split(',')[2].replace(' ', '').substring(0, 2);
-              // Check if in the area
-              // SboxAddressAction.updateSelectedAddress(addrInfo);
+              this.setState({addrInfo});
               SboxAddressAction.checkCanDeliver(addrInfo);
-              // this.setState({
-              //    selectedAddress: addrInfo
-              // });
             }else{
               throw 'error'
             }

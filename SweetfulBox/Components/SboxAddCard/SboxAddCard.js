@@ -274,9 +274,9 @@ export default class MyComponent extends Component {
       }
   }
   _renderCardNo() {
-    const bounceValueCardNumTop =  this.state.cardNumAnimated.interpolate({
+    const bounceValueCardNumbottom =  this.state.cardNumAnimated.interpolate({
       inputRange: [0,1],
-      outputRange:[0.05*height,0],
+      outputRange:[13,40],
     })
     const bounceValueCardNumLeft =  this.state.cardNumAnimated.interpolate({
       inputRange: [0,1],
@@ -290,27 +290,40 @@ export default class MyComponent extends Component {
     return (
       <View style={styles.cardNo}>
         <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"cardNum")} >
-          <View style={[styles.input]}>
+          <View style={styles.input}>
               <Animated.Text style={{
                   position:'absolute',
-                  top:bounceValueCardNumTop,
+                  bottom:bounceValueCardNumbottom,
                   left:bounceValueCardNumLeft,
                   fontSize:bounceValueCardNumFontSize,
-                  bottom:0,
                   fontSize:16,
                   color:'#6d6e71',
                 }}
                 allowFontScaling={false}
                 >
-                  信用卡号
+                  卡号
               </Animated.Text>
 
-              <View style={{height:25,width:36,marginTop:35}}>
-                <Image source={require('./Img/icon_creditcard.png')} style={{height:25,width:36,opacity:0.5}}/>
+              <View style={{position:'absolute',
+                            height:25,
+                            width:36,
+                            bottom:10}}>
+                <Image source={require('./Img/icon_creditcard.png')}
+                       style={{ height:25,
+                                width:36,
+                                opacity:0.5}}/>
               </View>
 
-              <View style={{height:40 ,width:300,marginTop:30,marginLeft:15,flexDirection:'row'}} >
-                    <Text style={{fontSize:25,backgroundColor:'transparent'}} >{this.state.cardNumber}</Text>
+              <View style={{position:'absolute',
+                            height:40 ,
+                            width:300,
+                            bottom:0,
+                            marginLeft:40,
+                            flexDirection:'row'}} >
+                    <Text style={{fontSize:25,
+                                  backgroundColor:'transparent'}} >
+                                  {this.state.cardNumber}
+                    </Text>
                     {this._renderNumMarker()}
               </View>
 
@@ -457,23 +470,17 @@ const styles = StyleSheet.create({
     backgroundColor:"#ffffff",
   },
   infoContainer:{
-    flex: 0.3,
-    marginTop:65,
+    height:180,
+    marginTop:0,
     width:width,
-
   },
   cardNo:{
-    flex:1,
-    paddingTop:30,
+    height:90,
     borderBottomWidth:1,
     borderColor:'#d9d9d9',
     marginLeft:20,
     marginRight:20,
   },
-  // title:{
-  //   flex:0.4,
-  //   flexDirection:'row',
-  // },
   input:{
     flex:1,//0.6
     flexDirection:'row',
@@ -481,12 +488,12 @@ const styles = StyleSheet.create({
     marginBottom:5,
   },
   cardDetails:{
-    flex:1,
+    height:90,
     paddingTop:20,
     flexDirection:'row',
   },
   otherInfo:{
-    flex:0.5,
+    flex:1,
     borderBottomWidth:1,
     borderColor:'#d9d9d9',
     marginLeft:20,

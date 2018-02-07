@@ -45,7 +45,6 @@ export default class SboxCart extends Component {
     const cartState = SboxCartStore.getState();
     this.setState(Object.assign({},cartState));
     this.state.cartList.some(item => {
-      console.log(item)
       if(item.sku_quantity > item.sku_amount) {
         this.setState({
           canCheckout: false,
