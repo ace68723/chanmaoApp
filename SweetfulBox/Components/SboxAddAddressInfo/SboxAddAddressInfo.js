@@ -59,7 +59,7 @@ export default class App extends Component {
       const unitNumber = this.state.unitNum;
       const userInfo = {addressObject,name,phoneNumber,unitNumber}
       this.props.setUserInfo(userInfo);
-      
+
       this.props.navigator.dismissModal({
         animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
       });
@@ -101,8 +101,6 @@ export default class App extends Component {
         const unitNumber = this.state.unitNum;
         const userInfo = {addressObject,name,phoneNumber,unitNumber}
         SboxUserAction.putUserAddr(userInfo);
-
-
     }
     _goBack(){
       this.props.navigator.dismissModal({
