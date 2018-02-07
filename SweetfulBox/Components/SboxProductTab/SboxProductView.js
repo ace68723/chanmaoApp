@@ -12,6 +12,33 @@ const { width,height } = Dimensions.get('window');
 import Settings from '../../Config/Setting';
 
 export default class SboxProductView extends Component {
+  _renderProductPic(){
+    if (this.props.product.status === 0) {
+      return(
+        <Image source={{uri:this.props.product.image}}
+               style={{width:Settings.getX(300),
+                        height:Settings.getY(426),
+                       alignSelf:'center'}}
+        />
+      )
+    }else {
+      return(
+        <View>
+          <Image source={{uri:this.props.product.image}}
+                 style={{width:Settings.getX(300),
+                          height:Settings.getY(426),
+                         alignSelf:'center'}}
+          />
+          <Image source={require('./Image/soldout.png')}
+                 style={{width:Settings.getX(300),
+                          height:Settings.getY(426),
+                         alignSelf:'center',
+                         position: 'absolute'}}
+          />
+        </View>
+      )
+    }
+  }
   _renderPriceText(){
     if (this.props.product.type == 'sku'){
       if (this.props.product.sku_original_price != this.props.product.sku_price){
@@ -59,14 +86,11 @@ export default class SboxProductView extends Component {
     );
   }
   render() {
+      console.log("product Tab ======", this.props.product);
       return (
 
             <View style={styles.productContainer}>
-              <Image source={{uri:this.props.product.image}}
-                     style={{width:Settings.getX(300),
-                              height:Settings.getY(426),
-                             alignSelf:'center'}}
-              />
+            {this._renderProductPic()}
               <Text style={{marginTop:6,
                             fontSize:12,
                             fontWeight:"700",
