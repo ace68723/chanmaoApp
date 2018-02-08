@@ -24,16 +24,16 @@ export default class MyComponent extends Component {
     if(this.props.checkoutStatus === 'successful') {
       this.setState({
         initialPage:2,
-      })
+      });
+      this.props.navigator.push({
+        screen: 'SboxHistory',
+        navigatorStyle: {navBarHidden: true},
+      });
       this.props.navigator.showModal({
         screen: 'SboxNotification',
         passProps: {checkoutSuccessful: true},
         navigatorStyle: {navBarHidden: true},
-      })
-      this.props.navigator.push({
-        screen: 'SboxHistory',
-        navigatorStyle: {navBarHidden: true},
-      })
+      });
     }
   }
   render() {
