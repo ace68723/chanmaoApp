@@ -8,7 +8,6 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,8 +28,7 @@ public class MainApplication extends NavigationApplication {
             new MapsPackage(),
             new WeChatPackage(),
             new RNDeviceInfo(),
-            new RealmReactPackage(),
-            new SplashScreenReactPackage()
+            new RealmReactPackage()
 //            new VectorIconsPackage()
     );
   }

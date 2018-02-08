@@ -59,7 +59,7 @@ export default class SboxHome extends Component {
     DatabaseInit();
   }
   componentDidMount() {
-    SplashScreen.hide();
+
       SboxHomeStore.addChangeListener(this._onChange);
       SboxHomeAction.getHomeData();
       // setTimeout(() => {
