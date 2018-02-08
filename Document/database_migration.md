@@ -2,6 +2,17 @@
 
 ## 从旧数据表构建新schema下的数据表过程
 
+* 0. 清空测试数据
+```
+TRUNCATE TABLE `sbox_sku_base`;
+TRUNCATE TABLE `sbox_sku_core`;
+TRUNCATE TABLE `sbox_sku_image`;
+TRUNCATE TABLE `sbox_spu`;
+TRUNCATE TABLE `sbox_addr_base`;
+TRUNCATE TABLE `sbox_image`;
+TRUNCATE TABLE `sbox_addr_base`;
+```
+
 * 1. 构建sbox_sku_base
 
 ```
@@ -72,20 +83,20 @@ SET
 insert into `sbox_image` (`image_id`, `url`)
 select id, image from sb_prod_image;
 ```
-  * 6.2 检查图片id范围，假设在[1,200)之内
+  * 6.2 检查图片id范围，假设在[1,2000)之内
 ```
-ASSERT(max(sbox_image.image_id)<200)!!!!!
+ASSERT(max(sbox_image.image_id)<2000)!!!!!
 ```
   * 6.3 再插成分表图片
 ```
 insert into `sbox_image` (`image_id`, `url`)
-select pbid+200, facts from sb_prod_base;
+select pbid+2000, facts from sb_prod_base;
 ```
 
 * 7. 构建sbox_sku_image
 ```
 insert into `sbox_sku_image` (`sku_id`, `image_id`, `fact_image_id`, `updated_at`, `updated_by` )
-select pbid, sb_prod_image.id, pbid+200, sb_prod_base.updated_at, 1 from sb_prod_base
+select pbid, sb_prod_image.id, pbid+2000, sb_prod_base.updated_at, 1 from sb_prod_base
 left join sb_prod_image on sb_prod_image.pmid = sb_prod_base.pmid and sb_prod_image.attr1 = sb_prod_base.attr1;
 ```
 
