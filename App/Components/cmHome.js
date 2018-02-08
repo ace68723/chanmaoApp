@@ -13,7 +13,6 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-
 import AuthAction from '../Actions/AuthAction';
 
 const { height, width } = Dimensions.get('window');

@@ -147,31 +147,41 @@ export default class MyComponent extends Component {
 
   }
   _handleSoldOut() {
-    this.props.navigator.showInAppNotification({
-     screen: "Notification",
-     passProps: {
-       backgroundColor:'#ff768b',
-       title:'甜满箱 下单失败',
-       content:'商品售完，请重新下单'
-     },
-     autoDismissTimerSec: 5
-    });
+    // this.props.navigator.showInAppNotification({
+    //  screen: "Notification",
+    //  passProps: {
+    //    backgroundColor:'#ff768b',
+    //    title:'甜满箱 下单失败',
+    //    content:'商品售完，请重新下单'
+    //  },
+    //  autoDismissTimerSec: 5
+    // });
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
+    });
+    this.props.navigator.showModal({
+      screen: 'SboxNotification',
+      passProps: {checkoutSuccessful: false},
+      navigatorStyle: {navBarHidden: true},
     });
   }
   _handleError() {
-    this.props.navigator.showInAppNotification({
-     screen: "Notification",
-     passProps: {
-       backgroundColor:'#ff768b',
-       title:'甜满箱 下单失败',
-       content:'System Error 请稍后尝试'
-     },
-     autoDismissTimerSec: 5
-    });
+    // this.props.navigator.showInAppNotification({
+    //  screen: "Notification",
+    //  passProps: {
+    //    backgroundColor:'#ff768b',
+    //    title:'甜满箱 下单失败',
+    //    content:'System Error 请稍后尝试'
+    //  },
+    //  autoDismissTimerSec: 5
+    // });
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
+    });
+    this.props.navigator.showModal({
+      screen: 'SboxNotification',
+      passProps: {checkoutSuccessful: false},
+      navigatorStyle: {navBarHidden: true},
     });
   }
 
