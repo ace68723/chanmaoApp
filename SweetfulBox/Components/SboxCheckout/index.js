@@ -96,7 +96,10 @@ export default class MyComponent extends Component {
         this._goToAddress();
       break;
       case "shouldAddCard":
-        this._goToAddCard();
+        setTimeout( () => {
+            this._goToAddCard();
+        }, 500);
+
       break;
       case "successful":
         this._handleSuccessful();
@@ -191,6 +194,7 @@ export default class MyComponent extends Component {
     })
   }
   _goToAddCard() {
+    if(this.state.checkoutStatus === 'shouldAddAddress') return;
     this.props.navigator.showModal({
         screen: "SboxChooseCardType",
         navigatorStyle: {navBarHidden:true},
@@ -261,7 +265,7 @@ export default class MyComponent extends Component {
   }
   _keyExtractor = (item, index) => item.sku_id;
   _renderUserInfo() {
-    if(!this.state.addr.hasOwnProperty('abid')){
+    if(!this.state.checkoutStatus == 'shouldAddAddress'){
       return(
         <TouchableOpacity onPress={this._goToAddress}>
           <View style={{flexDirection:'row',
@@ -285,7 +289,7 @@ export default class MyComponent extends Component {
           </TouchableOpacity>
       )
     }else{
-
+      console.log(this.state.addr)
       return(
         <TouchableOpacity
                       onPress={this._goToAddress} style={{  borderStyle:'dashed',
