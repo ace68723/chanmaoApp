@@ -290,7 +290,6 @@ export default class MyComponent extends Component {
           </TouchableOpacity>
       )
     }else{
-      console.log(this.state.addr)
       return(
         <TouchableOpacity
                       onPress={this._goToAddress} style={{  borderStyle:'dashed',

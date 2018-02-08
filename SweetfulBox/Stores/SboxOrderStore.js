@@ -42,7 +42,6 @@ const SboxOrderStore = Object.assign({},EventEmitter.prototype,{
     }
 
     this.state = Object.assign({},this.state,data);
-    console.log(data,this.state)
   },
   getState(){
     this.state.cartList = SboxCartStore.getState().cartList;

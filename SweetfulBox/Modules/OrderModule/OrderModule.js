@@ -94,7 +94,6 @@ export default  {
         last4: res.ev_last4,
         total:res.ev_total
       }
-      console.log(res)
       if(res.ev_error === 1) {
         if(res.ev_message >= 10000 && res.ev_message <= 20000 ){
           return {checkoutStatus:"shouldDoAuth"}
