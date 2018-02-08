@@ -25,10 +25,10 @@ class OrderInfo extends Component {
 		}
 	}
   _handleServicesBtn(){
-     Clipboard.setString('chanmaoweixin');
+     Clipboard.setString('sweetfulinc');
      Alert.alert(
             '已复制',
-            '馋猫公众号: chanmaoweixin',
+            '甜满箱客服微信: sweetfulinc',
             [
               {text: 'OK', onPress: () => {}},
             ]
