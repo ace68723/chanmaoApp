@@ -25,6 +25,11 @@ export default class MyComponent extends Component {
       this.setState({
         initialPage:2,
       })
+      this.props.navigator.showModal({
+        screen: 'SboxNotification',
+        passProps: {checkoutSuccessful: true},
+        navigatorStyle: {navBarHidden: true},
+      })
       this.props.navigator.push({
         screen: 'SboxHistory',
         navigatorStyle: {navBarHidden: true},
