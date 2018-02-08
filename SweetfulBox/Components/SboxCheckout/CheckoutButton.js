@@ -14,37 +14,6 @@ import {
 
 const { height, width } = Dimensions.get('window');
 export default class CheckoutButton extends Component {
-
-  _renderConfirmBtn() {
-      return(
-        <View style={{
-          position:'absolute',
-          bottom:0,
-          width:width,}}>
-          <TouchableOpacity
-              style={{height:60,}}
-              onPress={this.props.getOrderBefore}
-              activeOpacity={0.4}>
-            <View style={{
-                          flex:1,
-                          alignItems:'center',
-                          justifyContent:'center',
-                          backgroundColor:'#ff7685',
-                        }}>
-
-                <Text style={{
-                  color:'#ffffff',
-                  fontSize:20,
-                  fontFamily:'FZZhunYuan-M02S',
-                }}>
-                     去结账
-                </Text>
-
-            </View>
-          </TouchableOpacity>
-        </View>
-      )
-  }
   _renderLoadingBtn() {
     return(
       <View style={{position:'absolute',
@@ -66,7 +35,7 @@ export default class CheckoutButton extends Component {
                   width:width,
                   height:60,
                   backgroundColor:'#ff7685',}}
-          onPress={this._handleAddAddress}
+          onPress={this.props.goToAddress}
           activeOpacity={0.4}>
           <View style={{flex:1,
                         alignItems:'center',
@@ -90,7 +59,7 @@ export default class CheckoutButton extends Component {
                   width:width,
                   height:60,
                   backgroundColor:'#ff7685',}}
-          onPress={this._handleAddCard}
+          onPress={this.props.goToAddCard}
           activeOpacity={0.4}>
           <View style={{flex:1,
                         alignItems:'center',
@@ -114,7 +83,7 @@ export default class CheckoutButton extends Component {
                 width:width,
                 height:60,
                 backgroundColor:'#ff7685',}}
-        onPress={this._doCheckout}
+        onPress={this.props.doCheckout}
         activeOpacity={0.4}>
         <View style={{flex:1,
                       alignItems:'center',
@@ -131,16 +100,26 @@ export default class CheckoutButton extends Component {
     )
   }
   _renderBtn(){
-    if(this.props.showCheckoutLoading){
-      return this._renderLoadingBtn();
-    } else if(this.props.shouldAddAddress) {
-      return this._renderAddAddressBtn();
-    } else if(!this.props.shouldAddAddress && this.props.shouldAddCard){
-      return this._renderAddCardBtn();
-    } else if(this.props.startCheckout) {
-      return this._renderCheckoutBtn();
-    } else {
-      return this._renderConfirmBtn();
+    switch(this.props.checkoutStatus){
+      case "loading":
+        return this._renderLoadingBtn();
+      break;
+      case "shouldDoAuth":
+        return this._renderLoadingBtn();
+      break;
+      case "soldOut":
+        return this._renderLoadingBtn();
+      break;
+      case "shouldAddAddress":
+        return this._renderAddAddressBtn();
+      break;
+      case "shouldAddCard":
+        return this._renderAddCardBtn();
+      break;
+      case "readyToCheckout":
+        return this._renderCheckoutBtn();
+      break;
+
     }
   }
   render() {

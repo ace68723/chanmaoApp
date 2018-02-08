@@ -21,8 +21,11 @@ module.exports ={
 
     // Manage
     GET_DAILY_REDIS: 'GET_DAILY_REDIS',
+
     // Order
     GET_ORDER_BEFORE: 'GET_ORDER_BEFORE',
+    SBOX_CHECKOUT: 'SBOX_CHECKOUT',
+
     // User
     GET_ORDER_HISTORY: 'GET_ORDER_HISTORY',
     PUT_USER_ADDR: 'PUT_USER_ADDR',
@@ -44,4 +47,8 @@ module.exports ={
 
     GET_PRODUCT_LIST: 'GET_PRODUCT_LIST',
     SBOX_VERSION: '2.4.4',
+
+    //Test
+    GET_SECOND_MENU_DATA: 'GET_SECOND_MENU_DATA',
+    UPDATE_SECTION_LIST: 'UPDATE_SECTION_LIST',
 };

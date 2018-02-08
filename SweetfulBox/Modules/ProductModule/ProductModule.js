@@ -1,5 +1,5 @@
 import ProductAPI from './ProductAPI';
-import {sbox_addAPICache,sbox_getAPICache} from '../../../App/Modules/Database';
+import { sbox_addAPICache, sbox_getAPICache, GetUserInfo } from '../../../App/Modules/Database';
 import {sbox_getItemById} from '../Database';
 import {
   sbox_getAllBoxes,
@@ -104,7 +104,6 @@ export default  {
         uuid: 1,
       }
       const homeDataResult = await ProductAPI.getHomeData(lo_data);
-      console.log('xxxx', homeDataResult.ea_theme);
       if(homeDataResult.ev_error === 0 ){
         const eo_data ={
           bannerList:homeDataResult.ea_banner,
@@ -138,10 +137,8 @@ export default  {
     try {
       const lo_data ={
         iv_spu_id: spu_id,
-        authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxODc4NSIsImV4cGlyZWQiOjE0ODkwODk2MDAsImxhc3Rsb2dpbiI6MTQ4MzA0NzU4OH0.EPjeu-klo-ygKwUvdyVspIWeaHoosCNPdaa1pO4_RsY',
       }
       const singleProductResult = await ProductAPI.getSingleProduct(lo_data);
-
       if(singleProductResult.ev_error === 0 ){
         singleProductResult.eo_spu_base.sku_list.forEach((sku) => {
           sku.sku_quantity = 1;
@@ -177,6 +174,7 @@ export default  {
   async checkStock() {
     try {
       const cart_data = sbox_getAllItemsFromCart();
+      const {uid,token,version} = GetUserInfo();
       let cart_list = [];
       cart_data.forEach(item => {
         let data = {};
@@ -189,7 +187,7 @@ export default  {
       } else {
         const lo_data ={
           ia_prod: cart_list,
-          authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxODc4NSIsImV4cGlyZWQiOjE0ODkwODk2MDAsImxhc3Rsb2dpbiI6MTQ4MzA0NzU4OH0.EPjeu-klo-ygKwUvdyVspIWeaHoosCNPdaa1pO4_RsY',
+          authortoken: token,
         }
         const productStock = await ProductAPI.checkStock(lo_data);
         await sbox_updateCartStock(productStock.ea_prod);

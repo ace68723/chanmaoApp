@@ -22,7 +22,6 @@ class itemList extends Component {
 
 	render() {
     var items_ls = this.props.items_ls;
-    console.log(items_ls);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     var dataSource = ds.cloneWithRows(items_ls);
     //

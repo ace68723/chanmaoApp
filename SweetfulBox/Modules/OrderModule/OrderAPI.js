@@ -66,7 +66,7 @@ export default  {
     })
 
     options.body = JSON.stringify({
-      ia_boxes: io_data.ia_boxes,
+      prod: io_data.prod,
     })
     return fetch(url,options)
             .then((res) => res.json())

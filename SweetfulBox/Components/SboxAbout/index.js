@@ -112,7 +112,6 @@ export default class About extends Component {
   }
 
   _handleLoginSuccessful() {
-    console.log('here',this.props)
     this.props.navigator.pop({
       animated: true,
       animationType: 'slide-horizontal',
@@ -120,7 +119,6 @@ export default class About extends Component {
   }
 
   _goBack() {
-    console.log('here',this.props)
     this.props.navigator.pop({
       animated: true,
       animationType: 'slide-horizontal',
@@ -128,7 +126,6 @@ export default class About extends Component {
   }
 
   _renderLoginOrHistory() {
-    console.log("SboxAbout, _renderLoginOrHistory", this.state.shouldDoAuth);
     if (this.state.shouldDoAuth == false) {
       return (
         <TouchableOpacity onPress={this._goToHistory}
@@ -179,14 +176,11 @@ export default class About extends Component {
   }
 
   render() {
-    console.log("SboxAbout");
-    console.log(this.state);
     return(
       <View style={styles.viewController}>
           <SboxHeader title={"设置"}
                   goBack={this._renderGoBackBtn}
                   leftButtonText={'none'}/>
-          <View style={styles.separator}></View>
           <ScrollView style={{backgroundColor: '#D5D5D5'}}>
               {this._renderLoginOrHistory()}
               <View style={styles.separator}></View>
@@ -219,7 +213,7 @@ const styles = StyleSheet.create({
   },
   separator: {
 		height: 1,
-		borderWidth: 0.6,
+		borderWidth: 1,
 		borderColor: "#D5D5D5"
 	},
 });

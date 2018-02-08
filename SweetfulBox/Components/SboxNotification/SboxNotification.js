@@ -9,38 +9,37 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Setting from '../../Config/Setting'
+import SboxHeader from '../../../App/Components/General/SboxHeader';
 export default class SboxNotification extends Component {
   constructor(props)
   {
     super(props);
     this.state={
       checkoutSuccessful:true,
-
     }
+    this._goBack = this._goBack.bind(this);
     this._renderNotification=this._renderNotification.bind(this);
   }
   componentDidMount()
   {
 
   }
+
+  _goBack() {
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
+  }
+
   _renderNotification()
   {
     if (this.state.checkoutSuccessful) {
         return (
         <View style={styles.container}>
-          <View style={{
-            flex:0.075,
-            alignItems:'center',
-            flexDirection:'row',
-            borderBottomWidth:1,
-            borderBottomColor:'grey',
-          }}>
-            <Image source={require('./Img/icon-cancel-01.png')}
-                   style={{marginLeft:Setting.getX(40),height:Setting.getX(50),width:Setting.getX(50)}}/>
-            <Text style={{marginLeft:Setting.getX(435),fontSize:16,fontWeight:'bold',}}>
-              订单成功
-            </Text>
-          </View>
+          <SboxHeader title={"订单成功"}
+                  goBack={this._goBack}
+                  leftButtonText={'x'}/>
+
           <View style={{
             flex:0.925,
             alignItems:'center',
@@ -57,10 +56,11 @@ export default class SboxNotification extends Component {
                 订单支付成功！您可以在两个工作日内收到您的箱子~
               </Text>
             </View>
-            <TouchableOpacity style={{marginTop:Setting.getY(70),}}>
+            <TouchableOpacity onPress={this._goBack}
+              style={{marginTop:Setting.getY(70),}}>
               <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#ff768b',width:Setting.getX(600),height:Setting.getY(150)}}>
                 <Text style={{fontSize:16,color:'white'}}>
-                  返回首页
+                  返回历史订单
                 </Text>
               </View>
 
@@ -121,7 +121,6 @@ export default class SboxNotification extends Component {
       return (
       <View style={styles.container}>
         {this._renderNotification()}
-
       </View>
       );
 

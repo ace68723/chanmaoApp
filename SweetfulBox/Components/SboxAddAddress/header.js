@@ -11,42 +11,8 @@ import {
 } from 'react-native';
 import Separator from "./separator";
 import Checkbox from "./checkbox";
-// import ModalDropdown from 'react-native-modal-dropdown';
-// <ModalDropdown
-//   textStyle={{fontSize: 14}}
-//   dropdownStyle={{width: viewWidth/2, height: 200}}
-//   dropdownTextStyle={{paddingLeft: 10, fontSize: 18, color: 'black'}}
-//   dropdownTextHighlightStyle={{fontWeight: '800'}}
-//   options={locationOptions}
-//   defaultValue="Select City"
-//   onSelect={(idx, filter) => this.props.onFilter(idx, filter)}
-//   />
-//
-//
-//
-//
-//
-//
-//  切换城市以及搜索地址
-//
-//           <View style={styles.filter}>
-          // <View style={styles.changeCity}>
-        //
-        //
-        //   </View>
-        //
-        //
-        //
-        //   <View style={{width: 1, borderWidth: 0.4,
-        //     borderColor: "#D5D5D5"}}/>
-        //
-        //
-        //   <View style={styles.search}>
-        //     <TouchableOpacity>
-        //       <Text style={{textAlign:'center', fontSize: 14}}>搜索地址</Text>
-        //     </TouchableOpacity>
-        //   </View>
-        // </View>
+import SboxHeader from '../../../App/Components/General/SboxHeader';
+
 
 class Header extends Component {
   constructor() {
@@ -62,45 +28,35 @@ class Header extends Component {
     const viewHeight = Dimensions.get('window').height;
     const viewWidth = Dimensions.get('window').width;
     const navigationHeight = viewHeight * (212/2208) - 17;
-    const searchBarHeight = viewHeight * (105/2208);
+    // const searchBarHeight = viewHeight * (105/2208);
     const searchBarWidth = viewWidth * (950 / 1242);
     const backPaddingLeft = viewHeight * (60/2208);
 
 		return (
 			<View style={styles.container}>
 
-				<View style={[styles.navigation, {height: navigationHeight}]}>
-			    	<View style={styles.back}>
-			    	</View>
-			    	<View style={styles.title}>
-			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>搜索地址</Text>
-			    	</View>
-			    	<View style={{flex:1}}>
-            </View>
-			  </View>
+        <SboxHeader title={"搜索地址"}
+                goBack={this.props.goBack}
+                leftButtonText={'x'}/>
 
-        <Separator/>
-        <View style={{height: searchBarHeight, width: viewWidth}}>
-          <View style={[styles.searchBar, {margin: 2,
-                                           height: searchBarHeight - 4,
-                                           width: viewWidth - 6}]}>
+          <View style={[styles.searchBar, {paddingTop:15,paddingBottom:15}]}>
             <Image style={[styles.searchIcon],
                           {height: backPaddingLeft,
                            width: backPaddingLeft,
-                           marginHorizontal: viewWidth * (40 / 1242),}}
-                   />
+                           marginHorizontal: viewWidth * (40 / 1242),}}/>
                  <TextInput
+                   selectionColor={'#ff7685'}
+                   allowFontScaling={false}
+                   returnKeyType={'search'}
+                   autoCorrect={false}
+                   autoCapitalize={'none'}
+                   autoFocus={true}
+                   fontSize={18}
                    style={{flex: 0.95}}
                    placeholder={"搜索地址"}
                    onChangeText={(text) => this.props.onChangeTextInput(text)}
                    onSubmitEditing={this.props.onSubmitText}/>
           </View>
-        </View>
-
-
-
-
-
         <Separator/>
 
 			</View>
@@ -111,7 +67,6 @@ const styles = StyleSheet.create({
 	container: {
 		flexDirection: "column",
 		backgroundColor: "white",
-		marginTop:17,
 	},
 	navigation: {
     flexDirection:'row'

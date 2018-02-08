@@ -1,6 +1,8 @@
 import SboxConstants from '../Constants/SboxConstants';
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import UserModule from '../Modules/UserModule/UserModule'
+import OrderModule from '../Modules/OrderModule/OrderModule'
+import SboxOrderAction from './SboxOrderAction';
 export default {
       async getOrderHistory(io_data){
         try{
@@ -17,19 +19,22 @@ export default {
 
       async putUserAddr(io_data){
         try{
-
           const data = await UserModule.putUserAddr(io_data);
+          const checkoutData = await OrderModule.getOrderBefore();
+          dispatch({
+               actionType: SboxConstants.SBOX_CHECKOUT,
+               data:checkoutData
+           })
           dispatch({
             actionType: SboxConstants.PUT_USER_ADDR, data
           })
         }catch(error){
-
+          console.log(error)
         }
       },
 
       async checkUserLogin() {
         try{
-          console.log('SboxUserAction');
           // const data = await UserModule.checkUserLogin();
           const data = false;
           dispatch({
@@ -41,7 +46,6 @@ export default {
       },
       async clearToken() {
         try{
-          console.log('SboxUserAction');
           // const data = await UserModule.clearToken();
           const data = true;
           dispatch({

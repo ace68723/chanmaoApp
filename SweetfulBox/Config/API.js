@@ -5,14 +5,14 @@ const Server = TestServer;
 const APIConstants ={
 
     //Address
-    API_CONDO_LIST: Server + 'condo_list',
-    API_CONDO_FUZZY: Server + 'condo_fuzzy',
     API_CAN_DELIVER: Server + 'can_deliver',
+    API_USER_ADDR: Server +'user_addr',
 
     //Order
     API_ORDER_BEFORE: Server + 'order_before',
     API_ADD_CARD: Server + 'stripe_card',
     API_ADD_ORDER: Server + 'add_order',
+
     //Product
     API_CATEGORY: Server + 'category',
     API_CATEGORY_QUERY: Server + 'category_query',

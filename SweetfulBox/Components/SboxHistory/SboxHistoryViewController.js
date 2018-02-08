@@ -28,7 +28,6 @@ if(height == 812){
 
 export default class HistoryViewController extends Component {
   constructor() {
-		console.log("starttttt");
     super();
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = Object.assign({},SboxHistoryStore.getState(),{
@@ -42,9 +41,8 @@ export default class HistoryViewController extends Component {
     this._goToSboxHistoryOrderDetail = this._goToSboxHistoryOrderDetail.bind(this);
   }
 	componentDidMount() {
-		console.log("didmount");
     SboxHistoryStore.addChangeListener(this._onChange);
-		SboxHistoryAction.init();
+		SboxHistoryAction.getHistoryList();
 	}
   componentWillUnmount() {
     SboxHistoryStore.removeChangeListener(this._onChange);
@@ -61,7 +59,6 @@ export default class HistoryViewController extends Component {
 		})
 	}
   _goToSboxHistoryOrderDetail (orderDetail) {
-		console.log(orderDetail);
     this.props.navigator.push({
       screen: 'SboxHistoryOrderDetail',
       navigatorStyle: {navBarHidden: true},
@@ -69,7 +66,6 @@ export default class HistoryViewController extends Component {
     })
   }
 	_goBack() {
-    console.log('here',this.props)
     this.props.navigator.pop({
       animated: true,
       animationType: 'slide-horizontal',
@@ -77,7 +73,7 @@ export default class HistoryViewController extends Component {
   }
 	_onRefresh() {
 		this.setState({refreshing: true});
-		SboxHistoryAction.init();
+		SboxHistoryAction.getHistoryList();
 	}
 
   _onChange() {
@@ -102,7 +98,6 @@ export default class HistoryViewController extends Component {
 				<SboxHeader title={"历史订单"}
                 goBack={this._goBack}
                 leftButtonText={'<'}/>
-				<View style={styles.separator}></View>
         {this._renderHistoryView()}
       </View>
     )
@@ -128,7 +123,7 @@ const styles = StyleSheet.create({
   },
   separator: {
 		height: 1,
-		borderWidth: 0.6,
+		borderWidth: 1,
 		borderColor: "#D5D5D5"
 	},
 });

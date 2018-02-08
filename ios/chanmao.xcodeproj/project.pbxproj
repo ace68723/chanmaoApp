@@ -1320,7 +1320,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.orderapp2;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.orderapp;
 				PRODUCT_NAME = "馋猫生活";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/chanmao-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1361,7 +1361,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.orderapp2;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.orderapp;
 				PRODUCT_NAME = "馋猫生活";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/chanmao-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

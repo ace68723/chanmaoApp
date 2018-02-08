@@ -29,7 +29,8 @@ export default class CMMarker extends Component{
     render(){
 
           return( <Animated.Text style={{
-                    flex:1,fontSize:25,
+                    flex:1,
+                    fontSize:25,
                     opacity:this.state.bounceValueMarker,
                   }}>
                     |

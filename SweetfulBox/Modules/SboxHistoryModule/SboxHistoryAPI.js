@@ -1,6 +1,6 @@
 import { API_ORDER_HISTORY } from '../../Config/API';
 export default  {
-  getDefaultData(io_data){
+  getHistoryList(io_data){
     const url = API_ORDER_HISTORY;
 
     let options = {
@@ -13,13 +13,12 @@ export default  {
     }
 
     options.headers = Object.assign(options.headers,{
-        // authortoken: io_data.authortoken,
         authortoken: io_data.authortoken
     })
 
-    options.body = JSON.stringify({
-      // iv_lastid: io_data.iv_lastid,
-    })
+    // options.body = JSON.stringify({
+    //    iv_lastid: io_data.iv_lastid,
+    // })
 
 
     return fetch(url,options)

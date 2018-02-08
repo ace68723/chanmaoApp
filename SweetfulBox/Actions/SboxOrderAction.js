@@ -3,47 +3,37 @@ import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import OrderModule from '../Modules/OrderModule/OrderModule'
 import {sbox_getAllItemsFromCart} from '../Modules/Database'
 export default {
+    async addCard(reqData) {
+      try{
+         await OrderModule.addCard(reqData);
+        const data = await OrderModule.getOrderBefore();
+        dispatch({
+             actionType: SboxConstants.SBOX_CHECKOUT,data
+         })
+      }catch(error){
+        console.log(error)
+        throw 'no cardToken'
+      }
+    },
     async getOrderBefore(){
         try{
           const data = await OrderModule.getOrderBefore();
-          const {shouldDoAuth,soldOut} = data;
-          if(shouldDoAuth) {
-            dispatch({
-                actionType: SboxConstants.SHOULD_DO_AUTH
-            })
-          }else if(soldOut) {
-            dispatch({
-                actionType: SboxConstants.SOLD_OUT
-            })
-            dispatch({
-                actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY
-            })
-            dispatch({
-              actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
-            })
-          } else {
-            dispatch({
-                actionType: SboxConstants.GET_ORDER_BEFORE, data
-            })
-          }
-
+          dispatch({
+               actionType: SboxConstants.SBOX_CHECKOUT,data
+           })
         }catch(error){
           console.log(error)
         }
       },
-    async checkout(box) {
+    async checkout() {
       try{
 
-        const data = await OrderModule.checkout(box);
+        const data = await OrderModule.checkout();
         dispatch({
-            actionType: SboxConstants.CHECKOUT, data
+            actionType: SboxConstants.SBOX_CHECKOUT, data
         })
       }catch(error){
-
-        console.error(error)
-        dispatch({
-            actionType: SboxConstants.CHECKOUT_FAIL, error
-        })
+        console.log(error)
       }
     },
 

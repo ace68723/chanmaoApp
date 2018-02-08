@@ -24,7 +24,7 @@ import SboxHeader from '../../../App/Components/General/SboxHeader';
 import SboxOrderAction from '../../Actions/SboxOrderAction';
 import SboxProductAction from '../../Actions/SboxProductAction';
 import SboxOrderStore from '../../Stores/SboxOrderStore';
-import SboxCartStore from '../../Stores/SboxCartStore';
+
 
 import { SBOX_REALM_PATH } from '../../Config/API';
 
@@ -43,26 +43,32 @@ export default class MyComponent extends Component {
   }
   constructor() {
     super();
-    this.state = {
-      cartList:SboxCartStore.getState().cartList,
-      startCheckout:false,
-      renderCheckoutBtn:false,
-      checkoutSuccessful:false,
-      showCheckoutLoading:true,
-    }
-    // this._goToAddressList = this._goToAddressList.bind(this);
-    // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
-    // this._setUserInfo = this._setUserInfo.bind(this);
-    this._getOrderBefore = this._getOrderBefore.bind(this);
-    this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
-    this._renderCheckout = this._renderCheckout.bind(this);
-    // this._doOrderBefore = this._doOrderBefore.bind(this);
-    // this._handleLoginSuccessful = this._handleLoginSuccessful.bind(this);
-    // this._deleteItemAlert = this._deleteItemAlert.bind(this);
-    // this._deleteItem = this._deleteItem.bind(this);
-    // this._handleAddCard = this._handleAddCard.bind(this);
-    // this._handleAddAddress = this._handleAddAddress.bind(this);
+
+    this.state = SboxOrderStore.getState();
+
     this._onChange = this._onChange.bind(this);
+    this._handleLoginGoBack = this._handleLoginGoBack.bind(this);
+    this._handleSuccessful = this._handleSuccessful.bind(this);
+    this._handleSoldOut = this._handleSoldOut.bind(this);
+    this._handleError = this._handleError.bind(this);
+
+    this._goToAddress = this._goToAddress.bind(this);
+    this._goToAddCard = this._goToAddCard.bind(this);
+    this._goBack = this._goBack.bind(this);
+
+    this._getOrderBefore = this._getOrderBefore.bind(this);
+    this._doCheckout = this._doCheckout.bind(this);
+
+    this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
+    this._renderItem = this._renderItem.bind(this);
+    this._renderCheckout = this._renderCheckout.bind(this);
+    this._renderHeader = this._renderHeader.bind(this);
+    this._keyExtractor = this._keyExtractor.bind(this);
+
+
+
+
+
   }
   componentDidMount() {
     SboxOrderAction.getOrderBefore();
@@ -71,76 +77,159 @@ export default class MyComponent extends Component {
   componentWillUnmount() {
     SboxOrderStore.removeChangeListener(this._onChange);
   }
+
   _onChange() {
-      const state = Object.assign({},SboxOrderStore.getState())
-      this.setState(state)
-      if(this.state.shouldDoAuth){
-          this.props.navigator.showModal({
-            screen: 'CmLogin',
-            animated: false,
-            navigatorStyle: {navBarHidden: true},
-            passProps: {handleBackToHome: this._goBack,handleLoginSuccessful: this._handleLoginSuccessful},
-          })
-      }
-      if(this.state.checkoutSuccessful) {
-        this.props.navigator.pop({
-          animated: true,
-          animationType: 'fade',
-        });
-        this.props.navigator.pop({
-          animated: true,
-          animationType: 'fade',
-        });
-        this.props.navigator.showInAppNotification({
-         screen: "Notification", // unique ID registered with Navigation.registerScreen
-         passProps: {
-           backgroundColor:'#ff768b',
-           title:'甜满箱',
-           content:'下单成功'
-         }, // simple serializable object that will pass as props to the in-app notification (optional)
-         autoDismissTimerSec: 3 // auto dismiss notification in seconds
-        });
-      }
+      const state = Object.assign({},SboxOrderStore.getState());
+      this.setState(state);
+      this._handleCheckoutStatus();
   }
+
+  _handleCheckoutStatus() {
+    switch(this.state.checkoutStatus){
+      case "shouldDoAuth":
+        this._goToLogin();
+      break;
+      case "soldOut":
+        this._goBack();
+      break;
+      case "shouldAddAddress":
+        this._goToAddress();
+      break;
+      case "shouldAddCard":
+        this._goToAddCard();
+      break;
+      case "successful":
+        this._handleSuccessful();
+      break;
+      case "soldOut":
+        this._handleSoldOut();
+      break;
+      case "error":
+        this._handleError();
+      break;
+    }
+  }
+  _handleLoginGoBack() {
+    // dismissAllModals bug
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
+    setTimeout( () => {
+      this.props.navigator.dismissModal({
+        animationType: 'none'
+      });
+    }, 600);
+  }
+  _handleLoginSuccessful() {
+    SboxOrderAction.getOrderBefore();
+  }
+  _handleSuccessful() {
+    // this.props.navigator.showInAppNotification({
+    //  screen: "Notification",
+    //  passProps: {
+    //    backgroundColor:'#ff768b',
+    //    title:'甜满箱',
+    //    content:'下单成功'
+    //  },
+    //  autoDismissTimerSec: 5
+    // });
+    const {checkoutStatus} = this.state;
+    this.props.navigator.resetTo({
+        screen: 'SboxMainTab',
+        passProps: {checkoutStatus},
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+      });
+
+  }
+  _handleSoldOut() {
+    this.props.navigator.showInAppNotification({
+     screen: "Notification",
+     passProps: {
+       backgroundColor:'#ff768b',
+       title:'甜满箱 下单失败',
+       content:'商品售完，请重新下单'
+     },
+     autoDismissTimerSec: 5
+    });
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
+  }
+  _handleError() {
+    this.props.navigator.showInAppNotification({
+     screen: "Notification",
+     passProps: {
+       backgroundColor:'#ff768b',
+       title:'甜满箱 下单失败',
+       content:'System Error 请稍后尝试'
+     },
+     autoDismissTimerSec: 5
+    });
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
+  }
+
+  _goBack(){
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
+  }
+  _goToLogin() {
+    this.props.navigator.showModal({
+      screen: 'CmLogin',
+      navigatorStyle: {navBarHidden: true},
+      passProps: {handleBackToHome: this._handleLoginGoBack,
+                  handleLoginSuccessful: this._handleLoginSuccessful},
+    })
+  }
+  _goToAddress() {
+    this.props.navigator.showModal({
+      screen: 'SboxAddAddress',
+      navigatorStyle: {navBarHidden: true},
+    })
+  }
+  _goToAddCard() {
+    this.props.navigator.showModal({
+        screen: "SboxChooseCardType",
+        navigatorStyle: {navBarHidden:true},
+      });
+  }
+
+
+
+  _getOrderBefore() {
+    this.setState({
+      checkoutStatus:'loading',
+    })
+    SboxOrderAction.getOrderBefore();
+  }
+  _doCheckout() {
+    this.setState({
+      checkoutStatus:'loading',
+    })
+    SboxOrderAction.checkout();
+  }
+
   _renderGoBackBtn() {
     this.props.navigator.dismissModal({
       animationType: 'none'
     });
   }
-  _deleteItemAlert(product,productName) {
-    Alert.alert(
-      '删除',
-      productName,
-      [
-        {text: '取消', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {text: '确认', onPress: () => {this._deleteItem(product)}},
-      ],
-      { cancelable: false }
-    )
-  }
-
-  _getOrderBefore() {
-    this.setState({
-      showCheckoutLoading:true,
-    })
-    SboxOrderAction.getOrderBefore();
-  }
   _rederFooter() {
-
     return(
-      <CheckoutButton
-        getOrderBefore={this._getOrderBefore}
-        renderCheckoutBtn={this.state.renderCheckoutBtn}
-        checkoutSuccessful={this.state.checkoutSuccessful}
-        showCheckoutLoading={this.state.showCheckoutLoading}
-        startCheckout={this.state.startCheckout}
-        />
+      <CheckoutButton checkoutStatus = {this.state.checkoutStatus}
+                      goToAddress = {this._goToAddress}
+                      goToAddCard = {this._goToAddCard}
+                      doCheckout = {this._doCheckout}/>
     )
   }
-  _renderItem({item}) {
+  _renderItem(item,key) {
     const {sku_image_url,spu_name,sku_name,sku_quantity,sku_amount,sku_price} = item;
     return(
-      <View style={styles.item}>
+      <View style={styles.item} key={key}>
 
         <Image style={styles.image} source={{uri:sku_image_url}}/>
 
@@ -172,31 +261,147 @@ export default class MyComponent extends Component {
     )
   }
   _keyExtractor = (item, index) => item.sku_id;
+  _renderUserInfo() {
+    if(!this.state.addr.hasOwnProperty('abid')){
+      return(
+        <TouchableOpacity onPress={this._goToAddress}>
+          <View style={{flexDirection:'row',
+                        alignItems:'center',
+                        borderStyle:'dashed',
+                        borderWidth:2,
+                        borderColor:'#ff7685',
+                        padding:10
+                      }}>
+            <Image source={require('./Img/address.png')}
+                   style={{height:25*1.2264,width:25}}
+            />
+            <Text style={{
+                    fontSize:20,
+                    fontFamily:'FZZhunYuan-M02S',
+                    marginLeft:20,
+                  }}>
+              请选择您的配送地址
+            </Text>
+          </View>
+          </TouchableOpacity>
+      )
+    }else{
+
+      return(
+        <TouchableOpacity
+                      onPress={this._goToAddress} style={{  borderStyle:'dashed',
+                        borderWidth:2,
+                        borderColor:'#ff7685',
+                        padding:10,}}>
+            <UserInfo addr={this.state.addr.addr}
+                      name={this.state.addr.name}
+                      phoneNumber={this.state.addr.tel}
+                      unitNumber={this.state.addr.unit}
+            />
+        </TouchableOpacity>
+      )
+    }
+
+  }
+  _renderOrderInfo() {
+    return(
+      <View style={{
+                    marginTop:15,
+                    backgroundColor:'white',}}>
+          <View style={{
+                        padding:10,
+                        flexDirection:'row',
+                        borderBottomWidth: 1,
+                        borderColor: '#DCDCDC',}}>
+            <View style={{flex:0.3,}}>
+              <Text style={{fontSize:16,
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                    配送时间：
+              </Text>
+            </View>
+            <View style={{flex:0.7,alignItems:'flex-end'}}>
+              <Text style={{fontSize:16,
+                            color:'#ff7685',
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                      {this.state.deliTime}
+              </Text>
+            </View>
+
+          </View>
+          <View style={{
+                        padding:10,
+                        flexDirection:'row',
+                        borderBottomWidth: 1,
+                        borderColor: '#DCDCDC',}}>
+            <View style={{flex:0.5,}}>
+              <Text style={{fontSize:16,
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                      Delivery Fee: ${this.state.deliFee}
+              </Text>
+            </View>
+            <View style={{flex:0.5, alignItems:'flex-end'}}>
+              <Text style={{fontSize:16,
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                      Total: ${this.state.total}
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity
+                      onPress={this._goToAddCard}
+                      style={{
+                        padding:10,
+                        flexDirection:'row',
+                        borderBottomWidth: 1,
+                        borderColor: '#DCDCDC',}}>
+            <View style={{flex:0.5,}}>
+              <Text style={{fontSize:16,
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                      支付方式  {this.state.cardBrand}
+              </Text>
+            </View>
+            <View style={{flex:0.5, alignItems:'flex-end'}}>
+              <Text style={{fontSize:16,
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                      xxxx xxxx xxxx {this.state.last4}
+              </Text>
+            </View>
+          </TouchableOpacity>
+      </View>
+    )
+  }
+  _renderHeader(){
+    return(
+      <View>
+        {this._renderUserInfo()}
+        {this._renderOrderInfo()}
+      </View>
+    )
+  }
   _renderCheckout(){
+    const cartList = this.state.cartList.map((item,key) => {
+      return this._renderItem(item,key)
+    })
+    // console.log(cartList)
     return (
       <View style={styles.container}>
         <SboxHeader title={"结账"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={'x'}/>
-        <View style={styles.separator}>
-        </View>
-
-        <FlatList
-           	enableEmptySections
-            data={this.state.cartList}
-            renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-        />
-
+        <ScrollView>
+          {this._renderHeader()}
+          {cartList}
+        </ScrollView>
         {this._rederFooter()}
-
       </View>
     );
   }
   render() {
-    if(this.state.showCheckoutLoading){
+    if(this.state.checkoutStatus == 'firstLoading'){
       return(
         <View style={{flex:1,}}>
+          <SboxHeader title={"购物箱"}
+                  goBack={this._renderGoBackBtn}
+                  leftButtonText={'x'}/>
           <View style={{position:'absolute',
                         alignItems:'center',
                         justifyContent:'center',
@@ -218,6 +423,7 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"#ffffff",
   },
   navigation: {
     flexDirection:'row'
@@ -232,11 +438,6 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     // backgroundColor: "blue",
   },
-  separator: {
-		height: 1,
-		borderWidth: 0.6,
-		borderColor: "#D5D5D5"
-	},
   item: {
     height: height * (295 / 2208),
     flexDirection: 'row',

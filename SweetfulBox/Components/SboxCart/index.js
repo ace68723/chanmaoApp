@@ -41,12 +41,10 @@ export default class SboxCart extends Component {
   componentWillUnmount() {
     SboxCartStore.removeChangeListener(this._onChange);
   }
-
   _onChange() {
     const cartState = SboxCartStore.getState();
     this.setState(Object.assign({},cartState));
     this.state.cartList.some(item => {
-      console.log(item)
       if(item.sku_quantity > item.sku_amount) {
         this.setState({
           canCheckout: false,
@@ -55,16 +53,6 @@ export default class SboxCart extends Component {
       }
     });
   }
-
-  // this.props.navigator.showLightBox({
-  //   screen: "SboxCartAlert",
-  //   passProps: {
-  //     message:'库存不足'}, // simple serializable object that will pass as props to the lightbox (optional)
-  //   adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-  //  });
-  //  setTimeout(() => {
-  //   this.props.navigator.dismissLightBox();
-  // }, 1500);
   _addQuantity(item){
     SboxCartAction.addQuantity(item);
   }
@@ -83,7 +71,6 @@ export default class SboxCart extends Component {
     )
 
   }
-
   _goToCheckout(){
     const cartList = this.state.cartList;
     this.props.navigator.showModal({
@@ -243,7 +230,7 @@ export default class SboxCart extends Component {
                   fontFamily:'FZZhunYuan-M02S',}}>
                      {this.state.checkoutFont}
                 </Text>
-                
+
             </View>
           </TouchableOpacity>
         </View>
@@ -256,8 +243,6 @@ export default class SboxCart extends Component {
         <SboxHeader title={"购物箱"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={'x'}/>
-        <View style={styles.separator}>
-        </View>
         <FlatList
           	enableEmptySections
             data={this.state.cartList}
@@ -274,11 +259,7 @@ export default class SboxCart extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  separator: {
-    height: 1,
-    borderWidth: 0.6,
-    borderColor: "#D5D5D5"
+    backgroundColor:"#ffffff",
   },
   item: {
     // height: height * (295 / 2208),

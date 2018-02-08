@@ -21,8 +21,6 @@ const SboxHomeStore = Object.assign({},EventEmitter.prototype,{
     this.state.themeList = la_themeList;
   },
   updateHomedata(data) {
-      //
-      console.log('updateHomedata',data)
       this.state = Object.assign({}, this.state, data);
   },
   getState(){

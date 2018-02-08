@@ -46,7 +46,6 @@ const SboxUserStore = Object.assign({},EventEmitter.prototype,{
 					break;
 
         case SboxConstants.PUT_USER_ADDR:
-
           SboxUserStore.emitChange()
   				break;
 
