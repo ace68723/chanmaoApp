@@ -24,7 +24,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import DefaultTabBar from './DefaultTabBar';
 
 import SboxHomeBanner from './SboxHomeBanner';
-
+import SplashScreen from 'react-native-splash-screen';
 const { width,height } = Dimensions.get('window');
 const HEADER_MAX_HEIGHT = width*0.4831*1.3699;
 const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
@@ -59,6 +59,7 @@ export default class SboxHome extends Component {
     DatabaseInit();
   }
   componentDidMount() {
+    SplashScreen.hide();
       SboxHomeStore.addChangeListener(this._onChange);
       SboxHomeAction.getHomeData();
       setTimeout(() => {
