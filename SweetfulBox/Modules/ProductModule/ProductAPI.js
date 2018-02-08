@@ -110,9 +110,6 @@ export default  {
             'Content-Type': 'application/json'
         }
     }
-    options.headers = Object.assign(options.headers,{
-        authortoken: io_data.authortoken,
-    })
     options.body = JSON.stringify({
         iv_spu_id: io_data.iv_spu_id,
     })

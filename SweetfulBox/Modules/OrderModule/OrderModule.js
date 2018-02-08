@@ -5,7 +5,7 @@ import {
 const StripeBridge = NativeModules.StripeBridge;
 
 import {GetUserInfo} from '../../../App/Modules/Database';
-import {sbox_getAllItemsFromCart,sbox_updateCartStock} from '../../Modules/Database';
+import { sbox_getAllItemsFromCart, sbox_updateCartStock, sbox_deleteCart } from '../../Modules/Database';
 export default  {
   async putUserAddr(io_data){
     const {uid,token,version} = GetUserInfo();
@@ -62,6 +62,7 @@ export default  {
         iv_token: cardToken
       }
       const res = await OrderAPI.addCard(lo_data);
+      if(res.ev_error === 1) { throw 'add card fail'}
       const eo_data = res.ea_card_info;
       return eo_data
     } catch (e) {
@@ -84,9 +85,7 @@ export default  {
         authortoken:token,
         ia_prod: _productList,
       }
-      console.log(lo_data)
       const res = await OrderAPI.getOrderBefore(lo_data);
-      console.log(res)
       if(res.ev_error === 1) {
         if(res.ev_message >= 10000 && res.ev_message <= 20000 ){
           return {checkoutStatus:"shouldDoAuth"}
@@ -99,7 +98,7 @@ export default  {
         await sbox_updateCartStock(res.ea_prod);
         return {checkoutStatus:"soldOut"}
       }
-
+      console.log("res.eo_addr.hasOwnProperty('abid')",res.eo_addr.hasOwnProperty('abid'))
       if(!res.eo_addr.hasOwnProperty('abid')){
         return {checkoutStatus:"shouldAddAddress"}
       }
@@ -126,32 +125,36 @@ export default  {
   async checkout(box) {
     try {
       const {uid,token,version} = GetUserInfo();
-      if(!token) throw 'no token'
+      if(!token) return {checkoutStatus:"shouldDoAuth"}
 
-      let boxes = [];
+      let allItems = sbox_getAllItemsFromCart();
       let prod = [];
-      for (var i = 0; i < box.product.length; i++) {
-        const product = box.product[i];
-        const pbid = product.pbid;
-        const amount = product.selectedAmount;
-        prod.push({pbid,amount})
-      }
-      boxes.push({prod})
+      allItems.forEach((item) => {
+        if(item.sku_quantity > item.sku_amount) return {checkoutStatus:"soldOut"};
+        const {sku_id,sku_quantity} = item;
+        prod.push({sku_id,sku_quantity});
+      })
+
       const lo_data = {
         authortoken:token,
-        ia_boxes: boxes,
+        prod: prod,
       }
       const res = await OrderAPI.checkout(lo_data);
 
       if(res.ev_error === 0) {
-        init_sbox();
+        sbox_deleteCart();
+        return {checkoutStatus:"successful"};
         return res
       } else {
-        throw e
+        if(res.ev_message === 40007){
+          return {checkoutStatus:"soldOut"};
+        }else{
+          return {checkoutStatus:"error"};
+        }
       }
     } catch (e) {
 
-      throw e
+      return {checkoutStatus:"error"};
     }
 
   }

@@ -15,7 +15,6 @@ export default class SboxNotification extends Component {
     super(props);
     this.state={
       checkoutSuccessful:true,
-
     }
     this._renderNotification=this._renderNotification.bind(this);
   }
@@ -121,7 +120,6 @@ export default class SboxNotification extends Component {
       return (
       <View style={styles.container}>
         {this._renderNotification()}
-
       </View>
       );
 

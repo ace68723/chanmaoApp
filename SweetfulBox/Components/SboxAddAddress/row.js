@@ -22,23 +22,23 @@ class Row extends Component {
 		var { selected } = this.props;
     const viewHeight = Dimensions.get('window').height;
 		const viewWidth = Dimensions.get('window').width;
-		const rowHeight = viewHeight * 0.11;
+		// const rowHeight = viewHeight * 0.11;
 		const checkboxWidth = viewWidth * 0.07;
 		const str1 = this.props.addr.split(',');
 		const locationText = str1[0] + ",\n" + str1[1] + ", "
 			+ str1[2] + ", "+ str1[3];
 
 		return (
-			<TouchableOpacity onPress={() => (this.props.onselected(this.props.selected))}>
-				<View style={[styles.container, selected && styles.selected,
-					{height: rowHeight}]}>
-
+			<TouchableOpacity
+        onPressIn={()=>{console.log('here')}}
+        onPress={() => (this.props.onselected(this.props.selected))}>
+				<View style={[styles.container,
+                      selected && styles.selected,
+					            {paddingTop:15,paddingBottom:15}]}>
 
 	        <View style={styles.textWrap}>
 	          <Text style={{textAlign:'left', fontSize: 16}}>{locationText}</Text>
 	        </View>
-
-
 
 				</View>
 			</TouchableOpacity>

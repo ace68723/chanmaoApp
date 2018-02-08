@@ -4,7 +4,6 @@ import AddressModule from '../Modules/AddressModule/AddressModule'
 export default {
     async checkCanDeliver(addrInfo){
         try{
-          console.log(addrInfo);
           const data = await AddressModule.checkCanDeliver(addrInfo.lat,addrInfo.lng);
           const io_data = {
             geolocation: data,

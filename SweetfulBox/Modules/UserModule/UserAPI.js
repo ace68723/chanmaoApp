@@ -1,6 +1,7 @@
+import { API_ORDER_HISTORY, API_USER_ADDR } from '../../Config/API';
 export default  {
   getOrderHistory(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/order_history';
+    const url = API_ORDER_HISTORY;
 
     let options = {
         method: 'POST',
@@ -24,8 +25,7 @@ export default  {
             .catch((error) => {throw error})
   },
   putUserAddr(io_data){
-    const url = 'https://chanmao.us/api/sb/v1/user_addr';
-
+    const url = API_USER_ADDR;
     let options = {
         method: 'PUT',
         mode:'cors',
@@ -40,11 +40,13 @@ export default  {
     })
 
     options.body = JSON.stringify({
-        iv_cbid: io_data.iv_cbid,
-        iv_name: io_data.iv_name,
-        iv_unit: io_data.iv_unit,
-        iv_tel: io_data.iv_tel,
-
+      iv_addr: io_data.iv_addr,
+      iv_province: io_data.iv_province,
+      iv_lat:  io_data.iv_lat,
+      iv_lng:  io_data.iv_lng,
+      iv_name: io_data.iv_name,
+      iv_unit: io_data.iv_unit,
+      iv_tel:  io_data.iv_tel,
     })
 
 

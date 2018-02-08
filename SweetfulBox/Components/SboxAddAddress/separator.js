@@ -17,8 +17,7 @@ class Separator extends Component {
 
 var styles = StyleSheet.create({
 	separator: {
-		height: 1,
-		borderWidth: 1,
+		borderBottomWidth: 1,
 		borderColor: "#D5D5D5"
 	}
 });

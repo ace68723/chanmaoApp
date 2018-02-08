@@ -14,6 +14,23 @@ import SboxCart from '../SboxCart';
 import About from '../SboxAbout/index'
 import TabBar from './TabBar';
 export default class MyComponent extends Component {
+  constructor() {
+    super();
+    this.state = {
+      initialPage:0
+    }
+  }
+  componentDidMount() {
+    if(this.props.checkoutStatus === 'successful') {
+      this.setState({
+        initialPage:2,
+      })
+      this.props.navigator.push({
+        screen: 'SboxHistory',
+        navigatorStyle: {navBarHidden: true},
+      })
+    }
+  }
   render() {
     return (
       <ScrollableTabView
@@ -25,7 +42,7 @@ export default class MyComponent extends Component {
         tabBarInactiveTextColor={'#666666'}
         prerenderingSiblingsNumber={3}
         tabBarPosition = "bottom"
-        initialPage={0}
+        initialPage={this.state.initialPage}
         style={{flex:1, }}
         renderTabBar={() => <TabBar />}
       >

@@ -33,12 +33,13 @@ export default  {
 
   async putUserAddr(io_data){
     const {uid,token,version} = GetUserInfo();
-
-
     try {
       const lo_data ={
         authortoken: token,
-        iv_cbid: io_data.addressObject.cbid,
+        iv_addr: io_data.addressObject.addr,
+        iv_province: io_data.addressObject.province,
+        iv_lat: io_data.addressObject.lat,
+        iv_lng: io_data.addressObject.lng,
         iv_name: io_data.name,
         iv_unit: io_data.unitNumber,
         iv_tel:  io_data.phoneNumber,
@@ -51,6 +52,7 @@ export default  {
         throw errorMessage
       }
     } catch (e) {
+      console.log(e)
       const errorMessage = 'error';
       throw errorMessage
     }

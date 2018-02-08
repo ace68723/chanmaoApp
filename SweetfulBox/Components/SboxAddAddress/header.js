@@ -28,7 +28,7 @@ class Header extends Component {
     const viewHeight = Dimensions.get('window').height;
     const viewWidth = Dimensions.get('window').width;
     const navigationHeight = viewHeight * (212/2208) - 17;
-    const searchBarHeight = viewHeight * (105/2208);
+    // const searchBarHeight = viewHeight * (105/2208);
     const searchBarWidth = viewWidth * (950 / 1242);
     const backPaddingLeft = viewHeight * (60/2208);
 
@@ -39,28 +39,24 @@ class Header extends Component {
                 goBack={this.props.goBack}
                 leftButtonText={'x'}/>
 
-        <View style={{height: searchBarHeight, width: viewWidth}}>
-          <View style={[styles.searchBar, {margin: 2,
-                                           height: searchBarHeight - 4,
-                                           width: viewWidth - 6}]}>
+          <View style={[styles.searchBar, {paddingTop:15,paddingBottom:15}]}>
             <Image style={[styles.searchIcon],
                           {height: backPaddingLeft,
                            width: backPaddingLeft,
-                           marginHorizontal: viewWidth * (40 / 1242),}}
-                   />
+                           marginHorizontal: viewWidth * (40 / 1242),}}/>
                  <TextInput
+                   selectionColor={'#ff7685'}
+                   allowFontScaling={false}
+                   returnKeyType={'search'}
+                   autoCorrect={false}
+                   autoCapitalize={'none'}
                    autoFocus={true}
+                   fontSize={18}
                    style={{flex: 0.95}}
                    placeholder={"搜索地址"}
                    onChangeText={(text) => this.props.onChangeTextInput(text)}
                    onSubmitEditing={this.props.onSubmitText}/>
           </View>
-        </View>
-
-
-
-
-
         <Separator/>
 
 			</View>

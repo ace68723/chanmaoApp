@@ -134,7 +134,6 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
   }
 
 _renderProduct(itemObject) {
-  console.log(itemObject);
   var item = itemObject.item;
   return(
     <TouchableWithoutFeedback
@@ -179,7 +178,6 @@ _renderUserInfo() {
 }
 
   render() {
-    console.log(this.props.orderDetail.prod);
     return (
       <ScrollView >
         <View style={styles.content}>

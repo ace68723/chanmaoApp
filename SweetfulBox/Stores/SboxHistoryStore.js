@@ -26,7 +26,6 @@ const SboxHistoryStore = Object.assign({},EventEmitter.prototype,{
 	   switch(action.actionType){
 				case SboxConstants.GET_HISTORY_LIST:
 					SboxHistoryStore.updateState(action.data);
-					console.log(action.data)
           SboxHistoryStore.emitChange();
 					break;
         default:

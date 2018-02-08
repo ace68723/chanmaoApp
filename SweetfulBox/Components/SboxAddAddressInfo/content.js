@@ -56,6 +56,15 @@ const styles = StyleSheet.create({
 });
 
 export default class Content extends Component {
+    constructor() {
+      super();
+      this._onSubmitEditing = this._onSubmitEditing.bind(this);
+    }
+    _onSubmitEditing(e){
+        this.telRef.focus();
+    }
+
+    // onKeyPress={this._handleKeyDown}
     render() {
         return (
             <View style={styles.content}>
@@ -71,21 +80,26 @@ export default class Content extends Component {
                     <TextInput
                         value={this.props.name}
                         onChangeText={this.props.onNameChange}
-                        placeholder="Name"
-                        returnKeyType="done"
+                        placeholder="请以英文拼写您的姓名"
+                        selectionColor={'#ff7685'}
+                        returnKeyType="next"
+                        autoCorrect={false}
+                        autoFocus={true}
                         style={styles.input}
+                        onSubmitEditing={this._onSubmitEditing}
                     />
                 </View>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/phoneNum.png')}/></View>
                     <Text style={styles.tips}>电话: +1 </Text>
                     <TextInput
+                        ref={(ref)=>{ this.telRef = ref}}
                         value={this.props.phoneNumDisplay}
                         onChangeText={this.props.onPhoneNumChange}
                         maxLength = {13}
                         keyboardType={'phone-pad'}
+                        selectionColor={'#ff7685'}
                         placeholder="Phone Number"
-                        returnKeyType="done"
                         style={styles.input}
                     />
                 </View>
@@ -96,8 +110,10 @@ export default class Content extends Component {
                         value={this.props.unitNum}
                         onChangeText={this.props.onUnitNumChange}
                         placeholder="Optional（选填）"
-                        returnKeyType="done"
+                        selectionColor={'#ff7685'}
+                        returnKeyType="send"
                         style={styles.input}
+                        autoCorrect={false}
                     />
                 </View>
                 <View style={styles.horizontalSpace} />
@@ -108,6 +124,14 @@ export default class Content extends Component {
                     </TouchableOpacity>
                     <View style={styles.verticalSpace}/>
                 </View>
+                <Text style={{padding:20,paddingBottom:0}}>
+                  注：1. 请以英文形式拼写您的姓名，所留姓名和电话请务必与您所在的Condo
+                  前台登记的信息一致，否则包裹会被前台拒收。
+                </Text>
+                <Text style={{padding:20}}>
+                    2. 甜满箱包裹会配送到您的Condo前台。如果您所在的Condo没有前台，
+                    我们的配送员会在到达后电话联系您取包裹。请您保持电话畅通，谢谢。
+                </Text>
             </View>
         );
     }

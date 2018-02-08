@@ -109,3 +109,9 @@ export function sbox_deleteItem(item) {
     realm.delete(item);
   })
 }
+export function sbox_deleteCart() {
+  realm.write(() => {
+    let sbox_cart = realm.objects('sbox_cart');
+    realm.delete(sbox_cart);
+  });
+}

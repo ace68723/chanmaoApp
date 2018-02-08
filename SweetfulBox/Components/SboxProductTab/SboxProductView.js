@@ -13,7 +13,7 @@ import Settings from '../../Config/Setting';
 
 export default class SboxProductView extends Component {
   _renderProductPic(){
-    if (this.props.product.status === 0) {
+    if (this.props.product.spu_status === 0 || this.props.product.sku_status === 0) {
       return(
         <Image source={{uri:this.props.product.image}}
                style={{width:Settings.getX(300),

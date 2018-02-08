@@ -36,38 +36,33 @@ export default class App extends Component {
     }
     componentDidMount() {
       SboxUserStore.addChangeListener(this._onChange);
-      this.props.navigator.showLightBox({
-         screen: "SboxHomeAlert", // unique ID registered with Navigation.registerScreen
-         passProps: {
-           message:`注：1. 请以英文形式拼写您的姓名，所留姓名和电话请务必与您所在的Condo前台登记的信息一致，否则包裹会被前台拒收。
-
-2. 甜满箱包裹会配送到您的Condo前台。如果您所在的Condo没有前台，我们的配送员会在到达后电话联系您取包裹。请您保持电话畅通，谢谢。`}, // simple serializable object that will pass as props to the lightbox (optional)
-         style: {
-          //  backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-          //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
-         },
-         adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-        });
+//       this.props.navigator.showLightBox({
+//          screen: "SboxHomeAlert", // unique ID registered with Navigation.registerScreen
+//          passProps: {
+//            message:`注：1. 请以英文形式拼写您的姓名，所留姓名和电话请务必与您所在的Condo前台登记的信息一致，否则包裹会被前台拒收。
+//
+// 2. 甜满箱包裹会配送到您的Condo前台。如果您所在的Condo没有前台，我们的配送员会在到达后电话联系您取包裹。请您保持电话畅通，谢谢。`}, // simple serializable object that will pass as props to the lightbox (optional)
+//          style: {
+//           //  backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+//           //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
+//          },
+//          adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+//         });
     }
     componentWillUnmount() {
       SboxUserStore.removeChangeListener(this._onChange);
     }
     _onChange() {
-      const addressObject = this.props.addressObject;
-      const name  = this.state.name;
-      const phoneNumber = this.state.phoneNum;
-      const unitNumber = this.state.unitNum;
-      const userInfo = {addressObject,name,phoneNumber,unitNumber}
-      this.props.setUserInfo(userInfo);
+      // const addressObject = this.props.addressObject;
+      // const name  = this.state.name;
+      // const phoneNumber = this.state.phoneNum;
+      // const unitNumber = this.state.unitNum;
+      // const userInfo = {addressObject,name,phoneNumber,unitNumber}
+      // this.props.setUserInfo(userInfo);
 
-      this.props.navigator.dismissModal({
-        animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-      });
-      setTimeout(() =>{
         this.props.navigator.dismissModal({
           animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
         });
-      }, 500);
     }
     handlePhoneNumChange(value) {
         let newValue = value.replace(/[()-]/g, '');
@@ -100,13 +95,10 @@ export default class App extends Component {
         const phoneNumber = this.state.phoneNum;
         const unitNumber = this.state.unitNum;
         const userInfo = {addressObject,name,phoneNumber,unitNumber}
-        console.log(userInfo)
-        // SboxUserAction.putUserAddr(userInfo);
+        SboxUserAction.putUserAddr(userInfo);
     }
     _goBack(){
-      this.props.navigator.dismissModal({
-        animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-      });
+      this.props.navigator.pop();
     }
 
     render() {
@@ -114,7 +106,7 @@ export default class App extends Component {
             <View style={styles.container}>
                 <SboxHeader title={"添加地址"}
                         goBack={this._goBack}
-                        leftButtonText={'x'}/>
+                        leftButtonText={'<'}/>
                 <Content
                     address={this.state.address}
                     onAddressChange={(address) => this.setState({ address: address })}

@@ -58,11 +58,10 @@ export default class MyComponent extends Component {
        }, 5000);
     }
     else {
-        this.props.navigator.showModal({
+        this.props.navigator.push({
           screen: "SboxAddAddressInfo",
           passProps: {addrInfo:this.state.addrInfo},
           navigatorStyle: {navBarHidden:true},
-          animationType: 'slide-up'
         });
     }
   }
@@ -157,17 +156,15 @@ export default class MyComponent extends Component {
               onChangeTextInput={(text) => this.onChangeTextInput(text)}
               {...this.state}
           />
-
-          <View style={styles.content}>
             <FlatList
                 data={this.state.items}
+                keyboardShouldPersistTaps={'always'}
                 keyExtractor={(item, index) => index}
                 renderItem={({item}) => this._renderRow(item)}
                 ItemSeparatorComponent={(sectionId, rowId) => {
                   return <Separator/>
                 }}
                 />
-          </View>
       </KeyboardAvoidingView >
     );
   }
@@ -176,8 +173,5 @@ export default class MyComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  content: {
-    flex: 1
   },
 });

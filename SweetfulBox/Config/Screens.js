@@ -30,7 +30,7 @@ Navigation.registerComponent('SboxHomeAlert', () => SboxHomeAlert);
 Navigation.registerComponent('SboxAddressAlert', () => SboxAddressAlert);
 Navigation.registerComponent('SboxCartAlert', () => SboxCartAlert);
 Navigation.registerComponent('SboxAboutContact', () => SboxAboutContact)
-
+Navigation.registerComponent('SboxMainTab', () => SboxMainTab)
 
 module.exports = SboxMainTab;
 // module.exports = SboxHistory;

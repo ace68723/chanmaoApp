@@ -56,7 +56,6 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
         break
         case SboxConstants.CHECK_STOCK:
              SboxCartStore.checkStock(action.data);
-             console.log(action.data)
         break
 
         default:

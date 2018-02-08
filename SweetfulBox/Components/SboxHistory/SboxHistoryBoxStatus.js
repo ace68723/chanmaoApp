@@ -54,7 +54,6 @@ class BoxStatus extends Component {
   }
 
 	render() {
-    console.log(this.props);
     var boxes_ls = this.props.boxes_ls;
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     var dataSource = ds.cloneWithRows(boxes_ls);

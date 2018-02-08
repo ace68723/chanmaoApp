@@ -5,9 +5,10 @@ import {sbox_getAllItemsFromCart} from '../Modules/Database'
 export default {
     async addCard(reqData) {
       try{
-        const data = await OrderModule.addCard(reqData);
+         await OrderModule.addCard(reqData);
+        const data = await OrderModule.getOrderBefore();
         dispatch({
-             actionType: SboxConstants.SBOX_UPDATECARD,data
+             actionType: SboxConstants.SBOX_CHECKOUT,data
          })
       }catch(error){
         console.log(error)
@@ -17,7 +18,6 @@ export default {
     async getOrderBefore(){
         try{
           const data = await OrderModule.getOrderBefore();
-          console.log("getOrderBefore",data)
           dispatch({
                actionType: SboxConstants.SBOX_CHECKOUT,data
            })
@@ -25,19 +25,15 @@ export default {
           console.log(error)
         }
       },
-    async checkout(box) {
+    async checkout() {
       try{
 
-        const data = await OrderModule.checkout(box);
+        const data = await OrderModule.checkout();
         dispatch({
-            actionType: SboxConstants.CHECKOUT, data
+            actionType: SboxConstants.SBOX_CHECKOUT, data
         })
       }catch(error){
-
-        console.error(error)
-        dispatch({
-            actionType: SboxConstants.CHECKOUT_FAIL, error
-        })
+        console.log(error)
       }
     },
 

@@ -57,12 +57,12 @@ export default class MyComponent extends Component {
     this.setState(SboxProductTabStore.getStateByTmid(tmid));
   }
   _handleOnPressIn(product) {
-    if (product.status === 1) return;
+    if (product.spu_status === 1 || product.sku_status === 1) return;
     const {spu_id} = product;
     SboxProductAction.getSingleProduct(spu_id);
   }
   _goToSboxProductDetial(item) {
-    if (item.status === 1) return;
+    if (item.spu_status === 1 || item.sku_status === 1) return;
     setTimeout( () => {
       this.props.navigator.push({
         screen: 'SboxProductDetial',
