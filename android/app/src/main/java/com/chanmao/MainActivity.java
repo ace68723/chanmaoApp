@@ -1,7 +1,5 @@
 package com.chanmao;
-
 import com.facebook.react.ReactActivity;
-
 public class MainActivity extends com.reactnativenavigation.controllers.SplashActivity {
 
     /**
@@ -12,4 +10,6 @@ public class MainActivity extends com.reactnativenavigation.controllers.SplashAc
 //    protected String getMainComponentName() {
 //        return "chanmao";
 //    }
+
+
 }

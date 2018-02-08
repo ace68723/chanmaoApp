@@ -8,6 +8,7 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class MainApplication extends NavigationApplication {
             new MapsPackage(),
             new WeChatPackage(),
             new RNDeviceInfo(),
-            new RealmReactPackage(),
-            new VectorIconsPackage()
+            new RealmReactPackage()
+//            new VectorIconsPackage()
     );
   }
 

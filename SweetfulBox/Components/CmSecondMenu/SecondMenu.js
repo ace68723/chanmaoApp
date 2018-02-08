@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     flex:0.6,
     backgroundColor: 'white',
     justifyContent:'center',
-    backgroundColor: 'white',
+
   },
   left: {
     flex: 0.2,
