@@ -15,7 +15,9 @@ import SboxHomeAlert from '../Components/SboxHomeAlert/SboxHomeAlert';
 import SboxAddressAlert from '../Components/SboxHomeAlert/SboxAddressAlert';
 import SboxCartAlert from '../Components/SboxHomeAlert/SboxCartAlert';
 import SboxAboutContact from '../Components/SboxAbout/SboxAboutContact';
+import SboxNotification from '../Components/SboxNotification/SboxNotification';
 import SecondMenu from '../Components/CmSecondMenu/SecondMenu';
+
 
 Navigation.registerComponent('SboxProductDetial', () => SboxProductDetial);
 Navigation.registerComponent('SboxCart', () => SboxCart);
@@ -31,6 +33,7 @@ Navigation.registerComponent('SboxHomeAlert', () => SboxHomeAlert);
 Navigation.registerComponent('SboxAddressAlert', () => SboxAddressAlert);
 Navigation.registerComponent('SboxCartAlert', () => SboxCartAlert);
 Navigation.registerComponent('SboxAboutContact', () => SboxAboutContact)
+Navigation.registerComponent('SboxNotification', () => SboxNotification)
 Navigation.registerComponent('SboxMainTab', () => SboxMainTab)
 
 module.exports = SboxMainTab;

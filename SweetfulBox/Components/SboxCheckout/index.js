@@ -127,15 +127,15 @@ export default class MyComponent extends Component {
     SboxOrderAction.getOrderBefore();
   }
   _handleSuccessful() {
-    this.props.navigator.showInAppNotification({
-     screen: "Notification",
-     passProps: {
-       backgroundColor:'#ff768b',
-       title:'甜满箱',
-       content:'下单成功'
-     },
-     autoDismissTimerSec: 5
-    });
+    // this.props.navigator.showInAppNotification({
+    //  screen: "Notification",
+    //  passProps: {
+    //    backgroundColor:'#ff768b',
+    //    title:'甜满箱',
+    //    content:'下单成功'
+    //  },
+    //  autoDismissTimerSec: 5
+    // });
     const {checkoutStatus} = this.state;
     this.props.navigator.resetTo({
         screen: 'SboxMainTab',
@@ -144,6 +144,7 @@ export default class MyComponent extends Component {
         animationType: 'fade',
         navigatorStyle: {navBarHidden: true},
       });
+
   }
   _handleSoldOut() {
     this.props.navigator.showInAppNotification({

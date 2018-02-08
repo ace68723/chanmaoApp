@@ -107,3 +107,10 @@ INNER JOIN
 SET
   image_id = i.newimage_id;
 ```
+
+* 9. 构建sbox_addr_base
+
+```
+insert into sbox_addr_base (`abid`, `uid`, `addr`, `province`, `lat`, `lng`, `name`, `unit`, `tel`, `status`, `updated_at`)
+SELECT ab.abid, ab.uid, cb.addr,cb.province,cb.lat,cb.lng,ab.name, ab.unit,ab.tel,ab.status,0 from sb_addr_base as ab join sb_condo_base as cb on ab.cbid=cb.cbid;
+```
