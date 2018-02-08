@@ -23,6 +23,7 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
     spu_name:"",
     totalQuantity:0,
     loading:true,
+    outOfStock: false,
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -66,10 +67,16 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
     this.state =  Object.assign(this.state,{selectedProduct,selectedPage})
   },
   addQuantity(){
-    if(this.state.selectedProduct.sku_quantity>=this.state.selectedProduct.sku_amount) return;
-    const selectProductIndex  = findIndex(this.state.sku_list, {sku_id: this.state.selectedProduct.sku_id})
-    this.state.sku_list[selectProductIndex].sku_quantity += 1;
-    this.state.selectedProduct.sku_quantity = this.state.sku_list[selectProductIndex].sku_quantity;
+    if(this.state.selectedProduct.sku_quantity>=this.state.selectedProduct.sku_amount) {
+      this.state =  Object.assign({},this.state,{outOfStock: true});
+      setTimeout( () => {
+        this.state =  Object.assign(this.state,{outOfStock: false});
+      }, 500);
+    }else {
+      const selectProductIndex  = findIndex(this.state.sku_list, {sku_id: this.state.selectedProduct.sku_id})
+      this.state.sku_list[selectProductIndex].sku_quantity += 1;
+      this.state.selectedProduct.sku_quantity = this.state.sku_list[selectProductIndex].sku_quantity;
+    }
   },
   subQuantity(){
     if(this.state.selectedProduct.sku_quantity <= 1) return;
@@ -104,6 +111,7 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
       spu_name:"",
       totalQuantity:0,
       loading:true,
+      outOfStock: false,
     });
   },
   getState(){
@@ -120,11 +128,11 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
           SboxProductStore.emitChange();
           break
         case SboxConstants.ADD_QUANTITY:
-          SboxProductStore.addQuantity()
+          SboxProductStore.addQuantity();
           SboxProductStore.emitChange();
           break
         case SboxConstants.SUB_QUANTITY:
-          SboxProductStore.subQuantity()
+          SboxProductStore.subQuantity();
           SboxProductStore.emitChange();
           break
         case SboxConstants.CHANG_PRODUCT_IMAGE:

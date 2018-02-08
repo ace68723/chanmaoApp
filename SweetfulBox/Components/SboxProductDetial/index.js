@@ -46,6 +46,7 @@ export default class SweetProductDetial extends Component {
     this._goBack = this._goBack.bind(this);
     this._onChange = this._onChange.bind(this);
     this._handleOnPressIn = this._handleOnPressIn.bind(this);
+    this._handleOutOfStock = this._handleOutOfStock.bind(this);
   }
   componentDidMount(){
       if(this.state.spu_status === 1) {
@@ -60,13 +61,9 @@ export default class SweetProductDetial extends Component {
     SboxProductStore.removeChangeListener(this._onChange);
     SboxProductStore.initState();
   }
-
-  _handleOnPressIn() {
-    // SboxCartAction.checkStock();
-  }
-
   _onChange() {
     const productData = SboxProductStore.getState();
+
     if(productData.spu_status === 1) {
       this.props.navigator.pop({
         animated: true,
@@ -75,7 +72,28 @@ export default class SweetProductDetial extends Component {
     }else{
       this.setState(Object.assign({},productData));
     }
+    if(productData.outOfStock){
+      this._handleOutOfStock();
+    }
+
   }
+  _handleOnPressIn() {
+    // SboxCartAction.checkStock();
+  }
+  _handleOutOfStock() {
+    this.props.navigator.showLightBox({
+       screen: "SboxCartAlert",
+       passProps: {
+         message:`库存不足`},
+       style: {
+         flex: 1,
+         tapBackgroundToDismiss: true,
+       },
+       adjustSoftInput: "resize",
+      });
+  }
+
+
 
   _onPageChange(page){
     SboxProductAction.changeProductImage(page);

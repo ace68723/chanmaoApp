@@ -81,6 +81,14 @@ export default {
       }catch(error){
       }
     },
+    resetOutOfStock() {
+      try{
+        dispatch({
+            actionType: SboxConstants.RESET_OUT_OF_STOCK
+        })
+      }catch(error){
+      }
+    },
     changeProductImage(page) {
       try{
         dispatch({
