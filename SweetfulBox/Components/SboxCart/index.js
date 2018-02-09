@@ -260,7 +260,7 @@ export default class SboxCart extends Component {
       <View style={styles.container}>
         <SboxHeader title={"购物箱"}
                 goBack={this._renderGoBackBtn}
-                leftButtonText={'x'}/>
+                leftButtonText={this.props.backButton}/>
         <FlatList
           	enableEmptySections
             data={this.state.cartList}
