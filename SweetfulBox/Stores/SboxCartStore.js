@@ -16,6 +16,7 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
     cartList:[],
     total:0,
     totalQuantity:0,
+    outOfStock: false,
   },
 	emitChange(){
 			this.emit(CHANGE_EVENT)
@@ -43,6 +44,12 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
     this.state.cartList = this._cart;
     SboxCartStore.emitChange();
   },
+  updateOutOfStock() {
+    this.state =  Object.assign({},this.state,{outOfStock: true});
+    setTimeout( () => {
+      this.state =  Object.assign(this.state,{outOfStock: false});
+    }, 500);
+  },
   getTotalQuantity(){
     return this.state.totalQuantity
   },
@@ -53,10 +60,14 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
 	   switch(action.actionType){
         case SboxConstants.UPDATE_CART_ITEM_QUANTITY:
              SboxCartStore.updateTotalQuantity();
-        break
+             break
+        case SboxConstants.SET_OUT_OF_STOCK:
+             SboxCartStore.updateOutOfStock();
+             SboxCartStore.emitChange();
+             break;
         case SboxConstants.CHECK_STOCK:
              SboxCartStore.checkStock(action.data);
-        break
+             break
 
         default:
          // do nothing

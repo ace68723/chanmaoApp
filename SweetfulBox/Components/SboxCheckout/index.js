@@ -156,11 +156,13 @@ export default class MyComponent extends Component {
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
     });
-    this.props.navigator.showModal({
-      screen: 'SboxNotification',
-      passProps: {checkoutSuccessful: false},
-      navigatorStyle: {navBarHidden: true},
-    });
+    setTimeout(() => {
+      this.props.navigator.showModal({
+        screen: 'SboxNotification',
+        passProps: {checkoutSuccessful: false},
+        navigatorStyle: {navBarHidden: true},
+      });
+    }, 800);
   }
   _handleError() {
     // this.props.navigator.showInAppNotification({
@@ -175,11 +177,13 @@ export default class MyComponent extends Component {
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
     });
-    this.props.navigator.showModal({
-      screen: 'SboxNotification',
-      passProps: {checkoutSuccessful: false},
-      navigatorStyle: {navBarHidden: true},
-    });
+    setTimeout(() => {
+      this.props.navigator.showModal({
+        screen: 'SboxNotification',
+        passProps: {checkoutSuccessful: false},
+        navigatorStyle: {navBarHidden: true},
+      });
+    }, 800);
   }
 
   _goBack(){

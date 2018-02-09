@@ -26,6 +26,7 @@ export default class SboxCart extends Component {
     this.state = SboxCartStore.getState();
     this._renderItem = this._renderItem.bind(this);
     this._onChange = this._onChange.bind(this);
+    this._handleOutOfStock = this._handleOutOfStock.bind(this);
     this._addQuantity = this._addQuantity.bind(this);
     this._subQuantity = this._subQuantity.bind(this);
     this._deleteItem = this._deleteItem.bind(this);
@@ -52,6 +53,21 @@ export default class SboxCart extends Component {
         })
       }
     });
+    if(cartState.outOfStock){
+      this._handleOutOfStock();
+    }
+  }
+  _handleOutOfStock() {
+    this.props.navigator.showLightBox({
+       screen: "SboxCartAlert",
+       passProps: {
+         message:`库存不足`},
+       style: {
+         flex: 1,
+         tapBackgroundToDismiss: true,
+       },
+       adjustSoftInput: "resize",
+      });
   }
   _addQuantity(item){
     SboxCartAction.addQuantity(item);
