@@ -131,7 +131,7 @@ export default class About extends Component {
         <TouchableOpacity onPress={this._goToHistory}
             activeOpacity={0.4}
             style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
-            <Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/login.png')}/>
+            <Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/shoppingbox.png')}/>
             <Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}>查看订单</Text>
             <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
         </TouchableOpacity>
