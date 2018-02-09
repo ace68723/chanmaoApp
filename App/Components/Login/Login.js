@@ -82,11 +82,11 @@ export default class LogoAnimationView extends Component {
           loginSuccess:true,
     		})
         this.props.handleLoginSuccessful();
-        setTimeout(() => {
+        // setTimeout(() => {
           this.props.navigator.dismissModal({
              animationType: 'slide-down'
           })
-        }, 1000);
+        // }, 1000);
     } catch (e) {
       console.log(e)
       this.setState({

@@ -86,6 +86,14 @@ export default  {
         ia_prod: _productList,
       }
       const res = await OrderAPI.getOrderBefore(lo_data);
+      const eo_data ={
+        prod: res.ea_prod,
+        addr: res.eo_addr,
+        cusid: res.ev_cusid,
+        deliFee: res.ev_deliFee,
+        last4: res.ev_last4,
+        total:res.ev_total
+      }
       if(res.ev_error === 1) {
         if(res.ev_message >= 10000 && res.ev_message <= 20000 ){
           return {checkoutStatus:"shouldDoAuth"}
@@ -98,23 +106,14 @@ export default  {
         await sbox_updateCartStock(res.ea_prod);
         return {checkoutStatus:"soldOut"}
       }
-      console.log("res.eo_addr.hasOwnProperty('abid')",res.eo_addr.hasOwnProperty('abid'))
       if(!res.eo_addr.hasOwnProperty('abid')){
-        return {checkoutStatus:"shouldAddAddress"}
+        return  Object.assign(eo_data,{checkoutStatus:"shouldAddAddress"})
       }
 
       if(!res.ev_cusid){
-        return {checkoutStatus:"shouldAddCard"}
+        return Object.assign(eo_data,{checkoutStatus:"shouldAddCard"})
       }
 
-      const eo_data ={
-        prod: res.ea_prod,
-        addr: res.eo_addr,
-        cusid: res.ev_cusid,
-        deliFee: res.ev_deliFee,
-        last4: res.ev_last4,
-        total:res.ev_total
-      }
       eo_data = Object.assign(eo_data,{checkoutStatus:"readyToCheckout"});
       return eo_data
 
