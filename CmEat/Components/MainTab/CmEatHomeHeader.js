@@ -12,24 +12,25 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import {cme_getSelectedAddress} from '../../../App/Modules/Database';
+import AddressForHomeHeader from '../Address/AddressForHomeHeader';
 
 const {width,height} = Dimensions.get('window');
 const HEADER_MAX_HEIGHT = height*0.4106;
 // const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 const HEADER_MIN_HEIGHT = 20;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
+
+
+let headerHeight;
+if(height == 812){
+  //min 34
+  headerHeight = 88;
+}else{
+  headerHeight = 54;
+}
+
 export default class SboxHomeHeader extends Component {
-  constructor(){
-    super();
-    let addr;
-    if(cme_getSelectedAddress()){
-      addr = cme_getSelectedAddress().addr.split(",", 1);
-    }
-    this.state = {
-      addr:addr,
-    }
-  }
+
   render() {
     // const headerTop = this.props.scrollY.interpolate({
     //   inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
@@ -79,29 +80,27 @@ export default class SboxHomeHeader extends Component {
       outputRange: [0, 1],
       extrapolate: 'clamp',
     });
+
     return (
-      <Animated.View style={[styles.container,{top:headerTop,
-                                               backgroundColor:headerBackgroud,
-                                               borderColor:"#e2e2e4",
-                                               borderBottomWidth: 1,}]}>
+      <View style={styles.container}>
         <TouchableWithoutFeedback onPress={this.props.handleBackToHome}>
-          <View style={{flex:0.17, top:10,justifyContent:'center'}}>
+          <View style={{flex:0.17, }}>
             <Image source={require('./Images/icon_back.png')}
                    style={{
-                           marginLeft:10,
-                           height:height*0.032,
-                           width:height*0.032,}}/>
+                           position:'absolute',
+                           left:10,
+                           bottom:10,
+                           height:20,
+                           width:20,}}/>
 
           </View>
         </TouchableWithoutFeedback>
-        <View style={{flex:0.66,top:10,justifyContent:'center',alignItems:'center'}}>
-          <Text style={{color:"#000000"}}>
-              配送至   {this.state.addr}
-          </Text>
+        <View style={{flex:0.66,justifyContent:'center',alignItems:'center'}}>
+          <AddressForHomeHeader />
         </View>
         <View style={{flex:0.17, alignItems:'center', justifyContent:'center', top:10,}}>
         </View>
-      </Animated.View>
+      </View>
     );
   }
 }
@@ -123,8 +122,8 @@ export default class SboxHomeHeader extends Component {
 const styles = StyleSheet.create({
   container: {
     width:width,
-    // height:height*0.0811,
-    height:50,
+    height:headerHeight,
+    backgroundColor:"#ffffff",
     position:'absolute',
     flexDirection:'row',
   },

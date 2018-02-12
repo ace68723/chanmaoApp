@@ -60,7 +60,6 @@ export default class Tabs extends Component {
 		}
 	}
 	_showTabBar(){
-    console.log(this.state.showTabBar)
 		if(!this.state.showTabBar){
 			this.setState({
 				showTabBar:true,

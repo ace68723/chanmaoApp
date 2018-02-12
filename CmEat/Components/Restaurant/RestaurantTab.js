@@ -3,6 +3,7 @@ import React, {
 	Component,
 } from 'react';
 import  {
+  Platform,
   Dimensions,
   StyleSheet,
   Text,
@@ -13,6 +14,23 @@ import  {
 } from 'react-native';
 import RestaurantCard from './RestaurantCard';
 const {width,height} = Dimensions.get('window');
+let marginTop;
+let flatListMarginTop;
+if(Platform.OS==='ios'){
+  if(height == 812){
+    //min 34
+    //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
+    marginTop = 88+200+30-40;
+    flatListMarginTop = 0;
+  }else{
+    marginTop = 54+200+30-20;
+    flatListMarginTop = -20;
+  }
+}else{
+    marginTop = 54+200+32;
+    flatListMarginTop = 0;
+}
+
 export default class RestaurantTab extends Component {
   constructor(props){
 		super(props)
@@ -40,7 +58,7 @@ export default class RestaurantTab extends Component {
 			}
   }
 	_renderHeader(){
-		return	<View style={{marginTop:width*0.45+80,height:0}}
+		return	<View style={{marginTop:marginTop,height:0}}
 						 ref={(comp) => this._scrollViewContent = comp}/>
 	}
    _keyExtractor = (item, index) => item.area + item.rid;
@@ -66,15 +84,18 @@ export default class RestaurantTab extends Component {
                  restaurantList:this.props.restaurantList.slice(0, this.state.length)
                })
              }}
-          getItemLayout={(data, index) => (
-               {length: 250, offset: 250 * index, index}
-             )}
+
       />
     )
   }
 };
+// getItemLayout={(data, index) => (
+//      {length: 250, offset: 250 * index, index}
+//    )}
 const styles = StyleSheet.create({
   scrollView:{
     flex: 1,
+    marginTop:flatListMarginTop
+    // backgroundColor:'blue'
   },
 });

@@ -15,6 +15,14 @@ import icoMoonConfig from '../../../fontConfig.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 const {width,height} = Dimensions.get('window');
+let  tabBarHeight;
+if(height == 812){
+  tabBarHeight = 80;
+  paddingBottom = 30;
+}else{
+  tabBarHeight = 50;
+  paddingBottom = 10;
+}
 
 class DefaultTabBar extends Component {
   constructor(props) {
@@ -118,18 +126,6 @@ class DefaultTabBar extends Component {
     );
   }
 }
-// DefaultTabBar.propTypes = {
-//   goToPage: React.PropTypes.func,
-//   activeTab: React.PropTypes.number,
-//   tabs: React.PropTypes.array,
-//   backgroundColor: React.PropTypes.string,
-//   activeTextColor: React.PropTypes.string,
-//   inactiveTextColor: React.PropTypes.string,
-//   textStyle: Text.propTypes.style,
-//   tabStyle: View.propTypes.style,
-//   renderTab: React.PropTypes.func,
-//   underlineStyle: View.propTypes.style,
-// };
 
 DefaultTabBar.defaultProps = {
   activeTextColor: 'navy',
@@ -144,10 +140,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 10,
+    paddingBottom: paddingBottom,
   },
   tabs: {
-    height: 50,
+    height: tabBarHeight,
     flexDirection: 'row',
     justifyContent: 'space-around',
     borderWidth: 1,

@@ -14,23 +14,6 @@ import Dimensions from 'Dimensions';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-// <Animated.Image                         // 基础组件: Image, Text, View
-//   source={{uri: 'http://i.imgur.com/XMKOH81.jpg'}}
-//   style={{
-//     flex: 1,
-//
-//   }}
-// />
-
-// <TouchableOpacity
-//   onPress={this._onPressButton.bind(this)}
-//   style={styles.button}
-//   >
-//   <Text style={styles.welcome}
-//   >
-//   </Text>
-// </TouchableOpacity>
-
 export default class Category extends Component {
   constructor(props: any) {
     super(props);
@@ -130,8 +113,8 @@ export default class Category extends Component {
     ]).start();  // 开始
     })
   }
-  _handleCategoryPress(category_position){
-      this.props.handleCategoryPress(category_position);
+  _handleCategoryPress(index){
+      this.props.handleCategoryPress(index);
       this._closeAnimation();
   }
   _renderListView(){
@@ -143,7 +126,7 @@ export default class Category extends Component {
           return(
 
               <TouchableOpacity
-                onPress={_handleCategoryPress.bind(null,category.category_position)}
+                onPress={_handleCategoryPress.bind(null,category.index)}
                 key={index}
                 style={{ borderColor:"#e2e2e4",
                                           borderBottomWidth: 1,

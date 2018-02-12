@@ -17,6 +17,7 @@ import {
 
 import Swiper from 'react-native-swiper'
 import CardView from './CardView';
+import { Navigation } from 'react-native-navigation';
 
 const xOffset = new Animated.Value(0);
 const onScroll = Animated.event(
@@ -25,6 +26,16 @@ const onScroll = Animated.event(
 );
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const {width,height} = Dimensions.get('window');
+
+let top;
+if(height == 812){
+  //min 34
+  top = 88;
+}else{
+  top = 54;
+}
+
+
 const HEADER_MAX_HEIGHT = 200;
 // const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 const HEADER_MIN_HEIGHT = 20;
@@ -36,14 +47,24 @@ class ActivityHeaderWithBanner extends Component {
 	  }
 		_handleOnPress(banner){
 			if(banner.navitype == 2){
-				this.props.navigator.push({
-					id: 'AdView',
-					url:banner.naviparam.url,
-				})
+        const {url} = banner.naviparam;
+        Navigation.showModal({
+          screen: 'AdView',
+          animated: true,
+          navigatorStyle: {navBarHidden: true},
+          passProps: {url: url}
+        });
 			}
 			if(banner.navitype == 3){
-			 		banner.restaurant = banner.naviparam;
-	        this.props.openMenu(height,banner.naviparam);
+          this.props.navigator.showModal({
+            screen: 'CmEatMenu',
+            animated: false,
+            navigatorStyle: {navBarHidden: true},
+            passProps: {
+              py:height,
+              restaurant:banner.naviparam,
+            },
+          });
 			}
 		}
     _rotateTransform(index: number) {
@@ -112,7 +133,7 @@ class ActivityHeaderWithBanner extends Component {
 			return(
         <Swiper showsButtons={false}
                 showsPagination={false}
-                height={width*0.45}
+                height={200}
                 autoplay
                 loop
                 horizontal
@@ -125,7 +146,7 @@ class ActivityHeaderWithBanner extends Component {
 		render() {
 			const headerHeight = this.props.scrollY.interpolate({
 	      inputRange: [0, HEADER_SCROLL_DISTANCE],
-	      outputRange: [width*0.45, HEADER_MIN_HEIGHT],
+	      outputRange: [200, HEADER_MIN_HEIGHT],
 	      extrapolate: 'clamp',
 	    });
 			const imageOpacity = this.props.scrollY.interpolate({
@@ -144,16 +165,16 @@ class ActivityHeaderWithBanner extends Component {
 const styles = StyleSheet.create({
   header: {
     position: 'absolute',
-    top: 50,
+    top: top,
     left: 0,
     width: width,
-    height: width*0.45,
+    height: 200,
     overflow: 'hidden',
   },
   backgroundImage: {
     alignSelf:'center',
     width: width,
-    height: width*0.45,
+    height: 200,
     alignSelf:'center',
   },
 });

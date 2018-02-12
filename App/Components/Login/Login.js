@@ -21,6 +21,14 @@ import AuthAction from '../../Actions/AuthAction';
 import InputAnimation from './InputAnimation';
 
 const {width,height} = Dimensions.get('window');
+let marginTop;
+if(height == 812){
+  //min 34
+  //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
+  marginTop = 34;
+}else{
+  marginTop = 20;
+}
 // const(refs): define view refeneces
 const USERNAME_INPUTREF = 'Username_Input';
 const PASSWORD_INPUTREF = 'Password_Input';
@@ -133,7 +141,6 @@ export default class LogoAnimationView extends Component {
   }
 
   _handleBackToHome() {
-    console.log('handleBackToHome',this.props)
     this.props.navigator.dismissModal({
        animationType: 'slide-down'
     })
@@ -149,12 +156,12 @@ export default class LogoAnimationView extends Component {
   }
   _renderGoBackBtn() {
     return(
-      <TouchableOpacity style={{paddingTop:22,
+      <TouchableOpacity style={{paddingTop:0,
                                 paddingLeft:8,
                                 paddingRight:20,
                                 paddingBottom:20,
                                 position:'absolute',
-                                top:0,
+                                top:marginTop,
                                 left:0,}}
                         onPress={this._handleBackToHome}>
         <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>

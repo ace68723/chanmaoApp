@@ -20,7 +20,6 @@ const  HomeMoule = {
 
   async getHomeData(token){
         const HomeData = await HomeApi.getHomeData(token)
-        console.log(HomeData)
         if(HomeData.result === 0){
             HomeData.zone1.forEach((banner) => {
                 const naviparam = banner.naviparam;
@@ -54,7 +53,6 @@ const  HomeMoule = {
   async getAreaList(reqData){
       try {
         const res = await HomeApi.getAreaList(reqData)
-        console.log(res)
         let areaList={};
         if(res.result == 0){
           areaList = res.area;

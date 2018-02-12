@@ -49,11 +49,15 @@ export default class Home extends Component {
   _openStarted = false
   componentDidMount() {
     // SplashScreen.hide();
-      this._startAnimation();
+
       AuthAction.doAuth();
+      if(this.props.tag === 'fromChanmao') {
+          this._handleChanmaoPress();
+      }else{
+        this._startAnimation();
+      }
   }
   _startAnimation() {
-    console.log('here')
       Animated.parallel([
           Animated.timing(
           this.state.boxRight,
@@ -210,6 +214,7 @@ export default class Home extends Component {
       }, 500);
       setTimeout(() => {
         InteractionManager.runAfterInteractions(() => {
+          console.log(this._handleBackToHome)
           this.props.navigator.push({
             screen: 'SboxHome',
             passProps: {handleBackToHome: this._handleBackToHome},

@@ -23,7 +23,6 @@ import Loading from '../Helpers/Loading';
 import Header from '../General/Header';
 
 import AddressAction from '../../Actions/AddressAction';
-// import AddressStore from '../../Stores/AddressStore';
 
 const _getFormatAddress = () =>{
   return AddressStore.getFormatAddress()
@@ -34,7 +33,7 @@ const _getSate = () =>{
 const _getProps = () =>{
   return AddressStore.getProps()
 }
-class AddInfo extends Component {
+export default class CmEatAddInfo extends Component {
     constructor(props) {
         super(props);
         this.state={
@@ -49,6 +48,7 @@ class AddInfo extends Component {
         }
         this._submitAddress = this._submitAddress.bind(this);
         this._chooseType = this._chooseType.bind(this);
+        this._goBack = this._goBack.bind(this);
     }
     componentWillMount() {
       this._animatedChooseType = new Animated.Value(0);
@@ -56,7 +56,8 @@ class AddInfo extends Component {
     componentDidMount(){
 			this._chooseType()
     }
-    componentWillUnmount(){
+    _goBack() {
+      this.props.navigator.pop();
     }
     showLoading(){
       if(this.state.isLoading)
@@ -199,7 +200,7 @@ class AddInfo extends Component {
         return(
           <View style={styles.mainContainer}>
           <Header title={"地址"}
-	                goBack={AddressAction.closeAddInfo}
+	                goBack={this._goBack}
 	                leftButtonText={'×'}/>
             <ScrollView scrollEnabled={true}
                         keyboardShouldPersistTaps="always"
@@ -326,7 +327,6 @@ let styles = StyleSheet.create({
   },
   scrollView:{
     flex: 1,
-    marginTop: 64,
   },
   inputForm:{
     margin:10,
@@ -404,5 +404,3 @@ let styles = StyleSheet.create({
   },
 
 });
-
-module.exports = AddInfo;

@@ -60,7 +60,7 @@ export default class SboxNotification extends Component {
               style={{marginTop:Setting.getY(70),}}>
               <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#ff768b',width:Setting.getX(600),height:Setting.getY(150)}}>
                 <Text style={{fontSize:16,color:'white'}}>
-                  返回历史订单
+                  查看历史订单
                 </Text>
               </View>
 

@@ -9,6 +9,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  ImageBackground,
   Dimensions,
 } from 'react-native';
 import PhoneNumberVerify from './PhoneNumberVerify';
@@ -112,7 +113,8 @@ export default class pastOrderEN extends Component {
                                       justifyContent:'center',
                                       alignItems:'center'}}
                                onPress={this.props.HistoryOrderDetailVisible.bind(null,this.state.orderInfo.oid)}>
-              <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>详情</Text>
+              <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
+                      allowFontScaling={false}>详情</Text>
             </TouchableOpacity>
         </View>
       )
@@ -163,12 +165,12 @@ export default class pastOrderEN extends Component {
         <View style={styles.orderContainer}>
           <View style={styles.itemContainer}>
               <View style={styles.imageContainer}>
-                <Image style={{flex:1,width:deviceWidth-56,alignSelf:'center'}} source={{uri:this.state.orderInfo.mob_banner}}>
+                <ImageBackground style={{flex:1,width:deviceWidth-56,alignSelf:'center'}} source={{uri:this.state.orderInfo.mob_banner}}>
                   <View style={styles.opacityView}/>
                     <View style={styles.imageTextContainer}>
                       <Text style={styles.imageText} allowFontScaling={false}>{this.state.orderInfo.name}</Text>
                     </View>
-                </Image>
+                </ImageBackground>
               </View>
               <View style={styles.info}>
                   <Text style={[styles.infoTitle,statusColor]} allowFontScaling={false}>{statusMessage}</Text>

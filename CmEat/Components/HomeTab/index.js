@@ -12,9 +12,15 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-
 const {width,height} = Dimensions.get('window');
-
+let marginTop
+if(height == 812){
+  //min 34
+  //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
+  marginTop = 88+200-44+30;
+}else{
+  marginTop = 54+200-20+30;
+}
 export default class LoginButton extends Component {
 
   constructor(){
@@ -22,6 +28,7 @@ export default class LoginButton extends Component {
 		this._handleOnPress = this._handleOnPress.bind(this);
   }
 	componentDidMount(){
+
     const index = this.props.index;
 		const scrollView = this.refs._scrollVew;
 		const scrollViewContent = this.refs._scrollViewContent;
@@ -79,9 +86,11 @@ export default class LoginButton extends Component {
 				            onScroll={this.props.scrollEventBind()}
 										showsVerticalScrollIndicator={false}>
 
-             <View style={{marginTop:width*0.45+80,height:0}}
+             <View style={{marginTop:marginTop,height:0}}
                    ref={'_scrollViewContent'}/>
 						 {this._renderAdv()}
+             <View style={{height:300}}
+                   ref={'_scrollViewContent'}/>
         </ScrollView>
 
 

@@ -102,9 +102,7 @@ export default class LogoAnimationView extends Component {
 
 	 } catch (e) {
 		 if(e == '-2'){
-			 console.log(e)
 		 }else{
-			 console.log(e);
 		 }
 
 	 }

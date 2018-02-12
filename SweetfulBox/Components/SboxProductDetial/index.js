@@ -18,6 +18,15 @@ import {
     findIndex,
 } from 'lodash';
 
+const {width,height} = Dimensions.get('window');
+let marginTop;
+if(height == 812){
+
+  marginTop = 34;
+}else{
+  marginTop = 20;
+}
+
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import SboxProductDetialScrollView from './SboxProductDetialScrollView';
 import SboxProductDetialDesc from './SboxProductDetialDesc';
@@ -32,7 +41,7 @@ import SboxProductAction from '../../Actions/SboxProductAction';
 import SboxProductStore from '../../Stores/SboxProductStore';
 import SboxCartAction from '../../Actions/SboxCartAction';
 
-const {height, width} = Dimensions.get('window');
+
 
 
 
@@ -145,12 +154,12 @@ export default class SweetProductDetial extends Component {
   }
   _renderGoBackBtn() {
     return(
-      <TouchableOpacity style={{paddingTop:22,
+      <TouchableOpacity style={{paddingTop:0,
                                 paddingLeft:8,
                                 paddingRight:20,
                                 paddingBottom:20,
                                 position:'absolute',
-                                top:0,
+                                top:marginTop,
                                 left:0,}}
                         onPress={this._goBack}>
         <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>

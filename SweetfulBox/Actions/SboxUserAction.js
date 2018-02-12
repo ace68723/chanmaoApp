@@ -35,8 +35,7 @@ export default {
 
       async checkUserLogin() {
         try{
-          // const data = await UserModule.checkUserLogin();
-          const data = false;
+          const data = await UserModule.checkUserLogin();
           dispatch({
             actionType: SboxConstants.UPDATE_USER_AUTH, data
           })
@@ -44,15 +43,4 @@ export default {
 
         }
       },
-      async clearToken() {
-        try{
-          // const data = await UserModule.clearToken();
-          const data = true;
-          dispatch({
-            actionType: SboxConstants.CLEAR_USER_AUTH, data
-          })
-        }catch(error){
-
-        }
-      }
 }

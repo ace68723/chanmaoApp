@@ -4,7 +4,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 export default (props) =>{
 

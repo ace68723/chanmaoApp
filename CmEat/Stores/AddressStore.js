@@ -1,16 +1,10 @@
 import AppConstants from '../Constants/AppConstants';
-import RestaurantAction from '../Actions/RestaurantAction';
+import CheckoutAction from '../Actions/CheckoutAction';
 import {dispatch, register} from '../Dispatchers/AppDispatcher';
 import {EventEmitter} from 'events';
 const CHANGE_EVENT = 'change4422';
 
-import { realm } from '../../App/Modules/Database';
-const ERRROR_TITLE = AppConstants.ERRROR_TITLE;
-let predictionsData;
-let la_address;
-let lo_addrInfo;
-let state;
-let props;
+import { realm, cme_getAllAddress, cme_getSelectedAddress } from '../../App/Modules/Database';
 
 let addressList = []
 let addressListState = Object.assign({},
@@ -23,87 +17,58 @@ let addressListState = Object.assign({},
 		searchAddress:""
 	},{addressList},
 )
-const _updateDataSource = () => {
-		let addressList = []
-		let selectedUaid;
-		addressList.forEach((address)=>{
-			if(address.type == "S"){
-				selectedUaid = address.uaid;
-			}
-		})
-		addressListState = Object.assign({},addressListState,{addressList},{selectedUaid});
-}
+
 const AddressStore = Object.assign({},EventEmitter.prototype,{
+  state:{
+    addressList:[],
+	  predictionsData:[],
+		placeId:"",
+		showAddInfo:false,
+		addressType:"",
+		formattedAddress:"",
+		searchAddress:"",
+    addressStatus:"",
+	},
 	emitChange(){
 			this.emit( CHANGE_EVENT)
 	},
 	addChangeListener(callback){
 			this.on(CHANGE_EVENT, callback)
-			realm.addListener('change', () => {
-	        _updateDataSource();
-	    });
 	},
 	removeChangeListener(callback){
 			this.removeListener(CHANGE_EVENT, callback)
-			realm.removeAllListeners();
 	},
-	getPredictionsSuccess(autocompleteData){
-		predictionsData = autocompleteData.predictions;
-	},
-	getPredictionsData(){
-    return predictionsData
+  submitAddress(selectedUaid){
+    this.state.selectedUaid = selectedUaid;
+    this.state.addressStatus = "backToAddressList";
   },
-	getLoadState(){
-		return loaded
-	},
-	getAddressListState(){
-		// let selectedUaid;
-		// addressList.forEach((address)=>{
-		// 	if(address.selected){
-		// 		selectedUaid = address.uaid;
-    //     console.log(address)
-		// 	}
-		// })
-		const selectedUaid = addressListState.selectedUaid;
-		addressListState = Object.assign({},addressListState,{selectedUaid})
-		return addressListState
-	},
-	closeAddInfo(selectedUaid){
-		addressListState.selectedUaid = selectedUaid;
-		addressListState.showAddInfo = false;
-	},
 	showAddInfo(placeId){
 		addressListState.placeId = placeId;
 		addressListState.showAddInfo = true;
 	},
   saveAddress(ia_address){
-		// addressListState.addressList = ia_address;
+		addressListState.addressList = ia_address;
   },
 	updateAddresslist(){
-		setTimeout(function () {
-			RestaurantAction.updateAdderss();
-		}, 100);
+    this.state.addressList = cme_getAllAddress();
+    this.state.selectedAddress = cme_getSelectedAddress();
 	},
-  getAddress(){
-    return la_address;
-  },
 	formatAddress(io_addrInfo){
-		addressListState = Object.assign({},addressListState,{formattedAddress:io_addrInfo,showAddInfo:true})
+    this.state.formattedAddress = io_addrInfo;
+    this.state.addressStatus = "AddAddressInfo";
 	},
 	getFormatAddress(){
 		return lo_addrInfo;
 	},
+  getSeletedAddress(){
+    return cme_getSelectedAddress();
+  },
 	getState(){
-		return state;
+    this.state.addressList = cme_getAllAddress();
+    this.state.selectedAddress = cme_getSelectedAddress();
+		return this.state;
 	},
-	getProps(){
-		return props;
-	},
-	submitAddress(){
-		state = Object.assign({},{
-			 backToAddressList: true,
-		})
-	},
+
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
 				case AppConstants.PREDICTIONS_SUCCESS:
@@ -119,19 +84,10 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
              AddressStore.emitChange()
           break;
 				case AppConstants.SUBMIT_ADDRESS:
-             AddressStore.submitAddress()
+             AddressStore.submitAddress(action.selectedUaid)
              AddressStore.emitChange()
           break;
-				case AppConstants.COLSE_ADDINFO:
-						 AddressStore.closeAddInfo(action.selectedUaid)
-						 AddressStore.emitChange()
-					break;
-				case AppConstants.SHOW_ADDINFO:
-						 AddressStore.showAddInfo(action.placeId)
-						 AddressStore.emitChange()
-					break;
 				case AppConstants.UPDATA_ADDRESSLIST:
-						 AddressStore.updateAddresslist()
 						 AddressStore.emitChange()
 					break;
         default:

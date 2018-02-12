@@ -26,31 +26,33 @@ class SettingTab extends Component {
         this._cmeLogOut = this._cmeLogOut.bind(this);
     }
     _goToAddress(){
-      this.props.navigator.push({
-        id: 'Address',
+      this.props.navigator.showModal({
+        screen: 'CmEatAddress',
+        animated: true,
+        navigatorStyle: {navBarHidden: true},
+        passProps:{tag:"fromHome"}
       });
     }
     _goToAboutUs(){
       this.props.navigator.push({
-        id: 'AboutUs',
+        screen: 'CmEatAboutUs',
+        animated: true,
+        navigatorStyle: {navBarHidden: true},
+        passProps:{tag:"fromHome"}
       });
     }
     _cmeLogOut(){
       AuthAction.logout();
       this.props.handleBackToHome();
     }
-    // onPress={this._goToAboutUs.bind(this)}
-
-
-    //   <SettingCate  title={'添加地址'}
-			// 							onPress={this._goToAddress.bind(this)}
-			// 							icon={require('./Image/setting.png')}/>
-
     render(){
       return(
         <View style={styles.mainContainer}>
             <Header title={'设置'}/>
             <ScrollView style={styles.scrollView}>
+              <SettingCate  title={'添加地址'}
+                            onPress={this._goToAddress.bind(this)}
+                            icon={require('./Image/setting.png')}/>
 							<SettingCate  title={'关于我们'}
 														icon={require('./Image/information.png')}
 														onPress={this._goToAboutUs}
@@ -73,7 +75,6 @@ let styles = StyleSheet.create({
   },
   scrollView:{
     flex: 1,
-    marginTop:64,
   },
 });
 

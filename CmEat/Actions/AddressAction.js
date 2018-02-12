@@ -16,11 +16,6 @@ export default {
         console.log(error)
       }
     },
-    getPredictionsSuccess(autocompleteData){
-      dispatch({
-          actionType: AppConstants.PREDICTIONS_SUCCESS, autocompleteData
-      })
-    },
     formatAddress(placeId){
         const url = "https://maps.googleapis.com/maps/api/place/details/" +
         "json?placeid="+ placeId +
@@ -80,7 +75,7 @@ export default {
         const res = await AddressModule.submitAddress(userInfo)
         const selectedUaid = res.addr.uaid;
         dispatch({
-            actionType: AppConstants.COLSE_ADDINFO, selectedUaid
+            actionType: AppConstants.SUBMIT_ADDRESS, selectedUaid
         })
       } catch (e) {
         console.log(e)
@@ -99,14 +94,4 @@ export default {
           actionType: AppConstants.UPDATA_ADDRESSLIST
       })
     },
-    closeAddInfo(selectedUaid){
-        dispatch({
-            actionType: AppConstants.COLSE_ADDINFO, selectedUaid
-        })
-    },
-    showAddInfo(placeId){
-       dispatch({
-           actionType: AppConstants.SHOW_ADDINFO,placeId
-       })
-     }
 }

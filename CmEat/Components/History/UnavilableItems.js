@@ -23,13 +23,13 @@ export default (props) => {
                     qty = {dish.qty}/>
         )
     })
-    // <TouchableOpacity style={styles.unavilableButton}
-    //                   activeOpacity={0.4}
-    //                   onPress={reorder}>
-    //     <Text style={styles.unavilableText}>
-    //        保留已点菜品，继续点餐
-    //     </Text>
-    // </TouchableOpacity>
+    <TouchableOpacity style={styles.unavilableButton}
+                      activeOpacity={0.4}
+                      onPress={reorder}>
+        <Text style={styles.unavilableText}>
+           保留已点菜品，继续点餐
+        </Text>
+    </TouchableOpacity>
     return(
       <View style={{flex:1}}>
         <Text style={[styles.unavilableText,{fontSize:14}]}>

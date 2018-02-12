@@ -24,6 +24,7 @@ import {
 import Order from './Order';
 import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
+import HomeStore from '../../Stores/HomeStore'
 import Header from '../General/Header';
 import HistoryOrderDetail from './HistoryOrderDetail';
 import Modal from 'react-native-modalbox';
@@ -70,7 +71,6 @@ class HistoryTab extends Component {
           );
         }else if(this.state.verifyPhoneResult === 'SUCCESS'){
             HistoryStore.initVerifyPhoneResult();
-
             this._doAutoRefresh();
         }
 				if(this.state.doRefresh){
@@ -88,10 +88,10 @@ class HistoryTab extends Component {
       console.log('need rebuild _doAutoRefresh')
       // const currentRoutes = this.props.navigator.getCurrentRoutes();
       // if(currentRoutes.length == 1 && currentRoutes[0].name == 'Home'){
-      //   this.setState({
-      //     isRefreshing: true,
-      //   })
-      //   HistoryAction.getOrderData()
+        this.setState({
+          isRefreshing: true,
+        })
+        HistoryAction.getOrderData();
       // }
     }
     _onRefresh(){
@@ -105,13 +105,13 @@ class HistoryTab extends Component {
 					showHistoryOrderDetail: !this.state.showHistoryOrderDetail,
 					historyDetailOid:oid,
 				})
-				setTimeout( () =>{
-					if(this.state.showHistoryOrderDetail){
-						this.props.hideTabBar();
-					}else{
-						this.props.showTabBar();
-					}
-				}, 400);
+				// setTimeout( () =>{
+				// 	if(this.state.showHistoryOrderDetail){
+				// 		this.props.hideTabBar();
+				// 	}else{
+				// 		this.props.showTabBar();
+				// 	}
+				// }, 400);
     }
     _HistoryOrderDetail(){
       if(this.state.showHistoryOrderDetail){
@@ -125,11 +125,14 @@ class HistoryTab extends Component {
 			return this.currentPosition
 		}
 		_reorder(rid){
-			// this.props.navigator.push({
-			// 	 id: 'Menu',
-			// 	 py:800,
-			// 	 restaurant:RestaurantStore.getRestaurantWithRid(rid),
-			//  })
+      this.props.navigator.showModal({
+        screen: 'CmEatMenu',
+        navigatorStyle: {navBarHidden: true},
+        passProps: {
+          py:800,
+          restaurant:HomeStore.getRestaurantWithRid(rid),
+        },
+      });
 		}
     render(){
 			let orderList = this.state.orderData.map( order => {
@@ -204,7 +207,6 @@ let styles = StyleSheet.create({
   },
   scrollView:{
     flex: 1,
-    marginTop: 64,
   },
 
   orderTitleContainer:{

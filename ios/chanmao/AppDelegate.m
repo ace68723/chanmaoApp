@@ -63,8 +63,8 @@
    [self.window makeKeyAndVisible];
    */
   
-  //for stripe configure pk_live_XQlHKvkQ8N9yPEHlslQvaS7U
-    [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_test_MsgqDWzRTfpOKl5mBwX0J0u2"];
+  //for stripe configure pk_live_XQlHKvkQ8N9yPEHlslQvaS7U   pk_test_MsgqDWzRTfpOKl5mBwX0J0u2
+    [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_live_XQlHKvkQ8N9yPEHlslQvaS7U"];
   
   return YES;
 }

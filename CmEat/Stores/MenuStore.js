@@ -23,7 +23,6 @@ const MenuStore = Object.assign({},EventEmitter.prototype,{
 	},
   menuState(){
 		const menu = CartAPI.getMenu();
-		// const menu = la_menu;
 		const cartTotals = MenuStore.getCartTotals()
 		const categoryList = la_category;
     const state = {menu,cartTotals,loaded,name,open,categoryList}
@@ -47,9 +46,11 @@ const MenuStore = Object.assign({},EventEmitter.prototype,{
 					const dishAmount = category.dishes.length + 1;
 					const category_position = 320+la_category.length*63 + dishTotal*80;
 					dishTotal += category.dishes.length;
-					const item = {id,category_name,dishAmount,category_position}
+          const index = la_menu.length;
+          const item = {id,category_name,dishAmount,category_position,index}
 					la_menu = [...la_menu, item];
 					la_category = [...la_category,item];
+
 					category.dishes.map(dish => {
 						const id 	= dish.ds_id;
 						const ds_name = dish.ds_name;

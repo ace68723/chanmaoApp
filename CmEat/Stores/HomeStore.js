@@ -2,15 +2,16 @@ import AppConstants from '../Constants/AppConstants';
 import {dispatch, register} from '../Dispatchers/AppDispatcher';
 import {EventEmitter} from 'events';
 const CHANGE_EVENT = 'change';
+import _find from 'lodash/find';
 
-let HomeState = {
-		updatePosition:false,
+const HomeStore = Object.assign({},EventEmitter.prototype,{
+  state:{
+    updatePosition:false,
 		currentTab:1,
 		bannerList:[],
 		areaList:[],
 		showAnimatedView:false,
-};
-const HomeStore = Object.assign({},EventEmitter.prototype,{
+  },
 	emitChange(){
 			this.emit(CHANGE_EVENT)
 	},
@@ -24,14 +25,17 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 		 const bannerList = res.homeData.zone1;
 		 const advertisement = res.homeData.zone2;
 		 const areaList = res.areaList;
-		 const restaurantlist = res.restaurantlist;
-		 HomeState = Object.assign({},HomeState,{bannerList,advertisement,areaList,restaurantlist})
+		 this.state = Object.assign({},this.state,{bannerList,advertisement,areaList})
+  },
+  getRestaurantWithRid(rid){
+  		const restaurantData = _find(this.state.areaList[0].restaurantList, {rid:rid});
+  		return restaurantData
   },
 	closeMenu(){
-		HomeState = Object.assign({},HomeState,{showAnimatedView:false})
+		this.state = Object.assign({},this.state,{showAnimatedView:false})
 	},
   getHomeState(){
-    return HomeState
+    return this.state
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){

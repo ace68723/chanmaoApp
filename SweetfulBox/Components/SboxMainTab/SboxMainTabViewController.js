@@ -55,17 +55,17 @@ export default class MyComponent extends Component {
               activeIconImage={require("./Image/home.png")}
               inactiveIconImage={require("./Image/homegrey.png")}
               navigator={this.props.navigator}
-              />
+              handleBackToHome={this.props.handleBackToHome}/>
         <SboxCart
               tabLabel="购物车"
               activeIconImage={require("./Image/box.png")}
               inactiveIconImage={require("./Image/box.png")}
               navigator={this.props.navigator}/>
-            <About tabLabel="设置"
-              activeIconImage={require("./Image/setting.png")}
-              inactiveIconImage={require("./Image/settingb.png")}
-              navigator={this.props.navigator}
-              />
+        <About tabLabel="设置"
+          activeIconImage={require("./Image/setting.png")}
+          inactiveIconImage={require("./Image/settingb.png")}
+          navigator={this.props.navigator}
+          handleBackToHome={this.props.handleBackToHome}/>
       </ScrollableTabView>
 
   );

@@ -16,18 +16,13 @@ import {
 import SboxUserAction from '../../Actions/SboxUserAction';
 import SboxUserStore from '../../Stores/SboxUserStore';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
+import AuthAction from  '../../../App/Actions/AuthAction';
 
 const { height, width } = Dimensions.get('window');
 
 export default class About extends Component {
   constructor(props) {
     super(props);
-		// const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-		// this.state = Object.assign({},SboxHistoryStore.getState(),{
-		// 			dataSource: ds.cloneWithRows([]),
-		// 			items: [],
-		// 			refreshing: false,
-    // })
     this.state = {
         shouldDoAuth: true,
     }
@@ -37,8 +32,7 @@ export default class About extends Component {
     this._goBack = this._goBack.bind(this);
     this._contact = this._contact.bind(this);
     this._onChange = this._onChange.bind(this);
-		// this.setSource = this.setSource.bind(this);
-    // this._goToSboxHistoryOrderDetail = this._goToSboxHistoryOrderDetail.bind(this);
+    this._logout = this._logout.bind(this);
   }
 	componentDidMount() {
     SboxUserStore.addChangeListener(this._onChange);
@@ -47,43 +41,10 @@ export default class About extends Component {
   componentWillUnmount() {
     SboxUserStore.removeChangeListener(this._onChange);
   }
-  //
-	// setSource(items, itemsDatasource, otherState) {
-	// 	this.setState({
-	// 		items,
-	// 		dataSource: this.state.dataSource.cloneWithRows(itemsDatasource),
-	// 		...otherState
-	// 	})
-	// }
-  // _goToSboxHistoryOrderDetail (orderDetail) {
-	// 	console.log(orderDetail);
-  //   this.props.navigator.push({
-  //     screen: 'SboxHistoryOrderDetail',
-  //     navigatorStyle: {navBarHidden: true},
-  //     passProps: {orderDetail:orderDetail},
-  //   })
-  // }
-	// _onRefresh() {
-	// 	this.setState({refreshing: true});
-	// 	SboxHistoryAction.init();
-	// }
-  //
   _onChange() {
     const state = Object.assign({},SboxUserStore.getState());
     this.setState(state);
   }
-  // _renderHistoryView() {
-	// 	// if(this.state.items.length === 0 ) return;
-  //   return(
-  //     <SboxHistoryFlatlist
-	// 			onRefresh={() => this._onRefresh()}
-	// 			{...{items: this.state.items,
-  //            refreshing: this.state.refreshing,
-  //            goToSboxHistoryOrderDetail: this._goToSboxHistoryOrderDetail
-  //          }}
-	// 		/>
-  //   )
-  // }
 
   _goToHistory() {
     this.props.navigator.push({
@@ -101,7 +62,8 @@ export default class About extends Component {
   }
 
   _logout() {
-    SboxUserAction.clearToken();
+    AuthAction.logout();
+    this.props.handleBackToHome();
   }
 
   _contact() {
@@ -112,17 +74,12 @@ export default class About extends Component {
   }
 
   _handleLoginSuccessful() {
-    this.props.navigator.pop({
-      animated: true,
-      animationType: 'slide-horizontal',
-    });
+    SboxUserAction.checkUserLogin();
+    // this.props.navigator.dismissModal();
   }
 
   _goBack() {
-    this.props.navigator.pop({
-      animated: true,
-      animationType: 'slide-horizontal',
-    });
+    // this.props.navigator.dismissModal();
   }
 
   _renderLoginOrHistory() {
@@ -132,7 +89,7 @@ export default class About extends Component {
             activeOpacity={0.4}
             style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
             <Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/login.png')}/>
-            <Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}>查看订单</Text>
+            <Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}>我的订单</Text>
             <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
         </TouchableOpacity>
       )

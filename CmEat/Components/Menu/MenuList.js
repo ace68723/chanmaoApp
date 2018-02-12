@@ -58,7 +58,7 @@ class Menu extends Component {
         this._header = this._header.bind(this);
         this._goBack = this._goBack.bind(this);
 				this._handleCategoryPress = this._handleCategoryPress.bind(this);
-				this._renderMenuList = this._renderMenuList.bind(this);
+				this._renderItem = this._renderItem.bind(this);
         this._renderCategoryList = this._renderCategoryList.bind(this);
 
 				this._renderHeader = this._renderHeader.bind(this);
@@ -145,11 +145,10 @@ class Menu extends Component {
       }
 
     }
-    _renderMenuList ({item,index})  {
+    _renderItem ({item,index})  {
       if(item.category_name){
         return  (
-              <View ref={(ref) => { this.categoryRefList.push({category_ref:ref,category_name:item.category_name}) }}
-										style={{flex:1,backgroundColor:'#ffffff',overflow:"hidden"}}>
+              <View style={{height:100,flex:1,backgroundColor:'#ffffff',overflow:"hidden"}}>
                 <View style={{alignSelf:'center',marginTop:30,marginBottom:10}}>
                     <Text style={{fontSize:18,color:'#3a3b47',fontFamily:'FZZongYi-M05S',}}>
                       {item.category_name}
@@ -209,18 +208,10 @@ class Menu extends Component {
     _goBack(){
       this.props.navigator.pop();
     }
-		_handleCategoryPress(category_position){
-			// console.log(category_position,this.categoryRefList[1])
-			// const categoryRefIndex = findIndex(this.categoryRefList, function(o) { return o.category_name == category_name; });
-			// this.categoryRefList[1].category_ref.measure((ox, oy, width, height, px, py) => {
-				// console.log(oy)
+		_handleCategoryPress(index){
 				InteractionManager.runAfterInteractions(() => {
-					this.refs._menuList.scrollTo({x: 0, y: category_position, animated: true})
+					this.refs._menuList.scrollToIndex({ index: index, viewOffset:-300,animated: true})
 				})
-
-
-			// });
-			// this.refs._menuList.scrollTo({x: 0, y: 3000, animated: true})
 		}
 
 		_renderHeader(){
@@ -253,7 +244,7 @@ class Menu extends Component {
 				</View>
 			)
 		}
-    _keyExtractor = (item, index) => item.id;
+    _keyExtractor = (item, index) => `${item.id}${index}`;
     render(){
 
       // ==========================================
@@ -301,9 +292,12 @@ class Menu extends Component {
                   style={this.props.style}
                   ListHeaderComponent={this._renderHeader}
                   data={this.state.menu}
-                  renderItem={this._renderMenuList}
+                  renderItem={this._renderItem}
                   stickyHeaderIndices={[0]}
                   keyExtractor={this._keyExtractor}
+                  getItemLayout={(data, index) => (
+                     {length: 100, offset: 100 * index, index}
+                  )}
               />
 
 						<Category categoryList={this.state.categoryList} handleCategoryPress={this._handleCategoryPress}/>

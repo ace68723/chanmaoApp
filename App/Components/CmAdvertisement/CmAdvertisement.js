@@ -50,7 +50,6 @@ export default class CmAdvertisement extends Component {
   		fetch(url,options)
   			.then((res) => res.json())
   			.then((res)=>{
-          console.log(res)
   				if(res.result == 0 ){
 
   					if(res.image){

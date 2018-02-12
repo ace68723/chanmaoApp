@@ -24,16 +24,12 @@ import MenuCard from './MenuCard';
 import MenuStore from '../../Stores/MenuStore';
 
 const {width,height} = Dimensions.get('window');
-export default class LoginButton extends Component {
+export default class CmEatMenuSearch extends Component {
 
   constructor(props){
     super(props);
 		this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
-		// cartTotals.total = cartTotals.total.toFixed(2);
 		this.state = {
-			// menu:menuState.menu,
-			// cartTotals:cartTotals,
 			dataSource: this.ds.cloneWithRows([]),
 			restaurant:props.restaurant,
 			cartTotals:'',
@@ -66,7 +62,7 @@ export default class LoginButton extends Component {
 			})
 	}
 	_goBack(){
-		this.props.navigator.pop();
+		this.props.navigator.dismissModal({animationType: 'none',});
 	}
 	_goToCheckout(){
 		if(Number(this.state.cartTotals.total)>0){
@@ -133,56 +129,56 @@ export default class LoginButton extends Component {
   render(){
 		return(
       <View style={{flex:1,backgroundColor:"#ffffff"}}>
-			<Header title={this.props.restaurant.name}
-							goBack={this._goBack}
-							leftButtonText={'×'}/>
-			<TouchableOpacity onPress={this._goToCheckout}
-								style={{backgroundColor:"rgba(234,123,33,0.9)",
-										width:width,
-										height:50,
-										marginTop:64,
-										flexDirection:"row",
-										alignItems:"center",
-										justifyContent:"center",
-									}}>
-				<Text style={{color:"#ffffff",fontSize:16,margin:3}}>${this.state.cartTotals.total}</Text>
-				<View style={{margin:3,
-											borderRadius:15,
-											borderWidth:1,
-											paddingLeft:10,
-											paddingRight:10,
-											paddingTop:2,
-											paddingBottom:2,
-											borderColor:"#ffffff"}}>
-					<Text  style={{color:"#ffffff",fontSize:13,}}>去结账</Text>
-				</View>
+  			<Header title={this.props.restaurant.name}
+  							goBack={this._goBack}
+  							leftButtonText={'×'}/>
+          <TouchableOpacity onPress={this._goToCheckout}
+                  style={{backgroundColor:"rgba(234,123,33,0.9)",
+                      width:width,
+                      height:50,
+                      flexDirection:"row",
+                      alignItems:"center",
+                      justifyContent:"center",
+                    }}>
+          <Text style={{color:"#ffffff",fontSize:16,margin:3}}>${this.state.cartTotals.total}</Text>
+          <View style={{margin:3,
+                        borderRadius:15,
+                        borderWidth:1,
+                        paddingLeft:10,
+                        paddingRight:10,
+                        paddingTop:2,
+                        paddingBottom:2,
+                        borderColor:"#ffffff"}}>
+            <Text  style={{color:"#ffffff",fontSize:13,}}>去结账</Text>
+          </View>
 
-			</TouchableOpacity>
-			 <TextInput
-			 			style={[styles.input]}
-			 			placeholder={"搜索"}
-			 			placeholderTextColor={'#ea7b21'}
-			 			selectionColor={'#ea7b21'}
-			 			keyboardType = { 'url'}
-			 			autoCorrect= { false}
-						autoFocus={true}
-			 			returnKeyType={'next'}
-			 			onChangeText={this._setSearchText}
-			 	/>
-
-				<ListView
-						dataSource={this.state.dataSource}
-						initialListSize={50}
-						pageSize={50}
-						renderRow={(item) => this._renderMenuList(item)}
-						scrollRenderAheadDistance={300 }
-						enableEmptySections={true}
-						style={{overflow:'hidden',backgroundColor:"rgba(0,0,0,0)"}}
-					/>
+        </TouchableOpacity>
+         <TextInput
+              style={[styles.input]}
+              placeholder={"搜索"}
+              placeholderTextColor={'#ea7b21'}
+              selectionColor={'#ea7b21'}
+              keyboardType = { 'url'}
+              autoCorrect= { false}
+              autoFocus={true}
+              returnKeyType={'next'}
+              onChangeText={this._setSearchText}
+          />
+          <ListView
+            dataSource={this.state.dataSource}
+            initialListSize={50}
+            pageSize={50}
+            renderRow={(item) => this._renderMenuList(item)}
+            scrollRenderAheadDistance={300 }
+            enableEmptySections={true}
+            style={{overflow:'hidden',backgroundColor:"rgba(0,0,0,0)"}}
+          />
       </View>
     )
   }
 }
+
+
 const styles = StyleSheet.create({
 	input:{
 		fontSize: 18,

@@ -17,9 +17,21 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 const deviceWidth = Dimensions.get('window').width;
 const {width,height} = Dimensions.get('window');
+
+let _tabTop, tabBarInputRange, tabBarOutputRange;
+if(height == 812){
+  //min 34
+  _tabTop = 88 + 200;
+  tabBarInputRange = [0, _tabTop-88];
+  tabBarOutputRange = [_tabTop, 88];
+}else{
+  _tabTop = 54+200;
+  tabBarInputRange = [0, _tabTop-54];
+  tabBarOutputRange = [_tabTop, 54];
+}
+
+
 class DefaultTabBar extends Component {
-
-
   constructor(props) {
     super(props);
     this.renderTab = this.renderTab.bind(this);
@@ -126,16 +138,12 @@ class DefaultTabBar extends Component {
       bottom: 0,
     };
 
-    // const left = this.props.scrollValue.interpolate({
-    //   inputRange: [0, 1, ], outputRange: [0,  containerWidth / numberOfTabs, ],
-    // });
     const left = this.props.scrollValue.interpolate({
-      // inputRange: [0, 1, ], outputRange: [0,  containerWidth / 5, ],
       inputRange: [0, 1, ], outputRange: [0,  containerWidth / numberOfTabs, ],
     });
     const tabTop = this.props.scrollY.interpolate({
-      inputRange: [0, this.props.HEADER_SCROLL_DISTANCE-height*0.0811],
-      outputRange: [width*0.45+50, 50],
+      inputRange: tabBarInputRange,
+      outputRange: tabBarOutputRange,
       extrapolate: 'clamp',
     });
     // ========Tab bar under line============
@@ -144,43 +152,47 @@ class DefaultTabBar extends Component {
 
 
 
-      // <View style={{width:deviceWidth,}}>
-      // </View>
-
 // this.props.backgroundColor
     return (
-        <Animated.View style={{height:30,
-                               width:deviceWidth,
-                               position:"absolute",
-                               top: tabTop,
-                               justifyContent:'center',
-                               alignItems:'center'
-                             }}>
+      <Animated.View style={{height:30,
+                             width:deviceWidth,
+                             position:"absolute",
+                             top: tabTop,
+                             justifyContent:'center',
+                             alignItems:'center'
+                           }}>
 
-          <ScrollView style={[styles.tabs,
-                                      {
-                                        backgroundColor: 'white',
-                                        width:deviceWidth,
-                                        height:30,
-                                      },
-                                      this.props.style, ]}
-                      horizontal={true}
-                      showsHorizontalScrollIndicator={false}
-                      removeClippedSubviews={false}
-                      ref={(tabScrollView) => { this.tabScrollView = tabScrollView; }}>
-            {this.props.tabs.map((name, page) => {
-              const isTabActive = this.props.activeTab === page;
-              const renderTab = this.props.renderTab || this.renderTab;
-              return renderTab(name, page, isTabActive, this.props.goToPage);
-            })}
-          </ScrollView>
-          <Image  source={require('./Images/feather_cover.png')}
-                  style={{ position:"absolute",height:30,width:50,top:0,right:-30,}}/>
-        </Animated.View>
+        <ScrollView style={[styles.tabs,
+                                    {
+                                      backgroundColor: 'white',
+                                      width:deviceWidth,
+                                      height:30,
+                                    },
+                                    this.props.style, ]}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    removeClippedSubviews={false}
+                    ref={(tabScrollView) => { this.tabScrollView = tabScrollView; }}>
+          {this.props.tabs.map((name, page) => {
+            const isTabActive = this.props.activeTab === page;
+            const renderTab = this.props.renderTab || this.renderTab;
+            return renderTab(name, page, isTabActive, this.props.goToPage);
+          })}
+        </ScrollView>
+        <Image  source={require('./Images/feather_cover.png')}
+                style={{ position:"absolute",height:30,width:50,top:0,right:-30,}}/>
+      </Animated.View>
 
     );
   }
 }
+
+
+
+
+
+
+
 
 // DefaultTabBar.propTypes = {
 //   goToPage: React.PropTypes.func,

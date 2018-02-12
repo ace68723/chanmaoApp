@@ -2,7 +2,6 @@ import {default as React,Component} from 'react';
 import {
   Text,
   View,
-  Image,
   StyleSheet,
 } from 'react-native';
 export default (props) => {

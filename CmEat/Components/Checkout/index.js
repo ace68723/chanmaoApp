@@ -40,6 +40,18 @@ import HistoryAction from '../../Actions/HistoryAction';
 const {height, width} = Dimensions.get('window');
 const deviceHeight = height;
 const deviceWidth = width;
+let marginTop,headerHeight,acceptButtonHeight;
+if(height == 812){
+  //min 34
+  //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
+  marginTop = 34;
+  headerHeight = 88;
+  acceptButtonHeight = 80;
+}else{
+  marginTop = 20;
+  headerHeight = 64;
+  acceptButtonHeight = 40;
+}
 
 
 // const(refs): define comment refeneces
@@ -56,7 +68,7 @@ class Confirm extends Component {
                       startAmount:this.props.restaurant.start_amount,
                       viewBottom:new Animated.Value(0),
 											anim: new Animated.Value(0), //for background image
-											AnimatedImage:props.restaurant.imgUrl,
+											AnimatedImage:props.restaurant.mob_banner,
 											renderAddress:false,
 											loading: true,
 											showOrderConfirm:false,
@@ -119,14 +131,14 @@ class Confirm extends Component {
 			if(!this.state.loading){
 				this.setState({dltype:deliverType.type,loading:true,})
 				const dltype = deliverType.type
-				RestaurantAction.updateDltype(dltype);
+				CheckoutAction.updateDltype(dltype);
 			}
     }
     _calculateDeliveryFee(){
 			this.setState({
 				loading:true,
 			})
-      RestaurantAction.calculateDeliveryFee()
+      CheckoutAction.calculateDeliveryFee()
     }
     _doCheckout(){
       this.setState({
@@ -134,9 +146,9 @@ class Confirm extends Component {
 				showOrderConfirm:false,
       })
       InteractionManager.runAfterInteractions(() => {
-          RestaurantAction.checkout(this.state.comment);
+          CheckoutAction.checkout(this.state.comment);
       });
-      // RestaurantAction.checkout(this.state.comment);
+      // CheckoutAction.checkout(this.state.comment);
     }
     _checkout(){
 
@@ -174,15 +186,22 @@ class Confirm extends Component {
       });
     }
     _goToAddressList(){
-			// if(!this.state.loading){
-			// 	this.props.navigator.push({
-			// 		id: 'AddressList',
-			// 	});
-			// }
+			if(!this.state.loading){
+				this.props.navigator.showModal({
+					screen: 'CmEatAddress',
+          animated: true,
+          navigatorStyle: {navBarHidden: true},
+				});
+			}
     }
     _goToHistory(){
+      // console.log("_goToHistory")
 			HistoryAction.getOrderData()
-      this.props.navigator.popToTop();
+      this.props.navigator.popToRoot({
+        animated: true, // does the popToRoot have transition animation or does it happen immediately (optional)
+        animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the popToRoot have different transition animation (optional)
+      });
+      this.props.navigator.dismissAllModals();
     }
     showLoading(){
       if(this.state.isLoading)
@@ -403,7 +422,7 @@ class Confirm extends Component {
 							 minHeight={0}
 							 maxHeight={230}
 							 offset={this.state.anim}
-							 backgroundImage={this.state.AnimatedImage}
+							 backgroundImage={{uri:this.state.AnimatedImage}}
 							 backgroundShift={0}
 							 backgroundColor={"rgba(0,0,0,0)"}>
 					 </Background>
@@ -455,12 +474,12 @@ class Confirm extends Component {
 
           </ScrollView>
 					{this.renderCheckoutButton()}
-					<TouchableOpacity style={{paddingTop:22,
+					<TouchableOpacity style={{
 																		paddingLeft:8,
 																		paddingRight:20,
 																		paddingBottom:20,
 																		position:'absolute',
-																		top:0,
+																		top:marginTop,
 																		left:0,}}
 														onPress={this._goBack}>
 						<View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
@@ -516,7 +535,7 @@ let styles = StyleSheet.create({
   },
   acceptButton:{
     width:width,
-    height:40,
+    height:acceptButtonHeight,
     backgroundColor:'#ea7b21',
 		justifyContent:'center',
 		alignItems:'center',

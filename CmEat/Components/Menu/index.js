@@ -21,13 +21,24 @@ import {
 } from 'react-native';
 
 
+const {width,height} = Dimensions.get('window');
+const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
+let marginTop,headerHeight;
+if(height == 812){
+  //min 34
+  //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
+  marginTop = 34;
+  headerHeight = 88
+}else{
+  marginTop = 20;
+  headerHeight = 64
+}
+
 import MenuList from './MenuList';
 import Header from '../General/Header';
 import Background from '../General/Background';
 import MenuHeader from './MenuHeader';
 
-const {width,height} = Dimensions.get('window');
-const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
 class Menu extends Component {
     static navigatorStyle = {
         screenBackgroundColor: 'transparent',
@@ -39,7 +50,7 @@ class Menu extends Component {
         anim: new Animated.Value(0), //for background image
         showMenuAnimation: new Animated.Value(0),
         menuListCoverOpacity:new Animated.Value(1),
-        HV_Top:new Animated.Value(-120),
+        HV_Top:new Animated.Value(-150),
         restaurantViewOpacity: new Animated.Value(0), // init opacity 0
         restaurantCardTop:new Animated.Value(props.py),
         restaurantCardMargin:new Animated.Value(7),
@@ -63,7 +74,6 @@ class Menu extends Component {
 
     componentDidMount(){
       setTimeout( () =>{
-
         this.setState({
           renderHeader:true,
 					renderBackgroundCover:true,
@@ -139,14 +149,20 @@ class Menu extends Component {
 
     }
 		_goToMenuSearch(){
-			this.props.navigator.push({
-				 id: 'MenuSearch',
-				 restaurant:this.state.restaurant,
-			 })
+
+      this.props.navigator.showModal({
+        screen: 'CmEatMenuSearch',
+        animationType: 'none',
+        navigatorStyle: {navBarHidden: true},
+        passProps: {
+          restaurant:this.state.restaurant,
+        },
+      });
 		}
 		_goToCheckout(){
 			if(Number(this.state.cartTotals.total)>0){
 				if(Number(this.state.cartTotals.total)>=Number(this.state.restaurant.start_amount)){
+          console.log(this.state.restaurant);
           this.props.navigator.showModal({
             screen: 'CmEatCheckout',
             animated: true,
@@ -214,7 +230,7 @@ class Menu extends Component {
           showHeader:false
         })
         Animated.timing(this.state.HV_Top, {
-          toValue: -120,
+          toValue: -150,
           duration: 200,
         }).start();
       }
@@ -231,7 +247,6 @@ class Menu extends Component {
       }
     }
     _header(){
-
         if(!this.state.close && this.state.renderHeader){
           const _rightButtonText = '$'+this.state.cartTotals.total+'结账';
           return(
@@ -251,7 +266,7 @@ class Menu extends Component {
 														width:width,
 														height:50,
 														position:'absolute',
-												    top:64,
+												    top:headerHeight,
 														flexDirection:"row",
 														alignItems:"center",
 														justifyContent:"center",
@@ -277,11 +292,11 @@ class Menu extends Component {
         }else if(this.state.renderHeader){
           const _rightButtonText = '商家休息了';
           return(
-            <Header title={this.state.restaurant.name}
-                    goBack={this._closeMenuAnimation}
-                    leftButtonText={'×'}
-                    rightButton={() => {}}
-                    rightButtonText={_rightButtonText}/>
+            <View style={{position:'absolute',left:0,right:0}}>
+              <Header title={'商家关门啦'}
+                      goBack={this._closeMenuAnimation}
+                      leftButtonText={'×'}/>
+            </View>
           )
         }
 
@@ -289,12 +304,12 @@ class Menu extends Component {
     _renderClose(){
       if(this.state.renderHeader && !this.state.showHeader){
         return(
-          <TouchableOpacity style={{paddingTop:22,
+          <TouchableOpacity style={{paddingTop:0,
                                     paddingLeft:8,
                                     paddingRight:20,
                                     paddingBottom:20,
                                     position:'absolute',
-                                    top:0,
+                                    top:marginTop,
                                     left:0,}}
                             onPress={this._closeMenuAnimation}>
             <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
@@ -310,11 +325,11 @@ class Menu extends Component {
     _renderSearch(){
       if(this.state.renderHeader && !this.state.showHeader){
         return(
-          <TouchableOpacity style={{paddingTop:22,
+          <TouchableOpacity style={{paddingTop:0,
                                       paddingRight:20,
                                       paddingBottom:20,
                                       position:'absolute',
-                                      top:0,
+                                      top:marginTop,
                                       right:0,}}
                               onPress={this._goToMenuSearch}>
               <Image style={{  height: 40,width:44,}}
@@ -375,10 +390,10 @@ class Menu extends Component {
               {this._renderMenuList()}
             </View>
 
-            {this._header()}
+
             {this._renderClose()}
             {this._renderSearch()}
-
+            {this._header()}
 
           </View>
         )

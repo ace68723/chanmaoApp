@@ -45,7 +45,6 @@ const HomeApi = {
       }else{
           options.headers.userloc = "000000,000000"
       }
-      console.log(options)
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw error})

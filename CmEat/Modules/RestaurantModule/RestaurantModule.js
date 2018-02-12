@@ -28,6 +28,7 @@ const RestaurantModule = {
   async beforCheckout(reqData){
       try{
           const data = await RestaurantApi.beforCheckout(reqData);
+          console.log(data)
           if(data.result == 0){
             const pretax = data.pretax;
             const pretax_ori = data.pretax_ori;
@@ -84,7 +85,6 @@ const RestaurantModule = {
           cme_updateCalculateDeliveryFee({dltype,dlexp});
           return ex_data
         }else{
-          console.log('get result 1',res)
         }
       }catch (e){
         console.log(e)

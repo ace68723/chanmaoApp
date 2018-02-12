@@ -1,5 +1,6 @@
 import {default as React,Component} from 'react';
 import {
+  Dimensions,
   Image,
   Modal,
   StyleSheet,
@@ -10,6 +11,19 @@ import {
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../../fontConfig.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
+
+const {width,height} = Dimensions.get('window');
+let marginTop,headerHeight;
+if(height == 812){
+  //min 34
+  //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
+  marginTop = 34;
+  headerHeight = 88
+}else{
+  marginTop = 20;
+  headerHeight = 64
+}
+
 export default (props) =>{
 
   let backIcon;
@@ -59,7 +73,8 @@ export default (props) =>{
 
   return (
     <View style={styles.container}>
-      <View style={{  flexDirection:'row',flex:1,alignItems: 'center',}}>
+      <View style={{  flex:1,
+                      flexDirection:'row',}}>
         {leftButton()}
         <View style={styles.titleView}>
           <Text style={styles.title}numberOfLines={1}>
@@ -74,27 +89,25 @@ export default (props) =>{
 }
 const styles = StyleSheet.create({
   container:{
-    position:'absolute',
     top:0,
     left:0,
     right:0,
-    height:64,
+    height:headerHeight,
     backgroundColor:'#f4f4f4',
   },
   backButton:{
-    marginLeft:10,
-    marginTop:10,
+    position:'absolute',
+    bottom:10,
+    left:10,
   },
   backIcon:{
     fontSize:30,
     color:'#363646',
   },
-  titleView:{
-    flex:1,
-  },
+
   rightButton:{
-    marginTop:10,
-    marginRight:10,
+    position:'absolute',
+    bottom:10,
     height:30,
     alignSelf:'flex-end',
     alignItems:'center',
@@ -131,12 +144,16 @@ const styles = StyleSheet.create({
     height: 22,
     marginRight:5,
   },
+  titleView:{
+    flex:1,
+    flexDirection:"column-reverse",
+  },
   title:{
-    marginTop:10,
     color:'#363646',
     fontSize:20,
     fontWeight:'bold',
     textAlign:'center',
     fontFamily:'FZZongYi-M05S',
+    marginBottom:10,
   },
 })

@@ -295,7 +295,10 @@ export function cme_getSelectedAddress() {
   const selectedAddress = realm.objects('cme_address').filtered('selected == true' )[0]
   return selectedAddress
 }
-
+export function cme_getAllAddress() {
+  const allAddress = realm.objects('cme_address');
+  return allAddress
+}
 export function cme_addAddress(address) {
   realm.write(() => {
       const selectedAddress = realm.objects('cme_address').filtered('selected == true' );
@@ -345,11 +348,15 @@ export function cme_deletAddress(address) {
 }
 export function cme_updateSelectedAddress(address) {
   realm.write(() => {
-    const selectedAddress = realm.objects('cme_address').filtered('selected == true' );
-    if(selectedAddress[0]){
-        selectedAddress[0].selected = false;
+
+    const selectedAddress = realm.objects('cme_address').filtered('selected = true' )[0];
+    if (address.uaid === selectedAddress.uaid) return;
+    if(selectedAddress){
+        selectedAddress.selected = false;
     }
-    address.selected=true;
+    const condication = `uaid = '${address.uaid}'`
+    const updateAddress = realm.objects('cme_address').filtered(condication)[0];
+    updateAddress.selected=true;
     realm.create('cme_cart',{type:"uaid",value:address.uaid}, true );
   })
 }

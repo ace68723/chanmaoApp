@@ -7,6 +7,7 @@ import {
   Dimensions,
 	Easing,
   Image,
+  ImageBackground,
 	InteractionManager,
 	Keyboard,
   StyleSheet,
@@ -200,11 +201,11 @@ export default class InputAnimation extends Component {
 					<TouchableOpacity
 						style={styles.wechatView}
 						onPress = { this.props.if_handleWechatLogin }>
-						<Image source={require('./Image/wechat.png')} style={styles.wechatButton} >
+						<ImageBackground source={require('./Image/wechat.png')} style={styles.wechatButton} >
 							<Text style={styles.wechatButtonText}>
 								 {this.props.is_wechat}
 							</Text>
-						</Image>
+						</ImageBackground>
 				 </TouchableOpacity>
 				)
 			}

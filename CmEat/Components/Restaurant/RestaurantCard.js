@@ -123,7 +123,7 @@ class RestaurantCard extends Component {
           <TouchableWithoutFeedback
             onPress={this._openMenu}
             >
-            <View style={{marginTop:5,
+            <View style={{marginTop:0,
 													marginBottom:5,
 													shadowColor: "#e2e2e4",
                           shadowOpacity: 1,
@@ -187,8 +187,7 @@ class RestaurantCard extends Component {
 let styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    marginTop:5,
-
+    marginBottom:5,
     width: null,
   },
   restaurant:{
