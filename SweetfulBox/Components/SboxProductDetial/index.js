@@ -125,6 +125,7 @@ export default class SweetProductDetial extends Component {
     setTimeout( () => {
       this.props.navigator.push({
         screen: 'SboxCart',
+        passProps: {backButton: 'x'},
         navigatorStyle: {
           navBarHidden: true,
         },

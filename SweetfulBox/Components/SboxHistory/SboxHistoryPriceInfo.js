@@ -59,7 +59,7 @@ class OrderInfo extends Component {
           </View>
         </View>
 
-        <View style={{height: 1, borderWidth: 1, borderColor: "#D5D5D5"}}/>
+        <View style={{borderBottomWidth: 1, borderColor: "#D5D5D5"}}/>
 
         <View style={[styles.button, {height: buttonHeight}]}>
           <TouchableOpacity style={{flex: 1, justifyContent:'center'}}

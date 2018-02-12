@@ -26,6 +26,7 @@ export default class SboxCart extends Component {
     this.state = SboxCartStore.getState();
     this._renderItem = this._renderItem.bind(this);
     this._onChange = this._onChange.bind(this);
+    this._handleOutOfStock = this._handleOutOfStock.bind(this);
     this._addQuantity = this._addQuantity.bind(this);
     this._subQuantity = this._subQuantity.bind(this);
     this._deleteItem = this._deleteItem.bind(this);
@@ -52,6 +53,21 @@ export default class SboxCart extends Component {
         })
       }
     });
+    if(cartState.outOfStock){
+      this._handleOutOfStock();
+    }
+  }
+  _handleOutOfStock() {
+    this.props.navigator.showLightBox({
+       screen: "SboxCartAlert",
+       passProps: {
+         message:`库存不足`},
+       style: {
+         flex: 1,
+         tapBackgroundToDismiss: true,
+       },
+       adjustSoftInput: "resize",
+      });
   }
   _addQuantity(item){
     SboxCartAction.addQuantity(item);
@@ -184,57 +200,59 @@ export default class SboxCart extends Component {
 
   }
   _renderConfirmBtn() {
-      return(
-        <View style={{
-          position:'absolute',
-          bottom:0,
-          width:width,}}>
-          <View style={{flexDirection:'row',
-                        margin:10,
-                        marginLeft:20,
-                        marginRight:20,}}>
-            <Text style={{
-              flex:0.7,
-              color:'#ff7685',
-              fontSize:20,
-              fontFamily:'FZZhunYuan-M02S',
-              textAlign:'left',
-            }}>
-                Before Tax: ${Number(this.state.total).toFixed(2)}
-            </Text>
-            <Text style={{
-              flex:0.3,
-              color:'#ff7685',
-              fontSize:20,
-              fontFamily:'FZZhunYuan-M02S',
-              textAlign:'right',
-            }}>
-                 {this.state.totalQuantity}件
-            </Text>
-          </View>
-          <TouchableOpacity
-              style={{height:60,}}
-              onPress={this._goToCheckout}
-              disabled = {!this.state.canCheckout}
-              activeOpacity={0.4}>
-            <View style={{
-                          flex:1,
-                          alignItems:'center',
-                          justifyContent:'center',
-                          backgroundColor: this.state.canCheckout?'#ff7685': 'grey',
-                        }}>
-
-                <Text style={{
-                  color:'#ffffff',
-                  fontSize:20,
-                  fontFamily:'FZZhunYuan-M02S',}}>
-                     {this.state.checkoutFont}
-                </Text>
-
+      if (this.state.cartList.length > 0) {
+        return(
+          <View style={{
+            position:'absolute',
+            bottom:0,
+            width:width,}}>
+            <View style={{flexDirection:'row',
+                          margin:10,
+                          marginLeft:20,
+                          marginRight:20,}}>
+              <Text style={{
+                flex:0.7,
+                color:'#ff7685',
+                fontSize:20,
+                fontFamily:'FZZhunYuan-M02S',
+                textAlign:'left',
+              }}>
+                  Before Tax: ${Number(this.state.total).toFixed(2)}
+              </Text>
+              <Text style={{
+                flex:0.3,
+                color:'#ff7685',
+                fontSize:20,
+                fontFamily:'FZZhunYuan-M02S',
+                textAlign:'right',
+              }}>
+                   {this.state.totalQuantity}件
+              </Text>
             </View>
-          </TouchableOpacity>
-        </View>
-      )
+            <TouchableOpacity
+                style={{height:60,}}
+                onPress={this._goToCheckout}
+                disabled = {!this.state.canCheckout}
+                activeOpacity={0.4}>
+              <View style={{
+                            flex:1,
+                            alignItems:'center',
+                            justifyContent:'center',
+                            backgroundColor: this.state.canCheckout?'#ff7685': 'grey',
+                          }}>
+
+                  <Text style={{
+                    color:'#ffffff',
+                    fontSize:20,
+                    fontFamily:'FZZhunYuan-M02S',}}>
+                       {this.state.checkoutFont}
+                  </Text>
+
+              </View>
+            </TouchableOpacity>
+          </View>
+        )
+      }
   }
   _keyExtractor = (item, index) => item.sku_id;
   render() {
@@ -242,7 +260,7 @@ export default class SboxCart extends Component {
       <View style={styles.container}>
         <SboxHeader title={"购物箱"}
                 goBack={this._renderGoBackBtn}
-                leftButtonText={'x'}/>
+                leftButtonText={this.props.backButton}/>
         <FlatList
           	enableEmptySections
             data={this.state.cartList}

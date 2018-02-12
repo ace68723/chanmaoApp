@@ -124,7 +124,7 @@ export default class About extends Component {
         <TouchableOpacity onPress={this._logout}
             activeOpacity={0.4}
             style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
-            <Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/contact.png')}/>
+            <Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/exit.png')}/>
             <Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}>登出</Text>
             <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
         </TouchableOpacity>
@@ -169,8 +169,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "blue",
   },
   separator: {
-		height: 1,
-		borderWidth: 1,
+		borderBottomWidth: 1,
 		borderColor: "#D5D5D5"
 	},
 });
