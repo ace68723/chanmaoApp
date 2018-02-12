@@ -16,8 +16,8 @@ export default class SboxProductView extends Component {
     if (this.props.product.spu_status === 0 || this.props.product.sku_status === 0) {
       return(
         <Image source={{uri:this.props.product.image}}
-               style={{width:Settings.getX(300),
-                        height:Settings.getY(426),
+               style={{width: (width / 3) - 35,
+                        height:((width / 3) - 35) * 1.4,
                        alignSelf:'center'}}
         />
       )
@@ -25,13 +25,13 @@ export default class SboxProductView extends Component {
       return(
         <View>
           <Image source={{uri:this.props.product.image}}
-                 style={{width:Settings.getX(300),
-                          height:Settings.getY(426),
+                 style={{width: (width / 3) - 35,
+                          height:((width / 3) - 35) * 1.4,
                          alignSelf:'center'}}
           />
           <Image source={require('./Image/soldout.png')}
-                 style={{width:Settings.getX(300),
-                          height:Settings.getY(426),
+                 style={{width: (width / 3) - 35,
+                          height:((width / 3) - 35) * 1.4,
                          alignSelf:'center',
                          position: 'absolute'}}
           />
@@ -94,7 +94,8 @@ export default class SboxProductView extends Component {
                             fontSize:12,
                             fontWeight:"700",
                             color:"#6d6e71",
-                            alignSelf:"center"}}
+                            alignSelf:"center",
+                            height: 26}}
                             numberOfLines={2}>
                             {this.props.product.name}
               </Text>
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
     productContainer: {
       width:width / 3,
       paddingHorizontal:5,
-      marginBottom: Settings.getY(72)
+      // marginBottom: Settings.getY(72)
+      marginBottom: 21.75,
     }
 });

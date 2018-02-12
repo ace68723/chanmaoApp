@@ -53,6 +53,12 @@ export default class SboxCart extends Component {
         })
       }
     });
+    if (cartState.total < 25) {
+      this.setState({
+        canCheckout: false,
+        checkoutFont: '税前满$25起送'
+      })
+    }
     if(cartState.outOfStock){
       this._handleOutOfStock();
     }
@@ -88,13 +94,26 @@ export default class SboxCart extends Component {
 
   }
   _goToCheckout(){
-    const cartList = this.state.cartList;
-    this.props.navigator.showModal({
-      screen: "SboxCheckout",
-      title: "Modal",
-      navigatorStyle: {navBarHidden: true},
-      animationType: 'none'
-    });
+    if (this.state.total >= 25) {
+      const cartList = this.state.cartList;
+      this.props.navigator.showModal({
+        screen: "SboxCheckout",
+        title: "Modal",
+        navigatorStyle: {navBarHidden: true},
+        animationType: 'none'
+      });
+    }else {
+      this.props.navigator.showLightBox({
+         screen: "SboxCartAlert",
+         passProps: {
+           message:`甜满箱税前满$20起送哦~`},
+         style: {
+           flex: 1,
+           tapBackgroundToDismiss: true,
+         },
+         adjustSoftInput: "resize",
+        });
+    }
   }
   _renderGoBackBtn(){
     this.props.navigator.pop()
