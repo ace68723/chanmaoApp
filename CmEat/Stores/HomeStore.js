@@ -19,6 +19,13 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 			this.on(CHANGE_EVENT, callback)
 	},
 	removeChangeListener(callback){
+      this.state = {
+        updatePosition:false,
+    		currentTab:1,
+    		bannerList:[],
+    		areaList:[],
+    		showAnimatedView:false,
+      }
 			this.removeListener(CHANGE_EVENT, callback)
 	},
   saveHomeData(res){

@@ -37,7 +37,7 @@ import CheckoutAction from '../../Actions/CheckoutAction';
 import AddressStore from '../../Stores/AddressStore';
 
 
-export default class LoginButton extends Component {
+export default class CmEatAddress extends Component {
 
   constructor() {
       super();
@@ -76,22 +76,13 @@ export default class LoginButton extends Component {
     }
   }
   _goBack() {
-    // if (this.state.selectedUaid) {
-    //   setTimeout(() => {
-    //       CheckoutAction.calculateDeliveryFee();
-    //   }, 400);
-    // }
-
-    if(this.props.tag === "fromHome"){
-      this.props.navigator.resetTo({
-          screen: 'cmHome',
-          animated: true,
-          animationType: 'fade',
-          passProps:{tag:'fromChanmao'},
-          navigatorStyle: {navBarHidden: true},
-      })
+    console.log(this.props)
+    this.props.navigator.dismissModal();
+    if(this.props.tag === "fromHome") {
+      this.props.handleBackToHome("fromChanmao");
+    }else{
+      this.props.updateUaid(AddressStore.getSeletedAddress());
     }
-
 
   }
   _goToAddAddressInfo() {

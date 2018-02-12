@@ -40,6 +40,32 @@ export default class AddressForHomeHeader extends Component {
       selectedAddress:selectedAddress,
     })
   }
+  _renderAddress() {
+    if(this.state.selectedAddress) {
+      return(
+        <Text style={{color:"#000000",
+                      fontSize:15,
+                      fontWeight:'bold',
+                      fontFamily:'FZZongYi-M05S',
+                      marginBottom:10,}}
+                      numberOfLines={1}>
+            配送至   {this.state.selectedAddress}
+        </Text>
+      )
+    }else{
+      return(
+        <Text style={{color:"#000000",
+                      fontSize:15,
+                      fontWeight:'bold',
+                      fontFamily:'FZZongYi-M05S',
+                      marginBottom:10,}}
+                      numberOfLines={1}>
+            请选择地址
+        </Text>
+      )
+    }
+
+  }
   render() {
     return (
       <TouchableOpacity style={styles.container}
@@ -52,7 +78,10 @@ export default class AddressForHomeHeader extends Component {
             screen: 'CmEatAddress',
             animated: true,
             navigatorStyle: {navBarHidden: true},
-            passProps:{tag:"fromHome"}
+            passProps:{
+              tag:"fromHome",
+              handleBackToHome:this.props.handleBackToHome,
+            }
           });
           setTimeout( () => {
             this.setState({
@@ -61,14 +90,7 @@ export default class AddressForHomeHeader extends Component {
           }, 500);
 
         }}>
-        <Text style={{color:"#000000",
-                      fontSize:15,
-                      fontWeight:'bold',
-                      fontFamily:'FZZongYi-M05S',
-                      marginBottom:10,}}
-                      numberOfLines={1}>
-            配送至   {this.state.selectedAddress}
-        </Text>
+        {this._renderAddress()}
       </TouchableOpacity>
     );
   }

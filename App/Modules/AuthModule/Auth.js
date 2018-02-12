@@ -37,6 +37,7 @@ const AuthModule = {
 
     async doAuth(){
         const data = GetUserInfo();
+        console.log(data)
         const reqData = formatAuth(data);
         console.log(reqData)
         const res = await AuthApi.AppAuth(reqData);
@@ -157,6 +158,7 @@ const getError = (error) => {
     }
 }
 const formatLogin = (io_data) => {
+
   const userInfo = Object.assign({},{
     os:    DeviceInfo.getModel() +" | " +
            DeviceInfo.getSystemName() +" | " +

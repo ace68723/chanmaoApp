@@ -113,7 +113,7 @@ export default class MainTab extends Component {
 
            _forEach(this.scrollViewRefs,(ref,index)=>{
                 if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-               ref.scrollView.scrollToOffset({offset: this.state.scrollY._value,animated:false});
+                ref.scrollView.scrollToOffset({offset: this.state.scrollY._value,animated:false});
            })
 
        } else {

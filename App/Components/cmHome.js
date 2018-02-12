@@ -51,11 +51,8 @@ export default class Home extends Component {
     // SplashScreen.hide();
 
       AuthAction.doAuth();
-      if(this.props.tag === 'fromChanmao') {
-          this._handleChanmaoPress();
-      }else{
-        this._startAnimation();
-      }
+
+      this._startAnimation();
   }
   _startAnimation() {
       Animated.parallel([
@@ -206,8 +203,8 @@ export default class Home extends Component {
             navigatorStyle: {navBarHidden: true},
             style: {
               flex:1,
-             backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-            //  backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
+             backgroundBlur: "none", 
+            
            }
           })
         })
@@ -224,8 +221,8 @@ export default class Home extends Component {
               disabledBackGesture: true,
             },
             style: {
-             backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-             backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
+             backgroundBlur: "none", 
+             backgroundColor: "rgba(0,0,0,0)" 
            }
           })
         })
@@ -236,35 +233,43 @@ export default class Home extends Component {
           this.props.navigator.push({
             screen: 'SboxHome',
             passProps: {handleBackToHome: this._handleBackToHome},
-            animated: true, // does the push have transition animation or does it happen immediately (optional)
-            animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the push have different transition animation (optional)
+            animated: true,
+            animationType: 'slide-horizontal',
             navigatorStyle: {
               navBarHidden: true,
               disabledBackGesture: true,
             },
             style: {
-             backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-             backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
+             backgroundBlur: "none",
+             backgroundColor: "rgba(0,0,0,0)"
            }
           })
         })
       }, 1000);
     }
     }
-  _handleBackToHome() {
-    this.props.navigator.pop({
-      animated: true, // does the pop have transition animation or does it happen immediately (optional)
-      animationType: 'slide-horizontal', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
-    });
-    InteractionManager.runAfterInteractions(() => {
-      Animated.timing(
-      this.state.open,
-          {
-              toValue: 0,
-              duration: 500,
-          }
-      ).start();
-    });
+  _handleBackToHome(tag) {
+    if(tag === 'fromChanmao') {
+        this.props.navigator.pop({
+          animated: true,
+          animationType: 'fade',
+        });
+        this._handleChanmaoPress();
+    }else{
+      this.props.navigator.pop({
+        animated: true,
+        animationType: 'slide-horizontal',
+      });
+      InteractionManager.runAfterInteractions(() => {
+        Animated.timing(
+        this.state.open,
+            {
+                toValue: 0,
+                duration: 500,
+            }
+        ).start();
+      });
+    }
   }
   _handleLoginSuccessful() {
     InteractionManager.runAfterInteractions(() => {
@@ -278,8 +283,8 @@ export default class Home extends Component {
           },
 
           style: {
-           backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-           backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
+           backgroundBlur: "none",
+           backgroundColor: "rgba(0,0,0,0)"
          }
       })
     })

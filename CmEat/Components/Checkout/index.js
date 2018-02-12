@@ -110,6 +110,7 @@ class Confirm extends Component {
           this.props.navigator.showModal({
             screen: 'CmEatAddress',
             animated: true,
+            passProps:{updateUaid:this._updateUaid},
             navigatorStyle: {navBarHidden: true},
           });
         }
@@ -190,18 +191,18 @@ class Confirm extends Component {
 				this.props.navigator.showModal({
 					screen: 'CmEatAddress',
           animated: true,
+          passProps:{updateUaid:this._updateUaid},
           navigatorStyle: {navBarHidden: true},
 				});
 			}
     }
     _goToHistory(){
-      // console.log("_goToHistory")
 			HistoryAction.getOrderData()
-      this.props.navigator.popToRoot({
-        animated: true, // does the popToRoot have transition animation or does it happen immediately (optional)
-        animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the popToRoot have different transition animation (optional)
-      });
-      this.props.navigator.dismissAllModals();
+      this.props.navigator.dismissModal({animationType: 'slide-down'});
+      setTimeout(() => {
+        this.props.navigator.dismissModal({animationType: 'slide-down'});
+      }, 200);
+
     }
     showLoading(){
       if(this.state.isLoading)
@@ -248,9 +249,11 @@ class Confirm extends Component {
 				)
 			}else{
         return(
-          <View style={styles.acceptButton}>
-            <Text style={{color:'#9c9ea1',fontFamily:'FZZhunYuan-M02S',}}>请在上方选择配送地址</Text>
-          </View>
+          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
+            <View style={styles.acceptButton}>
+              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}>添加地址</Text>
+            </View>
+          </TouchableOpacity>
 
         )
       }
@@ -292,9 +295,14 @@ class Confirm extends Component {
 				)
 			}else{
 				return(
-					<TouchableOpacity onPress={()=>{this._goToAddressList()}}>
-							<View style={{height:100,width:100,}} />
-					</TouchableOpacity>
+          <View style={{height:100,width:width,alignItems:'center',justifyContent:'center'}} >
+            
+          </View>
+					// <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
+					// 		<View style={{height:100,width:width,alignItems:'center',justifyContent:'center'}} >
+          //       <Text style={{color:'#ea7b21',fontFamily:'FZZhunYuan-M02S',}}>请选择您的地址</Text>
+          //     </View>
+					// </TouchableOpacity>
 				)
 			}
 		}

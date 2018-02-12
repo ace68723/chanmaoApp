@@ -89,8 +89,6 @@ export default class LoginButton extends Component {
              <View style={{marginTop:marginTop,height:0}}
                    ref={'_scrollViewContent'}/>
 						 {this._renderAdv()}
-             <View style={{height:300}}
-                   ref={'_scrollViewContent'}/>
         </ScrollView>
 
 

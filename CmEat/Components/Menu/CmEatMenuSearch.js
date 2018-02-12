@@ -7,6 +7,7 @@ import {
   Animated,
   Dimensions,
   Image,
+  KeyboardAvoidingView,
 	ListView,
   StyleSheet,
   Text,
@@ -128,7 +129,7 @@ export default class CmEatMenuSearch extends Component {
 	// <Text style={{color:"#ffffff",fontSize:16,margin:3}}>${this.state.cartTotals.total}</Text>
   render(){
 		return(
-      <View style={{flex:1,backgroundColor:"#ffffff"}}>
+      <KeyboardAvoidingView style={{flex:1,backgroundColor:"#ffffff"}}>
   			<Header title={this.props.restaurant.name}
   							goBack={this._goBack}
   							leftButtonText={'×'}/>
@@ -168,12 +169,13 @@ export default class CmEatMenuSearch extends Component {
             dataSource={this.state.dataSource}
             initialListSize={50}
             pageSize={50}
+            keyboardShouldPersistTaps={'always'}
             renderRow={(item) => this._renderMenuList(item)}
             scrollRenderAheadDistance={300 }
             enableEmptySections={true}
             style={{overflow:'hidden',backgroundColor:"rgba(0,0,0,0)"}}
           />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

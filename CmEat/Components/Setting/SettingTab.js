@@ -30,7 +30,10 @@ class SettingTab extends Component {
         screen: 'CmEatAddress',
         animated: true,
         navigatorStyle: {navBarHidden: true},
-        passProps:{tag:"fromHome"}
+        passProps:{
+          tag:"fromHome",
+          handleBackToHome:this.props.handleBackToHome,
+        }
       });
     }
     _goToAboutUs(){
