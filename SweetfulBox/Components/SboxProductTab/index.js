@@ -136,6 +136,15 @@ export default class MyComponent extends Component {
   }
   _pressedSectionHeader(index){
     this.setState({headerIndex:index});
+    var tar_index = 1;
+    for (var counter = 0; counter < this.state.prod_list.length; counter++) {
+      if (this.state.prod_list[counter].section_id == index && this.state.prod_list[counter].type == "section_left") {
+        tar_index = Math.floor(counter / 3) - index + 1;
+      }
+    }
+    console.log(tar_index);
+    console.log(270 + tar_index * 212 + (index - 1) * 24);
+    this._scrollVew.scrollToOffset({animated: true, offset: 270 + tar_index * 209 + (index - 1) * 30});
   }
   _renderHeaderSection(){
     if (!this.state.section_list){

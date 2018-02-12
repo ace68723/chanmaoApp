@@ -87,7 +87,9 @@ export default class MyComponent extends Component {
   _handleCheckoutStatus() {
     switch(this.state.checkoutStatus){
       case "shouldDoAuth":
-        this._goToLogin();
+        setTimeout( () => {
+          this._goToLogin();
+        },500)
       break;
       case "soldOut":
         this._goBack();
@@ -195,14 +197,12 @@ export default class MyComponent extends Component {
     });
   }
   _goToLogin() {
-    setTimeout(function () {
       this.props.navigator.showModal({
         screen: 'CmLogin',
         navigatorStyle: {navBarHidden: true},
         passProps: {handleBackToHome: this._handleLoginGoBack,
                     handleLoginSuccessful: this._handleLoginSuccessful},
       })
-    }, 500);
   }
   _goToAddress() {
     this.props.navigator.showModal({
