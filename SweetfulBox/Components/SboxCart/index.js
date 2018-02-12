@@ -88,10 +88,8 @@ export default class SboxCart extends Component {
 
   }
   _goToCheckout(){
-    const cartList = this.state.cartList;
     this.props.navigator.showModal({
       screen: "SboxCheckout",
-      title: "Modal",
       navigatorStyle: {navBarHidden: true},
       animationType: 'none'
     });

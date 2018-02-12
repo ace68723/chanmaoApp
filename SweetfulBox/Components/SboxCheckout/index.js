@@ -195,12 +195,14 @@ export default class MyComponent extends Component {
     });
   }
   _goToLogin() {
-    this.props.navigator.showModal({
-      screen: 'CmLogin',
-      navigatorStyle: {navBarHidden: true},
-      passProps: {handleBackToHome: this._handleLoginGoBack,
-                  handleLoginSuccessful: this._handleLoginSuccessful},
-    })
+    setTimeout(function () {
+      this.props.navigator.showModal({
+        screen: 'CmLogin',
+        navigatorStyle: {navBarHidden: true},
+        passProps: {handleBackToHome: this._handleLoginGoBack,
+                    handleLoginSuccessful: this._handleLoginSuccessful},
+      })
+    }, 500);
   }
   _goToAddress() {
     this.props.navigator.showModal({
