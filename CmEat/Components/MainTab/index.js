@@ -4,10 +4,8 @@ import React, {
 } from 'react';
 import {
   Animated,
-	AppState,
   Dimensions,
   Platform,
-	findNodeHandle,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
@@ -51,18 +49,15 @@ export default class MainTab extends Component {
     this._scrollEventBind = this._scrollEventBind.bind(this);
     this._getScrollViewRefs= this._getScrollViewRefs.bind(this);
 		this._onChangeTab = this._onChangeTab.bind(this);
-		this._handleAppStateChange = this._handleAppStateChange.bind(this);
 		this.showBanner = true;
   }
 	async componentDidMount(){
     await AddressAction.getAddress();
     HomeAction.getHomeData();
     HomeStore.addChangeListener(this._onChange);
-		AppState.addEventListener('change', this._handleAppStateChange);
 	}
 	componentWillUnmount(){
 		HomeStore.removeChangeListener(this._onChange);
-		AppState.removeEventListener('change', this._handleAppStateChange);
 	}
 	shouldComponentUpdate(nextProps, nextState){
 		if( nextState != this.state){
@@ -84,11 +79,6 @@ export default class MainTab extends Component {
     }, 1500);
 
   }
-	_handleAppStateChange(currentAppState) {
-		if(currentAppState === 'active'){
-			HomeAction.getHomeData();
-		}
-	}
   // ui methond
   _scrollEventBind(){
     return(

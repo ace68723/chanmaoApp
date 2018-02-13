@@ -173,7 +173,7 @@ export default class Home extends Component {
       }
   }
   _handleSboxPress() {
-    if (Platform.OS === 'ios') {
+                  // if (Platform.OS === 'ios') {
       if(this._openStarted) return
       this._openStarted = true;
       this._scale = 3.95;
@@ -203,8 +203,8 @@ export default class Home extends Component {
             navigatorStyle: {navBarHidden: true},
             style: {
               flex:1,
-             backgroundBlur: "none", 
-            
+             backgroundBlur: "none",
+
            }
           })
         })
@@ -221,32 +221,32 @@ export default class Home extends Component {
               disabledBackGesture: true,
             },
             style: {
-             backgroundBlur: "none", 
-             backgroundColor: "rgba(0,0,0,0)" 
-           }
-          })
-        })
-      }, 2500);
-    } else if (Platform.OS === 'android') {
-      setTimeout(() => {
-        InteractionManager.runAfterInteractions(() => {
-          this.props.navigator.push({
-            screen: 'SboxHome',
-            passProps: {handleBackToHome: this._handleBackToHome},
-            animated: true,
-            animationType: 'slide-horizontal',
-            navigatorStyle: {
-              navBarHidden: true,
-              disabledBackGesture: true,
-            },
-            style: {
              backgroundBlur: "none",
              backgroundColor: "rgba(0,0,0,0)"
            }
           })
         })
-      }, 1000);
-    }
+      }, 2500);
+                  // } else if (Platform.OS === 'android') {
+                  //   setTimeout(() => {
+                  //     InteractionManager.runAfterInteractions(() => {
+                  //       this.props.navigator.push({
+                  //         screen: 'SboxHome',
+                  //         passProps: {handleBackToHome: this._handleBackToHome},
+                  //         animated: true,
+                  //         animationType: 'slide-horizontal',
+                  //         navigatorStyle: {
+                  //           navBarHidden: true,
+                  //           disabledBackGesture: true,
+                  //         },
+                  //         style: {
+                  //          backgroundBlur: "none",
+                  //          backgroundColor: "rgba(0,0,0,0)"
+                  //        }
+                  //       })
+                  //     })
+                  //   }, 1000);
+                  // }
     }
   _handleBackToHome(tag) {
     if(tag === 'fromChanmao') {
