@@ -95,12 +95,11 @@ export default class SboxCart extends Component {
   }
   _goToCheckout(){
     if (this.state.total >= 25) {
-      const cartList = this.state.cartList;
       this.props.navigator.showModal({
         screen: "SboxCheckout",
-        title: "Modal",
         navigatorStyle: {navBarHidden: true},
-        animationType: 'none'
+        animationType: 'none',
+        passProps:{tag:this.props.tag},
       });
     }else {
       this.props.navigator.showLightBox({

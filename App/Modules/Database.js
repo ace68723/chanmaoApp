@@ -156,7 +156,7 @@ export function DatabaseInit() {
     let init_cme_cart = realm.objects('cme_cart');
     realm.delete(init_cme_cart);
 
-    realm.create('cm_system',{type: 'version', value: '2.5.0'}, true );
+    realm.create('cm_system',{type: 'version', value: '2.5.2'}, true );
   })
   console.log(realm.path)
 }

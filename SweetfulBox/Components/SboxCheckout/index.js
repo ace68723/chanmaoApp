@@ -87,9 +87,7 @@ export default class MyComponent extends Component {
   _handleCheckoutStatus() {
     switch(this.state.checkoutStatus){
       case "shouldDoAuth":
-        setTimeout( () => {
-          this._goToLogin();
-        },500)
+        this._goToLogin();
       break;
       case "soldOut":
         this._goBack();
@@ -197,8 +195,13 @@ export default class MyComponent extends Component {
     });
   }
   _goToLogin() {
+    // this.props.navigator.showModal({
+    //   screen: 'SboxAddAddress',
+    //   navigatorStyle: {navBarHidden: true},
+    // })
       this.props.navigator.showModal({
         screen: 'CmLogin',
+        animationType: 'slide-up',
         navigatorStyle: {navBarHidden: true},
         passProps: {handleBackToHome: this._handleLoginGoBack,
                     handleLoginSuccessful: this._handleLoginSuccessful},
@@ -395,27 +398,34 @@ export default class MyComponent extends Component {
         {this._renderOrderInfo()}
       </View>
     )
+
   }
   _renderCheckout(){
+
     const cartList = this.state.cartList.map((item,key) => {
       return this._renderItem(item,key)
     })
-    // console.log(cartList)
     return (
       <View style={styles.container}>
         <SboxHeader title={"结账"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={'x'}/>
-        <ScrollView>
-          {this._renderHeader()}
-          {cartList}
-        </ScrollView>
-        {this._rederFooter()}
+                <ScrollView>
+                  {this._renderHeader()}
+                  {cartList}
+                </ScrollView>
+                {this._rederFooter()}
       </View>
     );
   }
   render() {
-    if(this.state.checkoutStatus == 'firstLoading'){
+    let bottom;
+    if(this.props.tag === 'fromMainTab'){
+      bottom = 65;
+    }else{
+      bottom = 0;
+    }
+    if(this.state.checkoutStatus === 'firstLoading' || this.state.checkoutStatus === 'shouldDoAuth'){
       return(
         <View style={{flex:1,}}>
           <SboxHeader title={"购物箱"}
@@ -424,7 +434,7 @@ export default class MyComponent extends Component {
           <View style={{position:'absolute',
                         alignItems:'center',
                         justifyContent:'center',
-                        bottom:0,
+                        bottom:bottom,
                         width:width,
                         backgroundColor:'#ff7685',
                         height:60,}}>

@@ -60,7 +60,9 @@ export default class MyComponent extends Component {
               tabLabel="购物车"
               activeIconImage={require("./Image/box.png")}
               inactiveIconImage={require("./Image/box.png")}
-              navigator={this.props.navigator}/>
+              navigator={this.props.navigator}
+              tag={'fromMainTab'}
+              />
         <About tabLabel="设置"
           activeIconImage={require("./Image/setting.png")}
           inactiveIconImage={require("./Image/settingb.png")}

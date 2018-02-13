@@ -34,7 +34,6 @@ export default class SboxAddressListView extends Component {
       this._goBack = this._goBack.bind(this);
   }
   _goBack() {
-    console.log(this.props)
     this.props.navigator.dismissModal({
       animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
     });

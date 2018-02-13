@@ -8,9 +8,7 @@ export default {
       try{
         const {username,password,deviceToken} = io_data
         const data                            = {username,password,deviceToken}
-        console.log(data)
         const res                             = await Auth.AppLogin(data)
-        console.log(res)
         return 'success'
       }catch(error){
         throw error

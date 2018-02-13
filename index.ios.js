@@ -14,8 +14,8 @@ DatabaseInit();
 registerScreens();
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'cmHome', // unique ID registered with Navigation.registerScreen
-    navigatorStyle: {navBarHidden: true}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+    screen: 'cmHome', 
+    navigatorStyle: {navBarHidden: true}, 
     navigatorButtons: {},
   },
 })

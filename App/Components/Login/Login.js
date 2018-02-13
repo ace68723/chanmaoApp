@@ -3,7 +3,6 @@ import React, {
 	Component,
 } from 'react';
 import {
-  Animated,
   Dimensions,
   Image,
 	InteractionManager,
@@ -56,7 +55,6 @@ export default class LogoAnimationView extends Component {
     this._handleBackToHome = this._handleBackToHome.bind(this);
     this._openAdView = this._openAdView.bind(this);
   }
-	_viewOpacity =  new Animated.Value(1);
 	async componentDidMount() {
 		const registerResult = await WeChat.registerApp(appid);
 		const isWXAppInstalled = await WeChat.isWXAppInstalled()
@@ -174,7 +172,7 @@ export default class LogoAnimationView extends Component {
   }
   render(){
     return(
-      <Animated.View style={[styles.container,{opacity:this._viewOpacity}]}>
+      <View style={styles.container}>
         <View style={styles.bgImageWrapper}>
 						 <Image source={require('./Image/background.png')}
 										style={styles.backgroundImage}/>
@@ -202,7 +200,7 @@ export default class LogoAnimationView extends Component {
 												if_openAdView = {this._openAdView}/>
           {this._renderGoBackBtn()}
 
-      </Animated.View>
+      </View>
     )
   }
 }
@@ -210,8 +208,6 @@ export default class LogoAnimationView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-		position: 'absolute',
-    top: 0, bottom: 0, left: 0, right: 0,
   },
   bgImageWrapper: {
     position: 'absolute',

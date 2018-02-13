@@ -37,9 +37,7 @@ const AuthModule = {
 
     async doAuth(){
         const data = GetUserInfo();
-        console.log(data)
         const reqData = formatAuth(data);
-        console.log(reqData)
         const res = await AuthApi.AppAuth(reqData);
         if (res.result === 0) {
           return res;
