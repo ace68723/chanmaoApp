@@ -142,8 +142,6 @@ export default class MyComponent extends Component {
         tar_index = Math.floor(counter / 3) - index + 1;
       }
     }
-    console.log(tar_index);
-    console.log(270 + tar_index * 212 + (index - 1) * 24);
     this._scrollVew.scrollToOffset({animated: true, offset: 270 + tar_index * 209 + (index - 1) * 30});
   }
   _renderHeaderSection(){

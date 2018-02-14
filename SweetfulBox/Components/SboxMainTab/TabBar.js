@@ -54,13 +54,14 @@ export default class TabBar extends Component {
       >
         <View style={[styles.tab, this.props.tabStyle, ]}>
         <ImageBackground
-                    style={{width:25,
+                    style={{width:27.6,
                       height:27,
                       marginBottom:3,
                       backgroundColor:'transparent',
-                       justifyContent: 'center',alignItems: 'center',}}
+                      justifyContent: 'center',
+                      alignItems: 'center',}}
                     source={iconImage}>
-                <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
+                <Text style={{backgroundColor:'rgba(0,0,0,0)',height: 13.5, fontFamily:'FZZhunYuan-M02S',}}>
                   {iconText}
                 </Text>
           </ImageBackground>

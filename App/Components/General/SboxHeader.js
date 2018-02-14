@@ -18,11 +18,13 @@ const viewWidth = Dimensions.get('window').width;
 
 let viewMarginTop;
 if(height == 812){
-  viewMarginTop = 27;
+  viewMarginTop = 0;
+  navigationHeight = 88;
 }else{
-  viewMarginTop = 17;
+  viewMarginTop = 0;
+  navigationHeight = 64;
 }
-const navigationHeight = viewHeight * (210/2208) - viewMarginTop;
+// const navigationHeight = viewHeight * (210/2208) - viewMarginTop;
 
 
 export default class MyComponent extends Component {
@@ -62,19 +64,20 @@ export default class MyComponent extends Component {
 
   render() {
     return (
-      <View style={[styles.navigation, {height: navigationHeight}]}>
+      <View style={styles.navigation}>
           <View style={styles.back}>
               {this._renderLeftButton()}
           </View>
           <View style={styles.title}>
               <Text style={{textAlign:'center',
                             fontSize:20,
-                            fontWeight: '700'}}
+                            fontWeight: '700',
+                            marginBottom:10,}}
                      numberOfLines={1}>
                             {this.props.title}
               </Text>
           </View>
-          <View style={styles.left}>
+          <View style={styles.right}>
           </View>
       </View>
       )
@@ -84,24 +87,32 @@ const styles = StyleSheet.create({
   navigation: {
     flexDirection:'row',
     backgroundColor: 'white',
-    marginTop: viewMarginTop,
     borderBottomWidth: 1,
     borderColor: "#D5D5D5",
+    height:navigationHeight,
+  },
+  container:{
+    top:0,
+    left:0,
+    right:0,
+    height:navigationHeight,
+    backgroundColor:'#f4f4f4',
   },
   back: {
     flex: 0.2,
-    justifyContent:'center',
     backgroundColor: 'white',
+    flexDirection: 'column-reverse',
+    marginBottom: 10,
   },
   title: {
     flex:0.6,
     backgroundColor: 'white',
-    justifyContent:'center',
-    backgroundColor: 'white',
+    flexDirection: 'column-reverse',
   },
-  left: {
+  right: {
     flex: 0.2,
-    justifyContent:'center',
+    flexDirection: 'column-reverse',
     backgroundColor: 'white',
+    marginBottom: 10,
   },
 })
