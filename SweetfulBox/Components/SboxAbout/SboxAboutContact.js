@@ -57,7 +57,7 @@ export default class About extends Component {
           <SboxHeader title={"联系客服"}
                   goBack={this._goBack}
                   leftButtonText={'<'}/>
-					<View style={{backgroundColor: '#D5D5D5', width: width, height: height, alignItems: 'center'}}>
+				  <View style={{backgroundColor: '#efefef', width: width, height: height, alignItems: 'center'}}>
 						<View style={{justifyContent: 'center',
 							            alignItems: 'center',
 													backgroundColor: 'white',
