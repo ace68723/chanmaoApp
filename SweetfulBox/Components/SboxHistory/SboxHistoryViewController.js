@@ -7,6 +7,7 @@ import {
 	ListView,
 	StyleSheet,
 	Text,
+	Image,
   View,
 } from 'react-native';
 
@@ -82,15 +83,21 @@ export default class HistoryViewController extends Component {
   }
   _renderHistoryView() {
 		// if(this.state.items.length === 0 ) return;
-    return(
-      <SboxHistoryFlatlist
-				onRefresh={() => this._onRefresh()}
-				{...{items: this.state.items,
-             refreshing: this.state.refreshing,
-             goToSboxHistoryOrderDetail: this._goToSboxHistoryOrderDetail
-           }}
-			/>
-    )
+		if (this.state.items.length > 0) {
+			return(
+	      <SboxHistoryFlatlist
+					onRefresh={() => this._onRefresh()}
+					{...{items: this.state.items,
+	             refreshing: this.state.refreshing,
+	             goToSboxHistoryOrderDetail: this._goToSboxHistoryOrderDetail
+	           }}
+				/>
+	    )
+		}else {
+			return(
+				<Image style={{height: height, width: width}} source={require('./Image/no_order.png')}></Image>
+			)
+		}
   }
   render() {
     return(

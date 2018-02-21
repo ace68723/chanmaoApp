@@ -138,7 +138,7 @@ export default class About extends Component {
           <SboxHeader title={"设置"}
                   goBack={this._renderGoBackBtn}
                   leftButtonText={'none'}/>
-          <ScrollView style={{backgroundColor: '#D5D5D5'}}>
+					<ScrollView style={{backgroundColor: '#efefef'}}>
               {this._renderLoginOrHistory()}
               <View style={styles.separator}></View>
               {this._renderContact()}

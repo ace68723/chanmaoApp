@@ -14,7 +14,8 @@ let addressListState = Object.assign({},
 		showAddInfo:false,
 		addressType:"",
 		formattedAddress:"",
-		searchAddress:""
+		searchAddress:"",
+    showConfirmBtn:true,
 	},{addressList},
 )
 
@@ -28,6 +29,7 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 		formattedAddress:"",
 		searchAddress:"",
     addressStatus:"",
+    showConfirmBtn:true,
 	},
 	emitChange(){
 			this.emit( CHANGE_EVENT)

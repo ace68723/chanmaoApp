@@ -94,6 +94,7 @@ class PhoneNumberVerify extends Component{
                     value={this.state.text}
                     placeholderTextColor={'#ff8b00'}
                     placeholder={'请输入验证码'}
+                    underlineColorAndroid={"rgba(0,0,0,0)"}
                   />
                 <TouchableOpacity
 										activeOpacity={0.6}

@@ -106,6 +106,7 @@ export default class LogoAnimationView extends Component {
 		try {
 		 const version = await WeChat.getApiVersion();
 		 const result = await WeChat.sendAuthRequest(scope, state);
+     console.log(result)
 		 const resCode = result.code;
 		 const deviceToken = this.state.deviceToken;
 		 const data = {resCode,deviceToken};
@@ -207,13 +208,18 @@ export default class LogoAnimationView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
+    width:width,
+    height:height,
+    backgroundColor:"#ffffff",
   },
   bgImageWrapper: {
+    flex:1,
     position: 'absolute',
     top: 0, bottom: 0, left: 0, right: 0,
   },
   backgroundImage:{
+    flex:1,
     width:width,
     height:height,
   },

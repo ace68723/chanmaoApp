@@ -243,6 +243,7 @@ export default class CmEatAddInfo extends Component {
                             autoCorrect= { false}
                             returnKeyType={'next'}
                             onChangeText={(text) => this._handleNameChange(text)}
+                            underlineColorAndroid={"rgba(0,0,0,0)"}
                         />
 
                     </View>
@@ -261,6 +262,7 @@ export default class CmEatAddInfo extends Component {
                           maxLength= {13}
                           returnKeyType={'next'}
                           onChangeText={(text) => this._handlePhoneNumberChange(text)}
+                          underlineColorAndroid={"rgba(0,0,0,0)"}
                       />
                     </View>
                     <View style= {styles.separator}/>
@@ -276,6 +278,7 @@ export default class CmEatAddInfo extends Component {
                           autoCorrect= { false}
                           returnKeyType={'next'}
                           onChangeText={(text) => this._handleApartmentNumberChange(text)}
+                          underlineColorAndroid={"rgba(0,0,0,0)"}
                       />
                     </View>
                     <View style= {styles.separator}/>
@@ -291,6 +294,7 @@ export default class CmEatAddInfo extends Component {
                           autoCorrect= { false}
                           returnKeyType={'next'}
                           onChangeText={(text) => this._handleBuzzCodeChange(text)}
+                          underlineColorAndroid={"rgba(0,0,0,0)"}
                       />
                     </View>
                     <View style= {styles.separator}/>

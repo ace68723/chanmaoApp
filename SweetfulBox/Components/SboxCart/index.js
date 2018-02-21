@@ -25,6 +25,7 @@ export default class SboxCart extends Component {
     super(props);
     this.state = SboxCartStore.getState();
     this._renderItem = this._renderItem.bind(this);
+    this._renderContent = this._renderContent.bind(this);
     this._onChange = this._onChange.bind(this);
     this._handleOutOfStock = this._handleOutOfStock.bind(this);
     this._addQuantity = this._addQuantity.bind(this);
@@ -171,6 +172,24 @@ export default class SboxCart extends Component {
         )
       }
   }
+  
+  _renderContent() {
+    if (this.state.cartList.length > 0) {
+      return (
+        <FlatList
+          	enableEmptySections
+            data={this.state.cartList}
+            renderItem={this._renderItem}
+            keyExtractor={(item, index) => item.sku_id}
+        />
+      )
+    }else {
+      return(
+        <Image style={{height: height, width: width}} source={require('./Image/no_item.png')}></Image>
+      )
+    }
+  }
+
   _renderItem({item}) {
     const {sku_image_url,spu_name,sku_name,sku_quantity,sku_amount,sku_price} = item;
     return(
@@ -279,12 +298,7 @@ export default class SboxCart extends Component {
         <SboxHeader title={"购物箱"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={this.props.backButton}/>
-        <FlatList
-          	enableEmptySections
-            data={this.state.cartList}
-            renderItem={this._renderItem}
-            keyExtractor={(item, index) => item.sku_id}
-        />
+        {this._renderContent()}
 
         {this._renderConfirmBtn()}
       </View>

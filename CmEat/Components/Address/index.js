@@ -7,6 +7,7 @@ import {
   Dimensions,
   Keyboard,
   Image,
+  Platform,
 	ListView,
   StyleSheet,
   Text,
@@ -114,7 +115,8 @@ export default class CmEatAddress extends Component {
 		)
 	}
 	_selectAddress(address){
-		AddressAction.selectAddress(address)
+    Keyboard.dismiss();
+		AddressAction.selectAddress(address);
 	}
   _handleSearchChange(text){
     this.setState({
@@ -262,6 +264,8 @@ export default class CmEatAddress extends Component {
               source={require('./Image/icon_address.png')}/>
         <TextInput
             style={[styles.input]}
+            onFocus={()=>{this.setState({showConfirmBtn:false})}}
+            onBlur={()=>{this.setState({showConfirmBtn:true})}}
             placeholder={"输入地址"}
             placeholderTextColor={'#999999'}
             selectionColor={'#ea7b21'}
@@ -269,6 +273,7 @@ export default class CmEatAddress extends Component {
             autoCorrect= {false}
             returnKeyType={'next'}
             onChangeText={this._handleSearchChange}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
         />
       </View>
     )
@@ -295,6 +300,7 @@ export default class CmEatAddress extends Component {
       <ScrollView style={{padding:10,}}
                   keyboardShouldPersistTaps={'always'}>
         {addressList}
+        {this._renderAndroidConfirmBtn()}
       </ScrollView>
     )
 
@@ -306,21 +312,45 @@ export default class CmEatAddress extends Component {
 			return this._renderAddressList();
 		}
 	}
+  _renderIosConfirmBtn(){
+    if(Platform.OS!='ios') return;
+    return(
+      <TouchableOpacity style={styles.button}
+                        activeOpacity={0.4}
+                        onPress={this._goBack}>
+            <Text style={styles.buttonText}>
+               确认
+            </Text>
+      </TouchableOpacity>
+    )
+  }
+  _renderAndroidConfirmBtn(){
+    if(Platform.OS!='android') return;
+    return(
+      <TouchableOpacity style={{  height:buttonHeight,
+                                  backgroundColor:'#ea7b21',
+                                  justifyContent:'center',
+                                  alignItems:'center',
+                                  marginTop:40,
+                                }}
+                        activeOpacity={0.4}
+                        onPress={this._goBack}>
+            <Text style={styles.buttonText}>
+               确认
+            </Text>
+      </TouchableOpacity>
+    )
+  }
   render(){
     return(
-      <View style={{flex:1,backgroundColor:"#f2f2f2"}}>
+      <View style={{  flex:1,
+                      backgroundColor:"#f2f2f2"}}>
         <Header title={"地址"}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
 					{this._renderSearchInput()}
 					{this._renderList()}
-        <TouchableOpacity style={styles.button}
-                          activeOpacity={0.4}
-                          onPress={this._goBack}>
-              <Text style={styles.buttonText}>
-                 确认
-              </Text>
-        </TouchableOpacity>
+          {this._renderIosConfirmBtn()}
       </View>
     )
 

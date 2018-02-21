@@ -65,7 +65,7 @@ export default class MyComponent extends Component {
               />
         <About tabLabel="设置"
           activeIconImage={require("./Image/setting.png")}
-          inactiveIconImage={require("./Image/settingb.png")}
+          inactiveIconImage={require("./Image/settinggrey.png")}
           navigator={this.props.navigator}
           handleBackToHome={this.props.handleBackToHome}/>
       </ScrollableTabView>

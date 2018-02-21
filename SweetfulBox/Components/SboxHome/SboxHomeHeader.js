@@ -107,7 +107,7 @@ export default class SboxHomeHeader extends Component {
 const styles = StyleSheet.create({
   container: {
     width:width,
-    height:height*0.0811,
+    height:88,
     position:'absolute',
     flexDirection:'row',
   },

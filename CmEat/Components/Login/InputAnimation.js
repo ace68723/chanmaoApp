@@ -232,6 +232,7 @@ export default class InputAnimation extends Component {
 	                  returnKeyType={'next'}
 	                  ref={this.props.ir_USERNAME_INPUTREF}
 	                  onChangeText={this.props.if_handleUsername}
+                    underlineColorAndroid={"rgba(0,0,0,0)"}
 	              />
 	             <View style={{height:1,
 	                           backgroundColor:'#ffffff',}}>
@@ -247,6 +248,7 @@ export default class InputAnimation extends Component {
 	                    secureTextEntry={true}
 	                    ref={this.props.ir_PASSWORD_INPUTREF}
 	                    onChangeText={this.props.if_handlePassword}
+                      underlineColorAndroid={"rgba(0,0,0,0)"}
 	                />
 								<View ref={this.props.ir_SUBMIT_BUTTON} >
 									<LoginButton is_login = {this.props.is_login}

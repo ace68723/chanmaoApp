@@ -9,6 +9,7 @@ import React, {
 import {
   Alert,
 	AppState,
+	Dimensions,
   Image,
   RefreshControl,
   StyleSheet,
@@ -40,6 +41,7 @@ class HistoryTab extends Component {
         this._reorder = this._reorder.bind(this);
 				this._handleAppStateChange = this._handleAppStateChange.bind(this);
 				this._getCurrentPosition = this._getCurrentPosition.bind(this);
+				this._renderContent = this._renderContent.bind(this);
     }
 
     componentDidMount(){
@@ -134,37 +136,49 @@ class HistoryTab extends Component {
         },
       });
 		}
+		_renderContent(){
+			if (this.state.orderData.length > 0) {
+				let orderList = this.state.orderData.map( order => {
+					return <Order key={ order.oid }
+												order={order}
+												HistoryOrderDetailVisible = {this._HistoryOrderDetailVisible}
+												scrollRef={this.refs._scrollView}
+												getCurrentPosition={this._getCurrentPosition}
+												reorder={this._reorder}/>
+				});
+				return(
+					<ScrollView style={styles.scrollView}
+										 scrollEventThrottle= {16}
+										 onScroll={(e)=>{this.currentPosition = e.nativeEvent.contentOffset.y}}
+										 refreshControl={
+											 <RefreshControl
+												 refreshing={this.state.isRefreshing}
+												 onRefresh={this._onRefresh}
+												 tintColor="#ff8b00"
+												 title="正在刷新啦..."
+												 titleColor="#ff8b00"
+											 />
+										 }
+										 ref='_scrollView'
+										 keyboardShouldPersistTaps={"always"}
+										 >
+
+
+					 { orderList }
+					</ScrollView>
+				)
+			}else {
+				const { height, width } = Dimensions.get('window');
+				return(
+					<Image style={{height: height, width: width}} source={require('./Image/cm_no_order.png')}></Image>
+				)
+			}
+		}
     render(){
-			let orderList = this.state.orderData.map( order => {
-				return <Order key={ order.oid }
-											order={order}
-											HistoryOrderDetailVisible = {this._HistoryOrderDetailVisible}
-											scrollRef={this.refs._scrollView}
-											getCurrentPosition={this._getCurrentPosition}
-											reorder={this._reorder}/>
-			});
       return(
          <View style={styles.mainContainer}>
              <Header title={'我的订单'} />
-						 <ScrollView style={styles.scrollView}
-						 						scrollEventThrottle= {16}
-						 						onScroll={(e)=>{this.currentPosition = e.nativeEvent.contentOffset.y}}
-						 						refreshControl={
-						 							<RefreshControl
-						 								refreshing={this.state.isRefreshing}
-						 								onRefresh={this._onRefresh}
-						 								tintColor="#ff8b00"
-						 								title="正在刷新啦..."
-						 								titleColor="#ff8b00"
-						 							/>
-						 						}
-						 						ref='_scrollView'
-						 						keyboardShouldPersistTaps={"always"}
-						 						>
-
-
-						 	{ orderList }
-						 </ScrollView>
+						 {this._renderContent()}
 						 <Modal style={styles.modal}
 						 			 position={"center"}
 						 			 isOpen={this.state.showHistoryOrderDetail}

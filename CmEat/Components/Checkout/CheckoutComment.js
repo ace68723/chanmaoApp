@@ -94,7 +94,9 @@ class CommentInput extends Component {
                        placeholder="发表评论"
                        selectionColor="#ff8b00"
                        multiline={true}
-                       onChangeText={(text) => this.props.commentChange(text)}>
+                       onChangeText={(text) => this.props.commentChange(text)}
+                       underlineColorAndroid={"rgba(0,0,0,0)"}
+                       >
             </TextInput>
             {this.button()}
           </View>

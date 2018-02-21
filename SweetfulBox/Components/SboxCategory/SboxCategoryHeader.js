@@ -58,6 +58,7 @@ export default class SboxCategoryHeader extends Component {
             autoCorrect={false}
             returnKeyType={'search'}
             value={this.props.searchKeyword}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
           />
 
         </View>
