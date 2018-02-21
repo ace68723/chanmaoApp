@@ -33,7 +33,6 @@ export default class MyComponent extends Component {
       this._renderHeader = this._renderHeader.bind(this);
       this._pressedSectionHeader = this._pressedSectionHeader.bind(this);
       this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
-      this._handleOnPressIn = this._handleOnPressIn.bind(this);
       this._onChange = this._onChange.bind(this);
   }
 
@@ -56,17 +55,16 @@ export default class MyComponent extends Component {
     if(tmid !== updatedTmid && updatedTmid !== -1) return;
     this.setState(SboxProductTabStore.getStateByTmid(tmid));
   }
-  _handleOnPressIn(product) {
-    if (product.spu_status === 1 || product.sku_status === 1) return;
-    const {spu_id} = product;
-    SboxProductAction.getSingleProduct(spu_id);
-  }
   _goToSboxProductDetial(item) {
+    console.log(item)
     if (item.spu_status === 1 || item.sku_status === 1) return;
+    const {spu_id, image} = item;
+    SboxProductAction.getSingleProduct(spu_id);
     setTimeout( () => {
       this.props.navigator.push({
         screen: 'SboxProductDetial',
         navigatorStyle: {navBarHidden: true},
+        passProps:{spu_image:image},
       })
     }, 150);
 
@@ -78,7 +76,6 @@ export default class MyComponent extends Component {
       if (item.type === "spu" || item.type === "sku"){
         return (
           <TouchableOpacity
-             onPressIn={this._handleOnPressIn.bind(null,item)}
              onPress={this._goToSboxProductDetial.bind(null,item)}>
               <SboxProductView
                 goToSboxProductDetial={this._goToSboxProductDetial}

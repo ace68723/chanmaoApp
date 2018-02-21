@@ -249,6 +249,8 @@ export default class SweetProductDetial extends Component {
       //     </View>
       //   )
       // } else {
+      //
+        console.log(this.prop)
         return (
           <View style={{flex:1}}>
 
@@ -259,6 +261,7 @@ export default class SweetProductDetial extends Component {
 
 
                 <SboxProductDetialScrollView
+                  spu_image={this.props.spu_image}
                   page={this.state.sku_image}
                   selectedPage={this.state.selectedPage}
                   onPageChange={this._onPageChange}

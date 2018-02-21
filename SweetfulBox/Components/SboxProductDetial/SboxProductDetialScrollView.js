@@ -71,30 +71,42 @@ export default class SboxProductDetialScrollView extends Component{
     super(props)
   }
   componentWillReceiveProps(nextProps, nextState){
+    if (Platform.OS != 'ios') return;
     if(nextProps.selectedPage !== this.props.selectedPage){
       this.refs.CardView.scrollTo({x:nextProps.selectedPage*width,y:0,animated:true})
     }
   }
 
   render() {
-    const pages = this.props.page.map((page,key)=>{
+    if(Platform.OS === 'ios' ){
+      const pages = this.props.page.map((page,key)=>{
+        return (
+          <Page key = {key} >
+            <Card page={page} index={key} />
+          </Page>
+        )
+      })
       return (
-        <Page key = {key} >
-          <Card page={page} index={key} />
-        </Page>
+          <CardView ref="CardView"
+                    onPageChange={this.props.onPageChange} onScroll={onScroll}
+                    >
+            {pages}
+          </CardView>
+      );
+    }else{
+      return(
+        <View style={[style.card, ]}>
+          <Image source={{uri: this.props.spu_image}}
+                 style={{ width: width*0.446,
+                          height: width*0.446*1.4043}}/>
+        </View>
       )
-    })
-    return (
-        <CardView ref="CardView"
-                  onPageChange={this.props.onPageChange} onScroll={onScroll}
-                  >
-          {pages}
-        </CardView>
-    );
-  }
+    }
 
+
+  }
 }
-// style={{backgroundColor:'blue'}}
+
 const style = StyleSheet.create({
   scrollView: {
     flexDirection: 'row',

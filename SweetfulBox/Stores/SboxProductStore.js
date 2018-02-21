@@ -34,6 +34,17 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
 	},
 	removeChangeListener(callback){
 			this.removeListener(CHANGE_EVENT, callback)
+      this.state = {
+        selectedPage: '',
+        selectedProduct:{},
+        sku_image:[{}],
+        sku_list:[{}],
+        sku_fact:"",
+        spu_name:"",
+        totalQuantity:0,
+        loading:true,
+        outOfStock: false,
+      }
 	},
 
   updateSingleProduct(data){
