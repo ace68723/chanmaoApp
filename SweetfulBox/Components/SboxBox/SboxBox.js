@@ -53,14 +53,13 @@ export default class MyComponent extends Component {
                   bottom:0,
                   width:width,
                 }}>
-            <TouchableOpacity  
+            <TouchableOpacity style={{top: -42,}}
                                 onPressIn={this.props.handleOnPressIn}
                                 onPress={this.props.goToSboxCart}>
               <AnimatedImageBackground
                     style={{
                       width:50,
                       height:50,
-                      top:-42,
                       alignItems:'center',
                       justifyContent:'center',
                       transform:[
