@@ -7,6 +7,7 @@ import {
   Dimensions,
 	Easing,
   Image,
+  Platform,
   ImageBackground,
 	InteractionManager,
 	Keyboard,
@@ -262,7 +263,6 @@ export default class InputAnimation extends Component {
 	                    placeholder={this.props.is_password}
 	                    placeholderTextColor={'#ffffff'}
 	                    selectionColor={'#ea7b21'}
-	                    keyboardType = { 'email-address'}
 	                    autoCorrect= { false}
 	                    returnKeyType={'next'}
 	                    secureTextEntry={true}
@@ -281,7 +281,7 @@ export default class InputAnimation extends Component {
 								</View>
 								{this._renderWechat()}
 
-							 <View style={{position:'absolute',bottom:5,width:width,alignItems:'center',backgroundColor:"rgba(0,0,0,0)"}}>
+							 <View style={{position:Platform.OS == 'ios'?'absolute':'relative',bottom:5,width:Platform.OS == 'ios'?width:'auto',alignItems:'center',}}>
 	                  <Text allowFontScaling={false} style={{color:"#ffffff",marginBottom:5}}>
 	                    {this.props.is_version}
 	                  </Text>
@@ -354,7 +354,8 @@ const styles = StyleSheet.create({
     textAlign:"right"
   },
 	wechatView:{
-    position:'absolute',
+    position:Platform.OS == 'ios'?'absolute':'relative',
+    marginTop:Platform.OS == 'ios'? 0 :50,
     right:0,
     left:0,
     bottom:height*0.08,

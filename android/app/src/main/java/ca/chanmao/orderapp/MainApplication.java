@@ -1,13 +1,11 @@
-package com.chanmao;
+package ca.chanmao.orderapp;
 
 import com.airbnb.android.react.maps.MapsPackage;
 import com.theweflex.react.WeChatPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import io.realm.react.RealmReactPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
-
 
 import java.util.Arrays;
 import java.util.List;

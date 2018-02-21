@@ -62,7 +62,7 @@ export default class loading extends Component {
   _renderLoading() {
       return (
         <Animated.Image source={require('./Img/SboxLoading.gif')}
-            style={{ width: width, height: height, opacity: this.state.loadingOpacity}}
+            style={{ flex: 1,width: width, height: height, opacity: this.state.loadingOpacity}}
         />
       )
   }
@@ -77,7 +77,7 @@ export default class loading extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     width: width,
     height: height,
     top:0,left:0,right:0,bottom:0,

@@ -106,6 +106,7 @@ export default class LogoAnimationView extends Component {
 		try {
 		 const version = await WeChat.getApiVersion();
 		 const result = await WeChat.sendAuthRequest(scope, state);
+     console.log(result)
 		 const resCode = result.code;
 		 const deviceToken = this.state.deviceToken;
 		 const data = {resCode,deviceToken};
