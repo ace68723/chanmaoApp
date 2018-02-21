@@ -78,6 +78,7 @@ export default class Content extends Component {
                     <View style={styles.image}><Image source={require('./img/name.png')}/></View>
                     <Text style={styles.tips}>联系人: </Text>
                     <TextInput
+                        underlineColorAndroid={"rgba(0,0,0,0)"}
                         value={this.props.name}
                         onChangeText={this.props.onNameChange}
                         placeholder="请以英文拼写您的姓名"
@@ -93,6 +94,7 @@ export default class Content extends Component {
                     <View style={styles.image}><Image source={require('./img/phoneNum.png')}/></View>
                     <Text style={styles.tips}>电话: +1 </Text>
                     <TextInput
+                        underlineColorAndroid={"rgba(0,0,0,0)"}
                         ref={(ref)=>{ this.telRef = ref}}
                         value={this.props.phoneNumDisplay}
                         onChangeText={this.props.onPhoneNumChange}
@@ -107,6 +109,7 @@ export default class Content extends Component {
                     <View style={styles.image}><Image source={require('./img/unitNum.png')}/></View>
                     <Text style={styles.tips}>Unit No.: </Text>
                     <TextInput
+                        underlineColorAndroid={"rgba(0,0,0,0)"}
                         value={this.props.unitNum}
                         onChangeText={this.props.onUnitNumChange}
                         placeholder="Optional（选填）"

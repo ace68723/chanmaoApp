@@ -164,6 +164,7 @@ export default class CmEatMenuSearch extends Component {
               autoFocus={true}
               returnKeyType={'next'}
               onChangeText={this._setSearchText}
+              underlineColorAndroid={"rgba(0,0,0,0)"}
           />
           <ListView
             dataSource={this.state.dataSource}

@@ -55,7 +55,9 @@ class Header extends Component {
                    style={{flex: 0.95}}
                    placeholder={"搜索地址"}
                    onChangeText={(text) => this.props.onChangeTextInput(text)}
-                   onSubmitEditing={this.props.onSubmitText}/>
+                   onSubmitEditing={this.props.onSubmitText}
+                   underlineColorAndroid={"rgba(0,0,0,0)"}
+                   />
           </View>
         <Separator/>
 

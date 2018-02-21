@@ -269,6 +269,7 @@ export default class CmEatAddress extends Component {
             autoCorrect= {false}
             returnKeyType={'next'}
             onChangeText={this._handleSearchChange}
+            underlineColorAndroid={"rgba(0,0,0,0)"}
         />
       </View>
     )
@@ -308,7 +309,8 @@ export default class CmEatAddress extends Component {
 	}
   render(){
     return(
-      <View style={{flex:1,backgroundColor:"#f2f2f2"}}>
+      <View style={{  flex:1,
+                      backgroundColor:"#f2f2f2"}}>
         <Header title={"地址"}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>

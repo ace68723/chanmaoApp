@@ -296,7 +296,7 @@ class Confirm extends Component {
 			}else{
 				return(
           <View style={{height:100,width:width,alignItems:'center',justifyContent:'center'}} >
-            
+
           </View>
 					// <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
 					// 		<View style={{height:100,width:width,alignItems:'center',justifyContent:'center'}} >
@@ -385,7 +385,8 @@ class Confirm extends Component {
 										 selectionColor="#ff8b00"
 										 multiline={true}
 										 value={this.state.comment}
-										 onChangeText={(text) => {this.setState({comment:text})}}>
+										 onChangeText={(text) => {this.setState({comment:text})}}
+                     underlineColorAndroid={"rgba(0,0,0,0)"}>
 					</TextInput>
 				</CommentModal>
 			)
