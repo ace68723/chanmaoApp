@@ -98,6 +98,8 @@ export default class LogoAnimationView extends Component {
 		 const deviceToken = this.state.deviceToken;
 		 const data = {resCode,deviceToken};
 		 AuthAction.doWechatAuth(data);
+
+
 		//  AuthService.doWechatAuth(data);
 
 	 } catch (e) {

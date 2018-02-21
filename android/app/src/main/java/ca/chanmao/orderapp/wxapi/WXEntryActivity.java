@@ -1,8 +1,13 @@
-package ca.chanmao.wxapi;
+package ca.chanmao.orderapp.wxapi;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import com.theweflex.react.WeChatModule;
+
+/**
+ * Created by aiden on 2018-02-21.
+ */
 
 public class WXEntryActivity extends Activity {
     @Override
