@@ -7,8 +7,8 @@ Navigation.startSingleScreenApp({
   screen: {
     // screen: 'cmHome', CmEat CmLogin// unique ID registered with Navigation.registerScreen
     screen: 'cmHome',
-    navigatorStyle: {navBarHidden: true}, 
-    navigatorButtons: {}, 
+    navigatorStyle: {navBarHidden: true},
+    navigatorButtons: {},
 
   },
   animated: true,
