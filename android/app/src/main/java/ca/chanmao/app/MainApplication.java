@@ -1,4 +1,4 @@
-package ca.chanmao.orderapp;
+package ca.chanmao.app;
 
 import android.support.annotation.Nullable;
 
@@ -36,7 +36,7 @@ public class MainApplication extends NavigationApplication {
             new WeChatPackage(),
             new RNDeviceInfo(),
             new RealmReactPackage(),
-            new CodePush("kbWUqemN-getsFnDL8D0thDFKXtSNJramkK7f", MainApplication.this, BuildConfig.DEBUG)
+            new CodePush("yUHXOB5mwRS-3ljvVytfpZNmNckE41ITwvOW-", MainApplication.this, BuildConfig.DEBUG)
 //            new VectorIconsPackage()
     );
 
