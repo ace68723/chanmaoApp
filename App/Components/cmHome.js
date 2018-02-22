@@ -16,6 +16,8 @@ import {
 import AuthAction from '../Actions/AuthAction';
 
 const { height, width } = Dimensions.get('window');
+const X_WIDTH = 375;
+const X_HEIGHT = 812;
 
 const styles = StyleSheet.create({
     container: {
@@ -24,6 +26,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 });
+
+const HOME_IMAGES = {
+  sbox_home_image: require('./Img/HOME-PAGE-SBOX.png'),
+  sbox_home_image_x: require('./Img/iphoneX_SweetfulBox.png'),
+  cm_home_image: require('./Img/HOME-PAGE-CM-iPhone.png'),
+  cm_home_image_x: require('./Img/iphoneX_chanmao.png'),
+}
 
 export default class Home extends Component {
   constructor() {
@@ -45,6 +54,11 @@ export default class Home extends Component {
       this._handleSboxPress = this._handleSboxPress.bind(this);
       this._handleBackToHome = this._handleBackToHome.bind(this);
       this._handleLoginSuccessful = this._handleLoginSuccessful.bind(this);
+
+      this._isiPhoneX = this._isiPhoneX.bind(this);
+      this._getSBoxHomePage = this._getSBoxHomePage.bind(this);
+      this._getCMHomePage = this._getCMHomePage.bind(this);
+
   }
   _openStarted = false
   componentDidMount() {
@@ -289,20 +303,49 @@ export default class Home extends Component {
       })
     })
   }
+
+  _isiPhoneX(){
+    return Platform.OS === 'ios' &&
+        ((height === X_HEIGHT && width === X_WIDTH) ||
+        (height === X_WIDTH && width === X_HEIGHT));
+  }
+
+  _getSBoxHomePage(){
+    if (this._isiPhoneX()){
+      return HOME_IMAGES['sbox_home_image_x'];
+    }
+    else{
+      return HOME_IMAGES['sbox_home_image'];
+    }
+  }
+
+  _getCMHomePage(){
+    if (this._isiPhoneX()){
+      return HOME_IMAGES['cm_home_image_x'];
+    }
+    else{
+      return HOME_IMAGES['cm_home_image'];
+    }
+  }
+
   render() {
       const cmScale = this.state.open.interpolate({inputRange: [0, 1], outputRange: [1, this.state.scale]}) //3.8215  275 320
       const cmtranslateX = this.state.open.interpolate({inputRange: [0, 1], outputRange: [0, this.state.translateX]})
       const cmtranslateY = this.state.open.interpolate({inputRange: [0, 1], outputRange: [0, this.state.translateY]})
       const cmTransform = {transform:[{translateX:cmtranslateX},{translateY:cmtranslateY},{scale:cmScale}]}
 
+      const sboxHomeHeightRatio = this._isiPhoneX() ? 2.2 : 1.971;
+      const cmHomeHeightRatio = this._isiPhoneX() ? 2.2 : 1.88;
+
       return (
           <Animated.View style={[styles.container,cmTransform]}>
               <View style={{ flex: 1,}}>
                 <TouchableWithoutFeedback onPress={this._handleSboxPress}>
                   <Animated.View style={{ flex: 0.55, right: this.state.boxRight,}}>
-                      <Image source={require('./Img/HOME-PAGE-SBOX.png')}
+
+                      <Image source={ this._getSBoxHomePage() }
                           style={{ width: width * 0.3674,
-                                    height: width * 0.3674 * 1.971,
+                                    height: width * 0.3674 * sboxHomeHeightRatio,
                                     bottom: 10,
                                     position: 'absolute',
                                     left: width * 0.0612,
@@ -322,7 +365,7 @@ export default class Home extends Component {
                                    height: width * 0.4 * 1.1462,
                                    top: height*0.18,
                                    position: 'absolute',
-                                   right: width * 0.18,
+                                   right: width * 0.16,
                          }}
                      />
                   </Animated.View>
@@ -330,12 +373,10 @@ export default class Home extends Component {
                   <TouchableWithoutFeedback onPress={this._handleChanmaoPress} >
                     <Animated.View style={{ flex: 0.55,overflow: 'visible', left: this.state.cmLeft, }}>
 
-
-
-                        <Image source={require('./Img/HOME-PAGE-CM-iPhone.png')}
+                        <Image source={ this._getCMHomePage() }
 
                             style={[{ width: width * 0.4315,
-                                      height: width * 0.4315 * 1.88,
+                                      height: width * 0.4315 * cmHomeHeightRatio,
                                       top: 20,
                                       position: 'absolute',
                                       left: 0,overflow: 'visible',
