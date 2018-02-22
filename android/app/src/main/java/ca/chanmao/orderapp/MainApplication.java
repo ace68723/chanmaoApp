@@ -1,6 +1,9 @@
 package ca.chanmao.orderapp;
 
+import android.support.annotation.Nullable;
+
 import com.airbnb.android.react.maps.MapsPackage;
+import com.microsoft.codepush.react.CodePush;
 import com.theweflex.react.WeChatPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import io.realm.react.RealmReactPackage;
@@ -18,7 +21,11 @@ public class MainApplication extends NavigationApplication {
     return BuildConfig.DEBUG;
   }
 
-
+  @Nullable
+  @Override
+  public String getJSBundleFile() {
+    return CodePush.getJSBundleFile();
+  }
 
   protected List<ReactPackage> getPackages() {
     // Add additional packages you require here
@@ -28,10 +35,16 @@ public class MainApplication extends NavigationApplication {
             new MapsPackage(),
             new WeChatPackage(),
             new RNDeviceInfo(),
-            new RealmReactPackage()
+            new RealmReactPackage(),
+            new CodePush("kbWUqemN-getsFnDL8D0thDFKXtSNJramkK7f", MainApplication.this, BuildConfig.DEBUG)
 //            new VectorIconsPackage()
     );
+
+
+
   }
+
+
 
   @Override
   public List<ReactPackage> createAdditionalReactPackages() {
