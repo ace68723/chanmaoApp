@@ -18,6 +18,8 @@ public class MainApplication extends NavigationApplication {
     return BuildConfig.DEBUG;
   }
 
+
+
   protected List<ReactPackage> getPackages() {
     // Add additional packages you require here
     // No need to add RnnPackage and MainReactPackage
