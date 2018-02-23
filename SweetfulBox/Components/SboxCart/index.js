@@ -172,7 +172,7 @@ export default class SboxCart extends Component {
         )
       }
   }
-  
+
   _renderContent() {
     if (this.state.cartList.length > 0) {
       return (
@@ -244,9 +244,10 @@ export default class SboxCart extends Component {
             bottom:0,
             width:width,}}>
             <View style={{flexDirection:'row',
-                          margin:10,
-                          marginLeft:20,
-                          marginRight:20,}}>
+                          padding:10,
+                          paddingLeft:20,
+                          paddingRight:20,
+                          backgroundColor: 'white'}}>
               <Text style={{
                 flex:0.7,
                 color:'#ff7685',
