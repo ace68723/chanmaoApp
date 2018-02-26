@@ -1,4 +1,4 @@
-package ca.chanmao.orderapp;
+package ca.chanmao.app;
 
 import android.util.Log;
 

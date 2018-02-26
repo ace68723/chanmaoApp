@@ -1,4 +1,4 @@
-package ca.chanmao.orderapp;
+package ca.chanmao.app;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
