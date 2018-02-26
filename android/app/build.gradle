@@ -159,6 +159,7 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile 'com.facebook.fresco:fresco:1.5.0'
     compile 'com.facebook.fresco:animated-gif:1.5.0'
+    compile 'com.stripe:stripe-android:3.0.1'
     compile project(':RCTWeChat')
 }
 

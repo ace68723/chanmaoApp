@@ -7,6 +7,7 @@ import {
   View,
   Platform,
   Text,
+  NativeModules,
   StyleSheet,
 } from 'react-native';
 import _forEach from 'lodash/forEach';
@@ -58,7 +59,7 @@ export default class SboxHome extends Component {
     DatabaseInit();
   }
   componentDidMount() {
-
+      // NativeModules.StripeBridge.pay();
       SboxHomeStore.addChangeListener(this._onChange);
       SboxHomeAction.getHomeData();
       setTimeout(() => {

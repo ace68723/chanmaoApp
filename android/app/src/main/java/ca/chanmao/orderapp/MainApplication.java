@@ -40,6 +40,7 @@ public class MainApplication extends NavigationApplication {
             new WeChatPackage(),
             new RNDeviceInfo(),
             new RealmReactPackage(),
+            new NativePackage(),
             new CodePush("yUHXOB5mwRS-3ljvVytfpZNmNckE41ITwvOW-", MainApplication.this, BuildConfig.DEBUG)
 //            new VectorIconsPackage()
     );
@@ -55,5 +56,9 @@ public class MainApplication extends NavigationApplication {
     return getPackages();
   }
 
+  @Override
+  public void onCreate() {
+    super.onCreate();
 
+  }
 }
