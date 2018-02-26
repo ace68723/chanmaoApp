@@ -8,10 +8,12 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import OrderActions from '../../Actions/OrderAction';
 class MenuCard extends Component {
   constructor(props) {
       super(props);
+			this._handleAddItem = this._handleAddItem.bind(this);
   }
   // OrderActions.addItem.bind(null, props.dish)
   shouldComponentUpdate(nextProps, nextState){
@@ -21,6 +23,19 @@ class MenuCard extends Component {
       return false
     }
   }
+	_handleAddItem() {
+		if (!this.props.dish.tpgs) {
+			OrderActions.addItem(this.props.dish);
+		}else {
+			Navigation.showModal({
+				screen: 'CmSecondMenu',
+				animated: true,
+				passProps:{'dish': this.props.dish,
+				           'action': 'add'},
+				navigatorStyle: {navBarHidden: true},
+			});
+		}
+	}
   render(){
     let _decreaseButton = () => {
       if(this.props.qty > 0){
@@ -44,9 +59,7 @@ class MenuCard extends Component {
     }
     return (
       <TouchableOpacity activeOpacity={0.4}
-                        onPress={()=>{
-                            OrderActions.addItem( this.props.dish)
-                          }}>
+                        onPress={this._handleAddItem.bind(this)}>
          <View style={styles.container}>
             <View style={{flex:0.6}}>
               <Text style={styles.itemTitle}

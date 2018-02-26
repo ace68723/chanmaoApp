@@ -32,8 +32,8 @@ if(height == 812){
 const navigationHeight = viewHeight * (210/2208) - viewMarginTop;
 
 export default class SecondMenu extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 		// const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		// this.state = Object.assign({},SboxHistoryStore.getState(),{
 		// 			dataSource: ds.cloneWithRows([]),
@@ -50,11 +50,13 @@ export default class SecondMenu extends Component {
         //           {title: "冷热[必选]", limit: 1, options: ["无冰", "少冰", "正常冰", "热饮"]},
         //         {title: "冷热[必选]", limit: 1, options: ["无冰", "少冰", "正常冰", "热饮"]}],
     }
+		console.log('===', this.props);
     this._renderOptions = this._renderOptions.bind(this);
     this._renderSection = this._renderSection.bind(this);
     this._onChange = this._onChange.bind(this);
     this._optionsSelectHandler = this._optionsSelectHandler.bind(this);
 		this._deleteHandler = this._deleteHandler.bind(this);
+		this._goBack = this._goBack.bind(this);
   }
 
   componentDidMount() {
@@ -70,14 +72,12 @@ export default class SecondMenu extends Component {
   }
 
   _optionsSelectHandler(options, tar_option, limit, index) {
-		console.log(options, tar_option, limit, index);
 		var counter = 0;
     for (let option of options) {
 			if (option.selected == true) {
 				counter ++;
 			}
     }
-		console.log(counter);
 		if (counter >= limit && limit != 1 && tar_option.selected == false) {
 			return;
 		}
@@ -103,10 +103,16 @@ export default class SecondMenu extends Component {
 
 	}
 
+	_goBack() {
+		this.props.navigator.dismissModal({
+			animationType: 'slide-down'
+		});
+	}
+
   _renderLeftButton() {
     if (this.props.leftButtonText == 'x' || true) {
       return (
-        <TouchableOpacity onPress={this.props.goBack}>
+        <TouchableOpacity onPress={this._goBack}>
             <View style={{width:30,
                           height:30,
                           marginLeft:10,
@@ -133,8 +139,8 @@ export default class SecondMenu extends Component {
   }
 
 	_renderRightButton() {
-		var action = 'add';
-		if (action == 'add') {
+		console.log(this.props.action);
+		if (this.props.action === 'modify') {
 			return (
 				<TouchableOpacity activeOpacity={0.4}
 					                onPress={() => this._deleteHandler()}>
@@ -215,14 +221,16 @@ export default class SecondMenu extends Component {
 
   _renderConfirmBtn() {
     return (
-      <View style={{justifyContent: 'center',
-                    backgroundColor: '#ea7b21',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    paddingTop: 15,
-                    paddingBottom: 15,
-                    flexDirection: 'row'}}>
+      <TouchableOpacity
+				  activeOpacity={0.4}
+				  style={{justifyContent: 'center',
+                  backgroundColor: '#ea7b21',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  paddingTop: 15,
+                  paddingBottom: 15,
+                  flexDirection: 'row'}}>
           <View style={{flex: 1, marginLeft: 20}}></View>
           <Text style={{flex: 1,
                         textAlign: 'center',
@@ -238,7 +246,7 @@ export default class SecondMenu extends Component {
                         fontSize: 16}}>
               $ 5.50
           </Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -262,7 +270,7 @@ export default class SecondMenu extends Component {
               </View>
           </View>
           <ScrollView style={{paddingBottom: 50}}>
-              {this._renderSection(this.state.optionsList)}
+              {this._renderSection(this.props.dish.tpgs)}
               <View style={{flexDirection: 'row',
                             width: 100,
                             justifyContent: 'space-between',
