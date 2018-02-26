@@ -1,3 +1,9 @@
+## Road Map
+- [ ] PureComponent
+- [ ] redux
+- [ ] react native 0.54'
+- [ ] realm
+
 ## Version
 * [chanmao2.4.5](#chanmao2.4.5)
 * [sweetfulBox_1.1](#sweetfulBox_1.1)
