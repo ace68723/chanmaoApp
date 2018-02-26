@@ -75,10 +75,21 @@ const CartApi = {
         // })
     },
     getFilteredMenu(filteredMenu) {
-        return filteredMenu.map(item => {
-            delete item.qty;
-            return Object.assign({}, item, this.la_cartItems.find(cItem => cItem.id === item.id))
-        })
+        this.la_cartItems.map(cartItem => {
+
+          if (cartItem.qty === 0) {
+              this.removeItem(cartItem)
+              delete this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty;
+          } else {
+            this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty = cartItem.qty;
+          }
+        });
+        return this.la_menu;
+        //old version for getMenu
+        // return filteredMenu.map(item => {
+        //     delete item.qty;
+        //     return Object.assign({}, item, this.la_cartItems.find(cItem => cItem.id === item.id))
+        // })
     },
 }
 export default CartApi;
