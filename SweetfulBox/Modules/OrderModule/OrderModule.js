@@ -55,7 +55,9 @@ export default  {
                                                 expMonth,
                                                 expYear,
                                                 cvv);
+
       if(!cardToken) throw 'no cardToken'
+      // alert(cardToken);
       const {uid,token,version} = GetUserInfo();
       const lo_data = {
         authortoken:token,
