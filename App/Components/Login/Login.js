@@ -224,7 +224,6 @@ const styles = StyleSheet.create({
     flex:1,
     width:width,
     height:height,
-    backgroundColor:"#ffffff",
   },
   bgImageWrapper: {
     flex:1,

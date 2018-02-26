@@ -281,7 +281,12 @@ export default class InputAnimation extends Component {
 								</View>
 								{this._renderWechat()}
 
-							 <View style={{position:Platform.OS == 'ios'?'absolute':'relative',bottom:5,width:Platform.OS == 'ios'?width:'auto',alignItems:'center',}}>
+							 <View style={{position:Platform.OS == 'ios'?'absolute':'relative',
+                             bottom:5,
+                             width:Platform.OS == 'ios'?width:'auto',
+                             alignItems:'center',
+                             backgroundColor:'rgba(0,0,0,0)'
+                           }}>
 	                  <Text allowFontScaling={false} style={{color:"#ffffff",marginBottom:5}}>
 	                    {this.props.is_version}
 	                  </Text>

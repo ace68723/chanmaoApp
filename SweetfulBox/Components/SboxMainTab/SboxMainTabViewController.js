@@ -34,6 +34,19 @@ export default class MyComponent extends Component {
         passProps: {checkoutSuccessful: true},
         navigatorStyle: {navBarHidden: true},
       });
+    }else {
+      setTimeout(() => {
+        this.props.navigator.showLightBox({
+           screen: "SboxHomeAlert", // unique ID registered with Navigation.registerScreen
+           passProps: {
+             message:`我们的配送范围已扩大至图中红框区域，包括所有Condo或House均可送达~具体地址可在填写订单时确认。`}, // simple serializable object that will pass as props to the lightbox (optional)
+           style: {
+            //  backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+            //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
+           },
+           adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+          });
+      }, 6000);
     }
   }
   render() {
@@ -43,12 +56,12 @@ export default class MyComponent extends Component {
         tabBarActiveTextColor={'#ff7685'}
         tabBarUnderlineColor={'#ff7685'}
         tabBarUnderlineStyle={{'backgroundColor':'#ff7685'}}
-        tabBarTextStyle={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
+        tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',}}
         tabBarInactiveTextColor={'#666666'}
         prerenderingSiblingsNumber={3}
         tabBarPosition = "bottom"
         initialPage={this.state.initialPage}
-        style={{flex:1, }}
+        style={{flex:1}}
         renderTabBar={() => <TabBar />}
       >
         <SboxHome tabLabel="首页"
@@ -59,7 +72,7 @@ export default class MyComponent extends Component {
         <SboxCart
               tabLabel="购物车"
               activeIconImage={require("./Image/box.png")}
-              inactiveIconImage={require("./Image/box.png")}
+              inactiveIconImage={require("./Image/boxgrey.png")}
               navigator={this.props.navigator}
               tag={'fromMainTab'}
               />
