@@ -1,4 +1,4 @@
-package ca.chanmao.orderapp.wxapi;
+package ca.chanmao.app.wxapi;
 
 import android.app.Activity;
 import android.os.Bundle;

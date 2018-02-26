@@ -96,9 +96,7 @@ export default class CmEatMenuSearch extends Component {
 	_setSearchText(searchText){
 		if(searchText){
 			let filteredData = this._filterNotes(searchText, this.state.menu);
-			console.log(filteredData);
 			const filteredMenu = MenuStore.getFilteredMenu(filteredData)
-			console.log(filteredMenu);
 			this.setState({
 				 filteredMenu:filteredData,
 				 dataSource: filteredMenu,

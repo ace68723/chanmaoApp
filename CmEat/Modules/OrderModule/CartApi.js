@@ -18,12 +18,17 @@ const CartApi = {
     },
 
     addItem (item){
+      if(!item.tpgs){ //not have toping group
         const cartItem = this.findItem(item);
-        if (!cartItem) {
+        if (!cartItem) { // create new item in la_cartItems
             this.la_cartItems = [...this.la_cartItems, Object.assign({ qty: 1 }, item)];
         } else {
             this.increaseItem(cartItem)
         }
+      } else { //have toping group, item must have qty
+        this.la_cartItems = [...this.la_cartItems, item];
+      }
+
     },
 
     // increaseItem(cartItem) { cartItem.qty++ },
@@ -39,9 +44,7 @@ const CartApi = {
             const cartItem = this.findItem(item);
             let qty = cartItem.qty--;
             Object.assign({ qty: qty }, cartItem)
-            if (cartItem.qty === 0) {
-                this.removeItem(cartItem)
-            }
+
         }
     },
 
@@ -54,19 +57,39 @@ const CartApi = {
     },
 
     getMenu() {
-        // this.la_cartItems.map(item=>{
+        this.la_cartItems.map(cartItem => {
+
+          if (cartItem.qty === 0) {
+              this.removeItem(cartItem)
+              delete this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty;
+          } else {
+            this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty = cartItem.qty;
+          }
+        });
+        return this.la_menu;
+
+        //old version for getMenu
+        // return this.la_menu.map(item => {
+        //     delete item.qty;
+        //     return Object.assign({}, item, this.la_cartItems.find(cItem => cItem.id === item.id))
         // })
-        // return this.la_menu
-        return this.la_menu.map(item => {
-            delete item.qty;
-            return Object.assign({}, item, this.la_cartItems.find(cItem => cItem.id === item.id))
-        })
     },
     getFilteredMenu(filteredMenu) {
-        return filteredMenu.map(item => {
-            delete item.qty;
-            return Object.assign({}, item, this.la_cartItems.find(cItem => cItem.id === item.id))
-        })
+        this.la_cartItems.map(cartItem => {
+
+          if (cartItem.qty === 0) {
+              this.removeItem(cartItem)
+              delete this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty;
+          } else {
+            this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty = cartItem.qty;
+          }
+        });
+        return this.la_menu;
+        //old version for getMenu
+        // return filteredMenu.map(item => {
+        //     delete item.qty;
+        //     return Object.assign({}, item, this.la_cartItems.find(cItem => cItem.id === item.id))
+        // })
     },
 }
 export default CartApi;
