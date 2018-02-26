@@ -3,6 +3,7 @@ package ca.chanmao.app;
 import android.support.annotation.Nullable;
 
 import com.airbnb.android.react.maps.MapsPackage;
+import com.facebook.soloader.SoLoader;
 import com.microsoft.codepush.react.CodePush;
 import com.theweflex.react.WeChatPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -21,11 +22,14 @@ public class MainApplication extends NavigationApplication {
     return BuildConfig.DEBUG;
   }
 
+
   @Nullable
   @Override
   public String getJSBundleFile() {
     return CodePush.getJSBundleFile();
   }
+
+
 
   protected List<ReactPackage> getPackages() {
     // Add additional packages you require here
@@ -50,4 +54,6 @@ public class MainApplication extends NavigationApplication {
   public List<ReactPackage> createAdditionalReactPackages() {
     return getPackages();
   }
+
+
 }

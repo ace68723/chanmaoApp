@@ -6,6 +6,8 @@ import codePush from "react-native-code-push";
 codePush.sync({ installMode: codePush.InstallMode.IMMEDIATE});
 DatabaseInit();
 registerScreens();
+
+// codePush.sync({ installMode: codePush.InstallMode.IMMEDIATE});
 Navigation.startSingleScreenApp({
   screen: {
     // screen: 'cmHome', CmEat CmLogin// unique ID registered with Navigation.registerScreen

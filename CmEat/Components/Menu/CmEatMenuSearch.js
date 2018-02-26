@@ -14,6 +14,7 @@ import {
 	TextInput,
 	TouchableOpacity,
   View,
+	FlatList,
 } from 'react-native';
 import {
     filter,
@@ -29,9 +30,9 @@ export default class CmEatMenuSearch extends Component {
 
   constructor(props){
     super(props);
-		this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+		this.ds = [];
 		this.state = {
-			dataSource: this.ds.cloneWithRows([]),
+			dataSource: this.ds,
 			restaurant:props.restaurant,
 			cartTotals:'',
 		}
@@ -42,6 +43,7 @@ export default class CmEatMenuSearch extends Component {
 
   }
 	componentDidMount(){
+		console.log(this.state.dataSource);
 		const menuState = MenuStore.menuState()
 		const cartTotals = MenuStore.menuState().cartTotals;
 		this.setState({
@@ -59,7 +61,7 @@ export default class CmEatMenuSearch extends Component {
 			const filteredMenu = MenuStore.getFilteredMenu(this.state.filteredMenu)
 			this.setState({
 				cartTotals:cartTotals,
-				dataSource:this.state.dataSource.cloneWithRows(filteredMenu),
+				dataSource:filteredMenu,
 			})
 	}
 	_goBack(){
@@ -97,12 +99,12 @@ export default class CmEatMenuSearch extends Component {
 			const filteredMenu = MenuStore.getFilteredMenu(filteredData)
 			this.setState({
 				 filteredMenu:filteredData,
-				 dataSource: this.state.dataSource.cloneWithRows(filteredMenu),
+				 dataSource: filteredMenu,
 			 });
 		}else{
 			this.setState({
 				 filteredMenu:[],
-				 dataSource: this.state.dataSource.cloneWithRows([]),
+				 dataSource: this.state.dataSource,
 			 });
 		}
 
@@ -115,17 +117,18 @@ export default class CmEatMenuSearch extends Component {
 				return note.search(text) !== -1;
 			});
 	}
-	_renderMenuList (item,index)  {
+	_renderMenuList ({item,index})  {
 			const dish = item;
+			console.log(item);
+			console.log(index);
 			return(
 				<MenuCard key={index}
 									ds_name = {dish.ds_name}
 									dish = {dish}
-									qty = {dish.qty}
-									addItem = {this.props.addItem}
-									addToOrder= {this.props.addToOrder}/>
+									qty = {dish.qty}/>
 			)
 	}
+	_keyExtractor = (item, index) => `${item.id}${index}`;
 	// <Text style={{color:"#ffffff",fontSize:16,margin:3}}>${this.state.cartTotals.total}</Text>
   render(){
 		return(
@@ -166,16 +169,19 @@ export default class CmEatMenuSearch extends Component {
               onChangeText={this._setSearchText}
               underlineColorAndroid={"rgba(0,0,0,0)"}
           />
-          <ListView
-            dataSource={this.state.dataSource}
-            initialListSize={50}
-            pageSize={50}
-            keyboardShouldPersistTaps={'always'}
-            renderRow={(item) => this._renderMenuList(item)}
-            scrollRenderAheadDistance={300 }
-            enableEmptySections={true}
-            style={{overflow:'hidden',backgroundColor:"rgba(0,0,0,0)"}}
-          />
+
+
+					<FlatList
+					    scrollEventThrottle={1}
+					    data={this.state.dataSource}
+					    renderItem={this._renderMenuList}
+					    keyExtractor={this._keyExtractor}
+							extraData={this.state}
+					    getItemLayout={(data, index) => (
+					       {length: 100, offset: 100 * index, index}
+					    )}
+					/>
+
       </KeyboardAvoidingView>
     )
   }
