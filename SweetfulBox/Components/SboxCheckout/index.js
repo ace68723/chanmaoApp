@@ -343,9 +343,10 @@ export default class MyComponent extends Component {
             </View>
             <View style={{flex:0.7,alignItems:'flex-end'}}>
               <Text style={{fontSize:16,
-                            color:'#ff7685',
+                            // color:'#ff7685',
+                            color: 'black',
                             fontFamily:'FZZhunYuan-M02S',}}>
-                      {this.state.deliTime}
+                      两个工作日内{this.state.deliTime}
               </Text>
             </View>
 

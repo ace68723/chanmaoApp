@@ -56,12 +56,12 @@ export default class MyComponent extends Component {
         tabBarActiveTextColor={'#ff7685'}
         tabBarUnderlineColor={'#ff7685'}
         tabBarUnderlineStyle={{'backgroundColor':'#ff7685'}}
-        tabBarTextStyle={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
+        tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',}}
         tabBarInactiveTextColor={'#666666'}
         prerenderingSiblingsNumber={3}
         tabBarPosition = "bottom"
         initialPage={this.state.initialPage}
-        style={{flex:1, }}
+        style={{flex:1}}
         renderTabBar={() => <TabBar />}
       >
         <SboxHome tabLabel="首页"
@@ -72,7 +72,7 @@ export default class MyComponent extends Component {
         <SboxCart
               tabLabel="购物车"
               activeIconImage={require("./Image/box.png")}
-              inactiveIconImage={require("./Image/box.png")}
+              inactiveIconImage={require("./Image/boxgrey.png")}
               navigator={this.props.navigator}
               tag={'fromMainTab'}
               />
