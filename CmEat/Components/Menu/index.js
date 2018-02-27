@@ -162,7 +162,6 @@ class Menu extends Component {
 		_goToCheckout(){
 			if(Number(this.state.cartTotals.total)>0){
 				if(Number(this.state.cartTotals.total)>=Number(this.state.restaurant.start_amount)){
-          console.log(this.state.restaurant);
           this.props.navigator.showModal({
             screen: 'CmEatCheckout',
             animated: true,
@@ -212,7 +211,6 @@ class Menu extends Component {
 													showMenuAnimation = {this.state.showMenuAnimation}/>)
       }
     }
-
     _changeCartTotals(cartTotals){
       this.setState({
         cartTotals:cartTotals
@@ -255,12 +253,10 @@ class Menu extends Component {
                                 }}>
               <Header title={this.state.restaurant.name}
                       goBack={this._closeMenuAnimation}
+                      rightButton={this._goToMenuSearch}
+                      rightButtonImage={require('./Image/icon_search_input.png')}
                       leftButtonText={'×'}/>
-							<TouchableOpacity onPress={this._goToMenuSearch}
-											 style={{position:"absolute",top:30,right:15,}}>
-								<Image style={{width:18,height: 20,}}
-											 source={require('./Image/icon_search_input.png')}/>
-							</TouchableOpacity>
+
 							<TouchableOpacity onPress={this._goToCheckout}
 													style={{backgroundColor:"rgba(234,123,33,0.9)",
 														width:width,

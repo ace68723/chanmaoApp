@@ -28,7 +28,6 @@ const RestaurantModule = {
   async beforCheckout(reqData){
       try{
           const data = await RestaurantApi.beforCheckout(reqData);
-          console.log(data)
           if(data.result == 0){
             const pretax = data.pretax;
             const pretax_ori = data.pretax_ori;

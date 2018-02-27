@@ -92,7 +92,6 @@ class Menu extends Component {
       const menuState = MenuStore.menuState()
       const menu = menuState.menu;
       const cartTotals = menuState.cartTotals;
-      cartTotals.total = cartTotals.total.toFixed(2);
       const name = menuState.name;
       this.setState({
         name:name,

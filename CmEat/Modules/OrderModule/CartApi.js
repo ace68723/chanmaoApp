@@ -48,12 +48,20 @@ const CartApi = {
         }
     },
 
-    cartTotals(qty = 0, total = 0) {
+    cartTotals(qty = 0,total = 0) {
+      try {
         this.la_cartItems.forEach(cartItem => {
             qty += cartItem.qty;
             total += cartItem.qty * cartItem.price;
         })
-        return { qty, total };
+        console.log(total)
+        total = total.toFixed(2);
+        // console.log(total3)
+        return { qty, total};
+      } catch (e) {
+        console.error(e)
+      }
+
     },
 
     getMenu() {
