@@ -109,11 +109,11 @@ export default {
 
         }
       },
-      updateOptions(sectionList) {
+      updateTopping({topping,tpg_id}) {
         try{
-          const data = sectionList;
+          const data = {topping,tpg_id};
           dispatch({
-              actionType: AppConstants.UPDATE_SECTION_LIST, data
+              actionType: AppConstants.UPDATE_TOPPING, data
           })
         }catch(error){
 

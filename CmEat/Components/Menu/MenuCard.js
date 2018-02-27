@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import OrderActions from '../../Actions/OrderAction';
+import SecondMenuStore from '../CmSecondMenu/SecondMenuStore';
 class MenuCard extends Component {
   constructor(props) {
       super(props);
@@ -27,6 +28,7 @@ class MenuCard extends Component {
 		if (!this.props.dish.tpgs) {
 			OrderActions.addItem(this.props.dish);
 		}else {
+			SecondMenuStore.getOptions({'toppingGroupList': this.props.dish.tpgs})
 			Navigation.showModal({
 				screen: 'CmSecondMenu',
 				animated: true,

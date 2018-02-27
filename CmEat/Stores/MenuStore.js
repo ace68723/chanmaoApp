@@ -69,7 +69,7 @@ const MenuStore = Object.assign({},EventEmitter.prototype,{
 															{
 																	"tpg_id": 2,
 																	"tpg_name": "冰量",
-																	"tpg_limit": 1,
+																	"tpg_limit": 4,
 																	"tps": [
 																			{
 																					"tp_id": 4,
@@ -104,7 +104,7 @@ const MenuStore = Object.assign({},EventEmitter.prototype,{
 																					"tp_price": "2.00"
 																			},
 																			{
-																					"tp_id": 34,
+																					"tp_id": 35,
 																					"tp_name": "中杯",
 																					"tp_price": "1.00"
 																			}
