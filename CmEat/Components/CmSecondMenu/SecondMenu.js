@@ -16,6 +16,7 @@ import {
 
 import SecondMenuAction from './SecondMenuAction';
 import SecondMenuStore from './SecondMenuStore';
+import OrderActions from '../../Actions/OrderAction';
 // import SboxHeader from '../../App/Components/General/SboxHeader';
 
 // const Icon = createIconSetFromIcoMoon(icoMoonConfig);
@@ -32,34 +33,23 @@ if(height == 812){
 const navigationHeight = viewHeight * (210/2208) - viewMarginTop;
 
 export default class SecondMenu extends Component {
-  constructor() {
-    super();
-		// const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-		// this.state = Object.assign({},SboxHistoryStore.getState(),{
-		// 			dataSource: ds.cloneWithRows([]),
-		// 			items: [],
-		// 			refreshing: false,
-    // })
-    this.state = {
-        optionsList: [],
-        // optionsList: [{title: "尺寸[必选]", limit: 1, options: ["小杯", "中杯 + $0.50", "大杯 + $1.00"]},
-        //               {title: "加料[多选]", limit: 6, options: ["中杯 + $0.50", "中杯 + $0.50", "中杯 + $0.50", "中杯 + $0.50", "中杯 + $0.50", "中杯 + $0.50"]},
-        //               {title: "甜度[必选]", limit: 1, options: ["0%", "30%", "50%", "100%"]},
-        //               {title: "冷热[必选]", limit: 1, options: ["无冰", "少冰", "正常冰", "热饮"]},
-        //             {title: "冷热[必选]", limit: 1, options: ["无冰", "少冰", "正常冰", "热饮"]},
-        //           {title: "冷热[必选]", limit: 1, options: ["无冰", "少冰", "正常冰", "热饮"]},
-        //         {title: "冷热[必选]", limit: 1, options: ["无冰", "少冰", "正常冰", "热饮"]}],
-    }
-    this._renderOptions = this._renderOptions.bind(this);
-    this._renderSection = this._renderSection.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = SecondMenuStore.getState();
+
+    this._renderToppingGroupList = this._renderToppingGroupList.bind(this);
+    this._renderToppingGroup = this._renderToppingGroup.bind(this);
+		this._handleToppingOnPress = this._handleToppingOnPress.bind(this);
     this._onChange = this._onChange.bind(this);
     this._optionsSelectHandler = this._optionsSelectHandler.bind(this);
 		this._deleteHandler = this._deleteHandler.bind(this);
+		this._goBack = this._goBack.bind(this);
+		this._confirm = this._confirm.bind(this);
   }
+
 
   componentDidMount() {
     SecondMenuStore.addChangeListener(this._onChange);
-		SecondMenuAction.getSectionList();
 	}
   componentWillUnmount() {
     SecondMenuStore.removeChangeListener(this._onChange);
@@ -69,44 +59,55 @@ export default class SecondMenu extends Component {
     this.setState(SecondMenuStore.getState());
   }
 
-  _optionsSelectHandler(options, tar_option, limit, index) {
-		console.log(options, tar_option, limit, index);
-		var counter = 0;
-    for (let option of options) {
-			if (option.selected == true) {
-				counter ++;
-			}
-    }
-		console.log(counter);
-		if (counter >= limit && limit != 1 && tar_option.selected == false) {
-			return;
-		}
-		else {
-			var sectionList = this.state.optionsList;
-			for (let option of options) {
-	      if (tar_option.tp_name == option.tp_name) {
-	        if (option.selected == true) {
-	          option.selected = false;
-	        }else {
-	          option.selected = true;
-	        }
-	      }else if (limit == 1) {
-					option.selected = false;
-				}
-	    }
-			sectionList[index].options = options;
-	    SecondMenuAction.updateOptions(sectionList);
-		}
+  _optionsSelectHandler(option) {
+		console.log(option)
+		// var counter = 0;
+    // for (let option of options) {
+		// 	if (option.selected == true) {
+		// 		counter ++;
+		// 	}
+    // }
+		// if (counter >= limit && limit != 1 && tar_option.selected == false) {
+		// 	return;
+		// }
+		// else {
+		// 	var sectionList = this.state.optionsList;
+		// 	for (let option of options) {
+	  //     if (tar_option.tp_name == option.tp_name) {
+	  //       if (option.selected == true) {
+	  //         option.selected = false;
+	  //       }else {
+	  //         option.selected = true;
+	  //       }
+	  //     }else if (limit == 1) {
+		// 			option.selected = false;
+		// 		}
+	  //   }
+		// 	sectionList[index].options = options;
+	  //   SecondMenuAction.updateOptionsList(sectionList);
+		// }
   }
-
+ 	_handleToppingOnPress({topping,tpg_id}) {
+		 SecondMenuAction.updateTopping({topping,tpg_id});
+	}
 	_deleteHandler() {
 
+	}
+
+	_goBack() {
+		this.props.navigator.dismissModal({
+			animationType: 'slide-down'
+		});
+	}
+
+	_confirm() {
+		OrderActions.addItem(this.props.dish);
 	}
 
   _renderLeftButton() {
     if (this.props.leftButtonText == 'x' || true) {
       return (
-        <TouchableOpacity onPress={this.props.goBack}>
+        <TouchableOpacity onPress={this._goBack}>
             <View style={{width:30,
                           height:30,
                           marginLeft:10,
@@ -133,8 +134,7 @@ export default class SecondMenu extends Component {
   }
 
 	_renderRightButton() {
-		var action = 'add';
-		if (action == 'add') {
+		if (this.props.action === 'modify') {
 			return (
 				<TouchableOpacity activeOpacity={0.4}
 					                onPress={() => this._deleteHandler()}>
@@ -151,78 +151,76 @@ export default class SecondMenu extends Component {
 		}
 	}
   // <Text style={{color: '#a5a5a5', fontSize: 16}}>[{section.title.split('[')[1]}</Text>
-  _renderSection(list) {
-    var res = [];
-    var sectionIndex = 0;
-    for (let section of list) {
-      res.push(
-        <View key={sectionIndex}>
-            <View style={{flexDirection:'row',
-                          alignItems: 'center',
-                          backgroundColor: '#f5f5f5',
-                          paddingTop: 5,
-                          paddingBottom: 5}}>
-                <Text style={{marginLeft: 20, fontSize: 16}}>{section.tpg_name}</Text>
-            </View>
-            <View style={{flexDirection: 'row',
-                          flexWrap: 'wrap',
-                          paddingTop: 8}}>
-                {this._renderOptions(section.tps, section.tpg_limit, sectionIndex)}
-            </View>
-        </View>
-      )
-      sectionIndex ++;
-    }
-    return res;
-  }
 
-  // <FlatList
-  //     data={section.options}
-  //     horizontal={true}
-  //     renderItem={(item) => this._renderOption(item)}/>
-
-  _renderOptions(options, limit, sectionIndex) {
-    var res = [];
-    var index = 0;
-    for (let option of options) {
-      var color = "black";
-      if (option.selected) {
+	_renderToppingGroup(toppingGroup) {
+		let _toppingGroup = [];
+		toppingGroup.tps.forEach((topping,index)=>{
+			const tpg_id = toppingGroup.tpg_id;
+			var color = "black";
+      if (topping.selected) {
         color = '#ea7b21';
       }
-      res.push(
-        <TouchableOpacity
-				    key={index}
-            activeOpacity={0.4}
-            onPress={() => this._optionsSelectHandler(options, option, limit, sectionIndex)}>
-            <Text style={{marginLeft: 20,
-                          marginBottom: 8,
-                          fontSize: 15,
-                          borderRadius: 5,
-                          borderWidth: 1,
-                          borderColor: color,
-                          paddingTop: 5,
-                          paddingBottom: 5,
-                          paddingLeft: 10,
-                          paddingRight: 10}}>
-                {option.tp_name} + ${option.tp_price}
-            </Text>
-        </TouchableOpacity>
-      )
-      index ++;
-    }
-    return res;
+      _toppingGroup.push(
+				<TouchableOpacity
+					    key={index}
+	            activeOpacity={0.4}
+							onPress={this._handleToppingOnPress.bind(null,{topping,tpg_id})}
+	            >
+	            <Text style={{marginLeft: 20,
+	                          marginBottom: 8,
+	                          fontSize: 15,
+	                          borderRadius: 5,
+	                          borderWidth: 1,
+	                          borderColor: color,
+	                          paddingTop: 5,
+	                          paddingBottom: 5,
+	                          paddingLeft: 10,
+	                          paddingRight: 10}}>
+	                {topping.tp_name} + ${topping.tp_price}
+	            </Text>
+	        </TouchableOpacity>
+			)
+		})
+		return _toppingGroup;
+
+  }
+
+  _renderToppingGroupList(toppingGroupList) {
+		let _toppingGroupList = [];
+		toppingGroupList.forEach((toppingGroup,index)=>{
+			_toppingGroupList.push(
+				<View key={index}>
+						<View style={{flexDirection:'row',
+													alignItems: 'center',
+													backgroundColor: '#f5f5f5',
+													paddingTop: 5,
+													paddingBottom: 5}}>
+								<Text style={{marginLeft: 20, fontSize: 16}}>{toppingGroup.tpg_name}</Text>
+						</View>
+						<View style={{flexDirection: 'row',
+													flexWrap: 'wrap',
+													paddingTop: 8}}>
+								{this._renderToppingGroup(toppingGroup)}
+						</View>
+				</View>
+			)
+		})
+		return _toppingGroupList;
   }
 
   _renderConfirmBtn() {
     return (
-      <View style={{justifyContent: 'center',
-                    backgroundColor: '#ea7b21',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    paddingTop: 15,
-                    paddingBottom: 15,
-                    flexDirection: 'row'}}>
+      <TouchableOpacity
+				  onPress={() => this._confirm()}
+				  activeOpacity={0.4}
+				  style={{justifyContent: 'center',
+                  backgroundColor: '#ea7b21',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  paddingTop: 15,
+                  paddingBottom: 15,
+                  flexDirection: 'row'}}>
           <View style={{flex: 1, marginLeft: 20}}></View>
           <Text style={{flex: 1,
                         textAlign: 'center',
@@ -238,7 +236,7 @@ export default class SecondMenu extends Component {
                         fontSize: 16}}>
               $ 5.50
           </Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -262,7 +260,7 @@ export default class SecondMenu extends Component {
               </View>
           </View>
           <ScrollView style={{paddingBottom: 50}}>
-              {this._renderSection(this.state.optionsList)}
+              {this._renderToppingGroupList(this.state.toppingGroupList)}
               <View style={{flexDirection: 'row',
                             width: 100,
                             justifyContent: 'space-between',

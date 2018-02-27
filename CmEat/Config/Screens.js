@@ -6,6 +6,7 @@ import CmEatAddress from '../Components/Address';
 import CmEatAddInfo from '../Components/Address/CmEatAddInfo';
 import CmEatAboutUs from '../Components/Setting/AboutUs';
 import CmEatMenuSearch from '../Components/Menu/CmEatMenuSearch';
+import CmSecondMenu from '../Components/CmSecondMenu/SecondMenu';
 
 
 
@@ -15,6 +16,7 @@ Navigation.registerComponent('CmEatAddress', () => CmEatAddress);
 Navigation.registerComponent('CmEatAddInfo', () => CmEatAddInfo);
 Navigation.registerComponent('CmEatAboutUs', () => CmEatAboutUs);
 Navigation.registerComponent('CmEatMenuSearch', () => CmEatMenuSearch);
+Navigation.registerComponent('CmSecondMenu', () => CmSecondMenu);
 
 module.exports = Tabs;
 // module.exports = SboxHistory;

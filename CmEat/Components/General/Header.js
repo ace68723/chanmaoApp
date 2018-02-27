@@ -51,7 +51,7 @@ export default (props) =>{
     }
   }
   const rightButton = () => {
-    if(props.rightButton){
+    if(props.rightButton && props.rightButtonText){
       return (
           <TouchableOpacity style={{flex:0.2,}}
                             onPress={props.rightButton}>
@@ -62,6 +62,25 @@ export default (props) =>{
             </View>
           </TouchableOpacity>
       )
+    } else if (props.rightButton && props.rightButtonImage){
+      // let image;
+      // switch (props.rightButtonImage) {
+      //   case 'icon_search_input':
+      //       image = require('./Image/icon_search_input.png')
+      //     break;
+      //   default:
+      //
+      // }
+      return(
+        <TouchableOpacity style={{flex:0.2,}}
+                          onPress={props.rightButton}>
+          <View style={styles.rightImage}>
+          <Image style={{width:18,height: 20,}}
+                 source={props.rightButtonImage}/>
+          </View>
+        </TouchableOpacity>
+      )
+
     }else{
       return(
         <View style={{flex:0.2}}>
@@ -104,7 +123,6 @@ const styles = StyleSheet.create({
     fontSize:30,
     color:'#363646',
   },
-
   rightButton:{
     position:'absolute',
     bottom:10,
@@ -117,6 +135,18 @@ const styles = StyleSheet.create({
     borderRadius:8,
     paddingLeft:5,
     paddingRight:5,
+    right:10
+  },
+  rightImage:{
+      position:'absolute',
+      bottom:10,
+      height:30,
+      alignSelf:'flex-end',
+      alignItems:'center',
+      justifyContent:'center',
+      paddingLeft:5,
+      paddingRight:5,
+      right:10
   },
   rightButtonText:{
     fontSize:16,

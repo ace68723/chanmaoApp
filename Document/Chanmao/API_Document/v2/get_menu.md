@@ -49,7 +49,8 @@
 | ------- | ------ | ------ | ---- |
 | tpg_id     | number | Topping group ID   |    |
 | tpg_name     | string | Topping group name   |    |
-| tpg_limit     | number | Topping group limit（最多选几项）  |    |
+| tpg_max_limit     | number | Topping group limit（最多选几项）  |    |
+| tpg_min_limit     | number | Topping group limit（最少选几项）>=1时 为必填 |    |
 | tps     | array | Topping 选项  |    |
 
 | tps  | 类型及其范围 | 说明     | 默认值  |
@@ -83,47 +84,47 @@ Data Sample
             "ds_name": "鱼香肉丝a",
             "ds_desc": "",
             "price": "998.99",
-            "tpgs": [
-                {
-                    "tpg_id": 2,
-                    "tpg_name": "冰量",
-                    "tpg_limit": 1,
-                    "tps": [
-                        {
-                            "tp_id": 4,
-                            "tp_name": "少冰",
-                            "tp_price": "0.00"
-                        },
-                        {
-                            "tp_id": 5,
-                            "tp_name": "多冰",
-                            "tp_price": "0.00"
-                        },
-                        {
-                            "tp_id": 6,
-                            "tp_name": "不要冰",
-                            "tp_price": "0.00"
-                        },
-                        {
-                            "tp_id": 15,
-                            "tp_name": "给老子加到满",
-                            "tp_price": "1.00"
-                        }
-                    ]
+            "tpgs": {
+              2:{
+                  "tpg_id": 2,
+                  "tpg_name": "冰量",
+                  "tpg_max_limit": 3,
+                  "tpg_min_limit": 1,
+                  "tps": {
+                      4:{
+                          "tp_id": 4,
+                          "tp_name": "少冰",
+                          "tp_price": "0.00"
+                      },
+                      5:{
+                          "tp_id": 5,
+                          "tp_name": "多冰",
+                          "tp_price": "0.00",
+                      },
+                      6:{
+                          "tp_id": 6,
+                          "tp_name": "不要冰",
+                          "tp_price": "0.00"
+                      }
                 },
-                {
-                    "tpg_id": 17,
-                    "tpg_name": "12312312",
-                    "tpg_limit": 1,
-                    "tps": [
-                        {
-                            "tp_id": 34,
-                            "tp_name": "123123",
-                            "tp_price": "0.00"
-                        }
-                    ]
-                }
-            ]
+              17:{
+                  "tpg_id": 17,
+                  "tpg_name": "Size",
+                  "tpg_limit": 1,
+                  "tps": {
+                    34:{
+                        "tp_id": 34,
+                        "tp_name": "大杯",
+                        "tp_price": "2.00"
+                    },
+                    35:{
+                          "tp_id": 35,
+                          "tp_name": "中杯",
+                          "tp_price": "1.00"
+                    }
+                  }
+              }
+            }
           }
     ],             
     'name': string,

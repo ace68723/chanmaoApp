@@ -43,7 +43,6 @@ export default class CmEatMenuSearch extends Component {
 
   }
 	componentDidMount(){
-		console.log(this.state.dataSource);
 		const menuState = MenuStore.menuState()
 		const cartTotals = MenuStore.menuState().cartTotals;
 		this.setState({
@@ -57,7 +56,6 @@ export default class CmEatMenuSearch extends Component {
 	}
 	_onChange(){
 			const cartTotals = MenuStore.menuState().cartTotals;
-			cartTotals.total = cartTotals.total.toFixed(2);
 			const filteredMenu = MenuStore.getFilteredMenu(this.state.filteredMenu)
 			this.setState({
 				cartTotals:cartTotals,
@@ -119,8 +117,6 @@ export default class CmEatMenuSearch extends Component {
 	}
 	_renderMenuList ({item,index})  {
 			const dish = item;
-			console.log(item);
-			console.log(index);
 			return(
 				<MenuCard key={index}
 									ds_name = {dish.ds_name}
@@ -144,7 +140,7 @@ export default class CmEatMenuSearch extends Component {
                       alignItems:"center",
                       justifyContent:"center",
                     }}>
-          <Text style={{color:"#ffffff",fontSize:16,margin:3}}>${this.state.cartTotals.total}</Text>
+          <Text style={{color:"#ffffff",fontSize:16,margin:3,fontFamily:'FZZongYi-M05S',}}>${this.state.cartTotals.total}</Text>
           <View style={{margin:3,
                         borderRadius:15,
                         borderWidth:1,
@@ -153,7 +149,7 @@ export default class CmEatMenuSearch extends Component {
                         paddingTop:2,
                         paddingBottom:2,
                         borderColor:"#ffffff"}}>
-            <Text  style={{color:"#ffffff",fontSize:13,}}>去结账</Text>
+            <Text  style={{color:"#ffffff",fontSize:13,fontFamily:'FZZongYi-M05S',}}>去结账</Text>
           </View>
 
         </TouchableOpacity>

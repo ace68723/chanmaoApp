@@ -1,5 +1,5 @@
-import SboxConstants from '../../Constants/SboxConstants';
-import {dispatch, register} from '../../Dispatchers/SboxDispatcher';
+import AppConstants from '../../Constants/AppConstants';
+import {dispatch, register} from '../../Dispatchers/AppDispatcher';
 // import UserModule from '../../Modules/UserModule/UserModule'
 export default {
       async getSectionList(){
@@ -103,17 +103,17 @@ export default {
           //   }
           // }
           dispatch({
-              actionType: SboxConstants.GET_SECOND_MENU_DATA, data
+              actionType: AppConstants.GET_SECOND_MENU_DATA, data
           })
         }catch(error){
 
         }
       },
-      updateOptions(sectionList) {
+      updateTopping({topping,tpg_id}) {
         try{
-          const data = sectionList;
+          const data = {topping,tpg_id};
           dispatch({
-              actionType: SboxConstants.UPDATE_SECTION_LIST, data
+              actionType: AppConstants.UPDATE_TOPPING, data
           })
         }catch(error){
 

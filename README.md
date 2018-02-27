@@ -11,6 +11,9 @@
 <div id="chanmao2.4.5"> <div/>
  
 # chanmao2.4.5 二级菜单
+### 2018-02-27 update
+- [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md) 新增 `tpg_max_limit` 表示最多选几项，`tpg_min_limit`表示至少选几项，当`tpg_min_limit >= 1`为该选项必填
+
 ### [Update log](https://github.com/ace68723/chanmao/blob/master/Document/Chanmao/UpdateLog.md)
 ### Contents
 * [1. Data sample]()
