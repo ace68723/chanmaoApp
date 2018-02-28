@@ -12,7 +12,7 @@
  
 # chanmao2.4.5 二级菜单
 ### 2018-02-27 update
-- [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md) 新增 `tpg_max_limit` 表示最多选几项，`tpg_min_limit`表示至少选几项，当`tpg_min_limit >= 1`为该选项必填
+- API [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md)  新增 `tpg_max_limit` 表示最多选几项，`tpg_min_limit`表示至少选几项，当`tpg_min_limit >= 1`为该选项必填
 
 ### [Update log](https://github.com/ace68723/chanmao/blob/master/Document/Chanmao/UpdateLog.md)
 ### Contents
@@ -27,7 +27,7 @@
  
 # sweetfulBox_1.1
 ### 2018-02-06 update
-- [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/before_checkout.md)新增 `ev_discount:number`表示折扣总价，`ea_discount_message:array`表示所有折扣的信息，可参考data sample
+- API [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/before_checkout.md) 新增 `ev_discount:number`表示折扣总价，`ea_discount_message:array`表示所有折扣的信息，可参考data sample
 
 ### 2018-02-06 update
 - 补 设置用户地址文档 [3.8 User Addr](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/user_addr.md)
