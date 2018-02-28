@@ -94,7 +94,18 @@ export default  {
         cusid: res.ev_cusid,
         deliFee: res.ev_deliFee,
         last4: res.ev_last4,
-        total:res.ev_total
+        total:res.ev_total,
+        ea_discount_message:[
+          {image:"",
+           message:"新用户下单立减$8"
+          },
+          {image:"",
+           message:"满$60立减10"
+          },
+          {image:"",
+           message:"10元红包"
+          }
+        ]
       }
       if(res.ev_error === 1) {
         if(res.ev_message >= 10000 && res.ev_message <= 20000 ){

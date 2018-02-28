@@ -33,6 +33,7 @@ export default class SboxCart extends Component {
     this._deleteItem = this._deleteItem.bind(this);
     this._goToCheckout = this._goToCheckout.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
+    this._renderDiscount=this._renderDiscount.bind(this);
   }
   componentDidMount(){
     setTimeout(() => {
@@ -114,6 +115,13 @@ export default class SboxCart extends Component {
          adjustSoftInput: "resize",
         });
     }
+  }
+  _renderDiscount()
+  {
+    return(
+      <View style={{backgroundColor:'#fff1c5',width:width,height:25}}>
+      </View>
+    )
   }
   _renderGoBackBtn(){
     this.props.navigator.pop()
@@ -267,6 +275,7 @@ export default class SboxCart extends Component {
                    {this.state.totalQuantity}件
               </Text>
             </View>
+            
             <TouchableOpacity
                 style={{height:60,}}
                 onPress={this._goToCheckout}
