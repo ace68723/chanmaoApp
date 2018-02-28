@@ -26,9 +26,11 @@
 <div id="sweetfulBox_1.1"> <div/>
  
 # sweetfulBox_1.1
+### 2018-02-28 update
+- 补 设置用户地址文档 [3.8 User Addr](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/user_addr.md)
 
 ### 2018-02-06 update
-- 补 设置用户地址文档 [3.8 User Addr](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/user_addr.md)
+- [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/before_checkout.md)新增 `ev_discount:number`表示折扣总价，`ea_discount_message:array`表示所有折扣的信息，可参考data sample
 
 ### 2018-02-05 update
 - 新增 [2.1 Database migration](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/database_migration.md)
