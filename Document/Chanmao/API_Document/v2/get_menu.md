@@ -1,5 +1,7 @@
 ## 菜单菜品 API - 读取菜单
 
+### 2018-02-28 update
+
 接口需要删除`ea_dishes`结构
 
 接口需要增加 dishes 结构到menu
@@ -8,13 +10,11 @@ dishes array 文档和接口增加 `status`
 
 dishes array 文档和接口删除 `name` 
 
-
 dishes array 文档删除 `rid` 接口没有该参数
 
 dishes array 文档删除 `dt_id` 接口没有该参数
 
 dishes array 文档删除 `tpg_ids` 接口没有该参数
-
 
 dishes array 文档更名 `dt_price` 为 `price`
 
