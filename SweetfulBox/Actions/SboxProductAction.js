@@ -3,9 +3,10 @@ import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import ProductModule from '../Modules/ProductModule/ProductModule';
 import {sbox_getCartQuantity,sbox_cartQuantityListener} from '../Modules/Database';
 export default {
-    async getSingleProduct(spu_id){
+    async getSingleProduct(spu_id,sku_id){
         try{
           const data = await ProductModule.getSingleProduct(spu_id);
+          if (sku_id>=0) data.sku_id=sku_id;
           dispatch({
               actionType: SboxConstants.GET_SINGLE_PRODUCT, data
           })
@@ -56,6 +57,7 @@ export default {
         }
       },
     changeSelectAttr(selectedProduct){
+      console.log(selectedProduct)
       try{
         dispatch({
             actionType: SboxConstants.CHANGE_SELECT_ATTR, selectedProduct

@@ -58,8 +58,12 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
 
     const loading         = false;
     const serviceImg      = data.spu_service_img;
-    const selectedProduct = data.sku_list[0];
-
+    var selectedProduct = data.sku_list[0];
+    console.log(data);
+    for (var i=0;i<data.sku_list.length;i++)
+    {
+      if (data.sku_id==data.sku_list[i].sku_id) selectedProduct=data.sku_list[i];
+    }
     this.state = Object.assign(this.state,{  sku_fact,
                                              sku_image,
                                              sku_list,

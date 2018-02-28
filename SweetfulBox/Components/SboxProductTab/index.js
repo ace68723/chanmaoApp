@@ -59,7 +59,8 @@ export default class MyComponent extends Component {
     console.log(item)
     if (item.spu_status === 1 || item.sku_status === 1) return;
     const {spu_id, image} = item;
-    SboxProductAction.getSingleProduct(spu_id);
+    if (item.sku_id) {SboxProductAction.getSingleProduct(spu_id,item.sku_id)}
+    else {SboxProductAction.getSingleProduct(spu_id,-1)}
     setTimeout( () => {
       this.props.navigator.push({
         screen: 'SboxProductDetial',

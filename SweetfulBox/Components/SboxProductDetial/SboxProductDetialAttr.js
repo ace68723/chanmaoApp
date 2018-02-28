@@ -16,6 +16,9 @@ import SboxProductAction from '../../Actions/SboxProductAction';
 const {height, width} = Dimensions.get('window');
 export default class SboxProductDetialAttr extends Component {
 
+
+
+
   renderAttrValue(sku, skuIndex) {
             let borderColor;
             if (this.props.selectedProduct.sku_id == sku.sku_id ){

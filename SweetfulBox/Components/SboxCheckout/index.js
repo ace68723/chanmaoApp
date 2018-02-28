@@ -64,7 +64,7 @@ export default class MyComponent extends Component {
     this._renderCheckout = this._renderCheckout.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
     this._keyExtractor = this._keyExtractor.bind(this);
-
+    this._renderDiscountMessage=this._renderDiscountMessage.bind(this);
 
 
 
@@ -325,6 +325,29 @@ export default class MyComponent extends Component {
     }
 
   }
+  _renderDiscountMessage(messageList)
+  {
+    let _messageList = [];
+    for (i=0;i<messageList.length;i++)
+    {
+      // alert(messageList[i].message);
+      _messageList.push(
+        <View key={i} style={{flexDirection:'row',
+               alignItems: 'center',
+               justifyContent:'center',
+               paddingTop: 5,
+               paddingBottom: 5,
+               width:width*0.5,
+             }}>
+
+               <Text>
+                  {messageList[i].message}
+               </Text>
+        </View>
+      )
+    }
+    return _messageList;
+  }
   _renderOrderInfo() {
     return(
       <View style={{
@@ -365,9 +388,21 @@ export default class MyComponent extends Component {
             <View style={{flex:0.5, alignItems:'flex-end'}}>
               <Text style={{fontSize:16,
                             fontFamily:'FZZhunYuan-M02S',}}>
-                      Total: ${this.state.total}
+                      Total:
+                      <Text style={{fontSize:16,
+                                    fontFamily:'FZZhunYuan-M02S',color:'#ff7685'}}>
+                          ${this.state.total}
+                      </Text>
               </Text>
             </View>
+          </View>
+          <View style={{flexDirection: 'row',
+                 flexWrap: 'wrap',
+                 paddingTop: 10,
+                 borderBottomWidth: 1,
+                 borderBottomColor: '#DCDCDC',
+               }}>
+            {this._renderDiscountMessage(this.state.ea_discount_message)}
           </View>
           <TouchableOpacity
                       onPress={this._goToAddCard}
@@ -420,6 +455,7 @@ export default class MyComponent extends Component {
     );
   }
   render() {
+    console.log(this.state);
     let bottom;
     if(this.props.tag === 'fromMainTab'){
       bottom = 65;
