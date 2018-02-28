@@ -38,7 +38,6 @@
 | ev_message | string | 报错信息        | 空          |
 | ev_cusid   | string | Customer ID | 空为没有       |
 | ev_last4   | string | 信用卡后4位      | 空为没有       |
-| ev_discount| number | 总折扣价格      | 空为没有       |
 | ea_discount_message| array | 折扣信息      | 空为没有       |
 | ev_oos     | number | 库存不足        | 0 为不缺，1为缺货 |
 | ea_prod    | array  | 返回所有的产品，通过 `quantity` `actual` 判断缺货        |           |
@@ -46,7 +45,7 @@
 | ev_deliFee | string | 运费          |            |
 | ev_pretax  | string | 税前总价        |            |
 | ev_total   | string | 税后总价        |            |
-
+| ev_original_total | number | 原始税后总价      |        |
 
 | ea_prod  | 类型及其范围 | 说明   |
 | -------- | ------ | ---- |
@@ -93,7 +92,7 @@ ev_message: string,
 ev_cusid: string,
 ev_last4: string,
 ev_oos: number, 
-ev_discount:number
+ev_original_total:number
 ea_discount_message:[
   {image:string,
    message:string
