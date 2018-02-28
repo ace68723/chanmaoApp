@@ -13,6 +13,7 @@
 # chanmao2.4.5 二级菜单
 ### 2018-02-28 update
 - API [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md) 新增 `测试接口` `测试商家` `测试菜品`
+- 更新API [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md) 文档需要该接口
 
 ### 2018-02-27 update
 - API [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md)  新增 `tpg_max_limit` 表示最多选几项，`tpg_min_limit`表示至少选几项，当`tpg_min_limit >= 1`为该选项必填
