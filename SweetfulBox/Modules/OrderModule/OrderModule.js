@@ -86,6 +86,7 @@ export default  {
       const lo_data = {
         authortoken:token,
         ia_prod: _productList,
+        version:version,
       }
       const res = await OrderAPI.getOrderBefore(lo_data);
       console.log(res);
@@ -96,6 +97,7 @@ export default  {
         deliFee: res.ev_deliFee,
         last4: res.ev_last4,
         total:res.ev_total,
+        ev_original_total:res.ev_original_total,
         ea_discount_message:res.ea_discount_message,
       }
       console.log(eo_data);

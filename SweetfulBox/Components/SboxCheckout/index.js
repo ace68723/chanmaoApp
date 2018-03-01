@@ -65,7 +65,7 @@ export default class MyComponent extends Component {
     this._renderHeader = this._renderHeader.bind(this);
     this._keyExtractor = this._keyExtractor.bind(this);
     this._renderDiscountMessage=this._renderDiscountMessage.bind(this);
-
+    this._renderDeliveryFee=this._renderDeliveryFee.bind(this);
 
 
 
@@ -339,7 +339,7 @@ export default class MyComponent extends Component {
                width:width*0.5,
              }}>
                 <View style={{alignItems:'center',
-                justifyContent:'center',
+                marginLeft:15,
                 height:35,
                 flexDirection:'row',
                 width:width*0.5,}}>
@@ -357,7 +357,19 @@ export default class MyComponent extends Component {
     }
     return _messageList;
   }
+  _renderDeliveryFee()
+  {
+    if (this.state.deliFee>0) return (
+      <View style={{flex:0.5,}}>
+        <Text style={{fontSize:16,
+                      fontFamily:'FZZhunYuan-M02S',}}>
+                Delivery Fee: ${this.state.deliFee}
+        </Text>
+      </View>
+    );
+  }
   _renderOrderInfo() {
+    console.log(this.state);
     return(
       <View style={{
                     marginTop:15,
@@ -383,28 +395,6 @@ export default class MyComponent extends Component {
             </View>
 
           </View>
-          <View style={{
-                        padding:10,
-                        flexDirection:'row',
-                        borderBottomWidth: 1,
-                        borderColor: '#DCDCDC',}}>
-            <View style={{flex:0.5,}}>
-              <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}>
-                      Delivery Fee: ${this.state.deliFee}
-              </Text>
-            </View>
-            <View style={{flex:0.5, alignItems:'flex-end'}}>
-              <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}>
-                      Total:
-                      <Text style={{fontSize:16,
-                                    fontFamily:'FZZhunYuan-M02S',color:'#ff7685'}}>
-                          ${this.state.total}
-                      </Text>
-              </Text>
-            </View>
-          </View>
           <View style={{flexDirection: 'row',
                  flexWrap: 'wrap',
 
@@ -413,6 +403,27 @@ export default class MyComponent extends Component {
                }}>
             {this._renderDiscountMessage(this.state.ea_discount_message)}
           </View>
+          <View style={{
+                        padding:10,
+                        borderBottomWidth: 1,
+                        borderColor: '#DCDCDC',}}>
+            {this._renderDeliveryFee()}
+            <View style={{flex:0.5, }}>
+              <Text style={{fontSize:16,
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                      Total:
+                      <Text style={{fontSize:16,
+                                    fontFamily:'FZZhunYuan-M02S',color:'#ff7685'}}>
+                          ${this.state.total}
+                          <Text style={{fontSize:16,
+                                        fontFamily:'FZZhunYuan-M02S',color:'grey',textDecorationLine:'line-through'}}>
+                              ({this.state.ev_original_total})
+                          </Text>
+                      </Text>
+              </Text>
+            </View>
+          </View>
+
           <TouchableOpacity
                       onPress={this._goToAddCard}
                       style={{
@@ -455,7 +466,7 @@ export default class MyComponent extends Component {
         <SboxHeader title={"结账"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={'x'}/>
-                <ScrollView>
+                <ScrollView style={{marginBottom:40}}>
                   {this._renderHeader()}
                   {cartList}
                 </ScrollView>

@@ -185,6 +185,7 @@ export default class SboxCart extends Component {
     if (this.state.cartList.length > 0) {
       return (
         <FlatList
+            style={{position:'absolute',width:width,height:350,top:50,}}
           	enableEmptySections
             data={this.state.cartList}
             renderItem={this._renderItem}
@@ -193,7 +194,7 @@ export default class SboxCart extends Component {
       )
     }else {
       return(
-        <Image style={{height: height, width: width}} source={require('./Image/no_item.png')}></Image>
+        <Image  style={{height: height, width: width}} source={require('./Image/no_item.png')}></Image>
       )
     }
   }
@@ -275,7 +276,7 @@ export default class SboxCart extends Component {
                    {this.state.totalQuantity}件
               </Text>
             </View>
-            
+
             <TouchableOpacity
                 style={{height:60,}}
                 onPress={this._goToCheckout}
