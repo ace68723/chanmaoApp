@@ -35,6 +35,7 @@
 ### 2018-02-28 update
 - API [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/before_checkout.md) 新增 `ev_original_total:number`表示原始税后总价，`ea_discount_message:array`表示所有折扣的信息，删除`ev_discount`,可参考data sample
 
+### [Update log](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/UpdateLog.md)
 
 ### Contents
 * [1. Data sample](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/DataSample.md)
