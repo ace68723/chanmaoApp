@@ -14,6 +14,7 @@
 ### 2018-02-28 update
 - API [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md) 新增 `测试接口` `测试商家` `测试菜品`
 - 更新API [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md) 文档需要该接口
+- 更新API [4.1 Checkout](https://github.com/ace68723/chanmao/blob/master/Document/Chanmao/API_Document/v1/checkout.md) 新增 `tpgs`
 
 ### 2018-02-27 update
 - API [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md)  新增 `tpg_max_limit` 表示最多选几项，`tpg_min_limit`表示至少选几项，当`tpg_min_limit >= 1`为该选项必填
@@ -23,9 +24,10 @@
 * [1. Data sample]()
 * [2. Database schema ]()
 
-* [3. API Document (v2)](https://github.com/ace68723/chanmao/tree/master/Document/Chanmao/API_Document)
+* [3. API Document (v2)](https://github.com/ace68723/chanmao/tree/master/Document/Chanmao/API_Document/v2)
   * [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md)
-  
+* [4. API Document (v1)](https://github.com/ace68723/chanmao/tree/master/Document/Chanmao/API_Document/1)
+  * [4.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v1/checkout.md)  
 
 <div id="sweetfulBox_1.1"> <div/>
  
