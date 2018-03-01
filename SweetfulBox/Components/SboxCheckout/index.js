@@ -66,8 +66,8 @@ export default class MyComponent extends Component {
     this._keyExtractor = this._keyExtractor.bind(this);
     this._renderDiscountMessage=this._renderDiscountMessage.bind(this);
     this._renderDeliveryFee=this._renderDeliveryFee.bind(this);
-
-
+    this._renderOriginalPrice=this._renderOriginalPrice.bind(this);
+    this._existDiscount=this._existDiscount.bind(this);
 
   }
   componentDidMount() {
@@ -328,6 +328,7 @@ export default class MyComponent extends Component {
   _renderDiscountMessage(messageList)
   {
     let _messageList = [];
+
     for (i=0;i<messageList.length;i++)
     {
       // alert(messageList[i].message);
@@ -368,6 +369,28 @@ export default class MyComponent extends Component {
       </View>
     );
   }
+  _renderOriginalPrice()
+  {
+    if (this.state.ev_original_total) return (
+      <Text style={{fontSize:16,
+                    fontFamily:'FZZhunYuan-M02S',color:'grey',textDecorationLine:'line-through'}}>
+          ({this.state.ev_original_total})
+      </Text>
+    )
+  }
+  _existDiscount()
+  {
+    if (this.state.ea_discount_message.length>0) return (
+      <View style={{flexDirection: 'row',
+             flexWrap: 'wrap',
+
+             borderBottomWidth: 1,
+             borderBottomColor: '#DCDCDC',
+           }}>
+        {this._renderDiscountMessage(this.state.ea_discount_message)}
+      </View>
+    )
+  }
   _renderOrderInfo() {
     console.log(this.state);
     return(
@@ -395,14 +418,7 @@ export default class MyComponent extends Component {
             </View>
 
           </View>
-          <View style={{flexDirection: 'row',
-                 flexWrap: 'wrap',
-
-                 borderBottomWidth: 1,
-                 borderBottomColor: '#DCDCDC',
-               }}>
-            {this._renderDiscountMessage(this.state.ea_discount_message)}
-          </View>
+          {this._existDiscount()}
           <View style={{
                         padding:10,
                         borderBottomWidth: 1,
@@ -417,7 +433,7 @@ export default class MyComponent extends Component {
                           ${this.state.total}
                           <Text style={{fontSize:16,
                                         fontFamily:'FZZhunYuan-M02S',color:'grey',textDecorationLine:'line-through'}}>
-                              ({this.state.ev_original_total})
+                              {this._renderOriginalPrice()}
                           </Text>
                       </Text>
               </Text>
