@@ -101,8 +101,12 @@ dishes array 文档更名 `dt_price` 为 `price`
 
 ```
 {
-    ev_result: number,
-    ev_message: string
+    ev_error	
+    ev_message	
+    catalog:[]	 
+    menu:[]	     
+    open:
+    promo:null
 }
 ```
 
