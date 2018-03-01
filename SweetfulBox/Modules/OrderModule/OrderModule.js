@@ -88,6 +88,7 @@ export default  {
         ia_prod: _productList,
       }
       const res = await OrderAPI.getOrderBefore(lo_data);
+      console.log(res);
       const eo_data ={
         prod: res.ea_prod,
         addr: res.eo_addr,
@@ -95,18 +96,9 @@ export default  {
         deliFee: res.ev_deliFee,
         last4: res.ev_last4,
         total:res.ev_total,
-        ea_discount_message:[
-          {image:"",
-           message:"新用户下单立减$8"
-          },
-          {image:"",
-           message:"满$60立减10"
-          },
-          {image:"",
-           message:"10元红包"
-          }
-        ]
+        ea_discount_message:res.ea_discount_message,
       }
+      console.log(eo_data);
       if(res.ev_error === 1) {
         if(res.ev_message >= 10000 && res.ev_message <= 20000 ){
           return {checkoutStatus:"shouldDoAuth"}
@@ -128,9 +120,11 @@ export default  {
       }
 
       eo_data = Object.assign(eo_data,{checkoutStatus:"readyToCheckout"});
+
       return eo_data
 
     } catch ({ev_message}) {
+      console.log(ev_message);
       throw `getOrderBefore ${ev_message} `
     }
   },

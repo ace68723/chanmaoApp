@@ -335,14 +335,23 @@ export default class MyComponent extends Component {
         <View key={i} style={{flexDirection:'row',
                alignItems: 'center',
                justifyContent:'center',
-               paddingTop: 5,
-               paddingBottom: 5,
+
                width:width*0.5,
              }}>
+                <View style={{alignItems:'center',
+                justifyContent:'center',
+                height:35,
+                flexDirection:'row',
+                width:width*0.5,}}>
+                  <Image
+                    style={{width:33,height:20,}}
+                    source={{uri:messageList[i].image}}
+                  />
+                   <Text style={{fontSize:16,marginLeft:5}}>
+                      {messageList[i].message}
+                   </Text>
 
-               <Text>
-                  {messageList[i].message}
-               </Text>
+               </View>
         </View>
       )
     }
@@ -398,7 +407,7 @@ export default class MyComponent extends Component {
           </View>
           <View style={{flexDirection: 'row',
                  flexWrap: 'wrap',
-                 paddingTop: 10,
+
                  borderBottomWidth: 1,
                  borderBottomColor: '#DCDCDC',
                }}>
