@@ -1,3 +1,10 @@
+
+### 2018-02-06 update	
+- 补 设置用户地址文档 [3.8 User Addr](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/user_addr.md)	
+
+### 2018-02-05 update	
+- 新增 [2.1 Database migration](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/database_migration.md)
+
 ### 2018-01-31 update
 - 新增API [3.7 Theme Query](https://github.com/ace68723/sweetfulBox_1.1/blob/master/Document/SweetfulBox/API_Document/v2/theme_query.md) 首页列表下拉时获取数据用
 
