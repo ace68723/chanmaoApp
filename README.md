@@ -27,7 +27,7 @@
 * [3. API Document (v2)](https://github.com/ace68723/chanmao/tree/master/Document/Chanmao/API_Document/v2)
   * [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md)
 * [4. API Document (v1)](https://github.com/ace68723/chanmao/tree/master/Document/Chanmao/API_Document/1)
-  * [4.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v1/checkout.md)  
+  * [4.1 Checkout](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v1/checkout.md)  
 
 <div id="sweetfulBox_1.1"> <div/>
  
