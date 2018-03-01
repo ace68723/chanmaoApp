@@ -146,6 +146,7 @@ export default  {
       const lo_data = {
         authortoken:token,
         prod: prod,
+        version:version,
       }
       const res = await OrderAPI.checkout(lo_data);
 
