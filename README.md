@@ -34,7 +34,9 @@
 # sweetfulBox_1.1
 
 ### 2018-03-01 update
-API [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/before_checkout.md)  [3.4 Add order](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/add_order.md) 增加 `version`参数
+API [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/before_checkout.md)  增加`version`参数 
+
+[3.4 Add order](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/add_order.md) 增加 `version` `comment`参数 
 
 ### 2018-02-28 update
 - API [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/before_checkout.md) 新增 `ev_original_total:number`表示原始税后总价，`ea_discount_message:array`表示所有折扣的信息，删除`ev_discount`,可参考data sample
