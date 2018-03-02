@@ -10,6 +10,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import { findIndex } from 'lodash';
 
@@ -33,6 +34,7 @@ export default class SboxCart extends Component {
     this._deleteItem = this._deleteItem.bind(this);
     this._goToCheckout = this._goToCheckout.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
+    this._renderDiscount=this._renderDiscount.bind(this);
   }
   componentDidMount(){
     setTimeout(() => {
@@ -115,6 +117,13 @@ export default class SboxCart extends Component {
         });
     }
   }
+  _renderDiscount()
+  {
+    return(
+      <View style={{backgroundColor:'#fff1c5',width:width,height:25}}>
+      </View>
+    )
+  }
   _renderGoBackBtn(){
     this.props.navigator.pop()
   }
@@ -174,9 +183,15 @@ export default class SboxCart extends Component {
   }
 
   _renderContent() {
+    let headerHeight = 64;
+    if (Platform.OS === 'ios' && ((height === 812 && width === 375) || (height === 375 && width === 812))){
+      // if iPhone x
+      headerHeight = 88;
+    }
     if (this.state.cartList.length > 0) {
       return (
         <FlatList
+            style={{position:'absolute',width:width,height:350,top:headerHeight,}}
           	enableEmptySections
             data={this.state.cartList}
             renderItem={this._renderItem}
@@ -185,7 +200,7 @@ export default class SboxCart extends Component {
       )
     }else {
       return(
-        <Image style={{height: height, width: width}} source={require('./Image/no_item.png')}></Image>
+        <Image  style={{height: height, width: width}} source={require('./Image/no_item.png')}></Image>
       )
     }
   }
@@ -267,6 +282,7 @@ export default class SboxCart extends Component {
                    {this.state.totalQuantity}件
               </Text>
             </View>
+
             <TouchableOpacity
                 style={{height:60,}}
                 onPress={this._goToCheckout}
@@ -300,7 +316,6 @@ export default class SboxCart extends Component {
                 goBack={this._renderGoBackBtn}
                 leftButtonText={this.props.backButton}/>
         {this._renderContent()}
-
         {this._renderConfirmBtn()}
       </View>
     );

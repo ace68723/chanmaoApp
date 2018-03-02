@@ -19,6 +19,7 @@ import {DatabaseInit} from '../../Modules/Database';
 import SboxHomeHeader from './SboxHomeHeader';
 import HeaderWithBanner from './HeaderWithBanner';
 import SboxProductTab from '../SboxProductTab/';
+import SboxProductAction from '../../Actions/SboxProductAction';
 // import SboxProductTab from '../SboxProductTab1.0/SboxProductTabViewController';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -54,6 +55,7 @@ export default class SboxHome extends Component {
       this._getScrollViewRefs = this._getScrollViewRefs.bind(this);
       this._backToHome = this._backToHome.bind(this);
       this._renderScrollableTabView = this._renderScrollableTabView.bind(this);
+      this._jumpToItem = this._jumpToItem.bind(this);
   }
   componentWillMount() {
     DatabaseInit();
@@ -84,6 +86,15 @@ export default class SboxHome extends Component {
 
   _backToHome() {
     this.props.handleBackToHome();
+  }
+  _jumpToItem(spu_id, sku_id){
+    SboxProductAction.getSingleProduct(spu_id,sku_id);
+    setTimeout( () => {
+      this.props.navigator.push({
+        screen: 'SboxProductDetial',
+        navigatorStyle: {navBarHidden: true},
+      })
+    }, 150);
   }
   _setPosition(){
     if (this.setPositionStarted) return
@@ -191,6 +202,7 @@ export default class SboxHome extends Component {
             navigator={this.props.navigator}
             openMenu = {this._openMenu}
             scrollY = {this.state.scrollY}
+            jumpToItem = {this._jumpToItem}
         />
       )
     }

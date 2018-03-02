@@ -91,7 +91,7 @@ export default {
               const selected = false;
             });
           });
-          console.log(lo_data.tpgs);
+          // console.log(lo_data.tpgs);
           var data = {
             optionsList: lo_data.tpgs
           }

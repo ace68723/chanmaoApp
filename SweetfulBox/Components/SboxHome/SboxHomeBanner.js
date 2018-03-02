@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
 
 export default class SboxHomeBanner extends Component {
   _handleOnPress(advertisement){
+    console.log(advertisement);
 		if(advertisement.navitype == 2){
 			this.props.navigator.push({
 				id: 'AdView',

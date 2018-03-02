@@ -1,5 +1,9 @@
 ##  下单前检查 API
 
+### 2018-03-01 update
+
+接口增加`version`参数
+
 
 |  Tables  |           说明            | 默认值  |
 | :------: | :---------------------: | :--: |
@@ -23,6 +27,7 @@
 | Tables  | 类型及其范围 | 说明    | 默认值  |
 | ------- | ------ | ----- | ---- |
 | ia_prod | array  | 产品及数量 |      |
+| version | string  | 版本号 |      |
 
 | ia_prod  | 类型及其范围 | 说明   |
 | -------- | ------ | ---- |
@@ -38,13 +43,14 @@
 | ev_message | string | 报错信息        | 空          |
 | ev_cusid   | string | Customer ID | 空为没有       |
 | ev_last4   | string | 信用卡后4位      | 空为没有       |
+| ea_discount_message| array | 折扣信息      | 空为没有       |
 | ev_oos     | number | 库存不足        | 0 为不缺，1为缺货 |
 | ea_prod    | array  | 返回所有的产品，通过 `quantity` `actual` 判断缺货        |           |
 | eo_addr    | object | 地址信息        |            |
 | ev_deliFee | string | 运费          |            |
 | ev_pretax  | string | 税前总价        |            |
 | ev_total   | string | 税后总价        |            |
-
+| ev_original_total | number | 原始税后总价      |        |
 
 | ea_prod  | 类型及其范围 | 说明   |
 | -------- | ------ | ---- |
@@ -61,6 +67,10 @@
 | tel     | string | 电话   |
 | unit    | string | unit |
 
+| ea_discount_message | 类型及其范围 | 说明   |
+| ------- | ------ | ---- |
+| image    | string | 折扣图片 |
+| message    | string | 折扣信息 |
 
 
 
@@ -87,6 +97,12 @@ ev_message: string,
 ev_cusid: string,
 ev_last4: string,
 ev_oos: number, 
+ev_original_total:number
+ea_discount_message:[
+  {image:string,
+   message:string
+  },
+]
 eo_addr: {
   abid: number,
   name: string,
@@ -106,4 +122,18 @@ ea_prod: [
 ev_deliFee: string,
 ev_pretax: string,
 ev_total: string
+```
+### data sample
+```
+ea_discount_message:[
+  {image:"",
+   message:"新用户下单立减$8"
+  },
+  {image:"",
+   message:"满$60立减10"
+  },
+  {image:"",
+   message:"10元红包"
+  }
+]
 ```
