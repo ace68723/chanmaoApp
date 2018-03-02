@@ -130,7 +130,7 @@ export default  {
       throw `getOrderBefore ${ev_message} `
     }
   },
-  async checkout(box) {
+  async checkout(comment) {
     try {
       const {uid,token,version} = GetUserInfo();
       if(!token) return {checkoutStatus:"shouldDoAuth"}
@@ -147,6 +147,7 @@ export default  {
         authortoken:token,
         prod: prod,
         version:version,
+        comment:comment,
       }
       const res = await OrderAPI.checkout(lo_data);
 

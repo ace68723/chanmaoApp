@@ -25,10 +25,10 @@ export default {
           console.log(error)
         }
       },
-    async checkout() {
+    async checkout(comment) {
       try{
 
-        const data = await OrderModule.checkout();
+        const data = await OrderModule.checkout(comment);
         dispatch({
             actionType: SboxConstants.SBOX_CHECKOUT, data
         })

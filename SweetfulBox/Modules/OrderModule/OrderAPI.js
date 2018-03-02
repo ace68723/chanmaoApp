@@ -69,6 +69,7 @@ export default  {
     options.body = JSON.stringify({
       prod: io_data.prod,
       version:io_data.version,
+      comment: io_data.comment,
     })
     return fetch(url,options)
             .then((res) => res.json())

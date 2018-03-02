@@ -13,13 +13,16 @@ import {
   ScrollView,
   TouchableOpacity,
   Platform,
-  ImageBackground
+  ImageBackground,
+  TouchableWithoutFeedback,
+  TextInput,
 } from 'react-native';
 
 import UserInfo from '../SboxAddAddressInfo/UserInfo';
 import SboxCart from '../SboxCart';
 import CheckoutButton from './CheckoutButton';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
+import CommentModal from 'react-native-modalbox';
 
 import SboxOrderAction from '../../Actions/SboxOrderAction';
 import SboxProductAction from '../../Actions/SboxProductAction';
@@ -63,6 +66,7 @@ export default class MyComponent extends Component {
     this._renderItem = this._renderItem.bind(this);
     this._renderCheckout = this._renderCheckout.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
+    this._renderComment = this._renderComment.bind(this);
     this._keyExtractor = this._keyExtractor.bind(this);
     this._renderDiscountMessage=this._renderDiscountMessage.bind(this);
     this._renderDeliveryFee=this._renderDeliveryFee.bind(this);
@@ -233,7 +237,7 @@ export default class MyComponent extends Component {
     this.setState({
       checkoutStatus:'loading',
     })
-    SboxOrderAction.checkout();
+    SboxOrderAction.checkout(this.state.comment);
   }
 
   _renderGoBackBtn() {
@@ -393,6 +397,13 @@ export default class MyComponent extends Component {
   }
   _renderOrderInfo() {
     console.log(this.state);
+    let commentText = ()=>{
+      if(this.state.comment){
+        return(	<Text>备注： {this.state.comment}</Text>)
+      }else{
+        return(<Text style={{color:'#ababb0'}}>添加备注</Text>)
+      }
+    }
     return(
       <View style={{
                     marginTop:15,
@@ -460,6 +471,23 @@ export default class MyComponent extends Component {
               </Text>
             </View>
           </TouchableOpacity>
+
+
+          <TouchableOpacity
+                      onPress={()=>{this.setState({openEditComment:true})}}
+                      style={{
+                        padding:10,
+                        flexDirection:'row',
+                        borderBottomWidth: 1,
+                        borderColor: '#DCDCDC',}}>
+            <View style={{flex:1,}}>
+              <Text style={{fontSize:16,
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                      {commentText()}
+              </Text>
+            </View>
+          </TouchableOpacity>
+
       </View>
     )
   }
@@ -486,9 +514,28 @@ export default class MyComponent extends Component {
                   {this._renderHeader()}
                   {cartList}
                 </ScrollView>
+                {this._renderComment()}
                 {this._rederFooter()}
       </View>
     );
+  }
+  _renderComment(){
+    return(
+      <CommentModal  style={styles.modal}
+                     position={"center"}
+                     isOpen={this.state.openEditComment}
+                     onClosed={()=>{this.setState({openEditComment:false})}}>
+        <TextInput style={styles.TextInput}
+                   placeholder="备注"
+                   selectionColor="#ff8b00"
+                   multiline={true}
+                   value={this.state.comment}
+                   onChangeText={(text) => {this.setState({comment:text})}}
+                   underlineColorAndroid={"rgba(0,0,0,0)"}>
+        </TextInput>
+      </CommentModal>
+    )
+
   }
   render() {
     console.log(this.state);
@@ -526,6 +573,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor:"#ffffff",
+  },
+  modal: {
+   justifyContent: 'center',
+   height: 350,
+   width: 300,
+  },
+  TextInput:{
+    flex:1,
+    color:'#000000',
+    fontSize:16,
+    padding:3,
+    paddingLeft:6,
+    backgroundColor:'#ffffff',
+    borderRadius:6,
+    borderColor:'#b1b1b1',
   },
   navigation: {
     flexDirection:'row'
