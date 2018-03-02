@@ -185,7 +185,7 @@ export default class SboxCart extends Component {
     if (this.state.cartList.length > 0) {
       return (
         <FlatList
-            style={{position:'absolute',width:width,height:350,top:50,}}
+            style={{position:'absolute',width:width,height:350,top:64,}}
           	enableEmptySections
             data={this.state.cartList}
             renderItem={this._renderItem}
@@ -310,7 +310,6 @@ export default class SboxCart extends Component {
                 goBack={this._renderGoBackBtn}
                 leftButtonText={this.props.backButton}/>
         {this._renderContent()}
-
         {this._renderConfirmBtn()}
       </View>
     );
