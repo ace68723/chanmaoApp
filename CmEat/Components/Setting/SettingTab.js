@@ -61,7 +61,6 @@ class SettingTab extends Component {
           animationType: 'fade',
           navigatorStyle: {navBarHidden: true},
         });
-      // this.props.handleBackToHome();
     }
     render(){
       return(
@@ -70,7 +69,7 @@ class SettingTab extends Component {
             <ScrollView style={styles.scrollView}>
 							<SettingCate  title={'我的订单'}
                             onPress={this._goToHistory.bind(this)}
-                            icon={require('./Image/setting.png')}/>
+                            icon={require('./Image/history.png')}/>
               <SettingCate  title={'添加地址'}
                             onPress={this._goToAddress.bind(this)}
                             icon={require('./Image/setting.png')}/>
