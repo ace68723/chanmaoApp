@@ -25,6 +25,7 @@ class SettingTab extends Component {
         this._goToAddress = this._goToAddress.bind(this);
 				this._goToAboutUs = this._goToAboutUs.bind(this);
         this._cmeLogOut = this._cmeLogOut.bind(this);
+				this._goToSbox = this._goToSbox.bind(this);
     }
 		_goToHistory(){
 			this.props.navigator.push({
@@ -63,6 +64,15 @@ class SettingTab extends Component {
         });
       // this.props.handleBackToHome();
     }
+		_goToSbox() {
+			this.props.navigator.resetTo({
+          screen: 'cmHome',
+          animated: true,
+          animationType: 'fade',
+          navigatorStyle: {navBarHidden: true},
+					passProps:{goToSweetfulBox: true}
+        });
+		}
     render(){
       return(
         <View style={styles.mainContainer}>
@@ -81,6 +91,9 @@ class SettingTab extends Component {
               <SettingCate  title={'退出登录'}
                             icon={require('./Image/logout.png')}
                             onPress={this._cmeLogOut}/>
+							<SettingCate  title={'甜满箱'}
+                icon={require('./Image/information.png')}
+                onPress={this._goToSbox}/>
             </ScrollView>
         </View>
       )
