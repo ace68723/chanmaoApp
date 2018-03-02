@@ -48,7 +48,7 @@ export default {
         })
       },
       deleteItem(item){
-        console.log(item)
+        // console.log(item)
         sbox_deleteItem(item)
         dispatch({
             actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY

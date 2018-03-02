@@ -14,7 +14,7 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
   },
 	emitChange(){
       this.emit(CHANGE_EVENT)
-      console.log(CHANGE_EVENT)
+      // console.log(CHANGE_EVENT)
 	},
 	addChangeListener(callback){
 			this.on(CHANGE_EVENT, callback)
@@ -37,10 +37,10 @@ const SboxAddressStore = Object.assign({},EventEmitter.prototype,{
     this.state = Object.assign({},this.state,{textInput:textInput});
   },
   checkWhetherInRange(data) {
-    console.log(this.state);
+    // console.log(this.state);
     this.state.showAlert = data.geolocation.ev_can_deliver;
     this.state.selectedAddress = data.addrInfo;
-    console.log(data.addrInfo);
+    // console.log(data.addrInfo);
   },
   getState(){
     return this.state;

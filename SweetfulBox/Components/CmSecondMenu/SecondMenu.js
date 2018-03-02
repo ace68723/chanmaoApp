@@ -70,14 +70,14 @@ export default class SecondMenu extends Component {
   }
 
   _optionsSelectHandler(options, tar_option, limit, index) {
-		console.log(options, tar_option, limit, index);
+		// console.log(options, tar_option, limit, index);
 		var counter = 0;
     for (let option of options) {
 			if (option.selected == true) {
 				counter ++;
 			}
     }
-		console.log(counter);
+		// console.log(counter);
 		if (counter >= limit && limit != 1 && tar_option.selected == false) {
 			return;
 		}

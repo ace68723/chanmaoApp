@@ -89,7 +89,7 @@ export default  {
         version:version,
       }
       const res = await OrderAPI.getOrderBefore(lo_data);
-      console.log(res);
+      // console.log(res);
       const eo_data ={
         prod: res.ea_prod,
         addr: res.eo_addr,
@@ -100,7 +100,7 @@ export default  {
         ev_original_total:res.ev_original_total,
         ea_discount_message:res.ea_discount_message,
       }
-      console.log(eo_data);
+      // console.log(eo_data);
       if(res.ev_error === 1) {
         if(res.ev_message >= 10000 && res.ev_message <= 20000 ){
           return {checkoutStatus:"shouldDoAuth"}

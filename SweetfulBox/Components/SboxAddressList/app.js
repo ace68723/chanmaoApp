@@ -70,7 +70,7 @@ componentWillMount() {
   // })
   // console.log(this.state);
   this.setSource(this.state.items, this.state.items);
-  console.log(this.state.items);
+  // console.log(this.state.items);
 }
 
 

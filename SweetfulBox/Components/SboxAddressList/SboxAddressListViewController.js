@@ -56,7 +56,7 @@ export default class SboxAddressList extends Component {
     // const newState = SboxAddressStore.getState();
     // this.setState(Object.assign({},{condoList: newState}))
     const state = Object.assign({},SboxAddressStore.getState());
-    console.log(state)
+    // console.log(state)
     this.setState(state);
   }
 
@@ -79,7 +79,7 @@ export default class SboxAddressList extends Component {
         return addressObject;
       }else{
         SboxAddressAction.updateSelectedAddress(addressObject);
-        console.log(addressObject);
+        // console.log(addressObject);
         this.props.navigator.showModal({
           screen: "SboxAddAddressInfo",
           passProps: {addressObject:addressObject,setUserInfo:this.props.setUserInfo},
@@ -126,7 +126,7 @@ export default class SboxAddressList extends Component {
   }
 
   _setUserInfo(userInfo){
-    console.log(userInfo)
+    // console.log(userInfo)
     this.setState({
       userInfo:userInfo
     })
@@ -135,14 +135,14 @@ export default class SboxAddressList extends Component {
   _reachEndStart:false
 
   _reachEnd() {
-    console.log("In reach end, textinput is: ", this.state.textInput);
+    // console.log("In reach end, textinput is: ", this.state.textInput);
     if(this.state.textInput.length !== 0) return;
     if(this._reachEndStart) return;
     this._reachEndStart = true;
     setTimeout(() => {
       this._reachEndStart = false;
     }, 500);
-    console.log(this.state.condoList.length);
+    // console.log(this.state.condoList.length);
     if (this.state.condoList.length===0 )return;
     SboxAddressAction.getCondoList(this.state.condoList.length);
   }

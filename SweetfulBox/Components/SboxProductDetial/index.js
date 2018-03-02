@@ -58,7 +58,7 @@ export default class SweetProductDetial extends Component {
     this._handleOutOfStock = this._handleOutOfStock.bind(this);
   }
   componentDidMount(){
-      console.log(this.props);
+      // console.log(this.props);
       if(this.state.spu_status === 1) {
           this.props.navigator.pop({
             animated: true,
@@ -251,7 +251,7 @@ export default class SweetProductDetial extends Component {
       //   )
       // } else {
       //
-        console.log(this.props)
+        // console.log(this.props)
         return (
           <View style={{flex:1}}>
 
@@ -271,7 +271,7 @@ export default class SweetProductDetial extends Component {
                 <SboxProductDetialDesc  selectedProduct={this.state.selectedProduct}
                                         productName={this.state.spu_name}/>
                 <SboxProductDetialAttr  sku_list={this.state.sku_list}
-                                        
+
                                         selectedProduct={this.state.selectedProduct}
                                         />
                 <AddAmountBtn  selectedProduct = {this.state.selectedProduct}/>

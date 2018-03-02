@@ -396,7 +396,7 @@ export default class MyComponent extends Component {
     )
   }
   _renderOrderInfo() {
-    console.log(this.state);
+    // console.log(this.state);
     let commentText = ()=>{
       if(this.state.comment){
         return(	<Text>备注： {this.state.comment}</Text>)
@@ -538,7 +538,7 @@ export default class MyComponent extends Component {
 
   }
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let bottom;
     if(this.props.tag === 'fromMainTab'){
       bottom = 65;
