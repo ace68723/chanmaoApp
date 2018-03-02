@@ -35,21 +35,18 @@
 | ea_theme   | array  | 口味列表     |            |
 
 
-| ea_banner | 类型及其范围 | 说明          |
-| --------- | ------ | ----------- |
-| id        | number | 首页Banner ID |
-| image     | string | 首页Banner图片  |
-| type      | string | 类别          |
-| param     | string | 参数          |
+| ea_banner | 类型及其范围 | 说明                   |
+| --------- | ------------ | ---------------------- |
+| id        | number       | 首页Banner ID          |
+| image     | string       | 首页Banner图片         |
+| type      | string       | 类别 1:url 2:spu 3:sku |
+| param     | object       | 参数                   |
 
-| ea_theme      | 类型及其范围 | 说明   |
+| param | 类型及其范围 | 说明   |
 | ------------- | ------ | ---- |
-| tmid          | number | 口味ID |
-| name          | string | 口味名字 |
-| icon_active   | string | 口味图标 |
-| icon_inactive | string | 口味图标 |
-| section_list  | array  | 产品列表 |
-| prod_list  | array  | 产品列表 |
+| {"url":url} | object | type 1 |
+| {"spu_id":spu_id} | object | type 2 |
+| {"spu_id":spu_id, "sku_id":sku_id} | object | type 3 |
 
 | section_list    | 类型及其范围 | 说明                                      |
 | --------------- | ------ | --------------------------------------- |
@@ -80,20 +77,27 @@
         {
             "id": 3,
             "image": "https://chanmao.us/storage/image/sb_app/home_banner/3_20170828.png",
-            "type": 3,
-            "param": "param3"
+            "type": 1,
+            "param": {
+                "url":"url"
+            }
         },
         {
             "id": 2,
             "image": "https://chanmao.us/storage/image/sb_app/home_banner/2_20170828.png",
             "type": 2,
-            "param": "param2"
+            "param": {
+                "spu_id":1,
+            }
         },
         {
             "id": 1,
             "image": "https://chanmao.us/storage/image/sb_app/home_banner/1_20170828.png",
             "type": 1,
-            "param": "param"
+             "param": {
+                "spu_id":1,
+				"sku_id":32,
+            }
         }
     ],
     "ea_theme": [
