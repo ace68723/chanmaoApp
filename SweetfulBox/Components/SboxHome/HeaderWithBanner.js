@@ -32,15 +32,23 @@ class ActivityHeaderWithBanner extends Component {
 			this._handleOnPress = this._handleOnPress.bind(this);
 	  }
 		_handleOnPress(banner){
-			if(banner.navitype == 2){
-				this.props.navigator.push({
-					id: 'AdView',
-					url:banner.naviparam.url,
-				})
+			console.log(banner);
+			if(banner.type == 1){
+				this.props.navigator.showModal({
+	        screen: 'AdView',
+	        animated: true,
+	        navigatorStyle: {navBarHidden: true},
+	        passProps: {url: banner.param}
+	      });
 			}
-			if(banner.navitype == 3){
-			 		banner.restaurant = banner.naviparam;
-	        this.props.openMenu(height,banner.naviparam);
+			if(banner.type == 2){
+			 		let spu_id = banner.param.spu_id;
+	        this.props.jumpToItem(spu_id, -1);
+			}
+			if(banner.type == 3){
+			 		let spu_id = banner.param.spu_id;
+					let sku_id = banner.param.sku_id;
+	        this.props.jumpToItem(spu_id, sku_id);
 			}
 		}
 
