@@ -1,3 +1,6 @@
+## 2018-03-02 update
+-  新增表sb_home_banner
+
 ## 2018-01-30 update
 -  表sb_order_base 重命名为sbox_order_base
 -  新增表sbox_order_item
