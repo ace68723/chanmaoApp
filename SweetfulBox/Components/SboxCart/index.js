@@ -10,6 +10,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import { findIndex } from 'lodash';
 
@@ -182,10 +183,15 @@ export default class SboxCart extends Component {
   }
 
   _renderContent() {
+    let headerHeight = 64;
+    if (Platform.OS === 'ios' && ((height === 812 && width === 375) || (height === 375 && width === 812))){
+      // if iPhone x
+      headerHeight = 88;
+    }
     if (this.state.cartList.length > 0) {
       return (
         <FlatList
-            style={{position:'absolute',width:width,height:350,top:64,}}
+            style={{position:'absolute',width:width,height:350,top:headerHeight,}}
           	enableEmptySections
             data={this.state.cartList}
             renderItem={this._renderItem}
