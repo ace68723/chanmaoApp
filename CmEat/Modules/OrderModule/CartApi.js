@@ -21,12 +21,18 @@ const CartApi = {
       if(!item.tpgs){ //not have toping group
         const cartItem = this.findItem(item);
         if (!cartItem) { // create new item in la_cartItems
-            this.la_cartItems = [...this.la_cartItems, Object.assign({ qty: 1 }, item)];
+            this.la_cartItems = [...this.la_cartItems, Object.assign({ qty: 1, cid: this.la_cartItems.length + 1 }, item)];
         } else {
             this.increaseItem(cartItem)
         }
       } else { //have toping group, item must have qty
-        this.la_cartItems = [...this.la_cartItems, item];
+        let _cartItems = this.la_cartItems;
+        if (item.cid) {
+          _cartItems = this.la_cartItems.filter(function(_item) {
+            return _item.cid != item.cid;
+          });
+        }
+        this.la_cartItems = [..._cartItems, Object.assign({ cid: this.la_cartItems.length + 1 }, item)];
       }
 
     },
@@ -54,9 +60,7 @@ const CartApi = {
             qty += cartItem.qty;
             total += cartItem.qty * cartItem.price;
         })
-        console.log(total)
         total = total.toFixed(2);
-        // console.log(total3)
         return { qty, total};
       } catch (e) {
         console.error(e)
