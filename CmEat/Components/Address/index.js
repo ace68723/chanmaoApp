@@ -66,7 +66,6 @@ export default class CmEatAddress extends Component {
       this._handleStatus(state);
   }
   _handleStatus(state) {
-    console.log(state)
     switch(state.addressStatus){
       case "AddAddressInfo":
         this._goToAddAddressInfo();
@@ -77,7 +76,6 @@ export default class CmEatAddress extends Component {
     }
   }
   _goBack() {
-    console.log(this.props)
     this.props.navigator.dismissModal();
     if(this.props.tag === "fromHome") {
       this.props.handleBackToHome("fromChanmao");

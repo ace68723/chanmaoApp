@@ -281,7 +281,6 @@ class Menu extends Component {
           )
         }
       }
-
       return(
 				<View style={{flex:1}}>
               <FlatList

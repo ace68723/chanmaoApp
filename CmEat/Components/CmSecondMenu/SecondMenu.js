@@ -14,8 +14,9 @@ import {
   View,
 } from 'react-native';
 
-import SecondMenuAction from './SecondMenuAction';
-import SecondMenuStore from './SecondMenuStore';
+import SecondMenuAction from '../../Actions/SecondMenuAction';
+import SecondMenuStore from '../../Stores/SecondMenuStore';
+import CheckoutAction from '../../Actions/CheckoutAction';
 import OrderActions from '../../Actions/OrderAction';
 // import SboxHeader from '../../App/Components/General/SboxHeader';
 
@@ -36,13 +37,13 @@ export default class SecondMenu extends Component {
   constructor(props) {
     super(props);
     this.state = SecondMenuStore.getState();
-
     this._renderToppingGroupList = this._renderToppingGroupList.bind(this);
     this._renderToppingGroup = this._renderToppingGroup.bind(this);
 		this._handleToppingOnPress = this._handleToppingOnPress.bind(this);
     this._onChange = this._onChange.bind(this);
-    this._optionsSelectHandler = this._optionsSelectHandler.bind(this);
 		this._deleteHandler = this._deleteHandler.bind(this);
+		this._decreaseToppingQuantity = this._decreaseToppingQuantity.bind(this);
+		this._updateProductQty = this._updateProductQty.bind(this);
 		this._goBack = this._goBack.bind(this);
 		this._confirm = this._confirm.bind(this);
   }
@@ -59,39 +60,24 @@ export default class SecondMenu extends Component {
     this.setState(SecondMenuStore.getState());
   }
 
-  _optionsSelectHandler(option) {
-		console.log(option)
-		// var counter = 0;
-    // for (let option of options) {
-		// 	if (option.selected == true) {
-		// 		counter ++;
-		// 	}
-    // }
-		// if (counter >= limit && limit != 1 && tar_option.selected == false) {
-		// 	return;
-		// }
-		// else {
-		// 	var sectionList = this.state.optionsList;
-		// 	for (let option of options) {
-	  //     if (tar_option.tp_name == option.tp_name) {
-	  //       if (option.selected == true) {
-	  //         option.selected = false;
-	  //       }else {
-	  //         option.selected = true;
-	  //       }
-	  //     }else if (limit == 1) {
-		// 			option.selected = false;
-		// 		}
-	  //   }
-		// 	sectionList[index].options = options;
-	  //   SecondMenuAction.updateOptionsList(sectionList);
-		// }
-  }
- 	_handleToppingOnPress({topping,tpg_id}) {
-		 SecondMenuAction.updateTopping({topping,tpg_id});
+ 	_handleToppingOnPress({tp_id,tpg_id}) {
+		 SecondMenuAction.updateTopping({tp_id,tpg_id});
 	}
 	_deleteHandler() {
+		OrderActions.addItem(Object.assign({},
+																			 this.props.dish,
+																			 {tpgs: this.state.toppingGroupList, qty: 0, price: this.state.total}));
+		this.props.saveModificationCallback();
+		this.props.navigator.dismissModal({
+			animationType: 'slide-down'
+		});
+	}
+	_decreaseToppingQuantity({tp_id,tpg_id}) {
+		SecondMenuAction.decreaseToppingQuantity({tp_id,tpg_id});
+	}
 
+	_updateProductQty(difference) {
+		SecondMenuAction.updateProductQty(difference);
 	}
 
 	_goBack() {
@@ -101,7 +87,15 @@ export default class SecondMenu extends Component {
 	}
 
 	_confirm() {
-		OrderActions.addItem(this.props.dish);
+		OrderActions.addItem(Object.assign({},
+																			 this.props.dish,
+																			 {tpgs: this.state.toppingGroupList, qty: this.state.qty, price: this.state.total}));
+		if (this.props.action === 'modify') {
+			this.props.saveModificationCallback();
+		}
+		this.props.navigator.dismissModal({
+			animationType: 'slide-down'
+		});
 	}
 
   _renderLeftButton() {
@@ -154,61 +148,158 @@ export default class SecondMenu extends Component {
 
 	_renderToppingGroup(toppingGroup) {
 		let _toppingGroup = [];
-		toppingGroup.tps.forEach((topping,index)=>{
-			const tpg_id = toppingGroup.tpg_id;
-			var color = "black";
-      if (topping.selected) {
-        color = '#ea7b21';
-      }
-      _toppingGroup.push(
-				<TouchableOpacity
-					    key={index}
-	            activeOpacity={0.4}
-							onPress={this._handleToppingOnPress.bind(null,{topping,tpg_id})}
-	            >
-	            <Text style={{marginLeft: 20,
-	                          marginBottom: 8,
-	                          fontSize: 15,
-	                          borderRadius: 5,
-	                          borderWidth: 1,
-	                          borderColor: color,
-	                          paddingTop: 5,
-	                          paddingBottom: 5,
-	                          paddingLeft: 10,
-	                          paddingRight: 10}}>
-	                {topping.tp_name} + ${topping.tp_price}
-	            </Text>
-	        </TouchableOpacity>
-			)
-		})
+		const {tpg_id,tps} = toppingGroup;
+		for (let key in tps) {
+			let color = 'black';
+			if (tps[key].quantity && tps[key].quantity > 0) {
+				color = '#ea7b21';
+			}
+			if (toppingGroup.tpg_max_limit != 1 && tps[key].quantity && tps[key].quantity > 0) {
+				_toppingGroup.push(
+					<View style={{flexDirection: 'row',
+												marginLeft: 20,
+												marginBottom: 10,
+												borderRadius: 5,
+												borderWidth: 1,
+												borderColor: color}}
+								key={key}>
+								<TouchableOpacity
+											style={{paddingTop: 5,
+															paddingBottom: 5,
+															paddingLeft: 10,
+															paddingRight: 5,
+															flexDirection: 'row'}}
+											activeOpacity={0.4}
+											onPress={this._handleToppingOnPress.bind(null,{tpg_id, 'tp_id': key})}>
+											<Text style={{fontSize: 15, marginRight: 8}}>
+													{tps[key].tp_name} ${tps[key].tp_price}
+											</Text>
+											<Text style={{fontSize: 15,
+																		textAlign: 'center',
+																		overflow: 'hidden',
+																		width: 20,
+																		backgroundColor: '#D4D4D4',
+																		borderRadius: 10}}>
+													{tps[key].quantity}
+											</Text>
+								</TouchableOpacity>
+								<TouchableOpacity style={{paddingTop: 2 , paddingBottom: 2, paddingRight: 5}}
+																	onPress={this._decreaseToppingQuantity.bind(null,{'tpg_id':toppingGroup.tpg_id, 'tp_id': key})}>
+									<View style={{width:30,
+																paddingTop: 2,
+																paddingBottom: 2,
+																alignSelf:'center',
+																alignItems:'center',
+																justifyContent:'center',
+																borderColor:'#ff8b00',
+																borderWidth:1,
+																borderRadius:6,}}>
+										<Text style={{fontSize: 15, color:'#ff8b00',}}> - </Text>
+									</View>
+								</TouchableOpacity>
+
+					</View>
+				)
+			} else {
+				_toppingGroup.push(
+					<View style={{flexDirection: 'row',
+												marginLeft: 20,
+												marginBottom: 10,
+												borderRadius: 5,
+												borderWidth: 1,
+												borderColor: color}}
+								key={key}>
+								<TouchableOpacity
+											style={{paddingTop: 5,
+															paddingBottom: 5,
+															paddingLeft: 10,
+															paddingRight: 5,
+															flexDirection: 'row'}}
+											activeOpacity={0.4}
+											onPress={this._handleToppingOnPress.bind(null,{tpg_id, 'tp_id': key})}>
+											<Text style={{fontSize: 15, marginRight: 8}}>
+													{tps[key].tp_name} ${tps[key].tp_price}
+											</Text>
+								</TouchableOpacity>
+					</View>
+				)
+			}
+		}
 		return _toppingGroup;
 
   }
 
   _renderToppingGroupList(toppingGroupList) {
 		let _toppingGroupList = [];
-		toppingGroupList.forEach((toppingGroup,index)=>{
+		let optionReminder = "";
+		for (let key in toppingGroupList) {
+			if (toppingGroupList[key].tpg_max_limit === toppingGroupList[key].tpg_min_limit) {
+				optionReminder = "[必选" + toppingGroupList[key].tpg_max_limit + "项]"
+			}
+			else if (toppingGroupList[key].tpg_min_limit) {
+				optionReminder = "[必选" + toppingGroupList[key].tpg_min_limit + "~" + toppingGroupList[key].tpg_max_limit + "项]";
+			}
+			else {
+				optionReminder = "[可选" + toppingGroupList[key].tpg_min_limit + "~" + toppingGroupList[key].tpg_max_limit + "项]";
+			}
 			_toppingGroupList.push(
-				<View key={index}>
+				<View key={key}>
 						<View style={{flexDirection:'row',
 													alignItems: 'center',
 													backgroundColor: '#f5f5f5',
 													paddingTop: 5,
 													paddingBottom: 5}}>
-								<Text style={{marginLeft: 20, fontSize: 16}}>{toppingGroup.tpg_name}</Text>
+								<Text style={{marginLeft: 20, fontSize: 16}}>{toppingGroupList[key].tpg_name}</Text>
+								<Text style={{fontSize: 16, color: '#a5a5a5'}}>{optionReminder}</Text>
 						</View>
 						<View style={{flexDirection: 'row',
 													flexWrap: 'wrap',
-													paddingTop: 8}}>
-								{this._renderToppingGroup(toppingGroup)}
+													paddingTop: 10}}>
+								{this._renderToppingGroup(toppingGroupList[key])}
 						</View>
 				</View>
 			)
-		})
+		}
 		return _toppingGroupList;
   }
 
+	_renderQtyButton() {
+		return (
+			<View style={{flexDirection: 'row',
+										width: 100,
+										justifyContent: 'space-between',
+										alignSelf: 'center',
+										borderRadius: 6,
+										borderWidth: 1,
+										paddingTop: 3,
+										paddingBottom: 3,
+										borderColor: '#ea7b21',
+										marginTop: 15}}>
+					<TouchableOpacity style={{}}
+														onPress={this._updateProductQty.bind(null,-1)}
+														activeOpacity={0.4}>
+							<Text style={{fontSize: 15, paddingTop: 5, paddingBottom: 5, width: 30, textAlign: 'center'}}>-</Text>
+					</TouchableOpacity>
+					<Text style={{paddingTop: 5, paddingBottom: 5}}>
+							{this.state.qty}
+					</Text>
+					<TouchableOpacity style={{}}
+														onPress={this._updateProductQty.bind(null,1)}
+														activeOpacity={0.4}>
+							<Text style={{fontSize: 15, paddingTop: 5, paddingBottom: 5, width: 30, textAlign: 'center'}}>+</Text>
+					</TouchableOpacity>
+			</View>
+		)
+	}
+
   _renderConfirmBtn() {
+		let confirmMsg = ''
+		if (this.props.action === 'add') {
+			confirmMsg = "添加" + this.state.qty + "份";
+		}
+		else {
+			confirmMsg = "确认修改";
+		}
     return (
       <TouchableOpacity
 				  onPress={() => this._confirm()}
@@ -227,14 +318,14 @@ export default class SecondMenu extends Component {
                         color: 'white',
                         fontSize: 16,
                         fontWeight: '700'}}>
-              确认修改
+              {confirmMsg}
           </Text>
           <Text style={{flex: 1,
                         textAlign: 'right',
                         marginRight: 20,
                         color: 'white',
                         fontSize: 16}}>
-              $ 5.50
+              ${(this.state.total * this.state.qty).toFixed(2)}
           </Text>
       </TouchableOpacity>
     )
@@ -252,7 +343,7 @@ export default class SecondMenu extends Component {
                                 fontSize:20,
                                 fontWeight: '700'}}
                          numberOfLines={1}>
-                                {this.props.title}原味奶茶
+                                {this.props.dish.ds_name}
                   </Text>
               </View>
               <View style={styles.right}>
@@ -261,28 +352,7 @@ export default class SecondMenu extends Component {
           </View>
           <ScrollView style={{paddingBottom: 50}}>
               {this._renderToppingGroupList(this.state.toppingGroupList)}
-              <View style={{flexDirection: 'row',
-                            width: 100,
-                            justifyContent: 'space-between',
-                            alignSelf: 'center',
-                            borderRadius: 6,
-                            borderWidth: 1,
-														paddingTop: 3,
-														paddingBottom: 3,
-                            borderColor: '#ea7b21',
-                            marginTop: 15}}>
-                  <TouchableOpacity style={{}}
-										                activeOpacity={0.4}>
-                      <Text style={{fontSize: 15, paddingTop: 5, paddingBottom: 5, width: 30, textAlign: 'center'}}>-</Text>
-                  </TouchableOpacity>
-                  <Text style={{paddingTop: 5, paddingBottom: 5}}>
-                      1
-                  </Text>
-                  <TouchableOpacity style={{}}
-										                activeOpacity={0.4}>
-                      <Text style={{fontSize: 15, paddingTop: 5, paddingBottom: 5, width: 30, textAlign: 'center'}}>+</Text>
-                  </TouchableOpacity>
-              </View>
+              {this._renderQtyButton()}
           </ScrollView>
           {this._renderConfirmBtn()}
       </View>
@@ -319,4 +389,18 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     backgroundColor: 'white',
   },
+	decreaseButton:{
+    width:50,
+    height:40,
+    alignSelf:'center',
+    alignItems:'center',
+    justifyContent:'center',
+    borderColor:'#ff8b00',
+    borderWidth:2,
+    borderRadius:8,
+  },
+  decreaseIcon:{
+    fontSize:20,
+    color:'#ff8b00',
+  }
 });

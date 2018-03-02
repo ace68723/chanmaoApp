@@ -45,6 +45,7 @@ const RestaurantApi = {
       }
       options.headers.authortoken = reqData.token;
       const rid = reqData.rid
+      // const rid = 5;
       options.body =  JSON.stringify({rid})
       return fetch(url,options)
               .then((res) => res.json())

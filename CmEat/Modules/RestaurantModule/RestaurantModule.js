@@ -15,7 +15,7 @@ const RestaurantModule = {
   async getMenu(reqData){
     try {
       const data = await RestaurantApi.getMenu(reqData);
-      if(data.result == 0){
+      if(data.ev_error == 0){
         return data
       }else{
         Alert.errorAlert(data.message)
