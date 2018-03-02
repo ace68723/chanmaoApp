@@ -200,20 +200,18 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-      this.props.navigator.dismissModal({animationType: 'slide-down'});
-      setTimeout(() => {
-        this.props.navigator.dismissModal({animationType: 'slide-down'});
-      }, 500);
-			setTimeout(() => {
-				HistoryAction.getOrderData();
-				Navigation.push({
-					screen: 'CmEatHistory',
-					animated: true,
-					navigatorStyle: {navBarHidden: true},
-					passProps:
-					{tag:"fromHome"}
-				});
-      }, 1000);
+      // this.props.navigator.dismissModal({animationType: 'slide-down'});
+      // setTimeout(() => {
+      //   this.props.navigator.dismissModal({animationType: 'slide-down'});
+      // }, 500);
+      this.props.navigator.resetTo({
+          screen: 'CmEatTabs',
+          passProps: {checkoutStatus:true},
+          animated: true,
+          animationType: 'fade',
+          navigatorStyle: {navBarHidden: true},
+        });
+
     }
     showLoading(){
       if(this.state.isLoading)

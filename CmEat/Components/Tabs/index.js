@@ -18,7 +18,6 @@ import {
 import MainTab from '../MainTab';
 import HistoryTab from '../History/HistoryTab';
 import SettingTab from '../Setting/SettingTab';
-import TabsStore from '../../Stores/TabsStore';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TabBar from './TabBar';
@@ -30,27 +29,21 @@ export default class Tabs extends Component {
 
   constructor(){
     super()
-    this.scrollViewRefs = [];
-		this.state = TabsStore.getState();
-    this._onChange = this._onChange.bind(this);
 		this._hideTabBar = this._hideTabBar.bind(this);
 	  this._showTabBar = this._showTabBar.bind(this);
 
   }
 	componentDidMount(){
-		TabsStore.addChangeListener(this._onChange);
+    if(this.props.checkoutStatus){
+      this.tabView.goToPage(1);
+      this.props.navigator.push({
+        screen: 'CmEatHistory',
+        animated: true,
+        navigatorStyle: {navBarHidden: true},
+        passProps:{tag:"fromHome"}
+      });
+    }
 	}
-	componentWillUnmount(){
-		TabsStore.removeChangeListener(this._onChange);
-	}
-  _onChange(){
-		const newState = Object.assign({},this.state,TabsStore.getState());
-		this.setState(newState);
-		if(this.state.goToHistory){
-			this.tabView.goToPage(1);
-			this._showTabBar();
-		}
-  }
 	_hideTabBar(){
 		if(this.state.showTabBar){
 			this.setState({
@@ -77,11 +70,14 @@ export default class Tabs extends Component {
 	// 						showTabBar = {this._showTabBar}/>
 
   render(){
+
+    // tabBarPosition={this.state.tabBarPosition}
+    //
+    // showTabBar={this.state.showTabBar}
     return(
 
 		 <ScrollableTabView  ref={(tabView) => { this.tabView = tabView; }}
 												 locked={true}
-												 tabBarPosition={this.state.tabBarPosition}
 												 tabBarBackgroundColor={'#fff'}
 												 tabBarActiveTextColor={'#ff8b00'}
 												 tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',top:5}}
@@ -89,8 +85,8 @@ export default class Tabs extends Component {
 												 initialPage={0}
 												 prerenderingSiblingsNumber={1}
 												 renderTabBar={() => <TabBar />}
-												 keyboardShouldPersistTaps={'always'}
-												 showTabBar={this.state.showTabBar}>
+                         tabBarPosition={'bottom'}
+												 keyboardShouldPersistTaps={'always'}>
 
 							 <MainTab tabLabel='主页'
 												navigator={this.props.navigator}

@@ -55,7 +55,13 @@ class SettingTab extends Component {
     }
     _cmeLogOut(){
       AuthAction.logout();
-      this.props.handleBackToHome();
+      this.props.navigator.resetTo({
+          screen: 'cmHome',
+          animated: true,
+          animationType: 'fade',
+          navigatorStyle: {navBarHidden: true},
+        });
+      // this.props.handleBackToHome();
     }
     render(){
       return(

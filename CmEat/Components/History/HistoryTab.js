@@ -46,7 +46,7 @@ class HistoryTab extends Component {
     }
 
     componentDidMount(){
-      setTimeout( () =>{
+      // setTimeout( () =>{
 				const _doAutoRefresh = this._doAutoRefresh;
 	      HistoryStore.addChangeListener(this._onChange);
 	      this._doAutoRefresh();
@@ -54,7 +54,7 @@ class HistoryTab extends Component {
         console.log('need rebuild currentRoutes')
 	      // const currentRoutes = this.props.navigator.getCurrentRoutes();
 				AppState.addEventListener('change', this._handleAppStateChange);
-      }, 4000);
+      // }, 4000);
     }
     componentWillUnmount() {
          HistoryStore.removeChangeListener(this._onChange);
@@ -82,7 +82,6 @@ class HistoryTab extends Component {
 
     }
 		_goBack() {
-			// this.props.navigator.dismissModal({animationType: 'slide-down'});
 			this.props.navigator.pop();
 		}
 
