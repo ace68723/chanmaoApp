@@ -188,11 +188,10 @@ export default class SboxCart extends Component {
       // if iPhone x
       headerHeight = 88;
     }
-    let flatListHeight = height - headerHeight - 60;
     if (this.state.cartList.length > 0) {
       return (
         <FlatList
-            style={{position:'absolute',width:width,height:flatListHeight,top:headerHeight,}}
+            style={{flex: 1,width:width, marginBottom: 103}}
           	enableEmptySections
             data={this.state.cartList}
             renderItem={this._renderItem}
@@ -252,6 +251,7 @@ export default class SboxCart extends Component {
 
 
   }
+
   _renderConfirmBtn() {
       if (this.state.cartList.length > 0) {
         return(
