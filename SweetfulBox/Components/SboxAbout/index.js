@@ -148,7 +148,7 @@ export default class About extends Component {
 			<TouchableOpacity onPress={this._goToCmEat}
 					activeOpacity={0.4}
 					style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
-					<Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/contact.png')}/>
+					<Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/chanmao.png')}/>
 					<Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}>馋猫订餐</Text>
 					<Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
 			</TouchableOpacity>
@@ -165,10 +165,10 @@ export default class About extends Component {
               {this._renderLoginOrHistory()}
               <View style={styles.separator}></View>
               {this._renderContact()}
-              <View style={styles.separator}></View>
-              {this._renderLogout()}
 							<View style={styles.separator}></View>
 							{this._renderCmEat()}
+              <View style={styles.separator}></View>
+              {this._renderLogout()}
           </ScrollView>
       </View>
     )
