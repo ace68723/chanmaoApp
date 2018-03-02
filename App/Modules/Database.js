@@ -265,7 +265,6 @@ export function cme_getCalculateDeliveryFee() {
   return {pretax,rid,uaid,startAmount,dltypeObj}
 }
 export function cme_updateCalculateDeliveryFee({dltype,dlexp}) {
-  console.log('cme_updateCalculateDeliveryFee',dltype)
   realm.write(() => {
       realm.create('cme_cart',{type:"dltype",value:dltype}, true );
       realm.create('cme_cart',{type:"dlexp",value:dlexp}, true );

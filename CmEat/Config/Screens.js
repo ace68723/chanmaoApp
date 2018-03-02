@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import Tabs from '../Components/Tabs';
+import CmEatTabs from '../Components/Tabs';
 import CmEatMenu from '../Components/Menu';
 import CmEatCheckout from '../Components/Checkout';
 import CmEatAddress from '../Components/Address';
@@ -17,6 +17,6 @@ Navigation.registerComponent('CmEatAddInfo', () => CmEatAddInfo);
 Navigation.registerComponent('CmEatAboutUs', () => CmEatAboutUs);
 Navigation.registerComponent('CmEatMenuSearch', () => CmEatMenuSearch);
 Navigation.registerComponent('CmSecondMenu', () => CmSecondMenu);
-
-module.exports = Tabs;
+Navigation.registerComponent('CmEatTabs', () => CmEatTabs);
+module.exports = CmEatTabs;
 // module.exports = SboxHistory;

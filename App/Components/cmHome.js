@@ -225,7 +225,6 @@ export default class Home extends Component {
       }, 500);
       setTimeout(() => {
         InteractionManager.runAfterInteractions(() => {
-          console.log(this._handleBackToHome)
           this.props.navigator.push({
             screen: 'SboxHome',
             passProps: {handleBackToHome: this._handleBackToHome},

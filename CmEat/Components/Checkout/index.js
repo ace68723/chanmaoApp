@@ -150,9 +150,7 @@ class Confirm extends Component {
         loading:true,
 				showOrderConfirm:false,
       })
-      InteractionManager.runAfterInteractions(() => {
-          CheckoutAction.checkout(this.state.comment);
-      });
+      CheckoutAction.checkout(this.state.comment);
       // CheckoutAction.checkout(this.state.comment);
     }
     _checkout(){

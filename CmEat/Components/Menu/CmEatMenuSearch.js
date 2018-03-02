@@ -51,7 +51,6 @@ export default class CmEatMenuSearch extends Component {
 	componentDidMount(){
 		const menuState = MenuStore.menuState();
 		const cartTotals = MenuStore.menuState().cartTotals;
-		
 		this.setState({
 			menu:menuState.menu,
 			cartTotals:cartTotals,
@@ -109,12 +108,12 @@ export default class CmEatMenuSearch extends Component {
 	_setSearchText(searchText){
 		if(searchText){
 			let filteredData = this._filterNotes(searchText, this.state.menu);
-			
+
 			const filteredMenu = MenuStore.getFilteredMenu(filteredData);
-		
+
 			this.setState({
 				 filteredMenu:filteredData,
-				 dataSource: filteredData, 
+				 dataSource: filteredData,
 				 searchText: searchText
 			 });
 		}else{
@@ -127,7 +126,7 @@ export default class CmEatMenuSearch extends Component {
 
 	}
 	_filterNotes(searchText, notes) {
-		
+
 			let text = searchText.toLowerCase();
 			return filter(notes, (dish) => {
 				if(dish.ds_name){
@@ -135,7 +134,7 @@ export default class CmEatMenuSearch extends Component {
 					return note.search(text) !== -1;
 				}
 			});
-			
+
 	}
 	_renderMenuList ({item,index})  {
 		if(!!item.ds_name){
@@ -146,7 +145,7 @@ export default class CmEatMenuSearch extends Component {
 									dish = {dish}
 									qty = {dish.qty}/>
 			)
-		}	
+		}
 	}
 	_cleanInput(){
 		this.setState({
@@ -159,10 +158,10 @@ export default class CmEatMenuSearch extends Component {
 		return(
 			<View style={styles.header}>
 				<View style={styles.searchView}>
-						<Image 
-							source={require('./Image/icon_search_input.png')} 
+						<Image
+							source={require('./Image/icon_search_input.png')}
 							style={{
-								height:iconSearchInputSize*0.5, 
+								height:iconSearchInputSize*0.5,
 								width:iconSearchInputSize*0.45,
 								marginLeft:10,
 							}}
@@ -171,7 +170,7 @@ export default class CmEatMenuSearch extends Component {
 							ref={'searchInput'}
 							style={styles.searchInput}
 							selectionColor={'#ea7b21'}
-							keyboardType = {'url'}
+							keyboardType = {'default'}
 							autoCorrect= { false}
 							autoFocus={true}
 							returnKeyType={'next'}
@@ -179,11 +178,11 @@ export default class CmEatMenuSearch extends Component {
 							underlineColorAndroid={"rgba(0,0,0,0)"}
 						/>
 						<TouchableOpacity onPress={()=>this._cleanInput()}>
-							<Image 
-								source={require('./Image/cancel.png')} 
+							<Image
+								source={require('./Image/cancel.png')}
 								style={{
-									height:15, 
-									width:15, 
+									height:15,
+									width:15,
 									marginRight:10}}
 							/>
 						</TouchableOpacity>
@@ -199,7 +198,7 @@ export default class CmEatMenuSearch extends Component {
 	_keyExtractor = (item, index) => `${item.id}${index}`;
 	// <Text style={{color:"#ffffff",fontSize:16,margin:3}}>${this.state.cartTotals.total}</Text>
 	_renderResultList(){
-		
+
 		if(this.state.dataSource && this.state.dataSource.length > 0){
 			return(
 				<FlatList
@@ -212,13 +211,13 @@ export default class CmEatMenuSearch extends Component {
 					getItemLayout={(data, index) => (
 							{length: 100, offset: 100 * index, index}
 					)}
-					
+
 				/>
 			);
 		}else if(this.state.searchText != ''){
 			return(
 				<View style={{justifyContent:'center',
-							alignContent:'center', 
+							alignContent:'center',
 							alignSelf:'center',
 							marginTop:100
 							}}>
@@ -226,14 +225,14 @@ export default class CmEatMenuSearch extends Component {
 				</View>
 			)
 		}
-		
+
 	}
 	//backgroundColor:"#ffffff"
 	render(){
-		
+
 		return(
-		
-		<KeyboardAvoidingView 
+
+		<KeyboardAvoidingView
 					style={{flex:1,backgroundColor:"#ffffff"}}
 					behavior={Platform.OS === 'ios'?"padding":null}
 					>
@@ -259,10 +258,10 @@ export default class CmEatMenuSearch extends Component {
 				</View>
 
 			</TouchableOpacity>
-			{this._renderResultList()}		
+			{this._renderResultList()}
 
 		</KeyboardAvoidingView>
-		
+
 		)
 	}
 }
@@ -294,14 +293,14 @@ const styles = StyleSheet.create({
 		backgroundColor:'#f4f4f4',
 		flexDirection:'row',
 		alignItems:'center',
-		width: width-searchViewMarginHorizontal*2,	
+		width: width-searchViewMarginHorizontal*2,
 	},
 	searchInput:{
 		fontSize: 18,
 		height:40,
 		marginHorizontal:5,
-		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,	
+		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,
 
 	},
-	
+
 });

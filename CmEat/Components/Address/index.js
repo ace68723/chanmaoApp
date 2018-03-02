@@ -76,6 +76,7 @@ export default class CmEatAddress extends Component {
     }
   }
   _goBack() {
+    console.log('_goBack')
     this.props.navigator.dismissModal();
     if(this.props.tag === "fromHome") {
       this.props.handleBackToHome("fromChanmao");

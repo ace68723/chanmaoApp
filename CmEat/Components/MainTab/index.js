@@ -72,11 +72,6 @@ export default class MainTab extends Component {
       areaList: [],
     })
     this.setState(newState);
-    setTimeout(()=>{
-      this.props.navigator.dismissModal({
-        animationType:'none'
-      });
-    }, 1500);
 
   }
   // ui methond
