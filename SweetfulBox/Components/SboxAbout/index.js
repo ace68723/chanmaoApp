@@ -33,6 +33,7 @@ export default class About extends Component {
     this._contact = this._contact.bind(this);
     this._onChange = this._onChange.bind(this);
     this._logout = this._logout.bind(this);
+		this._goToCmEat = this._goToCmEat.bind(this);
   }
 	componentDidMount() {
     SboxUserStore.addChangeListener(this._onChange);
@@ -65,6 +66,16 @@ export default class About extends Component {
     AuthAction.logout();
     this.props.handleBackToHome();
   }
+
+	_goToCmEat() {
+		this.props.navigator.resetTo({
+				screen: 'cmHome',
+				animated: true,
+				animationType: 'fade',
+				navigatorStyle: {navBarHidden: true},
+				passProps:{goToCmEat: true}
+			});
+	}
 
   _contact() {
     this.props.navigator.push({
@@ -132,6 +143,18 @@ export default class About extends Component {
     }
   }
 
+	_renderCmEat() {
+		return(
+			<TouchableOpacity onPress={this._goToCmEat}
+					activeOpacity={0.4}
+					style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
+					<Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/contact.png')}/>
+					<Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}>馋猫订餐</Text>
+					<Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
+			</TouchableOpacity>
+		)
+	}
+
   render() {
     return(
       <View style={styles.viewController}>
@@ -144,6 +167,8 @@ export default class About extends Component {
               {this._renderContact()}
               <View style={styles.separator}></View>
               {this._renderLogout()}
+							<View style={styles.separator}></View>
+							{this._renderCmEat()}
           </ScrollView>
       </View>
     )
