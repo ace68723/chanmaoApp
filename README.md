@@ -9,7 +9,7 @@
 * [sweetfulBox_1.1](#sweetfulBox_1.1)
 
 <div id="chanmao2.4.5"> <div/>
- 
+
 # chanmao2.4.5 二级菜单
 ### 2018-02-28 update
 - API [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md) 新增 `测试接口` `测试商家` `测试菜品`
@@ -30,10 +30,16 @@
   * [4.1 Checkout](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v1/checkout.md)  
 
 <div id="sweetfulBox_1.1"> <div/>
- 
+
 # sweetfulBox_1.1
 
+### 2018-03-02 update
+
+- API [3.1 Home data](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/home_data.md)调整`banner param`参数 
+- [2. Database schema ](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/database_schema.md)调整`banner param`参数 
+
 ### 2018-03-01 update
+
 API [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/before_checkout.md)  增加`version`参数 
 
 [3.4 Add order](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/add_order.md) 增加 `version` `comment`参数 
@@ -49,8 +55,7 @@ API [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Docume
   * [1.2 Home data sample](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/DataSample.md/#1.2)
   * [1.3 Shopping cart data sample](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/DataSample.md/#1.3)
   * [1.4 Order history data sample](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/DataSample.md/#1.4)
-  
- 
+
 * [2. Database schema ](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/database_schema.md)
  * [2.1 Database migration](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/database_migration.md)
 
@@ -63,6 +68,4 @@ API [3.3 Before checkout](https://github.com/ace68723/chanmao/blob/master/Docume
   * [3.6 Order History](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/order_history.md)
   * [3.7 Theme Query](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/theme_query.md) 
   * [3.8 User Addr](https://github.com/ace68723/chanmao/blob/master/Document/SweetfulBox/API_Document/v2/user_addr.md)
-  
-
 
