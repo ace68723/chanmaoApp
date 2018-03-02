@@ -35,6 +35,7 @@ class HistoryTab extends Component {
         super(props);
         this.state = Object.assign({},HistoryStore.getState(),{showHistoryOrderDetail:false});
         this._onChange = this._onChange.bind(this);
+				this._goBack = this._goBack.bind(this);
         this._onRefresh = this._onRefresh.bind(this);
         this._doAutoRefresh = this._doAutoRefresh.bind(this);
         this._HistoryOrderDetailVisible = this._HistoryOrderDetailVisible.bind(this);
@@ -80,6 +81,11 @@ class HistoryTab extends Component {
 				}
 
     }
+		_goBack() {
+			// this.props.navigator.dismissModal({animationType: 'slide-down'});
+			this.props.navigator.pop();
+		}
+
 		_handleAppStateChange(currentAppState) {
 			if(currentAppState === 'active'){
 				HistoryAction.getOrderData()
@@ -177,7 +183,9 @@ class HistoryTab extends Component {
     render(){
       return(
          <View style={styles.mainContainer}>
-             <Header title={'我的订单'} />
+							 <Header title={'我的订单'}
+								 			 goBack={this._goBack}
+			 								 leftButtonText={'x'}/>
 						 {this._renderContent()}
 						 <Modal style={styles.modal}
 						 			 position={"center"}

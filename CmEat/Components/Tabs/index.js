@@ -71,6 +71,10 @@ export default class Tabs extends Component {
 			// }, 300);
 		}
 	}
+	// <HistoryTab tabLabel='我的订单'
+	// 						navigator={this.props.navigator}
+	// 						hideTabBar = {this._hideTabBar}
+	// 						showTabBar = {this._showTabBar}/>
 
   render(){
     return(
@@ -94,10 +98,6 @@ export default class Tabs extends Component {
 												showTabBar = {this._showTabBar}
                         handleBackToHome={this.props.handleBackToHome}
                         />
-                <HistoryTab tabLabel='我的订单'
-                            navigator={this.props.navigator}
-                            hideTabBar = {this._hideTabBar}
-                            showTabBar = {this._showTabBar}/>
                 <SettingTab tabLabel='设置'
                             navigator={this.props.navigator}
                             handleBackToHome={this.props.handleBackToHome}/>

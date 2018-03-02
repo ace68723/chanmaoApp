@@ -19,6 +19,7 @@ import {
   View,
 } from 'react-native';
 
+import {Navigation} from 'react-native-navigation';
 import Background from '../General/Background';
 import CheckoutCard from './CheckoutCard';
 import Address from './Address';
@@ -199,12 +200,20 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-			HistoryAction.getOrderData()
       this.props.navigator.dismissModal({animationType: 'slide-down'});
       setTimeout(() => {
         this.props.navigator.dismissModal({animationType: 'slide-down'});
-      }, 200);
-
+      }, 500);
+			setTimeout(() => {
+				HistoryAction.getOrderData();
+				Navigation.push({
+					screen: 'CmEatHistory',
+					animated: true,
+					navigatorStyle: {navBarHidden: true},
+					passProps:
+					{tag:"fromHome"}
+				});
+      }, 1000);
     }
     showLoading(){
       if(this.state.isLoading)

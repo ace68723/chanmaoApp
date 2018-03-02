@@ -44,7 +44,30 @@ class MenuCard extends Component {
 	}
   render(){
     let _decreaseButton = () => {
-      if(this.props.qty > 0){
+			if(this.props.dish.tpgs) {
+				return(
+					<View style={{flex:0.4,flexDirection:'row',}}>
+            <View style={{flex:1,alignItems:'flex-end'}}>
+            </View>
+						<View style={{flex:1,}}>
+									<View style={{width:50,
+														    height:40,
+														    alignSelf:'center',
+														    alignItems:'center',
+														    justifyContent:'center',
+														    borderColor:'#ff8b00',
+																backgroundColor:'#ff8b00',
+														    borderWidth:2,
+														    borderRadius:8,}}>
+		                <Text style={{fontSize:20,
+								    							backgroundColor:'#ff8b00',
+																  color: 'white'}}>选项</Text>
+		              </View>
+            </View>
+          </View>
+				)
+			}
+      else if(this.props.qty > 0){
         return(
           <View style={{flex:0.4,flexDirection:'row',}}>
             <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>

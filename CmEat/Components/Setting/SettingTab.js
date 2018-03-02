@@ -21,10 +21,19 @@ import AuthAction from  '../../../App/Actions/AuthAction';
 class SettingTab extends Component {
     constructor(props) {
         super(props);
+				this._goToHistory = this._goToHistory.bind(this);
         this._goToAddress = this._goToAddress.bind(this);
 				this._goToAboutUs = this._goToAboutUs.bind(this);
         this._cmeLogOut = this._cmeLogOut.bind(this);
     }
+		_goToHistory(){
+			this.props.navigator.push({
+        screen: 'CmEatHistory',
+        animated: true,
+        navigatorStyle: {navBarHidden: true},
+        passProps:{tag:"fromHome"}
+      });
+		}
     _goToAddress(){
       this.props.navigator.showModal({
         screen: 'CmEatAddress',
@@ -53,6 +62,9 @@ class SettingTab extends Component {
         <View style={styles.mainContainer}>
             <Header title={'设置'}/>
             <ScrollView style={styles.scrollView}>
+							<SettingCate  title={'我的订单'}
+                            onPress={this._goToHistory.bind(this)}
+                            icon={require('./Image/setting.png')}/>
               <SettingCate  title={'添加地址'}
                             onPress={this._goToAddress.bind(this)}
                             icon={require('./Image/setting.png')}/>
