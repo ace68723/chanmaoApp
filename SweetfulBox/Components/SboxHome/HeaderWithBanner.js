@@ -32,7 +32,6 @@ class ActivityHeaderWithBanner extends Component {
 			this._handleOnPress = this._handleOnPress.bind(this);
 	  }
 		_handleOnPress(banner){
-			console.log(banner);
 			if(banner.type == 1){
 				this.props.navigator.showModal({
 	        screen: 'AdView',

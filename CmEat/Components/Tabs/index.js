@@ -92,7 +92,7 @@ export default class Tabs extends Component {
 												navigator={this.props.navigator}
 												hideTabBar = {this._hideTabBar}
 												showTabBar = {this._showTabBar}
-                        handleBackToHome={this.props.handleBackToHome}
+                        navigator={this.props.navigator}
                         />
                 <SettingTab tabLabel='设置'
                             navigator={this.props.navigator}

@@ -61,21 +61,8 @@ export default class SboxHome extends Component {
     DatabaseInit();
   }
   componentDidMount() {
-      // NativeModules.StripeBridge.pay();
       SboxHomeStore.addChangeListener(this._onChange);
       SboxHomeAction.getHomeData();
-      // setTimeout(() => {
-      //   this.props.navigator.showLightBox({
-      //      screen: "SboxHomeAlert", // unique ID registered with Navigation.registerScreen
-      //      passProps: {
-      //        message:`我们的配送范围已扩大至图中红框区域，包括所有Condo或House均可送达~具体地址可在填写订单时确认。`}, // simple serializable object that will pass as props to the lightbox (optional)
-      //      style: {
-      //       //  backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-      //       //  backgroundColor: "#ff000080" // tint color for the background, you can specify alpha here (optional)
-      //      },
-      //      adjustSoftInput: "resize", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
-      //     });
-      // }, 6000);
   }
   componentWillUnmount(){
       SboxHomeStore.removeChangeListener(this._onChange);
@@ -85,7 +72,12 @@ export default class SboxHome extends Component {
   }
 
   _backToHome() {
-    this.props.handleBackToHome();
+    this.props.navigator.resetTo({
+        screen: 'cmHome',
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+      });
   }
   _jumpToItem(spu_id, sku_id){
     SboxProductAction.getSingleProduct(spu_id,sku_id);

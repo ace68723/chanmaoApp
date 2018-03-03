@@ -4,6 +4,9 @@ const  Alert                = require('../System/Alert');
 const  AddressModule        = require('../AddressModule/AddressModule');
 const  MenuStore            = require('../../Stores/MenuStore');
 import {
+	Platform,
+} from 'react-native';
+import {
   UpdateAllRestaurants,
   cme_getCheckout,
   cme_beforCheckout,
@@ -101,7 +104,13 @@ const RestaurantModule = {
           item.ds_id = item.id;
           item.qty = null;
         })
-        const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment}
+        let channel
+        if (Platform.OS === 'ios') {
+          channel = 1;
+        } else if (Platform.OS === 'android') {
+          channel = 2;
+        }
+        const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel}
         const data = await RestaurantApi.checkout(reqData);
         return data
       }catch (e){

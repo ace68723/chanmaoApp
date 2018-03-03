@@ -62,11 +62,28 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentDidMount() {
-    // SplashScreen.hide();
 
       AuthAction.doAuth();
 
-      this._startAnimation();
+
+      if(this.props.goToCmEat){
+
+        setTimeout(() => {
+          this._startAnimation();
+        }, 200);
+        setTimeout(() => {
+          this._handleChanmaoPress()
+        }, 3100);
+      }else if(this.props.goToSweetfulBox){
+        setTimeout(() => {
+          this._startAnimation();
+        }, 200);
+        setTimeout(() => {
+          this._handleSboxPress()
+        }, 3100);
+      }else{
+        this._startAnimation();
+      }
   }
   _startAnimation() {
       Animated.parallel([

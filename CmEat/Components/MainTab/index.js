@@ -48,6 +48,7 @@ export default class MainTab extends Component {
     this._onChange = this._onChange.bind(this);
     this._scrollEventBind = this._scrollEventBind.bind(this);
     this._getScrollViewRefs= this._getScrollViewRefs.bind(this);
+    this._handleBackToHome = this._handleBackToHome.bind(this);
 		this._onChangeTab = this._onChangeTab.bind(this);
 		this.showBanner = true;
   }
@@ -85,6 +86,14 @@ export default class MainTab extends Component {
   }
   _getScrollViewRefs(ref:object){
       this.scrollViewRefs = [...this.scrollViewRefs,ref]
+  }
+  _handleBackToHome(){
+    this.props.navigator.resetTo({
+        screen: 'cmHome',
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+      });
   }
   _setPosition(){
     if (this.setPositionStarted) return
@@ -250,7 +259,7 @@ export default class MainTab extends Component {
       <View style={{flex: 1}}>
 				{this.renderScrollableTabView()}
         <CmEatHomeHeader scrollY = {this.state.scrollY}
-                         handleBackToHome={this.props.handleBackToHome}/>
+                         handleBackToHome={this._handleBackToHome}/>
          <HeaderWithBanner
               bannerList={this.state.bannerList}
               scrollY = {this.state.scrollY}
