@@ -117,7 +117,7 @@ Data Sample
             "price":"8.99",
             "qty":null,
             "status":0,
-            "tpgs":[
+            "tps":[
               {
                 "tp_id":5,
                 "tp_quantity":2
