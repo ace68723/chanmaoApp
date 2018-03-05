@@ -129,6 +129,7 @@ export default class Category extends Component {
                 onPress={_handleCategoryPress.bind(null,category.index)}
                 key={index}
                 style={{ borderColor:"#e2e2e4",
+
                                           borderBottomWidth: 1,
                                           // height:40,
                                           paddingTop:10,
@@ -218,6 +219,7 @@ export default class Category extends Component {
     }else{
       return <TouchableWithoutFeedback
         onPress={this._onPressButton.bind(this)}>
+
         <Image  source={require('./Image/button_menu_open.png')}
                 style={
                   {
@@ -247,7 +249,7 @@ export default class Category extends Component {
       bottom = 0
     }
     return (
-      <View style={[styles.container,{left:left,right:right,top:top,bottom:bottom,}]}>
+      <View style={[styles.container,{left:left,right:right,top:top-0.07*width,bottom:bottom,}]}>
         {this._renderTouchBackground()}
         {this._renderListView()}
         {this._renderTouchButton()}

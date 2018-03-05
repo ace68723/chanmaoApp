@@ -98,7 +98,7 @@ export default class Tabs extends Component {
 												 keyboardShouldPersistTaps={'always'}>
 
 							 <MainTab tabLabel='主页'
-												navigator={this.props.navigator}
+								
 												hideTabBar = {this._hideTabBar}
 												showTabBar = {this._showTabBar}
                         navigator={this.props.navigator}

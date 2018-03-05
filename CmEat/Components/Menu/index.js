@@ -19,6 +19,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import MenuStore from '../../Stores/MenuStore';
 
 
 const {width,height} = Dimensions.get('window');
@@ -111,6 +112,7 @@ class Menu extends Component {
     }
 
     _closeMenuAnimation(){
+      MenuStore.initMenu();
 			this.state.anim.setValue(0);
       this.setState({renderMenuList:false,renderHeader:false,})
       InteractionManager.runAfterInteractions(() => {
