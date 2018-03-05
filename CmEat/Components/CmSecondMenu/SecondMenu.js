@@ -87,6 +87,22 @@ export default class SecondMenu extends Component {
 	}
 
 	_confirm() {
+		console.log(this.state.toppingGroupList);
+		for (let tpg_id in this.state.toppingGroupList) {
+			console.log(this.state.toppingGroupList[tpg_id].tpg_min_limit);
+			if (this.state.toppingGroupList[tpg_id].tpg_min_limit > 0) {
+				let counter = 0;
+				for (let tp_id in this.state.toppingGroupList[tpg_id].tps) {
+					if (this.state.toppingGroupList[tpg_id].tps[tp_id].quantity > 0) {
+						counter = counter + parseInt(this.state.toppingGroupList[tpg_id].tps[tp_id].quantity);
+					}
+				}
+				if (counter < this.state.toppingGroupList[tpg_id].tpg_min_limit) {
+					alert("请选择必填选项");
+					return;
+				}
+			}
+		}
 		OrderActions.addItem(Object.assign({},
 																			 this.props.dish,
 																			 {tpgs: this.state.toppingGroupList, qty: this.state.qty, price: this.state.total}));

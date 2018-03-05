@@ -30,6 +30,7 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 		searchAddress:"",
     addressStatus:"",
     showConfirmBtn:true,
+		selectedUaid: null,
 	},
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -55,6 +56,9 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
     this.state.addressList = cme_getAllAddress();
     this.state.selectedAddress = cme_getSelectedAddress();
 	},
+	updateSelectedUaid(data) {
+		this.state.selectedUaid = data.uaid;
+	},
 	formatAddress(io_addrInfo){
     this.state.formattedAddress = io_addrInfo;
     this.state.addressStatus = "AddAddressInfo";
@@ -68,6 +72,9 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 	getState(){
     this.state.addressList = cme_getAllAddress();
     this.state.selectedAddress = cme_getSelectedAddress();
+		if (!this.state.selectedUaid) {
+			this.state.selectedUaid = cme_getSelectedAddress().uaid;
+		}
 		return this.state;
 	},
 
@@ -92,6 +99,10 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 				case AppConstants.UPDATA_ADDRESSLIST:
 						 AddressStore.emitChange()
 					break;
+				case AppConstants.UPDATA_SELECTED_UAID:
+						 AddressStore.updateSelectedUaid(action.data)
+						 AddressStore.emitChange()
+				  break;
         default:
          // do nothing
 		  }
