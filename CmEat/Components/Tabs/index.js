@@ -22,6 +22,7 @@ import SettingTab from '../Setting/SettingTab';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TabBar from './TabBar';
 
+import TabsStore from '../../Stores/TabsStore';
 const {width,height} = Dimensions.get('window');
 
 
@@ -31,19 +32,27 @@ export default class Tabs extends Component {
     super()
 		this._hideTabBar = this._hideTabBar.bind(this);
 	  this._showTabBar = this._showTabBar.bind(this);
-
+    this._onChange = this._onChange.bind(this);
   }
 	componentDidMount(){
-    if(this.props.checkoutStatus){
-      this.tabView.goToPage(1);
-      this.props.navigator.push({
-        screen: 'CmEatHistory',
-        animated: true,
-        navigatorStyle: {navBarHidden: true},
-        passProps:{tag:"fromHome"}
-      });
-    }
+    TabsStore.addChangeListener(this._onChange);
 	}
+  componentWillUnmount(){
+		TabsStore.removeChangeListener(this._onChange);
+	}
+  _onChange() {
+    if(TabsStore.getState().goToHistory){
+      this.tabView.goToPage(1);
+      setTimeout( () => {
+        this.props.navigator.push({
+          screen: 'CmEatHistory',
+          animated: true,
+          navigatorStyle: {navBarHidden: true},
+        });
+      }, 1000);
+
+    }
+  }
 	_hideTabBar(){
 		if(this.state.showTabBar){
 			this.setState({

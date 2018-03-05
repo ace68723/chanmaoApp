@@ -22,7 +22,7 @@ class PhoneNumberVerify extends Component{
           this.state={
             getVerifyCode:false
           }
-					// this._keyboardWillShow = this._keyboardWillShow.bind(this);
+					this._keyboardWillShow = this._keyboardWillShow.bind(this);
       }
 			componentDidMount(){
 				this._keyboardWillShowSubscription = Keyboard.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));

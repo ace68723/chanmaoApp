@@ -186,9 +186,8 @@ export default class Home extends Component {
         }, 500);
         setTimeout(() => {
           InteractionManager.runAfterInteractions(() => {
-              this.props.navigator.push({
+              this.props.navigator.resetTo({
                 screen: 'CmEat',
-                passProps: {handleBackToHome: this._handleBackToHome},
                 animated: false,
                 navigatorStyle: {
                   navBarHidden: true,
@@ -242,7 +241,7 @@ export default class Home extends Component {
       }, 500);
       setTimeout(() => {
         InteractionManager.runAfterInteractions(() => {
-          this.props.navigator.push({
+          this.props.navigator.resetTo({
             screen: 'SboxHome',
             passProps: {handleBackToHome: this._handleBackToHome},
             animated: false,

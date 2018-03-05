@@ -122,7 +122,6 @@ export default class RestaurantTab extends Component {
   //   }
   // }
   _onChange(){
-		console.log('here')
 		// if(this.props.index == 1){
 		// 	const restaurantData = RestaurantStore.getRestaurantData()
 		// 	const dataSource = {dataSource:this.state.dataSource.cloneWithRows(restaurantData)}

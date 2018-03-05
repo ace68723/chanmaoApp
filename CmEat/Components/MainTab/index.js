@@ -96,32 +96,37 @@ export default class MainTab extends Component {
       });
   }
   _setPosition(){
-    if (this.setPositionStarted) return
-    this.setPositionStarted = true;
-    setTimeout(()=>{
-      this.setPositionStarted = false;
-    }, 500);
-    if(_scrollY != this.state.scrollY._value ){
-       if(this.state.scrollY._value <= HEADER_MAX_HEIGHT){
-           _scrollY = this.state.scrollY._value;
+    try {
+      if (this.setPositionStarted) return
+      this.setPositionStarted = true;
+      setTimeout(()=>{
+        this.setPositionStarted = false;
+      }, 500);
+      if(_scrollY != this.state.scrollY._value ){
+         if(this.state.scrollY._value <= HEADER_MAX_HEIGHT){
+             _scrollY = this.state.scrollY._value;
 
+             _forEach(this.scrollViewRefs,(ref,index)=>{
+                  if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
+                  ref.scrollView.scrollToOffset({offset: this.state.scrollY._value,animated:false});
+             })
+
+         } else {
            _forEach(this.scrollViewRefs,(ref,index)=>{
-                if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-                ref.scrollView.scrollToOffset({offset: this.state.scrollY._value,animated:false});
+              if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
+               // ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
+                 // if( py>40 ){
+                   _scrollY = HEADER_MAX_HEIGHT;
+                   ref.scrollView.scrollToOffset({offset: HEADER_MAX_HEIGHT,animated:false});
+                 // }
+                // });
            })
-
-       } else {
-         _forEach(this.scrollViewRefs,(ref,index)=>{
-            if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-             // ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
-               // if( py>40 ){
-                 _scrollY = HEADER_MAX_HEIGHT;
-                 ref.scrollView.scrollToOffset({offset: HEADER_MAX_HEIGHT,animated:false});
-               // }
-              // });
-         })
-       }
+         }
+      }
+    } catch (e) {
+      console.log(e)
     }
+
   }
   // setPosition(){
   //   try {

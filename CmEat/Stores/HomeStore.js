@@ -38,9 +38,6 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
   		const restaurantData = _find(this.state.areaList[0].restaurantList, {rid:rid});
   		return restaurantData
   },
-	closeMenu(){
-		this.state = Object.assign({},this.state,{showAnimatedView:false})
-	},
   getHomeState(){
     return this.state
   },
@@ -50,11 +47,11 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 					   HomeStore.saveHomeData(action.res)
              HomeStore.emitChange()
 				break;
-				case AppConstants.CHECKOUT:
-								HomeStore.closeMenu();
-								setTimeout( () => {
-									HomeStore.emitChange();
-								}, 1000);
+				// case AppConstants.CHECKOUT:
+				// 				HomeStore.closeMenu();
+				// 				setTimeout( () => {
+				// 					HomeStore.emitChange();
+				// 				}, 1000);
 				break;
 
 		  }

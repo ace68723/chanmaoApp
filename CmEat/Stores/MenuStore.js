@@ -19,6 +19,7 @@ const MenuStore = Object.assign({},EventEmitter.prototype,{
 			this.on(CHANGE_EVENT, callback)
 	},
 	removeChangeListener(callback){
+      this.initMenu();
 			this.removeListener(CHANGE_EVENT, callback)
 	},
   menuState(){

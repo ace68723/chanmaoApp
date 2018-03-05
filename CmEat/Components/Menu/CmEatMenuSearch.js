@@ -69,19 +69,19 @@ export default class CmEatMenuSearch extends Component {
 			})
 	}
 	_goBack(){
-		this.props.navigator.dismissModal({animationType: 'none',});
+		this.props.navigator.pop({animated: false,});
 	}
 	_goToCheckout(){
 		if(Number(this.state.cartTotals.total)>0){
 			if(Number(this.state.cartTotals.total)>=Number(this.state.restaurant.start_amount)){
-				this.props.navigator.showModal({
-					screen: 'CmEatCheckout',
-					animated: true,
-					navigatorStyle: {navBarHidden: true},
-					passProps: {
-					  restaurant:this.state.restaurant,
-					},
-				});
+        this.props.navigator.push({
+          screen: 'CmEatCheckout',
+          animated: true,
+          navigatorStyle: {navBarHidden: true},
+          passProps: {
+            restaurant:this.state.restaurant,
+          },
+        });
 			}else{
 				Alert.alert(
 					'馋猫订餐提醒您',

@@ -2,6 +2,7 @@ import AppConstants from '../Constants/AppConstants';
 import {dispatch, register} from '../Dispatchers/AppDispatcher';
 import {EventEmitter} from 'events';
 import CheckoutAction from '../Actions/CheckoutAction';
+import MenuStore from './MenuStore';
 const CHANGE_EVENT = 'change';
 import {
   cme_getRestaurantData,
@@ -140,6 +141,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 		let checkoutSuccessful;
 		if(data.result == 0){
 			 checkoutSuccessful = true;
+       MenuStore.initMenu();
 		}else{
 			checkoutSuccessful = false;
 		}

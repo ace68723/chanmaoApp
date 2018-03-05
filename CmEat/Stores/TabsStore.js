@@ -14,21 +14,17 @@ const TabsStore = Object.assign({},EventEmitter.prototype,{
 	},
 	addChangeListener(callback){
 			this.on(CHANGE_EVENT, callback)
-      setTimeout( () => {
-        this.emit(CHANGE_EVENT)
-      }, 10000);
 	},
 	removeChangeListener(callback){
 			this.removeListener(CHANGE_EVENT, callback)
 	},
   GO_TO_HISTORY(){
     state = Object.assign({},state,{goToHistory:true})
-
-  },
-  getState(){
     setTimeout(() => {
       state = Object.assign({},state,{goToHistory:false})
     }, 500);
+  },
+  getState(){
     return state
   },
 	dispatcherIndex: register(function(action) {

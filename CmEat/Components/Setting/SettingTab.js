@@ -32,7 +32,6 @@ class SettingTab extends Component {
         screen: 'CmEatHistory',
         animated: true,
         navigatorStyle: {navBarHidden: true},
-        passProps:{tag:"fromHome"}
       });
 		}
     _goToAddress(){
@@ -40,10 +39,7 @@ class SettingTab extends Component {
         screen: 'CmEatAddress',
         animated: true,
         navigatorStyle: {navBarHidden: true},
-        passProps:{
-          tag:"fromHome",
-          handleBackToHome:this.props.handleBackToHome,
-        }
+        passProps:{tag:"fromHome"}
       });
     }
     _goToAboutUs(){
@@ -51,7 +47,6 @@ class SettingTab extends Component {
         screen: 'CmEatAboutUs',
         animated: true,
         navigatorStyle: {navBarHidden: true},
-        passProps:{tag:"fromHome"}
       });
     }
     _cmeLogOut(){

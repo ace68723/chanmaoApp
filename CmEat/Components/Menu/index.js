@@ -150,9 +150,9 @@ class Menu extends Component {
     }
 		_goToMenuSearch(){
 
-      this.props.navigator.showModal({
+      this.props.navigator.push({
         screen: 'CmEatMenuSearch',
-        animationType: 'none',
+        animated: false,
         navigatorStyle: {navBarHidden: true},
         passProps: {
           restaurant:this.state.restaurant,
@@ -162,7 +162,7 @@ class Menu extends Component {
 		_goToCheckout(){
 			if(Number(this.state.cartTotals.total)>0){
 				if(Number(this.state.cartTotals.total)>=Number(this.state.restaurant.start_amount)){
-          this.props.navigator.showModal({
+          this.props.navigator.push({
             screen: 'CmEatCheckout',
             animated: true,
             navigatorStyle: {navBarHidden: true},

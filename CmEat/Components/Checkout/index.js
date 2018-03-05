@@ -185,9 +185,7 @@ class Confirm extends Component {
 			this.setState({showOrderConfirm:false});
 		}
     _goBack(){
-      this.props.navigator.dismissModal({
-        animationType: 'slide-down'
-      });
+      this.props.navigator.pop();
     }
     _goToAddressList(){
 			if(!this.state.loading){
@@ -200,18 +198,8 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-      // this.props.navigator.dismissModal({animationType: 'slide-down'});
-      // setTimeout(() => {
-      //   this.props.navigator.dismissModal({animationType: 'slide-down'});
-      // }, 500);
-      this.props.navigator.resetTo({
-          screen: 'CmEatTabs',
-          passProps: {checkoutStatus:true},
-          animated: true,
-          animationType: 'fade',
-          navigatorStyle: {navBarHidden: true},
-        });
-
+        this.props.navigator.dismissModal({animationType: 'slide-down'});
+        // this.props.navigator.dismissAllModals({animationType: 'slide-down'});
     }
     showLoading(){
       if(this.state.isLoading)

@@ -147,30 +147,12 @@ class HistoryTab extends Component {
 					return <Order key={ order.oid }
 												order={order}
 												HistoryOrderDetailVisible = {this._HistoryOrderDetailVisible}
-												scrollRef={this.refs._scrollView}
+												scrollRef={this._scrollView}
 												getCurrentPosition={this._getCurrentPosition}
 												reorder={this._reorder}/>
 				});
 				return(
-					<ScrollView style={styles.scrollView}
-										 scrollEventThrottle= {16}
-										 onScroll={(e)=>{this.currentPosition = e.nativeEvent.contentOffset.y}}
-										 refreshControl={
-											 <RefreshControl
-												 refreshing={this.state.isRefreshing}
-												 onRefresh={this._onRefresh}
-												 tintColor="#ff8b00"
-												 title="正在刷新啦..."
-												 titleColor="#ff8b00"
-											 />
-										 }
-										 ref='_scrollView'
-										 keyboardShouldPersistTaps={"always"}
-										 >
-
-
-					 { orderList }
-					</ScrollView>
+					orderList
 				)
 			}else {
 				const { height, width } = Dimensions.get('window');
@@ -185,7 +167,26 @@ class HistoryTab extends Component {
 							 <Header title={'我的订单'}
 								 			 goBack={this._goBack}
 			 								 leftButtonText={'x'}/>
-						 {this._renderContent()}
+
+             <ScrollView style={styles.scrollView}
+   										 scrollEventThrottle= {16}
+   										 onScroll={(e)=>{this.currentPosition = e.nativeEvent.contentOffset.y}}
+   										 refreshControl={
+   											 <RefreshControl
+   												 refreshing={this.state.isRefreshing}
+   												 onRefresh={this._onRefresh}
+   												 tintColor="#ff8b00"
+   												 title="正在刷新啦..."
+   												 titleColor="#ff8b00"
+   											 />
+   										 }
+   										 ref={(ref) => this._scrollView = ref}
+   										 keyboardShouldPersistTaps={"always"}
+   										 >
+
+                {this._renderContent()}
+
+   					</ScrollView>
 						 <Modal style={styles.modal}
 						 			 position={"center"}
 						 			 isOpen={this.state.showHistoryOrderDetail}

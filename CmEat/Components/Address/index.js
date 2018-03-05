@@ -76,11 +76,18 @@ export default class CmEatAddress extends Component {
     }
   }
   _goBack() {
-    console.log('_goBack')
-    this.props.navigator.dismissModal();
+    // this.props.navigator.dismissModal();
     if(this.props.tag === "fromHome") {
-      this.props.handleBackToHome("fromChanmao");
+      // this.props.handleBackToHome("fromChanmao");
+      this.props.navigator.resetTo({
+  				screen: 'cmHome',
+  				animated: true,
+  				animationType: 'fade',
+  				navigatorStyle: {navBarHidden: true},
+  				passProps:{goToCmEat: true}
+  			});
     }else{
+      this.props.navigator.dismissModal();
       this.props.updateUaid(AddressStore.getSeletedAddress());
     }
 
