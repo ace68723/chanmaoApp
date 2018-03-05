@@ -30,7 +30,6 @@ const  HistoryModule = {
           return new Promise((resolve, reject) => {
             HistoryApi.getOrderData(token)
               .then(data => {
-                console.log(data);
                 if(data.result == 0){
                     resolve(data.orders);
                 }else{

@@ -87,9 +87,7 @@ export default class SecondMenu extends Component {
 	}
 
 	_confirm() {
-		console.log(this.state.toppingGroupList);
 		for (let tpg_id in this.state.toppingGroupList) {
-			console.log(this.state.toppingGroupList[tpg_id].tpg_min_limit);
 			if (this.state.toppingGroupList[tpg_id].tpg_min_limit > 0) {
 				let counter = 0;
 				for (let tp_id in this.state.toppingGroupList[tpg_id].tps) {
