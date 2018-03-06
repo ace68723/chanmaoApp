@@ -31,7 +31,7 @@ export function DatabaseInit() {
               ],
       schemaVersion: 1,
   })
-  console.log(realm.path)
+  // console.log(realm.path)
 }
 export function sbox_getAllItemsFromCart() {
   return realm.objects('sbox_cart');
@@ -48,7 +48,7 @@ export async function sbox_updateCartStock(cartList) {
 }
 export function sbox_addItemToCart(selectedProduct) {
   const item = realm.objectForPrimaryKey('sbox_cart',selectedProduct.sku_id);
-  console.log(item)
+  // console.log(item)
   if(item){
     realm.write(() => {
       item.sku_quantity += selectedProduct.sku_quantity;

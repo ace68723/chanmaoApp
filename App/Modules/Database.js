@@ -156,7 +156,7 @@ export function DatabaseInit() {
     let init_cme_cart = realm.objects('cme_cart');
     realm.delete(init_cme_cart);
 
-    realm.create('cm_system',{type: 'version', value: '2.5.3'}, true );
+    realm.create('cm_system',{type: 'version', value: '2.5.6'}, true );
   })
   console.log(realm.path)
 }
@@ -265,7 +265,6 @@ export function cme_getCalculateDeliveryFee() {
   return {pretax,rid,uaid,startAmount,dltypeObj}
 }
 export function cme_updateCalculateDeliveryFee({dltype,dlexp}) {
-  console.log('cme_updateCalculateDeliveryFee',dltype)
   realm.write(() => {
       realm.create('cme_cart',{type:"dltype",value:dltype}, true );
       realm.create('cme_cart',{type:"dlexp",value:dlexp}, true );
@@ -292,6 +291,7 @@ export function cme_getRestaurantData(area) {
   }
 }
 export function cme_getSelectedAddress() {
+  if (!realm.objects('cme_address').filtered('selected == true' )[0]) return "";
   const selectedAddress = realm.objects('cme_address').filtered('selected == true' )[0]
   return selectedAddress
 }

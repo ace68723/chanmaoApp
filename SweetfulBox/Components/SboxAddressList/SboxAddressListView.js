@@ -69,7 +69,7 @@ export default class SboxAddressListView extends Component {
 
 
   render() {
-      console.log(this.props.condoList)
+      // console.log(this.props.condoList)
       return (
         <View style={styles.container}>
             <Header

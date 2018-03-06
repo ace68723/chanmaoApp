@@ -94,4 +94,10 @@ export default {
           actionType: AppConstants.UPDATA_ADDRESSLIST
       })
     },
+    updateSelectedUaid(uaid) {
+      const data = {uaid: uaid}
+      dispatch({
+          actionType: AppConstants.UPDATA_SELECTED_UAID, data
+      })
+    },
 }

@@ -13,13 +13,16 @@ import {
   ScrollView,
   TouchableOpacity,
   Platform,
-  ImageBackground
+  ImageBackground,
+  TouchableWithoutFeedback,
+  TextInput,
 } from 'react-native';
 
 import UserInfo from '../SboxAddAddressInfo/UserInfo';
 import SboxCart from '../SboxCart';
 import CheckoutButton from './CheckoutButton';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
+import CommentModal from 'react-native-modalbox';
 
 import SboxOrderAction from '../../Actions/SboxOrderAction';
 import SboxProductAction from '../../Actions/SboxProductAction';
@@ -63,11 +66,12 @@ export default class MyComponent extends Component {
     this._renderItem = this._renderItem.bind(this);
     this._renderCheckout = this._renderCheckout.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
+    this._renderComment = this._renderComment.bind(this);
     this._keyExtractor = this._keyExtractor.bind(this);
     this._renderDiscountMessage=this._renderDiscountMessage.bind(this);
-
-
-
+    this._renderDeliveryFee=this._renderDeliveryFee.bind(this);
+    this._renderOriginalPrice=this._renderOriginalPrice.bind(this);
+    this._existDiscount=this._existDiscount.bind(this);
 
   }
   componentDidMount() {
@@ -233,7 +237,7 @@ export default class MyComponent extends Component {
     this.setState({
       checkoutStatus:'loading',
     })
-    SboxOrderAction.checkout();
+    SboxOrderAction.checkout(this.state.comment);
   }
 
   _renderGoBackBtn() {
@@ -328,6 +332,7 @@ export default class MyComponent extends Component {
   _renderDiscountMessage(messageList)
   {
     let _messageList = [];
+
     for (i=0;i<messageList.length;i++)
     {
       // alert(messageList[i].message);
@@ -335,20 +340,70 @@ export default class MyComponent extends Component {
         <View key={i} style={{flexDirection:'row',
                alignItems: 'center',
                justifyContent:'center',
-               paddingTop: 5,
-               paddingBottom: 5,
+
                width:width*0.5,
              }}>
+                <View style={{alignItems:'center',
+                marginLeft:15,
+                height:35,
+                flexDirection:'row',
+                width:width*0.5,}}>
+                  <Image
+                    style={{width:33,height:20,}}
+                    source={{uri:messageList[i].image}}
+                  />
+                   <Text style={{fontSize:16,marginLeft:5}}>
+                      {messageList[i].message}
+                   </Text>
 
-               <Text>
-                  {messageList[i].message}
-               </Text>
+               </View>
         </View>
       )
     }
     return _messageList;
   }
+  _renderDeliveryFee()
+  {
+    if (this.state.deliFee>0) return (
+      <View style={{flex:0.5,}}>
+        <Text style={{fontSize:16,
+                      fontFamily:'FZZhunYuan-M02S',}}>
+                Delivery Fee: ${this.state.deliFee}
+        </Text>
+      </View>
+    );
+  }
+  _renderOriginalPrice()
+  {
+    if (this.state.ev_original_total) return (
+      <Text style={{fontSize:16,
+                    fontFamily:'FZZhunYuan-M02S',color:'grey',textDecorationLine:'line-through'}}>
+          ({this.state.ev_original_total})
+      </Text>
+    )
+  }
+  _existDiscount()
+  {
+    if (this.state.ea_discount_message.length>0) return (
+      <View style={{flexDirection: 'row',
+             flexWrap: 'wrap',
+
+             borderBottomWidth: 1,
+             borderBottomColor: '#DCDCDC',
+           }}>
+        {this._renderDiscountMessage(this.state.ea_discount_message)}
+      </View>
+    )
+  }
   _renderOrderInfo() {
+    // console.log(this.state);
+    let commentText = ()=>{
+      if(this.state.comment){
+        return(	<Text>备注： {this.state.comment}</Text>)
+      }else{
+        return(<Text style={{color:'#ababb0'}}>添加备注</Text>)
+      }
+    }
     return(
       <View style={{
                     marginTop:15,
@@ -374,36 +429,28 @@ export default class MyComponent extends Component {
             </View>
 
           </View>
+          {this._existDiscount()}
           <View style={{
                         padding:10,
-                        flexDirection:'row',
                         borderBottomWidth: 1,
                         borderColor: '#DCDCDC',}}>
-            <View style={{flex:0.5,}}>
-              <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}>
-                      Delivery Fee: ${this.state.deliFee}
-              </Text>
-            </View>
-            <View style={{flex:0.5, alignItems:'flex-end'}}>
+            {this._renderDeliveryFee()}
+            <View style={{flex:0.5, }}>
               <Text style={{fontSize:16,
                             fontFamily:'FZZhunYuan-M02S',}}>
                       Total:
                       <Text style={{fontSize:16,
                                     fontFamily:'FZZhunYuan-M02S',color:'#ff7685'}}>
                           ${this.state.total}
+                          <Text style={{fontSize:16,
+                                        fontFamily:'FZZhunYuan-M02S',color:'grey',textDecorationLine:'line-through'}}>
+                              {this._renderOriginalPrice()}
+                          </Text>
                       </Text>
               </Text>
             </View>
           </View>
-          <View style={{flexDirection: 'row',
-                 flexWrap: 'wrap',
-                 paddingTop: 10,
-                 borderBottomWidth: 1,
-                 borderBottomColor: '#DCDCDC',
-               }}>
-            {this._renderDiscountMessage(this.state.ea_discount_message)}
-          </View>
+
           <TouchableOpacity
                       onPress={this._goToAddCard}
                       style={{
@@ -424,6 +471,23 @@ export default class MyComponent extends Component {
               </Text>
             </View>
           </TouchableOpacity>
+
+
+          <TouchableOpacity
+                      onPress={()=>{this.setState({openEditComment:true})}}
+                      style={{
+                        padding:10,
+                        flexDirection:'row',
+                        borderBottomWidth: 1,
+                        borderColor: '#DCDCDC',}}>
+            <View style={{flex:1,}}>
+              <Text style={{fontSize:16,
+                            fontFamily:'FZZhunYuan-M02S',}}>
+                      {commentText()}
+              </Text>
+            </View>
+          </TouchableOpacity>
+
       </View>
     )
   }
@@ -446,16 +510,35 @@ export default class MyComponent extends Component {
         <SboxHeader title={"结账"}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={'x'}/>
-                <ScrollView>
+                <ScrollView style={{marginBottom:40}}>
                   {this._renderHeader()}
                   {cartList}
                 </ScrollView>
+                {this._renderComment()}
                 {this._rederFooter()}
       </View>
     );
   }
+  _renderComment(){
+    return(
+      <CommentModal  style={styles.modal}
+                     position={"center"}
+                     isOpen={this.state.openEditComment}
+                     onClosed={()=>{this.setState({openEditComment:false})}}>
+        <TextInput style={styles.TextInput}
+                   placeholder="备注"
+                   selectionColor="#ff8b00"
+                   multiline={true}
+                   value={this.state.comment}
+                   onChangeText={(text) => {this.setState({comment:text})}}
+                   underlineColorAndroid={"rgba(0,0,0,0)"}>
+        </TextInput>
+      </CommentModal>
+    )
+
+  }
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let bottom;
     if(this.props.tag === 'fromMainTab'){
       bottom = 65;
@@ -490,6 +573,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor:"#ffffff",
+  },
+  modal: {
+   justifyContent: 'center',
+   height: 350,
+   width: 300,
+  },
+  TextInput:{
+    flex:1,
+    color:'#000000',
+    fontSize:16,
+    padding:3,
+    paddingLeft:6,
+    backgroundColor:'#ffffff',
+    borderRadius:6,
+    borderColor:'#b1b1b1',
   },
   navigation: {
     flexDirection:'row'

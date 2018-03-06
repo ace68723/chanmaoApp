@@ -44,7 +44,8 @@ const RestaurantApi = {
           }
       }
       options.headers.authortoken = reqData.token;
-      const rid = reqData.rid
+      const rid = reqData.rid;
+      // const rid = 5;
       options.body =  JSON.stringify({rid})
       return fetch(url,options)
               .then((res) => res.json())
@@ -112,7 +113,7 @@ const RestaurantApi = {
       const items   = reqData.items;
       const comment = reqData.comment;
       const version = AppConstants.CM_VERSION;
-      const channel = '1';
+      const channel = reqData.channel;
       const POST_DATA = {dltype,pretax,rid,uaid,dlexp,items,version,channel,comment}
       options.headers.authortoken = reqData.token;
       options.body =  JSON.stringify(POST_DATA);

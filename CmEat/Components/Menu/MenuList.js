@@ -85,7 +85,6 @@ class Menu extends Component {
 
     }
     componentWillUnmount() {
-      MenuStore.initMenu();
       MenuStore.removeChangeListener(this._onChange);
     }
     _onChange(){
@@ -281,7 +280,6 @@ class Menu extends Component {
           )
         }
       }
-
       return(
 				<View style={{flex:1}}>
               <FlatList

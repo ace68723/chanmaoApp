@@ -80,10 +80,10 @@ class DefaultTabBar extends Component {
             iconName = 'cm-home_page';
             break;
           case 1:
-            iconName = 'cm-my_order';
+            iconName = 'cm-setting';
             break;
           case 2:
-            iconName = 'cm-setting';
+            iconName = 'cm-my_order';
             break;
           default:
 

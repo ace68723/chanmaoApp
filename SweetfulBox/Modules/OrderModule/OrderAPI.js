@@ -18,6 +18,7 @@ export default  {
 
     options.body = JSON.stringify({
       ia_prod: io_data.ia_prod,
+      version:io_data.version,
     })
 
     return fetch(url,options)
@@ -67,6 +68,8 @@ export default  {
 
     options.body = JSON.stringify({
       prod: io_data.prod,
+      version:io_data.version,
+      comment: io_data.comment,
     })
     return fetch(url,options)
             .then((res) => res.json())

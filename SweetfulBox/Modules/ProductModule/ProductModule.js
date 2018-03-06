@@ -109,7 +109,7 @@ export default  {
           bannerList:homeDataResult.ea_banner,
           themeList: homeDataResult.ea_theme,
         }
-        console.log(eo_data)
+        // console.log(eo_data)
         this.updateAPICache(eo_data);
         return eo_data
       }else{

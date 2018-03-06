@@ -19,6 +19,7 @@ import {
   View,
 } from 'react-native';
 
+import {Navigation} from 'react-native-navigation';
 import Background from '../General/Background';
 import CheckoutCard from './CheckoutCard';
 import Address from './Address';
@@ -33,6 +34,7 @@ import OrderConfirm from './OrderConfirm';
 
 import CheckoutAction from '../../Actions/CheckoutAction';
 import CheckoutStore from '../../Stores/CheckoutStore';
+import SecondMenuStore from '../../Stores/SecondMenuStore';
 import MenuStore from '../../Stores/MenuStore';
 import HistoryAction from '../../Actions/HistoryAction';
 
@@ -76,6 +78,7 @@ class Confirm extends Component {
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
         this._updateUaid = this._updateUaid.bind(this);
+				this._saveModificationCallback = this._saveModificationCallback.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
         this._checkout = this._checkout.bind(this);
@@ -85,6 +88,7 @@ class Confirm extends Component {
         this._doCheckout = this._doCheckout.bind(this);
         this._handleCommentChange = this._handleCommentChange.bind(this);
         this._handleSubmitComment = this._handleSubmitComment.bind(this);
+				this._handleProductOnPress = this._handleProductOnPress.bind(this);
 				this._closeOrderConfirm = this._closeOrderConfirm.bind(this);
     }
 
@@ -103,6 +107,7 @@ class Confirm extends Component {
       CheckoutStore.removeChangeListener(this._onChange);
     }
     _onChange(){
+
 				const state = Object.assign({},CheckoutStore.getState());
         this.setState(state);
 
@@ -146,9 +151,7 @@ class Confirm extends Component {
         loading:true,
 				showOrderConfirm:false,
       })
-      InteractionManager.runAfterInteractions(() => {
-          CheckoutAction.checkout(this.state.comment);
-      });
+      CheckoutAction.checkout(this.state.comment);
       // CheckoutAction.checkout(this.state.comment);
     }
     _checkout(){
@@ -182,9 +185,7 @@ class Confirm extends Component {
 			this.setState({showOrderConfirm:false});
 		}
     _goBack(){
-      this.props.navigator.dismissModal({
-        animationType: 'slide-down'
-      });
+      this.props.navigator.pop();
     }
     _goToAddressList(){
 			if(!this.state.loading){
@@ -197,12 +198,8 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-			HistoryAction.getOrderData()
-      this.props.navigator.dismissModal({animationType: 'slide-down'});
-      setTimeout(() => {
         this.props.navigator.dismissModal({animationType: 'slide-down'});
-      }, 200);
-
+        // this.props.navigator.dismissAllModals({animationType: 'slide-down'});
     }
     showLoading(){
       if(this.state.isLoading)
@@ -224,12 +221,43 @@ class Confirm extends Component {
         TheSixAction.submitComment(data);
       }
     }
+		_handleProductOnPress(dish) {
+			if (dish.tpgs) {
+				const rid = this.state.rid;
+				const pretax = MenuStore.getCartTotals().total;
+				const navigator = this.props.navigator;
+				const startAmount = this.state.startAmount;
+				SecondMenuStore.getOptions({'toppingGroupList': dish.tpgs, 'price': dish.price, 'qty': dish.qty});
+				this.props.navigator.showModal({
+					screen: 'CmSecondMenu',
+					animated: true,
+					passProps:{dish,
+					           'action': 'modify',
+									   rid,
+									   pretax,
+									   startAmount,
+									   saveModificationCallback: this._saveModificationCallback},
+					navigatorStyle: {navBarHidden: true},
+				});
+			}
+		}
 		_handleScroll(e) {
       if(e.nativeEvent.contentOffset.y < 300){
         this.state.anim.setValue(e.nativeEvent.contentOffset.y);
         const height = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
       }
     }
+
+		_saveModificationCallback() {
+			const cart = MenuStore.getCart();
+			const rid = this.state.rid;
+			const pretax = MenuStore.getCartTotals().total;
+			const startAmount = this.state.startAmount;
+			CheckoutAction.beforCheckout(rid,pretax,startAmount);
+
+			const state = Object.assign({},CheckoutStore.getState(),{cart:cart, pretax: pretax});
+			this.setState(state);
+		}
 		renderCheckoutButton(){
       if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
         return(
@@ -409,7 +437,8 @@ class Confirm extends Component {
             <CheckoutItem key={index}
                       ds_name = {dish.ds_name}
                       dish = {dish}
-                      qty = {dish.qty}/>
+                      qty = {dish.qty}
+										  onPress = {this._handleProductOnPress.bind(null, dish)}/>
           )
       })
 			const margin = this.state.anim.interpolate({

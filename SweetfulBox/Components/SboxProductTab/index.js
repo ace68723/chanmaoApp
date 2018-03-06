@@ -56,7 +56,7 @@ export default class MyComponent extends Component {
     this.setState(SboxProductTabStore.getStateByTmid(tmid));
   }
   _goToSboxProductDetial(item) {
-    console.log(item)
+    // console.log(item)
     if (item.spu_status === 1 || item.sku_status === 1) return;
     const {spu_id, image} = item;
     if (item.sku_id) {SboxProductAction.getSingleProduct(spu_id,item.sku_id)}

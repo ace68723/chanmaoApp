@@ -51,6 +51,7 @@ export default class CmEatAddress extends Component {
       this._chooseAddress = this._chooseAddress.bind(this);
       this._deleteAddress = this._deleteAddress.bind(this);
       this._selectAddress = this._selectAddress.bind(this);
+			this._handleConfirm = this._handleConfirm.bind(this);
 
       this._goToAddAddressInfo = this._goToAddAddressInfo.bind(this);
   }
@@ -66,7 +67,6 @@ export default class CmEatAddress extends Component {
       this._handleStatus(state);
   }
   _handleStatus(state) {
-    console.log(state)
     switch(state.addressStatus){
       case "AddAddressInfo":
         this._goToAddAddressInfo();
@@ -77,13 +77,21 @@ export default class CmEatAddress extends Component {
     }
   }
   _goBack() {
-    console.log(this.props)
     this.props.navigator.dismissModal();
-    if(this.props.tag === "fromHome") {
-      this.props.handleBackToHome("fromChanmao");
-    }else{
-      this.props.updateUaid(AddressStore.getSeletedAddress());
-    }
+
+    // if(this.props.tag === "fromHome") {
+    //   // this.props.handleBackToHome("fromChanmao");
+    //   this.props.navigator.resetTo({
+  	// 			screen: 'cmHome',
+  	// 			animated: true,
+  	// 			animationType: 'fade',
+  	// 			navigatorStyle: {navBarHidden: true},
+  	// 			passProps:{goToCmEat: true}
+  	// 		});
+    // }else{
+    //   this.props.navigator.dismissModal();
+    //   this.props.updateUaid(AddressStore.getSeletedAddress());
+    // }
 
   }
   _goToAddAddressInfo() {
@@ -116,8 +124,35 @@ export default class CmEatAddress extends Component {
 	}
 	_selectAddress(address){
     Keyboard.dismiss();
-		AddressAction.selectAddress(address);
+		AddressAction.updateSelectedUaid(address.uaid);
 	}
+
+	_handleConfirm() {
+		this.state.addressList.map((address,index) => {
+      if (address.uaid === this.state.selectedUaid) {
+				if (address.selected === true) {
+
+				}
+				else {
+					AddressAction.selectAddress(address);
+				}
+			}
+    });
+		if(this.props.tag === "fromHome") {
+      // this.props.handleBackToHome("fromChanmao");
+      this.props.navigator.resetTo({
+  				screen: 'cmHome',
+  				animated: true,
+  				animationType: 'fade',
+  				navigatorStyle: {navBarHidden: true},
+  				passProps:{goToCmEat: true}
+  			});
+    }else{
+      this.props.navigator.dismissModal();
+      this.props.updateUaid(AddressStore.getSeletedAddress());
+    }
+	}
+
   _handleSearchChange(text){
     this.setState({
         searchAddress: text
@@ -202,7 +237,7 @@ export default class CmEatAddress extends Component {
 				}
 			}
 			let selectedIcon = () =>{
-				if(address.selected){
+				if(address.uaid === this.state.selectedUaid){
 					return (
 						<Image style ={{width:20,height:20,position:"absolute",bottom:10,right:10}}
 									 source={require('./Image/icon_check.png')}/>
@@ -317,7 +352,7 @@ export default class CmEatAddress extends Component {
     return(
       <TouchableOpacity style={styles.button}
                         activeOpacity={0.4}
-                        onPress={this._goBack}>
+                        onPress={this._handleConfirm}>
             <Text style={styles.buttonText}>
                确认
             </Text>
@@ -334,7 +369,7 @@ export default class CmEatAddress extends Component {
                                   marginTop:40,
                                 }}
                         activeOpacity={0.4}
-                        onPress={this._goBack}>
+                        onPress={this._handleConfirm}>
             <Text style={styles.buttonText}>
                确认
             </Text>

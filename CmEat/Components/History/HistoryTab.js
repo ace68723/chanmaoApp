@@ -35,6 +35,7 @@ class HistoryTab extends Component {
         super(props);
         this.state = Object.assign({},HistoryStore.getState(),{showHistoryOrderDetail:false});
         this._onChange = this._onChange.bind(this);
+				this._goBack = this._goBack.bind(this);
         this._onRefresh = this._onRefresh.bind(this);
         this._doAutoRefresh = this._doAutoRefresh.bind(this);
         this._HistoryOrderDetailVisible = this._HistoryOrderDetailVisible.bind(this);
@@ -45,7 +46,7 @@ class HistoryTab extends Component {
     }
 
     componentDidMount(){
-      setTimeout( () =>{
+      // setTimeout( () =>{
 				const _doAutoRefresh = this._doAutoRefresh;
 	      HistoryStore.addChangeListener(this._onChange);
 	      this._doAutoRefresh();
@@ -53,7 +54,7 @@ class HistoryTab extends Component {
         console.log('need rebuild currentRoutes')
 	      // const currentRoutes = this.props.navigator.getCurrentRoutes();
 				AppState.addEventListener('change', this._handleAppStateChange);
-      }, 4000);
+      // }, 4000);
     }
     componentWillUnmount() {
          HistoryStore.removeChangeListener(this._onChange);
@@ -80,6 +81,10 @@ class HistoryTab extends Component {
 				}
 
     }
+		_goBack() {
+			this.props.navigator.pop();
+		}
+
 		_handleAppStateChange(currentAppState) {
 			if(currentAppState === 'active'){
 				HistoryAction.getOrderData()
@@ -142,30 +147,12 @@ class HistoryTab extends Component {
 					return <Order key={ order.oid }
 												order={order}
 												HistoryOrderDetailVisible = {this._HistoryOrderDetailVisible}
-												scrollRef={this.refs._scrollView}
+												scrollRef={this._scrollView}
 												getCurrentPosition={this._getCurrentPosition}
 												reorder={this._reorder}/>
 				});
 				return(
-					<ScrollView style={styles.scrollView}
-										 scrollEventThrottle= {16}
-										 onScroll={(e)=>{this.currentPosition = e.nativeEvent.contentOffset.y}}
-										 refreshControl={
-											 <RefreshControl
-												 refreshing={this.state.isRefreshing}
-												 onRefresh={this._onRefresh}
-												 tintColor="#ff8b00"
-												 title="正在刷新啦..."
-												 titleColor="#ff8b00"
-											 />
-										 }
-										 ref='_scrollView'
-										 keyboardShouldPersistTaps={"always"}
-										 >
-
-
-					 { orderList }
-					</ScrollView>
+					orderList
 				)
 			}else {
 				const { height, width } = Dimensions.get('window');
@@ -177,8 +164,29 @@ class HistoryTab extends Component {
     render(){
       return(
          <View style={styles.mainContainer}>
-             <Header title={'我的订单'} />
-						 {this._renderContent()}
+							 <Header title={'我的订单'}
+								 			 goBack={this._goBack}
+			 								 leftButtonText={'x'}/>
+
+             <ScrollView style={styles.scrollView}
+   										 scrollEventThrottle= {16}
+   										 onScroll={(e)=>{this.currentPosition = e.nativeEvent.contentOffset.y}}
+   										 refreshControl={
+   											 <RefreshControl
+   												 refreshing={this.state.isRefreshing}
+   												 onRefresh={this._onRefresh}
+   												 tintColor="#ff8b00"
+   												 title="正在刷新啦..."
+   												 titleColor="#ff8b00"
+   											 />
+   										 }
+   										 ref={(ref) => this._scrollView = ref}
+   										 keyboardShouldPersistTaps={"always"}
+   										 >
+
+                {this._renderContent()}
+
+   					</ScrollView>
 						 <Modal style={styles.modal}
 						 			 position={"center"}
 						 			 isOpen={this.state.showHistoryOrderDetail}

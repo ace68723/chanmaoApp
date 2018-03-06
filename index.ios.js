@@ -14,8 +14,8 @@ DatabaseInit();
 registerScreens();
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'cmHome', 
-    navigatorStyle: {navBarHidden: true}, 
+    screen: 'cmHome',
+    navigatorStyle: {navBarHidden: true},
     navigatorButtons: {},
   },
 })

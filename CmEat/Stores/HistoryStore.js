@@ -73,9 +73,9 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
 						 HistoryStore.saveHistoryDetail(action.data)
 						 HistoryStore.emitChange()
 				 break;
-				 case AppConstants.CHECKOUT:
-							HistoryStore.doRefresh()
-							HistoryStore.emitChange()
+				 // case AppConstants.CHECKOUT:
+							// HistoryStore.doRefresh()
+							// HistoryStore.emitChange()
 			   break;
          case AppConstants.GET_HISTORY_SUCCESS:
              HistoryStore.getHistorySuccess(action.data)

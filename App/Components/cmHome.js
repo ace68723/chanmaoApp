@@ -62,11 +62,28 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentDidMount() {
-    // SplashScreen.hide();
 
       AuthAction.doAuth();
 
-      this._startAnimation();
+
+      if(this.props.goToCmEat){
+
+        setTimeout(() => {
+          this._startAnimation();
+        }, 200);
+        setTimeout(() => {
+          this._handleChanmaoPress()
+        }, 3100);
+      }else if(this.props.goToSweetfulBox){
+        setTimeout(() => {
+          this._startAnimation();
+        }, 200);
+        setTimeout(() => {
+          this._handleSboxPress()
+        }, 3100);
+      }else{
+        this._startAnimation();
+      }
   }
   _startAnimation() {
       Animated.parallel([
@@ -169,9 +186,8 @@ export default class Home extends Component {
         }, 500);
         setTimeout(() => {
           InteractionManager.runAfterInteractions(() => {
-              this.props.navigator.push({
+              this.props.navigator.resetTo({
                 screen: 'CmEat',
-                passProps: {handleBackToHome: this._handleBackToHome},
                 animated: false,
                 navigatorStyle: {
                   navBarHidden: true,
@@ -213,20 +229,14 @@ export default class Home extends Component {
         InteractionManager.runAfterInteractions(() => {
           this.props.navigator.showLightBox({
             screen: 'SboxLoading',
-            animated: false,
+            animationType: 'none',
             navigatorStyle: {navBarHidden: true},
-            style: {
-              flex:1,
-             backgroundBlur: "none",
-
-           }
           })
         })
       }, 500);
       setTimeout(() => {
         InteractionManager.runAfterInteractions(() => {
-          console.log(this._handleBackToHome)
-          this.props.navigator.push({
+          this.props.navigator.resetTo({
             screen: 'SboxHome',
             passProps: {handleBackToHome: this._handleBackToHome},
             animated: false,

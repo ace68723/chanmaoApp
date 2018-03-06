@@ -5,7 +5,7 @@ export default {
   async getProductList(io_data){
       try{
         const data = await SboxProductTabModule.getProductList(io_data);
-        console.log(data)
+        // console.log(data)
         dispatch({
             actionType: SboxConstants.GET_PRODUCT_LIST, data
         })

@@ -56,6 +56,7 @@ export default class MainTab extends Component {
     this._onChange = this._onChange.bind(this);
     this._scrollEventBind = this._scrollEventBind.bind(this);
     this._getScrollViewRefs= this._getScrollViewRefs.bind(this);
+    this._handleBackToHome = this._handleBackToHome.bind(this);
 		this._onChangeTab = this._onChangeTab.bind(this);
 		this.showBanner = true;
   }
@@ -80,11 +81,6 @@ export default class MainTab extends Component {
       areaList: [],
     })
     this.setState(newState);
-    setTimeout(()=>{
-      this.props.navigator.dismissModal({
-        animationType:'none'
-      });
-    }, 1500);
 
   }
   // ui methond
@@ -99,33 +95,46 @@ export default class MainTab extends Component {
   _getScrollViewRefs(ref:object){
       this.scrollViewRefs = [...this.scrollViewRefs,ref]
   }
+  _handleBackToHome(){
+    this.props.navigator.resetTo({
+        screen: 'cmHome',
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+      });
+  }
   _setPosition(){
-    if (this.setPositionStarted) return
-    this.setPositionStarted = true;
-    setTimeout(()=>{
-      this.setPositionStarted = false;
-    }, 500);
-    if(_scrollY != this.state.scrollY._value ){
-       if(this.state.scrollY._value <= HEADER_MAX_HEIGHT){
-           _scrollY = this.state.scrollY._value;
+    try {
+      if (this.setPositionStarted) return
+      this.setPositionStarted = true;
+      setTimeout(()=>{
+        this.setPositionStarted = false;
+      }, 500);
+      if(_scrollY != this.state.scrollY._value ){
+         if(this.state.scrollY._value <= HEADER_MAX_HEIGHT){
+             _scrollY = this.state.scrollY._value;
 
+             _forEach(this.scrollViewRefs,(ref,index)=>{
+                  if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
+                  ref.scrollView.scrollToOffset({offset: this.state.scrollY._value,animated:false});
+             })
+
+         } else {
            _forEach(this.scrollViewRefs,(ref,index)=>{
-                if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-                ref.scrollView.scrollToOffset({offset: this.state.scrollY._value,animated:false});
+              if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
+               // ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
+                 // if( py>40 ){
+                   _scrollY = HEADER_MAX_HEIGHT;
+                   ref.scrollView.scrollToOffset({offset: HEADER_MAX_HEIGHT,animated:false});
+                 // }
+                // });
            })
-
-       } else {
-         _forEach(this.scrollViewRefs,(ref,index)=>{
-            if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-             // ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
-               // if( py>40 ){
-                 _scrollY = HEADER_MAX_HEIGHT;
-                 ref.scrollView.scrollToOffset({offset: HEADER_MAX_HEIGHT,animated:false});
-               // }
-              // });
-         })
-       }
+         }
+      }
+    } catch (e) {
+      console.log(e)
     }
+
   }
   // setPosition(){
   //   try {
@@ -291,7 +300,7 @@ export default class MainTab extends Component {
       <View style={{flex: 1}}>
 				{this.renderScrollableTabView()}
         <CmEatHomeHeader scrollY = {this.state.scrollY}
-                         handleBackToHome={this.props.handleBackToHome}/>
+                         handleBackToHome={this._handleBackToHome}/>
          <HeaderWithBanner
               bannerList={this.state.bannerList}
               scrollY = {this.state.scrollY}

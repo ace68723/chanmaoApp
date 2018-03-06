@@ -4,6 +4,9 @@ const  Alert                = require('../System/Alert');
 const  AddressModule        = require('../AddressModule/AddressModule');
 const  MenuStore            = require('../../Stores/MenuStore');
 import {
+	Platform,
+} from 'react-native';
+import {
   UpdateAllRestaurants,
   cme_getCheckout,
   cme_beforCheckout,
@@ -12,9 +15,11 @@ import {
 } from '../../../App/Modules/Database';
 
 const RestaurantModule = {
-  async getMenu(reqData){
+  async getMenu(io_Data){
     try {
+			const reqData = {rid: parseInt(io_Data.rid), token: io_Data.token}
       const data = await RestaurantApi.getMenu(reqData);
+      // if(data.ev_error == 0){ //new api
       if(data.result == 0){
         return data
       }else{
@@ -99,8 +104,27 @@ const RestaurantModule = {
           item.amount = item.qty;
           item.ds_id = item.id;
           item.qty = null;
-        })
-        const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment}
+					let lo_tps = [];
+					if (item.tpgs) {
+						for (let tpg_id in item.tpgs) {
+							for (let tp_id in item.tpgs[tpg_id].tps) {
+								if (item.tpgs[tpg_id].tps[tp_id].quantity > 0) {
+									lo_tps.push({tp_id: tp_id, tp_quantity: item.tpgs[tpg_id].tps[tp_id].quantity});
+								}
+							}
+						}
+						item.tps = lo_tps;
+					}
+					item.tpgs = null;
+        });
+        let channel
+        if (Platform.OS === 'ios') {
+          channel = 1;
+        } else if (Platform.OS === 'android') {
+          channel = 2;
+        }
+        const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel}
+
         const data = await RestaurantApi.checkout(reqData);
         return data
       }catch (e){

@@ -56,6 +56,7 @@ const AuthModule = {
           const res = await AuthApi.AppLogin(userInfo)
           if (res.result === 0) {
             SaveUserInfo({uid:res.uid, token:res.token});
+            console.log(res);
             return res;
           }else{
             InitUserInfo();

@@ -45,7 +45,8 @@ public class StripeBridge extends ReactContextBaseJavaModule {
                     cardExpYear, //卡片过期年份
                     cardCVC //CVC验证码
             );
-            String key="pk_test_MsgqDWzRTfpOKl5mBwX0J0u2";
+            //for stripe configure pk_live_XQlHKvkQ8N9yPEHlslQvaS7U   pk_test_MsgqDWzRTfpOKl5mBwX0J0u2
+            String key="pk_live_XQlHKvkQ8N9yPEHlslQvaS7U";
 
             if (card.validateCard()) {
                 Log.d("teststripe","startjudge");

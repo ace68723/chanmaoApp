@@ -10,6 +10,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import { findIndex } from 'lodash';
 
@@ -182,9 +183,15 @@ export default class SboxCart extends Component {
   }
 
   _renderContent() {
+    let headerHeight = 64;
+    if (Platform.OS === 'ios' && ((height === 812 && width === 375) || (height === 375 && width === 812))){
+      // if iPhone x
+      headerHeight = 88;
+    }
     if (this.state.cartList.length > 0) {
       return (
         <FlatList
+            style={{flex: 1,width:width, marginBottom: 103}}
           	enableEmptySections
             data={this.state.cartList}
             renderItem={this._renderItem}
@@ -193,7 +200,7 @@ export default class SboxCart extends Component {
       )
     }else {
       return(
-        <Image style={{height: height, width: width}} source={require('./Image/no_item.png')}></Image>
+        <Image  style={{height: height, width: width}} source={require('./Image/no_item.png')}></Image>
       )
     }
   }
@@ -244,6 +251,7 @@ export default class SboxCart extends Component {
 
 
   }
+
   _renderConfirmBtn() {
       if (this.state.cartList.length > 0) {
         return(
@@ -275,7 +283,7 @@ export default class SboxCart extends Component {
                    {this.state.totalQuantity}件
               </Text>
             </View>
-            
+
             <TouchableOpacity
                 style={{height:60,}}
                 onPress={this._goToCheckout}
@@ -309,7 +317,6 @@ export default class SboxCart extends Component {
                 goBack={this._renderGoBackBtn}
                 leftButtonText={this.props.backButton}/>
         {this._renderContent()}
-
         {this._renderConfirmBtn()}
       </View>
     );

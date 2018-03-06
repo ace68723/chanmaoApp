@@ -50,8 +50,8 @@ export default class About extends Component {
 
 
   render() {
-    console.log("SboxAbout");
-    console.log(this.state);
+    // console.log("SboxAbout");
+    // console.log(this.state);
     return(
       <View style={styles.viewController}>
           <SboxHeader title={"联系客服"}

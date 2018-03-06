@@ -29,7 +29,7 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
 			this.removeListener(CHANGE_EVENT, callback)
 	},
   checkStock(data) {
-    console.log(data)
+    // console.log(data)
   },
   updateTotalQuantity(){
     this._cart = realm.objects('sbox_cart');
