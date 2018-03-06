@@ -78,11 +78,11 @@ class SettingTab extends Component {
               <SettingCate  title={'添加地址'}
                             onPress={this._goToAddress.bind(this)}
                             icon={require('./Image/setting.png')}/>
-							<SettingCate  title={'关于我们'}
+							<SettingCate  title={'联系客服'}
 														icon={require('./Image/information.png')}
 														onPress={this._goToAboutUs}
 														/>
-							<SettingCate  title={'甜满箱'}
+							<SettingCate  title={'甜满箱 首单立减8刀 满60再减10刀'}
                 icon={require('./Image/sbox.png')}
                 onPress={this._goToSbox}/>
               <SettingCate  title={'退出登录'}

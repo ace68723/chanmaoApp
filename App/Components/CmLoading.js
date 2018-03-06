@@ -66,7 +66,7 @@ export default class LogoAnimationView extends Component {
     },6500);
     setTimeout(() =>{
       InteractionManager.runAfterInteractions(() => {
-        this.props.navigator.dismissLightBox();
+        this.props.navigator.dismissModal();
       })
     },7600)
     // fade out LogoAnimationView end

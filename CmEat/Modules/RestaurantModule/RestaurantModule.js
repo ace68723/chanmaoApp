@@ -19,9 +19,8 @@ const RestaurantModule = {
     try {
 			const reqData = {rid: parseInt(io_Data.rid), token: io_Data.token}
       const data = await RestaurantApi.getMenu(reqData);
-			console.log(data);
-      if(data.ev_error == 0){ //new api
-      // if(data.result == 0){
+      // if(data.ev_error == 0){ //new api
+      if(data.result == 0){
         return data
       }else{
         Alert.errorAlert(data.message)

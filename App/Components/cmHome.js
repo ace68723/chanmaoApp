@@ -229,13 +229,8 @@ export default class Home extends Component {
         InteractionManager.runAfterInteractions(() => {
           this.props.navigator.showLightBox({
             screen: 'SboxLoading',
-            animated: false,
+            animationType: 'none',
             navigatorStyle: {navBarHidden: true},
-            style: {
-              flex:1,
-             backgroundBlur: "none",
-
-           }
           })
         })
       }, 500);
