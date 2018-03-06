@@ -1,6 +1,6 @@
 'use strict';
 // const TestServer = 'http://cmtest.littlesailing.com/index.php?r=';
-const proructServer = 'https://www.chanmao.ca/index.php?r=';
+const proructServer = 'https://www.xiaoming.ca/index.php?r=';
 const Server = proructServer;
 const AppConstants ={
     //chanmao login api,{username: , password: }

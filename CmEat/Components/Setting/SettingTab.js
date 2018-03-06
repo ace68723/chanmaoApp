@@ -82,9 +82,7 @@ class SettingTab extends Component {
 														icon={require('./Image/information.png')}
 														onPress={this._goToAboutUs}
 														/>
-							<SettingCate  title={'甜满箱 首单立减8刀 满60再减10刀'}
-                icon={require('./Image/sbox.png')}
-                onPress={this._goToSbox}/>
+
               <SettingCate  title={'退出登录'}
                             icon={require('./Image/logout.png')}
                             onPress={this._cmeLogOut}/>

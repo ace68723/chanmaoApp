@@ -291,6 +291,7 @@ export function cme_getRestaurantData(area) {
   }
 }
 export function cme_getSelectedAddress() {
+  if (!realm.objects('cme_address').filtered('selected == true' )[0]) return '';
   const selectedAddress = realm.objects('cme_address').filtered('selected == true' )[0]
   return selectedAddress
 }

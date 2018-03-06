@@ -41,7 +41,7 @@ public class MainApplication extends NavigationApplication {
             new RNDeviceInfo(),
             new RealmReactPackage(),
             new NativePackage(),
-            new CodePush("3h54HiPlCHlTlQsTwIxIkYoHvbfmc889ad22-4792-484d-b870-7cc05a2db9bd", MainApplication.this, BuildConfig.DEBUG)
+            new CodePush("x7lpggYVqE6aXppG-GDNorcJm7DjrkZxqMBh_z", MainApplication.this, BuildConfig.DEBUG)
 //            new VectorIconsPackage()
     );
 

@@ -351,17 +351,10 @@ export default class Home extends Component {
           <Animated.View style={[styles.container,cmTransform]}>
               <View style={{ flex: 1,}}>
                 <TouchableWithoutFeedback onPress={this._handleSboxPress}>
-                  <Animated.View style={{ flex: 0.55, right: this.state.boxRight,}}>
+                  <View style={{ flex: 0.55, }}>
 
-                      <Image source={ this._getSBoxHomePage() }
-                          style={{ width: width * 0.3674,
-                                    height: width * 0.3674 * sboxHomeHeightRatio,
-                                    bottom: 10,
-                                    position: 'absolute',
-                                    left: width * 0.0612,
-                          }}
-                      />
-                  </Animated.View>
+
+                  </View>
                 </TouchableWithoutFeedback>
 
                   <Animated.View style={{ flex: 0.45, top: this.state.orderTop,  }}>
@@ -369,16 +362,9 @@ export default class Home extends Component {
                   </Animated.View>
               </View>
               <View style={{ flex: 1, }}>
-                  <Animated.View style={{ flex: 0.45, bottom: this.state.settingBottom,  }}>
-                    <Image source={require('./Img/HOME-PAGE-SBOX-RIGHT.png')}
-                         style={{ width: width * 0.4,
-                                   height: width * 0.4 * 1.1462,
-                                   top: height*0.18,
-                                   position: 'absolute',
-                                   right: width * 0.16,
-                         }}
-                     />
-                  </Animated.View>
+                  <View style={{ flex: 0.45,   }}>
+
+                  </View>
 
                   <TouchableWithoutFeedback onPress={this._handleChanmaoPress} >
                     <Animated.View style={{ flex: 0.55,overflow: 'visible', left: this.state.cmLeft, }}>
