@@ -228,40 +228,37 @@ export default class CmEatMenuSearch extends Component {
 		}
 		
 	}
-	//backgroundColor:"#ffffff"
 	render(){
-		
 		return(
-		
-		<KeyboardAvoidingView 
-					style={{flex:1,backgroundColor:"#ffffff"}}
-					behavior={Platform.OS === 'ios'?"padding":null}
-					>
-			{this._renderSearchInput()}
-			<TouchableOpacity onPress={this._goToCheckout}
-					style={{backgroundColor:"rgba(234,123,33,0.9)",
-						width:width,
-						height:50,
-						flexDirection:"row",
-						alignItems:"center",
-											justifyContent:"center",
-					}}>
-				<Text style={{color:"#ffffff",fontSize:16,margin:3,fontFamily:'FZZongYi-M05S',}}>${this.state.cartTotals.total}</Text>
-				<View style={{margin:3,
-							borderRadius:15,
-							borderWidth:1,
-							paddingLeft:10,
-							paddingRight:10,
-							paddingTop:2,
-							paddingBottom:2,
-							borderColor:"#ffffff"}}>
-					<Text  style={{color:"#ffffff",fontSize:13,fontFamily:'FZZongYi-M05S',}}>去结账</Text>
-				</View>
+			<KeyboardAvoidingView 
+						style={{flex:1,backgroundColor:"#ffffff"}}
+						behavior={Platform.OS === 'ios'?"padding":null}
+						>
+				{this._renderSearchInput()}
+				<TouchableOpacity onPress={this._goToCheckout}
+						style={{backgroundColor:"rgba(234,123,33,0.9)",
+							width:width,
+							height:50,
+							flexDirection:"row",
+							alignItems:"center",
+												justifyContent:"center",
+						}}>
+					<Text style={{color:"#ffffff",fontSize:16,margin:3,fontFamily:'FZZongYi-M05S',}}>${this.state.cartTotals.total}</Text>
+					<View style={{margin:3,
+								borderRadius:15,
+								borderWidth:1,
+								paddingLeft:10,
+								paddingRight:10,
+								paddingTop:2,
+								paddingBottom:2,
+								borderColor:"#ffffff"}}>
+						<Text  style={{color:"#ffffff",fontSize:13,fontFamily:'FZZongYi-M05S',}}>去结账</Text>
+					</View>
 
-			</TouchableOpacity>
-			{this._renderResultList()}		
+				</TouchableOpacity>
+				{this._renderResultList()}		
 
-		</KeyboardAvoidingView>
+			</KeyboardAvoidingView>
 		
 		)
 	}

@@ -196,24 +196,25 @@ export default class Category extends Component {
       </TouchableWithoutFeedback>
      )
   }
+  // 
 
   _renderTouchButton()
   {
     if(!this.state.openBook){
-      return (
-        <TouchableWithoutFeedback
-          onPress={this._onPressButton.bind(this)}>
-          <Image  source={require('./Image/button_menu_close.png')}
-                  style={
-                    {
-                      position:'absolute',
-                      height: 0.15*width,
-                      width: 0.15*width*0.9,
-                      right:0.05*width,
-                      bottom:0.05*width,
-                    }
-                  }/>
-        </TouchableWithoutFeedback>
+      return(  
+          <TouchableWithoutFeedback
+            onPress={this._onPressButton.bind(this)}>
+            <Image  source={require('./Image/button_menu_close.png')}
+                    style={
+                      {
+                        position:'absolute',
+                        right:0.05*width,
+                        bottom:0.05*width,
+                        height: 0.15*width,
+                        width: 0.15*width*0.9,            
+                      }
+                    }/>
+          </TouchableWithoutFeedback>
       )
     }else{
       return <TouchableWithoutFeedback
@@ -222,10 +223,10 @@ export default class Category extends Component {
                 style={
                   {
                     position:'absolute',
-                    height: 0.15*width,
-                    width: 0.15*width*1.369,
                     right:0.05*width,
                     bottom:0.05*width,
+                    height: 0.15*width,
+                    width: 0.15*width*1.369, 
                   }
                 }/>
       </TouchableWithoutFeedback>

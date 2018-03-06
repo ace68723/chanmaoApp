@@ -10,6 +10,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  Image
 } from 'react-native';
 
 import _forEach from 'lodash/forEach';
@@ -34,7 +35,14 @@ const HEADER_MAX_HEIGHT = 220;
 const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 let _scrollY = 0;
-
+let marginTop;
+if(height == 812){
+  //min 34
+  //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
+  marginTop = 34;
+}else{
+  marginTop = 20;
+}
 export default class MainTab extends Component {
 
   constructor(){
@@ -174,8 +182,17 @@ export default class MainTab extends Component {
 			}else{
 				// this.props.hideTabBar();
 			}
-	}
-
+  }
+  _goToRestaurantSearch(){
+    this.props.navigator.showModal({
+      screen: 'CmRestaurantSearch',
+      animationType: 'none',
+      navigatorStyle: {navBarHidden: true},
+      passProps: {
+        restaurant:this.state.areaList[0].restaurantList,
+      },
+    });
+  }
 	renderScrollableTabView(){
 		if(this.state.areaList && this.state.areaList.length>0){
       // let restaurantTabs
@@ -249,7 +266,26 @@ export default class MainTab extends Component {
 				</ScrollableTabView>
 			)
 		}
-	}
+  }
+  _renderSearchButton(){
+    if(this.state.areaList[0]){
+      return(
+        <TouchableWithoutFeedback onPress={()=>this._goToRestaurantSearch()} >
+          <Image source={require('./Images/button_search.png')}
+                style={{ 
+                  position:'absolute',
+                  right:10,
+                  top:marginTop,
+                  height:40,
+                  width:44,
+                  }} />
+        </TouchableWithoutFeedback>
+      )
+    }
+      
+    
+    
+  }
   render(){
     return(
       <View style={{flex: 1}}>
@@ -260,6 +296,7 @@ export default class MainTab extends Component {
               bannerList={this.state.bannerList}
               scrollY = {this.state.scrollY}
               navigator={this.props.navigator}/>
+         {this._renderSearchButton()}
      </View>
     )
   }
