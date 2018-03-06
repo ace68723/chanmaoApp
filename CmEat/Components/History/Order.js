@@ -49,21 +49,54 @@ export default class pastOrderEN extends Component {
               );
           }
         };
-      return(
-        <View key={index} style={{flexDirection:'row',alignItems:'center',paddingTop:12,paddingBottom:12}}>
-            <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'FZZhunYuan-M02S',}}>{item.qty}</Text></View>
-            <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}
-                  allowFontScaling={false}>
-                    {item.name}
-            </Text>
-            {soldoutText()}
-            <View style={{flex:1,alignItems:'flex-end'}}>
-              <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}
-                    allowFontScaling={false}>
-                      ${item.qty*item.price}
-              </Text>
-            </View>
+        const toppingGroup = () => {
+          let _toppingGroup = [];
+          if(item.tps) {
+            for (let tp of item.tps) {
+              if (parseInt(tp.amount) > 0) {
+                _toppingGroup.push(
+                  <View key={tp.tp_id}
+                        style={{flexDirection: 'row', marginTop: 5, marginLeft: 38}}>
 
+                    <View style={{flex:1,justifyContent:'center'}}>
+                        <Text style={{color:'#ababb0',
+                                      fontSize:16,
+                                      fontFamily:'FZZhunYuan-M02S'}}>
+                          {tp.tp_name}
+                        </Text>
+                    </View>
+                    <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
+                      <Text style={{color:'#ababb0',
+                                    fontSize:16,
+                                    fontFamily:'FZZhunYuan-M02S',
+                                    textAlign: 'left'}}>
+                        ${tp.price} × {tp.amount}
+                      </Text>
+                    </View>
+                  </View>
+                )
+              }
+            }
+            return _toppingGroup;
+          }
+        };
+      return(
+        <View key={index} style={{flexDirection:'column',alignItems:'center',paddingTop:12,paddingBottom:12}}>
+            <View style={{flexDirection:'row'}}>
+                <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'FZZhunYuan-M02S',}}>{item.qty}</Text></View>
+                <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}
+                      allowFontScaling={false}>
+                        {item.name}
+                </Text>
+                {soldoutText()}
+                <View style={{flex:1,alignItems:'flex-end'}}>
+                  <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}
+                        allowFontScaling={false}>
+                          ${(item.qty*item.price).toFixed(2)}
+                  </Text>
+                </View>
+            </View>
+            {toppingGroup()}
         </View>
       )
     })

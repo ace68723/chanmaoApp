@@ -22,7 +22,7 @@
 ### [Update log](https://github.com/ace68723/chanmao/blob/master/Document/Chanmao/UpdateLog.md)
 ### Contents
 * [1. Data sample]()
-* [2. Database schema ]()
+* [2. Database schema ](https://github.com/ace68723/chanmao/blob/master/Document/Chanmao/database_migration.md)
 
 * [3. API Document (v2)](https://github.com/ace68723/chanmao/tree/master/Document/Chanmao/API_Document/v2)
   * [3.1 Get Menu](https://github.com/ace68723/chanmao2.4.0/blob/master/Document/Chanmao/API_Document/v2/get_menu.md)
