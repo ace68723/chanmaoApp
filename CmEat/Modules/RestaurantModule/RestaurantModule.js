@@ -124,7 +124,6 @@ const RestaurantModule = {
           channel = 2;
         }
         const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel}
-				console.log(reqData);
 
         const data = await RestaurantApi.checkout(reqData);
         return data
