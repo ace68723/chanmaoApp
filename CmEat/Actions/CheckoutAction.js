@@ -50,5 +50,14 @@ export default {
       dispatch({
           actionType: AppConstants.UPDATE_ADDRESS
       })
+    },
+    updateShouldAddAddress(flag) {
+      try{
+        data = {shouldAddAddress: flag}
+        dispatch({
+            actionType: AppConstants.SHOULD_ADD_ADDRESS, data,
+        })
+      }catch (e){
+      }
     }
 }

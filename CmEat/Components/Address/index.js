@@ -138,6 +138,9 @@ export default class CmEatAddress extends Component {
 				}
 			}
     });
+		if (this.props.handleAddressAdded) {
+			this.props.handleAddressAdded();
+		}
 		if(this.props.tag === "fromHome") {
       // this.props.handleBackToHome("fromChanmao");
       this.props.navigator.resetTo({

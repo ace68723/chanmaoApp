@@ -148,6 +148,9 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 		this.state = Object.assign({},this.state,{checkoutSuccessful});
 
   },
+  updateShouldAddAddress(data){
+    this.state.shouldAddAddress = data.shouldAddAddress;
+  },
 	getDltype(){
 		return this.state.dltype;
 	},
@@ -180,7 +183,11 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 								setTimeout(()=>{
 									RestaurantStore.initState()
 								},10000)
-				break;
+				  break;
+        case AppConstants.SHOULD_ADD_ADDRESS:
+                RestaurantStore.updateShouldAddAddress(action.data);
+                RestaurantStore.emitChange();
+        break;
 
 
 		  }

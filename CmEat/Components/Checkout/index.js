@@ -82,6 +82,7 @@ class Confirm extends Component {
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
         this._checkout = this._checkout.bind(this);
+				this._handleAddressAdded = this._handleAddressAdded.bind(this);
         this._goBack = this._goBack.bind(this);
         this._goToAddressList = this._goToAddressList.bind(this);
         this._goToHistory = this._goToHistory.bind(this);
@@ -115,7 +116,8 @@ class Confirm extends Component {
           this.props.navigator.showModal({
             screen: 'CmEatAddress',
             animated: true,
-            passProps:{updateUaid:this._updateUaid},
+            passProps:{updateUaid:this._updateUaid,
+											 handleAddressAdded: this._handleAddressAdded},
             navigatorStyle: {navBarHidden: true},
           });
         }
@@ -124,6 +126,9 @@ class Confirm extends Component {
 					this._goToHistory();
 				}
     }
+		_handleAddressAdded() {
+			CheckoutAction.updateShouldAddAddress(false);
+		}
     _updateUaid(address){
       if(address && address.uaid){
         const uaid = address.uaid;
