@@ -112,15 +112,17 @@ class Confirm extends Component {
 				const state = Object.assign({},CheckoutStore.getState());
         this.setState(state);
 
-        if(this.state.shouldAddAddress){
-          this.props.navigator.showModal({
-            screen: 'CmEatAddress',
-            animated: true,
-            passProps:{updateUaid:this._updateUaid,
-											 handleAddressAdded: this._handleAddressAdded},
-            navigatorStyle: {navBarHidden: true},
-          });
-        }
+				setTimeout( () => {
+					if(this.state.shouldAddAddress){
+	          this.props.navigator.showModal({
+	            screen: 'CmEatAddress',
+	            animated: true,
+	            passProps:{updateUaid:this._updateUaid,
+												 handleAddressAdded: this._handleAddressAdded},
+	            navigatorStyle: {navBarHidden: true},
+	          });
+	        }
+				}, 500);
 
 				if(this.state.checkoutSuccessful){
 					this._goToHistory();
