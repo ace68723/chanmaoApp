@@ -35,7 +35,7 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
 	removeChangeListener(callback){
 			this.removeListener(CHANGE_EVENT, callback)
       this.state = {
-        selectedPage: '',
+        selectedPage: 0,
         selectedProduct:{},
         sku_image:[{}],
         sku_list:[{}],
@@ -48,34 +48,64 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
 	},
 
   updateSingleProduct(data){
-    const { sku_fact,
-            sku_image,
-            sku_list,
-            spu_id,
-            spu_name,
-            spu_service_img,
-            spu_status } = data;
-
-    const loading         = false;
-    const serviceImg      = data.spu_service_img;
-    var selectedProduct = data.sku_list[0];
-    // console.log(data);
-    for (var i=0;i<data.sku_list.length;i++)
-    {
-      if (data.sku_id==data.sku_list[i].sku_id) selectedProduct=data.sku_list[i];
+    const selectedPage = findIndex(data.sku_list,{sku_id: data.sku_id});
+    console.log(selectedPage)
+    if(selectedPage === -1) {
+      const { sku_fact,
+        sku_image,
+        sku_list,
+        spu_id,
+        spu_name,
+        spu_service_img,
+        spu_status } = data;
+      const loading         = false;
+      const serviceImg      = data.spu_service_img;
+      var selectedProduct = data.sku_list[0];
+      // console.log(data);
+      for (var i=0;i<data.sku_list.length;i++)
+      {
+        if (data.sku_id==data.sku_list[i].sku_id) selectedProduct=data.sku_list[i];
+      }
+      this.state = Object.assign(this.state,{  sku_fact,
+                                              sku_image,
+                                              sku_list,
+                                              spu_id,
+                                              spu_name,
+                                              spu_service_img,
+                                              spu_status,
+                                              loading,
+                                              serviceImg,
+                                              selectedProduct
+                                            });
+    } else {
+        const { sku_fact,
+          sku_image,
+          sku_list,
+          spu_id,
+          spu_name,
+          spu_service_img,
+          spu_status } = data;
+        const loading         = false;
+        const serviceImg      = data.spu_service_img;
+        var selectedProduct = data.sku_list[selectedPage];
+        // console.log(data);
+        for (var i=0;i<data.sku_list.length;i++)
+        {
+          if (data.sku_id==data.sku_list[i].sku_id) selectedProduct=data.sku_list[i];
+        }
+        this.state = Object.assign(this.state,{  sku_fact,
+                                                sku_image,
+                                                sku_list,
+                                                spu_id,
+                                                spu_name,
+                                                spu_service_img,
+                                                spu_status,
+                                                loading,
+                                                serviceImg,
+                                                selectedProduct,
+                                                selectedPage
+                                              });
     }
-    this.state = Object.assign(this.state,{  sku_fact,
-                                             sku_image,
-                                             sku_list,
-                                             spu_id,
-                                             spu_name,
-                                             spu_service_img,
-                                             spu_status,
-                                             loading,
-                                             serviceImg,
-                                             selectedProduct
-                                           });
-
   },
   changeSelectAttr(selectedProduct){
     const selectedPage = findIndex(this.state.sku_image,{image_id: selectedProduct.sku_image_id})
