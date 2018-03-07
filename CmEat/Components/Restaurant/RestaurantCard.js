@@ -86,6 +86,7 @@ class RestaurantCard extends Component {
       }
       _openMenu(){
         this.refs[this.state.ref].measure( (fx, fy, width, height, px, py) => {
+
             this.props.navigator.showModal({
               screen: 'CmEatMenu',
               animated: false,

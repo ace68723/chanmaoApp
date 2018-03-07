@@ -51,12 +51,14 @@ export default class MainTab extends Component {
 		const state = {
       scrollY: new Animated.Value(0),
 			restaurantCoverOpacity: new Animated.Value(0), // init restaurant tab view opacity 0
+      renderSearch:false,
 		}
 		this.state = Object.assign({},state,HomeStore.getHomeState());
     this._onChange = this._onChange.bind(this);
     this._scrollEventBind = this._scrollEventBind.bind(this);
     this._getScrollViewRefs= this._getScrollViewRefs.bind(this);
     this._handleBackToHome = this._handleBackToHome.bind(this);
+    this._goToRestaurantSearch = this._goToRestaurantSearch.bind(this);
 		this._onChangeTab = this._onChangeTab.bind(this);
 		this.showBanner = true;
   }
@@ -76,10 +78,7 @@ export default class MainTab extends Component {
 		}
 	}
   _onChange(){
-    const newState = HomeStore.getHomeState();
-    this.setState({
-      areaList: [],
-    })
+    const newState = Object.assign({},HomeStore.getHomeState(),{renderSearch:true,});
     this.setState(newState);
 
   }
@@ -193,9 +192,9 @@ export default class MainTab extends Component {
 			}
   }
   _goToRestaurantSearch(){
-    this.props.navigator.showModal({
+    this.props.navigator.push({
       screen: 'CmRestaurantSearch',
-      animationType: 'none',
+      animated: false,
       navigatorStyle: {navBarHidden: true},
       passProps: {
         restaurant:this.state.areaList[0].restaurantList,
@@ -276,36 +275,18 @@ export default class MainTab extends Component {
 			)
 		}
   }
-  _renderSearchButton(){
-    if(this.state.areaList[0]){
-      return(
-        <TouchableWithoutFeedback onPress={()=>this._goToRestaurantSearch()} >
-          <Image source={require('./Images/button_search.png')}
-                style={{ 
-                  position:'absolute',
-                  right:10,
-                  top:marginTop,
-                  height:40,
-                  width:44,
-                  }} />
-        </TouchableWithoutFeedback>
-      )
-    }
-      
-    
-    
-  }
   render(){
     return(
       <View style={{flex: 1}}>
 				{this.renderScrollableTabView()}
         <CmEatHomeHeader scrollY = {this.state.scrollY}
-                         handleBackToHome={this._handleBackToHome}/>
+                         handleBackToHome={this._handleBackToHome}
+                         renderSearch={this.state.renderSearch}
+                         goToRestaurantSearch={this._goToRestaurantSearch}/>
          <HeaderWithBanner
               bannerList={this.state.bannerList}
               scrollY = {this.state.scrollY}
               navigator={this.props.navigator}/>
-         {this._renderSearchButton()}
      </View>
     )
   }

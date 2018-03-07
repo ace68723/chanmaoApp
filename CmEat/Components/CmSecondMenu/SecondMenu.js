@@ -377,8 +377,8 @@ export default class SecondMenu extends Component {
 const styles = StyleSheet.create({
   viewController:{
     flex:1,
-    justifyContent: 'space-between'
-    // backgroundColor: '#D5D5D5',
+    justifyContent: 'space-between',
+    backgroundColor: '#ffffff',
   },
   navigation: {
     flexDirection:'row',

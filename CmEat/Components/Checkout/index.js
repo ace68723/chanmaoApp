@@ -206,7 +206,6 @@ class Confirm extends Component {
     }
     _goToHistory(){
         this.props.navigator.dismissModal({animationType: 'slide-down'});
-        // this.props.navigator.dismissAllModals({animationType: 'slide-down'});
     }
     showLoading(){
       if(this.state.isLoading)

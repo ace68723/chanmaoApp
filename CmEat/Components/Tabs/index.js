@@ -43,6 +43,7 @@ export default class Tabs extends Component {
   _onChange() {
     if(TabsStore.getState().goToHistory){
       this.tabView.goToPage(1);
+      this.props.navigator.popToRoot({animated: false,});
       setTimeout( () => {
         this.props.navigator.push({
           screen: 'CmEatHistory',
@@ -98,7 +99,7 @@ export default class Tabs extends Component {
 												 keyboardShouldPersistTaps={'always'}>
 
 							 <MainTab tabLabel='主页'
-								
+
 												hideTabBar = {this._hideTabBar}
 												showTabBar = {this._showTabBar}
                         navigator={this.props.navigator}

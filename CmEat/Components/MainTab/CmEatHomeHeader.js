@@ -30,31 +30,23 @@ if(height == 812){
 }
 
 export default class SboxHomeHeader extends Component {
-
+  _renderSearchButton(){
+    if(this.props.renderSearch){
+      return(
+        <TouchableWithoutFeedback onPress={()=>this.props.goToRestaurantSearch()} >
+          <Image source={require('./Images/button_search.png')}
+                style={{
+                  position:'absolute',
+                  right:10,
+                  bottom:10,
+                  height:40,
+                  width:44,
+                  }} />
+        </TouchableWithoutFeedback>
+      )
+    }
+  }
   render() {
-    // const headerTop = this.props.scrollY.interpolate({
-    //   inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
-    //   outputRange: [10, 0],
-    //   extrapolate: 'clamp',
-    // });
-    // const headerBackgroud = this.props.scrollY.interpolate({
-    //   inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
-    //   outputRange: ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)'],
-    //   extrapolate: 'clamp',
-    // });
-    //   <Image source={require('./Images/icon_back_white.png')}
-             // style={{
-             //         marginLeft:10,
-             //         height:height*0.032,
-             //         width:height*0.032,}}/>
-             //            <Animated.Image source={require('./Images/icon_back.png')}
-                       // style={{
-                       //         marginTop: -height*0.032,
-                       //         marginLeft:10,
-                       //         height:height*0.032,
-                       //         width:height*0.032,
-                       //         opacity:backIconColor,
-                       //       }}/>
     const headerTop = this.props.scrollY.interpolate({
       inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
       outputRange: [0, 0],
@@ -99,6 +91,7 @@ export default class SboxHomeHeader extends Component {
           <AddressForHomeHeader handleBackToHome={this.props.handleBackToHome}/>
         </View>
         <View style={{flex:0.17, alignItems:'center', justifyContent:'center', top:10,}}>
+            {this._renderSearchButton()}
         </View>
       </View>
     );

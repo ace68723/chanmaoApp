@@ -40,7 +40,7 @@ export default class CmRestaurantSearch extends Component {
 				length:5,
             }
 		this.setState = this.setState.bind(this);
-		this._setSearchText = this._setSearchText.bind(this); 
+		this._setSearchText = this._setSearchText.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
 		this._keyExtractor = this._keyExtractor.bind(this);
     }
@@ -49,10 +49,10 @@ export default class CmRestaurantSearch extends Component {
 	componentWillUnmount() {
     }
     _goBack(){
-        this.props.navigator.dismissModal({animationType: 'none',});
+        this.props.navigator.pop({animated: false,});
 	}
 	_filterNotes(searchText, restaurants) {
-		
+
 		let text = searchText.toLowerCase();
 		return filter(restaurants, (rest) => {
 			if(rest.name){
@@ -60,7 +60,7 @@ export default class CmRestaurantSearch extends Component {
 				return lowerCaseName.search(text) !== -1;
 			}
 		});
-		
+
 	}
     _setSearchText(text){
 		if(text){
@@ -87,10 +87,10 @@ export default class CmRestaurantSearch extends Component {
 		return(
 			<View style={styles.header}>
 				<View style={styles.searchView}>
-						<Image 
-							source={require('./Image/icon_search_input.png')} 
+						<Image
+							source={require('./Image/icon_search_input.png')}
 							style={{
-								height:iconSearchInputSize*0.5, 
+								height:iconSearchInputSize*0.5,
 								width:iconSearchInputSize*0.45,
 								marginLeft:10,
 							}}
@@ -107,11 +107,11 @@ export default class CmRestaurantSearch extends Component {
 							underlineColorAndroid={"rgba(0,0,0,0)"}
 						/>
 						<TouchableOpacity onPress={()=>this._cleanInput()}>
-							<Image 
-								source={require('./Image/cancel.png')} 
+							<Image
+								source={require('./Image/cancel.png')}
 								style={{
-									height:15, 
-									width:15, 
+									height:15,
+									width:15,
 									marginRight:10}}
 							/>
 						</TouchableOpacity>
@@ -135,37 +135,39 @@ export default class CmRestaurantSearch extends Component {
 	_renderRestaurants() {
 		return(
 			<FlatList
-			style={styles.scrollView}
-			key={this.props.index}
-			data={this.state.restaurantList}
-			renderItem={(res) => this._renderRestaurant(res)}
-			keyExtractor={this._keyExtractor}
-			removeClippedSubviews={true}
-			initialNumToRender={1}
-			onEndReachedThreshold={0.5}
-			extraData={this.state.restaurantList}
-			onEndReached = {({distanceFromEnd})=>{
-				
-				this.setState({
-				  length: this.state.length + 5,
-				  restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
-				},()=>console.log(distanceFromEnd))
+  			style={styles.scrollView}
+  			key={this.props.index}
+  			data={this.state.restaurantList}
+        keyboardDismissMode={"on-drag"}
+        keyboardShouldPersistTaps={"always"}
+  			renderItem={(res) => this._renderRestaurant(res)}
+  			keyExtractor={this._keyExtractor}
+  			removeClippedSubviews={true}
+  			initialNumToRender={1}
+  			onEndReachedThreshold={0.5}
+  			extraData={this.state.restaurantList}
+  			onEndReached = {({distanceFromEnd})=>{
+
+  				this.setState({
+  				  length: this.state.length + 5,
+  				  restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
+  				},()=>console.log(distanceFromEnd))
 			  }}
-  
+
 		/>
 		)
 	  }
 	render(){
 		return(
-			<KeyboardAvoidingView 
+			<KeyboardAvoidingView
 						style={{flex:1,backgroundColor:"#ffffff"}}
 						behavior={Platform.OS === 'ios'?"padding":null}
 						>
 					{this._renderSearchInput()}
-				
+
 					{this._renderRestaurants()}
 			</KeyboardAvoidingView>
-		
+
 		)
 	}
 }
@@ -197,14 +199,14 @@ const styles = StyleSheet.create({
 		backgroundColor:'#f4f4f4',
 		flexDirection:'row',
 		alignItems:'center',
-		width: width-searchViewMarginHorizontal*2,	
+		width: width-searchViewMarginHorizontal*2,
 	},
 	searchInput:{
 		fontSize: 18,
 		height:40,
 		marginHorizontal:5,
-		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,	
+		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,
 
 	},
-	
+
 });
