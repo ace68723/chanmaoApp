@@ -57,6 +57,7 @@ export default class CmEatAddInfo extends Component {
 			this._chooseType()
     }
     _goBack() {
+			this.props.updateAddressStatus("");
       this.props.navigator.pop();
     }
     showLoading(){

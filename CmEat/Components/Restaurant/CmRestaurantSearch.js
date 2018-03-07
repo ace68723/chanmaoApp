@@ -31,7 +31,6 @@ export default class CmRestaurantSearch extends Component {
 
     constructor(props){
         super(props);
-            console.log(props)
             this.state = {
 				searchText:'',
 				restaurant:props.restaurant,

@@ -40,8 +40,8 @@ import AddressStore from '../../Stores/AddressStore';
 
 export default class CmEatAddress extends Component {
 
-  constructor() {
-      super();
+  constructor(props) {
+      super(props);
 
       this.state = AddressStore.getState();
 
@@ -51,12 +51,43 @@ export default class CmEatAddress extends Component {
       this._chooseAddress = this._chooseAddress.bind(this);
       this._deleteAddress = this._deleteAddress.bind(this);
       this._selectAddress = this._selectAddress.bind(this);
+			this._getCurrentGeolocation = this._getCurrentGeolocation.bind(this);
 			this._handleConfirm = this._handleConfirm.bind(this);
-
+			this._updateAddressStatus = this._updateAddressStatus.bind(this);
       this._goToAddAddressInfo = this._goToAddAddressInfo.bind(this);
   }
 	componentDidMount() {
     AddressStore.addChangeListener(this._onChange);
+		navigator.geolocation.getCurrentPosition (
+      (position) => {
+				const url = "https://maps.googleapis.com/maps/api/geocode/" +
+		    "json?latlng="+ position.coords.latitude + ',' + position.coords.longitude +
+		    "&types=address" +
+		    "&key=AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8"
+		    let options = {
+		        method: 'GET',
+		        mode:'cors',
+		        headers: {
+		            'Accept': 'application/json',
+		            'Content-Type': 'application/json'
+		        }
+		    }
+		    fetch(url,options)
+		      .then((res) => res.json())
+		      .then((res)=>{
+						AddressAction.updateCurrentLocation(res.results[0].formatted_address);
+		      })
+		      .catch((error) => {throw error});
+			},
+      (error)    => {
+				console.log(error)
+			},
+      {
+        enableHighAccuracy: true,
+        timeout:            20000,
+        maximumAge:         10000
+      }
+    )
 	}
   componentWillUnmount() {
       AddressStore.removeChangeListener(this._onChange);
@@ -100,13 +131,18 @@ export default class CmEatAddress extends Component {
       animated: true,
       navigatorStyle: {navBarHidden: true},
       passProps:{
-        formattedAddress:this.state.formattedAddress
+        formattedAddress:this.state.formattedAddress,
+				updateAddressStatus: this._updateAddressStatus
       }
     })
   }
   _goBackToAddressList() {
     this.props.navigator.pop();
   }
+
+	_updateAddressStatus(status) {
+		AddressAction.updateAddressStatus(status);
+	}
 
 	_chooseAddress(placeId) {
     Keyboard.dismiss();
@@ -126,6 +162,43 @@ export default class CmEatAddress extends Component {
     Keyboard.dismiss();
 		AddressAction.updateSelectedUaid(address.uaid);
 	}
+	_getCurrentGeolocation(){
+		navigator.geolocation.getCurrentPosition (
+      (position) => {
+				const url = "https://maps.googleapis.com/maps/api/geocode/" +
+		    "json?latlng="+ position.coords.latitude + ',' + position.coords.longitude +
+		    "&types=address" +
+		    "&key=AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8"
+		    let options = {
+		        method: 'GET',
+		        mode:'cors',
+		        headers: {
+		            'Accept': 'application/json',
+		            'Content-Type': 'application/json'
+		        }
+		    }
+		    fetch(url,options)
+		      .then((res) => res.json())
+		      .then((res)=>{
+						this._handleSearchChange(res.results[0].formatted_address);
+		      })
+		      .catch((error) => {throw error});
+			},
+      (error)    => {
+				console.log(error)
+			},
+      {
+        enableHighAccuracy: true,
+        timeout:            20000,
+        maximumAge:         10000
+      }
+    )
+	}
+
+	_clearAddressInput() {
+		AddressAction.clearAddressInput();
+	}
+
 
 	_handleConfirm() {
 		this.state.addressList.map((address,index) => {
@@ -202,7 +275,9 @@ export default class CmEatAddress extends Component {
 				if(address.type == "H"){
 					return (
 						<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
-							<TouchableOpacity onPress={this._deleteAddress.bind(null,address)}>
+							<TouchableOpacity
+									activeOpacity={0.4}
+									onPress={this._deleteAddress.bind(null,address)}>
 									<Image style={{width:30,height:29.2}}
 												source={require('./Image/icon_address_home.png')}/>
 							</TouchableOpacity>
@@ -214,7 +289,9 @@ export default class CmEatAddress extends Component {
 				}else if(address.type == "W"){
 					return(
 						<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
-							<TouchableOpacity onPress={this._deleteAddress.bind(null,address)}>
+							<TouchableOpacity
+								activeOpacity={0.4}
+								onPress={this._deleteAddress.bind(null,address)}>
 									<Image style={{width:30,height:27.1}}
 												source={require('./Image/icon_address_work.png')}/>
 							</TouchableOpacity>
@@ -227,7 +304,9 @@ export default class CmEatAddress extends Component {
 					return(
 
 						<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
-							<TouchableOpacity onPress={this._deleteAddress.bind(null,address)}>
+							<TouchableOpacity
+								activeOpacity={0.4}
+								onPress={this._deleteAddress.bind(null,address)}>
 									<Image style={{width:22,height:30}}
 												source={require('./Image/icon_address_other.png')}/>
 							</TouchableOpacity>
@@ -249,7 +328,8 @@ export default class CmEatAddress extends Component {
 			}
 			return(
 				<TouchableOpacity key={address.uaid}
-                                  onPress={this._selectAddress.bind(null,address)}>
+													activeOpacity={0.4}
+                          onPress={this._selectAddress.bind(null,address)}>
   				<View
   							style={{backgroundColor:"#ffffff",
   											marginTop:10,
@@ -271,7 +351,9 @@ export default class CmEatAddress extends Component {
   											}}>
   											{icon()}
   						<View style={{flex:1,flexDirection:"row",alignItems:"flex-end",justifyContent:"flex-end"}}>
-  							<TouchableOpacity onPress={this._deleteAddress.bind(null,address)}>
+  							<TouchableOpacity
+										activeOpacity={0.4}
+										onPress={this._deleteAddress.bind(null,address)}>
   									<Image style={{width:25,height:26.6,marginLeft:15,}}
   												 source={require('./Image/icon_address_delete.png')}/>
   							</TouchableOpacity>
@@ -297,11 +379,18 @@ export default class CmEatAddress extends Component {
                       paddingRight:30,
                       backgroundColor:"#ffffff",
                       flexDirection:"row",
+											alignItems: 'center'
                     }}>
-        <Image style={{width:22.68,height:30}}
-              source={require('./Image/icon_address.png')}/>
+				<TouchableOpacity
+						activeOpacity={0.4}
+						onPress={this._getCurrentGeolocation.bind(null)}>
+					<Image style={{width:22.68,height:30}}
+	              source={require('./Image/icon_address.png')}/>
+				</TouchableOpacity>
         <TextInput
             style={[styles.input]}
+						value={this.state.searchAddress}
+						autoFocus={true}
             onFocus={()=>{this.setState({showConfirmBtn:false})}}
             onBlur={()=>{this.setState({showConfirmBtn:true})}}
             placeholder={"输入地址"}
@@ -313,6 +402,16 @@ export default class CmEatAddress extends Component {
             onChangeText={this._handleSearchChange}
             underlineColorAndroid={"rgba(0,0,0,0)"}
         />
+			 <TouchableOpacity
+				 	activeOpacity={0.4}
+				 	onPress={()=>this._clearAddressInput()}>
+					<Image
+						source={require('./Image/cancel.png')}
+						style={{
+							height:21,
+							width:21,}}
+					/>
+				</TouchableOpacity>
       </View>
     )
   }
@@ -325,7 +424,8 @@ export default class CmEatAddress extends Component {
     })
     return(
       <ScrollView style={{padding:10,}}
-                  keyboardShouldPersistTaps={'always'}>
+                  keyboardShouldPersistTaps={'always'}
+									keyboardDismissMode={'on-drag'}>
         {predictionList}
       </ScrollView>
     )
@@ -334,9 +434,50 @@ export default class CmEatAddress extends Component {
     let addressList = this.state.addressList.map((address,index) => {
       return this._renderAddress(address)
     })
+		const currentLocationButton = () => {
+			return(
+				<TouchableOpacity
+							style={{backgroundColor:"#ffffff",
+											marginTop:10,
+											height:90,
+											padding:15,
+											paddingLeft:30,
+											paddingRight:30,
+											shadowColor: "#000000",
+											shadowOpacity: 0.1,
+											shadowOffset: {
+												 height: 0.5,
+												 width: 0.5,
+											},
+										}}
+							activeOpacity={0.4}
+							onPress={this._getCurrentGeolocation.bind(null)}>
+						<View style={{borderColor:"#e2e2e4",
+													borderBottomWidth: StyleSheet.hairlineWidth,
+													flexDirection:"row",
+													paddingBottom:5,
+												}}>
+								<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
+										<Image style={{width:22.5,height:30, marginLeft: 3.75, marginRight: 3.75}}
+													source={require('./Image/icon_address.png')}/>
+										<Text style={{fontSize:20,marginLeft:15,fontFamily:'FZZongYi-M05S',}}>
+											Current Location
+										</Text>
+								</View>
+								<View style={{flex:0.1,flexDirection:"row",alignItems:"flex-end",justifyContent:"flex-end"}}>
+								</View>
+						</View>
+						<Text style={{fontFamily:'FZZhunYuan-M02S',marginLeft: 3.75,}}>
+							{this.state.currentLocation}
+						</Text>
+				</TouchableOpacity>
+			)
+		}
     return(
       <ScrollView style={{padding:10,}}
-                  keyboardShouldPersistTaps={'always'}>
+                  keyboardShouldPersistTaps={'always'}
+									keyboardDismissMode={'on-drag'}>
+				{currentLocationButton()}
         {addressList}
         {this._renderAndroidConfirmBtn()}
       </ScrollView>

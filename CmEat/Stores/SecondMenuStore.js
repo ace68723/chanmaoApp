@@ -46,8 +46,7 @@ const SecondMenuStore = Object.assign({},EventEmitter.prototype,{
     const tpg_min_limit = this.state.toppingGroupList[tpg_id].tpg_min_limit;
     const tps = this.state.toppingGroupList[tpg_id].tps;
     if(tpg_max_limit === 1) {
-      if (tpg_min_limit === 1) {
-        if (this.state.toppingGroupList[tpg_id].tps[tp_id].quantity != 1) {
+      if (tpg_min_limit === 1 || this.state.toppingGroupList[tpg_id].tps[tp_id].quantity != 1) {
           let temp_tps = {};
           let origin_price = 0;
           for (let key in tps) {
@@ -64,32 +63,13 @@ const SecondMenuStore = Object.assign({},EventEmitter.prototype,{
           const _tpg = Object.assign({},this.state.toppingGroupList[tpg_id],{tps:_tps});
           this.state.toppingGroupList = Object.assign({},this.state.toppingGroupList,{[tpg_id]:_tpg});
           this.state.total = parseFloat(this.state.total) - parseFloat(origin_price) + parseFloat(this.state.toppingGroupList[tpg_id].tps[tp_id].tp_price);
-        }
       }
       else {
-        let _tp;
-        let _tps;
-        let _tpg;
-        let counter = 0;
-        for (let key in tps) {
-            if (tps[key].quantity) {
-              counter += (1 * tps[key].quantity);
-            }
-        }
-        if (this.state.toppingGroupList[tpg_id].tps[tp_id].quantity != 1 && counter === 0) {
-          _tp = Object.assign({}, this.state.toppingGroupList[tpg_id].tps[tp_id], {quantity: 1});
-          this.state.total = parseFloat(this.state.total) + parseFloat(this.state.toppingGroupList[tpg_id].tps[tp_id].tp_price);
-          _tps = Object.assign({},this.state.toppingGroupList[tpg_id].tps,{[tp_id]:_tp});
-          _tpg = Object.assign({},this.state.toppingGroupList[tpg_id],{tps:_tps});
-          this.state.toppingGroupList = Object.assign({},this.state.toppingGroupList,{[tpg_id]:_tpg});
-        }
-        else if (this.state.toppingGroupList[tpg_id].tps[tp_id].quantity === 1) {
-          _tp = Object.assign({}, this.state.toppingGroupList[tpg_id].tps[tp_id], {quantity: 0});
-          this.state.total = parseFloat(this.state.total) - parseFloat(this.state.toppingGroupList[tpg_id].tps[tp_id].tp_price);
-          _tps = Object.assign({},this.state.toppingGroupList[tpg_id].tps,{[tp_id]:_tp});
-          _tpg = Object.assign({},this.state.toppingGroupList[tpg_id],{tps:_tps});
-          this.state.toppingGroupList = Object.assign({},this.state.toppingGroupList,{[tpg_id]:_tpg});
-        }
+        const _tp = Object.assign({}, this.state.toppingGroupList[tpg_id].tps[tp_id], {quantity: 0});
+        this.state.total = parseFloat(this.state.total) - parseFloat(this.state.toppingGroupList[tpg_id].tps[tp_id].tp_price);
+        const _tps = Object.assign({},this.state.toppingGroupList[tpg_id].tps,{[tp_id]:_tp});
+        const _tpg = Object.assign({},this.state.toppingGroupList[tpg_id],{tps:_tps});
+        this.state.toppingGroupList = Object.assign({},this.state.toppingGroupList,{[tpg_id]:_tpg});
       }
     }
     else {
