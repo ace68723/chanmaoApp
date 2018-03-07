@@ -5,19 +5,25 @@ import {
   Text,
   View,
 } from 'react-native';
+
 export default (props) =>{
+//   <Image source={props.icon}
+// resizeMode={'contain'}
+// style={styles.icon}/>
     return (
-          <View style={styles.container}>
-            <Image source={props.icon}
-                   resizeMode={'contain'}
-                   style={styles.icon}/>
-              <Text style={styles.title}>
-                {props.title}:
-              </Text>
-              <Text style={styles.value}>
-                {props.value}
-              </Text>
-          </View>
+          
+        <View style={styles.container}>
+            <Text style={styles.title}>
+              {props.title}:
+            </Text>
+            <Text style={styles.value}>
+              {props.value}
+            </Text>
+            <Image source={props.rightIcon}
+              resizeMode={'contain'}
+              style={styles.rightIcon}/>
+        </View>
+         
 
 		)
 
@@ -32,6 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems:'center',
     height:50,
+    paddingLeft:10,
   },
   row:{
     flex:1,
@@ -41,6 +48,11 @@ const styles = StyleSheet.create({
     marginLeft:20,
     height:28,
     width:28,
+  },
+  rightIcon:{
+    marginLeft:10,
+    height:17,
+    width:11,
   },
   title:{
     marginLeft:10,
