@@ -57,7 +57,6 @@ export default {
         }
       },
     changeSelectAttr(selectedProduct){
-      // console.log(selectedProduct)
       try{
         dispatch({
             actionType: SboxConstants.CHANGE_SELECT_ATTR, selectedProduct

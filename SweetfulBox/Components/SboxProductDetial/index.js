@@ -57,6 +57,8 @@ export default class SweetProductDetial extends Component {
     this._handleOnPressIn = this._handleOnPressIn.bind(this);
     this._handleOutOfStock = this._handleOutOfStock.bind(this);
   }
+  componentWillMount() {
+  }
   componentDidMount(){
       // console.log(this.props);
       if(this.state.spu_status === 1) {
@@ -106,6 +108,7 @@ export default class SweetProductDetial extends Component {
 
 
   _onPageChange(page){
+    console.log(page)
     SboxProductAction.changeProductImage(page);
   }
   _addToCart() {
