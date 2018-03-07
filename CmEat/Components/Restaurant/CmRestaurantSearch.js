@@ -99,7 +99,7 @@ export default class CmRestaurantSearch extends Component {
 							ref={'searchInput'}
 							style={styles.searchInput}
 							selectionColor={'#ea7b21'}
-							keyboardType = {'url'}
+							keyboardType = {'default'}
 							autoCorrect= { false}
 							autoFocus={true}
 							returnKeyType={'next'}
