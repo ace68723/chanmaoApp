@@ -75,7 +75,8 @@ export default class CmEatAddress extends Component {
 		    fetch(url,options)
 		      .then((res) => res.json())
 		      .then((res)=>{
-						AddressAction.updateCurrentLocation(res.results[0].formatted_address);
+						let _addr = res.results[0].formatted_address.split(',');
+						AddressAction.updateCurrentLocation(_addr[0] + ', ' + _addr[1]);
 		      })
 		      .catch((error) => {throw error});
 			},
@@ -180,7 +181,8 @@ export default class CmEatAddress extends Component {
 		    fetch(url,options)
 		      .then((res) => res.json())
 		      .then((res)=>{
-						this._handleSearchChange(res.results[0].formatted_address);
+						let _addr = res.results[0].formatted_address.split(',');
+						this._handleSearchChange(_addr[0] + ', ' + _addr[1]);
 		      })
 		      .catch((error) => {throw error});
 			},
