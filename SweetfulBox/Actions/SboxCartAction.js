@@ -64,14 +64,13 @@ export default {
       async checkStock() {
           try {
               const data = await ProductModule.checkStock();
-              if (data.ev_error ===0) {
                 dispatch({
                     actionType: SboxConstants.UPDATE_CART_ITEM_QUANTITY
                 })
                 dispatch({
                   actionType: SboxConstants.UPDATE_CART_TOTAL_QUANTITY
                 })
-              }
+              
 
           }catch(error){
           console.log(error)

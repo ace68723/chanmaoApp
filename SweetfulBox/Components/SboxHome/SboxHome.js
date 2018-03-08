@@ -14,6 +14,8 @@ import _forEach from 'lodash/forEach';
 
 import SboxHomeAction from '../../Actions/SboxHomeAction';
 import SboxHomeStore from '../../Stores/SboxHomeStore';
+import SboxProductTabStore from '../../Stores/SboxProductTabStore';
+
 import {DatabaseInit} from '../../Modules/Database';
 
 import SboxHomeHeader from './SboxHomeHeader';
@@ -56,6 +58,8 @@ export default class SboxHome extends Component {
       this._backToHome = this._backToHome.bind(this);
       this._renderScrollableTabView = this._renderScrollableTabView.bind(this);
       this._jumpToItem = this._jumpToItem.bind(this);
+      this._goToSboxSearch = this._goToSboxSearch.bind(this);
+      
   }
   componentWillMount() {
     DatabaseInit();
@@ -70,7 +74,17 @@ export default class SboxHome extends Component {
   _onChange() {
       this.setState(SboxHomeStore.getState());
   }
-
+  _goToSboxSearch(){
+    this.props.navigator.push({
+      screen: 'SboxProductSearch',
+      animated: false,
+      navigatorStyle: {navBarHidden: true},
+      passProps: {
+         productList:SboxProductTabStore.getProductList(),
+         scrollEventBind: () => this._scrollEventBind(),
+      },
+    });
+  }
   _backToHome() {
     this.props.navigator.resetTo({
         screen: 'cmHome',
@@ -206,7 +220,9 @@ export default class SboxHome extends Component {
           {this._renderSingleTabView()}
           {this._renderHeaderWithBanner()}
           <SboxHomeHeader scrollY = {this.state.scrollY}
-                          backToHome={this._backToHome}/>
+                          backToHome={this._backToHome}
+                          goToSboxSearch={this._goToSboxSearch}
+                          />
         </View>
       );
   }

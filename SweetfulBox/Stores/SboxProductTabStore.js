@@ -79,6 +79,10 @@ const SboxProductTabStore = Object.assign({},EventEmitter.prototype,{
   getState(){
     return this.state;
   },
+  getProductList() {
+    return this.state[1].prod_list;
+
+  },
   // getStateByTmid(tmid) {
   //   const targeIndex =  findIndex(this.state.theme_list, function(o) {
   //     return o.tmid === tmid;

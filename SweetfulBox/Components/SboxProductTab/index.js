@@ -79,8 +79,6 @@ export default class MyComponent extends Component {
           <TouchableOpacity
              onPress={this._goToSboxProductDetial.bind(null,item)}>
               <SboxProductView
-                goToSboxProductDetial={this._goToSboxProductDetial}
-                handleOnPressIn = {this._handleOnPressIn}
                 product={item}
               />
            </TouchableOpacity>
