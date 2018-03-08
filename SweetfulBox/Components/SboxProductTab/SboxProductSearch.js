@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
 		height:60,
 		flexDirection:'row',
 		alignItems:'center',
-		marginTop:Platform.OS === 'ios'? 20 : 0,
+		marginTop:Platform.OS === 'ios'? 0 : 0,
 	},
 	searchView:{
 		borderRadius:30,
