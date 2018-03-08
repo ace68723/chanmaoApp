@@ -38,7 +38,6 @@ export default class CmRestaurantSearch extends Component {
 				restaurantList: [],
 				length:5,
             }
-		this.setState = this.setState.bind(this);
 		this._setSearchText = this._setSearchText.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
 		this._keyExtractor = this._keyExtractor.bind(this);
