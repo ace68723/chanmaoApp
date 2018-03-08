@@ -50,7 +50,7 @@ export default class orderHistory extends Component {
           for (let tp of item.tps) {
             _toppingGroup.push(
               <View key={tp.tp_id}
-                    style={{flexDirection: 'row', marginTop: 5, marginLeft: 24}}>
+                    style={{flexDirection: 'row', marginTop: 3, marginLeft: 24}}>
 
                 <View style={{flex:1,justifyContent:'center'}}>
                     <Text style={{color:'#ababb0',
@@ -74,8 +74,8 @@ export default class orderHistory extends Component {
         }
       }
       return(
-        <View style={{flex:1, flexDirection:'column'}} key={index}>
-          <View style={{flex:1,flexDirection:'row',paddingBottom:13}}>
+        <View style={{flex:1, flexDirection:'column', marginBottom: 8}} key={index}>
+          <View style={{flex:1,flexDirection:'row',paddingBottom:0}}>
             <View style={styles.quantityIcon}><Text style={{fontSize:12}}>{item.qty}</Text></View>
             <Text style={{fontSize:15,paddingLeft:5,}} allowFontScaling={false}>{item.name}</Text>
             <View style={{flex:1}}></View>
