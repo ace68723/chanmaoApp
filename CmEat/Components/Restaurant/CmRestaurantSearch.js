@@ -150,7 +150,7 @@ export default class CmRestaurantSearch extends Component {
   				this.setState({
   				  length: this.state.length + 5,
   				  restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
-  				},()=>console.log(distanceFromEnd))
+  				})
 			  }}
 
 		/>

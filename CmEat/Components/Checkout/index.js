@@ -16,7 +16,8 @@ import {
   TextInput,
   TouchableOpacity,
 	TouchableWithoutFeedback,
-  View,
+	View,
+	Platform
 } from 'react-native';
 
 import {Navigation} from 'react-native-navigation';
@@ -61,7 +62,8 @@ const COMMENT_INPUT = 'Comment_Input';
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
 class Confirm extends Component {
     constructor(props) {
-        super(props);
+				super(props);
+				console.log(props)
         const cart = MenuStore.getCart();
         const total = MenuStore.getCartTotals().total;
         const state={ cart,
@@ -74,6 +76,10 @@ class Confirm extends Component {
 											renderAddress:false,
 											loading: true,
 											showOrderConfirm:false,
+											paymentStatus:'添加支付方式',
+											tips:0,
+											tipsPercentage:0.1,
+								
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
@@ -93,7 +99,7 @@ class Confirm extends Component {
 				this._closeOrderConfirm = this._closeOrderConfirm.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount(){		
 			setTimeout(()=>{
 				const rid = this.state.rid;
 				const pretax = MenuStore.getCartTotals().total;
@@ -110,7 +116,7 @@ class Confirm extends Component {
     _onChange(){
 
 				const state = Object.assign({},CheckoutStore.getState());
-        this.setState(state);
+        this.setState(state,()=>this.setState({tips:(this.state.total*0.1).toFixed(2)}));
 
 				setTimeout( () => {
 					if(this.state.shouldAddAddress){
@@ -263,6 +269,12 @@ class Confirm extends Component {
 
 			const state = Object.assign({},CheckoutStore.getState(),{cart:cart, pretax: pretax});
 			this.setState(state);
+		}
+		_setTips(tipsPercentage){
+			this.setState({
+				tips:(this.state.total * tipsPercentage).toFixed(2),
+				tipsPercentage:tipsPercentage,
+			})
 		}
 		renderCheckoutButton(){
       if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
@@ -426,6 +438,72 @@ class Confirm extends Component {
 			)
 
 		}
+		_renderTipInfo(){
+			return(
+				<View style={{
+					height:100,	
+					
+				}}>
+				<View style={{flex:0.5, flexDirection:'row',alignItems:'center',}}>
+				 <Text style={{ 
+						marginLeft:20,
+						fontSize:15,
+						color:'#808080',
+						fontFamily:'FZZhunYuan-M02S',
+					}}>
+              小费:
+            </Text>
+            <Text style={{
+							 marginLeft:5,
+							 fontSize:15,
+							 color:'#ff8b00',
+							 fontFamily:'FZZhunYuan-M02S',
+						}}>
+              {this.state.tips}
+            </Text>
+						</View>
+						<View style={{flex:0.5, flexDirection:'row', paddingHorizontal:10}}>
+							<TouchableOpacity style={[styles.tipsView,
+												{
+													flex:0.2,
+													borderColor:this.state.tipsPercentage == 0.1 ?'#ff8b00' :'#808080',
+													backgroundColor: this.state.tipsPercentage == 0.1 ?'#ff8b00' :'white',
+												}]} onPress={()=>this._setTips(0.1)}>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.1 ?'#FFF': '#808080'}]}>10%</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.tipsView,{
+													flex:0.2,
+													borderColor:this.state.tipsPercentage == 0.15 ?'#ff8b00' :'#808080',
+													backgroundColor: this.state.tipsPercentage == 0.15 ?'#ff8b00' :'white',
+												}]} onPress={()=>this._setTips(0.15)}>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.15 ?'#FFF': '#808080'}]}>15%</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.tipsView,{
+													flex:0.2,
+													borderColor:this.state.tipsPercentage == 0.2 ?'#ff8b00' :'#808080',
+													backgroundColor: this.state.tipsPercentage == 0.2 ?'#ff8b00' :'white',
+												}]}  onPress={()=>this._setTips(0.2)}>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.2 ?'#FFF': '#808080'}]}>20%</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
+								<Text>$</Text>
+								<TextInput 
+													style={{flex:1,height: 40, marginHorizontal:5}}
+													placeholder={'Customized'}
+													keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
+													returnKeyType={'done'}
+													onChangeText={(text)=>{	
+														this.setState({
+															tips:text.length == 0 ? 0 : parseFloat(text),
+															tipsPercentage:this.state.tips/this.state.total,
+														})
+												}}
+													/>
+							</TouchableOpacity>
+						</View>
+				</View>
+			)
+		}
 		_renderOrderConfirm() {
 			if(this.state.showOrderConfirm) {
 				return(<OrderConfirm doCheckout={this._doCheckout}
@@ -460,7 +538,6 @@ class Confirm extends Component {
 				}
 			}
       return(
-
         <View style={styles.mainContainer}>
 					<Background
 							 minHeight={0}
@@ -501,16 +578,20 @@ class Confirm extends Component {
 												{commentText()}
 										</View>
 									</TouchableWithoutFeedback>
-									<CartItem icon={require('./Image/money-1.png')}
+									<CartItem 
 														title={'税前价格'}
 														value={'$'+this.state.pretax}/>
 
 									{this._renderDeliverFee()}
-									<CartItem icon={require('./Image/money-2.png')}
+									<CartItem 
 														title={'税后总价'}
 														value={'$'+this.state.total}/>
-
-
+									<TouchableOpacity onPress={()=>console.log('支付')}>
+									<CartItem rightIcon={require('./Image/right.png')}
+															title={'支付'}
+															value={this.state.paymentStatus}/>
+									</TouchableOpacity>
+									{this._renderTipInfo()}
 								</View>
 
 	            </Animated.View>
@@ -606,6 +687,19 @@ let styles = StyleSheet.create({
 		borderRadius:6,
 		borderColor:'#b1b1b1',
 	},
+	tipsView:{
+		borderWidth:1,
+		height:42, 
+		alignItems:'center',
+		justifyContent:'center',
+		marginHorizontal:5,
+		marginBottom:15,
+		borderRadius:30
+	},
+	tipsFont:{
+		fontSize:15,
+		fontFamily:'FZZhunYuan-M02S',
+	}
 
 
 });
