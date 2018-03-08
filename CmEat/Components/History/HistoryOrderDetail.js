@@ -44,12 +44,46 @@ export default class orderHistory extends Component {
   }
   _renderList(){
     return this.state.items.map((item,index)=>{
+      const toppingGroup = () => {
+        let _toppingGroup = [];
+        if (item.tps) {
+          for (let tp of item.tps) {
+            _toppingGroup.push(
+              <View key={tp.tp_id}
+                    style={{flexDirection: 'row', marginTop: 3, marginLeft: 24}}>
+
+                <View style={{flex:1,justifyContent:'center'}}>
+                    <Text style={{color:'#ababb0',
+                                  fontSize:16,
+                                  fontFamily:'FZZhunYuan-M02S'}}>
+                      {tp.tp_name}
+                    </Text>
+                </View>
+                <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',marginRight: 10}}>
+                  <Text style={{color:'#ababb0',
+                                fontSize:16,
+                                fontFamily:'FZZhunYuan-M02S',
+                                textAlign: 'left'}}>
+                    ${tp.price} × {tp.amount}
+                  </Text>
+                </View>
+              </View>
+            )
+          }
+          return _toppingGroup;
+        }
+      }
       return(
-        <View style={{flex:1,flexDirection:'row',paddingBottom:13}} key={index}>
-          <View style={styles.quantityIcon}><Text style={{fontSize:12}}>{item.qty}</Text></View>
-          <Text style={{fontSize:15,paddingLeft:5,}} allowFontScaling={false}>{item.name}</Text>
-          <View style={{flex:1}}></View>
-          <Text style={{fontSize:15,alignSelf:'flex-end',color:'#969696',marginRight:10}} allowFontScaling={false}>${item.price * item.qty} </Text>
+        <View style={{flex:1, flexDirection:'column', marginBottom: 8}} key={index}>
+          <View style={{flex:1,flexDirection:'row',paddingBottom:0}}>
+            <View style={styles.quantityIcon}><Text style={{fontSize:12}}>{item.qty}</Text></View>
+            <Text style={{fontSize:15,paddingLeft:5,}} allowFontScaling={false}>{item.name}</Text>
+            <View style={{flex:1}}></View>
+            <Text style={{fontSize:15,alignSelf:'flex-end',color:'#969696',marginRight:10}} allowFontScaling={false}>
+              ${(item.price * item.qty).toFixed(2)}
+            </Text>
+          </View>
+          {toppingGroup()}
         </View>
       )
     })

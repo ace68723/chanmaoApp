@@ -100,4 +100,21 @@ export default {
           actionType: AppConstants.UPDATA_SELECTED_UAID, data
       })
     },
+    updateAddressStatus(status) {
+      const data = {status: status}
+      dispatch({
+          actionType: AppConstants.UPDATA_ADDRESS_STATUS, data
+      })
+    },
+    updateCurrentLocation(location) {
+      const data = {currentLocation: location}
+      dispatch({
+          actionType: AppConstants.UPDATA_CURRENT_LOCATION, data
+      })
+    },
+    clearAddressInput() {
+      dispatch({
+          actionType: AppConstants.CLEAR_ADDRESS_INPUT
+      })
+    }
 }

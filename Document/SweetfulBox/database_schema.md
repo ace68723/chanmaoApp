@@ -17,7 +17,7 @@
 |                    |            |                |                   |                                                 |             |            |            |            |        |        |            |
 | sbox_sku_base      | sku_id     | spu_id         | name              | alias                                           | fullname    | status     | updated_at | updated_by |        |        |            |
 |                    |            |                |                   |                                                 |             |            |            |            |        |        |            |
-| sbox_sku_core      | sku_id     | original_price | price             | amount                                          | threshold   | updated_at | updated_by |            |        |        |            |
+| sbox_sku_core      | sku_id     | original_price | price             | amount                                          | threshold   | uplimit    | updated_at | updated_by |        |        |            |
 |                    |            |                |                   |                                                 |             |            |            |            |        |        |            |
 | sbox_sku_image     | sku_id     | image_id       | fact_image_id     | updated_at                                      | updated_by  |            |            |            |        |        |            |
 |                    |            |                |                   |                                                 |             |            |            |            |        |        |            |

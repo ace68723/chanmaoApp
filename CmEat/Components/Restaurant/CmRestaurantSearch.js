@@ -31,7 +31,6 @@ export default class CmRestaurantSearch extends Component {
 
     constructor(props){
         super(props);
-            console.log(props)
             this.state = {
 				searchText:'',
 				restaurant:props.restaurant,
@@ -151,7 +150,7 @@ export default class CmRestaurantSearch extends Component {
   				this.setState({
   				  length: this.state.length + 5,
   				  restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
-  				},()=>console.log(distanceFromEnd))
+  				})
 			  }}
 
 		/>

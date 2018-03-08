@@ -74,7 +74,7 @@ export default class MyComponent extends Component {
               navigator={this.props.navigator}
               tag={'fromMainTab'}
               />
-        <About tabLabel="设置"
+            <About tabLabel="我的"
           activeIconImage={require("./Image/setting.png")}
           inactiveIconImage={require("./Image/settinggrey.png")}
           navigator={this.props.navigator}

@@ -31,6 +31,7 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
     addressStatus:"",
     showConfirmBtn:true,
 		selectedUaid: null,
+		currentLocation: "",
 	},
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -58,6 +59,15 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 	},
 	updateSelectedUaid(data) {
 		this.state.selectedUaid = data.uaid;
+	},
+	updateAddressStatus(data) {
+		this.state.addressStatus = data.status;
+	},
+	updateCurrentLocation(data) {
+		this.state.currentLocation = data.currentLocation;
+	},
+	clearAddressInput() {
+		this.state.searchAddress = '';
 	},
 	formatAddress(io_addrInfo){
     this.state.formattedAddress = io_addrInfo;
@@ -103,6 +113,18 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 						 AddressStore.updateSelectedUaid(action.data)
 						 AddressStore.emitChange()
 				  break;
+				case AppConstants.UPDATA_ADDRESS_STATUS:
+						 AddressStore.updateAddressStatus(action.data);
+						 AddressStore.emitChange()
+					break;
+			  case AppConstants.UPDATA_CURRENT_LOCATION:
+				     AddressStore.updateCurrentLocation(action.data);
+						 AddressStore.emitChange()
+					break;
+				case AppConstants.CLEAR_ADDRESS_INPUT:
+						 AddressStore.clearAddressInput();
+						 AddressStore.emitChange()
+					break;
         default:
          // do nothing
 		  }
