@@ -14,6 +14,7 @@ import SboxProductView from './SboxProductView';
 import Settings from '../../Config/Setting';
 import SboxProductTabSectionHeaderCell from "./SboxProductTabSectionHeaderCell"
 
+import Util from '../../Modules/Util';
 
 import SboxProductTabAction from '../../Actions/SboxProductTabAction';
 import SboxProductAction from '../../Actions/SboxProductAction';
@@ -56,9 +57,14 @@ export default class MyComponent extends Component {
     this.setState(SboxProductTabStore.getStateByTmid(tmid));
   }
   _goToSboxProductDetial(item) {
-    // console.log(item)
     if (item.spu_status === 1 || item.sku_status === 1) return;
     const {spu_id, image} = item;
+
+    if (Util.getWaitingStatus() === true){
+      return;
+    }
+    Util.toggleWaitingStatus();
+
     if (item.sku_id) {SboxProductAction.getSingleProduct(spu_id,item.sku_id)}
     else {SboxProductAction.getSingleProduct(spu_id,-1)}
     setTimeout( () => {
