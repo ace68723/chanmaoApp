@@ -97,11 +97,33 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
     super(props);
     this._renderProduct = this._renderProduct.bind(this);
     this._handleOnPressIn = this._handleOnPressIn.bind(this);
+    this._renderProductImage = this._renderProductImage.bind(this);
+
     // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
   }
   _handleOnPressIn(item) {
     const {spu_id} = item;
     SboxProductAction.getSingleProduct(spu_id);
+  }
+  _renderProductImage(product){
+    if (product.sku_status === 0) {
+      return(
+        <Image source={{uri:product.sku_image}}
+               style={styles.image}
+        />
+      )
+    }else {
+      return(
+        <View>
+          <Image source={{uri:product.sku_image}}
+                 style={styles.image}
+          />
+        <Image source={require('./img/soldout.png')}
+                 style={[styles.image,{position: 'absolute'}]}
+          />
+        </View>
+      )
+    }
   }
   _renderOrderList() {
     let orderList = [];
@@ -120,7 +142,7 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
           <View key={['order', i]}
                 style={styles.item}>
             <View style={styles.itemImage}>
-              <Image style={styles.image} source={{uri:image}}/>
+              {this._renderProductImage(order)}
             </View>
             <View>
               <Text style={styles.itemName}>{name} x {amount}</Text>
@@ -138,10 +160,10 @@ _renderProduct(itemObject) {
   return(
     <TouchableWithoutFeedback
     onPressIn={this._handleOnPressIn.bind(null,item)}
-    onPress={() => this.props.goToSboxProductDetial()}>
+    onPress={() => this.props.goToSboxProductDetial(item)}>
       <View style={styles.item}>
         <View style={styles.itemImage}>
-          <Image style={styles.image} source={{uri:item.sku_image}}/>
+          {this._renderProductImage(item)}
         </View>
         <View>
           <Text style={styles.itemName}>{item.sku_fullname} x {item.sku_quantity}</Text>

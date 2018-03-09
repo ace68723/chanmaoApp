@@ -29,13 +29,16 @@ export default class HistoryOrderDetailViewController extends Component {
     });
   }
 
-	_goToSboxProductDetial() {
-    setTimeout( () => {
-      this.props.navigator.push({
-        screen: 'SboxProductDetial',
-        navigatorStyle: {navBarHidden: true},
-      })
-    }, 150);
+	_goToSboxProductDetial(item) {
+		// check
+		if (item.sku_status === 0) {
+			setTimeout( () => {
+				this.props.navigator.push({
+					screen: 'SboxProductDetial',
+					navigatorStyle: {navBarHidden: true},
+				})
+			}, 150);
+		}
   }
 
   _renderHistoryOrderDetailView() {
