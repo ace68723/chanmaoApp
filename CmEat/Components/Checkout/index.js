@@ -38,6 +38,7 @@ import CheckoutStore from '../../Stores/CheckoutStore';
 import SecondMenuStore from '../../Stores/SecondMenuStore';
 import MenuStore from '../../Stores/MenuStore';
 import HistoryAction from '../../Actions/HistoryAction';
+import Util from '../../Modules/Util';
 
 // device(size): get device height and width
 const {height, width} = Dimensions.get('window');
@@ -79,7 +80,7 @@ class Confirm extends Component {
 											paymentStatus:'添加支付方式',
 											tips:0,
 											tipsPercentage:0.1,
-								
+
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
@@ -99,7 +100,7 @@ class Confirm extends Component {
 				this._closeOrderConfirm = this._closeOrderConfirm.bind(this);
     }
 
-    componentDidMount(){		
+    componentDidMount(){
 			setTimeout(()=>{
 				const rid = this.state.rid;
 				const pretax = MenuStore.getCartTotals().total;
@@ -202,6 +203,11 @@ class Confirm extends Component {
     }
     _goToAddressList(){
 			if(!this.state.loading){
+				if (Util.getWaitingStatus() === true){
+				  return;
+				}
+				Util.toggleWaitingStatus();
+				
 				this.props.navigator.showModal({
 					screen: 'CmEatAddress',
           animated: true,
@@ -235,6 +241,11 @@ class Confirm extends Component {
     }
 		_handleProductOnPress(dish) {
 			if (dish.tpgs) {
+				if (Util.getWaitingStatus() === true){
+					return;
+				}
+				Util.toggleWaitingStatus();
+
 				const rid = this.state.rid;
 				const pretax = MenuStore.getCartTotals().total;
 				const navigator = this.props.navigator;
@@ -441,11 +452,11 @@ class Confirm extends Component {
 		_renderTipInfo(){
 			return(
 				<View style={{
-					height:100,	
-					
+					height:100,
+
 				}}>
 				<View style={{flex:0.5, flexDirection:'row',alignItems:'center',}}>
-				 <Text style={{ 
+				 <Text style={{
 						marginLeft:20,
 						fontSize:15,
 						color:'#808080',
@@ -487,12 +498,12 @@ class Confirm extends Component {
 							</TouchableOpacity>
 							<TouchableOpacity style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
 								<Text>$</Text>
-								<TextInput 
+								<TextInput
 													style={{flex:1,height: 40, marginHorizontal:5}}
 													placeholder={'Customized'}
 													keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
 													returnKeyType={'done'}
-													onChangeText={(text)=>{	
+													onChangeText={(text)=>{
 														this.setState({
 															tips:text.length == 0 ? 0 : parseFloat(text),
 															tipsPercentage:this.state.tips/this.state.total,
@@ -578,12 +589,12 @@ class Confirm extends Component {
 												{commentText()}
 										</View>
 									</TouchableWithoutFeedback>
-									<CartItem 
+									<CartItem
 														title={'税前价格'}
 														value={'$'+this.state.pretax}/>
 
 									{this._renderDeliverFee()}
-									<CartItem 
+									<CartItem
 														title={'税后总价'}
 														value={'$'+this.state.total}/>
 									<TouchableOpacity onPress={()=>console.log('支付')}>
@@ -689,7 +700,7 @@ let styles = StyleSheet.create({
 	},
 	tipsView:{
 		borderWidth:1,
-		height:42, 
+		height:42,
 		alignItems:'center',
 		justifyContent:'center',
 		marginHorizontal:5,
