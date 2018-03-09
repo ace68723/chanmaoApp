@@ -87,8 +87,12 @@ export default class App extends Component {
     }
 
     handleSubmit() {
-        if ( !this.state.name || !this.state.phoneNum) {
+        if ( !this.state.name || !this.state.phoneNum ) {
             Alert.alert('错误', '请填写所有信息', { text: 'OK' });
+            return;
+        }
+        if ( this.state.phoneNum.length != 10) {
+            Alert.alert('错误', '手机号码格式错误', { text: 'OK' });
             return;
         }
         const addressObject = this.props.addrInfo;
