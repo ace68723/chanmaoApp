@@ -41,6 +41,7 @@ import SboxProductAction from '../../Actions/SboxProductAction';
 import SboxProductStore from '../../Stores/SboxProductStore';
 import SboxCartAction from '../../Actions/SboxCartAction';
 
+import Util from '../../Modules/Util';
 
 
 
@@ -126,6 +127,11 @@ export default class SweetProductDetial extends Component {
     });
   }
   _goToSboxCart() {
+    if (Util.getWaitingStatus() === true){
+      return;
+    }
+    Util.toggleWaitingStatus();
+    
     setTimeout( () => {
       this.props.navigator.push({
         screen: 'SboxCart',
