@@ -143,7 +143,7 @@ export default class Category extends Component {
                 <View style={{flex:0.2,alignItems:'flex-end'}}>
                   <Text
                     style={{color:'black',fontFamily:'FZZhunYuan-M02S',fontSize:16,color:'#808080'}}>
-                      {category.dishAmount}
+                      {category.dishAmount - 1}
                   </Text>
                 </View>
 
@@ -197,12 +197,12 @@ export default class Category extends Component {
       </TouchableWithoutFeedback>
      )
   }
-  // 
+  //
 
   _renderTouchButton()
   {
     if(!this.state.openBook){
-      return(  
+      return(
           <TouchableWithoutFeedback
             onPress={this._onPressButton.bind(this)}>
             <Image  source={require('./Image/button_menu_close.png')}
@@ -212,7 +212,7 @@ export default class Category extends Component {
                         right:0.05*width,
                         bottom:0.05*width,
                         height: 0.15*width,
-                        width: 0.15*width*0.9,            
+                        width: 0.15*width*0.9,
                       }
                     }/>
           </TouchableWithoutFeedback>
@@ -228,7 +228,7 @@ export default class Category extends Component {
                     right:0.05*width,
                     bottom:0.05*width,
                     height: 0.15*width,
-                    width: 0.15*width*1.369, 
+                    width: 0.15*width*1.369,
                   }
                 }/>
       </TouchableWithoutFeedback>

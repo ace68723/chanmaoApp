@@ -18,8 +18,10 @@ import KeyboardView from './keyboardView';
 
 const {height, width} = Dimensions.get('window');
 
-import SboxOrderAction from '../../Actions/SboxOrderAction';
-import SboxHeader from '../../../App/Components/General/SboxHeader';
+// import SboxOrderAction from '../../Actions/SboxOrderAction';
+// import SboxHeader from '../../../App/Components/General/SboxHeader';
+import CheckoutAction from '../../Actions/CheckoutAction';
+import Header from '../General/Header';
 
 export default class MyComponent extends Component {
   constructor(props){
@@ -214,22 +216,24 @@ export default class MyComponent extends Component {
       const expYear = this.state.expYear;
       const cvv = this.state.cvv;
       const reqData = {cardNumber,expMonth,expYear,cvv};
-      const result = await SboxOrderAction.addCard(reqData);
+      const result = await CheckoutAction.addCard(reqData);
+      this.props.saveModificationCallback();
       this.setState({showLoading:false});
       this.props.navigator.dismissModal({
         animationType: 'slide-down'
       });
     } catch (e) {
       this.setState({showLoading:false});
-      this.props.navigator.showInAppNotification({
-       screen: "Notification",
-       passProps: {
-         backgroundColor:'#ff768b',
-         title:'甜满箱',
-         content:'您输入的支付信息输入有误',
-       },
-       autoDismissTimerSec: 3
-      });
+      console.log(e);
+      // this.props.navigator.showInAppNotification({
+      //  screen: "Notification",
+      //  passProps: {
+      //    backgroundColor:'#ff768b',
+      //    title:'甜满箱',
+      //    content:'您输入的支付信息输入有误',
+      //  },
+      //  autoDismissTimerSec: 3
+      // });
 
     }
 
@@ -447,9 +451,9 @@ export default class MyComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SboxHeader title={this.props.title}
-                goBack={this._goBack}
-                leftButtonText={'<'}/>
+          <Header title={this.props.title}
+                  goBack={this._goBack}
+                  leftButtonText={'×'}/>
           <View style={styles.infoContainer}>
             {this._renderCardNo()}
             {this._rednerCardDetails()}

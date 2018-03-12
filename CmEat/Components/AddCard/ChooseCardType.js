@@ -11,16 +11,20 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import SboxHeader from '../../../App/Components/General/SboxHeader';
+import CheckoutAction from '../../Actions/CheckoutAction';
+// import SboxHeader from '../../../App/Components/General/SboxHeader';
+import Header from '../General/Header';
 const { height, width } = Dimensions.get('window');
 
-export default class SboxChooseCardType extends Component {
+export default class ChooseCardType extends Component {
 
   constructor(){
     super()
     this.state = {};
     this._goBack = this._goBack.bind(this);
     this._goToCredit = this._goToCredit.bind(this);
+    this._goToAliPay = this._goToAliPay.bind(this);
+    this._goToCash = this._goToCash.bind(this);
     this._goToDebit = this._goToDebit.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
     this._renderButton = this._renderButton.bind(this);
@@ -35,22 +39,45 @@ export default class SboxChooseCardType extends Component {
 
   _goToCredit() {
     this.props.navigator.push({
-        screen: "SboxAddCard",
+        screen: "CmAddCard",
         navigatorStyle: {navBarHidden:true},
         passProps:{
-          title:"添加信用卡"
+          title:"添加信用卡",
+          saveModificationCallback: this.props.saveModificationCallback
         }
       });
   }
 
   _goToDebit() {
     this.props.navigator.push({
-        screen: "SboxAddCard",
+        screen: "CmAddCard",
         navigatorStyle: {navBarHidden:true},
         passProps:{
-          title:"添加 Debit Card"
+          title:"添加 Debit Card",
+          saveModificationCallback: this.props.saveModificationCallback
         }
       });
+  }
+
+  _goToAliPay() {
+    // this.props.navigator.push({
+    //     screen: "CmAddCard",
+    //     navigatorStyle: {navBarHidden:true},
+    //     passProps:{
+    //       title:"添加 支付宝"
+    //     }
+    //   });
+    CheckoutAction.updatePaymentStatus('支付宝');
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
+  }
+
+  _goToCash() {
+    CheckoutAction.updatePaymentStatus('Cash');
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
   }
 
   _renderGoBackBtn() {
@@ -86,18 +113,19 @@ export default class SboxChooseCardType extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SboxHeader title={"支付方式"}
+        <Header title={"支付方式"}
                 goBack={this._goBack}
-                leftButtonText={'x'}/>
-        <View style={styles.separator}></View>
+                leftButtonText={'×'}/>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>
             <TouchableOpacity onPress={this._goToCredit}
                 activeOpacity={0.4}
                 style={{flexDirection: 'row',
-                        paddingTop: 20,
-                        paddingBottom: 20,
+                        paddingTop: 12,
+                        paddingBottom: 12,
                         alignItems: 'center',
-                        backgroundColor: 'white'}}>
+                        backgroundColor: 'white',
+                        borderBottomWidth: 1,
+                        borderColor: "#D5D5D5"}}>
                 <Text style={{flex: 1,
                               fontSize: 18,
                               textAlign: 'left',
@@ -105,17 +133,55 @@ export default class SboxChooseCardType extends Component {
                               color:"#808080",}}>
                           信用卡
                 </Text>
-                <Image style={{height: 20,
-                              width: 20,
-                              marginRight:20,
-                        }} source={require('./Img/right.png')}/>
+                <Text style={styles.arrowText}>
+                  >
+                </Text>
             </TouchableOpacity>
-            <View style={styles.separator}/>
             <TouchableOpacity onPress={this._goToDebit}
                 activeOpacity={0.4}
                 style={{flexDirection: 'row',
-                        paddingTop: 20,
-                        paddingBottom: 20,
+                        paddingTop: 12,
+                        paddingBottom: 12,
+                        alignItems: 'center',
+                        backgroundColor: 'white',
+                        borderBottomWidth: 1,
+                        borderColor: "#D5D5D5"}}>
+                <Text style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20,
+                              color:"#808080",}}>
+                              借记卡
+                </Text>
+                <Text style={styles.arrowText}>
+                  >
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this._goToAliPay}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        paddingTop: 12,
+                        paddingBottom: 12,
+                        alignItems: 'center',
+                        backgroundColor: 'white',
+                        borderBottomWidth: 1,
+                        borderColor: "#D5D5D5"}}>
+                <Text style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20,
+                              color:"#808080",}}>
+                              支付宝
+                </Text>
+                <Text style={styles.arrowText}>
+                  >
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this._goToCash}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        paddingTop: 12,
+                        paddingBottom: 12,
                         alignItems: 'center',
                         backgroundColor: 'white'}}>
                 <Text style={{flex: 1,
@@ -123,14 +189,12 @@ export default class SboxChooseCardType extends Component {
                               textAlign: 'left',
                               marginLeft :20,
                               color:"#808080",}}>
-                              Debit Visa Mastercard
+                              现金
                 </Text>
-                <Image style={{height: 20,
-                              width: 20,
-                              marginRight:20,}}
-                       source={require('./Img/right.png')}/>
+                <Text style={styles.arrowText}>
+                  >
+                </Text>
             </TouchableOpacity>
-            <View style={styles.separator}/>
         </ScrollView>
       </View>
     );
@@ -160,8 +224,14 @@ const styles = StyleSheet.create({
     paddingTop: height * (54 / 2208),
   },
   separator: {
-    height: 1,
 		borderWidth: 1,
 		borderColor: "#D5D5D5"
+  },
+  arrowText:{
+    fontSize:30,
+    color:"#ff8b00",
+    textAlign:"right",
+    fontFamily:'FZZhunYuan-M02S',
+    marginRight: 20
   }
 });

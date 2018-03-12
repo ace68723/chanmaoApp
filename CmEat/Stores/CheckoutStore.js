@@ -112,6 +112,12 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   		const pretax_ori = data.result.pretax_ori;
   		const promoted = data.result.promoted;
   		const total = data.result.total;
+      let paymentStatus = '添加支付方式';
+      let tipInfoStatus = false;
+      if (data.result.last4.length > 0) {
+        paymentStatus = data.result.brand + ' xxxx xxxx xxxx ' + data.result.last4;
+        tipInfoStatus = true;
+      }
 
   		const loading = false;
   		const selectedAddress = cme_getSelectedAddress();
@@ -129,6 +135,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   																			pretax_ori,
   																			promoted,
   																			total,
+                                        paymentStatus,
+                                        tipInfoStatus,
   																			loading,
                                         selectedAddress
   																		 });
@@ -151,6 +159,17 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   updateShouldAddAddress(data){
     this.state.shouldAddAddress = data.shouldAddAddress;
   },
+  updatePaymentStatus(data){
+    if (data.paymentStatus == 'Cash') {
+      this.state.tipInfoStatus = false;
+    }
+    this.state.paymentStatus = data.paymentStatus;
+  },
+  updateCardStatus(data){
+    if (data.length > 0) {
+      this.state.cardStatus = true;
+    }
+  },
 	getDltype(){
 		return this.state.dltype;
 	},
@@ -165,30 +184,39 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 				case AppConstants.CALCULATE_DELIVERY_FEE:
 								RestaurantStore.calculateDeliveryFee(action.data);
 								RestaurantStore.emitChange();
-				break;
+                break;
 				case AppConstants.UPDATE_ADDRESS:
 								RestaurantStore.updateAddress();
 								RestaurantStore.emitChange();
-				break;
+                break;
 				case AppConstants.UPDATE_DLTYPE:
 								RestaurantStore.updateDltype(action.data);
-				break;
+                break;
         case AppConstants.BEFORE_CHECKOUT:
                 RestaurantStore.beforCheckout(action.data);
                 RestaurantStore.emitChange();
-          break;
+                break;
 				case AppConstants.CHECKOUT:
 								RestaurantStore.checkout(action.data);
 								RestaurantStore.emitChange();
 								setTimeout(()=>{
 									RestaurantStore.initState()
 								},10000)
-				  break;
+                break;
         case AppConstants.SHOULD_ADD_ADDRESS:
                 RestaurantStore.updateShouldAddAddress(action.data);
                 RestaurantStore.emitChange();
-        break;
-
+                break;
+        case AppConstants.UPDATE_PAYMENT_STATUS:
+                RestaurantStore.updatePaymentStatus(action.data);
+                RestaurantStore.emitChange();
+                break;
+        case AppConstants.ADD_CARD:
+                RestaurantStore.updateCardStatus(action.data);
+                RestaurantStore.emitChange();
+                break;
+        default:
+                break;
 
 		  }
 

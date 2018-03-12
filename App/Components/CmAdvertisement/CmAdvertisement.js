@@ -23,16 +23,20 @@ export default class CmAdvertisement extends Component {
     this.state = {
       AdImage:'',
       addr:addr,
+      showingAd: true
     }
     this._closeAd = this._closeAd.bind(this);
   }
   componentDidMount() {
     this._getAd();
     setTimeout(() =>{
-      this._closeAd();
+      if (this.state.showingAd){
+        this._closeAd();
+      }
     },7600)
   }
   _closeAd() {
+    this.setState({showingAd: false});
     InteractionManager.runAfterInteractions(() => {
       this.props.navigator.dismissModal();
     })
@@ -100,7 +104,7 @@ export default class CmAdvertisement extends Component {
   _renderAddress(){
     if(this.state.addr){
       return(
-        <View style={{alignItems:'center',justifyContent:'center',padding:10,marginBottom:20}}>
+        <View style={{alignItems:'center',justifyContent:'center',padding:10,marginBottom:0}}>
           <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600'}}>
             配送至
           </Text>
@@ -140,6 +144,7 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent:"flex-end",
     backgroundColor:"#ffffff",
+    marginBottom: 10
   },
   logoBox: {
       flexDirection: 'row',

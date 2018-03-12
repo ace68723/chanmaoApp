@@ -88,7 +88,7 @@ class DefaultTabBar extends Component {
       //  </Animated.View>
       return (
         <Button
-            style={{flex: 1, marginLeft:10 }}
+            style={{flex: 1, marginLeft:10, marginRight: 25 }}
             key={name}
             accessible={true}
             accessibilityLabel={name}
@@ -108,7 +108,7 @@ class DefaultTabBar extends Component {
           <View key={name} ref={"tabBtn"+page}>
 
             <Button
-                style={{flex: 1, marginLeft:25 }}
+                style={{flex: 1, marginRight:25, height:45 }}
                 accessible={true}
                 accessibilityLabel={name}
                 accessibilityTraits='button'
@@ -154,7 +154,7 @@ class DefaultTabBar extends Component {
 
 // this.props.backgroundColor
     return (
-      <Animated.View style={{height:30,
+      <Animated.View style={{height:45,
                              width:deviceWidth,
                              position:"absolute",
                              top: tabTop,
@@ -166,7 +166,7 @@ class DefaultTabBar extends Component {
                                     {
                                       backgroundColor: 'white',
                                       width:deviceWidth,
-                                      height:30,
+                                      height:45,
                                     },
                                     this.props.style, ]}
                     horizontal={true}
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     // alignItems:'center',
   },
   tabs: {
-    height: 30,
+    height: 45,
     flexDirection: 'row',
   },
 });

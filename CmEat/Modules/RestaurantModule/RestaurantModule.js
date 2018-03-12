@@ -38,7 +38,10 @@ const RestaurantModule = {
             const pretax_ori = data.pretax_ori;
             const promoted = data.promoted;
             const total = data.total;
-            const eo_data ={pretax,pretax_ori,promoted,total}
+						const cusid = data.cusid;
+						const last4 = data.last4;
+						const brand = data.brand;
+            const eo_data ={pretax,pretax_ori,promoted,total,cusid,last4,brand}
             const startAmount = reqData.startAmount;
             let rid = reqData.rid;
             if(typeof rid !== 'string'){

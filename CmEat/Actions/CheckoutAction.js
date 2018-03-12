@@ -4,6 +4,7 @@ import AuthModule from '../../App/Modules/AuthModule/Auth';
 import LocationModule from '../Modules/System/LocationModule';
 import RestaurantModule from '../Modules/RestaurantModule/RestaurantModule';
 import AddressModule from '../Modules/AddressModule/AddressModule';
+import CheckoutModule from '../Modules/CheckoutModule/CheckoutModule';
 
 export default {
     async beforCheckout(rid,pretax,startAmount){
@@ -59,5 +60,22 @@ export default {
         })
       }catch (e){
       }
-    }
+    },
+    updatePaymentStatus(paymentStatus){
+      data = {paymentStatus: paymentStatus}
+      dispatch({
+          actionType: AppConstants.UPDATE_PAYMENT_STATUS, data,
+      })
+    },
+    async addCard(io_data) {
+      try{
+        const data = await CheckoutModule.addCard(io_data);
+        dispatch({
+             actionType: AppConstants.ADD_CARD,data
+         })
+      }catch(error){
+        console.log(error)
+        throw 'no cardToken'
+      }
+    },
 }

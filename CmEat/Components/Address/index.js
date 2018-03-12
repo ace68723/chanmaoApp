@@ -428,6 +428,10 @@ export default class CmEatAddress extends Component {
       <ScrollView style={{padding:10,}}
                   keyboardShouldPersistTaps={'always'}
 									keyboardDismissMode={'on-drag'}>
+				<Text style={{marginLeft: 10,
+											marginBottom: 5,
+											fontSize: 16,
+											color: '#A5A5A5'}}>请选择: </Text>
         {predictionList}
       </ScrollView>
     )
@@ -494,7 +498,7 @@ export default class CmEatAddress extends Component {
 		}
 	}
   _renderIosConfirmBtn(){
-    if(Platform.OS!='ios') return;
+    if(Platform.OS!='ios' || this.state.searchAddress) return;
     return(
       <TouchableOpacity style={styles.button}
                         activeOpacity={0.4}
