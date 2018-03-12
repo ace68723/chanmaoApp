@@ -74,7 +74,16 @@ export default class SboxHomeHeader extends Component {
         <View style={{flex:0.66,top:10,justifyContent:'center'}}>
 
         </View>
-
+        <TouchableWithoutFeedback onPress={()=>this.props.goToSboxSearch()} >
+          <Image source={require('./Image/button_search.png')}
+                style={{
+                  position:'absolute',
+                  right:10,
+                  bottom:10,
+                  height:40,
+                  width:44,
+                  }} />
+        </TouchableWithoutFeedback>
       </Animated.View>
     );
   }

@@ -12,6 +12,7 @@ import SboxHistoryOrderDetailHeader from './SboxHistoryOrderDetailHeader';
 import SboxHistoryOrderDetailOrderView from './SboxHistoryOrderDetailOrderView';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
 import SboxProductAction from '../../Actions/SboxProductAction';
+import Util from '../../Modules/Util';
 
 const { height, width } = Dimensions.get('window');
 
@@ -29,13 +30,20 @@ export default class HistoryOrderDetailViewController extends Component {
     });
   }
 
-	_goToSboxProductDetial() {
-    setTimeout( () => {
-      this.props.navigator.push({
-        screen: 'SboxProductDetial',
-        navigatorStyle: {navBarHidden: true},
-      })
-    }, 150);
+	_goToSboxProductDetial(item) {
+		if (Util.getWaitingStatus() === true){
+		  return;
+		}
+		Util.toggleWaitingStatus();
+
+		if (item.sku_status === 0) {
+			setTimeout( () => {
+				this.props.navigator.push({
+					screen: 'SboxProductDetial',
+					navigatorStyle: {navBarHidden: true},
+				})
+			}, 150);
+		}
   }
 
   _renderHistoryOrderDetailView() {

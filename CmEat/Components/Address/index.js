@@ -36,7 +36,7 @@ import AddressAction from '../../Actions/AddressAction';
 import HomeAction from '../../Actions/HomeAction';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import AddressStore from '../../Stores/AddressStore';
-
+import Util from '../../Modules/Util';
 
 export default class CmEatAddress extends Component {
 
@@ -127,6 +127,11 @@ export default class CmEatAddress extends Component {
 
   }
   _goToAddAddressInfo() {
+		if (Util.getWaitingStatus() === true){
+		  return;
+		}
+		Util.toggleWaitingStatus();
+
     this.props.navigator.push({
       screen: 'CmEatAddInfo',
       animated: true,

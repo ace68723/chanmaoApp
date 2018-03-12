@@ -39,6 +39,7 @@ import MenuList from './MenuList';
 import Header from '../General/Header';
 import Background from '../General/Background';
 import MenuHeader from './MenuHeader';
+import Util from '../../Modules/Util';
 
 class Menu extends Component {
     static navigatorStyle = {
@@ -164,6 +165,11 @@ class Menu extends Component {
 		_goToCheckout(){
 			if(Number(this.state.cartTotals.total)>0){
 				if(Number(this.state.cartTotals.total)>=Number(this.state.restaurant.start_amount)){
+					if (Util.getWaitingStatus() === true){
+					  return;
+					}
+					Util.toggleWaitingStatus();
+
           this.props.navigator.push({
             screen: 'CmEatCheckout',
             animated: true,

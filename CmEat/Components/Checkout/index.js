@@ -38,6 +38,7 @@ import CheckoutStore from '../../Stores/CheckoutStore';
 import SecondMenuStore from '../../Stores/SecondMenuStore';
 import MenuStore from '../../Stores/MenuStore';
 import HistoryAction from '../../Actions/HistoryAction';
+import Util from '../../Modules/Util';
 
 // device(size): get device height and width
 const {height, width} = Dimensions.get('window');
@@ -210,6 +211,11 @@ class Confirm extends Component {
 		}
     _goToAddressList(){
 			if(!this.state.loading){
+				if (Util.getWaitingStatus() === true){
+				  return;
+				}
+				Util.toggleWaitingStatus();
+
 				this.props.navigator.showModal({
 					screen: 'CmEatAddress',
           animated: true,
@@ -243,6 +249,11 @@ class Confirm extends Component {
     }
 		_handleProductOnPress(dish) {
 			if (dish.tpgs) {
+				if (Util.getWaitingStatus() === true){
+					return;
+				}
+				Util.toggleWaitingStatus();
+
 				const rid = this.state.rid;
 				const pretax = MenuStore.getCartTotals().total;
 				const navigator = this.props.navigator;
@@ -451,7 +462,6 @@ class Confirm extends Component {
 				return(
 					<View style={{
 						height:100,
-
 					}}>
 					<View style={{flex:0.5, flexDirection:'row',alignItems:'center',}}>
 					 <Text style={{
@@ -468,48 +478,48 @@ class Confirm extends Component {
 								 color:'#ff8b00',
 								 fontFamily:'FZZhunYuan-M02S',
 							}}>
-	              {this.state.tips}
-	            </Text>
-							</View>
-							<View style={{flex:0.5, flexDirection:'row', paddingHorizontal:10}}>
-								<TouchableOpacity style={[styles.tipsView,
-													{
-														flex:0.2,
-														borderColor:this.state.tipsPercentage == 0.1 ?'#ff8b00' :'#808080',
-														backgroundColor: this.state.tipsPercentage == 0.1 ?'#ff8b00' :'white',
-													}]} onPress={()=>this._setTips(0.1)}>
-									<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.1 ?'#FFF': '#808080'}]}>10%</Text>
-								</TouchableOpacity>
-								<TouchableOpacity style={[styles.tipsView,{
-														flex:0.2,
-														borderColor:this.state.tipsPercentage == 0.15 ?'#ff8b00' :'#808080',
-														backgroundColor: this.state.tipsPercentage == 0.15 ?'#ff8b00' :'white',
-													}]} onPress={()=>this._setTips(0.15)}>
-									<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.15 ?'#FFF': '#808080'}]}>15%</Text>
-								</TouchableOpacity>
-								<TouchableOpacity style={[styles.tipsView,{
-														flex:0.2,
-														borderColor:this.state.tipsPercentage == 0.2 ?'#ff8b00' :'#808080',
-														backgroundColor: this.state.tipsPercentage == 0.2 ?'#ff8b00' :'white',
-													}]}  onPress={()=>this._setTips(0.2)}>
-									<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.2 ?'#FFF': '#808080'}]}>20%</Text>
-								</TouchableOpacity>
-								<TouchableOpacity style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
-									<Text>$</Text>
-									<TextInput
-														style={{flex:1,height: 40, marginHorizontal:5}}
-														placeholder={'Customized'}
-														keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
-														returnKeyType={'done'}
-														onChangeText={(text)=>{
-															this.setState({
-																tips:text.length == 0 ? 0 : parseFloat(text),
-																tipsPercentage:this.state.tips/this.state.total,
-															})
-													}}
-														/>
-								</TouchableOpacity>
-							</View>
+              {this.state.tips}
+            </Text>
+						</View>
+						<View style={{flex:0.5, flexDirection:'row', paddingHorizontal:10}}>
+							<TouchableOpacity style={[styles.tipsView,
+												{
+													flex:0.2,
+													borderColor:this.state.tipsPercentage == 0.1 ?'#ff8b00' :'#808080',
+													backgroundColor: this.state.tipsPercentage == 0.1 ?'#ff8b00' :'white',
+												}]} onPress={()=>this._setTips(0.1)}>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.1 ?'#FFF': '#808080'}]}>10%</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.tipsView,{
+													flex:0.2,
+													borderColor:this.state.tipsPercentage == 0.15 ?'#ff8b00' :'#808080',
+													backgroundColor: this.state.tipsPercentage == 0.15 ?'#ff8b00' :'white',
+												}]} onPress={()=>this._setTips(0.15)}>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.15 ?'#FFF': '#808080'}]}>15%</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.tipsView,{
+													flex:0.2,
+													borderColor:this.state.tipsPercentage == 0.2 ?'#ff8b00' :'#808080',
+													backgroundColor: this.state.tipsPercentage == 0.2 ?'#ff8b00' :'white',
+												}]}  onPress={()=>this._setTips(0.2)}>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.2 ?'#FFF': '#808080'}]}>20%</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
+								<Text>$</Text>
+								<TextInput
+													style={{flex:1,height: 40, marginHorizontal:5}}
+													placeholder={'Customized'}
+													keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
+													returnKeyType={'done'}
+													onChangeText={(text)=>{
+														this.setState({
+															tips:text.length == 0 ? 0 : parseFloat(text),
+															tipsPercentage:this.state.tips/this.state.total,
+														})
+												}}
+													/>
+							</TouchableOpacity>
+						</View>
 					</View>
 				)
 			}
