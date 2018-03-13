@@ -30,11 +30,11 @@
 | driver_comment | string | 司机评价   |           |
 | restaurant_score | int | 餐馆评分   |           |
 | restaurant_comment | string | 餐馆评价   |           |
-| dish_likes  | array | 订单下的菜品 |      |
+| dish_likes  | array | 订单菜品score |      |
 
 | dish_likes   | 类型及其范围 | 说明     | 默认值        |
 | ---------- | ------ | ------ | ---------- |
-| ds_id    | int | 菜品ID |    |
+| ot_id    | int | 菜品流水ID |    |
 | score  | int | 菜品评分 | 0:默认; 1:喜欢; -1:不喜欢   |
 
 
