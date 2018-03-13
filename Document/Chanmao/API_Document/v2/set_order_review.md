@@ -26,6 +26,7 @@
 | Tables  | 类型及其范围 | 说明     | 默认值  |
 | ------- | ------ | ------ | ---- |
 | oid     | number | 订单ID   |      |
+| complete_time | int | 订单送达时间(unix timestamp) |  |  
 | driver_score | int | 司机评分   |           |
 | driver_comment | string | 司机评价   |           |
 | restaurant_score | int | 餐馆评分   |           |
@@ -34,7 +35,7 @@
 
 | dish_likes   | 类型及其范围 | 说明     | 默认值        |
 | ---------- | ------ | ------ | ---------- |
-| ot_id    | int | 菜品流水ID |    |
+| otid    | int | 菜品流水ID |    |
 | score  | int | 菜品评分 | 0:默认; 1:喜欢; -1:不喜欢   |
 
 
