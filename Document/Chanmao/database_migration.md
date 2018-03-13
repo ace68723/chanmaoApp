@@ -1,7 +1,7 @@
 ### 2018-03-13 update	
 - 新增 `cm_order_review` 表用于用户对订单的评价信息
 - 新增 `like`字段在`cm_order_item`表中，用于用户对菜品的喜爱
-- 新增 OrderPayment 表用于订单支付信息
+- 新增 `OrderPayment` 表用于订单支付信息
 
 
 #### cm_order_review
