@@ -37,17 +37,17 @@
 | driver_name | string | 司机name   |           |
 | driver_score | int | 司机评分   |           |
 | driver_comment | string | 司机评价   |           |
-| driver_score | int | 司机评分   |           |
 | restaurant_name | string | 餐馆name   |           |
+| restaurant_score | int | 餐馆评分   |           |
 | restaurant_comment | string | 餐馆评价   |           |
-| dish_likes  | array | 订单菜品score |      |
+| dish_ratings  | array | 订单菜品score |      |
 | restaurant_comment_tags  | array(string) |  |      |
 | driver_comment_tags  | array(string) |  |      |
 
-| dish_likes   | 类型及其范围 | 说明     | 默认值        |
+| dish_ratings   | 类型及其范围 | 说明     | 默认值        |
 | ---------- | ------ | ------ | ---------- |
 | otid    | int | 菜品流水ID |    |
-| score  | int | 菜品评分 | 0:默认; 1:喜欢; -1:不喜欢   |
+| rating  | int | 菜品评分 | 0:默认; 1:喜欢; -1:不喜欢   |
 
 
 ```
