@@ -18,7 +18,6 @@
 | Tables      | 类型及其范围 | 说明        | 默认值  |
 | ----------- | ------ | --------- | ---- |
 | Authortoken | string | token验证信息 |      |
-| uuid | string |  |      |
 
 
 请求参数:
@@ -35,9 +34,11 @@
 | ev_error  | number | 请求是否成功 | 0为成功, 1为错误 |
 | ev_message | string | 报错信息   | 空          |
 | complete_time | int | 订单送达时间(unix timestamp) |  |  
+| driver_name | string | 司机name   |           |
 | driver_score | int | 司机评分   |           |
 | driver_comment | string | 司机评价   |           |
-| restaurant_score | int | 餐馆评分   |           |
+| driver_score | int | 司机评分   |           |
+| restaurant_name | string | 餐馆name   |           |
 | restaurant_comment | string | 餐馆评价   |           |
 | dish_likes  | array | 订单菜品score |      |
 | restaurant_comment_tags  | array(string) |  |      |
