@@ -88,7 +88,10 @@ export default class SboxHomeHeader extends Component {
           </View>
         </TouchableWithoutFeedback>
         <View style={{flex:0.66,justifyContent:'center',alignItems:'center'}}>
-          <AddressForHomeHeader handleBackToHome={this.props.handleBackToHome}/>
+          <AddressForHomeHeader
+            handleBackToHome={this.props.handleBackToHome}
+            toggleAddressPrompt={this.props.toggleAddressPrompt}
+            />
         </View>
         <View style={{flex:0.17, alignItems:'center', justifyContent:'center', top:10,}}>
             {this._renderSearchButton()}
