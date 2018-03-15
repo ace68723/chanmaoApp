@@ -18,7 +18,7 @@ import {
 import MainTab from '../MainTab';
 import HistoryTab from '../History/HistoryTab';
 import SettingTab from '../Setting/SettingTab';
-
+import SearchTab from '../Restaurant/CmRestaurantSearch';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TabBar from './TabBar';
 
@@ -104,6 +104,9 @@ export default class Tabs extends Component {
 												showTabBar = {this._showTabBar}
                         navigator={this.props.navigator}
                         />
+											<SearchTab tabLabel = '搜索'
+												navigator={this.props.navigator}
+											/>
 											<SettingTab tabLabel='我的'
                             navigator={this.props.navigator}
                             handleBackToHome={this.props.handleBackToHome}/>

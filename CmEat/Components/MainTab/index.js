@@ -198,6 +198,7 @@ export default class MainTab extends Component {
       navigatorStyle: {navBarHidden: true},
       passProps: {
         restaurant:this.state.areaList[0].restaurantList,
+        areaList: this.state.areaList
       },
     });
   }
