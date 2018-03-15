@@ -152,7 +152,7 @@ export default class CmRestaurantSearch extends Component {
 										navigator={this.props.navigator}/>
 				}
 	  }
-	_keyExtractor = (item, index) =>  item.area + item.rid;
+	_keyExtractor = (item, index) => index;
 	_renderRestaurants() {
 
 			return(
@@ -211,7 +211,7 @@ export default class CmRestaurantSearch extends Component {
 		}	
 		
 	}
-	_areaKeyExtractor = (area, index) =>   area.name+area.area;
+	_areaKeyExtractor = (area, index) => index + area.area +area.name;
 	_renderAreas(){
 		return(
 			<FlatList
@@ -230,6 +230,7 @@ export default class CmRestaurantSearch extends Component {
 		)
 	}
 	_renderResult(){
+		{this._renderAreas()}
 		if(this.state.restaurantList.length>0){
 			return(
 				<View style={{flex:1}}>
@@ -239,7 +240,7 @@ export default class CmRestaurantSearch extends Component {
 		}else{
 			return(
 				<View style={{flex:1}}>
-					 {this._renderAreas()}
+					{this._renderAreas()}
 				</View>
 			)
 		}
