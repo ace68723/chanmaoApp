@@ -1,11 +1,20 @@
 ### 2018-03-14 update	
 - `cm_order_review`表中新增`created_at`字段，用户记录评价时间
 - `cm_order_item`表中的`like`字段改名为rating
+- `cm_order_trace` 表新增`adjust_complete`，用于用户调整后的完成时间
 
 ### 2018-03-13 update	
 - 新增 `cm_order_review` 表用于用户对订单的评价信息
 - 新增 `like`字段在`cm_order_item`表中，用于用户对菜品的喜爱
 - 新增 `OrderPayment` 表用于订单支付信息
+
+
+#### cm_order_trace
+
+| oid    | driver_id | create   | initiate         | reaction          | assign       | pickup       | complete | adjust_complete                | status | csuid      | notes |
+| ------ | --------- | -------- | ---------------- | ----------------- | ------------ | ------------ | -------- | ------------------------------ | ------ | ---------- | ----- |
+| 订单id | 司机id    | 创建时间 | 成为可用订单时间 | 商家接单/拒单时间 | 客服分配时间 | 司机取餐时间 | 完成时间 | 客人调整后的完成时间<br >默认0 | 状态   | 分配客服id | 备注  |
+
 
 
 #### cm_order_review
