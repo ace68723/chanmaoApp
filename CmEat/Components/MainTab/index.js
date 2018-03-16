@@ -10,7 +10,8 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-  Image
+  Image,
+	FlatList
 } from 'react-native';
 
 import _forEach from 'lodash/forEach';
@@ -22,6 +23,7 @@ import CmEatHomeHeader from './CmEatHomeHeader';
 
 import HomeTab from '../HomeTab/'
 import RestaurantTab from '../Restaurant/RestaurantTab'
+import RestaurantCard from '../Restaurant/RestaurantCard';
 // import Menu from '../Restaurant/Menu';
 
 import HomeAction from '../../Actions/HomeAction';
@@ -202,78 +204,39 @@ export default class MainTab extends Component {
     });
   }
 	renderScrollableTabView(){
-		if(this.state.areaList && this.state.areaList.length>0){
-      // let restaurantTabs
-      // if(Platform.OS === 'ios') {
-          let restaurantTabs = this.state.areaList.map( (area,key) => {
-  					return 	(<RestaurantTab
-  														tabLabel={area.name}
-  														key={key+2}
-  														index={key+2}
-  														restaurantList={area.restaurantList}
-  														currentTab={this.state.currentTab}
-  														area={area.area}
-  														navigator={this.props.navigator}
-  														scrollEventBind={this._scrollEventBind}
-  														getScrollViewRefs={this._getScrollViewRefs}
-  														refsCurrentScrollView= {this.refsCurrentScrollView}
-  														hideTabBar = {this.props.hideTabBar}
-  														showTabBar = {this.props.showTabBar}
-  														scrollY = {this.state.scrollY._value}/>)
-  				});
-      // } else {
-      //     const areaListAndroid = [this.state.areaList[0]]
-      //     restaurantTabs = areaListAndroid.map( (area,key) => {
-    	// 				return 	(<RestaurantTab
-    	// 													tabLabel={area.name}
-    	// 													key={key+2}
-    	// 													index={key+2}
-    	// 													restaurantList={area.restaurantList}
-    	// 													currentTab={this.state.currentTab}
-    	// 													area={area.area}
-    	// 													navigator={this.props.navigator}
-    	// 													scrollEventBind={this._scrollEventBind}
-    	// 													getScrollViewRefs={this._getScrollViewRefs}
-    	// 													refsCurrentScrollView= {this.refsCurrentScrollView}
-    	// 													hideTabBar = {this.props.hideTabBar}
-    	// 													showTabBar = {this.props.showTabBar}
-    	// 													scrollY = {this.state.scrollY._value}/>)
-      //
-    	// 			});
-      //  }
-
-			return(
-				<ScrollableTabView  style={{flex:1,}}
-														tabBarPosition={'bottom'}
-														tabBarBackgroundColor={'#fff'}
-														tabBarActiveTextColor={'#ff8b00'}
-														tabBarUnderlineColor={'#ff8b00'}
-														tabBarTextStyle={{fontSize:18,fontFamily:'FZZhunYuan-M02S',}}
-														tabBarInactiveTextColor={'#666666'}
-														initialPage={0}
-														prerenderingSiblingsNumber={7}
-														renderTabBar={() =>
-																				<DefaultTabBar
-																				scrollY = {this.state.scrollY}
-																				HEADER_SCROLL_DISTANCE = {HEADER_SCROLL_DISTANCE}/>}
-														onScroll={(argument)=>{
-															this._setPosition()
-														}}
-														page={this.state.page}
-														onChangeTab={this._onChangeTab}>
-							<HomeTab  tabLabel='主页'
-												index={0}
-												scrollEventBind={this._scrollEventBind}
-												getScrollViewRefs={this._getScrollViewRefs}
-												navigator={this.props.navigator}
-												refsCurrentScrollView= {this.refsCurrentScrollView}
-												advertisement={this.state.advertisement}
-												hideTabBar = {this.props.hideTabBar}
-												showTabBar = {this.props.showTabBar}/>
-							{restaurantTabs}
-				</ScrollableTabView>
-			)
-		}
+		return(
+			<ScrollableTabView  style={{flex:1,}}
+													tabBarPosition={'bottom'}
+													tabBarBackgroundColor={'#fff'}
+													tabBarActiveTextColor={'#ff8b00'}
+													tabBarUnderlineColor={'#ff8b00'}
+													tabBarTextStyle={{fontSize:18,fontFamily:'FZZhunYuan-M02S',}}
+													tabBarInactiveTextColor={'#666666'}
+													initialPage={0}
+													prerenderingSiblingsNumber={7}
+													renderTabBar={() =>
+																			<DefaultTabBar
+																			scrollY = {this.state.scrollY}
+																			HEADER_SCROLL_DISTANCE = {HEADER_SCROLL_DISTANCE}/>}
+													onScroll={(argument)=>{
+														this._setPosition()
+													}}
+													page={this.state.page}
+													onChangeTab={this._onChangeTab}>
+						<HomeTab  tabLabel='主页'
+											index={0}
+											scrollEventBind={this._scrollEventBind}
+											getScrollViewRefs={this._getScrollViewRefs}
+											navigator={this.props.navigator}
+											refsCurrentScrollView= {this.refsCurrentScrollView}
+											advertisement={this.state.advertisement}
+											hideTabBar = {this.props.hideTabBar}
+											showTabBar = {this.props.showTabBar}
+											restaurants = {this.state.areaList}
+											scrollY = {this.state.scrollY}
+											/>
+			</ScrollableTabView>
+		)
   }
   render(){
     return(
@@ -307,5 +270,4 @@ export default class MainTab extends Component {
 // 					advertisement={this.state.advertisement}/>
 
 const styles = StyleSheet.create({
-
 });

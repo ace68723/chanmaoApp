@@ -11,7 +11,12 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+	FlatList,
 } from 'react-native';
+
+import RestaurantTab from '../Restaurant/RestaurantTab'
+import RestaurantCard from '../Restaurant/RestaurantCard';
+
 const {width,height} = Dimensions.get('window');
 let marginTop
 if(height == 812){
@@ -77,7 +82,50 @@ export default class LoginButton extends Component {
       )
     }
   }
+	_renderRestaurants() {
+		if (this.props.restaurants.length == 0){
+			return;
+		}
+		let all = [this.props.restaurants[0]];
+		console.log('ggg', all);
+		let restaurantTabs = all.map( (area,key) => {
+			return 	(<RestaurantTab
+									tabLabel={area.name}
+									key={key}
+									index={key}
+									restaurantList={area.restaurantList}
+									navigator={this.props.navigator}
+									getScrollViewRefs={this.props.getScrollViewRefs}
+									refsCurrentScrollView= {this.props.refsCurrentScrollView}
+									hideTabBar = {this.props.hideTabBar}
+									showTabBar = {this.props.showTabBar}
+									scrollEventBind = {this.props.scrollEventBind}
+									scrollY = {this.props.scrollY._value}/>)
+		 });
+		return restaurantTabs;
 
+
+
+		let keyExtractor = (item, index) => item.area + item.rid;
+		return (
+			<FlatList
+					scrollEventThrottle={1}
+					data={all}
+					renderItem={this._renderRestaurant}
+					keyExtractor={keyExtractor}
+					removeClippedSubviews={true}
+					initialNumToRender={1}
+					onEndReachedThreshold={0.5}
+			/>
+		)
+	}
+	_renderRestaurant({item}) {
+		console.log('ggg', item);
+		const restaurant = item;
+			if(restaurant){
+				return <RestaurantCard restaurant={restaurant}/>
+			}
+	}
   render(){
     return(
         <ScrollView style={styles.scrollView}
@@ -89,6 +137,7 @@ export default class LoginButton extends Component {
              <View style={{marginTop:marginTop,height:0}}
                    ref={'_scrollViewContent'}/>
 						 {this._renderAdv()}
+						 {this._renderRestaurants()}
         </ScrollView>
 
 
