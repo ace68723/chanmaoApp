@@ -311,7 +311,7 @@ export default class MainTab extends Component {
 												paddingLeft: 16,
 												justifyContent:'center',
 												backgroundColor: 'green',
-												marginTop: Util.isiPhoneX() == true ? 96 : 65
+												marginTop: Util.isiPhoneX() === true ? 94 : 62
 											}}>
 								<View style={styles.TriangleShapeCSS} />
 								<Text style={{color:"white",
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
 	  width: 0,
 	  height: 0,
 		left: 70,
-		top: -17,
+		top: -15,
 	  borderLeftWidth: 10,
 	  borderRightWidth: 10,
 	  borderBottomWidth: 10,
