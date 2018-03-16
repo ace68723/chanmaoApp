@@ -67,14 +67,14 @@ export default class ChooseCardType extends Component {
     //       title:"添加 支付宝"
     //     }
     //   });
-    CheckoutAction.updatePaymentStatus('支付宝');
+    CheckoutAction.updatePaymentStatus(10);
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
     });
   }
 
   _goToCash() {
-    CheckoutAction.updatePaymentStatus('Cash');
+    CheckoutAction.updatePaymentStatus(0);
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
     });

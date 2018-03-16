@@ -37,6 +37,7 @@ export default class orderHistory extends Component {
   }
   _onChange(){
     const state = Object.assign({},HistoryStore.getHistoryDetail())
+    console.log(state);
     this.setState(state)
     setTimeout(() => {
       this.setState({loading:false})

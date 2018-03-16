@@ -17,7 +17,7 @@ const HistoryApi = {
   getOrderData(token){
     const url = AuthConstants.API_HISTORYORDER
     let options = {
-        method: 'POST',
+        method: 'GET',
         mode:'cors',
         headers: {
             'Accept': 'application/json',
@@ -26,7 +26,7 @@ const HistoryApi = {
     }
     options.headers.authortoken = token;
     // options.body = JSON.stringify({channel:1});
-    options.body = JSON.stringify({channel: 1})
+    // options.body = JSON.stringify({channel: 1})
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

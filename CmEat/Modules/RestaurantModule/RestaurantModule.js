@@ -32,7 +32,9 @@ const RestaurantModule = {
   },
   async beforCheckout(reqData){
       try{
+				  console.log(reqData);
           const data = await RestaurantApi.beforCheckout(reqData);
+					console.log(data);
           if(data.result == 0){
             const pretax = data.pretax;
             const pretax_ori = data.pretax_ori;
@@ -132,9 +134,9 @@ const RestaurantModule = {
         } else if (Platform.OS === 'android') {
           channel = 2;
         }
-        const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel}
-
+        const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel, payment_channel: io_data.payment_channel, tips: io_data.tips}
         const data = await RestaurantApi.checkout(reqData);
+				console.log(data);
         return data
       }catch (e){
         console.log(e)

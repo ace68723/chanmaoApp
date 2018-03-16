@@ -104,9 +104,9 @@ export default class Tabs extends Component {
 												showTabBar = {this._showTabBar}
                         navigator={this.props.navigator}
                         />
-											<SettingTab tabLabel='我的'
-                            navigator={this.props.navigator}
-                            handleBackToHome={this.props.handleBackToHome}/>
+								<SettingTab tabLabel='我的'
+                      navigator={this.props.navigator}
+                      handleBackToHome={this.props.handleBackToHome}/>
 
 		 </ScrollableTabView>
 
