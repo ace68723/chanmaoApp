@@ -28,6 +28,7 @@ import HomeAction from '../../Actions/HomeAction';
 import AddressAction from '../../Actions/AddressAction';
 import HomeStore from '../../Stores/HomeStore';
 
+import Util from '../../Modules/Util'
 
 const {width,height} = Dimensions.get('window');
 // const HEADER_MAX_HEIGHT = width*0.45+6;
@@ -310,10 +311,11 @@ export default class MainTab extends Component {
 												paddingLeft: 16,
 												justifyContent:'center',
 												backgroundColor: 'green',
-												marginTop: 65}}>
+												marginTop: Util.isiPhoneX() == true ? 96 : 65
+											}}>
 								<View style={styles.TriangleShapeCSS} />
 								<Text style={{color:"white",
-													fontSize:11,
+													fontSize:12,
 													top: -4,
 													fontWeight:'bold',
 													textAlignVertical: "center",
