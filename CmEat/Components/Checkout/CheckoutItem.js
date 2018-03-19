@@ -29,7 +29,7 @@ export default (props) => {
                                 fontSize:16,
                                 fontFamily:'FZZhunYuan-M02S',
                                 textAlign: 'left'}}>
-                    {props.dish.tpgs[tpg_id].tps[tp_id].tp_price} × {props.dish.tpgs[tpg_id].tps[tp_id].quantity}
+                    ${props.dish.tpgs[tpg_id].tps[tp_id].tp_price} × {props.dish.tpgs[tpg_id].tps[tp_id].quantity}
                   </Text>
                 </View>
               </View>
@@ -52,7 +52,7 @@ export default (props) => {
                     </View>
                     <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
                       <Text style={styles.quantity}>
-                        {props.dish.price} × {props.dish.qty}
+                        ${props.dish.price.toFixed(2)} × {props.dish.qty}
                       </Text>
                     </View>
                   </View>
