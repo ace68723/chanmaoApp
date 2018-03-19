@@ -10,7 +10,7 @@
 |  授权访问限制  |           暂无            |      |
 |  授权范围()  |           暂无            |      |
 |   支持格式   |          JSON           |      |
-|   测试接口   |          http://norgta.com//api/cmapp/v2/set_order_review          |      |
+|   测试接口   |          https://norgta.com/api/cmapp/v2/set_order_review          |      |
 
 
 表头参数:
