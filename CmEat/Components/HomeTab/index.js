@@ -87,7 +87,6 @@ export default class LoginButton extends Component {
 			return;
 		}
 		let all = [this.props.restaurants[0]];
-		console.log('ggg', all);
 		let restaurantTabs = all.map( (area,key) => {
 			return 	(<RestaurantTab
 									tabLabel={area.name}
@@ -120,10 +119,9 @@ export default class LoginButton extends Component {
 		)
 	}
 	_renderRestaurant({item}) {
-		console.log('ggg', item);
 		const restaurant = item;
 			if(restaurant){
-				return <RestaurantCard restaurant={restaurant}/>
+				return (<RestaurantCard restaurant={restaurant}/>)
 			}
 	}
   render(){
