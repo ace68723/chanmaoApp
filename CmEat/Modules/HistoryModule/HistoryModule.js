@@ -97,6 +97,14 @@ const  HistoryModule = {
     }
     return verifyPhoneResult
   },
+  async addReview(io_data){
+    const addReviewResult = await HistoryApi.addReview(io_data);
+    const res = addReviewResult;
+    if(res.ev_error != 0){
+      Alert.errorAlert(res.ev_message)
+    }
+    return addReviewResult;
+  },
 
       // ===================================
       // getHistoryData API INTERFACE

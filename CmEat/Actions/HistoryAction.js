@@ -51,7 +51,19 @@ export default {
       }catch (e){
         console.log(e);
       }
-    }
+    },
+    async addReview(io_data){
+      try{
+        const token = await AuthModule.getToken();
+        const lo_data = {io_data,token};
+        const data = await HistoryModule.addReview(lo_data);
+        dispatch({
+            actionType: AppConstants.REVIEW_ADDED, data
+        })
+      }catch (e){
+        console.log(e);
+      }
+    },
 
 
 }

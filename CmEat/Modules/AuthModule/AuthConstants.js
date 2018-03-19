@@ -13,7 +13,7 @@ const AppConstants ={
     API_MENU: 'https://chanmao.us/api/cmapp/v2/get_menu',
     // API_MENU: Server + 'MobOrder10/Rrmenu',
     // API_HISTORYLIST: Server + 'MobOrder10/historylist',
-    API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',
+    // API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',
     API_HISTORYORDER: 'https://chanmao.us/api/cmapp/v2/get_history_list',
     API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
 
@@ -27,6 +27,7 @@ const AppConstants ={
     API_CHECKOUT:Server + 'MobOrder10/checkout',
     API_GETVERIFYCODE: Server + 'MobOrder10/sendcode',
     API_VERIFYCODE: Server + 'MobOrder10/verifysms',
+    API_ADDREVIEW: 'https://chanmao.us/api/cmapp/v2/set_order_review',
 
     GET_ATICLE_LIST: Server + 'MobContent10/PostList',
     GET_ARTICLE_AUTHOR: Server + 'MobContent10/ArticleOV',

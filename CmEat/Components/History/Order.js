@@ -24,7 +24,6 @@ export default class pastOrderEN extends Component {
           orderInfo: props.order,
           page: props.page
       };
-      console.log(this.state);
       this._renderDetialButton = this._renderDetialButton.bind(this);
   }
   componentWillReceiveProps(nextProps){

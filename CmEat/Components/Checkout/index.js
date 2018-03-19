@@ -161,7 +161,6 @@ class Confirm extends Component {
       CheckoutAction.calculateDeliveryFee()
     }
     _doCheckout(){
-			console.log(this.state.payment_channel);
 			if (!this.state.payment_channel) return;
       this.setState({
         loading:true,

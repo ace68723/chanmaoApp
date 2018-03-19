@@ -22,18 +22,20 @@ import {
 
 const { width } = Dimensions.get('window');
 import Header from '../General/Header';
+import HistoryAction from '../../Actions/HistoryAction';
+import HistoryStore from '../../Stores/HistoryStore';
 export default class pastOrderEN extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          complete_time: 1521232458,
+          complete_time: "",
           driver_score: 0,
           driver_comment: "",
           restaurant_score: 0,
           restaurant_comment: "",
           dish_ratings: props.orderInfo.items,
           modalVisible: false,
-          oid: props.orderInfo.order_oid
+          oid: props.orderInfo.order_oid,
       };
       this._handleInputOnFocus = this._handleInputOnFocus.bind(this);
       this._handleDriverScore = this._handleDriverScore.bind(this);
@@ -46,11 +48,11 @@ export default class pastOrderEN extends Component {
       this._handleChangeTime = this._handleChangeTime.bind(this);
       this._handleTimeSelected = this._handleTimeSelected.bind(this);
       this._handleConfirm = this._handleConfirm.bind(this);
+      this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props);
-    // CheckoutStore.addChangeListener(this._onChange);
+    HistoryStore.addChangeListener(this._onChange);
     let _dish_ratings = [];
     for (let _dish of this.props.orderInfo.items) {
       _dish_ratings.push({name: _dish.ds_name, rating: 0, otid: _dish.otid});
@@ -58,7 +60,15 @@ export default class pastOrderEN extends Component {
     this.setState({dish_ratings: _dish_ratings});
   }
   componentWillUnmount() {
-    // CheckoutStore.removeChangeListener(this._onChange);
+    HistoryStore.removeChangeListener(this._onChange);
+  }
+
+  _onChange() {
+    const showReviewAdded = HistoryStore.getState().showReviewAdded;
+    if (showReviewAdded) {
+      this.props.navigator.dismissModal();
+      alert("成功添加评价");
+    }
   }
 
   _handleInputOnFocus(offset) {
@@ -142,11 +152,25 @@ export default class pastOrderEN extends Component {
   }
 
   _handleTimeSelected(date) {
-    this.setState({complete_time: date/1000});
+    this.setState({complete_time: date});
   }
 
   _handleConfirm() {
-    console.log(this.state);
+    let dish_ratings = this.state.dish_ratings;
+    dish_ratings.map((_dish) => {
+      delete _dish['name'];
+      return _dish;
+    })
+    const data = {
+      complete_time: this.state.complete_time,
+      oid: this.state.oid,
+      driver_score: this.state.driver_score,
+      driver_comment: this.state.driver_comment,
+      restaurant_score: this.state.restaurant_score,
+      restaurant_comment: this.state.restaurant_comment,
+      dish_ratings: dish_ratings,
+    }
+    HistoryAction.addReview(data);
   }
 
 
@@ -450,7 +474,7 @@ export default class pastOrderEN extends Component {
                     <View
                         style={{position: 'absolute', height: 265, width: width, bottom: 0, backgroundColor: '#d4d4d4'}}>
                         <DatePickerIOS
-                          date={new Date(this.state.complete_time*1000)}
+                          date={new Date(this.state.complete_time)}
                           onDateChange={(value) => this._handleTimeSelected(value)}
                         />
                       <TouchableOpacity
