@@ -52,9 +52,7 @@ export default class RestaurantTab extends Component {
   _renderRestaurant({item}) {
     const restaurant = item;
 			if(restaurant){
-				return <RestaurantCard restaurant={restaurant}
-															 openMenu={this.props.openMenu}
-															 navigator={this.props.navigator}/>
+				return <RestaurantCard restaurant={restaurant} navigator={this.props.navigator}/>
 			}
   }
 

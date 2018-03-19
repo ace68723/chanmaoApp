@@ -31,6 +31,7 @@ export default class LoginButton extends Component {
   constructor(){
     super();
 		this._handleOnPress = this._handleOnPress.bind(this);
+		this._renderRestaurant = this._renderRestaurant.bind(this);
   }
 	componentDidMount(){
 

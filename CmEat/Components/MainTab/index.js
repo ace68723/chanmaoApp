@@ -55,6 +55,7 @@ export default class MainTab extends Component {
 			restaurantCoverOpacity: new Animated.Value(0), // init restaurant tab view opacity 0
       renderSearch:false,
 		}
+
 		this.state = Object.assign({},state,HomeStore.getHomeState());
     this._onChange = this._onChange.bind(this);
     this._scrollEventBind = this._scrollEventBind.bind(this);
@@ -214,8 +215,7 @@ export default class MainTab extends Component {
 													tabBarInactiveTextColor={'#666666'}
 													initialPage={0}
 													prerenderingSiblingsNumber={1}
-													renderTabBar={() =>
-																			<View></View>}
+													renderTabBar={() => <View></View>}
 													onScroll={(argument)=>{
 														this._setPosition()
 													}}
@@ -232,7 +232,6 @@ export default class MainTab extends Component {
 											showTabBar = {this.props.showTabBar}
 											restaurants = {this.state.areaList}
 											scrollY = {this.state.scrollY}
-											openMenu = {this._goToRestaurantSearch}
 											/>
 			</ScrollableTabView>
 		)
