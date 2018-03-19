@@ -121,6 +121,8 @@ export default class LoginButton extends Component {
 				            onScroll={this.props.scrollEventBind()}
 										showsVerticalScrollIndicator={false}>
 
+            <View style={{marginTop:marginTop,height:0}}
+                   ref={'_scrollViewContent'}/>
 
 						{this._renderAdv()}
 						{this._renderRestaurants()}
