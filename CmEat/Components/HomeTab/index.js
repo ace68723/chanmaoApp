@@ -11,7 +11,12 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+	FlatList,
 } from 'react-native';
+
+import RestaurantTab from '../Restaurant/RestaurantTab'
+import RestaurantCard from '../Restaurant/RestaurantCard';
+
 const {width,height} = Dimensions.get('window');
 let marginTop
 if(height == 812){
@@ -26,6 +31,7 @@ export default class LoginButton extends Component {
   constructor(){
     super();
 		this._handleOnPress = this._handleOnPress.bind(this);
+		this._renderRestaurant = this._renderRestaurant.bind(this);
   }
 	componentDidMount(){
 
@@ -35,6 +41,7 @@ export default class LoginButton extends Component {
 		const ref = Object.assign({},{index,scrollView,scrollViewContent})
 		this.props.getScrollViewRefs(ref);
 	}
+
 	_handleOnPress(advertisement){
 		if(advertisement.navitype == 2){
       const {url} = advertisement.naviparam;
@@ -78,6 +85,36 @@ export default class LoginButton extends Component {
     }
   }
 
+	_renderRestaurant({item}) {
+		const restaurant = item;
+			if(restaurant){
+				return (<RestaurantCard
+					restaurant={restaurant}
+					openMenu={this.props.openMenu}
+					navigator={this.props.navigator}
+					/>);
+			}
+	}
+
+	_renderRestaurants() {
+		if (this.props.restaurants.length == 0){
+			return;
+		}
+		let all = this.props.restaurants[0].restaurantList;
+		let keyExtractor = (item, index) => item.area + item.rid;
+		return (
+			<FlatList
+					style={{marginTop: 8,}}
+					key='key'
+					ref={(comp) => this._scrollVew = comp}
+					data={all}
+					renderItem={this._renderRestaurant}
+					keyExtractor={keyExtractor}
+					extraData={all}
+			/>
+		);
+	}
+
   render(){
     return(
         <ScrollView style={styles.scrollView}
@@ -86,9 +123,11 @@ export default class LoginButton extends Component {
 				            onScroll={this.props.scrollEventBind()}
 										showsVerticalScrollIndicator={false}>
 
-             <View style={{marginTop:marginTop,height:0}}
+            <View style={{marginTop:marginTop,height:0}}
                    ref={'_scrollViewContent'}/>
-						 {this._renderAdv()}
+
+						{this._renderAdv()}
+						{this._renderRestaurants()}
         </ScrollView>
 
 
@@ -97,12 +136,12 @@ export default class LoginButton extends Component {
 }
 const styles = StyleSheet.create({
 	container: {
-	 flex: 1,
 	 flexDirection:'row',
 	 flexWrap:'wrap',
 	},
 	scrollView:{
 		flex: 1,
+		marginTop: -30
 	},
 	autoViewStyle:{
 		alignItems:'center',

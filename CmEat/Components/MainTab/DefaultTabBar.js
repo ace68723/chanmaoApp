@@ -127,91 +127,25 @@ class DefaultTabBar extends Component {
   }
 
   render() {
-    const containerWidth = this.props.containerWidth;
-    const numberOfTabs = this.props.tabs.length;
-    const tabUnderlineStyle = {
-      position: 'absolute',
-      width: containerWidth / numberOfTabs,
-      // marginLeft:containerWidth / numberOfTabs/10,
-      height: 4,
-      backgroundColor: '#ff8b00',
-      bottom: 0,
-    };
-
-    const left = this.props.scrollValue.interpolate({
-      inputRange: [0, 1, ], outputRange: [0,  containerWidth / numberOfTabs, ],
-    });
-    const tabTop = this.props.scrollY.interpolate({
-      inputRange: tabBarInputRange,
-      outputRange: tabBarOutputRange,
-      extrapolate: 'clamp',
-    });
-    // ========Tab bar under line============
-    //   <Animated.View style={[tabUnderlineStyle, { left, }, this.props.underlineStyle, ]} />
-    // ======================================
-
-
-
-// this.props.backgroundColor
     return (
-      <Animated.View style={{height:45,
-                             width:deviceWidth,
-                             position:"absolute",
-                             top: tabTop,
-                             justifyContent:'center',
-                             alignItems:'center'
-                           }}>
-
-        <ScrollView style={[styles.tabs,
-                                    {
-                                      backgroundColor: 'white',
-                                      width:deviceWidth,
-                                      height:45,
-                                    },
-                                    this.props.style, ]}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    removeClippedSubviews={false}
-                    ref={(tabScrollView) => { this.tabScrollView = tabScrollView; }}>
-          {this.props.tabs.map((name, page) => {
-            const isTabActive = this.props.activeTab === page;
-            const renderTab = this.props.renderTab || this.renderTab;
-            return renderTab(name, page, isTabActive, this.props.goToPage);
-          })}
-        </ScrollView>
-        <Image  source={require('./Images/feather_cover.png')}
-                style={{ position:"absolute",height:30,width:50,top:0,right:-30,}}/>
-      </Animated.View>
-
+      <View style={{
+          height:1,
+          width:deviceWidth,
+          position:"absolute",
+          justifyContent:'center',
+          alignItems:'center'}}
+      />
     );
   }
 }
 
-
-
-
-
-
-
-
-// DefaultTabBar.propTypes = {
-//   goToPage: React.PropTypes.func,
-//   activeTab: React.PropTypes.number,
-//   tabs: React.PropTypes.array,
-//   backgroundColor: React.PropTypes.string,
-//   activeTextColor: React.PropTypes.string,
-//   inactiveTextColor: React.PropTypes.string,
-//   textStyle: Text.propTypes.style,
-//   tabStyle: View.propTypes.style,
-//   renderTab: React.PropTypes.func,
-//   underlineStyle: View.propTypes.style,
-// };
 
 DefaultTabBar.defaultProps = {
   activeTextColor: 'navy',
   inactiveTextColor: 'black',
   backgroundColor: null,
 };
+
 export default DefaultTabBar;
 
 const styles = StyleSheet.create({
