@@ -234,6 +234,7 @@ export default class MainTab extends Component {
 											showTabBar = {this.props.showTabBar}
 											restaurants = {this.state.areaList}
 											scrollY = {this.state.scrollY}
+											openMenu = {this._goToRestaurantSearch}
 											/>
 			</ScrollableTabView>
 		)

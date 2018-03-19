@@ -40,6 +40,7 @@ export default class LoginButton extends Component {
 		const ref = Object.assign({},{index,scrollView,scrollViewContent})
 		this.props.getScrollViewRefs(ref);
 	}
+
 	_handleOnPress(advertisement){
 		if(advertisement.navitype == 2){
       const {url} = advertisement.naviparam;
@@ -82,48 +83,36 @@ export default class LoginButton extends Component {
       )
     }
   }
+
+	_renderRestaurant({item}) {
+		const restaurant = item;
+			if(restaurant){
+				return (<RestaurantCard
+					restaurant={restaurant}
+					/>);
+			}
+	}
+
 	_renderRestaurants() {
 		if (this.props.restaurants.length == 0){
 			return;
 		}
-		let all = [this.props.restaurants[0]];
-		let restaurantTabs = all.map( (area,key) => {
-			return 	(<RestaurantTab
-									tabLabel={area.name}
-									key={key}
-									index={key}
-									restaurantList={area.restaurantList}
-									navigator={this.props.navigator}
-									getScrollViewRefs={this.props.getScrollViewRefs}
-									refsCurrentScrollView= {this.props.refsCurrentScrollView}
-									hideTabBar = {this.props.hideTabBar}
-									showTabBar = {this.props.showTabBar}
-									scrollEventBind = {this.props.scrollEventBind}
-									scrollY = {this.props.scrollY._value}/>)
-		 });
-		return restaurantTabs;
-
-
-
+		let all = this.props.restaurants[0].restaurantList;
+		console.log('gg', all);
 		let keyExtractor = (item, index) => item.area + item.rid;
 		return (
 			<FlatList
-					scrollEventThrottle={1}
+					style={{marginTop: 12,}}
+					key='key'
+					ref={(comp) => this._scrollVew = comp}
 					data={all}
 					renderItem={this._renderRestaurant}
 					keyExtractor={keyExtractor}
-					removeClippedSubviews={true}
-					initialNumToRender={1}
-					onEndReachedThreshold={0.5}
+					extraData={all}
 			/>
-		)
+		);
 	}
-	_renderRestaurant({item}) {
-		const restaurant = item;
-			if(restaurant){
-				return (<RestaurantCard restaurant={restaurant}/>)
-			}
-	}
+
   render(){
     return(
         <ScrollView style={styles.scrollView}
@@ -132,10 +121,9 @@ export default class LoginButton extends Component {
 				            onScroll={this.props.scrollEventBind()}
 										showsVerticalScrollIndicator={false}>
 
-             <View style={{marginTop:marginTop,height:0}}
-                   ref={'_scrollViewContent'}/>
-						 {this._renderAdv()}
-						 {this._renderRestaurants()}
+
+						{this._renderAdv()}
+						{this._renderRestaurants()}
         </ScrollView>
 
 
@@ -144,7 +132,6 @@ export default class LoginButton extends Component {
 }
 const styles = StyleSheet.create({
 	container: {
-	 flex: 1,
 	 flexDirection:'row',
 	 flexWrap:'wrap',
 	},
