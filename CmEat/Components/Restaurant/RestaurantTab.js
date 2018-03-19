@@ -39,6 +39,7 @@ export default class RestaurantTab extends Component {
       restaurantList: props.restaurantList.slice(0, 3)
     }
 		this._renderRestaurant = this._renderRestaurant.bind(this);
+
 	}
 	componentDidMount(){
 		const index = this.props.index;
@@ -55,7 +56,6 @@ export default class RestaurantTab extends Component {
 				return <RestaurantCard restaurant={restaurant} navigator={this.props.navigator}/>
 			}
   }
-
   _keyExtractor = (item, index) => item.area + item.rid;
   render() {
     return(

@@ -18,7 +18,6 @@
 | Tables      | 类型及其范围 | 说明        | 默认值  |
 | ----------- | ------ | --------- | ---- |
 | Authortoken | string | token验证信息 |      |
-| uuid | string |  |      |
 
 
 请求参数:
@@ -26,18 +25,36 @@
 | Tables  | 类型及其范围 | 说明     | 默认值  |
 | ------- | ------ | ------ | ---- |
 | oid     | number | 订单ID   |      |
-| complete_time | int | 订单送达时间(unix timestamp) |  |  
+| complete_time | int | 订单送达时间(unix timestamp) **optional** |  |  
 | driver_score | int | 司机评分   |           |
 | driver_comment | string | 司机评价   |           |
 | restaurant_score | int | 餐馆评分   |           |
 | restaurant_comment | string | 餐馆评价   |           |
-| dish_ratings  | array | 订单菜品score |      |
+| dish_ratings  | array | 订单菜品score **长度可以为0（评价为默认的可以不加到这个array里）** |      |
 
 | dish_ratings   | 类型及其范围 | 说明     | 默认值        |
 | ---------- | ------ | ------ | ---------- |
 | otid    | int | 菜品流水ID |    |
-| rating  | int | 菜品评分 | 0:默认; 1:喜欢; -1:不喜欢   |
+| rating  | int | 菜品评分  | 0:默认; 1:喜欢; -1:不喜欢   |
 
+
+Data Sample (测试服务器)
+```
+{
+	"oid":300015,
+	"complete_time":123456,
+	"driver_score":4,
+	"driver_comment":"",
+	"restaurant_score":3,
+	"restaurant_comment":"凉了",
+	"dish_ratings":[
+		{
+			"otid":259376,
+			"rating":-1
+		}
+	]
+}
+```
 
 返回:
 
@@ -54,9 +71,3 @@
 ```
 
 
-Data Sample
-```
-{
-	
-}
-```

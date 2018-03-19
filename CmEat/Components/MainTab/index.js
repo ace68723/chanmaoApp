@@ -30,6 +30,7 @@ import HomeAction from '../../Actions/HomeAction';
 import AddressAction from '../../Actions/AddressAction';
 import HomeStore from '../../Stores/HomeStore';
 
+import Util from '../../Modules/Util'
 
 const {width,height} = Dimensions.get('window');
 // const HEADER_MAX_HEIGHT = width*0.45+6;
@@ -54,6 +55,7 @@ export default class MainTab extends Component {
       scrollY: new Animated.Value(0),
 			restaurantCoverOpacity: new Animated.Value(0), // init restaurant tab view opacity 0
       renderSearch:false,
+			showAddressPrompt: false,
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
@@ -64,6 +66,8 @@ export default class MainTab extends Component {
     this._goToRestaurantSearch = this._goToRestaurantSearch.bind(this);
 		this._onChangeTab = this._onChangeTab.bind(this);
 		this.showBanner = true;
+
+		this._toggleAddressPrompt = this._toggleAddressPrompt.bind(this);
   }
 	async componentDidMount(){
     await AddressAction.getAddress();
@@ -201,9 +205,17 @@ export default class MainTab extends Component {
       navigatorStyle: {navBarHidden: true},
       passProps: {
         restaurant:this.state.areaList[0].restaurantList,
+        areaList: this.state.areaList
       },
     });
   }
+
+	_toggleAddressPrompt(){
+		console.log('ojbk');
+		this.setState({showAddressPrompt:!this.state.showAddressPrompt});
+		console.log(this.state.showAddressPrompt);
+	}
+
 	renderScrollableTabView(){
 		return(
 			<ScrollableTabView  style={{flex:1,}}
@@ -243,29 +255,59 @@ export default class MainTab extends Component {
         <CmEatHomeHeader scrollY = {this.state.scrollY}
                          handleBackToHome={this._handleBackToHome}
                          renderSearch={this.state.renderSearch}
+												 toggleAddressPrompt={this._toggleAddressPrompt}
                          goToRestaurantSearch={this._goToRestaurantSearch}/>
          <HeaderWithBanner
               bannerList={this.state.bannerList}
               scrollY = {this.state.scrollY}
               navigator={this.props.navigator}/>
+
+
+						{this.state.showAddressPrompt &&
+						<TouchableWithoutFeedback onPress={this._toggleAddressPrompt} >
+							<View style={{
+												position: 'absolute',
+												height: 36,
+												left: (width / 2) - (width * 0.9) / 2,
+												width: (width * 0.9),
+												paddingLeft: 16,
+												justifyContent:'center',
+												backgroundColor: 'green',
+												marginTop: Util.isiPhoneX() === true ? 94 : 62
+											}}>
+								<View style={styles.TriangleShapeCSS} />
+								<Text style={{color:"white",
+													fontSize:12,
+													top: -4,
+													fontWeight:'bold',
+													textAlignVertical: "center",
+													backgroundColor: 'green',}}
+													numberOfLines={1}>
+													这是正确的地址吗？距离您的位置似乎有点远。
+								</Text>
+							</View>
+						</TouchableWithoutFeedback>
+					}
+
+
      </View>
     )
   }
 }
 
-
-
-
-
-
-
-// <HomeTab  tabLabel='首页2'
-// 					index={1}
-// 					scrollEventBind={this._scrollEventBind}
-// 					getScrollViewRefs={this._getScrollViewRefs}
-// 					navigator={this.props.navigator}
-// 					refsCurrentScrollView= {this.refsCurrentScrollView}
-// 					advertisement={this.state.advertisement}/>
-
 const styles = StyleSheet.create({
+	TriangleShapeCSS: {
+	  width: 0,
+	  height: 0,
+		left: 70,
+		top: -15,
+	  borderLeftWidth: 10,
+	  borderRightWidth: 10,
+	  borderBottomWidth: 10,
+	  borderStyle: 'solid',
+	  backgroundColor: 'transparent',
+	  borderLeftColor: 'transparent',
+	  borderRightColor: 'transparent',
+	  borderBottomColor: 'green'
+	}
 });

@@ -35,12 +35,17 @@
 
 #### cm_order_payment
 
-| oid    | txn_id                             | charge_id | channel | payment_channel                                             | amount   | paid_at  | payment_status                                         |
-| ------ | ---------------------------------- | --------- | ------- | ----------------------------------------------------------- | -------- | -------- | ------------------------------------------------------ |
-| 订单号 | Stripe <br />Alipay<br />WeChatPay |    Stripe需要的id       |  1 iOS<br />2 Android       | 0 Cash<br />1 Credit Card<br />10 Alipay<br />20 WeChat Pay | 支付金额 | 支付时间 | 0 New<br />10 Authorized<br />20 Paid<br />30 Refunded |
+| oid    | txn_id                             | charge_id | amount   | updated_at  | payment_status                                         |
+| ------ | ---------------------------------- | --------- | ----------------------------------------------------------- |  -------- | ------------------------------------------------------ |
+| 订单号 | Stripe <br />Alipay<br />WeChatPay |    Stripe需要的id       | 支付金额 | 支付时间 | 0 New<br />10 Authorized<br />20 Paid<br />30 Refunded<br />40 Cancelled |
 
 #### cm_order_refund 
 
 | id   | txn_id | oid  | channel | requested_at | requested_by | approved_at | approved_by | notes |
 | ---- | ------ | ---- | ------- | ------------ | ------------ | ----------- | ----------- | ----- |
 |      |        |      |         |              |              |             |             |       |
+
+#### cm_order_base 新增字段
+| payment_channel  | charge_total  |
+| ---- |  ---- |
+|      | 原有的total不做改变，新的charge_total 是包含小费等所有信息的最终总额    |
