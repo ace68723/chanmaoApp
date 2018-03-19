@@ -39,7 +39,8 @@ export default class RestaurantTab extends Component {
       restaurantList: props.restaurantList.slice(0, 3)
     }
 		this._renderRestaurant = this._renderRestaurant.bind(this);
-		this._renderHeader = this._renderHeader.bind(this);
+    this._renderHeader = this._renderHeader.bind(this);
+    this._keyExtractor = this._keyExtractor.bind(this);
 	}
 	componentDidMount(){
 		const index = this.props.index;
@@ -61,7 +62,7 @@ export default class RestaurantTab extends Component {
 		return	<View style={{marginTop:marginTop,height:0}}
 						 ref={(comp) => this._scrollViewContent = comp}/>
 	}
-   _keyExtractor = (item, index) => item.area + item.rid;
+  _keyExtractor = (item, index) => index;
   render() {
     return(
       <FlatList

@@ -15,6 +15,7 @@ import Separator from "./separator";
 import { GOOGLE_API_KEY } from '../../Config/API';
 import SboxAddressStore from '../../Stores/SboxAddressStore';
 import SboxAddressAction from '../../Actions/SboxAddressAction';
+import Util from '../../Modules/Util';
 
 export default class MyComponent extends Component {
     constructor(props) {
@@ -73,6 +74,11 @@ export default class MyComponent extends Component {
   }
 
   handleAddressSelected(addressObject, selected) {
+    if (Util.getWaitingStatus() === true){
+      return;
+    }
+    Util.toggleWaitingStatus();
+
     const url = "https://maps.googleapis.com/maps/api/place/details/" +
         "json?placeid=" + addressObject.place_id +
         "&key=" + GOOGLE_API_KEY

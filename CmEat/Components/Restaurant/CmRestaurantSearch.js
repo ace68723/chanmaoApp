@@ -21,35 +21,46 @@ import {
 import {
     filter,
 } from 'lodash';
-
+import HomeStore from '../../Stores/HomeStore';
+import HomeAction from '../../Actions/HomeAction';
 import RestaurantCard from './RestaurantCard';
 const {width,height} = Dimensions.get('window');
-const searchViewMarginHorizontal = 30;
+const searchViewMarginHorizontal = 10;
 const iconSearchInputSize = 35;
 
 export default class CmRestaurantSearch extends Component {
 
     constructor(props){
         super(props);
-            this.state = {
+        const state = {
 				searchText:'',
-				restaurant:props.restaurant,
 				filteredRestaurant:[],
 				restaurantList: [],
 				length:5,
-            }
-		this.setState = this.setState.bind(this);
+				isRendering:'area',
+			}
+		this.state = Object.assign({},state,HomeStore.getHomeState());
 		this._setSearchText = this._setSearchText.bind(this);
+		this._onChange = this._onChange.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
 		this._keyExtractor = this._keyExtractor.bind(this);
     }
 	componentDidMount(){
+		HomeAction.getHomeData();
+		HomeStore.addChangeListener(this._onChange);
 	}
 	componentWillUnmount() {
-    }
-    _goBack(){
-        this.props.navigator.pop({animated: false,});
+		HomeStore.removeChangeListener(this._onChange);
 	}
+	_onChange(){
+		const newState = Object.assign({},HomeStore.getHomeState());
+		let restaurants = newState.areaList[0].restaurantList;
+		this.setState(Object.assign(newState,{restaurant:restaurants}));
+
+	}
+    // _goBack(){
+    //     this.props.navigator.pop({animated: false,});
+	// }
 	_filterNotes(searchText, restaurants) {
 
 		let text = searchText.toLowerCase();
@@ -63,10 +74,17 @@ export default class CmRestaurantSearch extends Component {
 	}
     _setSearchText(text){
 		if(text){
-			let filteredData = this._filterNotes(text, this.state.restaurant);
+			let filteredData;
+			if(text != "All"){
+				filteredData = this._filterNotes(text, this.state.restaurant);
+			}else{
+				filteredData = this.state.restaurant;
+			}
+			
 			this.setState({
 				 searchText: text,
 				 filteredRestaurant:filteredData,
+				 isRendering:'restaurant',
 				 restaurantList: filteredData.slice(0, 5)
 			 });
 		}else{
@@ -79,10 +97,17 @@ export default class CmRestaurantSearch extends Component {
     }
     _cleanInput(){
 		this.setState({
-			searchText:''
+			searchText:'',
+			restaurantList:[],
+			isRendering:'area'
 		},()=>this.refs.searchInput.clear());
 	}
 	_renderSearchInput(){
+		// <TouchableOpacity
+		// 				style={{flex:0.1}}
+		// 				onPress={()=>this._goBack()}>
+		// 			<Text style={{fontSize:40}}>×</Text>
+		// 		</TouchableOpacity>
 		return(
 			<View style={styles.header}>
 				<View style={styles.searchView}>
@@ -104,6 +129,7 @@ export default class CmRestaurantSearch extends Component {
 							returnKeyType={'next'}
 							onChangeText={this._setSearchText}
 							underlineColorAndroid={"rgba(0,0,0,0)"}
+							value={this.state.searchText}
 						/>
 						<TouchableOpacity onPress={()=>this._cleanInput()}>
 							<Image
@@ -115,11 +141,7 @@ export default class CmRestaurantSearch extends Component {
 							/>
 						</TouchableOpacity>
 				</View>
-				<TouchableOpacity
-						style={{flex:0.1}}
-						onPress={()=>this._goBack()}>
-					<Text style={{fontSize:40}}>×</Text>
-				</TouchableOpacity>
+				
 			</View>
 		)
 	}
@@ -130,41 +152,109 @@ export default class CmRestaurantSearch extends Component {
 										navigator={this.props.navigator}/>
 				}
 	  }
-	_keyExtractor = (item, index) => item.area + item.rid;
+	_keyExtractor = (item, index) => index;
 	_renderRestaurants() {
+
+			return(
+				<FlatList
+				style={styles.scrollView}
+				key={this.props.index}
+				data={this.state.restaurantList}
+				keyboardDismissMode={"on-drag"}
+				keyboardShouldPersistTaps={"always"}
+				renderItem={(res) => this._renderRestaurant(res)}
+				keyExtractor={this._keyExtractor}
+				removeClippedSubviews={true}
+				initialNumToRender={1}
+				onEndReachedThreshold={0.5}
+				extraData={this.state.restaurantList}
+				onEndReached = {({distanceFromEnd})=>{
+
+					this.setState({
+					length: this.state.length + 5,
+					restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
+					})
+				}}
+
+			/>
+			)
+		
+			
+		
+	  }
+	_renderArea({item}){
+		let area = item;
+
+		if(area){
+			return(
+				<TouchableOpacity onPress={()=>{
+					this._setSearchText(area.name);
+					this.refs.searchInput.value = area.name;
+					}} 
+					style={{padding:10}} >
+					<View style={{backgroundColor:'green', width:(width/2)-40, height:(width/2)-40}}></View>
+					<View style={{
+						flex:1,
+						margin:10,
+						position:'absolute',
+						width:(width/2)-40, height:(width/2)-40,
+						backgroundColor:'rgba(0,0,0,0.3)',
+						alignItems:'center',
+						justifyContent:'center'
+						}}>
+						<Text style={{
+							color:"#ffffff",fontSize:16,fontFamily:'FZZongYi-M05S',
+						}}>{area.name}</Text>
+					</View>
+				</TouchableOpacity>
+			)
+		}	
+		
+	}
+	_areaKeyExtractor = (area, index) => index + area.area +area.name;
+	_renderAreas(){
 		return(
 			<FlatList
-  			style={styles.scrollView}
-  			key={this.props.index}
-  			data={this.state.restaurantList}
-        keyboardDismissMode={"on-drag"}
-        keyboardShouldPersistTaps={"always"}
-  			renderItem={(res) => this._renderRestaurant(res)}
-  			keyExtractor={this._keyExtractor}
-  			removeClippedSubviews={true}
-  			initialNumToRender={1}
-  			onEndReachedThreshold={0.5}
-  			extraData={this.state.restaurantList}
-  			onEndReached = {({distanceFromEnd})=>{
-
-  				this.setState({
-  				  length: this.state.length + 5,
-  				  restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
-  				},()=>console.log(distanceFromEnd))
-			  }}
-
-		/>
+				style={{alignSelf:'center'}}
+				numColumns={2}
+				key={'area'}
+				data={this.state.areaList}
+				keyboardDismissMode={"on-drag"}
+				keyboardShouldPersistTaps={"always"}
+				renderItem={(area)=>this._renderArea(area)}
+				keyExtractor={this._areaKeyExtractor}
+				removeClippedSubviews={true}
+				initialNumToRender={1}
+				extraData={this.state.areaList}
+			/>
 		)
-	  }
+	}
+	_renderResult(){
+		{this._renderAreas()}
+		if(this.state.restaurantList.length>0){
+			return(
+				<View style={{flex:1}}>
+					{this._renderRestaurants()}
+				</View>
+			)
+		}else{
+			return(
+				<View style={{flex:1}}>
+					{this._renderAreas()}
+				</View>
+			)
+		}
+	}
 	render(){
+
 		return(
 			<KeyboardAvoidingView
 						style={{flex:1,backgroundColor:"#ffffff"}}
 						behavior={Platform.OS === 'ios'?"padding":null}
 						>
 					{this._renderSearchInput()}
-
-					{this._renderRestaurants()}
+					{this._renderResult()}
+					
 			</KeyboardAvoidingView>
 
 		)
@@ -187,6 +277,7 @@ const styles = StyleSheet.create({
 		flexDirection:'row',
 		alignItems:'center',
 		marginTop:Platform.OS === 'ios'? 20 : 0,
+	
 	},
 	searchView:{
 		borderRadius:30,
@@ -194,10 +285,11 @@ const styles = StyleSheet.create({
 		borderColor:'#e2e2e2',
 		marginTop:10,
 		marginHorizontal:10,
-		flex:0.9,
+		flex:1,
 		backgroundColor:'#f4f4f4',
 		flexDirection:'row',
 		alignItems:'center',
+		alignSelf:'center',
 		width: width-searchViewMarginHorizontal*2,
 	},
 	searchInput:{

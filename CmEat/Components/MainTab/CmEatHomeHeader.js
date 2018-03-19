@@ -30,22 +30,7 @@ if(height == 812){
 }
 
 export default class SboxHomeHeader extends Component {
-  _renderSearchButton(){
-    if(this.props.renderSearch){
-      return(
-        <TouchableWithoutFeedback onPress={()=>this.props.goToRestaurantSearch()} >
-          <Image source={require('./Images/button_search.png')}
-                style={{
-                  position:'absolute',
-                  right:10,
-                  bottom:10,
-                  height:40,
-                  width:44,
-                  }} />
-        </TouchableWithoutFeedback>
-      )
-    }
-  }
+
   render() {
     const headerTop = this.props.scrollY.interpolate({
       inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
@@ -88,11 +73,12 @@ export default class SboxHomeHeader extends Component {
           </View>
         </TouchableWithoutFeedback>
         <View style={{flex:0.66,justifyContent:'center',alignItems:'center'}}>
-          <AddressForHomeHeader handleBackToHome={this.props.handleBackToHome}/>
+          <AddressForHomeHeader
+            handleBackToHome={this.props.handleBackToHome}
+            toggleAddressPrompt={this.props.toggleAddressPrompt}
+            />
         </View>
-        <View style={{flex:0.17, alignItems:'center', justifyContent:'center', top:10,}}>
-            {this._renderSearchButton()}
-        </View>
+        
       </View>
     );
   }

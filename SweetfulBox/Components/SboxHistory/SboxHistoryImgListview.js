@@ -32,9 +32,10 @@ class imgListView extends Component {
         horizontal={true}
         enableEmptySections
         dataSource={dataSource}
-        renderRow={({index, sku_id, focus, sku_image}) => {
+        renderRow={({index, sku_id, focus, sku_image, sku_status}) => {
           return (
             <SboxHistoryImg
+              isAvailable = {sku_status === 0}
               onSelected={() => this.props.onSelected(index, sku_id)}
               key = {sku_id}
               {...{itemIndex: index, sku_id, focus, image: sku_image}}

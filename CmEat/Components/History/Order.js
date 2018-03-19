@@ -81,7 +81,7 @@ export default class pastOrderEN extends Component {
           }
         };
       return(
-        <View key={index} style={{flexDirection:'column',alignItems:'center',paddingTop:12,paddingBottom:12}}>
+        <View key={index} style={{flexDirection:'column',alignItems:'center',paddingTop:10,paddingBottom:10}}>
             <View style={{flexDirection:'row'}}>
                 <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'FZZhunYuan-M02S',}}>{item.qty}</Text></View>
                 <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}

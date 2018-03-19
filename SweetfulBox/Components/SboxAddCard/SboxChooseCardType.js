@@ -89,7 +89,6 @@ export default class SboxChooseCardType extends Component {
         <SboxHeader title={"支付方式"}
                 goBack={this._goBack}
                 leftButtonText={'x'}/>
-        <View style={styles.separator}></View>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>
             <TouchableOpacity onPress={this._goToCredit}
                 activeOpacity={0.4}
@@ -130,7 +129,6 @@ export default class SboxChooseCardType extends Component {
                               marginRight:20,}}
                        source={require('./Img/right.png')}/>
             </TouchableOpacity>
-            <View style={styles.separator}/>
         </ScrollView>
       </View>
     );
@@ -160,8 +158,7 @@ const styles = StyleSheet.create({
     paddingTop: height * (54 / 2208),
   },
   separator: {
-    height: 1,
-		borderWidth: 1,
+		borderTopWidth: 1,
 		borderColor: "#D5D5D5"
   }
 });

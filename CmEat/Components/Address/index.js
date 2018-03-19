@@ -36,7 +36,7 @@ import AddressAction from '../../Actions/AddressAction';
 import HomeAction from '../../Actions/HomeAction';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import AddressStore from '../../Stores/AddressStore';
-
+import Util from '../../Modules/Util';
 
 export default class CmEatAddress extends Component {
 
@@ -75,7 +75,8 @@ export default class CmEatAddress extends Component {
 		    fetch(url,options)
 		      .then((res) => res.json())
 		      .then((res)=>{
-						AddressAction.updateCurrentLocation(res.results[0].formatted_address);
+						let _addr = res.results[0].formatted_address.split(',');
+						AddressAction.updateCurrentLocation(_addr[0] + ', ' + _addr[1]);
 		      })
 		      .catch((error) => {throw error});
 			},
@@ -126,6 +127,11 @@ export default class CmEatAddress extends Component {
 
   }
   _goToAddAddressInfo() {
+		if (Util.getWaitingStatus() === true){
+		  return;
+		}
+		Util.toggleWaitingStatus();
+
     this.props.navigator.push({
       screen: 'CmEatAddInfo',
       animated: true,
@@ -180,7 +186,8 @@ export default class CmEatAddress extends Component {
 		    fetch(url,options)
 		      .then((res) => res.json())
 		      .then((res)=>{
-						this._handleSearchChange(res.results[0].formatted_address);
+						let _addr = res.results[0].formatted_address.split(',');
+						this._handleSearchChange(_addr[0] + ', ' + _addr[1]);
 		      })
 		      .catch((error) => {throw error});
 			},
@@ -426,6 +433,10 @@ export default class CmEatAddress extends Component {
       <ScrollView style={{padding:10,}}
                   keyboardShouldPersistTaps={'always'}
 									keyboardDismissMode={'on-drag'}>
+				<Text style={{marginLeft: 10,
+											marginBottom: 5,
+											fontSize: 16,
+											color: '#A5A5A5'}}>请选择: </Text>
         {predictionList}
       </ScrollView>
     )
@@ -492,7 +503,7 @@ export default class CmEatAddress extends Component {
 		}
 	}
   _renderIosConfirmBtn(){
-    if(Platform.OS!='ios') return;
+    if(Platform.OS!='ios' || this.state.searchAddress) return;
     return(
       <TouchableOpacity style={styles.button}
                         activeOpacity={0.4}
