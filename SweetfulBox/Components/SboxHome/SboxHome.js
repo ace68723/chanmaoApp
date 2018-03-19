@@ -166,7 +166,6 @@ export default class SboxHome extends Component {
     }
     return(
       <ScrollableTabView style={{}}
-
                           tabBarPosition={'bottom'}
                           tabBarBackgroundColor={'#fff'}
                           tabBarActiveTextColor={'#ff7685'}
@@ -198,12 +197,13 @@ export default class SboxHome extends Component {
     const theme = this.state.themeList[0];
     return (
       <SboxProductTab
-                  tmid={theme.tmid}
-                  prod_list={theme.prod_list}
-                  section_list={theme.section_list}
-                  scrollEventBind={this._scrollEventBind}
-                  getScrollViewRefs={this._getScrollViewRefs}
-                  navigator={this.props.navigator}/>
+        style={{ marginTop: -80}}
+        tmid={theme.tmid}
+        prod_list={theme.prod_list}
+        section_list={theme.section_list}
+        scrollEventBind={this._scrollEventBind}
+        getScrollViewRefs={this._getScrollViewRefs}
+        navigator={this.props.navigator}/>
     )
   }
   _renderHeaderWithBanner() {
