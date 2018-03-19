@@ -80,7 +80,7 @@ export default class CmRestaurantSearch extends Component {
 			}else{
 				filteredData = this.state.restaurant;
 			}
-			
+
 			this.setState({
 				 searchText: text,
 				 filteredRestaurant:filteredData,
@@ -125,7 +125,7 @@ export default class CmRestaurantSearch extends Component {
 							selectionColor={'#ea7b21'}
 							keyboardType = {'default'}
 							autoCorrect= { false}
-							autoFocus={true}
+							autoFocus={false}
 							returnKeyType={'next'}
 							onChangeText={this._setSearchText}
 							underlineColorAndroid={"rgba(0,0,0,0)"}
@@ -141,7 +141,7 @@ export default class CmRestaurantSearch extends Component {
 							/>
 						</TouchableOpacity>
 				</View>
-				
+
 			</View>
 		)
 	}
@@ -178,9 +178,9 @@ export default class CmRestaurantSearch extends Component {
 
 			/>
 			)
-		
-			
-		
+
+
+
 	  }
 	_renderArea({item}){
 		let area = item;
@@ -190,7 +190,7 @@ export default class CmRestaurantSearch extends Component {
 				<TouchableOpacity onPress={()=>{
 					this._setSearchText(area.name);
 					this.refs.searchInput.value = area.name;
-					}} 
+					}}
 					style={{padding:10}} >
 					<View style={{backgroundColor:'green', width:(width/2)-40, height:(width/2)-40}}></View>
 					<View style={{
@@ -208,8 +208,8 @@ export default class CmRestaurantSearch extends Component {
 					</View>
 				</TouchableOpacity>
 			)
-		}	
-		
+		}
+
 	}
 	_areaKeyExtractor = (area, index) => index + area.area +area.name;
 	_renderAreas(){
@@ -254,7 +254,7 @@ export default class CmRestaurantSearch extends Component {
 						>
 					{this._renderSearchInput()}
 					{this._renderResult()}
-					
+
 			</KeyboardAvoidingView>
 
 		)
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
 		flexDirection:'row',
 		alignItems:'center',
 		marginTop:Platform.OS === 'ios'? 20 : 0,
-	
+
 	},
 	searchView:{
 		borderRadius:30,

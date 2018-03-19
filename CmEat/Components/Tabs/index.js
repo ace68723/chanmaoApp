@@ -98,18 +98,20 @@ export default class Tabs extends Component {
                          tabBarPosition={'bottom'}
 												 keyboardShouldPersistTaps={'always'}>
 
-							 <MainTab tabLabel='主页'
+							<MainTab
+								tabLabel='主页'
+								hideTabBar = {this._hideTabBar}
+								showTabBar = {this._showTabBar}
+                navigator={this.props.navigator}/>
 
-												hideTabBar = {this._hideTabBar}
-												showTabBar = {this._showTabBar}
-                        navigator={this.props.navigator}
-                        />
-											<SearchTab tabLabel = '搜索'
-												navigator={this.props.navigator}
-											/>
-											<SettingTab tabLabel='我的'
-                            navigator={this.props.navigator}
-                            handleBackToHome={this.props.handleBackToHome}/>
+							<SearchTab
+								tabLabel = '搜索'
+								navigator={this.props.navigator}/>
+							
+							<SettingTab
+								tabLabel='我的'
+                navigator={this.props.navigator}
+                handleBackToHome={this.props.handleBackToHome}/>
 
 		 </ScrollableTabView>
 
