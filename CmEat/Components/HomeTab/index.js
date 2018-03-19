@@ -89,6 +89,8 @@ export default class LoginButton extends Component {
 			if(restaurant){
 				return (<RestaurantCard
 					restaurant={restaurant}
+					openMenu={this.props.openMenu}
+					navigator={this.props.navigator}
 					/>);
 			}
 	}
@@ -98,11 +100,10 @@ export default class LoginButton extends Component {
 			return;
 		}
 		let all = this.props.restaurants[0].restaurantList;
-		console.log('gg', all);
 		let keyExtractor = (item, index) => item.area + item.rid;
 		return (
 			<FlatList
-					style={{marginTop: 12,}}
+					style={{marginTop: 8,}}
 					key='key'
 					ref={(comp) => this._scrollVew = comp}
 					data={all}
@@ -139,6 +140,7 @@ const styles = StyleSheet.create({
 	},
 	scrollView:{
 		flex: 1,
+		marginTop: -30
 	},
 	autoViewStyle:{
 		alignItems:'center',

@@ -215,9 +215,7 @@ export default class MainTab extends Component {
 													initialPage={0}
 													prerenderingSiblingsNumber={1}
 													renderTabBar={() =>
-																			<DefaultTabBar
-																			scrollY = {this.state.scrollY}
-																			HEADER_SCROLL_DISTANCE = {HEADER_SCROLL_DISTANCE}/>}
+																			<View></View>}
 													onScroll={(argument)=>{
 														this._setPosition()
 													}}
