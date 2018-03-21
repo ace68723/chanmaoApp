@@ -41,6 +41,7 @@
 | order_review_status  | int | 订单是否被评价 | 0为未评价 1为已评价  |
 | order_status  | int | 订单状态 |  0为等待商家确认 10为商家已确认,准备中 20为商家已确认,准备中 30为送餐员已开始送餐 40为已送到,满意吗? 55为新用户订单确认中 60为客服稍后联系您改运费 5为槽糕,有的菜没了 90为订单已取消  |
 | order_total  | string | 订单总价 |    |
+| order_complete_time  | string | 订单送达时间 |    |
 | rr_name  | string | 餐馆名字 |    |
 | rr_rid  | string | 餐馆ID |    |
 | rr_url  | string | 餐馆图片 |    |
@@ -60,19 +61,68 @@
 | int_no  | string | 订单ID |    |
 | price  | string | 菜品价格 |    |
 | soldout  | int | 缺货状态 |  0为有货 1为缺货  |
-| tps  | array | 2级选项 |    |
+| tps  | array | topping列表 |    |
+
+
+| tps   | 类型及其范围 | 说明     | 默认值        |
+| ---------- | ------ | ------ | ---------- |
+| tp_id    | int | topping ID |    |
+| tp_name  | string | topping名字 |    |
+| tpg_name  | string | topping类别 |    |
+| amount  | int | topping数量 |    |
+| price  | int | topping价格 |    |
 
 
 ```
 {
     ev_error	
     ev_message	
+    ea_history_list
 }
 ```
 
 Data Sample
 ```
 {
-	
+  ev_error: 0,
+  ev_message: "",	
+  ea_history_list: {
+    order_comment: "",
+    order_created: "March 20, 2018, 1: 4",
+    order_oid: "494120",
+    order_payment_channel: 1,
+    order_payment_status: 10,
+    order_review_status: 0,
+    order_status: 55,
+    order_total: "85.69",
+    order_complete_time: "Wed Mar 21 2018 14:22:04 GMT-0400 (EDT)",
+    rr_name: "测试商家(请勿下单)",
+    rr_rid: "5",
+    rr_url: "https://www.chanmao.ca/img/mob_banner/005_20170118.png",
+    user_address: "3219 Dundas St W, Toronto, ON M6P 2A2加拿大",
+    user_name: "3213",
+    user_tel: "3213123123",
+    items: [
+      {
+        amount: 1,
+        ds_desc: "",
+        ds_id: 70091,
+        ds_name: "避风塘双龙虾",
+        int_no: "A01",
+        otid: 2276061,
+        price: "24.99",
+        soldout: 1,
+        tps: [
+          {
+	    amount: 1,
+	    price: "0.00",
+	    tp_id: 41,
+	    tp_name: "中杯",
+	    tpg_name: "尺寸"
+	  }
+        ]
+      }
+    ],
+  }
 }
 ```
