@@ -135,9 +135,11 @@ export default class CmRestaurantSearch extends Component {
 
 					{this.state.searchText != '' &&
 						<TouchableOpacity
-							style={{ marginLeft: 35}}
+							style={{ marginLeft: 25, padding: 10}}
 							onPress={()=>this._cleanInput()}>
-							<Text style={{fontSize: 15, backgroundColor: 'white'}}>取消</Text>
+							<Text style={{
+									fontSize: 16,
+									backgroundColor: 'white'}}>取消</Text>
 						</TouchableOpacity>
 					}
 
@@ -265,7 +267,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		color: '#ea7b21',
 		height:40,
-		width:width - 40,
+		width:width - 45,
 		marginTop:5,
 	},
 	input_full:{
@@ -277,7 +279,7 @@ const styles = StyleSheet.create({
 		marginTop:5,
 	},
 	header:{
-		width:width - 40,
+		width:width - 45,
 		height:60,
 		flexDirection:'row',
 		alignItems:'center',
@@ -301,7 +303,7 @@ const styles = StyleSheet.create({
 		flexDirection:'row',
 		alignItems:'center',
 		alignSelf:'center',
-		width: width-searchViewMarginHorizontal*2 - 40,
+		width: width-searchViewMarginHorizontal*2 - 45,
 	},
 	searchView_full:{
 		borderRadius:30,
@@ -320,7 +322,7 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		height:40,
 		marginHorizontal:5,
-		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10 - 40,
+		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10 - 45,
 
 	},
 	searchInput_full:{
