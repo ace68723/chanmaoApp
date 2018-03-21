@@ -49,9 +49,9 @@ class HistoryTab extends Component {
         this._reorder = this._reorder.bind(this);
 				this._handleAppStateChange = this._handleAppStateChange.bind(this);
 				this._getCurrentPosition = this._getCurrentPosition.bind(this);
-				this._renderContent = this._renderContent.bind(this);
+				// this._renderContent = this._renderContent.bind(this);
 				this._renderFilter = this._renderFilter.bind(this);
-				this._goToRestaurant = this._goToRestaurant.bind(this);
+				// this._goToRestaurant = this._goToRestaurant.bind(this);
 				this._handleOnChangeTab = this._handleOnChangeTab.bind(this);
     }
 
@@ -114,17 +114,17 @@ class HistoryTab extends Component {
         HistoryAction.getOrderData();
       // }
     }
-		_goToRestaurant(state) {
-	    this.props.navigator.showModal({
-	      screen: 'CmEatMenu',
-	      animated: false,
-	      navigatorStyle: {navBarHidden: true},
-	      passProps: {
-	        py:272,
-	        restaurant:state.orderInfo,
-	      },
-	    });
-	  }
+		// _goToRestaurant(state) {
+	  //   this.props.navigator.showModal({
+	  //     screen: 'CmEatMenu',
+	  //     animated: false,
+	  //     navigatorStyle: {navBarHidden: true},
+	  //     passProps: {
+	  //       py:272,
+	  //       restaurant:state.orderInfo,
+	  //     },
+	  //   });
+	  // }
     _onRefresh(){
       this.setState({
         isRefreshing: true,
@@ -162,9 +162,9 @@ class HistoryTab extends Component {
 		      animated: false,
 		      navigatorStyle: {navBarHidden: true},
 		      passProps: {
-		        py:272,
 						goBack: this._goBackToHistory,
-						orderInfo: orderInfo
+						orderInfo: orderInfo,
+						onRefresh: this._onRefresh,
 		      },
 		    });
     }
@@ -233,58 +233,6 @@ class HistoryTab extends Component {
 			//  </Text>
 		 // </TouchableOpacity>
 		}
-		_renderContent(){
-			if (this.state.orderData.length > 0) {
-				let orderList = this.state.orderData.map( order => {
-					if (this.state.renderingPage === 0) {
-						return (
-							<Order key={ order.order_oid }
-										 order={order}
-										 orderOnClick = {this._HistoryOrderDetailVisible}
-										 goToRestaurant = {this._goToRestaurant}
-										 scrollRef={this._scrollView}
-										 getCurrentPosition={this._getCurrentPosition}
-										 page={0}
-										 reorder={this._reorder}/>
-						)
-					}
-					else {
-						if (this.state.renderingPage === 1 && order.order_review_status === 0) {
-							return (
-								<Order key={ order.order_oid }
-											 order={order}
-											 orderOnClick = {this._goToComments}
-											 goToRestaurant = {this._goToRestaurant}
-											 scrollRef={this._scrollView}
-											 getCurrentPosition={this._getCurrentPosition}
-											 page={1}
-											 reorder={this._reorder}/>
-							)
-						}
-						else if (this.state.renderingPage === 2 && (order.order_payment_status === 30 || order.order_payment_status === 40) ) {
-							return (
-								<Order key={ order.order_oid }
-											 order={order}
-											 orderOnClick = {this._HistoryOrderDetailVisible}
-											 goToRestaurant = {this._goToRestaurant}
-											 scrollRef={this._scrollView}
-											 getCurrentPosition={this._getCurrentPosition}
-											 page={2}
-											 reorder={this._reorder}/>
-							)
-						}
-					}
-				});
-				return(
-					orderList
-				)
-			}else {
-				const { height, width } = Dimensions.get('window');
-				return(
-					<Image style={{height: height, width: width}} source={require('./Image/cm_no_order.png')}></Image>
-				)
-			}
-		}
     render(){
       return(
          <View style={styles.mainContainer}>
@@ -308,10 +256,21 @@ class HistoryTab extends Component {
 		 			      >
 		 			      <AllOrders
 										navigator={this.props.navigator}
+										orderData={this.state.orderData}
+										isRefreshing={this.state.isRefreshing}
+										onRefresh={this._onRefresh}
+										goToRestaurant={this._goToRestaurant}
+										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
 										tabLabel="首页"/>
 								<OrdersNotReviewed
 										navigator={this.props.navigator}
+										orderData={this.state.orderData}
+										isRefreshing={this.state.isRefreshing}
+										onRefresh={this._onRefresh}
+										goToComments={this._goToComments}
+										goToRestaurant={this._goToRestaurant}
+										reorder={this._reorder}
 										tabLabel="首页"/>
 	 			     </ScrollableTabView>
 						 <Modal style={styles.modal}

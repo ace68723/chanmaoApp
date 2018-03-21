@@ -90,13 +90,6 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
              HistoryStore.getHistorySuccess(action.data)
              HistoryStore.emitChange()
          break;
-         case AppConstants.REVIEW_ADDED:
-             HistoryStore.reviewAdded(action.data);
-             HistoryStore.emitChange();
-             setTimeout(()=>{
-               HistoryStore.resetShowReviewedAdd();
-             },6000);
-             break;
 
 		  }
 
