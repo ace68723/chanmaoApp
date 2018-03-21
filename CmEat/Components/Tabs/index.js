@@ -87,7 +87,6 @@ export default class Tabs extends Component {
     return(
 
 		 <ScrollableTabView  ref={(tabView) => { this.tabView = tabView; }}
-												 locked={true}
 												 tabBarBackgroundColor={'#fff'}
 												 tabBarActiveTextColor={'#ff8b00'}
 												 tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',top:5}}
@@ -107,7 +106,7 @@ export default class Tabs extends Component {
 							<SearchTab
 								tabLabel = '搜索'
 								navigator={this.props.navigator}/>
-							
+
 							<SettingTab
 								tabLabel='我的'
                 navigator={this.props.navigator}

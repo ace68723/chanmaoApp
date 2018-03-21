@@ -211,47 +211,24 @@ export default class MainTab extends Component {
   }
 
 	_toggleAddressPrompt(){
-		console.log('ojbk');
 		this.setState({showAddressPrompt:!this.state.showAddressPrompt});
-		console.log(this.state.showAddressPrompt);
 	}
 
-	renderScrollableTabView(){
-		return(
-			<ScrollableTabView  style={{flex:1,}}
-													tabBarPosition={'bottom'}
-													tabBarBackgroundColor={'#fff'}
-													tabBarActiveTextColor={'#ff8b00'}
-													tabBarUnderlineColor={'#ff8b00'}
-													tabBarTextStyle={{fontSize:18,fontFamily:'FZZhunYuan-M02S',}}
-													tabBarInactiveTextColor={'#666666'}
-													initialPage={0}
-													prerenderingSiblingsNumber={1}
-													renderTabBar={() => <View></View>}
-													onScroll={(argument)=>{
-														this._setPosition()
-													}}
-													page={this.state.page}
-													onChangeTab={this._onChangeTab}>
-						<HomeTab  tabLabel='主页'
-											index={0}
-											scrollEventBind={this._scrollEventBind}
-											getScrollViewRefs={this._getScrollViewRefs}
-											navigator={this.props.navigator}
-											refsCurrentScrollView= {this.refsCurrentScrollView}
-											advertisement={this.state.advertisement}
-											hideTabBar = {this.props.hideTabBar}
-											showTabBar = {this.props.showTabBar}
-											restaurants = {this.state.areaList}
-											scrollY = {this.state.scrollY}
-											/>
-			</ScrollableTabView>
-		)
-  }
   render(){
     return(
       <View style={{flex: 1}}>
-				{this.renderScrollableTabView()}
+				<HomeTab  tabLabel='主页'
+									index={0}
+									scrollEventBind={this._scrollEventBind}
+									getScrollViewRefs={this._getScrollViewRefs}
+									navigator={this.props.navigator}
+									refsCurrentScrollView= {this.refsCurrentScrollView}
+									advertisement={this.state.advertisement}
+									hideTabBar = {this.props.hideTabBar}
+									showTabBar = {this.props.showTabBar}
+									restaurants = {this.state.areaList}
+									scrollY = {this.state.scrollY}
+									/>
         <CmEatHomeHeader scrollY = {this.state.scrollY}
                          handleBackToHome={this._handleBackToHome}
                          renderSearch={this.state.renderSearch}
