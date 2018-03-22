@@ -11,6 +11,7 @@ import CmSecondMenu from '../Components/CmSecondMenu/SecondMenu';
 import CmRestaurantSearch from '../Components/Restaurant/CmRestaurantSearch';
 import CmChooseCardType from '../Components/AddCard/ChooseCardType';
 import CmAddCard from '../Components/AddCard/AddCard';
+import CmCommentDetail from '../Components/History/CommentDetail';
 
 
 
@@ -27,5 +28,6 @@ Navigation.registerComponent('CmEatTabs', () => CmEatTabs);
 Navigation.registerComponent('CmEatHistory', () => CmEatHistory);
 Navigation.registerComponent('CmChooseCardType', () => CmChooseCardType);
 Navigation.registerComponent('CmAddCard', () => CmAddCard);
+Navigation.registerComponent('CmCommentDetail', () => CmCommentDetail);
 module.exports = CmEatTabs;
 // module.exports = SboxHistory;

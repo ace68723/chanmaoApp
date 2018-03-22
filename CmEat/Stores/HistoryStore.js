@@ -10,6 +10,7 @@ let state = {
           current:null,
           unavailable:[],
           isRefreshing:false,
+          showReviewAdded: false,
         };
 let HistoryDetailData;
 const HistoryStore = Object.assign({},EventEmitter.prototype,{
@@ -52,6 +53,14 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
 			  state.verifyPhoneResult = 'FAIL';
 		}
 	},
+  reviewAdded(data) {
+    if (data.ev_error == 0) {
+      state.showReviewAdded = true;
+    }
+  },
+  resetShowReviewedAdd() {
+    state.showReviewAdded = false;
+  },
   initVerifyPhoneResult(){
       state.verifyPhoneResult = '';
   },
@@ -80,7 +89,7 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
          case AppConstants.GET_HISTORY_SUCCESS:
              HistoryStore.getHistorySuccess(action.data)
              HistoryStore.emitChange()
-        break;
+         break;
 
 		  }
 

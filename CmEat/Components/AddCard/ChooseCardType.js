@@ -67,14 +67,14 @@ export default class ChooseCardType extends Component {
     //       title:"添加 支付宝"
     //     }
     //   });
-    CheckoutAction.updatePaymentStatus('支付宝');
+    CheckoutAction.updatePaymentStatus(10);
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
     });
   }
 
   _goToCash() {
-    CheckoutAction.updatePaymentStatus('Cash');
+    CheckoutAction.updatePaymentStatus(0);
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
     });
@@ -111,90 +111,110 @@ export default class ChooseCardType extends Component {
     return buttonList
   }
   render() {
+    const payment_channel_list = () => {
+      let _payment_channel_list =[];
+      if (this.props.available_payment_channels.includes(1)) {
+        _payment_channel_list.push(
+          <TouchableOpacity onPress={this._goToCredit}
+              activeOpacity={0.4}
+              style={{flexDirection: 'row',
+                      paddingTop: 12,
+                      paddingBottom: 12,
+                      alignItems: 'center',
+                      backgroundColor: 'white',
+                      borderBottomWidth: 1,
+                      borderColor: "#D5D5D5"}}>
+              <Text style={{flex: 1,
+                            fontSize: 18,
+                            textAlign: 'left',
+                            marginLeft :20,
+                            color:"#808080",}}>
+                        信用卡
+              </Text>
+              <Text style={styles.arrowText}>
+                >
+              </Text>
+          </TouchableOpacity>
+        )
+        _payment_channel_list.push(
+          <TouchableOpacity onPress={this._goToDebit}
+              activeOpacity={0.4}
+              style={{flexDirection: 'row',
+                      paddingTop: 12,
+                      paddingBottom: 12,
+                      alignItems: 'center',
+                      backgroundColor: 'white',
+                      borderBottomWidth: 1,
+                      borderColor: "#D5D5D5"}}>
+              <Text style={{flex: 1,
+                            fontSize: 18,
+                            textAlign: 'left',
+                            marginLeft :20,
+                            color:"#808080",}}>
+                            借记卡
+              </Text>
+              <Text style={styles.arrowText}>
+                >
+              </Text>
+          </TouchableOpacity>
+        )
+      }
+      if (this.props.available_payment_channels.includes(10)) {
+        _payment_channel_list.push(
+          <TouchableOpacity onPress={this._goToAliPay}
+              activeOpacity={0.4}
+              style={{flexDirection: 'row',
+                      paddingTop: 12,
+                      paddingBottom: 12,
+                      alignItems: 'center',
+                      backgroundColor: 'white',
+                      borderBottomWidth: 1,
+                      borderColor: "#D5D5D5"}}>
+              <Text style={{flex: 1,
+                            fontSize: 18,
+                            textAlign: 'left',
+                            marginLeft :20,
+                            color:"#808080",}}>
+                            支付宝
+              </Text>
+              <Text style={styles.arrowText}>
+                >
+              </Text>
+          </TouchableOpacity>
+        )
+      }
+      if (this.props.available_payment_channels.includes(0)) {
+        _payment_channel_list.push(
+          <TouchableOpacity onPress={this._goToCash}
+              activeOpacity={0.4}
+              style={{flexDirection: 'row',
+                      paddingTop: 12,
+                      paddingBottom: 12,
+                      alignItems: 'center',
+                      backgroundColor: 'white'}}>
+              <Text style={{flex: 1,
+                            fontSize: 18,
+                            textAlign: 'left',
+                            marginLeft :20,
+                            color:"#808080",}}>
+                            现金
+              </Text>
+              <Text style={styles.arrowText}>
+                >
+              </Text>
+          </TouchableOpacity>
+        )
+      }
+      return _payment_channel_list;
+    }
+
     return (
       <View style={styles.container}>
         <Header title={"支付方式"}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>
-            <TouchableOpacity onPress={this._goToCredit}
-                activeOpacity={0.4}
-                style={{flexDirection: 'row',
-                        paddingTop: 12,
-                        paddingBottom: 12,
-                        alignItems: 'center',
-                        backgroundColor: 'white',
-                        borderBottomWidth: 1,
-                        borderColor: "#D5D5D5"}}>
-                <Text style={{flex: 1,
-                              fontSize: 18,
-                              textAlign: 'left',
-                              marginLeft :20,
-                              color:"#808080",}}>
-                          信用卡
-                </Text>
-                <Text style={styles.arrowText}>
-                  >
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToDebit}
-                activeOpacity={0.4}
-                style={{flexDirection: 'row',
-                        paddingTop: 12,
-                        paddingBottom: 12,
-                        alignItems: 'center',
-                        backgroundColor: 'white',
-                        borderBottomWidth: 1,
-                        borderColor: "#D5D5D5"}}>
-                <Text style={{flex: 1,
-                              fontSize: 18,
-                              textAlign: 'left',
-                              marginLeft :20,
-                              color:"#808080",}}>
-                              借记卡
-                </Text>
-                <Text style={styles.arrowText}>
-                  >
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToAliPay}
-                activeOpacity={0.4}
-                style={{flexDirection: 'row',
-                        paddingTop: 12,
-                        paddingBottom: 12,
-                        alignItems: 'center',
-                        backgroundColor: 'white',
-                        borderBottomWidth: 1,
-                        borderColor: "#D5D5D5"}}>
-                <Text style={{flex: 1,
-                              fontSize: 18,
-                              textAlign: 'left',
-                              marginLeft :20,
-                              color:"#808080",}}>
-                              支付宝
-                </Text>
-                <Text style={styles.arrowText}>
-                  >
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._goToCash}
-                activeOpacity={0.4}
-                style={{flexDirection: 'row',
-                        paddingTop: 12,
-                        paddingBottom: 12,
-                        alignItems: 'center',
-                        backgroundColor: 'white'}}>
-                <Text style={{flex: 1,
-                              fontSize: 18,
-                              textAlign: 'left',
-                              marginLeft :20,
-                              color:"#808080",}}>
-                              现金
-                </Text>
-                <Text style={styles.arrowText}>
-                  >
-                </Text>
-            </TouchableOpacity>
+            {payment_channel_list()}
         </ScrollView>
       </View>
     );

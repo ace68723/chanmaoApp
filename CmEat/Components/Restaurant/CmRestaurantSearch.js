@@ -38,6 +38,7 @@ export default class CmRestaurantSearch extends Component {
 				restaurantList: [],
 				length:5,
 				isRendering:'area',
+
 			}
 		this.state = Object.assign({},state,HomeStore.getHomeState());
 		this._setSearchText = this._setSearchText.bind(this);
@@ -80,7 +81,7 @@ export default class CmRestaurantSearch extends Component {
 			}else{
 				filteredData = this.state.restaurant;
 			}
-			
+
 			this.setState({
 				 searchText: text,
 				 filteredRestaurant:filteredData,
@@ -109,8 +110,8 @@ export default class CmRestaurantSearch extends Component {
 		// 			<Text style={{fontSize:40}}>×</Text>
 		// 		</TouchableOpacity>
 		return(
-			<View style={styles.header}>
-				<View style={styles.searchView}>
+			<View style={ this.state.searchText == '' ? styles.header_full : styles.header }>
+				<View style={this.state.searchText == '' ? styles.searchView_full : styles.searchView}>
 						<Image
 							source={require('./Image/icon_search_input.png')}
 							style={{
@@ -121,27 +122,29 @@ export default class CmRestaurantSearch extends Component {
 						/>
 						<TextInput
 							ref={'searchInput'}
-							style={styles.searchInput}
+							style={this.state.searchText == '' ? styles.searchInput_full : styles.searchInput}
 							selectionColor={'#ea7b21'}
 							keyboardType = {'default'}
 							autoCorrect= { false}
-							autoFocus={true}
+							autoFocus={false}
 							returnKeyType={'next'}
 							onChangeText={this._setSearchText}
 							underlineColorAndroid={"rgba(0,0,0,0)"}
 							value={this.state.searchText}
 						/>
-						<TouchableOpacity onPress={()=>this._cleanInput()}>
-							<Image
-								source={require('./Image/cancel.png')}
-								style={{
-									height:15,
-									width:15,
-									marginRight:10}}
-							/>
+
+					{this.state.searchText != '' &&
+						<TouchableOpacity
+							style={{ marginLeft: 25, padding: 10}}
+							onPress={()=>this._cleanInput()}>
+							<Text style={{
+									fontSize: 16,
+									backgroundColor: 'white'}}>取消</Text>
 						</TouchableOpacity>
+					}
+
 				</View>
-				
+
 			</View>
 		)
 	}
@@ -178,19 +181,15 @@ export default class CmRestaurantSearch extends Component {
 
 			/>
 			)
-		
-			
-		
 	  }
 	_renderArea({item}){
 		let area = item;
-
 		if(area){
 			return(
 				<TouchableOpacity onPress={()=>{
 					this._setSearchText(area.name);
 					this.refs.searchInput.value = area.name;
-					}} 
+					}}
 					style={{padding:10}} >
 					<View style={{backgroundColor:'green', width:(width/2)-40, height:(width/2)-40}}></View>
 					<View style={{
@@ -208,8 +207,8 @@ export default class CmRestaurantSearch extends Component {
 					</View>
 				</TouchableOpacity>
 			)
-		}	
-		
+		}
+
 	}
 	_areaKeyExtractor = (area, index) => index + area.area +area.name;
 	_renderAreas(){
@@ -218,14 +217,14 @@ export default class CmRestaurantSearch extends Component {
 				style={{alignSelf:'center'}}
 				numColumns={2}
 				key={'area'}
-				data={this.state.areaList}
+				data={this.state.areaList.slice(1, this.state.areaList.length)}
 				keyboardDismissMode={"on-drag"}
 				keyboardShouldPersistTaps={"always"}
 				renderItem={(area)=>this._renderArea(area)}
 				keyExtractor={this._areaKeyExtractor}
 				removeClippedSubviews={true}
 				initialNumToRender={1}
-				extraData={this.state.areaList}
+				extraData={this.state.areaList.slice(1, this.state.areaList.length)}
 			/>
 		)
 	}
@@ -254,7 +253,7 @@ export default class CmRestaurantSearch extends Component {
 						>
 					{this._renderSearchInput()}
 					{this._renderResult()}
-					
+
 			</KeyboardAvoidingView>
 
 		)
@@ -268,18 +267,45 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		color: '#ea7b21',
 		height:40,
+		width:width - 45,
+		marginTop:5,
+	},
+	input_full:{
+		fontSize: 18,
+		borderRadius: 8,
+		color: '#ea7b21',
+		height:40,
 		width:width,
 		marginTop:5,
 	},
 	header:{
+		width:width - 45,
+		height:60,
+		flexDirection:'row',
+		alignItems:'center',
+		marginTop:Platform.OS === 'ios'? 20 : 0,
+	},
+	header_full:{
 		width:width,
 		height:60,
 		flexDirection:'row',
 		alignItems:'center',
 		marginTop:Platform.OS === 'ios'? 20 : 0,
-	
 	},
 	searchView:{
+		borderRadius:30,
+		borderWidth:1,
+		borderColor:'#e2e2e2',
+		marginTop:10,
+		marginHorizontal:10,
+		flex:1,
+		backgroundColor:'#f4f4f4',
+		flexDirection:'row',
+		alignItems:'center',
+		alignSelf:'center',
+		width: width-searchViewMarginHorizontal*2 - 45,
+	},
+	searchView_full:{
 		borderRadius:30,
 		borderWidth:1,
 		borderColor:'#e2e2e2',
@@ -296,8 +322,14 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		height:40,
 		marginHorizontal:5,
+		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10 - 45,
+
+	},
+	searchInput_full:{
+		fontSize: 18,
+		height:40,
+		marginHorizontal:5,
 		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,
 
 	},
-
 });

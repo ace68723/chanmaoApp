@@ -217,6 +217,7 @@ export default class MyComponent extends Component {
       const cvv = this.state.cvv;
       const reqData = {cardNumber,expMonth,expYear,cvv};
       const result = await CheckoutAction.addCard(reqData);
+      CheckoutAction.updatePaymentStatus(1);
       this.props.saveModificationCallback();
       this.setState({showLoading:false});
       this.props.navigator.dismissModal({

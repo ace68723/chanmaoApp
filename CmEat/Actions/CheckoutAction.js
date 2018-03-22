@@ -36,10 +36,12 @@ export default {
       }catch (e){
       }
     },
-    async checkout(comment){
+    // async checkout(comment, payment_channel, tips){
+    async checkout(comment, payment_channel){
       try{
         const token = await AuthModule.getToken();
-        const reqData = {token,comment};
+        // const reqData = {token,comment, payment_channel, tips};
+        const reqData = {token,comment, payment_channel};
         const data = await RestaurantModule.checkout(reqData);
         dispatch({
             actionType: AppConstants.CHECKOUT, data,
@@ -61,8 +63,8 @@ export default {
       }catch (e){
       }
     },
-    updatePaymentStatus(paymentStatus){
-      data = {paymentStatus: paymentStatus}
+    updatePaymentStatus(payment_channel){
+      data = {payment_channel: payment_channel}
       dispatch({
           actionType: AppConstants.UPDATE_PAYMENT_STATUS, data,
       })

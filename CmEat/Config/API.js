@@ -1,6 +1,6 @@
 'use strict';
 const TestServer = 'https://norgta.com/api/sb/v2/';
-const proructServer = 'https://chanmao.us/api/sb/v2/';
+const proructServer = 'https://chanmao.us/api/payment/v2/';
 const Server = proructServer;
 const APIConstants ={
 

@@ -10,7 +10,7 @@
 |  授权访问限制  |           暂无            |      |
 |  授权范围()  |           暂无            |      |
 |   支持格式   |          JSON           |      |
-|   测试接口   |          http://norgta.com//api/cmapp/v2/set_order_review          |      |
+|   测试接口   |          https://norgta.com/api/cmapp/v2/set_order_review          |      |
 
 
 表头参数:
@@ -25,7 +25,7 @@
 | Tables  | 类型及其范围 | 说明     | 默认值  |
 | ------- | ------ | ------ | ---- |
 | oid     | number | 订单ID   |      |
-| complete_time | int | 订单送达时间(unix timestamp) **optional** |  |  
+| complete_time | int | 订单送达时间(string) **optional** ##"Fri Mar 16 2018 16:35:18 GMT-0400 (EDT)"|  |  
 | driver_score | int | 司机评分   |           |
 | driver_comment | string | 司机评价   |           |
 | restaurant_score | int | 餐馆评分   |           |

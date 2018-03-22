@@ -27,7 +27,7 @@ export default  {
       const res = await CheckoutAPI.addCard(lo_data);
       if(res.ev_error === 1) { throw 'add card fail'}
       const eo_data = res.ea_card_info;
-      return eo_data
+      return eo_data;
     } catch (e) {
       console.log(e);
       alert('您输入的支付信息输入有误');

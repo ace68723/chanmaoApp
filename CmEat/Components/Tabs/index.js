@@ -42,7 +42,7 @@ export default class Tabs extends Component {
 	}
   _onChange() {
     if(TabsStore.getState().goToHistory){
-      this.tabView.goToPage(1);
+      this.tabView.goToPage(2);
       this.props.navigator.popToRoot({animated: false,});
       setTimeout( () => {
         this.props.navigator.push({
@@ -87,7 +87,6 @@ export default class Tabs extends Component {
     return(
 
 		 <ScrollableTabView  ref={(tabView) => { this.tabView = tabView; }}
-												 locked={true}
 												 tabBarBackgroundColor={'#fff'}
 												 tabBarActiveTextColor={'#ff8b00'}
 												 tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',top:5}}
@@ -98,18 +97,22 @@ export default class Tabs extends Component {
                          tabBarPosition={'bottom'}
 												 keyboardShouldPersistTaps={'always'}>
 
-							 <MainTab tabLabel='主页'
+							<MainTab
+								tabLabel='主页'
+								hideTabBar = {this._hideTabBar}
+								showTabBar = {this._showTabBar}
+                navigator={this.props.navigator}/>
 
-												hideTabBar = {this._hideTabBar}
-												showTabBar = {this._showTabBar}
-                        navigator={this.props.navigator}
-                        />
-											<SearchTab tabLabel = '搜索'
-												navigator={this.props.navigator}
-											/>
-											<SettingTab tabLabel='我的'
-                            navigator={this.props.navigator}
-                            handleBackToHome={this.props.handleBackToHome}/>
+							<SearchTab
+								tabLabel = '搜索'
+								navigator={this.props.navigator}
+								hideTabBar = {this._hideTabBar}
+								showTabBar = {this._showTabBar}
+                navigator={this.props.navigator}
+                />
+							<SettingTab tabLabel='我的'
+                    navigator={this.props.navigator}
+                    handleBackToHome={this.props.handleBackToHome}/>
 
 		 </ScrollableTabView>
 

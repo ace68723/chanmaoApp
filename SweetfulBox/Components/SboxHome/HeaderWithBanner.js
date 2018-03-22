@@ -99,7 +99,7 @@ class ActivityHeaderWithBanner extends Component {
 		render() {
 			const headerHeight = this.props.scrollY.interpolate({
 	      inputRange: [0, HEADER_SCROLL_DISTANCE],
-	      outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+	      outputRange: [200, HEADER_MIN_HEIGHT],
 	      extrapolate: 'clamp',
 	    });
 			const imageOpacity = this.props.scrollY.interpolate({
