@@ -117,7 +117,7 @@ class Confirm extends Component {
     _onChange(){
 
 				const state = Object.assign({},CheckoutStore.getState());
-        this.setState(state,()=>this.setState({tips:(this.state.total*0.1).toFixed(2)}));
+        this.setState(state,()=>this.setState({tips:(this.state.total*this.state.tipsPercentage).toFixed(2)}));
 
 				setTimeout( () => {
 					if(this.state.shouldAddAddress){
@@ -161,11 +161,12 @@ class Confirm extends Component {
       CheckoutAction.calculateDeliveryFee()
     }
     _doCheckout(){
+			if (!this.state.payment_channel) return;
       this.setState({
         loading:true,
 				showOrderConfirm:false,
       })
-      CheckoutAction.checkout(this.state.comment);
+      CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
       // CheckoutAction.checkout(this.state.comment);
     }
     _checkout(){

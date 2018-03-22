@@ -54,6 +54,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     		addressList:[],
         dltype:1,
         pretax:0,
+        payment_channel: null,
         code:'',
         dltypeList:[
           {dltype:-1,
@@ -114,9 +115,11 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   		const total = data.result.total;
       let paymentStatus = '添加支付方式';
       let tipInfoStatus = false;
+      let payment_channel = null;
       if (data.result.last4.length > 0) {
         paymentStatus = data.result.brand + ' xxxx xxxx xxxx ' + data.result.last4;
         tipInfoStatus = true;
+        payment_channel = 1;
       }
 
   		const loading = false;
@@ -138,7 +141,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
                                         paymentStatus,
                                         tipInfoStatus,
   																			loading,
-                                        selectedAddress
+                                        selectedAddress,
+                                        payment_channel
   																		 });
 	},
 	updateAddress(){
@@ -160,10 +164,16 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     this.state.shouldAddAddress = data.shouldAddAddress;
   },
   updatePaymentStatus(data){
-    if (data.paymentStatus == 'Cash') {
+    if (data.payment_channel == 0) {
       this.state.tipInfoStatus = false;
+      this.state.paymentStatus = 'Cash';
+      this.state.payment_channel = 0;
     }
-    this.state.paymentStatus = data.paymentStatus;
+    else if (data.payment_channel == 10) {
+      this.state.tipInfoStatus = false;
+      this.state.paymentStatus = '支付宝';
+      this.state.payment_channel = 10;
+    }
   },
   updateCardStatus(data){
     if (data.length > 0) {

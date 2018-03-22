@@ -22,7 +22,9 @@ export default class pastOrderEN extends Component {
       this.state = {
           isCheaking: props.isCheaking,
           orderInfo: props.order,
+          page: props.page
       };
+      this._renderDetialButton = this._renderDetialButton.bind(this);
   }
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -83,16 +85,16 @@ export default class pastOrderEN extends Component {
       return(
         <View key={index} style={{flexDirection:'column',alignItems:'center',paddingTop:10,paddingBottom:10}}>
             <View style={{flexDirection:'row'}}>
-                <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'FZZhunYuan-M02S',}}>{item.qty}</Text></View>
+                <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'FZZhunYuan-M02S',}}>{item.amount}</Text></View>
                 <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}
                       allowFontScaling={false}>
-                        {item.name}
+                        {item.ds_name}
                 </Text>
                 {soldoutText()}
                 <View style={{flex:1,alignItems:'flex-end'}}>
                   <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}
                         allowFontScaling={false}>
-                          ${(item.qty*item.price).toFixed(2)}
+                          ${(item.amount*item.price).toFixed(2)}
                   </Text>
                 </View>
             </View>
@@ -114,9 +116,9 @@ export default class pastOrderEN extends Component {
   }
 
   _phoneNumberVerify (){
-    if(this.state.orderInfo.status == 55){
+    if(this.state.orderInfo.order_status == 55){
       return(
-          <PhoneNumberVerify  orderId={this.state.orderInfo.oid}
+          <PhoneNumberVerify  orderId={this.state.orderInfo.order_oid}
                               phoneNumber ={this.state.orderInfo.user_tel}
                               scrollRef={this.props.scrollRef}
                               getCurrentPosition={this.props.getCurrentPosition}/>
@@ -124,14 +126,56 @@ export default class pastOrderEN extends Component {
     }
   }
 
-  _renderDetialButton(){
-    if(this.state.orderInfo.status == '5'){
+  _renderDetialButton() {
+    if (this.props.page == 0) {
+      if(this.state.orderInfo.order_status == '5'){
+        return (
+          <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
+              <TouchableOpacity style={{flex:1,
+                                        justifyContent:'center',
+                                        alignItems:'center'}}
+                                 onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
+                <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
+                      allowFontScaling={false}>
+                      重新下单
+                </Text>
+              </TouchableOpacity>
+          </View>
+        )
+      }else{
+        return(
+          <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
+              <TouchableOpacity style={{flex:1,
+                                        justifyContent:'center',
+                                        alignItems:'center'}}
+                                 onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
+                <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
+                        allowFontScaling={false}>详情</Text>
+              </TouchableOpacity>
+          </View>
+        )
+      }
+    }
+    else if (this.props.page == 1) {
+      return(
+        <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
+            <TouchableOpacity style={{flex:1,
+                                      justifyContent:'center',
+                                      alignItems:'center'}}
+                               onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
+              <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
+                      allowFontScaling={false}>评价</Text>
+            </TouchableOpacity>
+        </View>
+      )
+    }
+    else {
       return (
         <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
             <TouchableOpacity style={{flex:1,
                                       justifyContent:'center',
                                       alignItems:'center'}}
-                               onPress={this.props.reorder.bind(null,this.state.orderInfo.rid)}>
+                               onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
               <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
                     allowFontScaling={false}>
                     重新下单
@@ -139,84 +183,75 @@ export default class pastOrderEN extends Component {
             </TouchableOpacity>
         </View>
       )
-    }else{
-      return(
-        <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
-            <TouchableOpacity style={{flex:1,
-                                      justifyContent:'center',
-                                      alignItems:'center'}}
-                               onPress={this.props.HistoryOrderDetailVisible.bind(null,this.state.orderInfo.oid)}>
-              <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
-                      allowFontScaling={false}>详情</Text>
-            </TouchableOpacity>
-        </View>
-      )
     }
   }
   render() {
-    let statusMessage;
+    let statusMessage = "现金支付";
     let statusColor;
-    switch (this.state.orderInfo.status) {
-        case '0':
+    switch (this.state.orderInfo.order_status) {
+        case 0:
             statusColor = {color:'#b2b2b2'};
             statusMessage = '等待商家确认';
             break;
-        case '10':
+        case 10:
             statusColor = {color:'#33cd5f'};
             statusMessage = '商家已确认, 准备中';
             break;
-        case '20':
+        case 20:
             statusColor = {color:'#33cd5f'};
             statusMessage = '商家已确认, 准备中';
             break;
-        case '30':
+        case 30:
             statusColor = {color:'#9bc8df'};
             statusMessage = '送餐员已开始送餐';
             break;
-        case '40':
+        case 40:
             statusColor = {color:'#11c1f3'};
             statusMessage = '已送到, 满意吗？';
             break;
-        case '55':
+        case 55:
             statusColor = {color:'#886aea'};
             statusMessage = '新用户订单确认中';
             break;
-        case '60':
+        case 60:
             statusColor = {color:'#11c1f3'};
             statusMessage = '客服稍后联系您改运费';
             break;
-        case '5':
+        case 5:
             statusColor = {color:'#ef473a'};
             statusMessage = '糟糕, 有的菜没了';
             break;
-        case '90':
+        case 90:
             statusColor = {color:'#ef473a'};
             statusMessage = '订单已取消';
             break;
     }
       return(
-        <View style={styles.orderContainer}>
+        <TouchableOpacity style={styles.orderContainer}
+                          onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
           <View style={styles.itemContainer}>
               <View style={styles.imageContainer}>
-                <ImageBackground style={{flex:1,width:deviceWidth-56,alignSelf:'center'}} source={{uri:this.state.orderInfo.mob_banner}}>
-                  <View style={styles.opacityView}/>
-                    <View style={styles.imageTextContainer}>
-                      <Text style={styles.imageText} allowFontScaling={false}>{this.state.orderInfo.name}</Text>
-                    </View>
-                </ImageBackground>
+                <TouchableOpacity style={{flex: 1}} onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
+                    <ImageBackground style={{flex:1,width:deviceWidth-56,alignSelf:'center'}} source={{uri:this.state.orderInfo.rr_url}}>
+                      <View style={styles.opacityView}/>
+                        <View style={styles.imageTextContainer}>
+                          <Text style={styles.imageText} allowFontScaling={false}>{this.state.orderInfo.rr_name}</Text>
+                        </View>
+                    </ImageBackground>
+                </TouchableOpacity>
               </View>
               <View style={styles.info}>
                   <Text style={[styles.infoTitle,statusColor]} allowFontScaling={false}>{statusMessage}</Text>
                   <View style={{flexDirection:'row'}}>
-                    <Text style={styles.infoText} allowFontScaling={false}>订单号 #{this.state.orderInfo.oid}</Text>
-                    <Text style={[styles.infoText,{textAlign:'right'}]} allowFontScaling={false}>{this.state.orderInfo.created}</Text>
+                    <Text style={styles.infoText} allowFontScaling={false}>订单号 #{this.state.orderInfo.order_oid}</Text>
+                    <Text style={[styles.infoText,{textAlign:'right'}]} allowFontScaling={false}>{this.state.orderInfo.order_created}</Text>
                   </View>
               </View>
               <View style={styles.orderList}>
                 {this._renderFoodList()}
               </View>
               <View style={styles.orderTotal}>
-                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>总价: ${this.state.orderInfo.total}</Text>
+                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>总价: ${this.state.orderInfo.order_total}</Text>
               </View>
               {this._phoneNumberVerify()}
               <View style={styles.buttonContainer}>
@@ -234,7 +269,7 @@ export default class pastOrderEN extends Component {
                   </View>
               </View>
           </View>
-        </View>
+        </TouchableOpacity>
     )
   }
 }

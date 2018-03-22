@@ -30,11 +30,15 @@ const  HistoryModule = {
           return new Promise((resolve, reject) => {
             HistoryApi.getOrderData(token)
               .then(data => {
-                if(data.result == 0){
-                    resolve(data.orders);
+                if (data.ev_error == 0){
+                // if(data.result == 0){
+                    // resolve(data.orders);
+                    resolve(data.ea_history_list);
                 }else{
-                  Alert.errorAlert(data.message)
-                  reject(data.result);
+                  // Alert.errorAlert(data.message)
+                  // reject(data.result);
+                  Alert.errorAlert(data.ev_message)
+                  reject(data.ev_error);
                 }
 
               })
@@ -92,6 +96,14 @@ const  HistoryModule = {
       // Alert.errorAlert(res.message)
     }
     return verifyPhoneResult
+  },
+  async addReview(io_data){
+    const addReviewResult = await HistoryApi.addReview(io_data);
+    const res = addReviewResult;
+    if(res.ev_error != 0){
+      Alert.errorAlert(res.ev_message)
+    }
+    return addReviewResult;
   },
 
       // ===================================
