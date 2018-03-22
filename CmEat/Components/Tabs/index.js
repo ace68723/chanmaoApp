@@ -42,7 +42,7 @@ export default class Tabs extends Component {
 	}
   _onChange() {
     if(TabsStore.getState().goToHistory){
-      this.tabView.goToPage(1);
+      this.tabView.goToPage(2);
       this.props.navigator.popToRoot({animated: false,});
       setTimeout( () => {
         this.props.navigator.push({

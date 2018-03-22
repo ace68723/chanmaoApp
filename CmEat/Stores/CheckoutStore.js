@@ -55,6 +55,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         dltype:1,
         pretax:0,
         payment_channel: null,
+        available_payment_channels: [],
         code:'',
         dltypeList:[
           {dltype:-1,
@@ -113,14 +114,19 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   		const pretax_ori = data.result.pretax_ori;
   		const promoted = data.result.promoted;
   		const total = data.result.total;
-      let paymentStatus = '添加支付方式';
+      const available_payment_channels = data.result.available_payment_channels;
+      let paymentStatus = '现金';
       let tipInfoStatus = false;
-      let payment_channel = null;
-      if (data.result.last4.length > 0) {
-        paymentStatus = data.result.brand + ' xxxx xxxx xxxx ' + data.result.last4;
-        tipInfoStatus = true;
-        payment_channel = 1;
-      }
+      let payment_channel = 0;
+      // 在线支付
+      // let paymentStatus = '添加支付方式';
+      // let tipInfoStatus = false;
+      // let payment_channel;
+      // if (this.state.payment_channel == null || this.state.payment_channel == 1) {
+      //   paymentStatus = data.result.brand + ' xxxx xxxx xxxx ' + data.result.last4;
+      //   tipInfoStatus = true;
+      //   payment_channel = 1;
+      // }
 
   		const loading = false;
   		const selectedAddress = cme_getSelectedAddress();
@@ -142,7 +148,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
                                         tipInfoStatus,
   																			loading,
                                         selectedAddress,
-                                        payment_channel
+                                        payment_channel,
+                                        available_payment_channels
   																		 });
 	},
 	updateAddress(){

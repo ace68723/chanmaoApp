@@ -115,14 +115,13 @@ const RestaurantApi = {
       const version = AppConstants.CM_VERSION;
       const channel = reqData.channel;
       const payment_channel = reqData.payment_channel;
-      const tips = reqData.tips;
-      const POST_DATA = {dltype,pretax,rid,uaid,dlexp,items,version,channel,comment, payment_channel, tips}
-      console.log(POST_DATA);
+      // const tips = reqData.tips;
+      // const POST_DATA = {dltype,pretax,rid,uaid,dlexp,items,version,channel,comment, payment_channel, tips}
+      const POST_DATA = {dltype,pretax,rid,uaid,dlexp,items,version,channel,comment, payment_channel}
       options.headers.authortoken = reqData.token;
       options.body =  JSON.stringify(POST_DATA);
       return fetch(url,options)
               .then(function(res) {
-                console.log(res);
                 return res.json();
               })
               .catch((error) => {throw error})

@@ -49,7 +49,7 @@ class OrdersNotReviewed extends Component {
 			if (this.props.orderData.length > 0) {
 				let _orderList = [];
 				for (let order of this.props.orderData) {
-					if (order.order_review_status === 0) {
+					if (order.order_review_status === 0 && order.order_status > 30) {
 						_orderList.push(
 							<Order key={ order.order_oid }
 										 order={order}

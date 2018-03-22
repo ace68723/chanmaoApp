@@ -32,15 +32,14 @@ const RestaurantModule = {
   },
   async beforCheckout(reqData){
       try{
-				  console.log(reqData);
           const data = await RestaurantApi.beforCheckout(reqData);
-					console.log(data);
           if(data.result == 0){
             const pretax = data.pretax;
             const pretax_ori = data.pretax_ori;
             const promoted = data.promoted;
             const total = data.total;
 						const cusid = data.cusid;
+						const available_payment_channels = data.available_payment_channels;
 						let last4 = "";
 						let brand = "";
 						if (data.last4) {
@@ -49,7 +48,7 @@ const RestaurantModule = {
 						if (data.brand) {
 							brand = data.brand;
 						}
-            const eo_data ={pretax,pretax_ori,promoted,total,cusid,last4,brand}
+            const eo_data ={pretax,pretax_ori,promoted,total,cusid,last4,brand,available_payment_channels}
             const startAmount = reqData.startAmount;
             let rid = reqData.rid;
             if(typeof rid !== 'string'){
@@ -134,9 +133,9 @@ const RestaurantModule = {
         } else if (Platform.OS === 'android') {
           channel = 2;
         }
-        const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel, payment_channel: io_data.payment_channel, tips: io_data.tips}
+        // const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel, payment_channel: io_data.payment_channel, tips: io_data.tips}
+				const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel, payment_channel: io_data.payment_channel}
         const data = await RestaurantApi.checkout(reqData);
-				console.log(data);
         return data
       }catch (e){
         console.log(e)

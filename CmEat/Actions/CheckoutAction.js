@@ -36,10 +36,12 @@ export default {
       }catch (e){
       }
     },
-    async checkout(comment, payment_channel, tips){
+    // async checkout(comment, payment_channel, tips){
+    async checkout(comment, payment_channel){
       try{
         const token = await AuthModule.getToken();
-        const reqData = {token,comment, payment_channel, tips};
+        // const reqData = {token,comment, payment_channel, tips};
+        const reqData = {token,comment, payment_channel};
         const data = await RestaurantModule.checkout(reqData);
         dispatch({
             actionType: AppConstants.CHECKOUT, data,

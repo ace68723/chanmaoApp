@@ -161,13 +161,13 @@ class Confirm extends Component {
       CheckoutAction.calculateDeliveryFee()
     }
     _doCheckout(){
-			if (!this.state.payment_channel) return;
+			if (this.state.payment_channel < 0) return;
       this.setState({
         loading:true,
 				showOrderConfirm:false,
       })
-      CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
-      // CheckoutAction.checkout(this.state.comment);
+      // CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
+      CheckoutAction.checkout(this.state.comment, this.state.payment_channel);
     }
     _checkout(){
 
@@ -203,12 +203,15 @@ class Confirm extends Component {
       this.props.navigator.pop();
     }
 		_goToChoosePayment(){
-			this.props.navigator.showModal({
-				screen: 'CmChooseCardType',
-				animated: true,
-				passProps:{saveModificationCallback: this._saveModificationCallback},
-				navigatorStyle: {navBarHidden: true,},
-			});
+			if (this.state.available_payment_channels.length != 1) {
+				this.props.navigator.showModal({
+					screen: 'CmChooseCardType',
+					animated: true,
+					passProps:{available_payment_channels: this.state.available_payment_channels,
+										 saveModificationCallback: this._saveModificationCallback},
+					navigatorStyle: {navBarHidden: true,},
+				});
+      }
 		}
     _goToAddressList(){
 			if(!this.state.loading){
@@ -440,6 +443,24 @@ class Confirm extends Component {
         </View>
       )
     }
+		_renderChoosePayment() {
+			if (this.state.available_payment_channels) {
+				if (this.state.available_payment_channels.length > 1) {
+					return(
+						<TouchableOpacity onPress={this._goToChoosePayment}>
+							<CartItem rightIcon={require('./Image/right.png')}
+												title={'支付'}
+												value={this.state.paymentStatus}/>
+						</TouchableOpacity>
+					)
+				}
+			}
+			return(
+				<CartItem rightIcon={require('./Image/right.png')}
+									title={'支付'}
+									value={this.state.paymentStatus}/>
+			)
+		}
 		_renderComment(){
 			return(
 				<CommentModal  style={styles.modal}
@@ -607,11 +628,7 @@ class Confirm extends Component {
 									<CartItem
 														title={'税后总价'}
 														value={'$'+this.state.total}/>
-													<TouchableOpacity onPress={this._goToChoosePayment}>
-										<CartItem rightIcon={require('./Image/right.png')}
-																title={'支付'}
-																value={this.state.paymentStatus}/>
-									</TouchableOpacity>
+									{this._renderChoosePayment()}
 									{this._renderTipInfo()}
 								</View>
 
