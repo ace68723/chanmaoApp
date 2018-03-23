@@ -85,6 +85,24 @@ export default class LoginButton extends Component {
     }
   }
 
+	_renderHeader() {
+		return(
+			<View style={{paddingBottom: 8}}>
+				<View style={{flexDirection: 'row', justifyContent: 'center'}}>
+					<Image style={{height: 25, width: 25}} source={require('./Image/order.png')}/>
+					<Text allowFontScaling={false}
+								style={{alignSelf: 'center',
+												fontSize: 16,
+												fontWeight: '700',
+												fontFamily:'FZZhunYuan-M02S'}}>在下面点餐呦</Text>
+				</View>
+				<View style={{justifyContent: 'center'}}>
+					<Image style={{height: 12, width: 12, alignSelf: 'center'}} source={require('./Image/order_down.png')}/>
+				</View>
+			</View>
+		)
+	}
+
 	_renderRestaurant({item}) {
 		const restaurant = item;
 			if(restaurant){
@@ -108,6 +126,7 @@ export default class LoginButton extends Component {
 					key='key'
 					ref={(comp) => this._scrollVew = comp}
 					data={all}
+					ListHeaderComponent={this._renderHeader}
 					renderItem={this._renderRestaurant}
 					keyExtractor={keyExtractor}
 					extraData={all}

@@ -13,8 +13,9 @@ import {
 	Text,
 	TextInput,
 	TouchableOpacity,
-  	View,
+  View,
 	FlatList,
+	ImageBackground,
 	Platform,
 	ScrollView
 } from 'react-native';
@@ -182,8 +183,47 @@ export default class CmRestaurantSearch extends Component {
 			/>
 			)
 	  }
-	_renderArea({item}){
+		// <View style={{backgroundColor:'#ff8b00', width:(width/2)-40, height:(width/2)-40}}></View>
+		// <View style={{
+		// 	flex:1,
+		// 	margin:10,
+		// 	position:'absolute',
+		// 	width:(width/2)-40, height:(width/2)-40,
+		// 	backgroundColor:'rgba(0,0,0,0.3)',
+		// 	alignItems:'center',
+		// 	justifyContent:'center'
+		// 	}}>
+		// 		<Text style={{
+		// 			color:"#ffffff",fontSize:16,fontFamily:'FZZongYi-M05S',
+		// 		}}>{area.name}</Text>
+		//  </View>
+	_renderArea({item, index}){
+		// const area_images = require.context('./Image', true);
 		let area = item;
+		let image_url = './Image/area_0.png';
+		switch (index) {
+			case 0:
+				image_url = './Image/area_0.png';
+				break;
+			case 1:
+				image_url = './Image/area_1.png';
+				break;
+			case 2:
+				image_url = './Image/area_2.png';
+				break;
+			case 3:
+				image_url = './Image/area_3.png';
+				break;
+			case 4:
+				image_url = './Image/area_4.png';
+				break;
+			case 5:
+				image_url = './Image/area_5.png';
+				break;
+			default:
+				image_url = './Image/area_0.png';
+				break;
+		}
 		if(area){
 			return(
 				<TouchableOpacity onPress={()=>{
@@ -191,26 +231,21 @@ export default class CmRestaurantSearch extends Component {
 					this.refs.searchInput.value = area.name;
 					}}
 					style={{padding:10}} >
-					<View style={{backgroundColor:'green', width:(width/2)-40, height:(width/2)-40}}></View>
-					<View style={{
-						flex:1,
-						margin:10,
-						position:'absolute',
-						width:(width/2)-40, height:(width/2)-40,
-						backgroundColor:'rgba(0,0,0,0.3)',
-						alignItems:'center',
-						justifyContent:'center'
-						}}>
-						<Text style={{
-							color:"#ffffff",fontSize:16,fontFamily:'FZZongYi-M05S',
-						}}>{area.name}</Text>
-					</View>
+					 <ImageBackground style={{height: (width/2)-40, width: (width/2)-40,alignSelf:'center'}} source={require('./Image/area_0.png')}>
+            <View style={styles.opacityView}/>
+              <View style={styles.imageTextContainer}>
+                <Text allowFontScaling={false}
+                      style={styles.imageText} allowFontScaling={false}>
+                      {area.name}
+                </Text>
+              </View>
+          </ImageBackground>
 				</TouchableOpacity>
 			)
 		}
 
 	}
-	_areaKeyExtractor = (area, index) => index + area.area +area.name;
+	_areaKeyExtractor = (area, index) => index;
 	_renderAreas(){
 		return(
 			<FlatList
@@ -332,4 +367,26 @@ const styles = StyleSheet.create({
 		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,
 
 	},
+	opacityView:{
+    flex:1,
+    opacity: 0.3,
+    backgroundColor:'#000000'
+  },
+  imageTextContainer:{
+    position:'absolute',
+    left:0,
+    top:0,
+    right:0,
+    bottom:0,
+    backgroundColor:'rgba(0,0,0,0)',
+    //flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageText: {
+   fontSize: 20,
+   color:'white',
+   alignSelf:'center',
+   fontFamily:'FZZongYi-M05S',
+  },
 });

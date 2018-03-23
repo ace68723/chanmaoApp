@@ -249,7 +249,7 @@ export default class MainTab extends Component {
 												width: (width * 0.9),
 												paddingLeft: 16,
 												justifyContent:'center',
-												backgroundColor: 'green',
+												backgroundColor: '#ff8b00',
 												marginTop: Util.isiPhoneX() === true ? 94 : 62
 											}}>
 								<View style={styles.TriangleShapeCSS} />
@@ -258,7 +258,7 @@ export default class MainTab extends Component {
 													top: -4,
 													fontWeight:'bold',
 													textAlignVertical: "center",
-													backgroundColor: 'green',}}
+													backgroundColor: '#ff8b00',}}
 													numberOfLines={1}>
 													这是正确的地址吗？距离您的位置似乎有点远。
 								</Text>
@@ -285,6 +285,6 @@ const styles = StyleSheet.create({
 	  backgroundColor: 'transparent',
 	  borderLeftColor: 'transparent',
 	  borderRightColor: 'transparent',
-	  borderBottomColor: 'green'
+	  borderBottomColor: '#ff8b00'
 	}
 });

@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
     left:0,
     right:0,
     height:headerHeight,
-    backgroundColor:'#f4f4f4',
+    // backgroundColor:'#f4f4f4',
+    backgroundColor: 'white'
   },
   backButton:{
     position:'absolute',
