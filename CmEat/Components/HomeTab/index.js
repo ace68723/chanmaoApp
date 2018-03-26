@@ -84,7 +84,7 @@ export default class HomeTab extends Component {
       <HeaderWithBanner
            bannerList={this.props.bannerList}
            navigator={this.props.navigator}/>
-          {this._renderAdv()} 
+          {this._renderAdv()}
 				<View style={{flexDirection: 'row', justifyContent: 'center'}}>
 					<Image style={{height: 25, width: 25}} source={require('./Image/order.png')}/>
 					<Text allowFontScaling={false}
@@ -146,6 +146,7 @@ export default class HomeTab extends Component {
 					renderItem={this._renderRestaurant}
 					keyExtractor={keyExtractor}
 					extraData={all}
+					onScroll={this.props.onScrollRestaurantsList}
 			/>
 		);
 

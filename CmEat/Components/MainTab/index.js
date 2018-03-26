@@ -64,6 +64,7 @@ export default class MainTab extends Component {
     this._goToRestaurantSearch = this._goToRestaurantSearch.bind(this);
 
 		this._toggleAddressPrompt = this._toggleAddressPrompt.bind(this);
+		this._onScrollRestaurantsList = this._onScrollRestaurantsList.bind(this);
   }
 	async componentDidMount(){
     await AddressAction.getAddress();
@@ -108,6 +109,13 @@ export default class MainTab extends Component {
 		this.setState({shouldRenderAddressPrompt:!this.state.shouldRenderAddressPrompt});
 	}
 
+	_onScrollRestaurantsList(event){
+		const DISMISS_OFFSET = 900;
+		if (event.nativeEvent.contentOffset.y >= DISMISS_OFFSET && this.state.shouldRenderAddressPrompt === true){
+			this.refs.HomeHeader.refs.AddressPrompt._onPress();
+		}
+	}
+
   render(){
     return(
       <View style={{flex: 1}}>
@@ -116,32 +124,24 @@ export default class MainTab extends Component {
 									advertisement={this.state.advertisement}
                   bannerList={this.state.bannerList}
 									restaurants = {this.state.areaList}
+									onScrollRestaurantsList = {this._onScrollRestaurantsList}
 									/>
         <CmEatHomeHeader
+					ref='HomeHeader'
                          handleBackToHome={this._handleBackToHome}
                          renderSearch={this.state.renderSearch}
                          toggleAddressPrompt={this._toggleAddressPrompt}
-                         goToRestaurantSearch={this._goToRestaurantSearch}/>
+                         goToRestaurantSearch={this._goToRestaurantSearch}
+												 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
+												 renderAddressPrompt={this.state.renderAddressPrompt}
+												 />
      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-	TriangleShapeCSS: {
-	  width: 0,
-	  height: 0,
-		left: 70,
-		top: -15,
-	  borderLeftWidth: 10,
-	  borderRightWidth: 10,
-	  borderBottomWidth: 10,
-	  borderStyle: 'solid',
-	  backgroundColor: 'transparent',
-	  borderLeftColor: 'transparent',
-	  borderRightColor: 'transparent',
-	  borderBottomColor: '#ea7b21'
-	}
+
 });
 
 

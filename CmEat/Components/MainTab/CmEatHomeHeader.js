@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import AddressForHomeHeader from '../Address/AddressForHomeHeader';
+import AddressPromptView from './AddressPromptView';
 
 const {width,height} = Dimensions.get('window');
 const HEADER_MAX_HEIGHT = height*0.4106;
@@ -52,33 +53,10 @@ export default class SboxHomeHeader extends Component {
             />
         </View>
 
-
-        <TouchableWithoutFeedback onPress={this._toggleAddressPrompt} >
-          <View style={{
-                    position: 'absolute',
-                    height: 36,
-                    left: (width / 2) - (width * 0.9) / 2,
-                    width: (width * 0.9),
-                    paddingLeft: 16,
-                    justifyContent:'center',
-                    backgroundColor: '#ea7b21',
-                    marginTop: headerHeight
-                  }}>
-            <View style={styles.TriangleShapeCSS} />
-            <Text style={{color:"white",
-                      fontSize:12,
-                      top: -4,
-                      fontWeight:'bold',
-                      textAlignVertical: "center",
-                      fontFamily:"FZZhunYuan-M02S",
-                      backgroundColor: '#ea7b21',}}
-                      numberOfLines={1}>
-                      这是正确的地址吗？距离您的位置似乎有点远。
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-
-
+        {this.props.shouldRenderAddressPrompt && this.props.renderAddressPrompt &&
+            <AddressPromptView
+              ref='AddressPrompt' onPress={this.props.toggleAddressPrompt} />
+        }
       </View>
     );
   }
@@ -106,4 +84,18 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     position:'absolute',
   },
+  TriangleShapeCSS: {
+    width: 0,
+    height: 0,
+    left: 70,
+    top: -15,
+    borderLeftWidth: 10,
+    borderRightWidth: 10,
+    borderBottomWidth: 10,
+    borderStyle: 'solid',
+    backgroundColor: 'transparent',
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#ea7b21'
+  }
 });
