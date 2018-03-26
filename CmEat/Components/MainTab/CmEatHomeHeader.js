@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import AddressForHomeHeader from '../Address/AddressForHomeHeader';
+import AddressPromptView from './AddressPromptView';
 
 const {width,height} = Dimensions.get('window');
 const HEADER_MAX_HEIGHT = height*0.4106;
@@ -52,6 +53,10 @@ export default class SboxHomeHeader extends Component {
             />
         </View>
 
+        {this.props.shouldRenderAddressPrompt && this.props.renderAddressPrompt &&
+            <AddressPromptView
+              ref='AddressPrompt' onPress={this.props.toggleAddressPrompt} />
+        }
       </View>
     );
   }
@@ -77,5 +82,20 @@ const styles = StyleSheet.create({
     height:headerHeight,
     backgroundColor:"#ffffff",
     flexDirection:'row',
+    position:'absolute',
   },
+  TriangleShapeCSS: {
+    width: 0,
+    height: 0,
+    left: 70,
+    top: -15,
+    borderLeftWidth: 10,
+    borderRightWidth: 10,
+    borderBottomWidth: 10,
+    borderStyle: 'solid',
+    backgroundColor: 'transparent',
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#ea7b21'
+  }
 });

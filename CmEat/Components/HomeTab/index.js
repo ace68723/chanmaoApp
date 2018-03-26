@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import {
   Animated,
+	Easing,
   Dimensions,
   Image,
   ScrollView,
@@ -20,23 +21,13 @@ import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 
 const {width,height} = Dimensions.get('window');
-let marginTop;
-let tabBarHeight;
-if(height == 812){
-  //min 34
-  //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
-  marginTop = 88+200-44;
-	tabBarHeight = 80;
-}else{
-  marginTop = 54+200-20;
-	tabBarHeight = 50;
-}
 export default class HomeTab extends Component {
 
   constructor(){
     super();
 		this.state = {
 			showScrollToResCards: true,
+			scrollToResCardsOpacity: new Animated.Value(1),
 		}
 		this._handleOnPress = this._handleOnPress.bind(this);
 		this._handleScrollToResCards = this._handleScrollToResCards.bind(this);
@@ -73,11 +64,22 @@ export default class HomeTab extends Component {
 
 	_handleOnScroll(event) {
 		if (event.nativeEvent.contentOffset.y > (207 + parseInt(this.props.advertisement.length/2) * 160)) {
-			this.setState({showScrollToResCards: false});
+			// this.setState({showScrollToResCards: false});
+			Animated.timing(this.state.scrollToResCardsOpacity, {
+	        toValue: 0,
+	        duration: 200,
+	        easing: Easing.linear
+	    }).start();
 		}
-		else if (!this.state.showScrollToResCards) {
-			this.setState({showScrollToResCards: true});
+		else {
+			// this.setState({showScrollToResCards: true});
+			Animated.timing(this.state.scrollToResCardsOpacity, {
+	        toValue: 1,
+	        duration: 200,
+	        easing: Easing.linear
+	    }).start();
 		}
+		this.props.onScrollRestaurantsList(event);
 	}
 
   _renderAdv(){
@@ -156,31 +158,34 @@ export default class HomeTab extends Component {
 	_renderScrollToResCards() {
 		if (this.state.showScrollToResCards) {
 			return(
-				<TouchableOpacity style={{position: 'absolute',
-																	flexDirection: 'row',
-																	justifyContent: 'space-around',
-																	alignItems: 'center',
-																	bottom: tabBarHeight,
+				<Animated.View style={{position: 'absolute',
+																	bottom: 0,
 																	backgroundColor: 'rgba(1,1,1,0.7)',
 																	height: 65,
 																	left: 0,
 																	right: 0,
 																	paddingLeft: 50,
-																	paddingRight: 50}}
-													activeOpacity={0.4}
-													onPress={this._handleScrollToResCards}
-													>
-						<Text style={{textAlign: 'center',
-													fontSize: 21,
-													fontWeight: '700',
-													color: 'white',
-													fontFamily:'FZZongYi-M05S'}}
-									allowFontScaling={false}>
-									下划点餐哦~
-						</Text>
-						<Image source={require('./Image/arrow-100x100.gif')}
-									 style={{height: 40, width: 40}}/>
-				</TouchableOpacity>
+																	paddingRight: 50,
+																	opacity: this.state.scrollToResCardsOpacity}}>
+						<TouchableOpacity style={{flex: 1,
+																			flexDirection: 'row',
+																			justifyContent: 'space-around',
+																			alignItems: 'center'}}
+															activeOpacity={0.4}
+															onPress={this._handleScrollToResCards}
+															>
+								<Text style={{textAlign: 'center',
+															fontSize: 21,
+															fontWeight: '700',
+															color: 'white',
+															fontFamily:'FZZongYi-M05S'}}
+											allowFontScaling={false}>
+											下划点餐哦~
+								</Text>
+								<Image source={require('./Image/arrow-100x100.gif')}
+											 style={{height: 40, width: 40}}/>
+						</TouchableOpacity>
+				</Animated.View>
 			)
 		}
 	}
