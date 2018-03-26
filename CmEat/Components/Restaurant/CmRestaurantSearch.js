@@ -208,6 +208,9 @@ export default class CmRestaurantSearch extends Component {
       case 4:
         ImageSource = require("./Image/area_4.png")
         break;
+			case 5:
+				ImageSource = require("./Image/area_5.png")
+				break;
       default:
         ImageSource = require("./Image/area_1.png")
     }
