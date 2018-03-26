@@ -52,6 +52,33 @@ export default class SboxHomeHeader extends Component {
             />
         </View>
 
+
+        <TouchableWithoutFeedback onPress={this._toggleAddressPrompt} >
+          <View style={{
+                    position: 'absolute',
+                    height: 36,
+                    left: (width / 2) - (width * 0.9) / 2,
+                    width: (width * 0.9),
+                    paddingLeft: 16,
+                    justifyContent:'center',
+                    backgroundColor: '#ea7b21',
+                    marginTop: headerHeight
+                  }}>
+            <View style={styles.TriangleShapeCSS} />
+            <Text style={{color:"white",
+                      fontSize:12,
+                      top: -4,
+                      fontWeight:'bold',
+                      textAlignVertical: "center",
+                      fontFamily:"FZZhunYuan-M02S",
+                      backgroundColor: '#ea7b21',}}
+                      numberOfLines={1}>
+                      这是正确的地址吗？距离您的位置似乎有点远。
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+
+
       </View>
     );
   }
@@ -77,5 +104,6 @@ const styles = StyleSheet.create({
     height:headerHeight,
     backgroundColor:"#ffffff",
     flexDirection:'row',
+    position:'absolute',
   },
 });

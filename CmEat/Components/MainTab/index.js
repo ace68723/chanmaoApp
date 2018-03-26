@@ -54,8 +54,8 @@ export default class MainTab extends Component {
 		const state = {
       scrollY: new Animated.Value(0),
 			restaurantCoverOpacity: new Animated.Value(0), // init restaurant tab view opacity 0
-      renderSearch:false,
-			showAddressPrompt: false,
+			renderAddressPrompt: false,
+      shouldRenderAddressPrompt:false,
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
@@ -81,9 +81,8 @@ export default class MainTab extends Component {
 		}
 	}
   _onChange(){
-    const newState = Object.assign({},HomeStore.getHomeState(),{renderSearch:true,});
+    const newState = Object.assign({},HomeStore.getHomeState(),{renderAddressPrompt:true,});
     this.setState(newState);
-
   }
   _handleBackToHome(){
     this.props.navigator.resetTo({
@@ -106,54 +105,23 @@ export default class MainTab extends Component {
   }
 
 	_toggleAddressPrompt(){
-		this.setState({showAddressPrompt:!this.state.showAddressPrompt});
+		this.setState({shouldRenderAddressPrompt:!this.state.shouldRenderAddressPrompt});
 	}
 
   render(){
     return(
       <View style={{flex: 1}}>
-      <CmEatHomeHeader
-                       handleBackToHome={this._handleBackToHome}
-                       renderSearch={this.state.renderSearch}
-                       toggleAddressPrompt={this._toggleAddressPrompt}
-                       goToRestaurantSearch={this._goToRestaurantSearch}/>
 				<HomeTab  tabLabel='主页'
 									navigator={this.props.navigator}
 									advertisement={this.state.advertisement}
                   bannerList={this.state.bannerList}
 									restaurants = {this.state.areaList}
 									/>
-
-
-
-						{this.state.showAddressPrompt &&
-						<TouchableWithoutFeedback onPress={this._toggleAddressPrompt} >
-							<View style={{
-												position: 'absolute',
-												height: 36,
-												left: (width / 2) - (width * 0.9) / 2,
-												width: (width * 0.9),
-												paddingLeft: 16,
-												justifyContent:'center',
-												backgroundColor: '#ea7b21',
-												marginTop: Util.isiPhoneX() === true ? 94 : 62
-											}}>
-								<View style={styles.TriangleShapeCSS} />
-								<Text style={{color:"white",
-													fontSize:12,
-													top: -4,
-													fontWeight:'bold',
-													textAlignVertical: "center",
-                          fontFamily:"FZZhunYuan-M02S",
-													backgroundColor: '#ea7b21',}}
-													numberOfLines={1}>
-													这是正确的地址吗？距离您的位置似乎有点远。
-								</Text>
-							</View>
-						</TouchableWithoutFeedback>
-					}
-
-
+        <CmEatHomeHeader
+                         handleBackToHome={this._handleBackToHome}
+                         renderSearch={this.state.renderSearch}
+                         toggleAddressPrompt={this._toggleAddressPrompt}
+                         goToRestaurantSearch={this._goToRestaurantSearch}/>
      </View>
     )
   }
@@ -175,3 +143,34 @@ const styles = StyleSheet.create({
 	  borderBottomColor: '#ea7b21'
 	}
 });
+
+
+
+
+					// 	{this.state.shouldRenderAddressPrompt &&
+          //    this.state.renderAddressPrompt &&
+					// 	<TouchableWithoutFeedback onPress={this._toggleAddressPrompt} >
+					// 		<View style={{
+					// 							position: 'absolute',
+					// 							height: 36,
+					// 							left: (width / 2) - (width * 0.9) / 2,
+					// 							width: (width * 0.9),
+					// 							paddingLeft: 16,
+					// 							justifyContent:'center',
+					// 							backgroundColor: '#ea7b21',
+					// 							marginTop: Util.isiPhoneX() === true ? 94 : 62
+					// 						}}>
+					// 			<View style={styles.TriangleShapeCSS} />
+					// 			<Text style={{color:"white",
+					// 								fontSize:12,
+					// 								top: -4,
+					// 								fontWeight:'bold',
+					// 								textAlignVertical: "center",
+          //                 fontFamily:"FZZhunYuan-M02S",
+					// 								backgroundColor: '#ea7b21',}}
+					// 								numberOfLines={1}>
+					// 								这是正确的地址吗？距离您的位置似乎有点远。
+					// 			</Text>
+					// 		</View>
+					// 	</TouchableWithoutFeedback>
+					// }
