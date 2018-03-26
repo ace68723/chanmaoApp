@@ -14,6 +14,7 @@ import {
   View,
 } from 'react-native';
 
+import Header from '../General/Header';
 import SecondMenuAction from '../../Actions/SecondMenuAction';
 import SecondMenuStore from '../../Stores/SecondMenuStore';
 import CheckoutAction from '../../Actions/CheckoutAction';
@@ -121,7 +122,10 @@ export default class SecondMenu extends Component {
                           marginLeft:10,
                           borderRadius:15,
                           backgroundColor:"rgba(0,0,0,0.4)"}}>
-                <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
+                <Text style={{fontSize:25,
+															textAlign:"center",
+															color:"#ffffff",
+															marginTop:-2}}>
                   ×
                 </Text>
             </View>
@@ -148,7 +152,8 @@ export default class SecondMenu extends Component {
 					                onPress={() => this._deleteHandler()}>
 						<Text style={{textAlign:'center',
 													fontSize:15,
-													fontWeight: '300'}}
+													fontWeight: '300',
+													fontFamily:'FZZhunYuan-M02S'}}
 									 numberOfLines={1}>
 													删除
 						</Text>
@@ -185,7 +190,7 @@ export default class SecondMenu extends Component {
 															flexDirection: 'row'}}
 											activeOpacity={0.4}
 											onPress={this._handleToppingOnPress.bind(null,{tpg_id, 'tp_id': key})}>
-											<Text style={{fontSize: 15, marginRight: 8}}>
+											<Text style={{fontSize: 15, marginRight: 8, fontFamily:'FZZhunYuan-M02S'}}>
 													{tps[key].tp_name} ${tps[key].tp_price}
 											</Text>
 											<Text style={{fontSize: 15,
@@ -193,7 +198,8 @@ export default class SecondMenu extends Component {
 																		overflow: 'hidden',
 																		width: 20,
 																		backgroundColor: '#D4D4D4',
-																		borderRadius: 10}}>
+																		borderRadius: 10,
+																		fontFamily:'FZZhunYuan-M02S'}}>
 													{tps[key].quantity}
 											</Text>
 								</TouchableOpacity>
@@ -208,7 +214,7 @@ export default class SecondMenu extends Component {
 																borderColor:'#ff8b00',
 																borderWidth:1,
 																borderRadius:6,}}>
-										<Text style={{fontSize: 15, color:'#ff8b00',}}> - </Text>
+										<Text style={{fontSize: 15, color:'#ff8b00', fontFamily:'FZZhunYuan-M02S'}}> - </Text>
 									</View>
 								</TouchableOpacity>
 
@@ -231,7 +237,7 @@ export default class SecondMenu extends Component {
 															flexDirection: 'row'}}
 											activeOpacity={0.4}
 											onPress={this._handleToppingOnPress.bind(null,{tpg_id, 'tp_id': key})}>
-											<Text style={{fontSize: 15, marginRight: 8}}>
+											<Text style={{fontSize: 15, marginRight: 8, fontFamily:'FZZhunYuan-M02S'}}>
 													{tps[key].tp_name} ${tps[key].tp_price}
 											</Text>
 								</TouchableOpacity>
@@ -263,8 +269,8 @@ export default class SecondMenu extends Component {
 													backgroundColor: '#f5f5f5',
 													paddingTop: 5,
 													paddingBottom: 5}}>
-								<Text style={{marginLeft: 20, fontSize: 16}}>{toppingGroupList[key].tpg_name}</Text>
-								<Text style={{fontSize: 16, color: '#a5a5a5'}}>{optionReminder}</Text>
+								<Text style={{marginLeft: 20, fontSize: 16, fontFamily:'FZZhunYuan-M02S'}}>{toppingGroupList[key].tpg_name}</Text>
+								<Text style={{fontSize: 16, color: '#a5a5a5', fontFamily:'FZZhunYuan-M02S'}}>{optionReminder}</Text>
 						</View>
 						<View style={{flexDirection: 'row',
 													flexWrap: 'wrap',
@@ -292,15 +298,25 @@ export default class SecondMenu extends Component {
 					<TouchableOpacity style={{}}
 														onPress={this._updateProductQty.bind(null,-1)}
 														activeOpacity={0.4}>
-							<Text style={{fontSize: 15, paddingTop: 5, paddingBottom: 5, width: 30, textAlign: 'center'}}>-</Text>
+							<Text style={{fontSize: 15,
+														paddingTop: 5,
+														paddingBottom: 5,
+														width: 30,
+														textAlign: 'center',
+														fontFamily:'FZZhunYuan-M02S'}}>-</Text>
 					</TouchableOpacity>
-					<Text style={{paddingTop: 5, paddingBottom: 5}}>
+					<Text style={{paddingTop: 5, paddingBottom: 5, fontFamily:'FZZhunYuan-M02S'}}>
 							{this.state.qty}
 					</Text>
 					<TouchableOpacity style={{}}
 														onPress={this._updateProductQty.bind(null,1)}
 														activeOpacity={0.4}>
-							<Text style={{fontSize: 15, paddingTop: 5, paddingBottom: 5, width: 30, textAlign: 'center'}}>+</Text>
+							<Text style={{fontSize: 15,
+														paddingTop: 5,
+														paddingBottom: 5,
+														width: 30,
+														textAlign: 'center',
+														fontFamily:'FZZhunYuan-M02S'}}>+</Text>
 					</TouchableOpacity>
 			</View>
 		)
@@ -331,39 +347,44 @@ export default class SecondMenu extends Component {
                         textAlign: 'center',
                         color: 'white',
                         fontSize: 16,
-                        fontWeight: '700'}}>
+                        fontWeight: '700',
+												fontFamily:'FZZhunYuan-M02S'}}>
               {confirmMsg}
           </Text>
           <Text style={{flex: 1,
                         textAlign: 'right',
                         marginRight: 20,
                         color: 'white',
-                        fontSize: 16}}>
+                        fontSize: 16,
+												fontFamily:'FZZhunYuan-M02S'}}>
               ${(this.state.total * this.state.qty).toFixed(2)}
           </Text>
       </TouchableOpacity>
     )
   }
-
+	// <View style={[styles.navigation, {height: navigationHeight}]}>
+	// 		<View style={styles.back}>
+	// 				{this._renderLeftButton()}
+	// 		</View>
+	// 		<View style={styles.title}>
+	// 				<Text style={{textAlign:'center',
+	// 											fontSize:20,
+	// 											fontWeight: '700',
+	// 											fontFamily:'FZZhunYuan-M02S'}}
+	// 							 numberOfLines={1}>
+	// 											{this.props.dish.ds_name}
+	// 				</Text>
+	// 		</View>
+	// 		<View style={styles.right}>
+	// 				{this._renderRightButton()}
+	// 		</View>
+	// </View>
   render() {
     return(
       <View style={styles.viewController}>
-          <View style={[styles.navigation, {height: navigationHeight}]}>
-              <View style={styles.back}>
-                  {this._renderLeftButton()}
-              </View>
-              <View style={styles.title}>
-                  <Text style={{textAlign:'center',
-                                fontSize:20,
-                                fontWeight: '700'}}
-                         numberOfLines={1}>
-                                {this.props.dish.ds_name}
-                  </Text>
-              </View>
-              <View style={styles.right}>
-								  {this._renderRightButton()}
-              </View>
-          </View>
+					<Header title={this.props.dish.ds_name}
+									goBack={this._goBack}
+									leftButtonText={'x'}/>
           <ScrollView style={{paddingBottom: 50}}>
               {this._renderToppingGroupList(this.state.toppingGroupList)}
               {this._renderQtyButton()}

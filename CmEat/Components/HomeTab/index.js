@@ -16,6 +16,7 @@ import {
 
 import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
+import HeaderWithBanner from './HeaderWithBanner';
 
 const {width,height} = Dimensions.get('window');
 let marginTop
@@ -26,22 +27,14 @@ if(height == 812){
 }else{
   marginTop = 54+200-20;
 }
-export default class LoginButton extends Component {
+export default class HomeTab extends Component {
 
   constructor(){
     super();
 		this._handleOnPress = this._handleOnPress.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
+    this._renderHeader = this._renderHeader.bind(this);
   }
-	componentDidMount(){
-
-    const index = this.props.index;
-		const scrollView = this.refs._scrollVew;
-		const scrollViewContent = this.refs._scrollViewContent;
-		const ref = Object.assign({},{index,scrollView,scrollViewContent})
-		this.props.getScrollViewRefs(ref);
-	}
-
 	_handleOnPress(advertisement){
 		if(advertisement.navitype == 2){
       const {url} = advertisement.naviparam;
@@ -85,6 +78,28 @@ export default class LoginButton extends Component {
     }
   }
 
+	_renderHeader() {
+		return(
+			<View style={{paddingBottom: 8}}>
+      <HeaderWithBanner
+           bannerList={this.props.bannerList}
+           navigator={this.props.navigator}/>
+          {this._renderAdv()} 
+				<View style={{flexDirection: 'row', justifyContent: 'center'}}>
+					<Image style={{height: 25, width: 25}} source={require('./Image/order.png')}/>
+					<Text allowFontScaling={false}
+								style={{alignSelf: 'center',
+												fontSize: 16,
+												fontWeight: '700',
+												fontFamily:'FZZhunYuan-M02S'}}>在下面点餐呦</Text>
+				</View>
+				<View style={{justifyContent: 'center'}}>
+					<Image style={{height: 12, width: 12, alignSelf: 'center'}} source={require('./Image/order_down.png')}/>
+				</View>
+			</View>
+		)
+	}
+
 	_renderRestaurant({item}) {
 		const restaurant = item;
 			if(restaurant){
@@ -107,6 +122,7 @@ export default class LoginButton extends Component {
 					key='key'
 					ref={(comp) => this._scrollVew = comp}
 					data={all}
+					ListHeaderComponent={this._renderHeader}
 					renderItem={this._renderRestaurant}
 					keyExtractor={keyExtractor}
 					extraData={all}
@@ -116,7 +132,7 @@ export default class LoginButton extends Component {
   render(){
 
     if (this.props.restaurants.length == 0){
-			return;
+			return <View/>;
 		}
 		let all = this.props.restaurants[0].restaurantList;
 		let keyExtractor = (item, index) => item.area + item.rid;
@@ -126,6 +142,7 @@ export default class LoginButton extends Component {
 					key='key'
 					ref={(comp) => this._scrollVew = comp}
 					data={all}
+          ListHeaderComponent={this._renderHeader}
 					renderItem={this._renderRestaurant}
 					keyExtractor={keyExtractor}
 					extraData={all}

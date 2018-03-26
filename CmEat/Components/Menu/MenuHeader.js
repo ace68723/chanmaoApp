@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 const {width,height} = Dimensions.get('window');
-export default class LoginButton extends Component {
+export default class MenuHeader extends Component {
 
   constructor(props){
     super();

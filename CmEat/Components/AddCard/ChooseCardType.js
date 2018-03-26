@@ -104,7 +104,7 @@ export default class ChooseCardType extends Component {
           style={styles.box}
           onPress={()=>{}}
           >
-            <Text style={styles.box_text}>{name}</Text>
+            <Text allowFontScaling={false} style={styles.box_text}>{name}</Text>
         </TouchableOpacity>
       )
     }
@@ -124,14 +124,16 @@ export default class ChooseCardType extends Component {
                       backgroundColor: 'white',
                       borderBottomWidth: 1,
                       borderColor: "#D5D5D5"}}>
-              <Text style={{flex: 1,
+              <Text allowFontScaling={false}
+                    style={{flex: 1,
                             fontSize: 18,
                             textAlign: 'left',
                             marginLeft :20,
                             color:"#808080",}}>
                         信用卡
               </Text>
-              <Text style={styles.arrowText}>
+              <Text allowFontScaling={false}
+                    style={styles.arrowText}>
                 >
               </Text>
           </TouchableOpacity>
@@ -146,14 +148,15 @@ export default class ChooseCardType extends Component {
                       backgroundColor: 'white',
                       borderBottomWidth: 1,
                       borderColor: "#D5D5D5"}}>
-              <Text style={{flex: 1,
+              <Text allowFontScaling={false}
+                    style={{flex: 1,
                             fontSize: 18,
                             textAlign: 'left',
                             marginLeft :20,
                             color:"#808080",}}>
                             借记卡
               </Text>
-              <Text style={styles.arrowText}>
+              <Text allowFontScaling={false} style={styles.arrowText}>
                 >
               </Text>
           </TouchableOpacity>
@@ -170,14 +173,15 @@ export default class ChooseCardType extends Component {
                       backgroundColor: 'white',
                       borderBottomWidth: 1,
                       borderColor: "#D5D5D5"}}>
-              <Text style={{flex: 1,
+              <Text allowFontScaling={false}
+                    style={{flex: 1,
                             fontSize: 18,
                             textAlign: 'left',
                             marginLeft :20,
                             color:"#808080",}}>
                             支付宝
               </Text>
-              <Text style={styles.arrowText}>
+              <Text allowFontScaling={false} style={styles.arrowText}>
                 >
               </Text>
           </TouchableOpacity>
@@ -192,14 +196,15 @@ export default class ChooseCardType extends Component {
                       paddingBottom: 12,
                       alignItems: 'center',
                       backgroundColor: 'white'}}>
-              <Text style={{flex: 1,
+              <Text allowFontScaling={false}
+                    style={{flex: 1,
                             fontSize: 18,
                             textAlign: 'left',
                             marginLeft :20,
                             color:"#808080",}}>
                             现金
               </Text>
-              <Text style={styles.arrowText}>
+              <Text allowFontScaling={false} style={styles.arrowText}>
                 >
               </Text>
           </TouchableOpacity>

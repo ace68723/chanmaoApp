@@ -245,11 +245,14 @@ export default class pastOrderEN extends Component {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        borderBottomWidth: 1,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
                         borderColor: '#b3b3b8'}}>
               <Text style={{fontSize:20,
                             textAlign:'center',
-                            paddingBottom:10}}>确认评价</Text>
+                            paddingBottom:10,
+                            fontFamily:'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
+              确认评价</Text>
           </View>
           <View style={{flex: 1,
                         flexDirection: 'row',
@@ -263,14 +266,20 @@ export default class pastOrderEN extends Component {
                                   onPress={this._hideConfirmSection}>
                     <Text style={{alignSelf: 'center',
                                   fontSize:18,
-                                  textAlign:'center'}}>取消</Text>
+                                  textAlign:'center',
+                                  fontFamily:'FZZhunYuan-M02S'}}
+                          allowFontScaling={false}>
+                    取消</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={{flex: 1}}
                               onPress={this._handleConfirm}>
                 <Text style={{fontSize:18,
                               textAlign:'center',
-                              color: '#ff8b00'}}>确定</Text>
+                              color: '#ff8b00',
+                              fontFamily:'FZZhunYuan-M02S'}}
+                      allowFontScaling={false}>
+                确定</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -306,9 +315,10 @@ export default class pastOrderEN extends Component {
               <Text style={{marginRight: 20,
                             padding: 6,
                             borderRadius: 15,
-                            borderWidth: 1,
+                            borderWidth: StyleSheet.hairlineWidth,
                             borderColor: '#b3b3b8',
-                            marginBottom: 5}}>
+                            marginBottom: 5,
+                            fontFamily:'FZZhunYuan-M02S'}}>
                     {text}
               </Text>
           </TouchableOpacity>
@@ -317,44 +327,51 @@ export default class pastOrderEN extends Component {
       return _commentList;
     };
     return (
-      <View style={{marginTop: 20,
+      <View style={{marginTop: 10,
                     backgroundColor: 'white',
-                    borderTopWidth: 1,
+                    borderTopWidth: StyleSheet.hairlineWidth,
                     borderTopColor: '#b3b3b8',
-                    borderBottomWidth: 1,
+                    borderBottomWidth: StyleSheet.hairlineWidth,
                     borderBottomColor: '#b3b3b8'}}>
           <View style={{flexDirection: 'row',
                         padding: 20,
-                        borderBottomWidth: 1,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
                         borderBottomColor: '#b3b3b8',
                         alignItems: 'center'}}>
               <Image style={{width:35,height:35}}source={require('./Image/wechat3.png')}/>
               <View style={{flex: 1,
                             flexDirection: 'column',
                             marginLeft: 10}}>
-                  <Text style={{fontSize: 18}}>馋猫专送</Text>
+                  <Text style={{fontSize: 18, fontFamily:'FZZhunYuan-M02S'}} allowFontScaling={false}>馋猫专送</Text>
                   <View style={{flex: 1,
                                 flexDirection: 'row',
                                 justifyContent: 'space-between'}}>
-                      <Text style={{fontSize: 14}}>
+                      <Text style={{fontSize: 14, fontFamily:'FZZhunYuan-M02S'}}
+                            allowFontScaling={false}>
                           今日{this.state.complete_time.toString().split(" ")[4]}左右送达
                       </Text>
                       <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={this._handleChangeTime}>
-                          <Text style={{color: '#ff8b00', fontSize: 14}}>更正</Text>
-                          <Text style={{width: 14,
+                          <Text style={{color: '#ff8b00', fontSize: 14, fontFamily:'FZZhunYuan-M02S'}}
+                                allowFontScaling={false}>
+                          更正</Text>
+                          <Text allowFontScaling={false}
+                                style={{width: 14,
                                         height: 14,
                                         fontSize: 11,
                                         textAlign: 'center',
                                         color: '#ff8b00',
-                                        borderWidth: 1,
+                                        borderWidth: StyleSheet.hairlineWidth,
                                         borderColor: '#ff8b00',
-                                        borderRadius: 7}}>></Text>
+                                        borderRadius: 7,
+                                        fontFamily:'FZZhunYuan-M02S'}}>></Text>
                       </TouchableOpacity>
                   </View>
               </View>
           </View>
           <View style={{padding: 20}}>
-              <Text style={{textAlign: 'center', marginBottom: 20}}>为配送打分</Text>
+              <Text allowFontScaling={false}
+                    style={{textAlign: 'center', marginBottom: 20, fontFamily:'FZZhunYuan-M02S'}}>
+              为配送打分</Text>
               <View style={{flexDirection: 'row',
                             justifyContent: 'space-around',
                             marginBottom: 20,
@@ -369,10 +386,11 @@ export default class pastOrderEN extends Component {
                   {commentList()}
               </View>
               <TextInput style={{height: 80,
-                                 borderWidth: 1,
+                                 borderWidth: StyleSheet.hairlineWidth,
                                  borderColor: '#b3b3b8',
                                  textAlignVertical: 'top',
-                                 padding: 10}}
+                                 padding: 10,
+                                 fontFamily:'FZZhunYuan-M02S'}}
                          underlineColorAndroid='transparent'
                          value={this.state.driver_comment}
                          placeholder={"写下您对司机的评价吧~"}
@@ -412,12 +430,14 @@ export default class pastOrderEN extends Component {
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleRestaurantQuickComments(text)}>
-              <Text style={{marginRight: 20,
+              <Text allowFontScaling={false}
+                    style={{marginRight: 20,
                             padding: 6,
                             borderRadius: 15,
-                            borderWidth: 1,
+                            borderWidth: StyleSheet.hairlineWidth,
                             borderColor: '#b3b3b8',
-                            marginBottom: 5}}>
+                            marginBottom: 5,
+                            fontFamily:'FZZhunYuan-M02S'}}>
                     {text}
               </Text>
           </TouchableOpacity>
@@ -459,30 +479,43 @@ export default class pastOrderEN extends Component {
         }
         _dishList.push(
           <View key={dish.otid} style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12}}>
-            <Text style={{color: '#a5a5a5'}}>{dish.name}</Text>
+            <Text allowFontScaling={false}
+                  style={{color: '#a5a5a5', fontFamily:'FZZhunYuan-M02S'}}>{dish.name}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity style={{flexDirection: 'row',
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                         borderRadius: 15,
-                                        borderWidth: 1,
+                                        borderWidth: StyleSheet.hairlineWidth,
                                         borderColor: thump_up_color,
                                         height: 28,
                                         marginRight: 20}}
                                 onPress={() => this._handleDishLike(dish)}>
                 {thump_up_image()}
-                <Text style={{marginLeft: 5, marginRight: 5, fontSize: 16, color: thump_up_color}}>赞</Text>
+                <Text allowFontScaling={false}
+                      style={{marginLeft: 5,
+                              marginRight: 5,
+                              fontSize: 16,
+                              color: thump_up_color,
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                      赞</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{flexDirection: 'row',
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                         borderRadius: 15,
-                                        borderWidth: 1,
+                                        borderWidth: StyleSheet.hairlineWidth,
                                         borderColor: thump_down_color,
                                         height: 28,}}
                                 onPress={() => this._handleDishDislike(dish)}>
                 {thump_down_image()}
-                <Text style={{marginLeft: 5, marginRight: 5, fontSize: 16, color: thump_down_color}}>踩</Text>
+                <Text allowFontScaling={false}
+                      style={{marginLeft: 5,
+                              marginRight: 5,
+                              fontSize: 16,
+                              color: thump_down_color,
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                      踩</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -491,17 +524,20 @@ export default class pastOrderEN extends Component {
       return _dishList;
     };
     return(
-      <View style={{marginTop: 20,
+      <View style={{marginTop: 10,
                     backgroundColor: 'white',
-                    borderTopWidth: 1,
+                    borderTopWidth: StyleSheet.hairlineWidth,
                     borderTopColor: '#b3b3b8',
-                    borderBottomWidth: 1,
+                    borderBottomWidth: StyleSheet.hairlineWidth,
                     borderBottomColor: '#b3b3b8',
                     marginBottom: 50}}>
           <ImageBackground style={{height: 110, width: width,alignSelf:'center'}} source={{uri:this.props.orderInfo.rr_url}}>
             <View style={styles.opacityView}/>
               <View style={styles.imageTextContainer}>
-                <Text style={styles.imageText} allowFontScaling={false}>{this.props.orderInfo.rr_name}</Text>
+                <Text allowFontScaling={false}
+                      style={styles.imageText} allowFontScaling={false}>
+                      {this.props.orderInfo.rr_name}
+                </Text>
               </View>
           </ImageBackground>
           <View style={{padding: 20}}>
@@ -520,14 +556,15 @@ export default class pastOrderEN extends Component {
               </View>
               <TextInput style={{height: 80,
                                  marginBottom: 20,
-                                 borderWidth: 1,
+                                 borderWidth: StyleSheet.hairlineWidth,
                                  borderColor: '#b3b3b8',
                                  textAlignVertical: 'top',
-                                 padding: 10}}
+                                 padding: 10,
+                                 fontFamily:'FZZhunYuan-M02S'}}
                          underlineColorAndroid='transparent'
                          value={this.state.restaurant_comment}
                          placeholder={"写下您对商家的评价吧~"}
-                         onFocus={() => this._handleInputOnFocus(430)}
+                         onFocus={() => this._handleInputOnFocus(420)}
                          onChangeText={(text) => this._handleRestaurantComments(text)}
                          multiline = {true}>
               </TextInput>
@@ -562,7 +599,11 @@ export default class pastOrderEN extends Component {
                         height: acceptButtonHeight,
                         justifyContent: 'center'}}
                 onPress={() => this.setState({modalVisible: false})}>
-                  <Text style={{textAlign: 'center',color: 'white', fontSize: 18}}>
+                  <Text allowFontScaling={false}
+                        style={{textAlign: 'center',
+                                color: 'white',
+                                fontSize: 18,
+                                fontFamily:'FZZhunYuan-M02S'}}>
                     确定
                   </Text>
                 </TouchableOpacity>

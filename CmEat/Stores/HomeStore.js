@@ -31,7 +31,12 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
   saveHomeData(res){
 		 const bannerList = res.homeData.zone1;
 		 const advertisement = res.homeData.zone2;
-		 const areaList = res.areaList;
+		 const areaList = [];
+     let index = 0;
+     while (index < res.areaList.length) {
+       areaList.push({...res.areaList[index], image: './Image/area_' + index.toString() + '.png'});
+       index++;
+     }
 		 this.state = Object.assign({},this.state,{bannerList,advertisement,areaList})
   },
   getRestaurantWithRid(rid){

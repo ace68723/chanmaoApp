@@ -14,7 +14,7 @@ import {
 
 
 const {width,height} = Dimensions.get('window');
-export default class LoginButton extends Component {
+export default class EmptyView extends Component {
 
   constructor(){
     super();

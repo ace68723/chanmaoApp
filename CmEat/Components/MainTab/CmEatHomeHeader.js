@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import {
-  Animated,
   Dimensions,
   Image,
   View,
@@ -32,32 +31,6 @@ if(height == 812){
 export default class SboxHomeHeader extends Component {
 
   render() {
-    const headerTop = this.props.scrollY.interpolate({
-      inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
-      outputRange: [0, 0],
-      extrapolate: 'clamp',
-    });
-    const headerBackgroud = this.props.scrollY.interpolate({
-      inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
-      outputRange: ['rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)'],
-      extrapolate: 'clamp',
-    });
-    const searchBorderColor = this.props.scrollY.interpolate({
-      inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
-      outputRange: ['rgba(255, 255, 255, 0)', '#848689'],
-      extrapolate: 'clamp',
-    });
-    const fontColor = this.props.scrollY.interpolate({
-      inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
-      outputRange: ['#414042', '#808080'],
-      extrapolate: 'clamp',
-    });
-    const backIconColor = this.props.scrollY.interpolate({
-      inputRange: [HEADER_SCROLL_DISTANCE - height*0.0811*2, HEADER_SCROLL_DISTANCE - height*0.081],
-      outputRange: [0, 1],
-      extrapolate: 'clamp',
-    });
-
     return (
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={this.props.handleBackToHome}>
@@ -78,7 +51,7 @@ export default class SboxHomeHeader extends Component {
             toggleAddressPrompt={this.props.toggleAddressPrompt}
             />
         </View>
-        
+
       </View>
     );
   }
@@ -103,7 +76,6 @@ const styles = StyleSheet.create({
     width:width,
     height:headerHeight,
     backgroundColor:"#ffffff",
-    position:'absolute',
     flexDirection:'row',
   },
 });

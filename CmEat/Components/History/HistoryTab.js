@@ -23,7 +23,19 @@ import {
 
 } from 'react-native';
 
+const {height, width} = Dimensions.get('window');
+let marginTop,headerHeight,acceptButtonHeight;
+if(height == 812){
+  marginTop = 34;
+  headerHeight = 88;
+  acceptButtonHeight = 80;
+}else{
+  marginTop = 20;
+  headerHeight = 64;
+  acceptButtonHeight = 40;
+}
 import Order from './Order';
+import TabBar from './TabBar';
 import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
 import HomeStore from '../../Stores/HomeStore'
@@ -211,14 +223,14 @@ class HistoryTab extends Component {
 					<TouchableOpacity
 						style={{flex: 1, padding: 20}}
 						onPress={() => this.setState({renderingPage: 0})}>
-						<Text style={{textAlign: 'center', color: firstFilterColor}}>
+						<Text style={{textAlign: 'center', color: firstFilterColor, fontFamily:'FZZhunYuan-M02S'}}>
 							全部订单
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={{flex: 1, padding: 20}}
 						onPress={() => this.setState({renderingPage: 1})}>
-						<Text style={{textAlign: 'center', color: secondFilterColor}}>
+						<Text style={{textAlign: 'center', color: secondFilterColor, fontFamily:'FZZhunYuan-M02S'}}>
 							待评价
 						</Text>
 					</TouchableOpacity>
@@ -236,22 +248,18 @@ class HistoryTab extends Component {
     render(){
       return(
          <View style={styles.mainContainer}>
-						 <Header title={'我的订单'}
-							 			 goBack={this._goBack}
-		 								 leftButtonText={'x'}/>
 						 <ScrollableTabView
 	 			        tabBarBackgroundColor={'#fff'}
-	 			        tabBarActiveTextColor={'#ff7685'}
-	 			        tabBarUnderlineColor={'#ff7685'}
-	 			        tabBarUnderlineStyle={{'backgroundColor':'#ff7685'}}
+	 			        tabBarActiveTextColor={'#ff8b00'}
+	 			        tabBarUnderlineColor={'#ff8b00'}
+	 			        tabBarUnderlineStyle={{'backgroundColor':'#ff8b00'}}
 	 			        tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',}}
 	 			        tabBarInactiveTextColor={'#666666'}
 	 			        prerenderingSiblingsNumber={3}
 	 			        tabBarPosition = "top"
 	 			        initialPage={0}
-								page={this.state.renderingPage}
-	 			        style={{flex:1}}
-				        renderTabBar={() => this._renderFilter(this.state.renderingPage)}
+	 			        style={{flex:1, marginTop: marginTop}}
+				        renderTabBar={() => <TabBar/>}
 								onChangeTab={this._handleOnChangeTab}
 		 			      >
 		 			      <AllOrders
@@ -262,7 +270,7 @@ class HistoryTab extends Component {
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
-										tabLabel="首页"/>
+										tabLabel="全部订单"/>
 								<OrdersNotReviewed
 										navigator={this.props.navigator}
 										orderData={this.state.orderData}
@@ -271,7 +279,7 @@ class HistoryTab extends Component {
 										goToComments={this._goToComments}
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
-										tabLabel="首页"/>
+										tabLabel="待评价"/>
 	 			     </ScrollableTabView>
 						 <Modal style={styles.modal}
 						 			 position={"center"}
@@ -280,6 +288,20 @@ class HistoryTab extends Component {
 						 			 swipeToClose={false}>
 						 		 {this._HistoryOrderDetail()}
 						 </Modal>
+						 <TouchableOpacity style={{paddingTop:5,
+	                                     paddingLeft:10,
+	                                     paddingRight:20,
+	                                     paddingBottom:20,
+	                                     position:'absolute',
+	                                     top:marginTop,
+	                                     left:0,}}
+	                             onPress={this._goBack}>
+	             <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
+	               <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
+	                 ×
+	               </Text>
+	             </View>
+	           </TouchableOpacity>
 
          </View>
       )

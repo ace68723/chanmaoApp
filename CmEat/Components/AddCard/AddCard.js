@@ -325,7 +325,8 @@ export default class MyComponent extends Component {
                             bottom:0,
                             marginLeft:40,
                             flexDirection:'row'}} >
-                    <Text style={{fontSize:25,
+                    <Text allowFontScaling={false}
+                          style={{fontSize:25,
                                   backgroundColor:'transparent'}} >
                                   {this.state.cardNumber}
                     </Text>

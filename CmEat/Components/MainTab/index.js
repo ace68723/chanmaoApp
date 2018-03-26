@@ -18,7 +18,7 @@ import _forEach from 'lodash/forEach';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import DefaultTabBar from './DefaultTabBar';
-import HeaderWithBanner from './HeaderWithBanner';
+
 import CmEatHomeHeader from './CmEatHomeHeader';
 
 import HomeTab from '../HomeTab/'
@@ -60,12 +60,8 @@ export default class MainTab extends Component {
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
     this._onChange = this._onChange.bind(this);
-    this._scrollEventBind = this._scrollEventBind.bind(this);
-    this._getScrollViewRefs= this._getScrollViewRefs.bind(this);
     this._handleBackToHome = this._handleBackToHome.bind(this);
     this._goToRestaurantSearch = this._goToRestaurantSearch.bind(this);
-		this._onChangeTab = this._onChangeTab.bind(this);
-		this.showBanner = true;
 
 		this._toggleAddressPrompt = this._toggleAddressPrompt.bind(this);
   }
@@ -89,18 +85,6 @@ export default class MainTab extends Component {
     this.setState(newState);
 
   }
-  // ui methond
-  _scrollEventBind(){
-    return(
-      Animated.event(
-          [{nativeEvent: {contentOffset: {y: this.state.scrollY}}}],
-          // { useNativeDriver: true }
-        )
-    )
-  }
-  _getScrollViewRefs(ref:object){
-      this.scrollViewRefs = [...this.scrollViewRefs,ref]
-  }
   _handleBackToHome(){
     this.props.navigator.resetTo({
         screen: 'cmHome',
@@ -108,95 +92,6 @@ export default class MainTab extends Component {
         animationType: 'fade',
         navigatorStyle: {navBarHidden: true},
       });
-  }
-  _setPosition(){
-    try {
-      if (this.setPositionStarted) return
-      this.setPositionStarted = true;
-      setTimeout(()=>{
-        this.setPositionStarted = false;
-      }, 500);
-      if(_scrollY != this.state.scrollY._value ){
-         if(this.state.scrollY._value <= HEADER_MAX_HEIGHT){
-             _scrollY = this.state.scrollY._value;
-
-             _forEach(this.scrollViewRefs,(ref,index)=>{
-                  if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-                  ref.scrollView.scrollToOffset({offset: this.state.scrollY._value,animated:false});
-             })
-
-         } else {
-           _forEach(this.scrollViewRefs,(ref,index)=>{
-              if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-               // ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
-                 // if( py>40 ){
-                   _scrollY = HEADER_MAX_HEIGHT;
-                   ref.scrollView.scrollToOffset({offset: HEADER_MAX_HEIGHT,animated:false});
-                 // }
-                // });
-           })
-         }
-      }
-    } catch (e) {
-      console.log(e)
-    }
-
-  }
-  // setPosition(){
-  //   try {
-  //     if(this.scrollViewRefs.length === 0 || _scrollY === this.state.scrollY._value) return
-  //
-  //     if(this.state.scrollY._value<=200+width*0.4831*1.3699){
-  //       _forEach(this.scrollViewRefs,(ref,index)=>{
-  //         if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-  //         ref.scrollView.scrollToOffset({offset:this.state.scrollY._value,animated: false});
-  //       })
-  //     }
-       // if(this.state.scrollY._value<=200+height*0.081){
-       //
-    		// 	 _scrollY = this.state.scrollY._value;
-    		// 	 _forEach(this.scrollViewRefs,(ref,index)=>{
-       //       if(index == 0) {ref.scrollView.scrollTo({y:this.state.scrollY._value,animated: false});return};
-       //       if(!ref.scrollView.scrollToOffset){console.log(ref,index);return}
-    		// 		  if(ref.index != this.state.currentTab){
-    		// 			 ref.scrollView.scrollToOffset({offset:this.state.scrollY._value,animated: false});
-    		// 		  }
-    		// 	 })
-       //
-       // }else {
-       //
-       //   _forEach(this.scrollViewRefs,(ref,index)=>{
-       //
-       //     if(index == 0) {ref.scrollView.scrollTo({y:200+height*0.081,animated: false});return};
-       //     // if(!ref.scrollView.scrollToOffset){console.log(ref,index);return}
-       //     if(ref.index != this.state.currentTab){
-       //       console.log(ref.scrollViewContent)
-       //       // ref.scrollViewContent.measure((ox, oy, width, height, px, py) => {
-       //     //     if(py>40 ){
-       //           ref.scrollView.scrollToOffset({offset:200+height*0.081,animated: false});
-       //     //
-       //     //     }
-       //        // });
-       //      }
-       //   })
-       // }
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  //
-  //
-  // }
-	_onChangeTab(tabRef){
-		this.setState(
-			{ currentTab:tabRef.i,
-				oldTab:tabRef.from,
-				updatePosition:false
-			})
-			if(tabRef.i == 0){
-				// this.props.showTabBar();
-			}else{
-				// this.props.hideTabBar();
-			}
   }
   _goToRestaurantSearch(){
     this.props.navigator.push({
@@ -217,27 +112,18 @@ export default class MainTab extends Component {
   render(){
     return(
       <View style={{flex: 1}}>
+      <CmEatHomeHeader
+                       handleBackToHome={this._handleBackToHome}
+                       renderSearch={this.state.renderSearch}
+                       toggleAddressPrompt={this._toggleAddressPrompt}
+                       goToRestaurantSearch={this._goToRestaurantSearch}/>
 				<HomeTab  tabLabel='主页'
-									index={0}
-									scrollEventBind={this._scrollEventBind}
-									getScrollViewRefs={this._getScrollViewRefs}
 									navigator={this.props.navigator}
-									refsCurrentScrollView= {this.refsCurrentScrollView}
 									advertisement={this.state.advertisement}
-									hideTabBar = {this.props.hideTabBar}
-									showTabBar = {this.props.showTabBar}
+                  bannerList={this.state.bannerList}
 									restaurants = {this.state.areaList}
-									scrollY = {this.state.scrollY}
 									/>
-        <CmEatHomeHeader scrollY = {this.state.scrollY}
-                         handleBackToHome={this._handleBackToHome}
-                         renderSearch={this.state.renderSearch}
-												 toggleAddressPrompt={this._toggleAddressPrompt}
-                         goToRestaurantSearch={this._goToRestaurantSearch}/>
-         <HeaderWithBanner
-              bannerList={this.state.bannerList}
-              scrollY = {this.state.scrollY}
-              navigator={this.props.navigator}/>
+
 
 
 						{this.state.showAddressPrompt &&

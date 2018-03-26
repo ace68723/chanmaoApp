@@ -368,4 +368,26 @@ const styles = StyleSheet.create({
 		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,
 
 	},
+	opacityView:{
+    flex:1,
+    opacity: 0.3,
+    backgroundColor:'#000000'
+  },
+  imageTextContainer:{
+    position:'absolute',
+    left:0,
+    top:0,
+    right:0,
+    bottom:0,
+    backgroundColor:'rgba(0,0,0,0)',
+    //flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageText: {
+   fontSize: 20,
+   color:'white',
+   alignSelf:'center',
+   fontFamily:'FZZongYi-M05S',
+  },
 });
