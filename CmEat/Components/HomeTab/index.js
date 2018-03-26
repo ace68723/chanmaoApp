@@ -22,9 +22,9 @@ let marginTop
 if(height == 812){
   //min 34
   //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
-  marginTop = 88+200-44+30;
+  marginTop = 88+200-44;
 }else{
-  marginTop = 54+200-20+30;
+  marginTop = 54+200-20;
 }
 export default class LoginButton extends Component {
 
@@ -95,7 +95,6 @@ export default class LoginButton extends Component {
 					/>);
 			}
 	}
-
 	_renderRestaurants() {
 		if (this.props.restaurants.length == 0){
 			return;
@@ -114,24 +113,43 @@ export default class LoginButton extends Component {
 			/>
 		);
 	}
-
   render(){
-    return(
-        <ScrollView style={styles.scrollView}
-										ref={'_scrollVew'}
-                    scrollEventThrottle={1}
-				            onScroll={this.props.scrollEventBind()}
-										showsVerticalScrollIndicator={false}>
 
-            <View style={{marginTop:marginTop,height:0}}
-                   ref={'_scrollViewContent'}/>
+    if (this.props.restaurants.length == 0){
+			return;
+		}
+		let all = this.props.restaurants[0].restaurantList;
+		let keyExtractor = (item, index) => item.area + item.rid;
+		return (
+			<FlatList
+					style={{marginTop: 8,}}
+					key='key'
+					ref={(comp) => this._scrollVew = comp}
+					data={all}
+					renderItem={this._renderRestaurant}
+					keyExtractor={keyExtractor}
+					extraData={all}
+			/>
+		);
 
-						{this._renderAdv()}
-						{this._renderRestaurants()}
-        </ScrollView>
 
 
-    )
+    // return(
+    //     <ScrollView style={styles.scrollView}
+		// 								ref={'_scrollVew'}
+    //                 scrollEventThrottle={1}
+		// 		            onScroll={this.props.scrollEventBind()}
+		// 								showsVerticalScrollIndicator={false}>
+    //
+    //         <View style={{marginTop:marginTop,height:0}}
+    //                ref={'_scrollViewContent'}/>
+    //
+		// 				{this._renderAdv()}
+		// 				{this._renderRestaurants()}
+    //     </ScrollView>
+    //
+    //
+    // )
   }
 }
 const styles = StyleSheet.create({
@@ -141,7 +159,6 @@ const styles = StyleSheet.create({
 	},
 	scrollView:{
 		flex: 1,
-		marginTop: -30
 	},
 	autoViewStyle:{
 		alignItems:'center',

@@ -13,7 +13,7 @@ export default (props) => {
     return (
       <TouchableHighlight onPress={props.onPress}>
         <View style={styles.container}>
-            <View style={[styles.col,{  flex:0.3,}]}>
+            <View style={[styles.col,{  flex:0.2,}]}>
                   <Image source={props.icon} style={styles.icon} />
             </View>
           <View style={styles.col}>
@@ -21,17 +21,17 @@ export default (props) => {
                 {props.title}
             </Text>
           </View>
-          <View style={[styles.col,styles.arrow]}>
-              <Text style={styles.arrowText}>
-                >
-              </Text>
-          </View>
+
         </View>
       </TouchableHighlight>
     )
 }
-
-
+//右侧箭头
+// <View style={[styles.col,styles.arrow]}>
+//     <Text style={styles.arrowText}>
+//       >
+//     </Text>
+// </View>
 
 
 const styles = StyleSheet.create({
@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: '#fff',
         height:60,
-        borderBottomColor:'#ddd',
-        borderBottomWidth:1,
+        // borderBottomColor:'#ddd',
+        // borderBottomWidth:1,
     },
     col: {
       flex: 1,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
       width:25,
     },
     title:{
-      fontSize:20,
+      fontSize:16,
       textAlign: "left",
       color:'#666666',
       fontWeight:'600',

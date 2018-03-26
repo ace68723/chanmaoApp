@@ -102,9 +102,10 @@ export default (props) =>{
         </View>
         {rightButton()}
       </View>
-      <View style={{height:0.5,backgroundColor:'#b3b3b8'}}/>
+
     </View>
     )
+    // <View style={{height:0.5,backgroundColor:'#b3b3b8'}}/>
 }
 const styles = StyleSheet.create({
   container:{
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     left:0,
     right:0,
     height:headerHeight,
-    backgroundColor:'#f4f4f4',
+    backgroundColor:'#ffffff',
   },
   backButton:{
     position:'absolute',

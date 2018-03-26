@@ -72,6 +72,7 @@ class SettingTab extends Component {
         <View style={styles.mainContainer}>
             <Header title={'设置'}/>
             <ScrollView style={styles.scrollView}>
+              <View style={{height:30,flex:1,backgroundColor:"#ffffff"}}/>
 							<SettingCate  title={'我的订单'}
                             onPress={this._goToHistory.bind(this)}
                             icon={require('./Image/history.png')}/>
@@ -103,6 +104,7 @@ let styles = StyleSheet.create({
   },
   scrollView:{
     flex: 1,
+    backgroundColor:"#ffffff",
   },
 });
 

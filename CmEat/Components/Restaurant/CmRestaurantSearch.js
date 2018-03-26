@@ -7,13 +7,14 @@ import {
 	Animated,
 	Dimensions,
 	Image,
+  ImageBackground,
 	KeyboardAvoidingView,
 	ListView,
 	StyleSheet,
 	Text,
 	TextInput,
 	TouchableOpacity,
-  	View,
+  View,
 	FlatList,
 	Platform,
 	ScrollView
@@ -30,7 +31,7 @@ const iconSearchInputSize = 35;
 
 export default class CmRestaurantSearch extends Component {
 
-    constructor(props){
+  constructor(props) {
         super(props);
         const state = {
 				searchText:'',
@@ -45,15 +46,15 @@ export default class CmRestaurantSearch extends Component {
 		this._onChange = this._onChange.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
 		this._keyExtractor = this._keyExtractor.bind(this);
-    }
-	componentDidMount(){
+  }
+	componentDidMount() {
 		HomeAction.getHomeData();
 		HomeStore.addChangeListener(this._onChange);
 	}
 	componentWillUnmount() {
 		HomeStore.removeChangeListener(this._onChange);
 	}
-	_onChange(){
+	_onChange() {
 		const newState = Object.assign({},HomeStore.getHomeState());
 		let restaurants = newState.areaList[0].restaurantList;
 		this.setState(Object.assign(newState,{restaurant:restaurants}));
@@ -73,37 +74,37 @@ export default class CmRestaurantSearch extends Component {
 		});
 
 	}
-    _setSearchText(text){
-		if(text){
-			let filteredData;
-			if(text != "All"){
-				filteredData = this._filterNotes(text, this.state.restaurant);
-			}else{
-				filteredData = this.state.restaurant;
-			}
+  _setSearchText(text) {
+  		if(text){
+    			let filteredData;
+    			if(text != "All"){
+    				filteredData = this._filterNotes(text, this.state.restaurant);
+    			}else{
+    				filteredData = this.state.restaurant;
+    			}
 
-			this.setState({
-				 searchText: text,
-				 filteredRestaurant:filteredData,
-				 isRendering:'restaurant',
-				 restaurantList: filteredData.slice(0, 5)
-			 });
-		}else{
-			this.setState({
-				 searchText:'',
-				 filteredRestaurant:[],
-				 restaurantList:[],
-			 });
-		}
-    }
-    _cleanInput(){
-		this.setState({
-			searchText:'',
-			restaurantList:[],
-			isRendering:'area'
-		},()=>this.refs.searchInput.clear());
+    			this.setState({
+    				 searchText: text,
+    				 filteredRestaurant:filteredData,
+    				 isRendering:'restaurant',
+    				 restaurantList: filteredData.slice(0, 5)
+    			 });
+  		} else {
+  			this.setState({
+  				 searchText:'',
+  				 filteredRestaurant:[],
+  				 restaurantList:[],
+  			 });
+  		}
+  }
+  _cleanInput() {
+  		this.setState({
+  			searchText:'',
+  			restaurantList:[],
+  			isRendering:'area'
+  		},()=>this.refs.searchInput.clear());
 	}
-	_renderSearchInput(){
+	_renderSearchInput() {
 		// <TouchableOpacity
 		// 				style={{flex:0.1}}
 		// 				onPress={()=>this._goBack()}>
@@ -115,8 +116,8 @@ export default class CmRestaurantSearch extends Component {
 						<Image
 							source={require('./Image/icon_search_input.png')}
 							style={{
-								height:iconSearchInputSize*0.5,
-								width:iconSearchInputSize*0.45,
+								height:iconSearchInputSize*0.7,
+								width:iconSearchInputSize*0.63,
 								marginLeft:10,
 							}}
 						/>
@@ -130,6 +131,7 @@ export default class CmRestaurantSearch extends Component {
 							returnKeyType={'next'}
 							onChangeText={this._setSearchText}
 							underlineColorAndroid={"rgba(0,0,0,0)"}
+              placeholder={"搜索你想要的餐馆"}
 							value={this.state.searchText}
 						/>
 
@@ -157,7 +159,6 @@ export default class CmRestaurantSearch extends Component {
 	  }
 	_keyExtractor = (item, index) => index;
 	_renderRestaurants() {
-
 			return(
 				<FlatList
 				style={styles.scrollView}
@@ -182,44 +183,77 @@ export default class CmRestaurantSearch extends Component {
 			/>
 			)
 	  }
-	_renderArea({item}){
+  _renderAreasHeader() {
+    return(
+      <View style={{padding:10,paddingTop:20,paddingBottom:0}}>
+        <Text style={{fontSize:18,fontFamily:"FZZhunYuan-M02S"}}>
+          城市&区域
+        </Text>
+      </View>
+    )
+  }
+	_renderArea({item ,index}) {
 		let area = item;
+    let ImageSource
+    switch (index+1) {
+      case 1:
+        ImageSource = require("./Image/area_1.png")
+        break;
+      case 2:
+        ImageSource = require("./Image/area_2.png")
+        break;
+      case 3:
+        ImageSource = require("./Image/area_3.png")
+        break;
+      case 4:
+        ImageSource = require("./Image/area_4.png")
+        break;
+      default:
+        ImageSource = require("./Image/area_1.png")
+    }
+    // <View style={{backgroundColor:'#ffffff', width:(width/2)-20, height:(width/2)-20}}></View>
+
 		if(area){
 			return(
 				<TouchableOpacity onPress={()=>{
-					this._setSearchText(area.name);
-					this.refs.searchInput.value = area.name;
-					}}
-					style={{padding:10}} >
-					<View style={{backgroundColor:'green', width:(width/2)-40, height:(width/2)-40}}></View>
-					<View style={{
-						flex:1,
-						margin:10,
-						position:'absolute',
-						width:(width/2)-40, height:(width/2)-40,
-						backgroundColor:'rgba(0,0,0,0.3)',
-						alignItems:'center',
-						justifyContent:'center'
-						}}>
-						<Text style={{
-							color:"#ffffff",fontSize:16,fontFamily:'FZZongYi-M05S',
-						}}>{area.name}</Text>
-					</View>
+  					this._setSearchText(area.name);
+  					this.refs.searchInput.value = area.name;
+					}}>
+					<ImageBackground
+            source={ImageSource}
+            style={{
+              marginTop:10,
+              marginLeft:10,
+  						width:(width-30)/2,
+              height:(width-30)/2,
+  						alignItems:'center',
+  						justifyContent:'center',
+  						}}>
+  						<Text style={{
+                  backgroundColor:"rgba(0,0,0,0)",
+    							color:"#ffffff",
+                  fontSize:18,
+                  fontFamily:'FZZongYi-M05S',
+    						}}>
+                {area.name}
+              </Text>
+					</ImageBackground>
 				</TouchableOpacity>
 			)
 		}
 
 	}
 	_areaKeyExtractor = (area, index) => index + area.area +area.name;
-	_renderAreas(){
+	_renderAreas() {
 		return(
 			<FlatList
-				style={{alignSelf:'center'}}
 				numColumns={2}
 				key={'area'}
+        showsVerticalScrollIndicator={false}
 				data={this.state.areaList.slice(1, this.state.areaList.length)}
 				keyboardDismissMode={"on-drag"}
 				keyboardShouldPersistTaps={"always"}
+        ListHeaderComponent={this._renderAreasHeader}
 				renderItem={(area)=>this._renderArea(area)}
 				keyExtractor={this._areaKeyExtractor}
 				removeClippedSubviews={true}
@@ -228,7 +262,7 @@ export default class CmRestaurantSearch extends Component {
 			/>
 		)
 	}
-	_renderResult(){
+	_renderResult() {
 		{this._renderAreas()}
 		if(this.state.restaurantList.length>0){
 			return(
@@ -244,7 +278,7 @@ export default class CmRestaurantSearch extends Component {
 			)
 		}
 	}
-	render(){
+	render() {
 
 		return(
 			<KeyboardAvoidingView
@@ -294,12 +328,12 @@ const styles = StyleSheet.create({
 	},
 	searchView:{
 		borderRadius:30,
-		borderWidth:1,
-		borderColor:'#e2e2e2',
+		// borderWidth:1,
+		// borderColor:'#e2e2e2',
 		marginTop:10,
 		marginHorizontal:10,
 		flex:1,
-		backgroundColor:'#f4f4f4',
+		// backgroundColor:'#f4f4f4',
 		flexDirection:'row',
 		alignItems:'center',
 		alignSelf:'center',
@@ -307,28 +341,30 @@ const styles = StyleSheet.create({
 	},
 	searchView_full:{
 		borderRadius:30,
-		borderWidth:1,
-		borderColor:'#e2e2e2',
+		// borderWidth:1,
+		// borderColor:'#e2e2e2',
 		marginTop:10,
 		marginHorizontal:10,
 		flex:1,
-		backgroundColor:'#f4f4f4',
+		// backgroundColor:'#f4f4f4',
 		flexDirection:'row',
 		alignItems:'center',
 		alignSelf:'center',
 		width: width-searchViewMarginHorizontal*2,
 	},
 	searchInput:{
-		fontSize: 18,
+    fontFamily:"FZZhunYuan-M02S",
+		fontSize: 20,
 		height:40,
-		marginHorizontal:5,
+		marginLeft:10,
 		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10 - 45,
 
 	},
 	searchInput_full:{
-		fontSize: 18,
+    fontFamily:"FZZhunYuan-M02S",
+		fontSize: 20,
 		height:40,
-		marginHorizontal:5,
+		marginLeft:10,
 		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,
 
 	},

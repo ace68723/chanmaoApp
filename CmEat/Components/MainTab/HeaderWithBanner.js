@@ -38,7 +38,7 @@ if(height == 812){
 
 const HEADER_MAX_HEIGHT = 200;
 // const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
-const HEADER_MIN_HEIGHT = 20;
+const HEADER_MIN_HEIGHT = 0;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 class ActivityHeaderWithBanner extends Component {
 	  constructor(){
@@ -67,37 +67,9 @@ class ActivityHeaderWithBanner extends Component {
           });
 			}
 		}
-    _rotateTransform(index: number) {
-      if (Platform.OS === 'ios') {
-
-        // 0 - 375
-        return {
-          transform: [{
-            translateX: xOffset.interpolate({
-              inputRange: [(index - 1) * SCREEN_WIDTH, index * SCREEN_WIDTH, (index + 1) * SCREEN_WIDTH],
-              // outputRange: [-width*0.5, 0, width*0.5],
-              outputRange: [-35, 0, 35],
-            })
-          }]
-        };
-      } else {
-        return {
-          transform: [{
-            translateX: xOffset.interpolate({
-              inputRange: [(index - 1) * SCREEN_WIDTH, index * SCREEN_WIDTH, (index + 1) * SCREEN_WIDTH],
-              outputRange: [-35, 0, 35],
-            })
-          }],
-          paddingLeft:  xOffset.interpolate({
-            inputRange: [(index - 1) * SCREEN_WIDTH, index * SCREEN_WIDTH, (index + 1) * SCREEN_WIDTH],
-            outputRange: [-35, 0, 35],
-          })
-        };
-      }
-    }
 		_renderBanner(){
 			const imageTranslate = this.props.scrollY.interpolate({
-				inputRange: [0, HEADER_SCROLL_DISTANCE],
+				inputRange: [-100, HEADER_SCROLL_DISTANCE],
 				outputRange: [0, -50],
 				extrapolate: 'clamp',
 			});
@@ -111,7 +83,7 @@ class ActivityHeaderWithBanner extends Component {
                     <Animated.Image
                       style={[
                         styles.backgroundImage,
-                        { transform: [{translateY: imageTranslate}]},
+                        // { transform: [{translateY: imageTranslate}]},
                       ]}
                        source={{uri: banner.image}}
                     />
