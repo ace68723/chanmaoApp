@@ -22,11 +22,14 @@ const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 
 let headerHeight;
+let marginTop;
 if(height == 812){
   //min 34
   headerHeight = 88;
+  marginTop = 0;
 }else{
   headerHeight = 54;
+  marginTop = 20;
 }
 
 export default class SboxHomeHeader extends Component {
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
     width:width,
     height:headerHeight,
     backgroundColor:"#ffffff",
+    marginTop: marginTop,
     flexDirection:'row',
     position:'absolute',
   },

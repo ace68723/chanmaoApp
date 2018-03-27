@@ -21,6 +21,14 @@ import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 
 const {width,height} = Dimensions.get('window');
+let marginTop;
+if(height == 812){
+  //min 34
+  //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
+  marginTop = 91;
+}else{
+  marginTop = 75;
+}
 export default class HomeTab extends Component {
 
   constructor(){
@@ -199,9 +207,8 @@ export default class HomeTab extends Component {
 		let all = this.props.restaurants[0].restaurantList;
 		let keyExtractor = (item, index) => item.area + item.rid;
 		return (
-			<View style={{marginTop: 8}}>
+			<View style={{marginTop: marginTop}}>
 					<FlatList
-							style={{}}
 							key='key'
 							ref={'flatlist'}
 							data={all}
