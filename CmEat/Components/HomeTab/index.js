@@ -79,14 +79,6 @@ export default class HomeTab extends Component {
 	        easing: Easing.linear
 	    }).start();
 		}
-		else {
-			// this.setState({showScrollToResCards: true});
-			Animated.timing(this.state.scrollToResCardsOpacity, {
-	        toValue: 1,
-	        duration: 200,
-	        easing: Easing.linear
-	    }).start();
-		}
 		this.props.onScrollRestaurantsList(event);
 	}
 
@@ -164,7 +156,7 @@ export default class HomeTab extends Component {
 	}
 
 	_renderScrollToResCards() {
-		if (this.state.showScrollToResCards) {
+		if (this.props.showIntroduction) {
 			return(
 				<Animated.View style={{position: 'absolute',
 																	bottom: 0,

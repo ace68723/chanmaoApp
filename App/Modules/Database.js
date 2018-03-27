@@ -3,6 +3,16 @@ const Realm               = require('realm');
 //=============================
 //              new
 //=============================
+const cm_system_scheam = {
+  name: 'cm_system',
+  primaryKey: 'type',
+  properties: {
+    type:'string',
+    value:'string',
+  }
+}
+
+//馋猫订餐
 const cme_address_schema = {
   name: 'cme_address',
   primaryKey: 'type',
@@ -47,14 +57,8 @@ const cme_restaurant_scheam = {
       start_time:"string"
   }
 }
-const cm_system_scheam = {
-  name: 'cm_system',
-  primaryKey: 'type',
-  properties: {
-    type:'string',
-    value:'string',
-  }
-}
+
+//甜满箱
 const sbox_cart_product_scheam = {
     name: 'sbox_cart_product',
     primaryKey: 'pboxid',
@@ -151,11 +155,11 @@ export function DatabaseInit() {
       realm.create('cme_address',Object.assign({},init_cme_address,{type:'W'}), true );
       realm.create('cme_address',Object.assign({},init_cme_address,{type:'O'}), true );
     }
-
-
     let init_cme_cart = realm.objects('cme_cart');
     realm.delete(init_cme_cart);
-
+    if(!realm.objectForPrimaryKey('cm_system','cme_intro_count')){
+        realm.create('cm_system',{type:"cme_intro_count",value:"0"}, true );
+    }
     realm.create('cm_system',{type: 'version', value: '2.5.8'}, true );
   })
   console.log(realm.path)
@@ -379,6 +383,15 @@ export function cme_updateCheckoutDltype({dltype,uaid}) {
       realm.create('cme_cart',{type:"dltype",value:dltype}, true );
       realm.create('cme_cart',{type:"uaid",value:uaid}, true );
   });
+}
+export function cme_updateHomeIntroCount() {
+  const _introCount = (parseInt(realm.objectForPrimaryKey('cm_system','cme_intro_count').value) + 1).toString();
+  realm.write(() => {
+      realm.create('cm_system',{type:"cme_intro_count",value:_introCount}, true );
+  });
+}
+export function cme_getHomeIntroCount() {
+  return realm.objectForPrimaryKey('cm_system','cme_intro_count').value;
 }
 
 export function sbox_addToCart(product){

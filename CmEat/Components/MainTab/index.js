@@ -56,6 +56,7 @@ export default class MainTab extends Component {
 			restaurantCoverOpacity: new Animated.Value(0), // init restaurant tab view opacity 0
 			renderAddressPrompt: false,
       shouldRenderAddressPrompt:false,
+			showIntroduction: true,
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
@@ -125,6 +126,7 @@ export default class MainTab extends Component {
                   bannerList={this.state.bannerList}
 									restaurants = {this.state.areaList}
 									onScrollRestaurantsList = {this._onScrollRestaurantsList}
+									showIntroduction={this.state.showIntroduction}
 									/>
         <CmEatHomeHeader
 					ref='HomeHeader'

@@ -48,7 +48,7 @@ export default class CmRestaurantSearch extends Component {
 		this._keyExtractor = this._keyExtractor.bind(this);
   }
 	componentDidMount() {
-		HomeAction.getHomeData();
+		// HomeAction.getHomeData();
 		HomeStore.addChangeListener(this._onChange);
 	}
 	componentWillUnmount() {
@@ -210,6 +210,9 @@ export default class CmRestaurantSearch extends Component {
         break;
 			case 5:
 				ImageSource = require("./Image/area_5.png")
+				break;
+			case 6:
+				ImageSource = require("./Image/area_6.png")
 				break;
       default:
         ImageSource = require("./Image/area_1.png")
