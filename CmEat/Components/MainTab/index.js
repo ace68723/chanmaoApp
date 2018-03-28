@@ -127,14 +127,13 @@ export default class MainTab extends Component {
 									onScrollRestaurantsList = {this._onScrollRestaurantsList}
 									/>
         <CmEatHomeHeader
-					ref='HomeHeader'
-                         handleBackToHome={this._handleBackToHome}
-                         renderSearch={this.state.renderSearch}
-                         toggleAddressPrompt={this._toggleAddressPrompt}
-                         goToRestaurantSearch={this._goToRestaurantSearch}
-												 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
-												 renderAddressPrompt={this.state.renderAddressPrompt}
-												 />
+           handleBackToHome={this._handleBackToHome}
+           renderSearch={this.state.renderSearch}
+           toggleAddressPrompt={this._toggleAddressPrompt}
+           goToRestaurantSearch={this._goToRestaurantSearch}
+  				 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
+  				 renderAddressPrompt={this.state.renderAddressPrompt}
+				 />
      </View>
     )
   }

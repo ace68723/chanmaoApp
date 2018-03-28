@@ -138,7 +138,6 @@ export default class HomeTab extends Component {
 			if(restaurant){
 				return (<RestaurantCard
 					restaurant={restaurant}
-					openMenu={this.props.openMenu}
 					navigator={this.props.navigator}
 					/>);
 			}
