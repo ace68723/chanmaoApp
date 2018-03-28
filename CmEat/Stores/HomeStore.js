@@ -9,9 +9,10 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
     updatePosition:false,
 		currentTab:1,
 		bannerList:[],
-		areaList:[],
 		showAnimatedView:false,
     showIntroduction: true,
+    restaurantList: [],
+    zones: [],
   },
 	emitChange(){
 			this.emit(CHANGE_EVENT)
@@ -24,7 +25,6 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
         updatePosition:false,
     		currentTab:1,
     		bannerList:[],
-    		areaList:[],
     		showAnimatedView:false,
       }
 			this.removeListener(CHANGE_EVENT, callback)
@@ -33,17 +33,13 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
      const showIntroduction = res.showIntroduction;
 		 const bannerList = res.homeData.zone1;
 		 const advertisement = res.homeData.zone2;
-		 const areaList = [];
-     let index = 0;
-     while (index < res.areaList.length) {
-       areaList.push({...res.areaList[index], image: './Image/area_' + index.toString() + '.png'});
-       index++;
-     }
-		 this.state = Object.assign({},this.state,{bannerList,advertisement,areaList,showIntroduction})
+     const restaurantList = res.restaurantList;
+     const zones = res.zones;
+		 this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones})
   },
   getRestaurantWithRid(rid){
-  		const restaurantData = _find(this.state.areaList[0].restaurantList, {rid:rid});
-  		return restaurantData
+  		const restaurantData = _find(this.state.restaurantList, {rid:parseInt(rid)});
+  		return restaurantData;
   },
   getHomeState(){
     return this.state

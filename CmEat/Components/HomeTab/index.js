@@ -193,10 +193,11 @@ export default class HomeTab extends Component {
 
   render(){
 
-    if (this.props.restaurants.length == 0){
+    if (this.props.restaurantList.length == 0){
 			return <View/>;
 		}
-		let all = this.props.restaurants[0].restaurantList;
+		// let prev_all = this.props.restaurants[0].restaurantList;
+		let all = this.props.restaurantList;
 		let keyExtractor = (item, index) => item.area + item.rid;
 		return (
 			<View style={{marginTop: marginTop}}>

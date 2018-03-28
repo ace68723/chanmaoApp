@@ -38,6 +38,7 @@ export default class CmRestaurantSearch extends Component {
 				searchText:'',
 				filteredRestaurant:[],
 				restaurantList: [],
+				zones: [],
 				length:5,
 				isRendering:'area',
 
@@ -57,8 +58,9 @@ export default class CmRestaurantSearch extends Component {
 	}
 	_onChange() {
 		const newState = Object.assign({},HomeStore.getHomeState());
-		let restaurants = newState.areaList[0].restaurantList;
-		this.setState(Object.assign(newState,{restaurant:restaurants}));
+		let zones = newState.zones;
+		let allRestaurants = newState.restaurantList;
+		this.setState(Object.assign(newState,{restaurantList: [], allRestaurants: allRestaurants, zones: zones}));
 
 	}
     // _goBack(){
@@ -80,9 +82,9 @@ export default class CmRestaurantSearch extends Component {
 					let processedText = WordProcessor.tranStr(text);
     			let filteredData;
     			if(text != "All"){
-    				filteredData = this._filterNotes(processedText, this.state.restaurant);
+						filteredData = this._filterNotes(processedText, this.state.allRestaurants);
     			}else{
-    				filteredData = this.state.restaurant;
+						filteredData = this.state.allRestaurants;
     			}
 
     			this.setState({
@@ -258,7 +260,7 @@ export default class CmRestaurantSearch extends Component {
 				numColumns={2}
 				key={'area'}
         showsVerticalScrollIndicator={false}
-				data={this.state.areaList.slice(1, this.state.areaList.length)}
+				data={this.state.zones}
 				keyboardDismissMode={"on-drag"}
 				keyboardShouldPersistTaps={"always"}
         ListHeaderComponent={this._renderAreasHeader}
@@ -266,12 +268,11 @@ export default class CmRestaurantSearch extends Component {
 				keyExtractor={this._areaKeyExtractor}
 				removeClippedSubviews={true}
 				initialNumToRender={1}
-				extraData={this.state.areaList.slice(1, this.state.areaList.length)}
+				extraData={this.state.zones}
 			/>
 		)
 	}
 	_renderResult() {
-		{this._renderAreas()}
 		if(this.state.restaurantList.length>0){
 			return(
 				<View style={{flex:1}}>

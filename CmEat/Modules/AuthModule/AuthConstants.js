@@ -11,6 +11,7 @@ const AppConstants ={
     API_AREALIST: Server + 'MobOrder10/RrAreaNew',
     API_RESTAURANTLIST: Server + 'MobOrder10/Rrlist',
     API_MENU: 'https://chanmao.us/api/cmapp/v2/get_menu',
+    API_RESTAURANT_LIST: 'https://norgta.com/api/cmapp/v2/get_restaurant_list',
     // API_MENU: Server + 'MobOrder10/Rrmenu',
     // API_HISTORYLIST: Server + 'MobOrder10/historylist',
     // API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',

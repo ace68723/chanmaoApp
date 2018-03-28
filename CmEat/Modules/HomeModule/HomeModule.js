@@ -19,7 +19,7 @@ const  HomeMoule = {
 // ===================================================
 
   async getHomeData(token){
-        const HomeData = await HomeApi.getHomeData(token)
+        const HomeData = await HomeApi.getHomeData(token);
         if(HomeData.result === 0){
             HomeData.zone1.forEach((banner) => {
                 const naviparam = banner.naviparam;
@@ -52,7 +52,7 @@ const  HomeMoule = {
 
   async getAreaList(reqData){
       try {
-        const res = await HomeApi.getAreaList(reqData)
+        const res = await HomeApi.getAreaList(reqData);
         let areaList={};
         if(res.result == 0){
           areaList = res.area;
@@ -69,5 +69,29 @@ const  HomeMoule = {
       }
 
     },
+    async getRestaurantList(reqData){
+        try {
+          const res = await HomeApi.getRestaurantList(reqData);
+          let restaurantList = [];
+          let zones = [];
+          if (res.ev_error == 0) {
+            restaurantList = res.ea_restaurant_list;
+            zones = res.ea_zone;
+          }
+          // if(res.result == 0){
+          //   areaList = res.area;
+          //   areaList.map(area=>{
+          //     let newRestaurantList;
+          //
+          //     area.restaurantList = orderBy(area.restaurantList, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
+          //     // console.log(newRestaurantList)
+          //   })
+          // }
+          return {restaurantList, zones};
+        } catch (e) {
+          console.error(e)
+        }
+
+      },
 }
 module.exports = HomeMoule;

@@ -62,7 +62,7 @@ export default class MainTab extends Component {
 		this.state = Object.assign({},state,HomeStore.getHomeState());
     this._onChange = this._onChange.bind(this);
     this._handleBackToHome = this._handleBackToHome.bind(this);
-    this._goToRestaurantSearch = this._goToRestaurantSearch.bind(this);
+    // this._goToRestaurantSearch = this._goToRestaurantSearch.bind(this);
 
 		this._showAddressPrompt = this._showAddressPrompt.bind(this);
 		this._dismissAddressPrompt = this._dismissAddressPrompt.bind(this);
@@ -96,17 +96,17 @@ export default class MainTab extends Component {
         navigatorStyle: {navBarHidden: true},
       });
   }
-  _goToRestaurantSearch(){
-    this.props.navigator.push({
-      screen: 'CmRestaurantSearch',
-      animated: false,
-      navigatorStyle: {navBarHidden: true},
-      passProps: {
-        restaurant:this.state.areaList[0].restaurantList,
-        areaList: this.state.areaList
-      },
-    });
-  }
+  // _goToRestaurantSearch(){
+  //   this.props.navigator.push({
+  //     screen: 'CmRestaurantSearch',
+  //     animated: false,
+  //     navigatorStyle: {navBarHidden: true},
+  //     // passProps: {
+  //     //   restaurant:this.state.areaList[0].restaurantList,
+  //     //   areaList: this.state.areaList
+  //     // },
+  //   });
+  // }
 
 	_showAddressPrompt(){
 		this.setState({shouldRenderAddressPrompt:true});
@@ -130,7 +130,7 @@ export default class MainTab extends Component {
 									navigator={this.props.navigator}
 									advertisement={this.state.advertisement}
                   bannerList={this.state.bannerList}
-									restaurants = {this.state.areaList}
+									restaurantList = {this.state.restaurantList}
 									onScrollRestaurantsList = {this._onScrollRestaurantsList}
 									showIntroduction={this.state.showIntroduction}
 									/>
@@ -140,7 +140,6 @@ export default class MainTab extends Component {
                          renderSearch={this.state.renderSearch}
                          showAddressPrompt={this._showAddressPrompt}
 												 dismissAddressPrompt={this._dismissAddressPrompt}
-                         goToRestaurantSearch={this._goToRestaurantSearch}
 												 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
 												 renderAddressPrompt={this.state.renderAddressPrompt}
 												 />

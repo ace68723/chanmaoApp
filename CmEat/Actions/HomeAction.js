@@ -19,7 +19,10 @@ export default {
              userloc = await LocationModule.getCurrentPosition();
            }
           const reqData = {token,userloc}
-          const areaList = await HomeModule.getAreaList(reqData);
+          // const areaList = await HomeModule.getAreaList(reqData);
+          const restaurantListInfo = await HomeModule.getRestaurantList(reqData);
+          const restaurantList = restaurantListInfo.restaurantList;
+          const zones = restaurantListInfo.zones;
 
           let showIntroduction = true;
           const introCount = await cme_getHomeIntroCount();
@@ -29,7 +32,7 @@ export default {
           else {
             showIntroduction = false;
           }
-          const res = {homeData,areaList,showIntroduction}
+          const res = {homeData,showIntroduction, restaurantList, zones}
           dispatch({
               actionType: AppConstants.GET_HOME_DATA, res
           })
