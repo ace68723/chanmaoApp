@@ -28,7 +28,7 @@ if(height == 812){
   headerHeight = 88;
   marginTop = 0;
 }else{
-  headerHeight = 54;
+  headerHeight = 64;
   marginTop = 20;
 }
 
@@ -43,13 +43,13 @@ export default class SboxHomeHeader extends Component {
                    style={{
                            position:'absolute',
                            left:10,
-                           bottom:10,
+                           bottom:15,
                            height:20,
                            width:20,}}/>
 
           </View>
         </TouchableWithoutFeedback>
-        <View style={{flex:0.66,justifyContent:'center',alignItems:'center'}}>
+        <View style={{flex:0.66,justifyContent:'center',alignItems:'center', marginBottom: 5}}>
           <AddressForHomeHeader
             handleBackToHome={this.props.handleBackToHome}
             showAddressPrompt={this.props.showAddressPrompt}

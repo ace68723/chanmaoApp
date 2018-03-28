@@ -27,7 +27,14 @@ import HomeAction from '../../Actions/HomeAction';
 import RestaurantCard from './RestaurantCard';
 import WordProcessor from '../WordProcess/WordProcessor';
 import CMLabel from '../../Constants/AppLabel'
+import { orderBy } from 'lodash';
 const {width,height} = Dimensions.get('window');
+let marginTop,headerHeight;
+if(height == 812){
+  headerHeight = 88
+}else{
+  headerHeight = 64
+}
 const searchViewMarginHorizontal = 10;
 const iconSearchInputSize = 35;
 
@@ -87,7 +94,7 @@ export default class CmRestaurantSearch extends Component {
     			}else{
 						filteredData = this.state.allRestaurants;
     			}
-
+					filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
     			this.setState({
     				 searchText: text,
     				 filteredRestaurant:filteredData,
@@ -324,17 +331,15 @@ const styles = StyleSheet.create({
 	},
 	header:{
 		width:width - 45,
-		height:60,
+		height:headerHeight,
 		flexDirection:'row',
 		alignItems:'center',
-		marginTop:Platform.OS === 'ios'? 20 : 0,
 	},
 	header_full:{
 		width:width,
-		height:60,
+		height:headerHeight,
 		flexDirection:'row',
 		alignItems:'center',
-		marginTop:Platform.OS === 'ios'? 20 : 0,
 	},
 	searchView:{
 		borderRadius:30,
