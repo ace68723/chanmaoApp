@@ -116,5 +116,11 @@ export default {
       dispatch({
           actionType: AppConstants.CLEAR_ADDRESS_INPUT
       })
+    },
+    dismissAddressPromptView() {
+      dispatch({
+          actionType: AppConstants.DISMISS_ADDRESS_PROMPT
+      })
     }
+
 }

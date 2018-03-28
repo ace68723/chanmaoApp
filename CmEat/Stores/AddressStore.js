@@ -32,6 +32,7 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
     showConfirmBtn:true,
 		selectedUaid: null,
 		currentLocation: "",
+		shouldDismissAddressPromptView: false,
 	},
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -72,6 +73,9 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 	formatAddress(io_addrInfo){
     this.state.formattedAddress = io_addrInfo;
     this.state.addressStatus = "AddAddressInfo";
+	},
+	dismissAddressPromptView(){
+		this.state.shouldDismissAddressPromptView = true;
 	},
 	getFormatAddress(){
 		return lo_addrInfo;
@@ -125,6 +129,11 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 						 AddressStore.clearAddressInput();
 						 AddressStore.emitChange()
 					break;
+				case AppConstants.DISMISS_ADDRESS_PROMPT:
+						AddressStore.dismissAddressPromptView()
+						AddressStore.emitChange()
+
+	        break;
         default:
          // do nothing
 		  }
