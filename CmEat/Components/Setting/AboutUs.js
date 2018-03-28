@@ -13,6 +13,7 @@ import {
   Clipboard,
 } from 'react-native';
 import AppConstants from '../../Constants/AppConstants';
+import CMLabel from '../../Constants/AppLabel';
 const {height, width} = Dimensions.get('window');
 const deviceWidth = width;
 const deviceHeight = height;
@@ -60,7 +61,7 @@ export default class InfoPage extends Component {
     // }} allowFontScaling={false}>客服电话：647-515-6699</Text>
     return (
       <View style={styles.container}>
-        <Header title={'关于我们'} goBack={this._goBack}/>
+        <Header title={CMLabel.getCNLabel('ABOUT_US')} goBack={this._goBack}/>
         <ScrollView style={{flex:1,  marginTop:64,paddingLeft:20,paddingRight:20}}>
 
             <View style={styles.fontContainer}>

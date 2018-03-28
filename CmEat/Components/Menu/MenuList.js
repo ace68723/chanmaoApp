@@ -32,7 +32,7 @@ import MenuStore from '../../Stores/MenuStore';
 import RestaurantAction from '../../Actions/RestaurantAction';
 
 import findIndex from 'lodash/findIndex';
-
+import CMLabel from '../../Constants/AppLabel';
 
 
 const {width,height} = Dimensions.get('window');
@@ -128,8 +128,8 @@ class Menu extends Component {
             '馋猫订餐提醒您',
             '不足'+this.state.startAmount+'只能自取哦～',
             [
-              {text: '取消', onPress: () => {}, style: 'cancel'},
-              {text: '好哒', onPress: () => {
+              {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+              {text: CMLabel.getCNLabel('CONFIRM'), onPress: () => {
                    this.props.navigator.push({
                       id: 'Confirm',
                       restaurant:this.props.restaurant,
@@ -185,9 +185,9 @@ class Menu extends Component {
       if(this.props.offsetY > 100){
 
         if(!this.props.restaurant.close){
-          const _rightButtonText = '$'+this.state.cartTotals.total+'结账';
+          const _rightButtonText = '$'+this.state.cartTotals.total+CMLabel.getCNLabel('CHECK_OUT');
           return(
-            <Header title={'点餐'}
+            <Header title={CMLabel.getCNLabel('ORDER')}
                     goBack={this._goBack}
                     rightButton={this._goToCinfirm}
                     rightButtonText={_rightButtonText}/>
@@ -195,7 +195,7 @@ class Menu extends Component {
         }else{
           const _rightButtonText = '商家休息了';
           return(
-            <Header title={'点餐'}
+            <Header title={CMLabel.getCNLabel('ORDER')}
                     goBack={this._goBack}
                     rightButton={() => {}}
                     rightButtonText={_rightButtonText}/>
@@ -259,7 +259,7 @@ class Menu extends Component {
                                   onPress={this._goToCinfirm}>
                 <View style={styles.checkoutButton}>
                   <Text style={styles.checkoutText}>
-                    ${this.state.cartTotals.total}结账
+                    ${this.state.cartTotals.total}{CMLabel.getCNLabel('CHECK_OUT')}
                   </Text>
                 </View>
               </TouchableOpacity>

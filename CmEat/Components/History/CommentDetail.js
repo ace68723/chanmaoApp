@@ -21,7 +21,7 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native';
-
+import CMLabel from '../../Constants/AppLabel';
 const {height, width} = Dimensions.get('window');
 const deviceHeight = height;
 const deviceWidth = width;
@@ -252,7 +252,7 @@ export default class pastOrderEN extends Component {
                             paddingBottom:10,
                             fontFamily:'FZZhunYuan-M02S'}}
                     allowFontScaling={false}>
-              确认评价</Text>
+              {CMLabel.getCNLabel('CONFIRM_COMMENT')}</Text>
           </View>
           <View style={{flex: 1,
                         flexDirection: 'row',
@@ -269,7 +269,7 @@ export default class pastOrderEN extends Component {
                                   textAlign:'center',
                                   fontFamily:'FZZhunYuan-M02S'}}
                           allowFontScaling={false}>
-                    取消</Text>
+                    {CMLabel.getCNLabel('CANCEL')}</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={{flex: 1}}
@@ -279,7 +279,7 @@ export default class pastOrderEN extends Component {
                               color: '#ff8b00',
                               fontFamily:'FZZhunYuan-M02S'}}
                       allowFontScaling={false}>
-                确定</Text>
+                {CMLabel.getCNLabel('CONFIRM')}</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -353,7 +353,7 @@ export default class pastOrderEN extends Component {
                       <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={this._handleChangeTime}>
                           <Text style={{color: '#ff8b00', fontSize: 14, fontFamily:'FZZhunYuan-M02S'}}
                                 allowFontScaling={false}>
-                          更正</Text>
+                          {CMLabel.getCNLabel('CHANGE_COMMENT')}</Text>
                           <Text allowFontScaling={false}
                                 style={{width: 14,
                                         height: 14,
@@ -371,7 +371,7 @@ export default class pastOrderEN extends Component {
           <View style={{padding: 20}}>
               <Text allowFontScaling={false}
                     style={{textAlign: 'center', marginBottom: 20, fontFamily:'FZZhunYuan-M02S'}}>
-              为配送打分</Text>
+              {CMLabel.getCNLabel('RATE_DELIVERY')}</Text>
               <View style={{flexDirection: 'row',
                             justifyContent: 'space-around',
                             marginBottom: 20,
@@ -393,7 +393,7 @@ export default class pastOrderEN extends Component {
                                  fontFamily:'FZZhunYuan-M02S'}}
                          underlineColorAndroid='transparent'
                          value={this.state.driver_comment}
-                         placeholder={"写下您对司机的评价吧~"}
+                         placeholder={CMLabel.getCNLabel('COMMENT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(36)}
                          onChangeText={(text) => this._handleDriverComments(text)}
                          multiline = {true}>
@@ -498,7 +498,7 @@ export default class pastOrderEN extends Component {
                               fontSize: 16,
                               color: thump_up_color,
                               fontFamily:'FZZhunYuan-M02S'}}>
-                      赞</Text>
+                      {CMLabel.getCNLabel('LIKE')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{flexDirection: 'row',
                                         justifyContent: 'center',
@@ -515,7 +515,7 @@ export default class pastOrderEN extends Component {
                               fontSize: 16,
                               color: thump_down_color,
                               fontFamily:'FZZhunYuan-M02S'}}>
-                      踩</Text>
+                      {CMLabel.getCNLabel('DISLIKE')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -604,7 +604,7 @@ export default class pastOrderEN extends Component {
                                 color: 'white',
                                 fontSize: 18,
                                 fontFamily:'FZZhunYuan-M02S'}}>
-                    确定
+                    {CMLabel.getCNLabel('CONFIRM')}
                   </Text>
                 </TouchableOpacity>
             </View>
@@ -632,7 +632,7 @@ export default class pastOrderEN extends Component {
   render() {
       return(
         <View style={styles.container} >
-            <Header title={'评价'}
+            <Header title={CMLabel.getCNLabel('COMMENT')}
                     goBack={this.props.goBack}
                     leftButtonText={'x'}/>
                 <ScrollView ref="ScrollView"
@@ -644,7 +644,7 @@ export default class pastOrderEN extends Component {
                 <TouchableOpacity
                     style={{backgroundColor: '#ff8b00', padding: 15, height: acceptButtonHeight, justifyContent: 'center'}}
                     onPress={this._showConfirmSection}>
-                  <Text style={{textAlign: 'center', color: 'white', fontSize: 18}}>确认</Text>
+                  <Text style={{textAlign: 'center', color: 'white', fontSize: 18}}>{CMLabel.getCNLabel('CONFIRM')}</Text>
                 </TouchableOpacity>
                 {this._renderTimePicker()}
 

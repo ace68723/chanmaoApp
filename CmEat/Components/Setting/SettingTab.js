@@ -17,7 +17,7 @@ import SettingHeader from './SettingHeader';
 import Header from '../General/Header';
 
 import AuthAction from  '../../../App/Actions/AuthAction';
-
+import CMLabel from '../../Constants/AppLabel';
 class SettingTab extends Component {
     constructor(props) {
         super(props);
@@ -70,23 +70,23 @@ class SettingTab extends Component {
     render(){
       return(
         <View style={styles.mainContainer}>
-            <Header title={'设置'}/>
+            <Header title={CMLabel.getCNLabel('SETTING')}/>
             <ScrollView style={styles.scrollView}>
               <View style={{height:30,flex:1,backgroundColor:"#ffffff"}}/>
-							<SettingCate  title={'我的订单'}
+							<SettingCate  title={CMLabel.getCNLabel('MY_ORDER')}
                             onPress={this._goToHistory.bind(this)}
                             icon={require('./Image/history.png')}/>
-              <SettingCate  title={'添加地址'}
+              <SettingCate  title={CMLabel.getCNLabel('ADD_ADDRESS')}
                             onPress={this._goToAddress.bind(this)}
                             icon={require('./Image/setting.png')}/>
-							<SettingCate  title={'联系客服'}
+							<SettingCate  title={CMLabel.getCNLabel('CUSTOMER_SERVICE')}
 														icon={require('./Image/information.png')}
 														onPress={this._goToAboutUs}
 														/>
-							<SettingCate  title={'甜满箱 首单立减8刀 满60再减10刀'}
+							<SettingCate  title={CMLabel.getCNLabel('SWEETBOX')}
                 icon={require('./Image/sbox.png')}
                 onPress={this._goToSbox}/>
-              <SettingCate  title={'退出登录'}
+              <SettingCate  title={CMLabel.getCNLabel('LOG_OUT')}
                             icon={require('./Image/logout.png')}
                             onPress={this._cmeLogOut}/>
             </ScrollView>

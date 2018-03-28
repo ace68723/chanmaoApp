@@ -13,7 +13,7 @@ import {
   Dimensions,
 } from 'react-native';
 import PhoneNumberVerify from './PhoneNumberVerify';
-
+import CMLabel from '../../Constants/AppLabel';
 const { width } = Dimensions.get('window');
 const deviceWidth = width;
 export default class pastOrderEN extends Component {
@@ -46,7 +46,7 @@ export default class pastOrderEN extends Component {
                               textAlign: 'center',
                               color: soldoutColor }}
                 >
-                        售完
+                        {CMLabel.getCNLabel('SOLD_OUT')}
                 </Text>
               );
           }
@@ -137,7 +137,7 @@ export default class pastOrderEN extends Component {
                                  onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
                 <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
                       allowFontScaling={false}>
-                      重新下单
+                      {CMLabel.getCNLabel('REORDER')}
                 </Text>
               </TouchableOpacity>
           </View>
@@ -150,7 +150,7 @@ export default class pastOrderEN extends Component {
                                         alignItems:'center'}}
                                  onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
                 <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
-                        allowFontScaling={false}>详情</Text>
+                        allowFontScaling={false}>{CMLabel.getCNLabel('DETAIL')}</Text>
               </TouchableOpacity>
           </View>
         )
@@ -164,7 +164,7 @@ export default class pastOrderEN extends Component {
                                       alignItems:'center'}}
                                onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
               <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
-                      allowFontScaling={false}>评价</Text>
+                      allowFontScaling={false}>{CMLabel.getCNLabel('COMMENT')}</Text>
             </TouchableOpacity>
         </View>
       )
@@ -178,7 +178,7 @@ export default class pastOrderEN extends Component {
                                onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
               <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
                     allowFontScaling={false}>
-                    重新下单
+                    {CMLabel.getCNLabel('REORDER')}
               </Text>
             </TouchableOpacity>
         </View>
@@ -243,7 +243,7 @@ export default class pastOrderEN extends Component {
               <View style={styles.info}>
                   <Text style={[styles.infoTitle,statusColor]} allowFontScaling={false}>{statusMessage}</Text>
                   <View style={{flexDirection:'row'}}>
-                    <Text style={styles.infoText} allowFontScaling={false}>订单号 #{this.state.orderInfo.order_oid}</Text>
+                    <Text style={styles.infoText} allowFontScaling={false}>{CMLabel.getCNLabel('ORDER_NO')} #{this.state.orderInfo.order_oid}</Text>
                     <Text style={[styles.infoText,{textAlign:'right'}]} allowFontScaling={false}>{this.state.orderInfo.order_created}</Text>
                   </View>
               </View>
@@ -251,7 +251,7 @@ export default class pastOrderEN extends Component {
                 {this._renderFoodList()}
               </View>
               <View style={styles.orderTotal}>
-                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>总价: ${this.state.orderInfo.order_total}</Text>
+                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>{CMLabel.getCNLabel('PRICE')}: ${this.state.orderInfo.order_total}</Text>
               </View>
               {this._phoneNumberVerify()}
               <View style={styles.buttonContainer}>

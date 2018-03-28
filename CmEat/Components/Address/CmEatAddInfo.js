@@ -23,7 +23,7 @@ import Loading from '../Helpers/Loading';
 import Header from '../General/Header';
 
 import AddressAction from '../../Actions/AddressAction';
-
+import CMLabel from '../../Constants/AppLabel';
 const _getFormatAddress = () =>{
   return AddressStore.getFormatAddress()
 }
@@ -200,7 +200,7 @@ export default class CmEatAddInfo extends Component {
 
         return(
           <View style={styles.mainContainer}>
-          <Header title={"地址"}
+          <Header title={CMLabel.getCNLabel('ADDRESS')}
 	                goBack={this._goBack}
 	                leftButtonText={'×'}/>
             <ScrollView scrollEnabled={true}
@@ -223,7 +223,7 @@ export default class CmEatAddInfo extends Component {
 																								transform: [{rotate: interpolatedRotateAnimation}]}}/>
 												<Animated.View style={{flexDirection:"column",flex:1,marginTop:interpolatedMarginTop}}>
 														<Text style={{marginLeft:10,marginTop:12,fontFamily:'FZZhunYuan-M02S',}}>
-															设置为默认地址(选填)
+															{CMLabel.getCNLabel('ADD_DEFAULT_ADDRESS')}
 														</Text>
 														{this._renderChooseType()}
 
@@ -233,7 +233,7 @@ export default class CmEatAddInfo extends Component {
 										<View style= {styles.separator}/>
                     <View style={styles.inputBox}>
                       <Text style={styles.inputText}>
-                        联系人:
+                        {CMLabel.getCNLabel('CONTACT')}:
                       </Text>
                         <TextInput
                             blurOnSubmit={false}
@@ -251,7 +251,7 @@ export default class CmEatAddInfo extends Component {
                     <View style= {styles.separator}/>
                     <View style={styles.inputBox}>
                       <Text style={styles.inputText}>
-                        电话: ＋1:
+                        {CMLabel.getCNLabel('PHONE')}: ＋1:
                       </Text>
                       <TextInput
                           blurOnSubmit={false}
@@ -311,7 +311,7 @@ export default class CmEatAddInfo extends Component {
                     <TouchableOpacity  style={styles.button}
                                        activeOpacity={0.7}
                                        onPress={this._submitAddress}>
-                        <Text style={ styles.buttonText }>添加地址 </Text>
+                        <Text style={ styles.buttonText }>{CMLabel.getCNLabel('ADD_ADDRESS')} </Text>
                     </TouchableOpacity>
                </View>
 

@@ -46,7 +46,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import AllOrders from './AllOrders';
 import OrdersNotReviewed from './OrdersNotReviewed';
 import BadOrders from './BadOrders';
-
+import CMLabel from '../../Constants/AppLabel';
 class HistoryTab extends Component {
     constructor(props) {
         super(props);
@@ -224,14 +224,14 @@ class HistoryTab extends Component {
 						style={{flex: 1, padding: 20}}
 						onPress={() => this.setState({renderingPage: 0})}>
 						<Text style={{textAlign: 'center', color: firstFilterColor, fontFamily:'FZZhunYuan-M02S'}}>
-							全部订单
+							{CMLabel.getCNLabel('ALL_ORDER')}
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={{flex: 1, padding: 20}}
 						onPress={() => this.setState({renderingPage: 1})}>
 						<Text style={{textAlign: 'center', color: secondFilterColor, fontFamily:'FZZhunYuan-M02S'}}>
-							待评价
+							{CMLabel.getCNLabel('YET_COMMENT')}
 						</Text>
 					</TouchableOpacity>
 
@@ -270,7 +270,7 @@ class HistoryTab extends Component {
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
-										tabLabel="全部订单"/>
+										tabLabel={CMLabel.getCNLabel('ALL_ORDER')}/>
 								<OrdersNotReviewed
 										navigator={this.props.navigator}
 										orderData={this.state.orderData}
@@ -279,7 +279,7 @@ class HistoryTab extends Component {
 										goToComments={this._goToComments}
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
-										tabLabel="待评价"/>
+										tabLabel={CMLabel.getCNLabel('YET_COMMENT')}/>
 	 			     </ScrollableTabView>
 						 <Modal style={styles.modal}
 						 			 position={"center"}
