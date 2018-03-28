@@ -3,7 +3,7 @@ import {dispatch, register} from '../Dispatchers/AppDispatcher';
 import HomeModule from '../Modules/HomeModule/HomeModule';
 import LocationModule from '../../App/Modules/System/LocationModule';
 import AuthModule from '../../App/Modules/AuthModule/Auth';
-import { cme_getSelectedAddress } from '../../App/Modules/Database';
+import { cme_getSelectedAddress, cme_getHomeIntroCount, cme_updateHomeIntroCount } from '../../App/Modules/Database';
 export default {
      async getHomeData(){
         try{
@@ -20,7 +20,16 @@ export default {
            }
           const reqData = {token,userloc}
           const areaList = await HomeModule.getAreaList(reqData);
-          const res = {homeData,areaList}
+
+          let showIntroduction = true;
+          const introCount = await cme_getHomeIntroCount();
+          if (introCount < 3) {
+            await cme_updateHomeIntroCount();
+          }
+          else {
+            showIntroduction = false;
+          }
+          const res = {homeData,areaList,showIntroduction}
           dispatch({
               actionType: AppConstants.GET_HOME_DATA, res
           })

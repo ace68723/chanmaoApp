@@ -104,7 +104,7 @@ export default class Tabs extends Component {
                 navigator={this.props.navigator}/>
 
 							<SearchTab
-								tabLabel = '搜索'
+								tabLabel = '分区&搜索'
 								navigator={this.props.navigator}
 								hideTabBar = {this._hideTabBar}
 								showTabBar = {this._showTabBar}

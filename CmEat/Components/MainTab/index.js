@@ -42,9 +42,9 @@ let marginTop;
 if(height == 812){
   //min 34
   //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
-  marginTop = 34;
+  marginTop = 0;
 }else{
-  marginTop = 20;
+  marginTop = -20;
 }
 export default class MainTab extends Component {
 
@@ -56,6 +56,7 @@ export default class MainTab extends Component {
 			restaurantCoverOpacity: new Animated.Value(0), // init restaurant tab view opacity 0
 			renderAddressPrompt: false,
       shouldRenderAddressPrompt:false,
+			showIntroduction: true,
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
@@ -124,13 +125,14 @@ export default class MainTab extends Component {
 
   render(){
     return(
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, marginTop: marginTop}}>
 				<HomeTab  tabLabel='主页'
 									navigator={this.props.navigator}
 									advertisement={this.state.advertisement}
                   bannerList={this.state.bannerList}
 									restaurants = {this.state.areaList}
 									onScrollRestaurantsList = {this._onScrollRestaurantsList}
+									showIntroduction={this.state.showIntroduction}
 									/>
         <CmEatHomeHeader
 					ref='HomeHeader'
