@@ -25,7 +25,7 @@ import Header from '../General/Header';
 import MenuCard from './MenuCard';
 
 import MenuStore from '../../Stores/MenuStore';
-
+import CMLabel from '../../Constants/AppLabel';
 const {width,height} = Dimensions.get('window');
 const searchViewMarginHorizontal = 30;
 const iconSearchInputSize = 35;
@@ -87,7 +87,7 @@ export default class CmEatMenuSearch extends Component {
 					'馋猫订餐提醒您',
 					'不足'+this.state.restaurant.start_amount+'只能自取哦～',
 					[
-						{text: '取消', onPress: () => {}, style: 'cancel'},
+						{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
 						{text: '好哒', onPress: () => {
 								this.props.navigator.showModal({
 									screen: 'CmEatCheckout',
@@ -251,7 +251,7 @@ export default class CmEatMenuSearch extends Component {
 								paddingTop:2,
 								paddingBottom:2,
 								borderColor:"#ffffff"}}>
-						<Text  style={{color:"#ffffff",fontSize:13,fontFamily:'FZZongYi-M05S',}}>去结账</Text>
+						<Text  style={{color:"#ffffff",fontSize:13,fontFamily:'FZZongYi-M05S',}}>{CMLabel.getCNLabel('GO_CHECKOUT')}</Text>
 					</View>
 
 				</TouchableOpacity>

@@ -7,12 +7,12 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-
+import CMLabel from '../../Constants/AppLabel';
 export default (props) =>{
         return (
           <View style={styles.container}>
               <Text style={styles.title}>
-                设置
+                {CMLabel.getCNLabel('SETTING')}
               </Text>
           </View>
         )

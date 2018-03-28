@@ -25,7 +25,8 @@ import {
 import HomeStore from '../../Stores/HomeStore';
 import HomeAction from '../../Actions/HomeAction';
 import RestaurantCard from './RestaurantCard';
-import WordProcessor from '../WordProcess/WordProcessor'
+import WordProcessor from '../WordProcess/WordProcessor';
+import CMLabel from '../../Constants/AppLabel'
 const {width,height} = Dimensions.get('window');
 const searchViewMarginHorizontal = 10;
 const iconSearchInputSize = 35;
@@ -189,7 +190,7 @@ export default class CmRestaurantSearch extends Component {
     return(
       <View style={{padding:10,paddingTop:20,paddingBottom:0}}>
         <Text style={{fontSize:18,fontFamily:"FZZhunYuan-M02S"}}>
-          城市&区域
+          {CMLabel.getCNLabel('CITY_AREA')}
         </Text>
       </View>
     )

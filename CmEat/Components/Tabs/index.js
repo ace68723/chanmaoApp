@@ -21,7 +21,7 @@ import SettingTab from '../Setting/SettingTab';
 import SearchTab from '../Restaurant/CmRestaurantSearch';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TabBar from './TabBar';
-
+import CMLabel from '../../Constants/AppLabel';
 import TabsStore from '../../Stores/TabsStore';
 const {width,height} = Dimensions.get('window');
 
@@ -98,19 +98,19 @@ export default class Tabs extends Component {
 												 keyboardShouldPersistTaps={'always'}>
 
 							<MainTab
-								tabLabel='主页'
+								tabLabel= {CMLabel.getCNLabel('MAIN_TAB')}
 								hideTabBar = {this._hideTabBar}
 								showTabBar = {this._showTabBar}
                 navigator={this.props.navigator}/>
 
 							<SearchTab
-								tabLabel = '分区&搜索'
+								tabLabel = {CMLabel.getCNLabel('AREA_SEARCH')}
 								navigator={this.props.navigator}
 								hideTabBar = {this._hideTabBar}
 								showTabBar = {this._showTabBar}
                 navigator={this.props.navigator}
                 />
-							<SettingTab tabLabel='我的'
+							<SettingTab tabLabel={CMLabel.getCNLabel('MY_TAB')}
                     navigator={this.props.navigator}
                     handleBackToHome={this.props.handleBackToHome}/>
 

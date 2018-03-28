@@ -14,6 +14,7 @@ import {
 import CheckoutAction from '../../Actions/CheckoutAction';
 // import SboxHeader from '../../../App/Components/General/SboxHeader';
 import Header from '../General/Header';
+import CMLabel from '../../Constants/AppLabel';
 const { height, width } = Dimensions.get('window');
 
 export default class ChooseCardType extends Component {
@@ -130,7 +131,7 @@ export default class ChooseCardType extends Component {
                             textAlign: 'left',
                             marginLeft :20,
                             color:"#808080",}}>
-                        信用卡
+                        {CMLabel.getCNLabel('CREDIT_CARD')}
               </Text>
               <Text allowFontScaling={false}
                     style={styles.arrowText}>
@@ -154,7 +155,7 @@ export default class ChooseCardType extends Component {
                             textAlign: 'left',
                             marginLeft :20,
                             color:"#808080",}}>
-                            借记卡
+                            {CMLabel.getCNLabel('DEBIT_CARD')}
               </Text>
               <Text allowFontScaling={false} style={styles.arrowText}>
                 >
@@ -179,7 +180,7 @@ export default class ChooseCardType extends Component {
                             textAlign: 'left',
                             marginLeft :20,
                             color:"#808080",}}>
-                            支付宝
+                            {CMLabel.getCNLabel('ALIPAY')}
               </Text>
               <Text allowFontScaling={false} style={styles.arrowText}>
                 >
@@ -202,7 +203,7 @@ export default class ChooseCardType extends Component {
                             textAlign: 'left',
                             marginLeft :20,
                             color:"#808080",}}>
-                            现金
+                            {CMLabel.getCNLabel('CASH')}
               </Text>
               <Text allowFontScaling={false} style={styles.arrowText}>
                 >
@@ -215,7 +216,7 @@ export default class ChooseCardType extends Component {
 
     return (
       <View style={styles.container}>
-        <Header title={"支付方式"}
+        <Header title={CMLabel.getCNLabel('PAYMENT_TYPE')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>

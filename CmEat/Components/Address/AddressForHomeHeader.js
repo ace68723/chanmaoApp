@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import AddressStore from '../../Stores/AddressStore';
 import { Navigation } from 'react-native-navigation';
-
+import CMLabel from '../../Constants/AppLabel';
 import LocationModule from '../../Modules/System/LocationModule'
 
 export default class AddressForHomeHeader extends Component {
@@ -96,7 +96,7 @@ export default class AddressForHomeHeader extends Component {
                         fontFamily:'FZZongYi-M05S',
                         marginBottom:10,}}
                         numberOfLines={1}>
-              配送至   {this.state.selectedAddress}
+              {CMLabel.getCNLabel('DELIVER_TO')}   {this.state.selectedAddress}
           </Text>
 
         </View>
@@ -110,7 +110,7 @@ export default class AddressForHomeHeader extends Component {
                       fontFamily:'FZZongYi-M05S',
                       marginBottom:10,}}
                       numberOfLines={1}>
-            请选择地址
+            {CMLabel.getCNLabel('CHOOSE_ADDRESS')}
         </Text>
       )
     }

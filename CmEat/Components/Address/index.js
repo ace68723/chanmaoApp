@@ -37,7 +37,7 @@ import HomeAction from '../../Actions/HomeAction';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import AddressStore from '../../Stores/AddressStore';
 import Util from '../../Modules/Util';
-
+import CMLabel from '../../Constants/AppLabel';
 export default class CmEatAddress extends Component {
 
   constructor(props) {
@@ -159,8 +159,8 @@ export default class CmEatAddress extends Component {
 			'删除地址',
 			"addressDescription",
 			[
-				{text: '取消', onPress: () => {}, style: 'cancel'},
-				{text: '确认', onPress: password => AddressAction.deleteAddress(address)},
+				{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+				{text: CMLabel.getCNLabel('CONFIRM'), onPress: password => AddressAction.deleteAddress(address)},
 			]
 		)
 	}
@@ -400,7 +400,7 @@ export default class CmEatAddress extends Component {
 						autoFocus={true}
             onFocus={()=>{this.setState({showConfirmBtn:false})}}
             onBlur={()=>{this.setState({showConfirmBtn:true})}}
-            placeholder={"输入地址"}
+            placeholder={CMLabel.getCNLabel('ENTER_ADDRESS')}
             placeholderTextColor={'#999999'}
             selectionColor={'#ea7b21'}
             keyboardType = { 'default'}
@@ -436,7 +436,7 @@ export default class CmEatAddress extends Component {
 				<Text style={{marginLeft: 10,
 											marginBottom: 5,
 											fontSize: 16,
-											color: '#A5A5A5'}}>请选择: </Text>
+											color: '#A5A5A5'}}>{CMLabel.getCNLabel('CHOOSE')}: </Text>
         {predictionList}
       </ScrollView>
     )
@@ -509,7 +509,7 @@ export default class CmEatAddress extends Component {
                         activeOpacity={0.4}
                         onPress={this._handleConfirm}>
             <Text style={styles.buttonText}>
-               确认
+               {CMLabel.getCNLabel('CONFIRM')}
             </Text>
       </TouchableOpacity>
     )
@@ -526,7 +526,7 @@ export default class CmEatAddress extends Component {
                         activeOpacity={0.4}
                         onPress={this._handleConfirm}>
             <Text style={styles.buttonText}>
-               确认
+							{CMLabel.getCNLabel('CONFIRM')}
             </Text>
       </TouchableOpacity>
     )
@@ -535,7 +535,7 @@ export default class CmEatAddress extends Component {
     return(
       <View style={{  flex:1,
                       backgroundColor:"#f2f2f2"}}>
-        <Header title={"地址"}
+        <Header title={CMLabel.getCNLabel('ADDRESS')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
 					{this._renderSearchInput()}
