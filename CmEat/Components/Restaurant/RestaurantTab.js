@@ -41,14 +41,6 @@ export default class RestaurantTab extends Component {
 		this._renderRestaurant = this._renderRestaurant.bind(this);
 
 	}
-	componentDidMount(){
-		const index = this.props.index;
-		const scrollView = this._scrollVew;
-		const scrollViewContent = this._scrollViewContent;
-		const ref = Object.assign({},{index,scrollView,scrollViewContent})
-		this.props.getScrollViewRefs(ref)
-		// this._scrollVew.scrollToOffset({y: this.props.scrollY,animated:false});
-	}
 
   _renderRestaurant({item}) {
     const restaurant = item;
