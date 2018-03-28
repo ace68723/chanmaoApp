@@ -14,11 +14,13 @@ import {
   TouchableWithoutFeedback,
   View,
 	FlatList,
+	InteractionManager,
 } from 'react-native';
 
 import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
+import Background from '../General/Background'
 
 const {width,height} = Dimensions.get('window');
 let marginTop;
@@ -36,6 +38,13 @@ export default class HomeTab extends Component {
 		this.state = {
 			showScrollToResCards: true,
 			scrollToResCardsOpacity: new Animated.Value(1),
+
+
+			anim: new Animated.Value(0), //for background image
+			restaurantViewOpacity: new Animated.Value(0), // init opacity 0
+			restaurantCardTop:new Animated.Value(0),
+			restaurantCardMargin:new Animated.Value(7),
+			selectedRestaurantBanner: 'https://www.chanmao.ca/img/mob_banner/076_20170118.png',
 		}
 		this._handleOnPress = this._handleOnPress.bind(this);
 		this._handleScrollToResCards = this._handleScrollToResCards.bind(this);
@@ -43,6 +52,10 @@ export default class HomeTab extends Component {
 		this._renderRestaurant = this._renderRestaurant.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
 		this._renderScrollToResCards = this._renderScrollToResCards.bind(this);
+
+		this._openMenu = this._openMenu.bind(this);
+		this._renderBS = this._renderBS.bind(this);
+
   }
 	_handleOnPress(advertisement){
 		if(advertisement.navitype == 2){
@@ -125,13 +138,59 @@ export default class HomeTab extends Component {
 		)
 	}
 
+	_openMenu(py, selected){
+
+		this.setState({selectedRestaurantBanner: selected.mob_banner});
+		this.setState({restaurantCardTop: new Animated.Value(py)});
+
+		setTimeout( () =>{
+			Animated.parallel([
+				Animated.timing(this.state.restaurantCardTop, {
+					toValue: -marginTop,
+					duration: 300,
+				}),
+				Animated.timing(this.state.restaurantViewOpacity, {
+					toValue:1,
+					duration: 300,
+				}),
+				Animated.timing(this.state.restaurantCardMargin, {
+					toValue:0,
+					duration: 300,
+				}),
+			]).start()
+		}, 400);
+	}
+
+	_renderBS(){
+		return (
+			<Animated.View style={{
+						position: 'absolute',
+						top:this.state.restaurantCardTop,
+						left:this.state.restaurantCardMargin,
+						right:this.state.restaurantCardMargin,
+						opacity: this.state.restaurantViewOpacity,
+				}}>
+				<Text></Text>
+				<Background
+						 minHeight={0}
+						 maxHeight={230}
+						 offset={this.state.anim}
+						 backgroundImage={{uri:this.state.selectedRestaurantBanner}}
+						 backgroundShift={0}
+						 backgroundColor={"rgba(0,0,0,0)"}>
+				 </Background>
+			</Animated.View>
+		);
+	}
+
 	_renderRestaurant({item}) {
 		const restaurant = item;
 			if(restaurant){
 				return (<RestaurantCard
 					restaurant={restaurant}
 					navigator={this.props.navigator}
-					/>);
+					openMenu={this._openMenu}
+				/>);
 			}
 	}
 	_renderRestaurants() {
@@ -153,7 +212,6 @@ export default class HomeTab extends Component {
 			/>
 		);
 	}
-
 	_renderScrollToResCards() {
 		if (this.props.showIntroduction) {
 			return(
@@ -211,6 +269,7 @@ export default class HomeTab extends Component {
 							scrollEventThrottle={200}
 					/>
 					{this._renderScrollToResCards()}
+					{this._renderBS()}
 			</View>
 		);
 

@@ -84,71 +84,60 @@ class Menu extends Component {
 
     }
     _openMenuAnimation(){
-      	InteractionManager.runAfterInteractions(() => {
-
-          Animated.parallel([
-            Animated.timing(this.state.restaurantCardTop, {
-              toValue: 0,
-              duration: 300,
-            }),
             Animated.timing(this.state.restaurantViewOpacity, {
-              toValue:1,
-              duration: 300,
-            }),
-            Animated.timing(this.state.restaurantCardMargin, {
-              toValue:0,
-              duration: 300,
-            }),
-            Animated.timing(this.state.showMenuAnimation, {
-              toValue:1,
-              duration: 300,
-            })
-          ]).start()
-          setTimeout(()=>{
-            this.setState({
-              renderHeader:true,
-            })
-          }, 400);
-        })
+			setTimeout(()=>{
+					this.setState({
+						renderHeader:true,
+
+					})
+			}, 400);
+
+			setTimeout(()=>{
+					this.setState({
+						restaurantCardTop:new Animated.Value(0),
+						restaurantViewOpacity:new Animated.Value(1),
+						restaurantCardMargin:new Animated.Value(0),
+						showMenuAnimation:new Animated.Value(1),
+					})
+			}, 300);
+
+
     }
 
     _closeMenuAnimation(){
       MenuStore.initMenu();
 			this.state.anim.setValue(0);
       this.setState({renderMenuList:false,renderHeader:false,})
-      InteractionManager.runAfterInteractions(() => {
-        Animated.parallel([
-          Animated.timing(this.state.restaurantCardTop, {
-            toValue: this.state.top,
-            duration: 300,
-          }),
-          Animated.timing(this.state.restaurantViewOpacity, {
-            toValue: 0,
-            duration: 300,
-          }),
-          Animated.timing(this.state.restaurantCardMargin, {
-            toValue:7,
-            duration: 300,
-          }),
-          Animated.timing(this.state.showMenuAnimation, {
-            toValue:0,
-            duration: 300,
+
+      Animated.parallel([
+        Animated.timing(this.state.restaurantCardTop, {
+          toValue: this.state.top,
+          duration: 300,
+        }),
+        Animated.timing(this.state.restaurantViewOpacity, {
+          toValue: 0,
+          duration: 300,
+        }),
+        Animated.timing(this.state.restaurantCardMargin, {
+          toValue:7,
+          duration: 300,
+        }),
+        Animated.timing(this.state.showMenuAnimation, {
+          toValue:0,
+          duration: 300,
+        })
+      ]).start()
+
+      this.MenuHeader.close();
+      setTimeout( ()=> {
+        // !important for history reorder
+        if(!this.props.closeMenu) {
+          this.props.navigator.dismissModal({
+              animationType: 'none'
           })
-        ]).start()
-        this.MenuHeader.close();
-        setTimeout( ()=> {
-          // !important for history reorder
-          if(!this.props.closeMenu) {
-            this.props.navigator.dismissModal({
-                animationType: 'none'
-            })
-            return
-          };
-        }, 500);
-      })
-
-
-
+          return
+        };
+      }, 500);
 
     }
 		_goToMenuSearch(){
@@ -367,6 +356,7 @@ class Menu extends Component {
                                  }}>
             </Animated.View>
   					{this._renderBackgroundCover()}
+
             <Animated.View style={{top:this.state.restaurantCardTop,
                                    marginLeft:this.state.restaurantCardMargin,
                                    marginRight:this.state.restaurantCardMargin,
@@ -390,6 +380,7 @@ class Menu extends Component {
                   end_time = {this.props.restaurant.end_time}
                   />
             </Animated.View>
+
             <View style={{position:'absolute',left:0,top:0,right:0,bottom:0,}}>
               {this._renderMenuList()}
             </View>

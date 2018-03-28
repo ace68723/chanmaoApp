@@ -41,8 +41,6 @@ class RestaurantCard extends Component {
 				})
 			}
       _renderCloseCover(){
-
-
         if(this.state.restaurant.open == 0){
           return(
             <View style={{position:'absolute',
@@ -85,17 +83,18 @@ class RestaurantCard extends Component {
         }
       }
       _openMenu(){
-        this.refs[this.state.ref].measure( (fx, fy, width, height, px, py) => {
-            this.props.navigator.showModal({
-              screen: 'CmEatMenu',
-              animated: false,
-              navigatorStyle: {navBarHidden: true},
-              passProps: {
-                py:py,
-                restaurant:this.state.restaurant,
-              },
-            });
-        })
+				this.refs[this.state.ref].measure( (fx, fy, width, height, px, py) => {
+						// this.props.navigator.showModal({
+						// 	screen: 'CmEatMenu',
+						// 	animated: false,
+						// 	navigatorStyle: {navBarHidden: true},
+						// 	passProps: {
+						// 		py:py,
+						// 		restaurant:this.state.restaurant,
+						// 	},
+						// });
+						this.props.openMenu(py, this.state.restaurant);
+				})
       }
       _renderDistance(){
         if(this.state.restaurant.distance > 0){
