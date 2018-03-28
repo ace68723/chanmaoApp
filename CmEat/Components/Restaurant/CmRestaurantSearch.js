@@ -25,6 +25,7 @@ import {
 import HomeStore from '../../Stores/HomeStore';
 import HomeAction from '../../Actions/HomeAction';
 import RestaurantCard from './RestaurantCard';
+import WordProcessor from '../WordProcess/WordProcessor'
 const {width,height} = Dimensions.get('window');
 const searchViewMarginHorizontal = 10;
 const iconSearchInputSize = 35;
@@ -76,9 +77,10 @@ export default class CmRestaurantSearch extends Component {
 	}
   _setSearchText(text) {
   		if(text){
+					let processedText = WordProcessor.tranStr(text);
     			let filteredData;
     			if(text != "All"){
-    				filteredData = this._filterNotes(text, this.state.restaurant);
+    				filteredData = this._filterNotes(processedText, this.state.restaurant);
     			}else{
     				filteredData = this.state.restaurant;
     			}
