@@ -56,6 +56,7 @@ export default class MainTab extends Component {
 			restaurantCoverOpacity: new Animated.Value(0), // init restaurant tab view opacity 0
 			renderAddressPrompt: false,
       shouldRenderAddressPrompt:false,
+			showIntroduction: true,
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
@@ -63,8 +64,10 @@ export default class MainTab extends Component {
     this._handleBackToHome = this._handleBackToHome.bind(this);
     this._goToRestaurantSearch = this._goToRestaurantSearch.bind(this);
 
-		this._toggleAddressPrompt = this._toggleAddressPrompt.bind(this);
+		this._showAddressPrompt = this._showAddressPrompt.bind(this);
+		this._dismissAddressPrompt = this._dismissAddressPrompt.bind(this);
 		this._onScrollRestaurantsList = this._onScrollRestaurantsList.bind(this);
+
   }
 	async componentDidMount(){
     await AddressAction.getAddress();
@@ -105,14 +108,18 @@ export default class MainTab extends Component {
     });
   }
 
-	_toggleAddressPrompt(){
-		this.setState({shouldRenderAddressPrompt:!this.state.shouldRenderAddressPrompt});
+	_showAddressPrompt(){
+		this.setState({shouldRenderAddressPrompt:true});
+	}
+
+	_dismissAddressPrompt(){
+		this.setState({shouldRenderAddressPrompt:false});
 	}
 
 	_onScrollRestaurantsList(event){
 		const DISMISS_OFFSET = 900;
 		if (event.nativeEvent.contentOffset.y >= DISMISS_OFFSET && this.state.shouldRenderAddressPrompt === true){
-			this.refs.HomeHeader.refs.AddressPrompt._onPress();
+			AddressAction.dismissAddressPromptView();
 		}
 	}
 
@@ -125,8 +132,10 @@ export default class MainTab extends Component {
                   bannerList={this.state.bannerList}
 									restaurants = {this.state.areaList}
 									onScrollRestaurantsList = {this._onScrollRestaurantsList}
+									showIntroduction={this.state.showIntroduction}
 									/>
         <CmEatHomeHeader
+<<<<<<< HEAD
            handleBackToHome={this._handleBackToHome}
            renderSearch={this.state.renderSearch}
            toggleAddressPrompt={this._toggleAddressPrompt}
@@ -134,6 +143,17 @@ export default class MainTab extends Component {
   				 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
   				 renderAddressPrompt={this.state.renderAddressPrompt}
 				 />
+=======
+					ref='HomeHeader'
+                         handleBackToHome={this._handleBackToHome}
+                         renderSearch={this.state.renderSearch}
+                         showAddressPrompt={this._showAddressPrompt}
+												 dismissAddressPrompt={this._dismissAddressPrompt}
+                         goToRestaurantSearch={this._goToRestaurantSearch}
+												 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
+												 renderAddressPrompt={this.state.renderAddressPrompt}
+												 />
+>>>>>>> 6f7958c3142f20bbd14d9a2a8c345f742c298a65
      </View>
     )
   }
@@ -148,7 +168,7 @@ const styles = StyleSheet.create({
 
 					// 	{this.state.shouldRenderAddressPrompt &&
           //    this.state.renderAddressPrompt &&
-					// 	<TouchableWithoutFeedback onPress={this._toggleAddressPrompt} >
+					// 	<TouchableWithoutFeedback onPress={this._showAddressPrompt} >
 					// 		<View style={{
 					// 							position: 'absolute',
 					// 							height: 36,
