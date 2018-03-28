@@ -135,25 +135,14 @@ export default class MainTab extends Component {
 									showIntroduction={this.state.showIntroduction}
 									/>
         <CmEatHomeHeader
-<<<<<<< HEAD
-           handleBackToHome={this._handleBackToHome}
-           renderSearch={this.state.renderSearch}
-           toggleAddressPrompt={this._toggleAddressPrompt}
-           goToRestaurantSearch={this._goToRestaurantSearch}
-  				 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
-  				 renderAddressPrompt={this.state.renderAddressPrompt}
+			       handleBackToHome={this._handleBackToHome}
+			       renderSearch={this.state.renderSearch}
+			       showAddressPrompt={this._showAddressPrompt}
+						 dismissAddressPrompt={this._dismissAddressPrompt}
+			       goToRestaurantSearch={this._goToRestaurantSearch}
+						 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
+						 renderAddressPrompt={this.state.renderAddressPrompt}
 				 />
-=======
-					ref='HomeHeader'
-                         handleBackToHome={this._handleBackToHome}
-                         renderSearch={this.state.renderSearch}
-                         showAddressPrompt={this._showAddressPrompt}
-												 dismissAddressPrompt={this._dismissAddressPrompt}
-                         goToRestaurantSearch={this._goToRestaurantSearch}
-												 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
-												 renderAddressPrompt={this.state.renderAddressPrompt}
-												 />
->>>>>>> 6f7958c3142f20bbd14d9a2a8c345f742c298a65
      </View>
     )
   }
