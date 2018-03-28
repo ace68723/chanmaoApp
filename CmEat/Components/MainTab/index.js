@@ -57,6 +57,7 @@ export default class MainTab extends Component {
 			renderAddressPrompt: false,
       shouldRenderAddressPrompt:false,
 			showIntroduction: true,
+			restaurantList: [],
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());

@@ -31,9 +31,11 @@ import { orderBy } from 'lodash';
 const {width,height} = Dimensions.get('window');
 let marginTop,headerHeight;
 if(height == 812){
-  headerHeight = 88
+  headerHeight = 88;
+	marginTop = 20;
 }else{
-  headerHeight = 64
+  headerHeight = 64;
+	marginTop = 10;
 }
 const searchViewMarginHorizontal = 10;
 const iconSearchInputSize = 35;
@@ -131,6 +133,7 @@ export default class CmRestaurantSearch extends Component {
 								height:iconSearchInputSize*0.7,
 								width:iconSearchInputSize*0.63,
 								marginLeft:10,
+								marginTop: marginTop
 							}}
 						/>
 						<TextInput
@@ -345,7 +348,7 @@ const styles = StyleSheet.create({
 		borderRadius:30,
 		// borderWidth:1,
 		// borderColor:'#e2e2e2',
-		marginTop:10,
+		marginTop:marginTop,
 		marginHorizontal:10,
 		flex:1,
 		// backgroundColor:'#f4f4f4',
@@ -358,7 +361,7 @@ const styles = StyleSheet.create({
 		borderRadius:30,
 		// borderWidth:1,
 		// borderColor:'#e2e2e2',
-		marginTop:10,
+		marginTop:marginTop,
 		marginHorizontal:10,
 		flex:1,
 		// backgroundColor:'#f4f4f4',
@@ -369,6 +372,7 @@ const styles = StyleSheet.create({
 	},
 	searchInput:{
     fontFamily:"FZZhunYuan-M02S",
+		marginTop: marginTop,
 		fontSize: 20,
 		height:40,
 		marginLeft:10,
@@ -377,6 +381,7 @@ const styles = StyleSheet.create({
 	},
 	searchInput_full:{
     fontFamily:"FZZhunYuan-M02S",
+		marginTop: marginTop,
 		fontSize: 20,
 		height:40,
 		marginLeft:10,
