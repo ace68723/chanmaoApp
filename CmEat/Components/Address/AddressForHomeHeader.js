@@ -68,7 +68,7 @@ export default class AddressForHomeHeader extends Component {
 						const distance = res.rows[0].elements[0].distance.value;
             const promoptDistance = 500;
             if (distance && distance >= promoptDistance){
-              this.props.toggleAddressPrompt();
+              this.props.showAddressPrompt();
             }
             else{
               console.log('not show');

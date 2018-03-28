@@ -49,13 +49,13 @@ export default class SboxHomeHeader extends Component {
         <View style={{flex:0.66,justifyContent:'center',alignItems:'center'}}>
           <AddressForHomeHeader
             handleBackToHome={this.props.handleBackToHome}
-            toggleAddressPrompt={this.props.toggleAddressPrompt}
+            showAddressPrompt={this.props.showAddressPrompt}
             />
         </View>
 
         {this.props.shouldRenderAddressPrompt && this.props.renderAddressPrompt &&
             <AddressPromptView
-              ref='AddressPrompt' onPress={this.props.toggleAddressPrompt} />
+              ref='AddressPrompt' onPress={this.props.dismissAddressPrompt} />
         }
       </View>
     );

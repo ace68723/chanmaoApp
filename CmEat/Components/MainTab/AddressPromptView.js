@@ -11,10 +11,9 @@ import {
   Animated,
   Easing,
 } from 'react-native';
+import AddressStore from '../../Stores/AddressStore';
 
 const {width,height} = Dimensions.get('window');
-
-let isAnimating = false;
 
 let headerHeight;
 if(height == 812){
@@ -34,11 +33,12 @@ export default class AddressPromptView extends Component {
 
     this.state = Object.assign({}, state);
     this._onPress = this._onPress.bind(this);
+    this._onChange = this._onChange.bind(this);
+
   }
 
   componentDidMount() {
     const animationDuration = 500;
-
     Animated.timing(this.state.fadeInOpacity, {
         toValue: 1,
         duration: animationDuration,
@@ -49,20 +49,20 @@ export default class AddressPromptView extends Component {
         duration: animationDuration,
         easing: Easing.linear
     }).start();
+
+    AddressStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount(){
+    AddressStore.removeChangeListener(this._onChange);
+  }
+
+  _onChange(){
+    this._onPress();
   }
 
   _onPress(){
-    if (isAnimating === true){
-      return;
-    }
-
     const animationDuration = 500;
-    setTimeout(() => {
-        isAnimating = false;
-    }, animationDuration * 2);
-    
-    isAnimating = true;
-
     Animated.timing(this.state.fadeInOpacity, {
         toValue: 0,
         duration: animationDuration,
@@ -75,7 +75,7 @@ export default class AddressPromptView extends Component {
     }).start();
     setTimeout(() => {
         this.props.onPress();
-    }, 1000);
+    }, animationDuration * 2);
   }
 
   render() {
