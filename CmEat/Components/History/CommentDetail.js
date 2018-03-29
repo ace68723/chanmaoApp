@@ -535,7 +535,7 @@ export default class pastOrderEN extends Component {
             <View style={styles.opacityView}/>
               <View style={styles.imageTextContainer}>
                 <Text allowFontScaling={false}
-                      style={styles.imageText} allowFontScaling={false}>
+                      style={styles.imageText} >
                       {this.props.orderInfo.rr_name}
                 </Text>
               </View>

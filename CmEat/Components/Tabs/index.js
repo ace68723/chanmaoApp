@@ -108,7 +108,6 @@ export default class Tabs extends Component {
 								navigator={this.props.navigator}
 								hideTabBar = {this._hideTabBar}
 								showTabBar = {this._showTabBar}
-                navigator={this.props.navigator}
                 />
 							<SettingTab tabLabel={CMLabel.getCNLabel('MY_TAB')}
                     navigator={this.props.navigator}
