@@ -27,7 +27,7 @@ if(height == 812){
   //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
   marginTop = 91;
 }else{
-  marginTop = 75;
+  marginTop = 85;
 }
 export default class HomeTab extends Component {
 
@@ -192,7 +192,7 @@ export default class HomeTab extends Component {
 
   render(){
 
-    if (this.props.restaurantList.length == 0){
+    if (!this.props.restaurantList || this.props.restaurantList.length == 0){
 			return <View/>;
 		}
 		// let prev_all = this.props.restaurants[0].restaurantList;

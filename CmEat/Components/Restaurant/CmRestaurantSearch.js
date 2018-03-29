@@ -152,7 +152,7 @@ export default class CmRestaurantSearch extends Component {
 
 					{this.state.searchText != '' &&
 						<TouchableOpacity
-							style={{ marginLeft: 25, padding: 10}}
+							style={{ marginLeft: 25, padding: 10, marginTop: marginTop, marginLeft: 10}}
 							onPress={()=>this._cleanInput()}>
 							<Text style={{
 									fontSize: 16,

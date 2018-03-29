@@ -75,15 +75,27 @@ class DefaultTabBar extends Component {
 
         const fontWeight = isTabActive ? 'bold' : 'normal';
         let iconName;
+        let iconSize;
+        let textMarginTop;
+        let iconMarginTop;
         switch (page) {
           case 0:
             iconName = 'cm-home_page';
+            iconSize = 30;
+            iconMarginTop = 0;
+            textMarginTop = 0;
             break;
           case 1:
-            iconName = 'cm-setting';
+            iconName = 'cm-search';
+            iconSize = 40;
+            iconMarginTop = -2;
+            textMarginTop = -8;
             break;
           case 2:
             iconName = 'cm-my_order';
+            iconSize = 30;
+            iconMarginTop = 0;
+            textMarginTop = 0;
             break;
           default:
 
@@ -98,8 +110,8 @@ class DefaultTabBar extends Component {
               onPress={() => onPressHandler(page)}
             >
               <View style={[styles.tab, this.props.tabStyle, ]}>
-                <Icon style={{top:5}} name={iconName} size={30} color={textColor} />
-                <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+                <Icon style={{top:5, marginTop: iconMarginTop}} name={iconName} size={iconSize} color={textColor} />
+                <Text style={[{color: textColor, fontWeight, marginTop: textMarginTop}, textStyle, ]}>
                   {name}
                 </Text>
               </View>
