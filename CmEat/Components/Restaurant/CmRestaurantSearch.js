@@ -152,7 +152,7 @@ export default class CmRestaurantSearch extends Component {
 
 					{this.state.searchText != '' &&
 						<TouchableOpacity
-							style={{ marginLeft: 25, padding: 10, marginTop: marginTop, marginLeft: 10}}
+							style={{padding: 10, marginTop: marginTop, marginLeft: 10}}
 							onPress={()=>this._cleanInput()}>
 							<Text style={{
 									fontSize: 16,
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
     fontFamily:"FZZhunYuan-M02S",
 		marginTop: marginTop,
 		fontSize: 20,
-		height:40,
+		height:50,
 		marginLeft:10,
 		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10 - 45,
 
@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
     fontFamily:"FZZhunYuan-M02S",
 		marginTop: marginTop,
 		fontSize: 20,
-		height:40,
+		height:50,
 		marginLeft:10,
 		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,
 
