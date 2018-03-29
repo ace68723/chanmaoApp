@@ -85,7 +85,7 @@ class CommentInput extends Component {
     return (
 
         <View style={[styles.container,{bottom: this.state.bottom,height:this.state.height}]} >
-          <View style={{height:0.5,backgroundColor:'#b3b3b8'}}>
+          <View style={{height:0.5,backgroundColor:'#bdc8d9'}}>
 
           </View>
           <View style={{flexDirection:'row',flex:1,padding:10,}}>

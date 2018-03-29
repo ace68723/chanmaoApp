@@ -89,7 +89,6 @@ export default class pastOrderEN extends Component {
     if (showReviewAdded) {
       this.props.onRefresh();
       this.props.navigator.dismissModal();
-      alert("成功添加评价");
     }
   }
 
@@ -246,7 +245,7 @@ export default class pastOrderEN extends Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                         borderBottomWidth: StyleSheet.hairlineWidth,
-                        borderColor: '#b3b3b8'}}>
+                        borderColor: '#bdc8d9'}}>
               <Text style={{fontSize:20,
                             textAlign:'center',
                             paddingBottom:10,
@@ -260,7 +259,7 @@ export default class pastOrderEN extends Component {
                         justifyContent: 'center'}}>
             <View style={{flex: 1,
                           borderRightWidth: 1,
-                          borderColor: '#b3b3b8'}}>
+                          borderColor: '#bdc8d9'}}>
                 <TouchableOpacity style={{flex: 1,
                                           justifyContent: 'center'}}
                                   onPress={this._hideConfirmSection}>
@@ -308,7 +307,7 @@ export default class pastOrderEN extends Component {
     };
     const commentList = () => {
       let _commentList = [];
-      let list = ["准时", "份量足", "服务好", "快", "包装精美", "差评", "物美价廉"];
+      let list = ["准时", "份量足", "服务好", "快", "包装精美", "物美价廉"];
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleDriverQuickComments(text)}>
@@ -316,7 +315,7 @@ export default class pastOrderEN extends Component {
                             padding: 6,
                             borderRadius: 15,
                             borderWidth: StyleSheet.hairlineWidth,
-                            borderColor: '#b3b3b8',
+                            borderColor: '#bdc8d9',
                             marginBottom: 5,
                             fontFamily:'FZZhunYuan-M02S'}}>
                     {text}
@@ -329,44 +328,53 @@ export default class pastOrderEN extends Component {
     return (
       <View style={{marginTop: 10,
                     backgroundColor: 'white',
-                    borderTopWidth: StyleSheet.hairlineWidth,
-                    borderTopColor: '#b3b3b8',
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    borderBottomColor: '#b3b3b8'}}>
+                    borderBottomColor: '#bdc8d9'}}>
           <View style={{flexDirection: 'row',
-                        padding: 20,
+                        // padding: 20,
                         borderBottomWidth: StyleSheet.hairlineWidth,
-                        borderBottomColor: '#b3b3b8',
-                        alignItems: 'center'}}>
-              <Image style={{width:35,height:35}}source={require('./Image/wechat3.png')}/>
+                        borderBottomColor: '#bdc8d9',
+                        alignItems: 'center',
+                        justifyContent:'center',
+                      }}>
+              <Image style={{width:100,height:100}}source={require('./Image/chanmao_logo.png')}/>
               <View style={{flex: 1,
                             flexDirection: 'column',
                             marginLeft: 10}}>
-                  <Text style={{fontSize: 18, fontFamily:'FZZhunYuan-M02S'}} allowFontScaling={false}>馋猫专送</Text>
-                  <View style={{flex: 1,
-                                flexDirection: 'row',
-                                justifyContent: 'space-between'}}>
-                      <Text style={{fontSize: 14, fontFamily:'FZZhunYuan-M02S'}}
-                            allowFontScaling={false}>
-                          今日{this.state.complete_time.toString().split(" ")[4]}左右送达
-                      </Text>
-                      <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={this._handleChangeTime}>
-                          <Text style={{color: '#ff8b00', fontSize: 14, fontFamily:'FZZhunYuan-M02S'}}
-                                allowFontScaling={false}>
-                          {CMLabel.getCNLabel('CHANGE_COMMENT')}</Text>
-                          <Text allowFontScaling={false}
-                                style={{width: 14,
-                                        height: 14,
-                                        fontSize: 11,
-                                        textAlign: 'center',
-                                        color: '#ff8b00',
-                                        borderWidth: StyleSheet.hairlineWidth,
-                                        borderColor: '#ff8b00',
-                                        borderRadius: 7,
-                                        fontFamily:'FZZhunYuan-M02S'}}>></Text>
-                      </TouchableOpacity>
-                  </View>
+                  <Text style={{fontSize: 18,
+                                fontFamily:'FZZhunYuan-M02S'}}
+                        allowFontScaling={false}>
+                        馋猫专送
+                  </Text>
+                  <Text style={{fontSize: 14,
+                                fontFamily:'FZZhunYuan-M02S'}}
+                        allowFontScaling={false}>
+                      今日{this.state.complete_time.toString().split(" ")[4]}左右送达
+                  </Text>
               </View>
+
+              <TouchableOpacity  onPress={this._handleChangeTime}>
+                <View style={{flexDirection: 'row',
+                              alignItems: 'center',
+                              marginRight:10,
+                            }}>
+                  <Text style={{color: '#ff8b00', fontSize: 14, fontFamily:'FZZhunYuan-M02S'}}
+                        allowFontScaling={false}>
+                  {CMLabel.getCNLabel('CHANGE_COMMENT')}</Text>
+                  <Text allowFontScaling={false}
+                        style={{width: 14,
+                                height: 14,
+                                fontSize: 11,
+                                textAlign: 'center',
+                                color: '#ff8b00',
+                                borderWidth: StyleSheet.hairlineWidth,
+                                borderColor: '#ff8b00',
+                                borderRadius: 7,
+                                fontFamily:'FZZhunYuan-M02S'}}>
+                                >
+                  </Text>
+                </View>
+              </TouchableOpacity>
           </View>
           <View style={{padding: 20}}>
               <Text allowFontScaling={false}
@@ -387,7 +395,7 @@ export default class pastOrderEN extends Component {
               </View>
               <TextInput style={{height: 80,
                                  borderWidth: StyleSheet.hairlineWidth,
-                                 borderColor: '#b3b3b8',
+                                 borderColor: '#bdc8d9',
                                  textAlignVertical: 'top',
                                  padding: 10,
                                  fontFamily:'FZZhunYuan-M02S'}}
@@ -426,7 +434,7 @@ export default class pastOrderEN extends Component {
     };
     const commentList = () => {
       let _commentList = [];
-      let list = ["新鲜", "准时", "份量足", "服务好", "快", "包装精美", "差评", "物美价廉"];
+      let list = ["新鲜", "准时", "份量足", "服务好", "快", "包装精美", "物美价廉"];
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleRestaurantQuickComments(text)}>
@@ -435,7 +443,7 @@ export default class pastOrderEN extends Component {
                             padding: 6,
                             borderRadius: 15,
                             borderWidth: StyleSheet.hairlineWidth,
-                            borderColor: '#b3b3b8',
+                            borderColor: '#bdc8d9',
                             marginBottom: 5,
                             fontFamily:'FZZhunYuan-M02S'}}>
                     {text}
@@ -527,9 +535,9 @@ export default class pastOrderEN extends Component {
       <View style={{marginTop: 10,
                     backgroundColor: 'white',
                     borderTopWidth: StyleSheet.hairlineWidth,
-                    borderTopColor: '#b3b3b8',
+                    borderTopColor: '#bdc8d9',
                     borderBottomWidth: StyleSheet.hairlineWidth,
-                    borderBottomColor: '#b3b3b8',
+                    borderBottomColor: '#bdc8d9',
                     marginBottom: 50}}>
           <ImageBackground style={{height: 110, width: width,alignSelf:'center'}} source={{uri:this.props.orderInfo.rr_url}}>
             <View style={styles.opacityView}/>
@@ -557,7 +565,7 @@ export default class pastOrderEN extends Component {
               <TextInput style={{height: 80,
                                  marginBottom: 20,
                                  borderWidth: StyleSheet.hairlineWidth,
-                                 borderColor: '#b3b3b8',
+                                 borderColor: '#bdc8d9',
                                  textAlignVertical: 'top',
                                  padding: 10,
                                  fontFamily:'FZZhunYuan-M02S'}}
@@ -635,6 +643,8 @@ export default class pastOrderEN extends Component {
             <Header title={CMLabel.getCNLabel('COMMENT')}
                     goBack={this.props.goBack}
                     leftButtonText={'x'}/>
+                    <View style={{borderBottomWidth: StyleSheet.hairlineWidth,
+                                  borderColor: '#bdc8d9'}}/>
                 <ScrollView ref="ScrollView"
                             keyboardShouldPersistTaps={'always'}
                             keyboardDismissMode={'on-drag'}>
@@ -663,7 +673,7 @@ export default class pastOrderEN extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: '#ffffff',
   },
   modal: {
 		justifyContent: 'center',

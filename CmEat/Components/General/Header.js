@@ -105,7 +105,7 @@ export default (props) =>{
 
     </View>
     )
-    // <View style={{height:0.5,backgroundColor:'#b3b3b8'}}/>
+    // <View style={{height:0.5,backgroundColor:'#bdc8d9'}}/>
 }
 const styles = StyleSheet.create({
   container:{
@@ -114,6 +114,8 @@ const styles = StyleSheet.create({
     right:0,
     height:headerHeight,
     backgroundColor:'#ffffff',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#bdc8d9',
   },
   backButton:{
     position:'absolute',

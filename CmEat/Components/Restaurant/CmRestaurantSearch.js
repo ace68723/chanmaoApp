@@ -306,6 +306,8 @@ export default class CmRestaurantSearch extends Component {
 						behavior={Platform.OS === 'ios'?"padding":null}
 						>
 					{this._renderSearchInput()}
+          <View style={{borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderBottomColor: '#bdc8d9',}}/>
 					{this._renderResult()}
 
 			</KeyboardAvoidingView>
