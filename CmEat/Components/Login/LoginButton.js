@@ -119,14 +119,14 @@ export default class LoginButton extends Component {
       <View style={styles.container} ref={"LOGIN"}>
 						{this._renderLoginButton()}
           <View style={styles.registerView}>
-						<TouchableWithoutFeedback onPress={()=>{this.props.if_openAdView('https://chanmao.ca/index.php?r=site/register')}}>
+						<TouchableWithoutFeedback onPress={()=>{this.props.if_openAdView('https://xiaoming.ca/index.php?r=site/register')}}>
 							<View style={{flex:1}}>
 								<Text allowFontScaling={false} style={styles.registerText}>
 		               {this.props.is_register}
 		            </Text>
 							</View>
 						</TouchableWithoutFeedback>
-						<TouchableWithoutFeedback onPress={()=>{this.props.if_openAdView('https://chanmao.ca/index.php?r=site/recovery')}}>
+						<TouchableWithoutFeedback onPress={()=>{this.props.if_openAdView('https://xiaoming.ca/index.php?r=site/recovery')}}>
 							<View style={{flex:1}}>
 								<Text allowFontScaling={false} style={styles.forgotText}>
 									{this.props.is_forgot}

@@ -65,22 +65,22 @@ export default class InfoPage extends Component {
 
             <View style={styles.fontContainer}>
                 <Text style={styles.headerFont} allowFontScaling={false} >
-                  这是一个致力于打造多伦多最佳订餐平台，为自己理想奋斗的热血团队。我们愿真诚的接纳您的意见，也邀请志同道合的你加入我们。
+                  小明配送是基于加拿大魁北克省蒙特利尔的O2O网络订餐平台，零元起送，无送餐范围限制，保证送餐速度，致力于成为蒙特利尔最佳订餐服务平台。这是一个年轻热血有梦想的团队，我们愿真诚的接纳您的意见，也邀请志同道合的你加入我们。
                 </Text>
             </View>
                 <View style={styles.centerContent}>
                           <View style={styles.imgContainer} >
-                            <Image source={require('./Image/cmQRcode.jpeg')} style={{width: 140, height: 140}} />
+                            <Image source={require('./Image/xmQRcode.jpg')} style={{width: 140, height: 140}} />
                           </View>
                           <View style={styles.centerFontContainer}>
                               <Text style={styles.centerFontWEIXIN}
                                     selectable={true}
                                     allowFontScaling={false}>
-                                    微信客服：chanmaoweixin
+                                    微信客服：xiaomingpeisong_ca
                               </Text>
                               <Text style={styles.centerFont} onPress={()=>{
                                 this.contact("marketing@chanmao.ca","email");
-                              }} allowFontScaling={false}>商务合作：marketing@chanmao.ca</Text>
+                              }} allowFontScaling={false}>商务合作: marketing@xiaoming.ca</Text>
                           </View>
                 </View>
         </ScrollView>

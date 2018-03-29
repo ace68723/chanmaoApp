@@ -1,4 +1,4 @@
-package ca.chanmao.app;
+package ca.chanmao.xmapp;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;

@@ -95,7 +95,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "ca.chanmao.app"
+        applicationId "ca.chanmao.xmapp"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 3

@@ -1,17 +1,12 @@
-package ca.chanmao.app;
+package ca.chanmao.xmapp;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.facebook.react.bridge.ReactApplicationContext;
 import com.stripe.android.Stripe;
 import com.stripe.android.TokenCallback;
 import com.stripe.android.model.Card;
 import com.stripe.android.model.Token;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by aiden on 2018-02-26.

@@ -1,4 +1,4 @@
-package ca.chanmao.app.wxapi;
+package ca.chanmao.xmapp.wxapi;
 
 import android.app.Activity;
 import android.os.Bundle;

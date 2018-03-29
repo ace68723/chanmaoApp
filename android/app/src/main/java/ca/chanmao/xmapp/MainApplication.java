@@ -1,9 +1,8 @@
-package ca.chanmao.app;
+package ca.chanmao.xmapp;
 
 import android.support.annotation.Nullable;
 
 import com.airbnb.android.react.maps.MapsPackage;
-import com.facebook.soloader.SoLoader;
 import com.microsoft.codepush.react.CodePush;
 import com.theweflex.react.WeChatPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;

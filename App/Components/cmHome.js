@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
 const HOME_IMAGES = {
   sbox_home_image: require('./Img/HOME-PAGE-SBOX.png'),
   sbox_home_image_x: require('./Img/iphoneX_SweetfulBox.png'),
-  cm_home_image: require('./Img/HOME-PAGE-CM-iPhone.png'),
-  cm_home_image_x: require('./Img/iphoneX_chanmao.png'),
+  cm_home_image: require('./Img/HOME-XM.png'),
+  cm_home_image_x: require('./Img/HOME-XM.png'),
 }
 
 export default class Home extends Component {
@@ -175,15 +175,15 @@ export default class Home extends Component {
         //     })
         //   })
         // }, 500);
-        setTimeout(() => {
-          InteractionManager.runAfterInteractions(() => {
-            this.props.navigator.showModal({
-              screen: 'CmAdvertisement',
-              animationType: 'none',
-              navigatorStyle: {navBarHidden: true},
-            })
-          })
-        }, 500);
+        // setTimeout(() => {
+        //   InteractionManager.runAfterInteractions(() => {
+        //     this.props.navigator.showModal({
+        //       screen: 'CmAdvertisement',
+        //       animationType: 'none',
+        //       navigatorStyle: {navBarHidden: true},
+        //     })
+        //   })
+        // }, 500);
         setTimeout(() => {
           InteractionManager.runAfterInteractions(() => {
               this.props.navigator.resetTo({
