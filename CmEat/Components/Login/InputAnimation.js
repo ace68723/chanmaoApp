@@ -223,11 +223,13 @@ export default class InputAnimation extends Component {
 							</Animated.View>
 
 	            <TextInput
-	                  style={[styles.input,{marginTop:height*0.068}]}
+
+	                  style={[styles.input,{marginTop:height*0.068},]}
 	                  placeholder={this.props.is_username}
 	                  placeholderTextColor={'#ffffff'}
 	                  selectionColor={'#ea7b21'}
 	                  keyboardType = { 'url'}
+
 	                  autoCorrect= { false}
 	                  returnKeyType={'next'}
 	                  ref={this.props.ir_USERNAME_INPUTREF}
@@ -303,7 +305,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderRadius: 8,
     color: '#ffffff',
-    height:40,
+    height:50,
     marginTop:5,
   },
   button:{
