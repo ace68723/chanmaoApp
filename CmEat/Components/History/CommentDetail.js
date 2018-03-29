@@ -643,8 +643,6 @@ export default class pastOrderEN extends Component {
             <Header title={CMLabel.getCNLabel('COMMENT')}
                     goBack={this.props.goBack}
                     leftButtonText={'x'}/>
-                    <View style={{borderBottomWidth: StyleSheet.hairlineWidth,
-                                  borderColor: '#bdc8d9'}}/>
                 <ScrollView ref="ScrollView"
                             keyboardShouldPersistTaps={'always'}
                             keyboardDismissMode={'on-drag'}>
