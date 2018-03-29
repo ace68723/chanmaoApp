@@ -24,8 +24,9 @@ export default (props) =>{
 const styles = StyleSheet.create({
   container:{
     backgroundColor: '#fff',
-    borderColor: '#ddd',
-    borderWidth: 1,
+    borderBottomColor:"#bdc8d9",
+    borderBottomWidth:StyleSheet.hairlineWidth,
+    padding:10
   },
   text:{
     margin:10,
