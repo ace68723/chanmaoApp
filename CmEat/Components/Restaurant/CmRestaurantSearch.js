@@ -209,29 +209,29 @@ export default class CmRestaurantSearch extends Component {
   }
 	_renderArea({item ,index}) {
 		let area = item;
-    let ImageSource
-    switch (index+1) {
-      case 1:
-        ImageSource = require("./Image/area_1.png")
-        break;
-      case 2:
-        ImageSource = require("./Image/area_2.png")
-        break;
-      case 3:
-        ImageSource = require("./Image/area_3.png")
-        break;
-      case 4:
-        ImageSource = require("./Image/area_4.png")
-        break;
-			case 5:
-				ImageSource = require("./Image/area_5.png")
-				break;
-			case 6:
-				ImageSource = require("./Image/area_6.png")
-				break;
-      default:
-        ImageSource = require("./Image/area_1.png")
-    }
+    // let ImageSource
+    // switch (index+1) {
+    //   case 1:
+    //     ImageSource = require("./Image/area_1.png")
+    //     break;
+    //   case 2:
+    //     ImageSource = require("./Image/area_2.png")
+    //     break;
+    //   case 3:
+    //     ImageSource = require("./Image/area_3.png")
+    //     break;
+    //   case 4:
+    //     ImageSource = require("./Image/area_4.png")
+    //     break;
+		// 	case 5:
+		// 		ImageSource = require("./Image/area_5.png")
+		// 		break;
+		// 	case 6:
+		// 		ImageSource = require("./Image/area_6.png")
+		// 		break;
+    //   default:
+    //     ImageSource = require("./Image/area_1.png")
+    // }
     // <View style={{backgroundColor:'#ffffff', width:(width/2)-20, height:(width/2)-20}}></View>
 
 		if(area){
@@ -241,7 +241,7 @@ export default class CmRestaurantSearch extends Component {
   					this.refs.searchInput.value = area.name;
 					}}>
 					<ImageBackground
-            source={ImageSource}
+            source={{uri:area.image}}
             style={{
               marginTop:10,
               marginLeft:10,
