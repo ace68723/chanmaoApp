@@ -32,7 +32,7 @@ const {width,height} = Dimensions.get('window');
 let marginTop,headerHeight;
 if(height == 812){
   headerHeight = 88;
-	marginTop = 20;
+	marginTop = 30;
 }else{
   headerHeight = 64;
 	marginTop = 10;
@@ -119,49 +119,37 @@ export default class CmRestaurantSearch extends Component {
   		},()=>this.refs.searchInput.clear());
 	}
 	_renderSearchInput() {
-		// <TouchableOpacity
-		// 				style={{flex:0.1}}
-		// 				onPress={()=>this._goBack()}>
-		// 			<Text style={{fontSize:40}}>×</Text>
-		// 		</TouchableOpacity>
-		return(
-			<View style={ this.state.searchText == '' ? styles.header_full : styles.header }>
-				<View style={this.state.searchText == '' ? styles.searchView_full : styles.searchView}>
-						<Image
-							source={require('./Image/icon_search_input.png')}
-							style={{
-								height:iconSearchInputSize*0.7,
-								width:iconSearchInputSize*0.63,
-								marginLeft:10,
-								marginTop: marginTop
-							}}
-						/>
-						<TextInput
-							ref={'searchInput'}
-							style={this.state.searchText == '' ? styles.searchInput_full : styles.searchInput}
-							selectionColor={'#ea7b21'}
-							keyboardType = {'default'}
-							autoCorrect= { false}
-							autoFocus={false}
-							returnKeyType={'next'}
-							onChangeText={this._setSearchText}
-							underlineColorAndroid={"rgba(0,0,0,0)"}
-              placeholder={"搜索你想要的餐馆"}
-							value={this.state.searchText}
-						/>
-
+		return (
+			<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', height: headerHeight}}>
+					<View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-start', marginLeft: 20, marginTop: marginTop}}>
+							<Image
+								source={require('./Image/icon_search_input.png')}
+								style={{width: 22, height: 24.5
+								}}
+							/>
+							<TextInput
+								ref={'searchInput'}
+								style={{flex: 1, marginLeft: 10, fontFamily:"FZZhunYuan-M02S", fontSize: 20,}}
+								selectionColor={'#ea7b21'}
+								keyboardType = {'default'}
+								autoCorrect= { false}
+								autoFocus={false}
+								returnKeyType={'next'}
+								onChangeText={this._setSearchText}
+								underlineColorAndroid={"rgba(0,0,0,0)"}
+								placeholder={"搜索你想要的餐馆"}
+								value={this.state.searchText}
+							/>
+					</View>
 					{this.state.searchText != '' &&
 						<TouchableOpacity
-							style={{padding: 10, marginTop: marginTop, marginLeft: 10}}
-							onPress={()=>this._cleanInput()}>
-							<Text style={{
-									fontSize: 16,
-									backgroundColor: 'white'}}>取消</Text>
-						</TouchableOpacity>
+						style={{marginRight: 20, marginTop: marginTop}}
+						onPress={()=>this._cleanInput()}>
+						<Text style={{
+								fontSize: 16,
+								backgroundColor: 'white'}}>取消</Text>
+					</TouchableOpacity>
 					}
-
-				</View>
-
 			</View>
 		)
 	}
@@ -209,31 +197,6 @@ export default class CmRestaurantSearch extends Component {
   }
 	_renderArea({item ,index}) {
 		let area = item;
-    // let ImageSource
-    // switch (index+1) {
-    //   case 1:
-    //     ImageSource = require("./Image/area_1.png")
-    //     break;
-    //   case 2:
-    //     ImageSource = require("./Image/area_2.png")
-    //     break;
-    //   case 3:
-    //     ImageSource = require("./Image/area_3.png")
-    //     break;
-    //   case 4:
-    //     ImageSource = require("./Image/area_4.png")
-    //     break;
-		// 	case 5:
-		// 		ImageSource = require("./Image/area_5.png")
-		// 		break;
-		// 	case 6:
-		// 		ImageSource = require("./Image/area_6.png")
-		// 		break;
-    //   default:
-    //     ImageSource = require("./Image/area_1.png")
-    // }
-    // <View style={{backgroundColor:'#ffffff', width:(width/2)-20, height:(width/2)-20}}></View>
-
 		if(area){
 			return(
 				<TouchableOpacity onPress={()=>{
@@ -318,78 +281,6 @@ export default class CmRestaurantSearch extends Component {
 
 
 const styles = StyleSheet.create({
-	input:{
-		fontSize: 18,
-		borderRadius: 8,
-		color: '#ea7b21',
-		height:40,
-		width:width - 45,
-		marginTop:5,
-	},
-	input_full:{
-		fontSize: 18,
-		borderRadius: 8,
-		color: '#ea7b21',
-		height:40,
-		width:width,
-		marginTop:5,
-	},
-	header:{
-		width:width - 45,
-		height:headerHeight,
-		flexDirection:'row',
-		alignItems:'center',
-	},
-	header_full:{
-		width:width,
-		height:headerHeight,
-		flexDirection:'row',
-		alignItems:'center',
-	},
-	searchView:{
-		borderRadius:30,
-		// borderWidth:1,
-		// borderColor:'#e2e2e2',
-		marginTop:marginTop,
-		marginHorizontal:10,
-		flex:1,
-		// backgroundColor:'#f4f4f4',
-		flexDirection:'row',
-		alignItems:'center',
-		alignSelf:'center',
-		width: width-searchViewMarginHorizontal*2 - 45,
-	},
-	searchView_full:{
-		borderRadius:30,
-		// borderWidth:1,
-		// borderColor:'#e2e2e2',
-		marginTop:marginTop,
-		marginHorizontal:10,
-		flex:1,
-		// backgroundColor:'#f4f4f4',
-		flexDirection:'row',
-		alignItems:'center',
-		alignSelf:'center',
-		width: width-searchViewMarginHorizontal*2,
-	},
-	searchInput:{
-    fontFamily:"FZZhunYuan-M02S",
-		marginTop: marginTop,
-		fontSize: 20,
-		height:50,
-		marginLeft:10,
-		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10 - 45,
-
-	},
-	searchInput_full:{
-    fontFamily:"FZZhunYuan-M02S",
-		marginTop: marginTop,
-		fontSize: 20,
-		height:50,
-		marginLeft:10,
-		width:width-searchViewMarginHorizontal*2-20-15-iconSearchInputSize*0.45-10,
-
-	},
 	opacityView:{
     flex:1,
     opacity: 0.3,
