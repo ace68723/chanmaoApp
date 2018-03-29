@@ -87,6 +87,8 @@ const styles = StyleSheet.create({
     marginTop: marginTop,
     flexDirection:'row',
     position:'absolute',
+    borderBottomColor:"#bdc8d9",
+    borderBottomWidth:StyleSheet.hairlineWidth,
   },
   TriangleShapeCSS: {
     width: 0,

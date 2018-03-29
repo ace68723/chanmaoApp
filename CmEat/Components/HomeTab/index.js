@@ -25,9 +25,9 @@ let marginTop;
 if(height == 812){
   //min 34
   //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
-  marginTop = 91;
+  marginTop = 88;
 }else{
-  marginTop = 85;
+  marginTop = 84;
 }
 export default class HomeTab extends Component {
 
