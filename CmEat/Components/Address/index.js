@@ -386,7 +386,11 @@ export default class CmEatAddress extends Component {
                       paddingRight:30,
                       backgroundColor:"#ffffff",
                       flexDirection:"row",
-											alignItems: 'center'
+											alignItems: 'center',
+                      borderTopColor:"#bdc8d9",
+                      borderTopWidth:StyleSheet.hairlineWidth,
+                      borderBottomColor:"#bdc8d9",
+                      borderBottomWidth:StyleSheet.hairlineWidth,
                     }}>
 				<TouchableOpacity
 						activeOpacity={0.4}
@@ -409,7 +413,8 @@ export default class CmEatAddress extends Component {
             onChangeText={this._handleSearchChange}
             underlineColorAndroid={"rgba(0,0,0,0)"}
         />
-			 <TouchableOpacity
+			 {this.state.searchAddress ?
+         <TouchableOpacity
 				 	activeOpacity={0.4}
 				 	onPress={()=>this._clearAddressInput()}>
 					<Image
@@ -419,6 +424,7 @@ export default class CmEatAddress extends Component {
 							width:21,}}
 					/>
 				</TouchableOpacity>
+      :<View/>}
       </View>
     )
   }
@@ -430,13 +436,14 @@ export default class CmEatAddress extends Component {
                               chooseAddress = {this._chooseAddress}/>
     })
     return(
-      <ScrollView style={{padding:10,}}
-                  keyboardShouldPersistTaps={'always'}
+      <ScrollView keyboardShouldPersistTaps={'always'}
 									keyboardDismissMode={'on-drag'}>
 				<Text style={{marginLeft: 10,
+                      marginTop:15,
 											marginBottom: 5,
 											fontSize: 16,
-											color: '#A5A5A5'}}>{CMLabel.getCNLabel('CHOOSE')}: </Text>
+											color: '#A5A5A5',}}>{CMLabel.getCNLabel('CHOOSE')}: </Text>
+
         {predictionList}
       </ScrollView>
     )
@@ -534,7 +541,7 @@ export default class CmEatAddress extends Component {
   render(){
     return(
       <View style={{  flex:1,
-                      backgroundColor:"#f2f2f2"}}>
+                      backgroundColor:"#ffffff"}}>
         <Header title={CMLabel.getCNLabel('ADDRESS')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
