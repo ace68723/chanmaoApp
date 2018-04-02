@@ -20,7 +20,7 @@ if(height == 812){
   //min 34
   headerHeight = 88;
 }else{
-  headerHeight = 54;
+  headerHeight = 54 + 30;
 }
 
 export default class AddressPromptView extends Component {

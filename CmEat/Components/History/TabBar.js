@@ -61,7 +61,9 @@ export default class TabBar extends Component {
     if (this.props.tabs.length == 0) {
       numberOfTabs = 1;
     }
-    numberOfTabs = this.props.tabs.length;
+    else {
+      numberOfTabs = this.props.tabs.length;
+    }
     const tabUnderlineStyle = {
       position: 'absolute',
       width: containerWidth / numberOfTabs - 80,

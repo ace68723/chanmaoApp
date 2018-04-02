@@ -296,22 +296,46 @@ export default class Home extends Component {
     }
   }
   _handleLoginSuccessful() {
-    InteractionManager.runAfterInteractions(() => {
-        this.props.navigator.push({
-          screen: 'CmEat',
-          passProps: {handleBackToHome: this._handleBackToHome},
-          animated: false,
-          navigatorStyle: {
-            navBarHidden: true,
-            disabledBackGesture: true,
-          },
-
-          style: {
-           backgroundBlur: "none",
-           backgroundColor: "rgba(0,0,0,0)"
-         }
+    // InteractionManager.runAfterInteractions(() => {
+    //   //   this.props.navigator.push({
+    //   //     screen: 'CmEat',
+    //   //     passProps: {handleBackToHome: this._handleBackToHome},
+    //   //     animated: false,
+    //   //     navigatorStyle: {
+    //   //       navBarHidden: true,
+    //   //       disabledBackGesture: true,
+    //   //     },
+    //   //
+    //   //     style: {
+    //   //      backgroundBlur: "none",
+    //   //      backgroundColor: "rgba(0,0,0,0)"
+    //   //    }
+    //   // })
+    setTimeout(() => {
+      InteractionManager.runAfterInteractions(() => {
+        this.props.navigator.showModal({
+          screen: 'CmAdvertisement',
+          animationType: 'none',
+          navigatorStyle: {navBarHidden: true},
+        })
       })
-    })
+    }, 500);
+    setTimeout(() => {
+      InteractionManager.runAfterInteractions(() => {
+          this.props.navigator.resetTo({
+            screen: 'CmEat',
+            animated: false,
+            navigatorStyle: {
+              navBarHidden: true,
+              disabledBackGesture: true,
+            },
+            style: {
+             backgroundBlur: "none",
+             backgroundColor: "rgba(0,0,0,0)"
+           }
+        })
+      })
+    }, 600);
   }
 
   _isiPhoneX(){

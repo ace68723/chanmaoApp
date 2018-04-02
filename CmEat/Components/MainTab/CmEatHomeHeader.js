@@ -56,14 +56,16 @@ export default class SboxHomeHeader extends Component {
             />
         </View>
 
-        {this.props.shouldRenderAddressPrompt && this.props.renderAddressPrompt &&
-            <AddressPromptView
-              ref='AddressPrompt' onPress={this.props.dismissAddressPrompt} />
-        }
+
       </View>
     );
   }
 }
+// {this.props.shouldRenderAddressPrompt && this.props.renderAddressPrompt &&
+//     <AddressPromptView
+//       ref='AddressPrompt' onPress={this.props.dismissAddressPrompt} />
+// }
+
 // <Animated.View style={{alignItems:'center',
 //               flexDirection:'row',
 //               height:height*0.0443,

@@ -24,6 +24,7 @@ import CmEatHomeHeader from './CmEatHomeHeader';
 import HomeTab from '../HomeTab/'
 import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
+import AddressPromptView from './AddressPromptView';
 // import Menu from '../Restaurant/Menu';
 
 import HomeAction from '../../Actions/HomeAction';
@@ -143,6 +144,10 @@ export default class MainTab extends Component {
 						 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
 						 renderAddressPrompt={this.state.renderAddressPrompt}
 				 />
+				 {this.state.shouldRenderAddressPrompt && this.state.renderAddressPrompt &&
+						 <AddressPromptView
+							 ref='AddressPrompt' onPress={this._dismissAddressPrompt} />
+				 }
      </View>
     )
   }
