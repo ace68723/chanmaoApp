@@ -120,27 +120,16 @@ export default class CmRestaurantSearch extends Component {
 	}
 	_renderSearchInput() {
 		return (
-			<View style={{flexDirection: 'row',
-										justifyContent: 'flex-start',
-										alignItems: 'center',
-										height: headerHeight}}>
-					<View style={{flex: 1,
-												flexDirection:'row',
-												justifyContent: 'flex-start',
-												marginLeft: 20,
-												marginTop: marginTop,
-												alignItems: 'center'}}>
+			<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', height: headerHeight}}>
+					<View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-start', marginLeft: 20, marginTop: marginTop}}>
 							<Image
 								source={require('./Image/icon_search_input.png')}
-								style={{width: 22,
-												height: 24.5}}
+								style={{width: 22, height: 24.5
+								}}
 							/>
 							<TextInput
 								ref={'searchInput'}
-								style={{flex: 1,
-												marginLeft: 10,
-												fontFamily:"FZZhunYuan-M02S",
-												fontSize: 20}}
+								style={{flex: 1, marginLeft: 10, fontFamily:"FZZhunYuan-M02S", fontSize: 20,}}
 								selectionColor={'#ea7b21'}
 								keyboardType = {'default'}
 								autoCorrect= { false}
@@ -153,8 +142,8 @@ export default class CmRestaurantSearch extends Component {
 							/>
 					</View>
 					{this.state.searchText != '' &&
-						<TouchableOpacity style={{marginRight: 20,
-																			marginTop: marginTop}}
+						<TouchableOpacity
+						style={{marginRight: 20, marginTop: marginTop}}
 						onPress={()=>this._cleanInput()}>
 						<Text style={{
 								fontSize: 16,
@@ -260,7 +249,7 @@ export default class CmRestaurantSearch extends Component {
 	_renderResult() {
 		if(this.state.restaurantList.length>0){
 			return(
-				<View style={{flex:1}}>
+				<View style={{flex:1,marginTop:5}}>
 					{this._renderRestaurants()}
 				</View>
 			)
