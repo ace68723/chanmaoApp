@@ -3,6 +3,7 @@ import React, {
 	Component,
 } from 'react';
 import {
+	AppState,
   Animated,
   Dimensions,
   Image,
@@ -22,6 +23,7 @@ import SearchTab from '../Restaurant/CmRestaurantSearch';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TabBar from './TabBar';
 import CMLabel from '../../Constants/AppLabel';
+import HomeAction from '../../Actions/HomeAction';
 import TabsStore from '../../Stores/TabsStore';
 const {width,height} = Dimensions.get('window');
 
@@ -33,12 +35,15 @@ export default class Tabs extends Component {
 		this._hideTabBar = this._hideTabBar.bind(this);
 	  this._showTabBar = this._showTabBar.bind(this);
     this._onChange = this._onChange.bind(this);
+		this._handleAppStateChange = this._handleAppStateChange.bind(this);
   }
 	componentDidMount(){
     TabsStore.addChangeListener(this._onChange);
+		AppState.addEventListener('change', this._handleAppStateChange);
 	}
   componentWillUnmount(){
 		TabsStore.removeChangeListener(this._onChange);
+		AppState.removeEventListener('change', this._handleAppStateChange);
 	}
   _onChange() {
     if(TabsStore.getState().goToHistory){
@@ -54,6 +59,11 @@ export default class Tabs extends Component {
 
     }
   }
+	_handleAppStateChange = (nextAppState) => {
+		if (nextAppState === 'active') {
+			HomeAction.getHomeData();
+		}
+	}
 	_hideTabBar(){
 		if(this.state.showTabBar){
 			this.setState({

@@ -18,9 +18,9 @@ const {width,height} = Dimensions.get('window');
 let headerHeight;
 if(height == 812){
   //min 34
-  headerHeight = 88;
+  headerHeight = 88 - 12;
 }else{
-  headerHeight = 54 + 30;
+  headerHeight = 54 + 30 - 12;
 }
 
 export default class AddressPromptView extends Component {
@@ -83,19 +83,23 @@ export default class AddressPromptView extends Component {
         <TouchableWithoutFeedback onPress={this._onPress}>
           <Animated.View style={{
                     position: 'absolute',
-                    height: 36,
+                    height: 48,
                     left: (width / 2) - (width * 0.9) / 2,
                     width: (width * 0.9),
-                    paddingLeft: 16,
                     justifyContent:'center',
-                    backgroundColor: '#ea7b21',
+                    backgroundColor: 'transparent',
                     marginTop: this.state.animatedHeaderHeight,
                     opacity: this.state.fadeInOpacity,
                   }}>
             <View style={styles.TriangleShapeCSS} />
             <Text style={{color:"white",
                         fontSize:12,
-                        top: -4,
+                        top: 0,
+                        width: (width * 0.9),
+                        paddingLeft: 16,
+                        paddingTop: 12,
+                        paddingBottom: 12,
+                        backgroundColor: '#ea7b21',
                         fontWeight:'bold',
                         textAlignVertical: "center",
                         fontFamily:"FZZhunYuan-M02S",
@@ -115,8 +119,8 @@ const styles = StyleSheet.create({
   TriangleShapeCSS: {
     width: 0,
     height: 0,
-    left: 70,
-    top: -15,
+    left: 120,
+    top: 0,
     borderLeftWidth: 10,
     borderRightWidth: 10,
     borderBottomWidth: 10,
