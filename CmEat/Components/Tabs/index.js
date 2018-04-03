@@ -92,7 +92,7 @@ export default class Tabs extends Component {
 												 tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',top:5}}
 												 tabBarInactiveTextColor={'#666666'}
 												 initialPage={0}
-												 prerenderingSiblingsNumber={1}
+												 prerenderingSiblingsNumber={3}
 												 renderTabBar={() => <TabBar />}
                          tabBarPosition={'bottom'}
 												 keyboardShouldPersistTaps={'always'}>
