@@ -4,7 +4,7 @@ module.exports={
     //Searching
     AREA_SEARCH:'分区&搜索',
     CITY_AREA:'城市&区域',
-    
+
     //Setting
     MY_TAB:'我的',
     SETTING:'设置',
@@ -26,7 +26,7 @@ module.exports={
     ENTER_VERTIFICATION_CODE:'请输入验证码',
     RECIPT:'收据',
     HELP:'帮助',
-    SOLD_OUT:'搜完',
+    SOLD_OUT:'售完',
     REORDER:'重新下单',
     DETAIL:'详情',
     //Address
@@ -37,11 +37,11 @@ module.exports={
     ENTER_ADDRESS:'输入地址',
     CHOOSE:'请选择',
     ADD_DEFAULT_ADDRESS:'设置为默认地址(选填)',
-    
+
     //Info
     CONTACT:'联系人',
     PHONE:'电话',
-    
+
 
     //Check out
     GO_CHECKOUT:'去结账',
@@ -76,5 +76,5 @@ module.exports={
     PAYMENT_TYPE:"支付方式",
     //About us
     ABOUT_US:'关于我们',
-    
+
 }

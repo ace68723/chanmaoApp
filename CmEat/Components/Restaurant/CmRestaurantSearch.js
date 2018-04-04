@@ -48,6 +48,7 @@ export default class CmRestaurantSearch extends Component {
 				searchText:'',
 				filteredRestaurant:[],
 				restaurantList: [],
+				allRestaurants: [],
 				zones: [],
 				length:5,
 				isRendering:'area',
@@ -262,7 +263,9 @@ export default class CmRestaurantSearch extends Component {
 		}
 	}
 	render() {
-
+		if (this.state.allRestaurants.length == 0) {
+			return <Image  style={{height: height, width: width}} source={require('./Image/no_restaurants_area.png')}/>
+		}
 		return(
 			<KeyboardAvoidingView
 						style={{flex:1,backgroundColor:"#ffffff"}}

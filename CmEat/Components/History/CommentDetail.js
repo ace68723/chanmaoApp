@@ -307,7 +307,7 @@ export default class pastOrderEN extends Component {
     };
     const commentList = () => {
       let _commentList = [];
-      let list = ["准时", "份量足", "服务好", "快", "包装精美", "物美价廉"];
+      let list = ["准时", "有礼貌", "速度快", "服务周到", "送货上门", "保温", "包装完整"];
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleDriverQuickComments(text)}>
@@ -434,7 +434,7 @@ export default class pastOrderEN extends Component {
     };
     const commentList = () => {
       let _commentList = [];
-      let list = ["新鲜", "准时", "份量足", "服务好", "快", "包装精美", "物美价廉"];
+      let list = ["包装精美", "物美价廉", "口味好", "实惠", "分量足"];
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleRestaurantQuickComments(text)}>

@@ -444,6 +444,7 @@ class Confirm extends Component {
       )
     }
 		_renderChoosePayment() {
+			console.log(this.state.available_payment_channels);
 			if (this.state.available_payment_channels) {
 				if (this.state.available_payment_channels.length > 1) {
 					return(
@@ -454,12 +455,14 @@ class Confirm extends Component {
 						</TouchableOpacity>
 					)
 				}
+				else if (this.state.available_payment_channels.length > 1) {
+					return(
+						<CartItem rightIcon={require('./Image/right.png')}
+											title={CMLabel.getCNLabel('PAY')}
+											value={this.state.paymentStatus}/>
+					)
+				}
 			}
-			return(
-				<CartItem rightIcon={require('./Image/right.png')}
-									title={CMLabel.getCNLabel('PAY')}
-									value={this.state.paymentStatus}/>
-			)
 		}
 		_renderComment(){
 			return(

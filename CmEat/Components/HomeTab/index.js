@@ -193,7 +193,7 @@ export default class HomeTab extends Component {
   render(){
 
     if (!this.props.restaurantList || this.props.restaurantList.length == 0){
-			return <View/>;
+			return <Image  style={{marginTop: 20, height: height, width: width}} source={require('./Image/no_restaurants_main.png')}/>;
 		}
 		let all = this.props.restaurantList;
 		let keyExtractor = (item, index) => item.rid;

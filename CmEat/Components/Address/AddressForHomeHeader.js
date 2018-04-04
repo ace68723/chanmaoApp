@@ -65,13 +65,15 @@ export default class AddressForHomeHeader extends Component {
 		    fetch(url,options)
 		      .then((res) => res.json())
 		      .then((res)=>{
-						const distance = res.rows[0].elements[0].distance.value;
-            const promoptDistance = 500;
-            if (distance && distance >= promoptDistance){
-              this.props.showAddressPrompt();
-            }
-            else{
-              console.log('not show');
+            if (res.rows.length > 0) {
+              const distance = res.rows[0].elements[0].distance.value;
+              const promoptDistance = 500;
+              if (distance && distance >= promoptDistance){
+                this.props.showAddressPrompt();
+              }
+              else{
+                console.log('not show');
+              }
             }
 		      })
 		      .catch((error) => {throw error});

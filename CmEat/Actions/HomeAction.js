@@ -17,7 +17,7 @@ export default {
             userloc =  selectedAddress.loc_la +','+selectedAddress.loc_lo;
           } else {
              userloc = await LocationModule.getCurrentPosition();
-           }
+          }
           const reqData = {token,userloc}
           // const areaList = await HomeModule.getAreaList(reqData);
           const restaurantListInfo = await HomeModule.getRestaurantList(reqData);
@@ -35,9 +35,9 @@ export default {
           const res = {homeData,showIntroduction, restaurantList, zones}
           dispatch({
               actionType: AppConstants.GET_HOME_DATA, res
-          })
+          });
         }catch (e){
-          console.error(e);
+          console.log(e);
         }
       },
 
