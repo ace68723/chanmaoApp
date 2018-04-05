@@ -34,7 +34,8 @@ export default class AddAmountBtn extends Component {
                       fontWeight:'500',
                       fontSize:15,
                       marginTop:25,
-                    }}>
+                    }}
+              allowFontScaling={false}>
           数量
         </Text>
         <View style={{flexDirection:'row',
@@ -59,7 +60,8 @@ export default class AddAmountBtn extends Component {
                                 fontSize: 20,
                                 fontFamily:'FZZhunYuan-M02S',
                                 color:'#ff768b',
-                              }}>
+                              }}
+                            allowFontScaling={false}>
                         -
                       </Text>
               </View>
@@ -79,7 +81,8 @@ export default class AddAmountBtn extends Component {
                           fontSize: 18,
                           fontFamily:'FZZhunYuan-M02S',
                           color:'#ff768b',
-                        }}>
+                        }}
+                      allowFontScaling={false}>
                   {quantity}
                 </Text>
             </View>
@@ -100,7 +103,8 @@ export default class AddAmountBtn extends Component {
                             fontSize: 20,
                             fontFamily:'FZZhunYuan-M02S',
                             color:'#ff768b',
-                          }}>
+                          }}
+                        allowFontScaling={false}>
                     +
                   </Text>
               </View>

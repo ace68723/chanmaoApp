@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
 export default (props) => {
         return(
           <View style={styles.copyRightView}>
-            <Text style={styles.copyright}>{AppString('copyright')}</Text>
+            <Text style={styles.copyright}
+                  allowFontScaling={false}>{AppString('copyright')}</Text>
          </View>
         )
 

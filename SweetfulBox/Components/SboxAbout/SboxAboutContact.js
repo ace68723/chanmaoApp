@@ -71,10 +71,12 @@ export default class About extends Component {
 											    shadowRadius: 2,}}>
 								<Image style={{width: qrWidth, height: qrWidth, marginBottom: 20}}
 									     source={require('./img/wechat.jpg')}/>
-										 <Text style={{marginBottom: 10, fontSize: 16}}>
+										 <Text style={{marginBottom: 10, fontSize: 16}}
+										 			 allowFontScaling={false}>
 									WeChat: sweetfulinc
 								</Text>
-								<Text style={{fontSize: 16}}>
+								<Text style={{fontSize: 16}}
+											allowFontScaling={false}>
 									Email: sweet4u@sweetful.ca
 								</Text>
 	          </View>

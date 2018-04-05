@@ -76,24 +76,29 @@ export default (props) => {
       <View style={styles.mainContainer}>
           <View style={styles.row}>
             <View style={styles.col}>
-                <Text style={styles.resturantName}>
+                <Text style={styles.resturantName}
+                      allowFontScaling={false}>
                   {props.restaurantName}
                 </Text>
 
-                <Text style={styles.resturantAddress}>
+                <Text style={styles.resturantAddress}
+                      allowFontScaling={false}>
                   {props.restaurantAddress}
                 </Text>
             </View>
             <View style={styles.col}>
-                <Text style={styles.resturantName}>
+                <Text style={styles.resturantName}
+                      allowFontScaling={false}>
                   ->
                 </Text>
             </View>
             <View style={styles.col}>
-                <Text style={styles.resturantName}>
+                <Text style={styles.resturantName}
+                      allowFontScaling={false}>
                   目的地
                 </Text>
-                <Text style={styles.resturantAddress}>
+                <Text style={styles.resturantAddress}
+                      allowFontScaling={false}>
                   {props.userAddress}
                 </Text>
             </View>
@@ -101,7 +106,8 @@ export default (props) => {
           <Image source={statusImageURL}
                  style={styles.logo} />
            <View style={styles.col}>
-               <Text style={[styles.resturantName,statusColor]}>
+               <Text style={[styles.resturantName,statusColor]}
+                     allowFontScaling={false}>
                   {statusMessage}
                </Text>
            </View>

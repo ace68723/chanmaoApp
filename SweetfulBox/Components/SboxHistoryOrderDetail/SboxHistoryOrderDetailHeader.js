@@ -48,7 +48,8 @@ export default class SboxHistoryOrderDetailHeader extends Component {
                                width:height*0.032,}}/>
                </TouchableWithoutFeedback>
             </View>
-            <Text style={styles.headTitle}>订单详情</Text>
+            <Text style={styles.headTitle}
+                  allowFontScaling={false}>订单详情</Text>
             <View style={styles.right}/>
           </View>
       );

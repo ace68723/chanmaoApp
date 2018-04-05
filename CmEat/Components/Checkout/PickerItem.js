@@ -57,7 +57,8 @@ class PickerItem extends Component{
                           <TouchableOpacity onPress={ this.closeModal.bind(this) }
                                               activeOpacity={0.5}
                                               style={styles.closeButton}>
-                            <Text style={styles.closeButtonText}>完成</Text>
+                            <Text style={styles.closeButtonText}
+																	allowFontScaling={false}>完成</Text>
                           </TouchableOpacity>
                       </View>
                       <PickerIOS

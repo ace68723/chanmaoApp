@@ -10,11 +10,13 @@ export default (props) =>{
     let _addressDescription = ()=>{
       if(props.apartmentNumber ){
         return(
-            <Text  style={styles.text}numberOfLines={2}>{props.apartmentNumber} - {props.addressDescription}</Text>
+            <Text style={styles.text}numberOfLines={2}
+                  allowFontScaling={false}>{props.apartmentNumber} - {props.addressDescription}</Text>
         )
       }else{
           return(
-            <Text  style={styles.text}numberOfLines={2}>{props.addressDescription}</Text>
+            <Text style={styles.text}numberOfLines={2}
+                  allowFontScaling={false}>{props.addressDescription}</Text>
           )
       }
     }
@@ -29,7 +31,8 @@ export default (props) =>{
                            style={styles.icon}/>
                 </View>
                 <View style={styles.col}>
-                    <Text style={styles.text}>
+                    <Text style={styles.text}
+                          allowFontScaling={false}>
                       {props.name} - {props.phoneNumber}
                     </Text>
                 </View>

@@ -58,11 +58,10 @@ export default class SboxCheckout extends Component {
               opacity:payBtnOpacity,
               position:'absolute'
             }}>
-              <Text style={{
-                color:'#ffffff',
-                fontSize:20,
-                fontFamily:'FZZhunYuan-M02S',
-              }}>
+              <Text style={{color:'#ffffff',
+                            fontSize:20,
+                            fontFamily:'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
                 支付 $52.36
               </Text>
             </Animated.View>
@@ -82,11 +81,10 @@ export default class SboxCheckout extends Component {
         justifyContent:'center',
         opacity:selectOpacity,
       }}>
-        <Text style={{
-          color:'#000000',
-          fontSize:20,
-          fontFamily:'FZZhunYuan-M02S',
-        }}>
+        <Text style={{color:'#000000',
+                      fontSize:20,
+                      fontFamily:'FZZhunYuan-M02S'}}
+              allowFontScaling={false}>
            SELECT CARD TO PAY
         </Text>
       </Animated.View>

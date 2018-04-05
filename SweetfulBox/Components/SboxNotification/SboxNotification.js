@@ -52,18 +52,21 @@ export default class SboxNotification extends Component {
               <Image source={require('./Img/success.png')}
                      style={{height:Setting.getY(500),width:Setting.getX(270)}}/>
             </View>
-            <Text style={{marginTop:Setting.getY(150),fontSize:20,fontWeight:'bold',}}>
+            <Text style={{marginTop:Setting.getY(150),fontSize:20,fontWeight:'bold',}}
+                  allowFontScaling={false}>
               恭喜您
             </Text>
             <View style={{marginTop:Setting.getY(100),width:Setting.getX(1000),height:Setting.getY(200)}}>
-              <Text style={{fontSize:16, }}>
+              <Text style={{fontSize:16, }}
+                    allowFontScaling={false}>
                 订单支付成功！您可以在两个工作日内收到您的箱子~
               </Text>
             </View>
             <TouchableOpacity onPress={this._goBack}
               style={{marginTop:Setting.getY(70),}}>
               <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#ff768b',width:Setting.getX(600),height:Setting.getY(150)}}>
-                <Text style={{fontSize:16,color:'white'}}>
+                <Text style={{fontSize:16,color:'white'}}
+                      allowFontScaling={false}>
                   查看历史订单
                 </Text>
               </View>
@@ -88,18 +91,21 @@ export default class SboxNotification extends Component {
               <Image source={require('./Img/fail.png')}
                      style={{height:Setting.getY(500),width:Setting.getX(270)}}/>
             </View>
-            <Text style={{marginTop:Setting.getY(150),fontSize:20,fontWeight:'bold',}}>
+            <Text style={{marginTop:Setting.getY(150),fontSize:20,fontWeight:'bold',}}
+                  allowFontScaling={false}>
               很抱歉
             </Text>
             <View style={{marginTop:Setting.getY(100),width:Setting.getX(1100),height:Setting.getY(200)}}>
-              <Text style={{fontSize:16, }}>
+              <Text style={{fontSize:16, }}
+                    allowFontScaling={false}>
                 订单支付失败了！请仔细核对您的地址或银行卡信息是否准确，如需人工帮助，请您联系客服，谢谢！
               </Text>
             </View>
             <TouchableOpacity onPress={this._goBackCart}
               style={{marginTop:Setting.getY(70),}}>
               <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#ff768b',width:Setting.getX(600),height:Setting.getY(150)}}>
-                <Text style={{fontSize:16,color:'white'}}>
+                <Text style={{fontSize:16,color:'white'}}
+                      allowFontScaling={false}>
                   返回购物箱
                 </Text>
               </View>

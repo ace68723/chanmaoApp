@@ -17,7 +17,8 @@ export default (props) => {
                   <Image source={props.icon} style={styles.icon} />
             </View>
           <View style={styles.col}>
-            <Text style={styles.title}>
+            <Text style={styles.title}
+                  allowFontScaling={false}>
                 {props.title}
             </Text>
           </View>

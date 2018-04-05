@@ -63,19 +63,22 @@ export default class Content extends Component {
                               alignItems: 'center',
                               paddingRight:120,}}>
                     <Image style={{width:20,height:20}} source={require('./img/name.png')}/>
-                    <Text style={{marginLeft:15}}>
+                    <Text style={{marginLeft:15}}
+                          allowFontScaling={false}>
                       {this.props.name}
                     </Text>
                 </View>
                 <View style={styles.info}>
                     <Image  style={{width:20,height:20}} source={require('./img/phoneNum.png')}/>
-                    <Text style={{marginLeft:15}}>
+                    <Text style={{marginLeft:15}}
+                          allowFontScaling={false}>
                       {this.props.phoneNumber}
                     </Text>
                 </View>
                 <View style={styles.info}>
                     <Image  style={{width:20,height:20}} source={require('./img/unitNum.png')}/>
-                    <Text style={{marginLeft:15}}>
+                    <Text style={{marginLeft:15}}
+                          allowFontScaling={false}>
                       {unitNumber}{this.props.addr}
                     </Text>
                 </View>

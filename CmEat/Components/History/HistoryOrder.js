@@ -110,8 +110,12 @@ export default class pastOrderEN extends Component {
     return orderInfo.food.map((item,index)=>{
       return(
         <View key={index} style={{flexDirection:'row',alignItems:'center',paddingTop:12,paddingBottom:12}}>
-            <View style={styles.quantityIcon}><Text style={{fontSize:10}}>{item.quantity}</Text></View>
-            <Text style={{fontSize:16,paddingLeft:20}} allowFontScaling={false}>{item.name}</Text>
+            <View style={styles.quantityIcon}>
+                <Text style={{fontSize:10}}
+                      allowFontScaling={false}>{item.quantity}</Text>
+            </View>
+            <Text style={{fontSize:16,paddingLeft:20}}
+                  allowFontScaling={false}>{item.name}</Text>
         </View>
       )
     })

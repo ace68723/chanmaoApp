@@ -97,7 +97,8 @@ export default class AddressForHomeHeader extends Component {
                         fontWeight:'bold',
                         fontFamily:'FZZongYi-M05S',
                         marginBottom:10,}}
-                        numberOfLines={1}>
+                        numberOfLines={1}
+                allowFontScaling={false}>
               {CMLabel.getCNLabel('DELIVER_TO')}   {this.state.selectedAddress}
           </Text>
 
@@ -111,7 +112,8 @@ export default class AddressForHomeHeader extends Component {
                       fontWeight:'bold',
                       fontFamily:'FZZongYi-M05S',
                       marginBottom:10,}}
-                      numberOfLines={1}>
+                      numberOfLines={1}
+              allowFontScaling={false}>
             {CMLabel.getCNLabel('CHOOSE_ADDRESS')}
         </Text>
       )

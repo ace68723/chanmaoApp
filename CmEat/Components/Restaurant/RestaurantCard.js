@@ -52,7 +52,8 @@ class RestaurantCard extends Component {
                               fontSize:20,
                               color:'#ffffff',
                               textAlign:'center',
-                              top:90,}}>
+                              top:90,}}
+											allowFontScaling={false}>
                   商家关门啦
                 </Text>
             </View>
@@ -109,7 +110,13 @@ class RestaurantCard extends Component {
 								source={require('./Image/icon_distance.png')}
 								style={[{height:12,width:8.7,top:-2}]}
 							/>
-              <Text style={{color:'#ababb0',fontSize:12,fontWeight:'400',fontFamily:'FZZhunYuan-M02S',marginLeft:3,textAlign:'right'}}>
+              <Text style={{color:'#ababb0',
+														fontSize:12,
+														fontWeight:'400',
+														fontFamily:'FZZhunYuan-M02S',
+														marginLeft:3,
+														textAlign:'right'}}
+										allowFontScaling={false}>
 
                   {(this.state.restaurant.distance/1000).toFixed(2)} km
               </Text>
@@ -163,12 +170,21 @@ class RestaurantCard extends Component {
                               borderBottomWidth: StyleSheet.hairlineWidth,
                               borderLeftWidth:StyleSheet.hairlineWidth,
                               borderRightWidth:StyleSheet.hairlineWidth,}}>
-                  <Text style={{color:'#363646',fontSize:15,fontWeight:'500',fontFamily:'FZZongYi-M05S',}}>
+                  <Text style={{color:'#363646',
+																fontSize:15,
+																fontWeight:'500',
+																fontFamily:'FZZongYi-M05S',}}
+												allowFontScaling={false}>
                       {this.state.restaurant.name}
                   </Text>
                   <View style={{flexDirection:"row"}}>
                     <View style={{flex:1,}}>
-                      <Text style={{color:'#ababb0',fontSize:12,fontWeight:'200',marginTop:5,fontFamily:'FZZhunYuan-M02S'}}>
+                      <Text style={{color:'#ababb0',
+																		fontSize:12,
+																		fontWeight:'200',
+																		marginTop:5,
+																		fontFamily:'FZZhunYuan-M02S'}}
+														allowFontScaling={false}>
                           {this.state.restaurant.desc}
                       </Text>
                     </View>

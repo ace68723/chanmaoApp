@@ -87,18 +87,21 @@ class SwipeOut extends Component{
         let _addressDescription = ()=>{
           if(this.props.apartmentNumber){
             return(
-                <Text  style={styles.text}numberOfLines={2}>{this.props.apartmentNumber} - {this.props.addressDescription}</Text>
+                <Text style={styles.text}numberOfLines={2}
+											allowFontScaling={false}>{this.props.apartmentNumber} - {this.props.addressDescription}</Text>
             )
           }else{
               return(
-                <Text  style={styles.text}numberOfLines={2}>{this.props.addressDescription}</Text>
+                <Text style={styles.text}numberOfLines={2}
+											allowFontScaling={false}>{this.props.addressDescription}</Text>
               )
           }
         }
         let _buzzCode = () => {
           if(this.props.buzz){
             return(
-                <Text  style={styles.text}numberOfLines={1}>buzz: {this.props.buzz} </Text>
+                <Text style={styles.text}numberOfLines={1}
+											allowFontScaling={false}>buzz: {this.props.buzz} </Text>
             )
           }
         }
@@ -140,7 +143,8 @@ class SwipeOut extends Component{
                   <View style={{flex:1,height:100}}>
 
                       <View style={{flex: 1,height: 100,backgroundColor:'white',justifyContent:'center',}}>
-                          <Text style={styles.text}>
+                          <Text style={styles.text}
+																allowFontScaling={false}>
                             {this.props.name} - {this.props.phoneNumber}
                           </Text>
                           {_buzzCode()}
@@ -148,7 +152,8 @@ class SwipeOut extends Component{
                           <TouchableOpacity style={styles.rightButton}
                                             activeOpacity={0.4}
                                             onPress={this.props.delete.bind(null,this.props.uaid,this.props.addressDescription)}>
-                                  <Text style= {styles.rightButtonText}>{"删除"}</Text>
+                                  <Text style= {styles.rightButtonText}
+																				allowFontScaling={false}>{"删除"}</Text>
                           </TouchableOpacity>
 
                       </View>

@@ -51,7 +51,8 @@ export default class SboxAddressListView extends Component {
 
   _renderEmpty() {
     return (
-      <Text style={{padding: 12, textAlign:'center', fontSize: 16}}>Condo not found</Text>
+      <Text style={{padding: 12, textAlign:'center', fontSize: 16}}
+            allowFontScaling={false}>Condo not found</Text>
     );
   }
 

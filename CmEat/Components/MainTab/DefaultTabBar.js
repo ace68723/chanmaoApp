@@ -97,7 +97,8 @@ class DefaultTabBar extends Component {
           >
             <View style={[styles.tab, this.props.tabStyle,{flexDirection:'row',alignItems:'center'} ]}>
                 <Icon style={{top:-2}} name={iconName} size={25} color={textColor} />
-              <Text style={[{color: textColor, fontWeight, }, textStyle,]}>
+              <Text style={[{color: textColor, fontWeight, }, textStyle,]}
+                    allowFontScaling={false}>
                 {name}
               </Text>
             </View>
@@ -114,7 +115,8 @@ class DefaultTabBar extends Component {
                 accessibilityTraits='button'
                 onPress={() => onPressHandler(page)}>
               <View style={[styles.tab, this.props.tabStyle, ]}>
-                <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+                <Text style={[{color: textColor, fontWeight, }, textStyle, ]}
+                      allowFontScaling={false}>
                   {name}
                 </Text>
               </View>

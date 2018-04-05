@@ -70,13 +70,15 @@ export default class Content extends Component {
             <View style={styles.content}>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/address.png')}/></View>
-                    <Text style={styles.input}>
+                    <Text style={styles.input}
+                          allowFontScaling={false}>
                       {this.props.address}
                     </Text>
                 </View>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/name.png')}/></View>
-                    <Text style={styles.tips}>联系人: </Text>
+                    <Text style={styles.tips}
+                          allowFontScaling={false}>联系人: </Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         value={this.props.name}
@@ -92,7 +94,8 @@ export default class Content extends Component {
                 </View>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/phoneNum.png')}/></View>
-                    <Text style={styles.tips}>电话: +1 </Text>
+                    <Text style={styles.tips}
+                          allowFontScaling={false}>电话: +1 </Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         ref={(ref)=>{ this.telRef = ref}}
@@ -107,7 +110,8 @@ export default class Content extends Component {
                 </View>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/unitNum.png')}/></View>
-                    <Text style={styles.tips}>Unit No.: </Text>
+                    <Text style={styles.tips}
+                          allowFontScaling={false}>Unit No.: </Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         value={this.props.unitNum}
@@ -123,15 +127,18 @@ export default class Content extends Component {
                 <View style={styles.submit}>
                     <View style={styles.verticalSpace}/>
                     <TouchableOpacity style={styles.submitButton} onPress={this.props.onSubmit}>
-                        <Text style={styles.submitText}>添加地址</Text>
+                        <Text style={styles.submitText}
+                              allowFontScaling={false}>添加地址</Text>
                     </TouchableOpacity>
                     <View style={styles.verticalSpace}/>
                 </View>
-                <Text style={{padding:20,paddingBottom:0}}>
+                <Text style={{padding:20,paddingBottom:0}}
+                      allowFontScaling={false}>
                   注：1. 请以英文形式拼写您的姓名，所留姓名和电话请务必与您所在的Condo
                   前台登记的信息一致，否则包裹会被前台拒收。
                 </Text>
-                <Text style={{padding:20}}>
+                <Text style={{padding:20}}
+                      allowFontScaling={false}>
                     2. 甜满箱包裹会配送到您的Condo前台。如果您所在的Condo没有前台，
                     我们的配送员会在到达后电话联系您取包裹。请您保持电话畅通，谢谢。
                 </Text>

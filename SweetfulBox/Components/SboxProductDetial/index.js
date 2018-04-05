@@ -109,7 +109,6 @@ export default class SweetProductDetial extends Component {
 
 
   _onPageChange(page){
-    console.log(page)
     SboxProductAction.changeProductImage(page);
   }
   _addToCart() {
@@ -131,7 +130,7 @@ export default class SweetProductDetial extends Component {
       return;
     }
     Util.toggleWaitingStatus();
-    
+
     setTimeout( () => {
       this.props.navigator.push({
         screen: 'SboxCart',
@@ -174,7 +173,8 @@ export default class SweetProductDetial extends Component {
                                 left:0,}}
                         onPress={this._goBack}>
         <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
-          <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
+          <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}
+                allowFontScaling={false}>
             ×
           </Text>
         </View>
@@ -202,7 +202,8 @@ export default class SweetProductDetial extends Component {
                         color:'white',
                         fontSize:17,
                         fontFamily:'FZZhunYuan-M02S',
-                      }}>
+                      }}
+                      allowFontScaling={false}>
                     加入购物箱
                 </Text>
           </View>
@@ -229,7 +230,8 @@ export default class SweetProductDetial extends Component {
                         color:'white',
                         fontSize:17,
                         fontFamily:'FZZhunYuan-M02S',
-                      }}>
+                      }}
+                      allowFontScaling={false}>
                     加入购物箱
                 </Text>
           </View>

@@ -96,7 +96,8 @@ export default class SboxCategoryContent extends Component {
             style={styles.image}
           />
           <View style={styles.name}>
-            <Text style={styles.text}>{name}</Text>
+            <Text style={styles.text}
+                  allowFontScaling={false}>{name}</Text>
           </View>
         </TouchableOpacity>
       );
@@ -115,7 +116,8 @@ export default class SboxCategoryContent extends Component {
             activeOpacity={0.6}
             onPress={this.props.handleSearchHistoryOnpress.bind(null,keyword)}
           >
-            <Text style={styles.record_text}>{keyword}</Text>
+            <Text style={styles.record_text}
+                  allowFontScaling={false}>{keyword}</Text>
           </TouchableOpacity>
         );
     }
@@ -126,7 +128,8 @@ export default class SboxCategoryContent extends Component {
     return (
       <ScrollView style={styles.content}>
         <View style={styles.title}>
-          <Text style={styles.text}>产品分类</Text>
+          <Text style={styles.text}
+                allowFontScaling={false}>产品分类</Text>
         </View>
 
         <View style={styles.categoryList}>
@@ -134,9 +137,11 @@ export default class SboxCategoryContent extends Component {
         </View>
 
         <View style={[styles.title, styles.flexRow]}>
-          <Text style={styles.text}>搜索记录</Text>
+          <Text style={styles.text}
+                allowFontScaling={false}>搜索记录</Text>
           <TouchableOpacity onPress={this.props.clearSearchHistory}>
-            <Text style={styles.erase}>清空</Text>
+            <Text style={styles.erase}
+                  allowFontScaling={false}>清空</Text>
           </TouchableOpacity>
         </View>
 

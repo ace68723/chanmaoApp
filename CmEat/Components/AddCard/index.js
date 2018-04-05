@@ -348,7 +348,8 @@ export default class CMKeyBoard extends Component {
                                 </View>
 
                                 <View style={{height:40 ,width:300,marginTop:30,marginLeft:15,flexDirection:'row'}} >
-                                      <Text style={{fontSize:25,backgroundColor:'transparent'}} >{this.state.text}</Text>
+                                      <Text style={{fontSize:25,backgroundColor:'transparent'}}
+                                            allowFontScaling={false}>{this.state.text}</Text>
                                       {this._renderNumMarker()}
                                 </View>
 

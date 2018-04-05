@@ -11,19 +11,21 @@ export default (props) =>{
 // resizeMode={'contain'}
 // style={styles.icon}/>
     return (
-          
+
         <View style={styles.container}>
-            <Text style={styles.title}>
+            <Text style={styles.title}
+                  allowFontScaling={false}>
               {props.title}:
             </Text>
-            <Text style={styles.value}>
+            <Text style={styles.value}
+                  allowFontScaling={false}>
               {props.value}
             </Text>
             <Image source={props.rightIcon}
               resizeMode={'contain'}
               style={styles.rightIcon}/>
         </View>
-         
+
 
 		)
 

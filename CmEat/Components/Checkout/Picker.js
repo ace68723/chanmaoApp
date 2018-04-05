@@ -65,11 +65,14 @@ class picker extends Component {
     _addressDescription(apartmentNumber,addressDescription){
       if(apartmentNumber){
         return(
-            <Text  style={styles.text}numberOfLines={2}>{apartmentNumber} - {addressDescription}</Text>
+            <Text style={styles.text}numberOfLines={2}
+									allowFontScaling={false}>{apartmentNumber} - {addressDescription}</Text>
         )
       }else{
           return(
-            <Text  style={styles.text}numberOfLines={2}>{addressDescription}</Text>
+            <Text style={styles.text}
+									numberOfLines={2}
+									allowFontScaling={false}>{addressDescription}</Text>
           )
       }
     }
@@ -90,7 +93,8 @@ class picker extends Component {
         }
       }else{
         return(
-          <Text style={[styles.showtime,{color:'#ff8b00',padding:0,marginLeft:5,fontSize:15,}]}>
+          <Text style={[styles.showtime,{color:'#ff8b00',padding:0,marginLeft:5,fontSize:15,}]}
+								allowFontScaling={false}>
             {this.state.selected[this.props.descriptionKey]}
           </Text>
         )
@@ -102,7 +106,8 @@ class picker extends Component {
           <TouchableHighlight underlayColor="transparent"
                               onPress={ () => this.setState({modal: true,selected:this.props.pickserList[this.state.index],}) }>
               <View style={[styles.pickerContainer,{ justifyContent:'center',}]}>
-                  <Text style={[styles.pickerText,{color:'#ff8b00',}]}>
+                  <Text style={[styles.pickerText,{color:'#ff8b00',}]}
+												allowFontScaling={false}>
                     {this.props.title}
                   </Text>
                   {this._renderSelected()}
@@ -117,7 +122,8 @@ class picker extends Component {
                   <Image source={this.props.icon}
                          resizeMode={'contain'}
                          style={styles.icon}/>
-                  <Text style={{color:'#808080',marginLeft:10}}>
+                  <Text style={{color:'#808080',marginLeft:10}}
+												allowFontScaling={false}>
                     {this.props.title}:
                   </Text>
                   {this._renderSelected()}

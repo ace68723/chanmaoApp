@@ -61,7 +61,8 @@ class CommentInput extends Component {
       return(
         <View style={styles.buttonView}>
           <TouchableOpacity style={styles.button} onPress={this.props.submitComment.bind(null,this.refs['commentInput'])}>
-            <Text style={styles.buttonText}>
+            <Text style={styles.buttonText}
+									allowFontScaling={false}>
               提交
             </Text>
           </TouchableOpacity>
@@ -72,7 +73,8 @@ class CommentInput extends Component {
         <View style={styles.buttonView}>
           <TouchableOpacity style={styles.button}
                             onPress={this.props.goToCommentList}>
-            <Text style={styles.buttonText}>
+            <Text style={styles.buttonText}
+									allowFontScaling={false}>
               {this.props.commentAmount}评
             </Text>
           </TouchableOpacity>

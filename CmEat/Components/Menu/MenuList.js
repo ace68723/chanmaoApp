@@ -148,7 +148,10 @@ class Menu extends Component {
         return  (
               <View style={{height:100,flex:1,backgroundColor:'#ffffff',overflow:"hidden"}}>
                 <View style={{alignSelf:'center',marginTop:30,marginBottom:10}}>
-                    <Text style={{fontSize:18,color:'#3a3b47',fontFamily:'FZZongYi-M05S',}}>
+                    <Text style={{fontSize:18,
+																	color:'#3a3b47',
+																	fontFamily:'FZZongYi-M05S',}}
+													allowFontScaling={false}>
                       {item.category_name}
                     </Text>
                 </View>
@@ -169,7 +172,8 @@ class Menu extends Component {
     _renderCategoryList(){
         this.state.categoryList.map((category,index)=>{
           return (
-            <Text key={index}>
+            <Text key={index}
+									allowFontScaling={false}>
                 {category.category_name}
             </Text>
           )
@@ -258,7 +262,8 @@ class Menu extends Component {
                 <TouchableOpacity activeOpacity={0.5}
                                   onPress={this._goToCinfirm}>
                 <View style={styles.checkoutButton}>
-                  <Text style={styles.checkoutText}>
+                  <Text style={styles.checkoutText}
+												allowFontScaling={false}>
                     ${this.state.cartTotals.total}{CMLabel.getCNLabel('CHECK_OUT')}
                   </Text>
                 </View>
@@ -271,7 +276,8 @@ class Menu extends Component {
                   <View style={{flex:1}} />
                   <TouchableOpacity activeOpacity={0.5}>
                     <View style={styles.checkoutButton}>
-                      <Text style={styles.checkoutText}>
+                      <Text style={styles.checkoutText}
+														allowFontScaling={false}>
                           商家休息啦
                       </Text>
                     </View>

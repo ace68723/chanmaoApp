@@ -16,12 +16,13 @@ export default class SboxProductDetialDesc extends Component {
         <View style={{alignItems:'center',}}>
           <Text style={{fontSize:19,
                         fontFamily:'FZZhunYuan-M02S',
-                      }}>
+                      }}
+                allowFontScaling={false}>
               {this.props.productName} | {this.props.selectedProduct.sku_name}
           </Text>
-  
-  
-  
+
+
+
           <View style={{flexDirection:'row',
                         width:150,
                         marginTop:10,}}>
@@ -31,7 +32,8 @@ export default class SboxProductDetialDesc extends Component {
                           textAlign: 'center',
                           flex:1,
                           paddingRight:20,
-                        }}>
+                        }}
+                  allowFontScaling={false}>
                 ${this.props.selectedProduct.sku_price}
             </Text>
           </View>
@@ -42,7 +44,8 @@ export default class SboxProductDetialDesc extends Component {
         <View style={{alignItems:'center',}}>
           <Text style={{fontSize:19,
                         fontFamily:'FZZhunYuan-M02S',
-                      }}>
+                      }}
+                allowFontScaling={false}>
               {this.props.productName} | {this.props.selectedProduct.sku_name}
           </Text>
           <View style={{flexDirection:'row',
@@ -54,8 +57,13 @@ export default class SboxProductDetialDesc extends Component {
                           textAlign: 'center',
                           flex:1,
                           paddingRight:20,
-                        }}>
-                $ {this.props.selectedProduct.sku_price} <Text style = {{textDecorationLine: 'line-through',color:'grey'}}>( {this.props.selectedProduct.sku_original_price} )</Text>
+                        }}
+                  allowFontScaling={false}>
+                $ {this.props.selectedProduct.sku_price}
+                <Text style = {{textDecorationLine: 'line-through',color:'grey'}}
+                      allowFontScaling={false}>
+                      ( {this.props.selectedProduct.sku_original_price} )
+                </Text>
             </Text>
           </View>
         </View>

@@ -305,7 +305,8 @@ class Confirm extends Component {
             <TouchableOpacity style={styles.acceptButton}
                               activeOpacity={0.4}
                               onPress={this._checkout}>
-									<Text style={styles.acceptText}>
+									<Text style={styles.acceptText}
+												allowFontScaling={false}>
 										 {CMLabel.getCNLabel('CHECK_OUT')}
 									</Text>
             </TouchableOpacity>
@@ -320,7 +321,8 @@ class Confirm extends Component {
         return(
           <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
             <View style={styles.acceptButton}>
-              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
+              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
+										allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
             </View>
           </TouchableOpacity>
 
@@ -336,7 +338,8 @@ class Confirm extends Component {
 												textAlign:'center',
 												marginTop:20,
 												fontFamily:'FZZongYi-M05S',
-											}}>
+											}}
+								allowFontScaling={false}>
 				 		{this.props.restaurant.name}
 					</Text>
 					<Text style={{color:'#ababb0',
@@ -344,7 +347,8 @@ class Confirm extends Component {
 												fontWeight:'400',
 												marginTop:10,
 												textAlign:'center',
-												fontFamily:'FZZhunYuan-M02S',}}>
+												fontFamily:'FZZhunYuan-M02S',}}
+								allowFontScaling={false}>
 						{this.props.restaurant.desc}
 					</Text>
 					<View style={{height:2,
@@ -430,7 +434,8 @@ class Confirm extends Component {
                             marginRight:5,
                             padding:5
                           }}>
-                <Text style={{color:deliverType.textColor,fontFamily:'FZZhunYuan-M02S',}}>
+                <Text style={{color:deliverType.textColor,fontFamily:'FZZhunYuan-M02S',}}
+											allowFontScaling={false}>
                   {deliverType.text}
                 </Text>
               </View>
@@ -489,20 +494,20 @@ class Confirm extends Component {
 						height:100,
 					}}>
 					<View style={{flex:0.5, flexDirection:'row',alignItems:'center',}}>
-					 <Text style={{
-							marginLeft:20,
-							fontSize:15,
-							color:'#808080',
-							fontFamily:'FZZhunYuan-M02S',
-						}}>
+					 <Text style={{marginLeft:20,
+												 fontSize:15,
+												 color:'#808080',
+												 fontFamily:'FZZhunYuan-M02S',
+											}}
+									allowFontScaling={false}>
 	              {CMLabel.getCNLabel('TIPS')}:
 	            </Text>
-	            <Text style={{
-								 marginLeft:5,
-								 fontSize:15,
-								 color:'#ff8b00',
-								 fontFamily:'FZZhunYuan-M02S',
-							}}>
+	            <Text style={{marginLeft:5,
+													  fontSize:15,
+													  color:'#ff8b00',
+													  fontFamily:'FZZhunYuan-M02S',
+													}}
+										allowFontScaling={false}>
               {this.state.tips}
             </Text>
 						</View>
@@ -513,24 +518,27 @@ class Confirm extends Component {
 													borderColor:this.state.tipsPercentage == 0.1 ?'#ff8b00' :'#808080',
 													backgroundColor: this.state.tipsPercentage == 0.1 ?'#ff8b00' :'white',
 												}]} onPress={()=>this._setTips(0.1)}>
-								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.1 ?'#FFF': '#808080'}]}>10%</Text>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.1 ?'#FFF': '#808080'}]}
+											allowFontScaling={false}>10%</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={[styles.tipsView,{
 													flex:0.2,
 													borderColor:this.state.tipsPercentage == 0.15 ?'#ff8b00' :'#808080',
 													backgroundColor: this.state.tipsPercentage == 0.15 ?'#ff8b00' :'white',
 												}]} onPress={()=>this._setTips(0.15)}>
-								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.15 ?'#FFF': '#808080'}]}>15%</Text>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.15 ?'#FFF': '#808080'}]}
+											allowFontScaling={false}>15%</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={[styles.tipsView,{
 													flex:0.2,
 													borderColor:this.state.tipsPercentage == 0.2 ?'#ff8b00' :'#808080',
 													backgroundColor: this.state.tipsPercentage == 0.2 ?'#ff8b00' :'white',
 												}]}  onPress={()=>this._setTips(0.2)}>
-								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.2 ?'#FFF': '#808080'}]}>20%</Text>
+								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.2 ?'#FFF': '#808080'}]}
+											allowFontScaling={false}>20%</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
-								<Text>$</Text>
+								<Text allowFontScaling={false}>$</Text>
 								<TextInput
 													style={{flex:1,height: 40, marginHorizontal:5}}
 													placeholder={'Customized'}
@@ -579,7 +587,8 @@ class Confirm extends Component {
 				if(this.state.comment){
 					return(	<Text>{CMLabel.getCNLabel('REMARK')}： {this.state.comment}</Text>)
 				}else{
-					return(<Text style={{color:'#ababb0'}}>{CMLabel.getCNLabel('ADD_REMARK')}</Text>)
+					return(<Text style={{color:'#ababb0'}}
+											 allowFontScaling={false}>{CMLabel.getCNLabel('ADD_REMARK')}</Text>)
 				}
 			}
       return(
@@ -649,7 +658,8 @@ class Confirm extends Component {
 																		left:0,}}
 														onPress={this._goBack}>
 						<View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
-							<Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
+							<Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}
+										allowFontScaling={false}>
 								×
 							</Text>
 						</View>

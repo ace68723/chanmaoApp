@@ -42,7 +42,8 @@ export default class SboxCart extends Component {
             <Text style={{color:'white',
                           marginLeft:10,
                           fontFamily:'FZZhunYuan-M02S',
-                          }}>
+                          }}
+                  allowFontScaling={false}>
               购物箱 NO.{box.boxId}
             </Text>
           </View>
@@ -61,10 +62,10 @@ export default class SboxCart extends Component {
         <View key={key}
               style={{height:80}}
               >
-          <Text>
+          <Text allowFontScaling={false}>
             {product.fullname}
           </Text>
-          <Text>
+          <Text allowFontScaling={false}>
             ${product.price}
           </Text>
         </View>

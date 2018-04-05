@@ -101,8 +101,9 @@ export default class Option extends Component {
         <View style={{width: width * (379 / 1242),
                 marginTop: height * (35 / 2208),}}>
             <Text style={[styles.optionsText,{
-              textAlign: textAlign,
-            }]}>
+                          textAlign: textAlign,
+                        }]}
+                  allowFontScaling={false}>
             {suboption.name}
             </Text>
         </View>
@@ -116,7 +117,8 @@ export default class Option extends Component {
         <View style={styles.row}>
           <Image style={styles.image} source={this.props.option.image}/>
           <View style={styles.subTitle}>
-            <Text style={styles.subTitleText}>{this.props.option.title}</Text>
+            <Text style={styles.subTitleText}
+                  allowFontScaling={false}>{this.props.option.title}</Text>
           </View>
         </View>
         <View style={styles.suboption}

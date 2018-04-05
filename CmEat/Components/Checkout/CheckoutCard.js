@@ -9,7 +9,7 @@ export default (props) =>{
 
     return (
         <View style={styles.container}>
-           <Text>
+           <Text allowFontScaling={false}>
              {props.ds_name}
              {props.dish.price} {'\n'}
              {props.dish.qty}

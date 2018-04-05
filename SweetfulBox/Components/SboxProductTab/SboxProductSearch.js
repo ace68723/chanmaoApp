@@ -153,7 +153,7 @@ export default class SboxProductSearch extends Component {
 					<TouchableOpacity
 							style={{flex:0.1}}
 							onPress={()=>this._goBack()}>
-						<Text style={{fontSize:40}}>×</Text>
+						<Text style={{fontSize:40}} allowFontScaling={false}>×</Text>
 					</TouchableOpacity>
 				</View>
 			)
@@ -169,7 +169,7 @@ export default class SboxProductSearch extends Component {
 					/>
 				</TouchableOpacity>
 				);
-		
+
 			}
 			else if (item.type === "empty") {
 				return (
@@ -189,8 +189,9 @@ export default class SboxProductSearch extends Component {
 					justifyContent:'center',
 				}}>
 				<Text style={{
-					fontWeight: 'bold',
-					}}>{item.section_name}
+											fontWeight: 'bold',
+										}}
+							allowFontScaling={false}>{item.section_name}
 				</Text>
 				</View>
 				);
@@ -231,7 +232,7 @@ export default class SboxProductSearch extends Component {
 								stickyHeaderIndices={[0]}
 								numColumns={3}
 								columnWrapperStyle={{ marginTop: 10,alignSelf:'center' }}
-						/>					
+						/>
 			)
 		}
 }

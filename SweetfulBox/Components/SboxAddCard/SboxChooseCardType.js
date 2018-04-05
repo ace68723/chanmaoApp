@@ -77,7 +77,10 @@ export default class SboxChooseCardType extends Component {
           style={styles.box}
           onPress={()=>{}}
           >
-            <Text style={styles.box_text}>{name}</Text>
+            <Text style={styles.box_text}
+                  allowFontScaling={false}>
+                  {name}
+            </Text>
         </TouchableOpacity>
       )
     }
@@ -101,7 +104,8 @@ export default class SboxChooseCardType extends Component {
                               fontSize: 18,
                               textAlign: 'left',
                               marginLeft :20,
-                              color:"#808080",}}>
+                              color:"#808080",}}
+                      allowFontScaling={false}>
                           信用卡
                 </Text>
                 <Image style={{height: 20,
@@ -121,7 +125,8 @@ export default class SboxChooseCardType extends Component {
                               fontSize: 18,
                               textAlign: 'left',
                               marginLeft :20,
-                              color:"#808080",}}>
+                              color:"#808080",}}
+                      allowFontScaling={false}>
                               Debit Visa Mastercard
                 </Text>
                 <Image style={{height: 20,

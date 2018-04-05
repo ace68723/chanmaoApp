@@ -340,7 +340,8 @@ export default class CMKeyBoard extends Component {
                                     top:this.state.bounceValueCardNumTop,
                                   }}>
 
-                                    <Text style={{fontSize:16,color:'#6d6e71'}} allowFontScaling={false}>信用卡号</Text>
+                                    <Text style={{fontSize:16,color:'#6d6e71'}}
+                                          allowFontScaling={false}>信用卡号</Text>
                                 </Animated.Text>
 
                                 <View style={{height:25,width:36,marginTop:35}}>
@@ -348,7 +349,8 @@ export default class CMKeyBoard extends Component {
                                 </View>
 
                                 <View style={{height:40 ,width:300,marginTop:30,marginLeft:15,flexDirection:'row'}} >
-                                      <Text style={{fontSize:25,backgroundColor:'transparent'}} >{this.state.text}</Text>
+                                      <Text style={{fontSize:25,backgroundColor:'transparent'}}
+                                            allowFontScaling={false}>{this.state.text}</Text>
                                       {this._renderNumMarker()}
                                 </View>
 
@@ -367,7 +369,8 @@ export default class CMKeyBoard extends Component {
                                 fontSize:this.state.bounceValueDateFontSize,
                                 top:this.state.bounceValueDateTop,
                               }}>
-                                <Text style={{fontSize:16,color:'#6d6e71'}} allowFontScaling={false}>有效期至</Text>
+                                <Text style={{fontSize:16,color:'#6d6e71'}}
+                                      allowFontScaling={false}>有效期至</Text>
                               </Animated.Text>
 
                           </View>
@@ -379,7 +382,10 @@ export default class CMKeyBoard extends Component {
                                     <Animated.Text style={{
                                       opacity:this.state.opacityExpWord,
                                     }}>
-                                      <Text style={{fontSize:25}} allowFontScaling={false}>{this.state.expMonth}/{this.state.expYear}</Text>
+                                      <Text style={{fontSize:25}}
+                                            allowFontScaling={false}>
+                                            {this.state.expMonth}/{this.state.expYear}
+                                      </Text>
                                     </Animated.Text>
                                 </View>
                                 <View style={{flex:0.1,paddingTop:15}}>
@@ -414,7 +420,7 @@ export default class CMKeyBoard extends Component {
                                   }}>
                                     <View style={{height:40 ,width:100,flexDirection:'row' }} >
                                       <Text style={{fontSize:25,backgroundColor:'transparent'}}
-                                                  allowFontScaling={false}>
+                                            allowFontScaling={false}>
                                                   {this.state.cvv}</Text>
                                         {this._renderCVVMarker()}
                                     </View>

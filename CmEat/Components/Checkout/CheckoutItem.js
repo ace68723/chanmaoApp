@@ -20,7 +20,8 @@ export default (props) => {
                 <View style={{flex:1,justifyContent:'center'}}>
                     <Text style={{color:'#ababb0',
                                   fontSize:16,
-                                  fontFamily:'FZZhunYuan-M02S'}}>
+                                  fontFamily:'FZZhunYuan-M02S'}}
+                          allowFontScaling={false}>
                       {props.dish.tpgs[tpg_id].tps[tp_id].tp_name}
                     </Text>
                 </View>
@@ -28,7 +29,8 @@ export default (props) => {
                   <Text style={{color:'#ababb0',
                                 fontSize:16,
                                 fontFamily:'FZZhunYuan-M02S',
-                                textAlign: 'left'}}>
+                                textAlign: 'left'}}
+                        allowFontScaling={false}>
                     ${props.dish.tpgs[tpg_id].tps[tp_id].tp_price} × {props.dish.tpgs[tpg_id].tps[tp_id].quantity}
                   </Text>
                 </View>
@@ -46,12 +48,14 @@ export default (props) => {
                 <View style={{flex: 1, marginRight: 12}}>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{flex:1,justifyContent:'center',}}>
-                        <Text style={styles.itemTitle}>
+                        <Text style={styles.itemTitle}
+                              allowFontScaling={false}>
                           {props.ds_name}
                         </Text>
                     </View>
                     <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
-                      <Text style={styles.quantity}>
+                      <Text style={styles.quantity}
+                            allowFontScaling={false}>
                         ${props.dish.price.toFixed(2)} × {props.dish.qty}
                       </Text>
                     </View>
@@ -71,12 +75,14 @@ export default (props) => {
               <View style={{flex: 1, marginRight: 12}}>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{flex:1,justifyContent:'center',}}>
-                      <Text style={styles.itemTitle}>
+                      <Text style={styles.itemTitle}
+                            allowFontScaling={false}>
                         {props.ds_name}
                       </Text>
                   </View>
                   <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
-                    <Text style={styles.quantity}>
+                    <Text style={styles.quantity}
+                          allowFontScaling={false}>
                       {props.dish.price} × {props.dish.qty}
                     </Text>
                   </View>

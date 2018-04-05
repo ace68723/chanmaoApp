@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 export default class Content extends Component {
   constructor(props) {
     super(props);
-    
+
   }
 
   _renderCategoryList() {
@@ -92,7 +92,8 @@ export default class Content extends Component {
             style={styles.image}
           />
           <View style={styles.name}>
-            <Text style={styles.text}>{name}</Text>
+            <Text style={styles.text}
+                  allowFontScaling={false}>{name}</Text>
           </View>
         </TouchableOpacity>
       );
@@ -112,7 +113,8 @@ export default class Content extends Component {
           style={styles.record_item}
           activeOpacity={0.6}
         >
-          <Text style={styles.gray}>{name}</Text>
+          <Text style={styles.gray}
+                allowFontScaling={false}>{name}</Text>
         </TouchableOpacity>
       );
     }
@@ -123,7 +125,8 @@ export default class Content extends Component {
     return (
       <ScrollView style={styles.content}>
         <View style={styles.title}>
-          <Text style={styles.text}>产品分类</Text>
+          <Text style={styles.text}
+                allowFontScaling={false}>产品分类</Text>
         </View>
 
         <View style={styles.categoryList}>
@@ -131,9 +134,11 @@ export default class Content extends Component {
         </View>
 
         <View style={[styles.title, styles.flexRow]}>
-          <Text style={styles.text}>搜索记录</Text>
+          <Text style={styles.text}
+                allowFontScaling={false}>搜索记录</Text>
           <TouchableOpacity>
-            <Text style={styles.erase}>清空</Text>
+            <Text style={styles.erase}
+                  allowFontScaling={false}>清空</Text>
           </TouchableOpacity>
         </View>
 

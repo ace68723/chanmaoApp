@@ -49,7 +49,8 @@ export default class SboxProductView extends Component {
                                 fontWeight:"700",
                                 color:"#ff768b",
                                 marginRight: 2,
-                                alignSelf:"center"}}>
+                                alignSelf:"center"}}
+                        allowFontScaling={false}>
                                 ${this.props.product.sku_price}
                   </Text>
                   <Text style={{marginTop:6,
@@ -57,7 +58,8 @@ export default class SboxProductView extends Component {
                                 fontWeight:"700",
                                 color:"black",
                                 textDecorationLine: 'line-through',
-                                alignSelf:"center"}}>
+                                alignSelf:"center"}}
+                        allowFontScaling={false}>
                                 $({this.props.product.sku_original_price})
                   </Text>
                 </View>
@@ -69,7 +71,8 @@ export default class SboxProductView extends Component {
                                 fontSize:12,
                                 fontWeight:"700",
                                 color:"#ff768b",
-                                alignSelf:"center"}}>
+                                alignSelf:"center"}}
+                allowFontScaling={false}>
                                 ${this.props.product.sku_price}
                   </Text>
         )
@@ -80,7 +83,8 @@ export default class SboxProductView extends Component {
                     fontSize:12,
                     fontWeight:"700",
                     color:"#ff768b",
-                    alignSelf:"center"}}>
+                    alignSelf:"center"}}
+            allowFontScaling={false}>
                     ${this.props.product.spu_price}
       </Text>
     );
@@ -96,7 +100,8 @@ export default class SboxProductView extends Component {
                             color:"#6d6e71",
                             alignSelf:"center",
                             height: 26}}
-                            numberOfLines={2}>
+                    numberOfLines={2}
+                    allowFontScaling={false}>
                             {this.props.product.name}
               </Text>
               {this._renderPriceText()}

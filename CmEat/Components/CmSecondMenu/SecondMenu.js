@@ -125,7 +125,8 @@ export default class SecondMenu extends Component {
                 <Text style={{fontSize:25,
 															textAlign:"center",
 															color:"#ffffff",
-															marginTop:-2}}>
+															marginTop:-2}}
+											allowFontScaling={false}>
                   ×
                 </Text>
             </View>
@@ -154,7 +155,8 @@ export default class SecondMenu extends Component {
 													fontSize:15,
 													fontWeight: '300',
 													fontFamily:'FZZhunYuan-M02S'}}
-									 numberOfLines={1}>
+									 numberOfLines={1}
+									 allowFontScaling={false}>
 													删除
 						</Text>
 				</TouchableOpacity>
@@ -190,16 +192,20 @@ export default class SecondMenu extends Component {
 															flexDirection: 'row'}}
 											activeOpacity={0.4}
 											onPress={this._handleToppingOnPress.bind(null,{tpg_id, 'tp_id': key})}>
-											<Text style={{fontSize: 15, marginRight: 8, fontFamily:'FZZhunYuan-M02S'}}>
+											<Text style={{fontSize: 15,
+																		marginRight: 8,
+																		fontFamily:'FZZhunYuan-M02S'}}
+														allowFontScaling={false}>
 													{tps[key].tp_name} ${tps[key].tp_price}
 											</Text>
 											<Text style={{fontSize: 15,
 																		textAlign: 'center',
 																		overflow: 'hidden',
-																		width: 20,
+																		width: 18,
 																		backgroundColor: '#D4D4D4',
-																		borderRadius: 10,
-																		fontFamily:'FZZhunYuan-M02S'}}>
+																		borderRadius: 9,
+																		fontFamily:'FZZhunYuan-M02S'}}
+														allowFontScaling={false}>
 													{tps[key].quantity}
 											</Text>
 								</TouchableOpacity>
@@ -214,7 +220,10 @@ export default class SecondMenu extends Component {
 																borderColor:'#ff8b00',
 																borderWidth:1,
 																borderRadius:6,}}>
-										<Text style={{fontSize: 15, color:'#ff8b00', fontFamily:'FZZhunYuan-M02S'}}> - </Text>
+										<Text style={{fontSize: 15,
+																	color:'#ff8b00',
+																	fontFamily:'FZZhunYuan-M02S'}}
+													allowFontScaling={false}> - </Text>
 									</View>
 								</TouchableOpacity>
 
@@ -237,7 +246,10 @@ export default class SecondMenu extends Component {
 															flexDirection: 'row'}}
 											activeOpacity={0.4}
 											onPress={this._handleToppingOnPress.bind(null,{tpg_id, 'tp_id': key})}>
-											<Text style={{fontSize: 15, marginRight: 8, fontFamily:'FZZhunYuan-M02S'}}>
+											<Text style={{fontSize: 15,
+																		marginRight: 8,
+																		fontFamily:'FZZhunYuan-M02S'}}
+														allowFontScaling={false}>
 													{tps[key].tp_name} ${tps[key].tp_price}
 											</Text>
 								</TouchableOpacity>
@@ -269,8 +281,18 @@ export default class SecondMenu extends Component {
 													backgroundColor: '#f5f5f5',
 													paddingTop: 5,
 													paddingBottom: 5}}>
-								<Text style={{marginLeft: 20, fontSize: 16, fontFamily:'FZZhunYuan-M02S'}}>{toppingGroupList[key].tpg_name}</Text>
-								<Text style={{fontSize: 16, color: '#a5a5a5', fontFamily:'FZZhunYuan-M02S'}}>{optionReminder}</Text>
+								<Text style={{marginLeft: 20,
+															fontSize: 16,
+															fontFamily:'FZZhunYuan-M02S'}}
+											allowFontScaling={false}>
+											{toppingGroupList[key].tpg_name}
+								</Text>
+								<Text style={{fontSize: 16,
+															color: '#a5a5a5',
+															fontFamily:'FZZhunYuan-M02S'}}
+											allowFontScaling={false}>
+											{optionReminder}
+								</Text>
 						</View>
 						<View style={{flexDirection: 'row',
 													flexWrap: 'wrap',
@@ -303,9 +325,15 @@ export default class SecondMenu extends Component {
 														paddingBottom: 5,
 														width: 30,
 														textAlign: 'center',
-														fontFamily:'FZZhunYuan-M02S'}}>-</Text>
+														fontFamily:'FZZhunYuan-M02S'}}
+										allowFontScaling={false}>
+										-
+							</Text>
 					</TouchableOpacity>
-					<Text style={{paddingTop: 5, paddingBottom: 5, fontFamily:'FZZhunYuan-M02S'}}>
+					<Text style={{paddingTop: 5,
+												paddingBottom: 5,
+												fontFamily:'FZZhunYuan-M02S'}}
+								allowFontScaling={false}>
 							{this.state.qty}
 					</Text>
 					<TouchableOpacity style={{}}
@@ -316,7 +344,10 @@ export default class SecondMenu extends Component {
 														paddingBottom: 5,
 														width: 30,
 														textAlign: 'center',
-														fontFamily:'FZZhunYuan-M02S'}}>+</Text>
+														fontFamily:'FZZhunYuan-M02S'}}
+										allowFontScaling={false}>
+										+
+							</Text>
 					</TouchableOpacity>
 			</View>
 		)
@@ -348,7 +379,8 @@ export default class SecondMenu extends Component {
                         color: 'white',
                         fontSize: 16,
                         fontWeight: '700',
-												fontFamily:'FZZhunYuan-M02S'}}>
+												fontFamily:'FZZhunYuan-M02S'}}
+								allowFontScaling={false}>
               {confirmMsg}
           </Text>
           <Text style={{flex: 1,
@@ -356,7 +388,8 @@ export default class SecondMenu extends Component {
                         marginRight: 20,
                         color: 'white',
                         fontSize: 16,
-												fontFamily:'FZZhunYuan-M02S'}}>
+												fontFamily:'FZZhunYuan-M02S'}}
+								allowFontScaling={false}>
               ${(this.state.total * this.state.qty).toFixed(2)}
           </Text>
       </TouchableOpacity>

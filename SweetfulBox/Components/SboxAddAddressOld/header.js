@@ -44,9 +44,11 @@ export default class Header extends Component {
       return (
           <View style={styles.container}>
             <TouchableOpacity style={styles.left}>
-                <Text style={styles.cancleIcon}>{String.fromCharCode(10005)}</Text>
+                <Text style={styles.cancleIcon}
+                      allowFontScaling={false}>{String.fromCharCode(10005)}</Text>
             </TouchableOpacity>
-            <Text style={styles.headTitle}>添加地址</Text>
+            <Text style={styles.headTitle}
+                  allowFontScaling={false}>添加地址</Text>
             <View style={styles.right}/>
           </View>
       );

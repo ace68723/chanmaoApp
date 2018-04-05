@@ -90,11 +90,14 @@ export default class Content extends Component {
             <Image style={styles.box_image} source={image}/>
           </TouchableOpacity>
           <View>
-            <Text style={styles.prodName}>{name}</Text>
+            <Text style={styles.prodName}
+                  allowFontScaling={false}>{name}</Text>
             <View style={[styles.flexRow, styles.prodPrice_Form]}>
-              <Text style={styles.prodPrice}>{price}</Text>
+              <Text style={styles.prodPrice}
+                    allowFontScaling={false}>{price}</Text>
               <View style={styles.prodPrice_Num_Form}>
-                <Text style={styles.prodPrice_Num}>{amount}</Text>
+                <Text style={styles.prodPrice_Num}
+                      allowFontScaling={false}>{amount}</Text>
               </View>
             </View>
           </View>

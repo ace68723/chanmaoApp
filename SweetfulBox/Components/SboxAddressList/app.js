@@ -65,7 +65,6 @@ componentWillMount() {
   // 		const items = JSON.parse(json);
   // 		this.setSource(items, items);
   // 	} catch(e) {
-  // 		console.log("GG");
   // 	}
   // })
   // console.log(this.state);

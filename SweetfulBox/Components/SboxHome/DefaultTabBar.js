@@ -67,7 +67,13 @@ class DefaultTabBar extends Component {
                 <Image source={{uri:icon}}
                        style={{height:25,}}
                        resizeMode={'contain'}/>
-                     <Text style={[{color: textColor, fontWeight, fontFamily:'FZZhunYuan-M02S',marginTop:8, textAlign: 'center'}, textStyle, ]}>
+                     <Text style={[{color: textColor,
+                                    fontWeight,
+                                    fontFamily:'FZZhunYuan-M02S',
+                                    arginTop:8,
+                                    textAlign: 'center'},
+                                    textStyle, ]}
+                           allowFontScaling={false}>
                   {name}
                 </Text>
               </View>

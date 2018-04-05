@@ -320,9 +320,10 @@ export default class MyComponent extends Component {
                             bottom:0,
                             marginLeft:40,
                             flexDirection:'row'}} >
-                    <Text style={{fontSize:25,
-                                  backgroundColor:'transparent'}} >
-                                  {this.state.cardNumber}
+                    <Text style={{fontSize:24,
+                                  backgroundColor:'transparent'}}
+                          allowFontScaling={false}>
+                          {this.state.cardNumber}
                     </Text>
                     {this._renderNumMarker()}
               </View>
@@ -366,14 +367,11 @@ export default class MyComponent extends Component {
                                 marginTop:25,
                                 opacity:opacityDate,
                               }}>
-                        <Text style={{fontSize:25}}
+                        <Text style={{fontSize:23}}
                           allowFontScaling={false}>
                           {this.state.expMonth}/{this.state.expYear}
                         </Text>
                   </Animated.View>
-                  <View style={{flex:0.1,paddingTop:15}}>
-
-                  </View>
               </View>
           </TouchableWithoutFeedback>
 
@@ -418,10 +416,11 @@ export default class MyComponent extends Component {
                                     height:40,
                                     width:100,
                                     flexDirection:'row' }} >
-                      <Text style={{fontSize:25,backgroundColor:'transparent'}}
-                                  allowFontScaling={false}>
-                                  {this.state.cvv}</Text>
-                        {this._renderCVVMarker()}
+                      <Text style={{fontSize:23,backgroundColor:'transparent'}}
+                            allowFontScaling={false}>
+                            {this.state.cvv}
+                      </Text>
+                      {this._renderCVVMarker()}
                     </Animated.View>
 
                   </View>

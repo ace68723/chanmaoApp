@@ -93,19 +93,20 @@ export default class AddressPromptView extends Component {
                   }}>
             <View style={styles.TriangleShapeCSS} />
             <Text style={{color:"white",
-                        fontSize:12,
-                        top: 0,
-                        width: (width * 0.9),
-                        paddingLeft: 16,
-                        paddingTop: 12,
-                        paddingBottom: 12,
-                        backgroundColor: '#ea7b21',
-                        fontWeight:'bold',
-                        textAlignVertical: "center",
-                        fontFamily:"FZZhunYuan-M02S",
-                        backgroundColor: '#ea7b21',}}
-                        numberOfLines={1}>
-                        这是正确的地址吗？距离您的位置似乎有点远。
+                          fontSize:12,
+                          top: 0,
+                          width: (width * 0.9),
+                          paddingLeft: 16,
+                          paddingTop: 12,
+                          paddingBottom: 12,
+                          backgroundColor: '#ea7b21',
+                          fontWeight:'bold',
+                          textAlignVertical: "center",
+                          fontFamily:"FZZhunYuan-M02S",
+                          backgroundColor: '#ea7b21',}}
+                          numberOfLines={1}
+                  allowFontScaling={false}>
+                          这是正确的地址吗？距离您的位置似乎有点远。
             </Text>
           </Animated.View>
         </TouchableWithoutFeedback>

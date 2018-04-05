@@ -69,7 +69,9 @@ export default class MyComponent extends Component {
                     }}
 
                     source={require('./Image/box.png')}>
-                <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
+                <Text style={{backgroundColor:'rgba(0,0,0,0)',
+                              fontFamily:'FZZhunYuan-M02S',}}
+                      allowFontScaling={false}>
                    {this.state.totalQuantity}
                 </Text>
               </AnimatedImageBackground>
@@ -105,7 +107,9 @@ export default class MyComponent extends Component {
                       justifyContent:'center',
                     }}
                     source={require('./Image/box.png')}>
-                <Text style={{backgroundColor:'rgba(0,0,0,0)',fontFamily:'FZZhunYuan-M02S',}}>
+                <Text style={{backgroundColor:'rgba(0,0,0,0)',
+                              fontFamily:'FZZhunYuan-M02S'}}
+                      allowFontScaling={false}>
                    {this.state.totalQuantity}
                 </Text>
               </AnimatedImageBackground>

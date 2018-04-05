@@ -50,11 +50,20 @@ export default class MyComponent extends Component {
     return (
       <View  style={styles.content}>
         <Image style={styles.image} source={this.props.sectionParam.image}/>
-        <Text style={styles.name}>{this.props.sectionParam.name}</Text>
-        <Text style={styles.description}>{this.props.sectionParam.description}</Text>
+        <Text style={styles.name}
+              allowFontScaling={false}>
+              {this.props.sectionParam.name}
+        </Text>
+        <Text style={styles.description}
+              allowFontScaling={false}>
+              {this.props.sectionParam.description}
+        </Text>
         <View style={styles.forwordButton}>
           <TouchableOpacity>
-            <Text style={styles.forwardIcon}>{'\u232A'}</Text>
+            <Text style={styles.forwardIcon}
+                  allowFontScaling={false}>
+                  {'\u232A'}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

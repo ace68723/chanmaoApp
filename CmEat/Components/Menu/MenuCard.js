@@ -51,7 +51,7 @@ class MenuCard extends Component {
             </View>
 						<View style={{flex:1,}}>
 									<View style={{width:50,
-														    height:40,
+														    height:36,
 														    alignSelf:'center',
 														    alignItems:'center',
 														    justifyContent:'center',
@@ -59,9 +59,12 @@ class MenuCard extends Component {
 																backgroundColor:'#ff8b00',
 														    borderWidth:2,
 														    borderRadius:8,}}>
-		                <Text style={{fontSize:20,
+		                <Text style={{fontSize:18,
 								    							backgroundColor:'#ff8b00',
-																  color: 'white'}}>选项</Text>
+																  color: 'white'}}
+													allowFontScaling={false}>
+													选项
+										</Text>
 		              </View>
             </View>
           </View>
@@ -71,14 +74,16 @@ class MenuCard extends Component {
         return(
           <View style={{flex:0.4,flexDirection:'row',}}>
             <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
-              <Text style={styles.quantity}>
+              <Text style={styles.quantity}
+										allowFontScaling={false}>
                 数量: {this.props.dish.qty}
               </Text>
             </View>
             <TouchableOpacity style={{flex:1,}}
                               onPress={() => {OrderActions.decreaseItem( this.props.dish)}}>
               <View style={styles.decreaseButton}>
-                <Text style={styles.decreaseIcon}> - </Text>
+                <Text style={styles.decreaseIcon}
+											allowFontScaling={false}> - </Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -92,10 +97,12 @@ class MenuCard extends Component {
          <View style={styles.container}>
             <View style={{flex:0.6}}>
               <Text style={styles.itemTitle}
-                    numberOfLines={2}>
+                    numberOfLines={2}
+										allowFontScaling={false}>
                 {this.props.ds_name}
               </Text>
-              <Text style={styles.price}>
+              <Text style={styles.price}
+										allowFontScaling={false}>
                  {this.props.dish.price}
               </Text>
             </View>

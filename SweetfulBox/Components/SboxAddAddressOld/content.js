@@ -71,7 +71,8 @@ export default class Content extends Component {
                 </View>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/name.png')}/></View>
-                    <Text style={styles.tips}>联系人: </Text>
+                    <Text style={styles.tips}
+                          allowFontScaling={false}>联系人: </Text>
                     <TextInput
                         value={this.props.name}
                         onChangeText={this.props.onNameChange}
@@ -82,7 +83,8 @@ export default class Content extends Component {
                 </View>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/phoneNum.png')}/></View>
-                    <Text style={styles.tips}>电话: +1 </Text>
+                    <Text style={styles.tips}
+                          allowFontScaling={false}>电话: +1 </Text>
                     <TextInput
                         value={this.props.phoneNumDisplay}
                         onChangeText={this.props.onPhoneNumChange}
@@ -95,7 +97,8 @@ export default class Content extends Component {
                 </View>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/unitNum.png')}/></View>
-                    <Text style={styles.tips}>Unit No.: </Text>
+                    <Text style={styles.tips}
+                          allowFontScaling={false}>Unit No.: </Text>
                     <TextInput
                         value={this.props.unitNum}
                         onChangeText={this.props.onUnitNumChange}
@@ -108,7 +111,8 @@ export default class Content extends Component {
                 <View style={styles.submit}>
                     <View style={styles.verticalSpace}/>
                     <TouchableOpacity style={styles.submitButton} onPress={this.props.onSubmit}>
-                        <Text style={styles.submitText}>添加地址</Text>
+                        <Text style={styles.submitText}
+                              allowFontScaling={false}>添加地址</Text>
                     </TouchableOpacity>
                     <View style={styles.verticalSpace}/>
                 </View>

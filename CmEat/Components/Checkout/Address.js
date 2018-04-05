@@ -96,13 +96,16 @@ export default class Address extends Component {
 							 />
 						</MapView>
 						<View style={{flex:1,margin:10}}>
-							<Text numberOfLines={2} style={{fontFamily:'FZZhunYuan-M02S',}}>
+							<Text numberOfLines={2} style={{fontFamily:'FZZhunYuan-M02S',}}
+										allowFontScaling={false}>
 									{this.state.address.addr}
 							</Text>
-							<Text style={{fontFamily:'FZZhunYuan-M02S',}}>
+							<Text style={{fontFamily:'FZZhunYuan-M02S',}}
+										allowFontScaling={false}>
 									{this.state.address.city}
 							</Text>
-							<Text style={{fontFamily:'FZZhunYuan-M02S',}}>
+							<Text style={{fontFamily:'FZZhunYuan-M02S',}}
+										allowFontScaling={false}>
 									{this.state.address.tel}
 							</Text>
 						</View>

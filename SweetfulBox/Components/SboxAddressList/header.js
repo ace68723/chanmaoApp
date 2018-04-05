@@ -73,7 +73,8 @@ class Header extends Component {
 			    	<View style={styles.back}>
 			    	</View>
 			    	<View style={styles.title}>
-			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>地址</Text>
+			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }
+                      allowFontScaling={false}>地址</Text>
 			    	</View>
 			    	<View style={{flex:1}}>
             </View>
@@ -104,7 +105,8 @@ class Header extends Component {
         <Separator/>
 
         <View style={[styles.announcement, {height: searchBarHeight}]}>
-          <Text style={{textAlign:'center'}}>我们只配送以下范围， 请选择您收货的Condo地址</Text>
+          <Text style={{textAlign:'center'}}
+                allowFontScaling={false}>我们只配送以下范围， 请选择您收货的Condo地址</Text>
         </View>
 
         <Separator/>

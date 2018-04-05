@@ -63,7 +63,8 @@ export default class pastOrderEN extends Component {
                     <View style={{flex:1,justifyContent:'center'}}>
                         <Text style={{color:'#ababb0',
                                       fontSize:16,
-                                      fontFamily:'FZZhunYuan-M02S'}}>
+                                      fontFamily:'FZZhunYuan-M02S'}}
+                              allowFontScaling={false}>
                           {tp.tp_name}
                         </Text>
                     </View>
@@ -71,7 +72,8 @@ export default class pastOrderEN extends Component {
                       <Text style={{color:'#ababb0',
                                     fontSize:16,
                                     fontFamily:'FZZhunYuan-M02S',
-                                    textAlign: 'left'}}>
+                                    textAlign: 'left'}}
+                            allowFontScaling={false}>
                         ${tp.price} × {tp.amount}
                       </Text>
                     </View>

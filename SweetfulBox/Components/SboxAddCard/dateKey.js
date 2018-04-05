@@ -20,18 +20,14 @@ export default class DateKey extends Component {
     this.state={
       expMonth:"",
       expYear:"",
-      years: [2018,2019,2020,2021,2022,2023,2024,2025]
     }
     this._onPressMonth = this._onPressMonth.bind(this);
     this._onPressYear = this._onPressYear.bind(this);
+    this._renderMonthKeysRow = this._renderMonthKeysRow.bind(this);
+    this._renderYearKeysRow = this._renderYearKeysRow.bind(this);
   }
   _onPressMonth(input){
-
-    if(input<10){
-      var month = "0" + input.toString();
-    }else{
-      var month = input.toString();
-    }
+    var month = input.toString();
     date.month = month;
     this.props.inputFunc(date)
   }
@@ -40,58 +36,108 @@ export default class DateKey extends Component {
     date.year = year;
     this.props.inputFunc(date)
   }
-  _renderMonthKeys(){
+  _renderMonthKeysRow() {
+    var keysList = ["01","02","03","04","05","06","07","08","09","10","11","12",];
     var allKeys=[];
-    for(var i = 0; i < 12; i++){
-            const value = i+1;
-            if(i<9){
-                allKeys.push(
-                    <TouchableHighlight key={i}
-                                        style={styles.monthKeyStyle}
-                                        underlayColor='#ff768b'
-                                        onPress={()=>{this._onPressMonth(value)}}>
-                      <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>0{i+1}</Text>
-                    </TouchableHighlight>
-                );
-           }else{
-             allKeys.push(
-                 <TouchableOpacity key={i} style={styles.monthKeyStyle} onPress={()=>{this._onPressMonth(value)}}>
-                   <Text style={styles.DateKeyFont} allowFontScaling={false}>{i+1}</Text>
-                 </TouchableOpacity>
-               );
-           }
+    for(var i = 1; i < 5; i++){
+            const values = keysList.splice(0, 3);
+            allKeys.push(
+              <View style={{flex: 0.2,
+                            flexDirection: 'row',
+                            justifyContent: 'space-around',
+                            marginLeft: 10,
+                            marginRight: 10}}>
+                  <TouchableHighlight style={{alignItems:'center',
+                                              justifyContent:'center',
+                                              padding: 10}}
+                                      underlayColor='#ff768b'
+                                      onPress={()=>{this._onPressMonth(values[0])}}>
+                    <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[0]}</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight style={{alignItems:'center',
+                                              justifyContent:'center',
+                                              padding: 10}}
+                                      underlayColor='#ff768b'
+                                      onPress={()=>{this._onPressMonth(values[1])}}>
+                    <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[1]}</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight style={{alignItems:'center',
+                                              justifyContent:'center',
+                                              padding: 10}}
+                                      underlayColor='#ff768b'
+                                      onPress={()=>{this._onPressMonth(values[2])}}>
+                    <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[2]}</Text>
+                  </TouchableHighlight>
+              </View>
+            );
          }
 
     return allKeys;
   }
-  _renderYearKeys(){
+  _renderYearKeysRow() {
+    let cur_year = (new Date()).getFullYear();
+    let keysList = [];
+    for (i = 0; i < 8; i++) {
+        keysList.push((cur_year + i).toString());
+    }
     var allKeys=[];
-    this.state.years.map((year,i)=>{
-            const value = year;
-            allKeys.push(
-                <TouchableOpacity key={i} style={styles.yearKeyStyle} onPress={()=>{this._onPressYear(value)}}>
-                  <Text style={styles.DateKeyFont} allowFontScaling={false}>{year}</Text>
-                </TouchableOpacity>
-            );
-         })
-    return allKeys;
+    for(var i = 0; i < 4; i++){
+        const values = keysList.splice(0, 2);
+        allKeys.push(
+          <View style={{flex: 0.2,
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                        marginLeft: 10,
+                        marginRight: 10}}>
+              <TouchableHighlight style={{alignItems:'center',
+                                          justifyContent:'center',
+                                          padding: 10,
+                                          paddingLeft: 5,
+                                          paddingRight: 5}}
+                                  underlayColor='#ff768b'
+                                  onPress={()=>{this._onPressYear(values[0])}}>
+                <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[0]}</Text>
+              </TouchableHighlight>
+              <TouchableHighlight style={{alignItems:'center',
+                                          justifyContent:'center',
+                                          padding: 10,
+                                          paddingLeft: 5,
+                                          paddingRight: 5}}
+                                  underlayColor='#ff768b'
+                                  onPress={()=>{this._onPressYear(values[1])}}>
+                <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[1]}</Text>
+              </TouchableHighlight>
+          </View>
+        );
+     }
+     return allKeys;
   }
+
   render(){
       return(
         <View style={{flex:1,flexDirection:'row'}}>
-               <View style={styles.modalMonthContainer}>
-
-                   <View style={{height:40,paddingLeft:30,justifyContent:'center'}}><Text style={{color:'#ff768b'}} allowFontScaling={false}>MONTH</Text></View>
-                   <View style={styles.modalMonthContent}>
-                     {this._renderMonthKeys()}
-                   </View>
-               </View>
-               <View style={styles.modalYearContainer}>
-                       <View style={{height:40,paddingLeft:40,justifyContent:'center'}}><Text style={{color:'#ff768b'}} allowFontScaling={false}>YEAR</Text></View>
-                       <View style={styles.modalYearContent}>
-                         {this._renderYearKeys()}
-                       </View>
-               </View>
+            <View style={{flex: 0.5, marginBottom:20}}>
+                <View style={{marginTop: 10,marginBottom: 5,justifyContent:'center'}}>
+                    <Text style={{color:'#ff768b', textAlign: 'center'}}
+                          allowFontScaling={false}>
+                      MONTH
+                    </Text>
+                </View>
+                <View style={{flex:1,
+                              borderRightWidth:1,
+                              borderColor:'#d9d9d9',}}>
+                      {this._renderMonthKeysRow()}
+                </View>
+            </View>
+            <View style={{flex: 0.5, marginBottom:20}}>
+                <View style={{marginTop: 10,marginBottom: 5,justifyContent:'center'}}>
+                    <Text style={{color:'#ff768b', textAlign: 'center'}}
+                          allowFontScaling={false}>
+                      YEAR
+                    </Text>
+                </View>
+                {this._renderYearKeysRow()}
+            </View>
 
        </View>
       )
@@ -103,51 +149,6 @@ export default class DateKey extends Component {
 
 
 const styles = StyleSheet.create({
-  modalMonthContainer:{
-    flex:0.5,
-  },
-  modalYearContainer:{
-    flex:0.5,
-    paddingLeft:10,
-    paddingRight:20,
-
-  },
-  modalMonthContent:{
-    flex:1,
-    flexDirection:'row',
-    flexWrap:'wrap',
-    marginBottom:20,
-    paddingLeft:10,
-
-  },
-  modalYearContent:{
-    flex:1,
-    flexDirection:'row',
-    flexWrap:'wrap',
-    paddingLeft:20,
-    marginBottom:20,
-    borderLeftWidth:1,
-    borderColor:'#d9d9d9',
-  },
-
-  monthKeyStyle:{
-
-    alignItems:'center',
-    justifyContent:'center',
-    width:50,
-    height:45,
-
-
-  },
-  yearKeyStyle:{
-
-    alignItems:'center',
-    justifyContent:'center',
-
-    width:65,
-    height:45,
-
-  },
   DateKeyFont:{
     fontSize:20,
   },

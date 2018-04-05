@@ -74,7 +74,8 @@ export default class Content extends Component {
           onPress={this.props.handleOnPress.bind(null, data)}
           >
             <Image style={styles.box_image} source={image}/>
-            <Text style={styles.box_text}>{name}</Text>
+            <Text style={styles.box_text}
+                  allowFontScaling={false}>{name}</Text>
         </TouchableOpacity>
       )
     }

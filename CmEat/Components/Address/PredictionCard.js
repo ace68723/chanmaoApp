@@ -11,7 +11,8 @@ export default (props) =>{
 		return (
       <TouchableWithoutFeedback onPress={props.chooseAddress.bind(null,props.placeId,"O")}>
         <View style={styles.container}>
-              <Text style={styles.text}>
+              <Text style={styles.text}
+                    allowFontScaling={false}>
                 {props.description}
               </Text>
         </View>

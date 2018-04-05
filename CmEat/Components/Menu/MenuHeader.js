@@ -78,13 +78,14 @@ export default class MenuHeader extends Component {
 															 marginTop:7,
 															 fontSize:13,
 															 color:'#3a3b47',
-															 fontFamily:'FZZhunYuan-M02S',
-														 }}>
+															 fontFamily:'FZZhunYuan-M02S'}}
+							 allowFontScaling={false}>
 						最低起送价: {this.props.restaurant.start_amount}
 				</Text>
 			)
 		}else{
-			<Text style={{marginBottom:15,}}/>
+			<Text style={{marginBottom:15,}}
+						allowFontScaling={false}/>
 		}
 	}
 
@@ -114,12 +115,21 @@ export default class MenuHeader extends Component {
 										paddingBottom:23,
 									}}>
 				<Animated.View style={{opacity:this.state.intrOpacity}}>
-					<Text style={{color:'#363646',fontSize:15,fontWeight:'500',fontFamily:'FZZongYi-M05S',}}>
+					<Text style={{color:'#363646',
+												fontSize:15,
+												fontWeight:'500',
+												fontFamily:'FZZongYi-M05S',}}
+								allowFontScaling={false}>
 							{this.props.restaurant.name}
 					</Text>
 					<View style={{flexDirection:"row"}}>
 						<View style={{flex:1,}}>
-							<Text style={{color:'#ababb0',fontSize:12,fontWeight:'200',marginTop:5,fontFamily:'FZZhunYuan-M02S'}}>
+							<Text style={{color:'#ababb0',
+														fontSize:12,
+														fontWeight:'200',
+														marginTop:5,
+														fontFamily:'FZZhunYuan-M02S'}}
+										allowFontScaling={false}>
 									{this.props.restaurant.desc}
 							</Text>
 						</View>
@@ -127,23 +137,27 @@ export default class MenuHeader extends Component {
 				</Animated.View>
 				<Animated.View style={{opacity:this.state.rrOpacity,marginTop:-25,}}>
 					<Text style={{color:'#363646',
-																	fontSize:25,
-																	fontWeight:'500',
-																	fontFamily:'FZZongYi-M05S',
-																	textAlign:'center',
-																	}}>
+												fontSize:25,
+												fontWeight:'500',
+												fontFamily:'FZZongYi-M05S',
+												textAlign:'center',}}
+								allowFontScaling={false}>
 							{this.props.restaurant.name}
 					</Text>
 					<Text style={{color:'#ababb0',
-																	fontSize:13,
-																	fontWeight:'400',
-																	fontFamily:'FZZhunYuan-M02S',
-																	marginTop:10,
-																	textAlign:'center',}}>
+												fontSize:13,
+												fontWeight:'400',
+												fontFamily:'FZZhunYuan-M02S',
+												marginTop:10,
+												textAlign:'center',}}
+								allowFontScaling={false}>
 						{this.props.restaurant.desc}
 					</Text>
 					{this._renderStartMount()}
-					<Text style={{textAlign:'center',color:'#84828d',fontFamily:'FZZhunYuan-M02S'}}>
+					<Text style={{textAlign:'center',
+												color:'#84828d',
+												fontFamily:'FZZhunYuan-M02S'}}
+								allowFontScaling={false}>
 						{this.props.start_time} - {this.props.end_time}
 					</Text>
 				</Animated.View>

@@ -25,7 +25,7 @@ import Checkbox from "./checkbox";
 //
 //
 //
-//  切换城市以及搜索地址 
+//  切换城市以及搜索地址
 //
 //           <View style={styles.filter}>
           // <View style={styles.changeCity}>
@@ -60,11 +60,13 @@ class Header extends Component {
 				<View style={[styles.navigation, {height: navigationHeight}]}>
 			    	<View style={styles.back}>
 			      		<TouchableOpacity onClick={this.props.onClearComplete}>
-                    <Text style={{fontSize:20,marginLeft:10}}>{String.fromCharCode(10005)}</Text>
+                    <Text style={{fontSize:20,marginLeft:10}}
+                          allowFontScaling={false}>{String.fromCharCode(10005)}</Text>
                 </TouchableOpacity>
 			    	</View>
 			    	<View style={styles.title}>
-			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }>地址</Text>
+			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }
+                      allowFontScaling={false}>地址</Text>
 			    	</View>
 			    	<View style={{flex:1}}>
             </View>
@@ -77,7 +79,8 @@ class Header extends Component {
         <Separator/>
 
         <View style={styles.announcement}>
-          <Text style={{textAlign:'center'}}>我们只配送以下范围， 请选择您收货的Condo地址</Text>
+          <Text style={{textAlign:'center'}}
+                allowFontScaling={false}>我们只配送以下范围， 请选择您收货的Condo地址</Text>
         </View>
 
         <Separator/>

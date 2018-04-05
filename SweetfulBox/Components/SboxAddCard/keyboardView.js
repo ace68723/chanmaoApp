@@ -41,7 +41,10 @@ export default class KeyboardView extends Component{
           <TouchableWithoutFeedback onPress={this.props.handleSubmitPress}>
             <View style={[styles.submitButton,
                   {backgroundColor:submitButtonColor}]}>
-                  <Text style={{color:'white', fontSize:27}} allowFontScaling={false}>SAVE</Text>
+                  <Text style={{color:'white', fontSize:27}}
+                        allowFontScaling={false}>
+                        SAVE
+                  </Text>
             </View>
           </TouchableWithoutFeedback>
         )

@@ -289,7 +289,10 @@ export default class CmEatAddress extends Component {
 									<Image style={{width:30,height:29.2}}
 												source={require('./Image/icon_address_home.png')}/>
 							</TouchableOpacity>
-							<Text style={{fontSize:20,marginLeft:15,fontFamily:'FZZongYi-M05S',}}>
+							<Text style={{fontSize:20,
+														marginLeft:15,
+														fontFamily:'FZZongYi-M05S',}}
+										allowFontScaling={false}>
 								Home
 							</Text>
 						</View>
@@ -303,7 +306,10 @@ export default class CmEatAddress extends Component {
 									<Image style={{width:30,height:27.1}}
 												source={require('./Image/icon_address_work.png')}/>
 							</TouchableOpacity>
-							<Text style={{fontSize:20,marginLeft:15,fontFamily:'FZZongYi-M05S',}}>
+							<Text style={{fontSize:20,
+														marginLeft:15,
+														fontFamily:'FZZongYi-M05S',}}
+										allowFontScaling={false}>
 								Work
 							</Text>
 						</View>
@@ -318,7 +324,10 @@ export default class CmEatAddress extends Component {
 									<Image style={{width:22,height:30}}
 												source={require('./Image/icon_address_other.png')}/>
 							</TouchableOpacity>
-							<Text style={{fontSize:20,marginLeft:15,fontFamily:'FZZongYi-M05S',}}>
+							<Text style={{fontSize:20,
+														marginLeft:15,
+														fontFamily:'FZZongYi-M05S',}}
+										allowFontScaling={false}>
 								Other
 							</Text>
 						</View>
@@ -367,10 +376,12 @@ export default class CmEatAddress extends Component {
   							</TouchableOpacity>
   						</View>
   					</View>
-  					<Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}>
+  					<Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
+									allowFontScaling={false}>
   						{address.name} {this._formatPhoneNumber(address.tel)}
   					</Text>
-  					<Text style={{fontFamily:'FZZhunYuan-M02S',}}>
+  					<Text style={{fontFamily:'FZZhunYuan-M02S',}}
+									allowFontScaling={false}>
   						{apt_no}{address.addr}
   					</Text>
   					{selectedIcon()}
@@ -444,7 +455,8 @@ export default class CmEatAddress extends Component {
 											marginBottom: 5,
 											fontSize: 16,
 											fontFamily:'FZZhunYuan-M02S',
-											color: '#A5A5A5',}}>{CMLabel.getCNLabel('CHOOSE')}: </Text>
+											color: '#A5A5A5',}}
+							allowFontScaling={false}>{CMLabel.getCNLabel('CHOOSE')}: </Text>
 
         {predictionList}
       </ScrollView>
@@ -480,14 +492,16 @@ export default class CmEatAddress extends Component {
 								<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
 										<Image style={{width:22.5,height:30, marginLeft: 3.75, marginRight: 3.75}}
 													source={require('./Image/icon_address.png')}/>
-										<Text style={{fontSize:20,marginLeft:15,fontFamily:'FZZongYi-M05S',}}>
+										<Text style={{fontSize:20,marginLeft:15,fontFamily:'FZZongYi-M05S',}}
+													allowFontScaling={false}>
 											Current Location
 										</Text>
 								</View>
 								<View style={{flex:0.1,flexDirection:"row",alignItems:"flex-end",justifyContent:"flex-end"}}>
 								</View>
 						</View>
-						<Text style={{fontFamily:'FZZhunYuan-M02S',marginLeft: 3.75,}}>
+						<Text style={{fontFamily:'FZZhunYuan-M02S',marginLeft: 3.75,}}
+									allowFontScaling={false}>
 							{this.state.currentLocation}
 						</Text>
 				</TouchableOpacity>
@@ -517,7 +531,8 @@ export default class CmEatAddress extends Component {
       <TouchableOpacity style={styles.button}
                         activeOpacity={0.4}
                         onPress={this._handleConfirm}>
-            <Text style={styles.buttonText}>
+            <Text style={styles.buttonText}
+									allowFontScaling={false}>
                {CMLabel.getCNLabel('CONFIRM')}
             </Text>
       </TouchableOpacity>
@@ -534,7 +549,8 @@ export default class CmEatAddress extends Component {
                                 }}
                         activeOpacity={0.4}
                         onPress={this._handleConfirm}>
-            <Text style={styles.buttonText}>
+            <Text style={styles.buttonText}
+									allowFontScaling={false}>
 							{CMLabel.getCNLabel('CONFIRM')}
             </Text>
       </TouchableOpacity>

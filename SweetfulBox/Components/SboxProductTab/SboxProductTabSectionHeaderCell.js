@@ -26,8 +26,9 @@ export default class SboxProductTabSectionHeaderCell extends Component {
             width: 25
           }}/>
         <Text style={[
-            styles.text, (this.props.currentIndex == this.props.index) && styles.activatedText
-          ]}>
+                      styles.text, (this.props.currentIndex == this.props.index) && styles.activatedText
+                    ]}
+              allowFontScaling={false}>
           {this.props.name}
         </Text>
       </TouchableOpacity>

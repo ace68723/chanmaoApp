@@ -175,7 +175,8 @@ export default class CmEatAddInfo extends Component {
                             marginRight:5,
                             padding:5
                           }}>
-                <Text style={{color:type.textColor,fontFamily:'FZZhunYuan-M02S',}}>
+                <Text style={{color:type.textColor,fontFamily:'FZZhunYuan-M02S',}}
+											allowFontScaling={false}>
                   {type.text}
                 </Text>
               </View>
@@ -209,7 +210,8 @@ export default class CmEatAddInfo extends Component {
                         style={styles.scrollView}>
                 <View style={styles.inputForm}>
                     <View style={styles.addressBox}>
-                      <Text style={styles.inputText}>
+                      <Text style={styles.inputText}
+														allowFontScaling={false}>
                         {this.state.formattedAddress.address}
                       </Text>
                     </View>
@@ -222,7 +224,8 @@ export default class CmEatAddInfo extends Component {
 																								height:28,
 																								transform: [{rotate: interpolatedRotateAnimation}]}}/>
 												<Animated.View style={{flexDirection:"column",flex:1,marginTop:interpolatedMarginTop}}>
-														<Text style={{marginLeft:10,marginTop:12,fontFamily:'FZZhunYuan-M02S',}}>
+														<Text style={{marginLeft:10,marginTop:12,fontFamily:'FZZhunYuan-M02S',}}
+																	allowFontScaling={false}>
 															{CMLabel.getCNLabel('ADD_DEFAULT_ADDRESS')}
 														</Text>
 														{this._renderChooseType()}
@@ -232,7 +235,8 @@ export default class CmEatAddInfo extends Component {
 										</TouchableWithoutFeedback>
 										<View style= {styles.separator}/>
                     <View style={styles.inputBox}>
-                      <Text style={styles.inputText}>
+                      <Text style={styles.inputText}
+														allowFontScaling={false}>
                         {CMLabel.getCNLabel('CONTACT')}:
                       </Text>
                         <TextInput
@@ -250,7 +254,8 @@ export default class CmEatAddInfo extends Component {
                     </View>
                     <View style= {styles.separator}/>
                     <View style={styles.inputBox}>
-                      <Text style={styles.inputText}>
+                      <Text style={styles.inputText}
+														allowFontScaling={false}>
                         {CMLabel.getCNLabel('PHONE')}: ＋1:
                       </Text>
                       <TextInput
@@ -268,7 +273,8 @@ export default class CmEatAddInfo extends Component {
                     </View>
                     <View style= {styles.separator}/>
                     <View style={styles.inputBox}>
-                      <Text style={styles.inputText}>
+                      <Text style={styles.inputText}
+														allowFontScaling={false}>
                         Unit / Apt No:
                       </Text>
                       <TextInput
@@ -284,7 +290,8 @@ export default class CmEatAddInfo extends Component {
                     </View>
                     <View style= {styles.separator}/>
                     <View style={styles.inputBox}>
-                      <Text style={styles.inputText}>
+                      <Text style={styles.inputText}
+														allowFontScaling={false}>
                           Buzz Code:
                       </Text>
                       <TextInput
@@ -311,7 +318,8 @@ export default class CmEatAddInfo extends Component {
                     <TouchableOpacity  style={styles.button}
                                        activeOpacity={0.7}
                                        onPress={this._submitAddress}>
-                        <Text style={ styles.buttonText }>{CMLabel.getCNLabel('ADD_ADDRESS')} </Text>
+                        <Text style={ styles.buttonText }
+															allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')} </Text>
                     </TouchableOpacity>
                </View>
 

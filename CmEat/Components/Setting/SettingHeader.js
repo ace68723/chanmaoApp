@@ -11,7 +11,8 @@ import CMLabel from '../../Constants/AppLabel';
 export default (props) =>{
         return (
           <View style={styles.container}>
-              <Text style={styles.title}>
+              <Text style={styles.title}
+                    allowFontScaling={false}>
                 {CMLabel.getCNLabel('SETTING')}
               </Text>
           </View>

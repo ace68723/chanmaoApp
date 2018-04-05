@@ -26,7 +26,8 @@ export default class NumKey extends Component{
         const value = i+1;
         allKeys.push(
             <TouchableHighlight key={i} style={styles.keyStyle} underlayColor="#f2f2f2" onPress={()=>{this.props.inputFunc(value)}}>
-              <Text style={styles.keyFont}>{i+1}</Text>
+              <Text style={styles.keyFont}
+                    allowFontScaling={false}>{i+1}</Text>
             </TouchableHighlight>
         );
       }
@@ -36,7 +37,8 @@ export default class NumKey extends Component{
       );
       allKeys.push(
         <TouchableHighlight key={10} style={styles.keyStyle} underlayColor="#f2f2f2" onPress={()=>{this.props.inputFunc(0)}}>
-          <Text style={styles.keyFont}>0</Text>
+          <Text style={styles.keyFont}
+                allowFontScaling={false}>0</Text>
         </TouchableHighlight>
       );
       allKeys.push(

@@ -25,7 +25,7 @@ export default class SboxHomeAlert extends Component {
   }
   render() {
     return (
-      <View style={{flex:1, alignItems:'center',justifyContent:'center'}}>  
+      <View style={{flex:1, alignItems:'center',justifyContent:'center'}}>
         <View style={styles.container}>
           <Image source={require('./Image/popup.png')}
                  style={{width:width*0.7,height:width*0.7/4}}
@@ -58,11 +58,10 @@ export default class SboxHomeAlert extends Component {
                           alignItems:'center',
                           justifyContent:'center',
                           }}>
-                <Text style={{
-                  color:'#ffffff',
-                  fontSize:18,
-                  fontFamily:'FZZhunYuan-M02S',
-                }}>
+                <Text style={{color:'#ffffff',
+                              fontSize:18,
+                              fontFamily:'FZZhunYuan-M02S'}}
+                      allowFontScaling={false}>
                   确认
                 </Text>
             </View>

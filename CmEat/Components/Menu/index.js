@@ -275,7 +275,11 @@ class Menu extends Component {
 														alignItems:"center",
 														justifyContent:"center",
 													}}>
-								<Text style={{color:"#ffffff",fontSize:16,margin:3,fontFamily:'FZZongYi-M05S',}}>
+								<Text style={{color:"#ffffff",
+															fontSize:16,
+															margin:3,
+															fontFamily:'FZZongYi-M05S',}}
+											allowFontScaling={false}>
 										${this.state.cartTotals.total}
 								</Text>
 								<View style={{margin:3,
@@ -286,7 +290,12 @@ class Menu extends Component {
 															paddingTop:2,
 															paddingBottom:2,
 															borderColor:"#ffffff"}}>
-									<Text  style={{color:"#ffffff",fontSize:13,fontFamily:'FZZongYi-M05S',}}>去结账</Text>
+									<Text  style={{color:"#ffffff",
+																 fontSize:13,
+																 fontFamily:'FZZongYi-M05S',}}
+												 allowFontScaling={false}>
+												 去结账
+									</Text>
 								</View>
 
 							</TouchableOpacity>
@@ -317,7 +326,11 @@ class Menu extends Component {
                                     left:0,}}
                             onPress={this._closeMenuAnimation}>
             <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
-              <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
+              <Text style={{fontSize:25,
+														textAlign:"center",
+														color:"#ffffff",
+														marginTop:-2}}
+										allowFontScaling={false}>
                 ×
               </Text>
             </View>

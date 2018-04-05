@@ -233,7 +233,8 @@ export default class LogoAnimationView extends Component {
 																			backgroundColor:'rgba(151,151,151,0.5)',
 																			borderRadius:5}}
 															onPress={this._closeAd}>
-							<Text style={{color:'#ffffff',fontSize:16,fontWeight:'600'}}>
+							<Text style={{color:'#ffffff',fontSize:16,fontWeight:'600'}}
+										allowFontScaling={false}>
 								跳过
 							</Text>
 						</TouchableOpacity>

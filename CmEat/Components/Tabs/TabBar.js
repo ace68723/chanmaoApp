@@ -111,7 +111,11 @@ class DefaultTabBar extends Component {
             >
               <View style={[styles.tab, this.props.tabStyle, ]}>
                 <Icon style={{top:5, marginTop: iconMarginTop}} name={iconName} size={iconSize} color={textColor} />
-                <Text style={[{color: textColor, fontWeight, marginTop: textMarginTop}, textStyle, ]}>
+                <Text style={[{color: textColor,
+                               fontWeight,
+                               marginTop: textMarginTop},
+                               textStyle, ]}
+                      allowFontScaling={false}>
                   {name}
                 </Text>
               </View>

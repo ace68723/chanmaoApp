@@ -61,11 +61,13 @@ export default class TabBar extends Component {
                       justifyContent: 'center',
                       alignItems: 'center',}}
                     source={iconImage}>
-                <Text style={{backgroundColor:'rgba(0,0,0,0)',height: 13.5, fontFamily:'FZZhunYuan-M02S',}}>
+                <Text style={{backgroundColor:'rgba(0,0,0,0)',height: 13.5, fontFamily:'FZZhunYuan-M02S',}}
+                      allowFontScaling={false}>
                   {iconText}
                 </Text>
           </ImageBackground>
-          <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+          <Text style={[{color: textColor, fontWeight, }, textStyle, ]}
+                allowFontScaling={false}>
             {name}
           </Text>
         </View>

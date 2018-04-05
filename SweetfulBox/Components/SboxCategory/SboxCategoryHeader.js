@@ -63,7 +63,8 @@ export default class SboxCategoryHeader extends Component {
 
         </View>
         <TouchableOpacity>
-          <Text style={styles.cancle}>取消</Text>
+          <Text style={styles.cancle}
+                allowFontScaling={false}>取消</Text>
         </TouchableOpacity>
       </View>
     );

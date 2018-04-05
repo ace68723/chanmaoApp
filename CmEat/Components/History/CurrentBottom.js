@@ -17,33 +17,39 @@ const createdTime = moment(props.created).format('h:mm:ss a');
           <View style={styles.row}>
             <View style={styles.col}>
 
-                <Text style={styles.title}>
+                <Text style={styles.title}
+                      allowFontScaling={false}>
                   Customer:
                 </Text>
 
-                <Text style={styles.description}>
+                <Text style={styles.description}
+                      allowFontScaling={false}>
                   {props.username}
                 </Text>
 
             </View>
             <View style={styles.col}>
 
-                <Text style={styles.title}>
+                <Text style={styles.title}
+                      allowFontScaling={false}>
                   Order Id:
                 </Text>
 
-                <Text style={styles.description}>
+                <Text style={styles.description}
+                      allowFontScaling={false}>
                   {props.orderId}
                 </Text>
 
             </View>
             <View style={styles.col}>
 
-                <Text style={styles.title}>
+                <Text style={styles.title}
+                      allowFontScaling={false}>
                   Total:
                 </Text>
 
-                <Text style={styles.description}>
+                <Text style={styles.description}
+                      allowFontScaling={false}>
                   ${props.total}
                 </Text>
 
@@ -52,18 +58,22 @@ const createdTime = moment(props.created).format('h:mm:ss a');
 
           <View style={[styles.row,{marginTop:10}]}>
           <View style={styles.col}>
-            <Text style={styles.title}>
+            <Text style={styles.title}
+                  allowFontScaling={false}>
               下单时间
             </Text>
-            <Text style={styles.title}>
+            <Text style={styles.title}
+                  allowFontScaling={false}>
                {createdTime}
             </Text>
           </View>
            <View style={[styles.col]}>
-            <Text style={styles.title}>
+            <Text style={styles.title}
+                  allowFontScaling={false}>
                微信客服公众号
              </Text>
-             <Text style={[styles.title,{fontWeight:"700",fontFamily:'FZZhunYuan-M02S',}]}>
+             <Text style={[styles.title,{fontWeight:"700",fontFamily:'FZZhunYuan-M02S',}]}
+                   allowFontScaling={false}>
                 chanmaoweixin
               </Text>
            </View>
@@ -74,7 +84,8 @@ const createdTime = moment(props.created).format('h:mm:ss a');
                      onPress={() => {
                         props.HistoryOrderDetailVisible(props.orderId)
                      }}>
-                    <Text style={styles.buttonText}>
+                    <Text style={styles.buttonText}
+                          allowFontScaling={false}>
                         查看订单
                     </Text>
                   </TouchableOpacity>
@@ -83,7 +94,8 @@ const createdTime = moment(props.created).format('h:mm:ss a');
 
 
 
-          <Text style={[styles.title,{textAlign:'center',marginTop:10,fontSize:11,fontFamily:'FZZhunYuan-M02S',}]}>
+          <Text style={[styles.title,{textAlign:'center',marginTop:10,fontSize:11,fontFamily:'FZZhunYuan-M02S',}]}
+                allowFontScaling={false}>
            *订单配送时长会因商家、交通和天气原因造成部分延迟,请您见谅
           </Text>
 

@@ -145,8 +145,10 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
               {this._renderProductImage(order)}
             </View>
             <View>
-              <Text style={styles.itemName}>{name} x {amount}</Text>
-              <Text style={styles.itemPrice}>${price}</Text>
+              <Text style={styles.itemName}
+                    allowFontScaling={false}>{name} x {amount}</Text>
+              <Text style={styles.itemPrice}
+                    allowFontScaling={false}>${price}</Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -166,8 +168,10 @@ _renderProduct(itemObject) {
           {this._renderProductImage(item)}
         </View>
         <View>
-          <Text style={styles.itemName}>{item.sku_fullname} x {item.sku_quantity}</Text>
-          <Text style={styles.itemPrice}>${item.sku_price}</Text>
+          <Text style={styles.itemName}
+                allowFontScaling={false}>{item.sku_fullname} x {item.sku_quantity}</Text>
+          <Text style={styles.itemPrice}
+                allowFontScaling={false}>${item.sku_price}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -185,15 +189,18 @@ _renderUserInfo() {
     >
       <View style={styles.info}>
         <Image style={styles.userImage} source={require('./img/name.png')}/>
-        <Text style={styles.userText}>{this.props.orderDetail.addr.name}</Text>
+        <Text style={styles.userText}
+              allowFontScaling={false}>{this.props.orderDetail.addr.name}</Text>
       </View>
       <View style={styles.info}>
         <Image style={styles.userImage} source={require('./img/phoneNum.png')}/>
-        <Text style={styles.userText}>{this.props.orderDetail.addr.tel}</Text>
+        <Text style={styles.userText}
+              allowFontScaling={false}>{this.props.orderDetail.addr.tel}</Text>
       </View>
       <View style={styles.info}>
         <Image style={styles.userImage} source={require('./img/address.png')}/>
-        <Text style={styles.userText}>{this.props.orderDetail.addr.addr}</Text>
+        <Text style={styles.userText}
+              allowFontScaling={false}>{this.props.orderDetail.addr.addr}</Text>
       </View>
     </View>
   );
@@ -204,8 +211,10 @@ _renderUserInfo() {
       <ScrollView >
         <View style={styles.content}>
           <View style={styles.orderDetails}>
-            <Text style={styles.orderFont}>订单号：#{this.props.orderDetail.obid}</Text>
-            <Text style={styles.orderFont}>{this.props.orderDetail.created_date}</Text>
+            <Text style={styles.orderFont}
+                  allowFontScaling={false}>订单号：#{this.props.orderDetail.obid}</Text>
+            <Text style={styles.orderFont}
+                  allowFontScaling={false}>{this.props.orderDetail.created_date}</Text>
           </View>
           <FlatList
             data={this.props.orderDetail.prod}
@@ -217,12 +226,15 @@ _renderUserInfo() {
           {this._renderUserInfo()}
 
           <View style={styles.extraFee}>
-            <Text style={styles.extraFeeText}>Delivery Fee: ${this.props.orderDetail.delifee}</Text>
-            <Text style={styles.extraFeeText} >Tax: ${this.props.orderDetail.tax}</Text>
+            <Text style={styles.extraFeeText}
+                  allowFontScaling={false}>Delivery Fee: ${this.props.orderDetail.delifee}</Text>
+            <Text style={styles.extraFeeText}
+                  allowFontScaling={false}>Tax: ${this.props.orderDetail.tax}</Text>
           </View>
 
           <View style={styles.total}>
-            <Text style={styles.totalText}>Total: ${this.props.orderDetail.total}</Text>
+            <Text style={styles.totalText}
+                  allowFontScaling={false}>Total: ${this.props.orderDetail.total}</Text>
           </View>
         </View>
       </ScrollView>

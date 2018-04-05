@@ -11,7 +11,8 @@ export default (props) => {
     return(
         <TouchableHighlight style={ styles.button }
                             onPress= { props.handler } >
-            <Text style={ styles.buttonText }>{ props.txt } </Text>
+            <Text style={ styles.buttonText }
+                  allowFontScaling={false}>{ props.txt } </Text>
         </TouchableHighlight>
     )
 }

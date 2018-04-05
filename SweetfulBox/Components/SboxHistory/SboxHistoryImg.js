@@ -23,7 +23,6 @@ class imgPreview extends Component {
 		}
 	}
   _renderProductImage(){
-    console.log('is', this.props.isAvailable);
     if (this.props.isAvailable === true) {
       return(
         <Image ref={(imageView) => { imgRef = imageView; }}

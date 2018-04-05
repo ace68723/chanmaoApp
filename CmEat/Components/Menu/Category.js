@@ -137,12 +137,19 @@ export default class Category extends Component {
                                           flex:1,}}>
               <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
                 <Text
-                  style={{flex:0.8,color:'black',fontFamily:'FZZhunYuan-M02S',fontSize:16,}}>
+                  style={{flex:0.8,
+                          color:'black',
+                          fontFamily:'FZZhunYuan-M02S',fontSize:16}}
+                  allowFontScaling={false}>
                   {category.category_name}
                 </Text>
                 <View style={{flex:0.2,alignItems:'flex-end'}}>
                   <Text
-                    style={{color:'black',fontFamily:'FZZhunYuan-M02S',fontSize:16,color:'#808080'}}>
+                    style={{color:'black',
+                            fontFamily:'FZZhunYuan-M02S',
+                            fontSize:16,
+                            color:'#808080'}}
+                    allowFontScaling={false}>
                       {category.dishAmount - 1}
                   </Text>
                 </View>

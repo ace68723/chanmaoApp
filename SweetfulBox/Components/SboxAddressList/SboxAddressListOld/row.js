@@ -45,7 +45,8 @@ class Row extends Component {
 	        </View>
 
 	        <View style={styles.textWrap}>
-	          <Text style={{textAlign:'left', fontSize: 16}}>{locationText}</Text>
+	          <Text style={{textAlign:'left', fontSize: 16}}
+									allowFontScaling={false}>{locationText}</Text>
 	        </View>
 
 

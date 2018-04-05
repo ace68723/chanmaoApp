@@ -42,7 +42,11 @@ export default class MyComponent extends Component {
                           marginLeft:10,
                           borderRadius:15,
                           backgroundColor:"rgba(0,0,0,0.4)"}}>
-                <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
+                <Text style={{fontSize:25,
+                              textAlign:"center",
+                              color:"#ffffff",
+                              marginTop:-2}}
+                      allowFontScaling={false}>
                   ×
                 </Text>
             </View>
@@ -73,7 +77,8 @@ export default class MyComponent extends Component {
                             fontSize:20,
                             fontWeight: '700',
                             marginBottom:10,}}
-                     numberOfLines={1}>
+                     numberOfLines={1}
+                     allowFontScaling={false}>
                             {this.props.title}
               </Text>
           </View>

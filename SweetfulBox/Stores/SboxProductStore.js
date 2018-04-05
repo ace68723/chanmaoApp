@@ -49,7 +49,6 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
 
   updateSingleProduct(data){
     const selectedPage = findIndex(data.sku_list,{sku_id: data.sku_id});
-    console.log(selectedPage)
     if(selectedPage === -1) {
       const { sku_fact,
         sku_image,

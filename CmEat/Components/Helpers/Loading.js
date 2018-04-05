@@ -20,7 +20,7 @@ export default (props) =>{
 				  <View style={styles.mainContainer}>
 					  <View style={styles.gifBox}>
 
-						  <Text >快到碗里来 </Text>
+						  <Text allowFontScaling={false}>快到碗里来 </Text>
 					  </View>
 				  </View>
 			  </Modal>

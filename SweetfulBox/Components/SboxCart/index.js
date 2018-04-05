@@ -140,7 +140,8 @@ export default class SboxCart extends Component {
                             height: 30,
                             width: 30,
                             borderWidth: 1,}}>
-                <Text style={{fontSize:20}}>-</Text>
+                <Text style={{fontSize:20}}
+                      allowFontScaling={false}>-</Text>
               </View>
 
             </TouchableOpacity>
@@ -152,7 +153,8 @@ export default class SboxCart extends Component {
                           alignItems:'center',
                         }}>
               <Text style={{ fontSize:18,
-                             color: '#ff7685'}}>
+                             color: '#ff7685'}}
+                    allowFontScaling={false}>
                 {item.sku_quantity}
               </Text>
             </View>
@@ -164,7 +166,8 @@ export default class SboxCart extends Component {
                             height: 30,
                             width: 30,
                             borderWidth: 1,}}>
-                <Text style={{fontSize:20}}>+</Text>
+                <Text style={{fontSize:20}}
+                      allowFontScaling={false}>+</Text>
               </View>
             </TouchableOpacity>
 
@@ -176,7 +179,8 @@ export default class SboxCart extends Component {
             <Text style={{backgroundColor: "#ff7685",
                           width: 90,
                           textAlign: "center",
-                          color: "white"}}>Sold Out</Text>
+                          color: "white"}}
+                  allowFontScaling={false}>Sold Out</Text>
           </View>
         )
       }
@@ -216,9 +220,8 @@ export default class SboxCart extends Component {
           <View style={{flex:0.7,paddingRight:10,}}>
             <Text numberOfLines={2}
                   style={{fontSize:15,
-                          fontFamily:'FZZhunYuan-M02S',
-
-                        }}>
+                          fontFamily:'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
                 {spu_name}
             </Text>
             <Text numberOfLines={1}
@@ -226,14 +229,16 @@ export default class SboxCart extends Component {
                           fontFamily:'FZZhunYuan-M02S',
                           marginTop:10,
                           color:"#6d6e71",
-                        }}>
+                        }}
+                  allowFontScaling={false}>
                 {sku_name}
             </Text>
             {this._renderButton(item)}
           </View>
           <View style={{flex:0.3, justifyContent: 'space-between', flexDirection: 'column'}}>
-            <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}>
-            ${sku_price}
+            <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}
+                  allowFontScaling={false}>
+                  ${sku_price}
             </Text>
             <TouchableOpacity
               activeOpacity={0.4}
@@ -264,22 +269,20 @@ export default class SboxCart extends Component {
                           paddingLeft:20,
                           paddingRight:20,
                           backgroundColor: 'white'}}>
-              <Text style={{
-                flex:0.7,
-                color:'#ff7685',
-                fontSize:20,
-                fontFamily:'FZZhunYuan-M02S',
-                textAlign:'left',
-              }}>
+              <Text style={{flex:0.7,
+                            color:'#ff7685',
+                            fontSize:20,
+                            fontFamily:'FZZhunYuan-M02S',
+                            textAlign:'left'}}
+                    allowFontScaling={false}>
                   Before Tax: ${Number(this.state.total).toFixed(2)}
               </Text>
-              <Text style={{
-                flex:0.3,
-                color:'#ff7685',
-                fontSize:20,
-                fontFamily:'FZZhunYuan-M02S',
-                textAlign:'right',
-              }}>
+              <Text style={{flex:0.3,
+                            color:'#ff7685',
+                            fontSize:20,
+                            fontFamily:'FZZhunYuan-M02S',
+                            textAlign:'right'}}
+                    allowFontScaling={false}>
                    {this.state.totalQuantity}件
               </Text>
             </View>
@@ -296,10 +299,10 @@ export default class SboxCart extends Component {
                             backgroundColor: this.state.canCheckout?'#ff7685': 'grey',
                           }}>
 
-                  <Text style={{
-                    color:'#ffffff',
-                    fontSize:20,
-                    fontFamily:'FZZhunYuan-M02S',}}>
+                  <Text style={{color:'#ffffff',
+                                fontSize:20,
+                                fontFamily:'FZZhunYuan-M02S',}}
+                        allowFontScaling={false}>
                        {this.state.checkoutFont}
                   </Text>
 

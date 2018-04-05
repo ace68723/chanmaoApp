@@ -223,14 +223,20 @@ class HistoryTab extends Component {
 					<TouchableOpacity
 						style={{flex: 1, padding: 20}}
 						onPress={() => this.setState({renderingPage: 0})}>
-						<Text style={{textAlign: 'center', color: firstFilterColor, fontFamily:'FZZhunYuan-M02S'}}>
+						<Text style={{textAlign: 'center',
+													color: firstFilterColor,
+													fontFamily:'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
 							{CMLabel.getCNLabel('ALL_ORDER')}
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={{flex: 1, padding: 20}}
 						onPress={() => this.setState({renderingPage: 1})}>
-						<Text style={{textAlign: 'center', color: secondFilterColor, fontFamily:'FZZhunYuan-M02S'}}>
+						<Text style={{textAlign: 'center',
+													color: secondFilterColor,
+													fontFamily:'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
 							{CMLabel.getCNLabel('YET_COMMENT')}
 						</Text>
 					</TouchableOpacity>
@@ -297,7 +303,11 @@ class HistoryTab extends Component {
 	                                     left:0,}}
 	                             onPress={this._goBack}>
 	             <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
-	               <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
+	               <Text style={{fontSize:25,
+									 						 textAlign:"center",
+									 						 color:"#ffffff",
+									 						 marginTop:-2}}
+											 allowFontScaling={false}>
 	                 ×
 	               </Text>
 	             </View>

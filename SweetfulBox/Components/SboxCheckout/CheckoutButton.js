@@ -40,11 +40,10 @@ export default class CheckoutButton extends Component {
           <View style={{flex:1,
                         alignItems:'center',
                         justifyContent:'center',}}>
-              <Text style={{
-                color:'#ffffff',
-                fontSize:20,
-                fontFamily:'FZZhunYuan-M02S',
-              }}>
+              <Text style={{color:'#ffffff',
+                            fontSize:20,
+                            fontFamily:'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
                 添加配送地址
               </Text>
           </View>
@@ -64,11 +63,10 @@ export default class CheckoutButton extends Component {
           <View style={{flex:1,
                         alignItems:'center',
                         justifyContent:'center',}}>
-              <Text style={{
-                color:'#ffffff',
-                fontSize:20,
-                fontFamily:'FZZhunYuan-M02S',
-              }}>
+              <Text style={{color:'#ffffff',
+                            fontSize:20,
+                            fontFamily:'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
                 添加支付方式
               </Text>
           </View>
@@ -88,11 +86,10 @@ export default class CheckoutButton extends Component {
         <View style={{flex:1,
                       alignItems:'center',
                       justifyContent:'center',}}>
-            <Text style={{
-              color:'#ffffff',
-              fontSize:20,
-              fontFamily:'FZZhunYuan-M02S',
-            }}>
+            <Text style={{color:'#ffffff',
+                          fontSize:20,
+                          fontFamily:'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
               确认下单
             </Text>
         </View>

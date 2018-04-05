@@ -48,7 +48,10 @@ export default class TabBar extends Component {
         key={page}
         style={{flex: 1, padding: 15}}
         onPress={() => this.props.goToPage(page)}>
-        <Text style={{textAlign: 'center', color: textColor, fontFamily:'FZZhunYuan-M02S'}}>
+        <Text style={{textAlign: 'center',
+                      color: textColor,
+                      fontFamily:'FZZhunYuan-M02S'}}
+              allowFontScaling={false}>
           {name}
         </Text>
       </TouchableOpacity>

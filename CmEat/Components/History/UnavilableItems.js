@@ -26,13 +26,15 @@ export default (props) => {
     <TouchableOpacity style={styles.unavilableButton}
                       activeOpacity={0.4}
                       onPress={reorder}>
-        <Text style={styles.unavilableText}>
+        <Text style={styles.unavilableText}
+              allowFontScaling={false}>
            保留已点菜品，继续点餐
         </Text>
     </TouchableOpacity>
     return(
       <View style={{flex:1}}>
-        <Text style={[styles.unavilableText,{fontSize:14}]}>
+        <Text style={[styles.unavilableText,{fontSize:14}]}
+              allowFontScaling={false}>
           以下菜品没有啦
         </Text>
         {unavailableList}

@@ -30,14 +30,14 @@ class Row extends Component {
 
 		return (
 			<TouchableOpacity
-        onPressIn={()=>{console.log('here')}}
         onPress={() => (this.props.onselected(this.props.selected))}>
 				<View style={[styles.container,
                       selected && styles.selected,
 					            {paddingTop:15,paddingBottom:15}]}>
 
 	        <View style={styles.textWrap}>
-	          <Text style={{textAlign:'left', fontSize: 16}}>{locationText}</Text>
+	          <Text style={{textAlign:'left', fontSize: 16}}
+									allowFontScaling={false}>{locationText}</Text>
 	        </View>
 
 				</View>

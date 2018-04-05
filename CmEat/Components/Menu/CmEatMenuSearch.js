@@ -190,7 +190,8 @@ export default class CmEatMenuSearch extends Component {
 				<TouchableOpacity
 						style={{flex:0.1}}
 						onPress={()=>this._goBack()}>
-					<Text style={{fontSize:40}}>×</Text>
+					<Text style={{fontSize:40}}
+								allowFontScaling={false}>×</Text>
 				</TouchableOpacity>
 			</View>
 		)
@@ -221,7 +222,12 @@ export default class CmEatMenuSearch extends Component {
 							alignSelf:'center',
 							marginTop:100
 							}}>
-					<Text style={{fontSize:16,margin:3,fontFamily:'FZZongYi-M05S'}}>找不到关于 "{this.state.searchText}" 的东西哦</Text>
+					<Text style={{fontSize:16,
+												margin:3,
+												fontFamily:'FZZongYi-M05S'}}
+								allowFontScaling={false}>
+								找不到关于 "{this.state.searchText}" 的东西哦
+					</Text>
 				</View>
 			)
 		}
@@ -229,7 +235,7 @@ export default class CmEatMenuSearch extends Component {
 	}
 	render(){
 		return(
-			<KeyboardAvoidingView 
+			<KeyboardAvoidingView
 						style={{flex:1,backgroundColor:"#ffffff"}}
 						behavior={Platform.OS === 'ios'?"padding":null}
 						>
@@ -242,7 +248,13 @@ export default class CmEatMenuSearch extends Component {
 							alignItems:"center",
 												justifyContent:"center",
 						}}>
-					<Text style={{color:"#ffffff",fontSize:16,margin:3,fontFamily:'FZZongYi-M05S',}}>${this.state.cartTotals.total}</Text>
+					<Text style={{color:"#ffffff",
+												fontSize:16,
+												margin:3,
+												fontFamily:'FZZongYi-M05S',}}
+								allowFontScaling={false}>
+								${this.state.cartTotals.total}
+					</Text>
 					<View style={{margin:3,
 								borderRadius:15,
 								borderWidth:1,
@@ -251,14 +263,19 @@ export default class CmEatMenuSearch extends Component {
 								paddingTop:2,
 								paddingBottom:2,
 								borderColor:"#ffffff"}}>
-						<Text  style={{color:"#ffffff",fontSize:13,fontFamily:'FZZongYi-M05S',}}>{CMLabel.getCNLabel('GO_CHECKOUT')}</Text>
+						<Text style={{color:"#ffffff",
+													fontSize:13,
+													fontFamily:'FZZongYi-M05S',}}
+									allowFontScaling={false}>
+									{CMLabel.getCNLabel('GO_CHECKOUT')}
+						</Text>
 					</View>
 
 				</TouchableOpacity>
-				{this._renderResultList()}		
+				{this._renderResultList()}
 
 			</KeyboardAvoidingView>
-		
+
 
 		)
 	}

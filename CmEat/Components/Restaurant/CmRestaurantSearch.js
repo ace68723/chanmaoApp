@@ -146,9 +146,9 @@ export default class CmRestaurantSearch extends Component {
 						<TouchableOpacity
 						style={{marginRight: 20, marginTop: marginTop}}
 						onPress={()=>this._cleanInput()}>
-						<Text style={{
-								fontSize: 16,
-								backgroundColor: 'white'}}>取消</Text>
+						<Text style={{fontSize: 16,
+													backgroundColor: 'white'}}
+								allowFontScaling={false}>取消</Text>
 					</TouchableOpacity>
 					}
 			</View>
@@ -190,7 +190,9 @@ export default class CmRestaurantSearch extends Component {
   _renderAreasHeader() {
     return(
       <View style={{padding:10,paddingTop:20,paddingBottom:0}}>
-        <Text style={{fontSize:18,fontFamily:"FZZhunYuan-M02S"}}>
+        <Text style={{fontSize:18,
+											fontFamily:"FZZhunYuan-M02S"}}
+							allowFontScaling={false}>
           {CMLabel.getCNLabel('CITY_AREA')}
         </Text>
       </View>
@@ -214,12 +216,11 @@ export default class CmRestaurantSearch extends Component {
   						alignItems:'center',
   						justifyContent:'center',
   						}}>
-  						<Text style={{
-                  backgroundColor:"rgba(0,0,0,0)",
-    							color:"#ffffff",
-                  fontSize:18,
-                  fontFamily:'FZZongYi-M05S',
-    						}}>
+  						<Text style={{backgroundColor:"rgba(0,0,0,0)",
+					    							color:"#ffffff",
+					                  fontSize:18,
+					                  fontFamily:'FZZongYi-M05S'}}
+									allowFontScaling={false}>
                 {area.name}
               </Text>
 					</ImageBackground>

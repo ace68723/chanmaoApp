@@ -264,22 +264,22 @@ export default class MyComponent extends Component {
           <View style={{flex:0.7,paddingRight:10,}}>
             <Text numberOfLines={2}
                   style={{fontSize:15,
-                          fontFamily:'FZZhunYuan-M02S',
-
-                        }}>
+                          fontFamily:'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
                 {spu_name}
             </Text>
             <Text numberOfLines={1}
                   style={{fontSize:12,
                           fontFamily:'FZZhunYuan-M02S',
                           marginTop:10,
-                          color:"#6d6e71",
-                        }}>
+                          color:"#6d6e71"}}
+                  allowFontScaling={false}>
                 {sku_name}
             </Text>
           </View>
           <View style={{flex:0.3, justifyContent: 'space-between', flexDirection: 'column'}}>
-            <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}>
+            <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}
+                  allowFontScaling={false}>
             ${sku_price} x {sku_quantity}
             </Text>
           </View>
@@ -302,11 +302,10 @@ export default class MyComponent extends Component {
             <Image source={require('./Img/address.png')}
                    style={{height:25*1.2264,width:25}}
             />
-            <Text style={{
-                    fontSize:20,
-                    fontFamily:'FZZhunYuan-M02S',
-                    marginLeft:20,
-                  }}>
+            <Text style={{fontSize:20,
+                          fontFamily:'FZZhunYuan-M02S',
+                          marginLeft:20,}}
+                  allowFontScaling={false}>
               请选择您的配送地址
             </Text>
           </View>
@@ -352,7 +351,9 @@ export default class MyComponent extends Component {
                     style={{width:33,height:20,}}
                     source={{uri:messageList[i].image}}
                   />
-                   <Text style={{fontSize:16,marginLeft:5}}>
+                   <Text style={{fontSize:16,
+                                 marginLeft:5}}
+                         allowFontScaling={false}>
                       {messageList[i].message}
                    </Text>
 
@@ -367,7 +368,8 @@ export default class MyComponent extends Component {
     if (this.state.deliFee>0) return (
       <View style={{flex:0.5,}}>
         <Text style={{fontSize:16,
-                      fontFamily:'FZZhunYuan-M02S',}}>
+                      fontFamily:'FZZhunYuan-M02S',}}
+              allowFontScaling={false}>
                 Delivery Fee: ${this.state.deliFee}
         </Text>
       </View>
@@ -377,7 +379,10 @@ export default class MyComponent extends Component {
   {
     if (this.state.ev_original_total) return (
       <Text style={{fontSize:16,
-                    fontFamily:'FZZhunYuan-M02S',color:'grey',textDecorationLine:'line-through'}}>
+                    fontFamily:'FZZhunYuan-M02S',
+                    color:'grey',
+                    textDecorationLine:'line-through'}}
+            allowFontScaling={false}>
           ({this.state.ev_original_total})
       </Text>
     )
@@ -399,9 +404,9 @@ export default class MyComponent extends Component {
     // console.log(this.state);
     let commentText = ()=>{
       if(this.state.comment){
-        return(	<Text>备注： {this.state.comment}</Text>)
+        return(	<Text allowFontScaling={false}>备注： {this.state.comment}</Text>)
       }else{
-        return(<Text style={{color:'#ababb0'}}>添加备注</Text>)
+        return(<Text style={{color:'#ababb0'}} allowFontScaling={false}>添加备注</Text>)
       }
     }
     return(
@@ -415,7 +420,8 @@ export default class MyComponent extends Component {
                         borderColor: '#DCDCDC',}}>
             <View style={{flex:0.3,}}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}>
+                            fontFamily:'FZZhunYuan-M02S',}}
+                    allowFontScaling={false}>
                     配送时间：
               </Text>
             </View>
@@ -423,7 +429,8 @@ export default class MyComponent extends Component {
               <Text style={{fontSize:16,
                             // color:'#ff7685',
                             color: 'black',
-                            fontFamily:'FZZhunYuan-M02S',}}>
+                            fontFamily:'FZZhunYuan-M02S',}}
+                    allowFontScaling={false}>
                       两个工作日内{this.state.deliTime}
               </Text>
             </View>
@@ -437,13 +444,18 @@ export default class MyComponent extends Component {
             {this._renderDeliveryFee()}
             <View style={{flex:0.5, }}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}>
+                            fontFamily:'FZZhunYuan-M02S',}}
+                    allowFontScaling={false}>
                       Total:
                       <Text style={{fontSize:16,
-                                    fontFamily:'FZZhunYuan-M02S',color:'#ff7685'}}>
+                                    fontFamily:'FZZhunYuan-M02S',color:'#ff7685'}}
+                            allowFontScaling={false}>
                           ${this.state.total}
                           <Text style={{fontSize:16,
-                                        fontFamily:'FZZhunYuan-M02S',color:'grey',textDecorationLine:'line-through'}}>
+                                        fontFamily:'FZZhunYuan-M02S',
+                                        color:'grey',
+                                        textDecorationLine:'line-through'}}
+                                allowFontScaling={false}>
                               {this._renderOriginalPrice()}
                           </Text>
                       </Text>
@@ -460,13 +472,15 @@ export default class MyComponent extends Component {
                         borderColor: '#DCDCDC',}}>
             <View style={{flex:0.5,}}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}>
+                            fontFamily:'FZZhunYuan-M02S',}}
+                    allowFontScaling={false}>
                       支付方式  {this.state.cardBrand}
               </Text>
             </View>
             <View style={{flex:0.5, alignItems:'flex-end'}}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}>
+                            fontFamily:'FZZhunYuan-M02S',}}
+                    allowFontScaling={false}>
                       xxxx xxxx xxxx {this.state.last4}
               </Text>
             </View>
@@ -482,7 +496,8 @@ export default class MyComponent extends Component {
                         borderColor: '#DCDCDC',}}>
             <View style={{flex:1,}}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}>
+                            fontFamily:'FZZhunYuan-M02S',}}
+                    allowFontScaling={false}>
                       {commentText()}
               </Text>
             </View>

@@ -37,7 +37,10 @@ export default class MyComponent extends Component {
           paddingBottom: height * (68 / 2208),
           borderBottomWidth: 1,
           borderColor: '#DCDCDC',}}>
-        <Text style={styles.title}>{this.props.sectionParam.title}</Text>
+        <Text style={styles.title}
+              allowFontScaling={false}>
+              {this.props.sectionParam.title}
+        </Text>
         {this._renderOption()}
       </View>
     );

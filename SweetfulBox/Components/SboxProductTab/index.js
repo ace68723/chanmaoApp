@@ -109,8 +109,9 @@ export default class MyComponent extends Component {
              justifyContent:'center',
            }}>
            <Text style={{
-               fontWeight: 'bold',
-             }}>{item.section_name}
+                         fontWeight: 'bold',
+                       }}
+                 allowFontScaling={false}>{item.section_name}
            </Text>
           </View>
         );
@@ -144,7 +145,7 @@ export default class MyComponent extends Component {
         tar_index = Math.floor(counter / 3) - index + 1;
       }
     }
-    this._scrollVew.scrollToOffset({animated: true, offset: 190 + tar_index * 209 + (index - 1) * 30});
+    this._scrollVew.scrollToOffset({animated: true, offset: 200 + tar_index * 209 + (index - 1) * 30});
   }
   _renderHeaderSection(){
     if (!this.state.section_list){
