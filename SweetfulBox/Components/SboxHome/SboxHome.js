@@ -197,7 +197,7 @@ export default class SboxHome extends Component {
     const theme = this.state.themeList[0];
     return (
       <SboxProductTab
-        style={{ marginTop: -80}}
+        style={{ marginTop: -70}}
         tmid={theme.tmid}
         prod_list={theme.prod_list}
         section_list={theme.section_list}

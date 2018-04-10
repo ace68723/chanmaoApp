@@ -19,7 +19,8 @@ export default class GoBack extends Component {
                                 left:0,}}
                         onPress={this.props.goBack}>
         <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
-          <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}>
+          <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}
+                allowFontScaling={false}>
             ×
           </Text>
         </View>

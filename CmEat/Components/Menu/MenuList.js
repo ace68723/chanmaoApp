@@ -232,6 +232,12 @@ class Menu extends Component {
 				</View>
 			)
 		}
+		_renderFooter() {
+			return(
+				<View style={{height: 80}}>
+				</View>
+			)
+		}
 		_handleScroll( e: any) {
 			if(e.nativeEvent.contentOffset.y < 300){
 				this.state.anim.setValue(e.nativeEvent.contentOffset.y);
@@ -294,6 +300,7 @@ class Menu extends Component {
                   onScroll={this.props.handleScroll()}
                   style={this.props.style}
                   ListHeaderComponent={this._renderHeader}
+									ListFooterComponent={this._renderFooter}
                   data={this.state.menu}
                   renderItem={this._renderItem}
                   stickyHeaderIndices={[0]}

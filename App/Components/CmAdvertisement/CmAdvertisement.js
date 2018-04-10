@@ -105,10 +105,12 @@ export default class CmAdvertisement extends Component {
     if(this.state.addr){
       return(
         <View style={{alignItems:'center',justifyContent:'center',padding:10,marginBottom:0}}>
-          <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600'}}>
+          <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600'}}
+                allowFontScaling={false}>
             配送至
           </Text>
-          <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600',marginTop:10,}}>
+          <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600',marginTop:10,}}
+                allowFontScaling={false}>
             {this.state.addr}
           </Text>
         </View>
@@ -127,7 +129,8 @@ export default class CmAdvertisement extends Component {
                                     backgroundColor:'rgba(151,151,151,0.5)',
                                     borderRadius:5}}
                             onPress={this._closeAd}>
-            <Text style={{color:'#ffffff',fontSize:16,fontWeight:'600'}}>
+            <Text style={{color:'#ffffff',fontSize:16,fontWeight:'600'}}
+                  allowFontScaling={false}>
               跳过
             </Text>
           </TouchableOpacity>

@@ -19,6 +19,7 @@ import SecondMenuAction from '../../Actions/SecondMenuAction';
 import SecondMenuStore from '../../Stores/SecondMenuStore';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import OrderActions from '../../Actions/OrderAction';
+import CMLabel from '../../Constants/AppLabel';
 // import SboxHeader from '../../App/Components/General/SboxHeader';
 
 // const Icon = createIconSetFromIcoMoon(icoMoonConfig);
@@ -308,47 +309,60 @@ export default class SecondMenu extends Component {
 	_renderQtyButton() {
 		return (
 			<View style={{flexDirection: 'row',
-										width: 100,
-										justifyContent: 'space-between',
-										alignSelf: 'center',
-										borderRadius: 6,
-										borderWidth: 1,
-										paddingTop: 3,
-										paddingBottom: 3,
-										borderColor: '#ea7b21',
-										marginTop: 15}}>
-					<TouchableOpacity style={{}}
-														onPress={this._updateProductQty.bind(null,-1)}
-														activeOpacity={0.4}>
-							<Text style={{fontSize: 15,
-														paddingTop: 5,
-														paddingBottom: 5,
-														width: 30,
-														textAlign: 'center',
-														fontFamily:'FZZhunYuan-M02S'}}
-										allowFontScaling={false}>
-										-
-							</Text>
-					</TouchableOpacity>
-					<Text style={{paddingTop: 5,
-												paddingBottom: 5,
-												fontFamily:'FZZhunYuan-M02S'}}
+										marginTop: 15,
+										marginLeft: 20,
+										marginRight: 20,
+										alignItems: 'center'}}>
+					<Text style={{flex: 0.3, fontSize: 16, fontFamily:'FZZhunYuan-M02S', color: '#a5a5a5'}}
 								allowFontScaling={false}>
-							{this.state.qty}
+					{CMLabel.getCNLabel('DISH_QUANTITY')}:
 					</Text>
-					<TouchableOpacity style={{}}
-														onPress={this._updateProductQty.bind(null,1)}
-														activeOpacity={0.4}>
-							<Text style={{fontSize: 15,
-														paddingTop: 5,
-														paddingBottom: 5,
-														width: 30,
-														textAlign: 'center',
-														fontFamily:'FZZhunYuan-M02S'}}
-										allowFontScaling={false}>
-										+
-							</Text>
-					</TouchableOpacity>
+					<View style={{flex: 0.4}}>
+							<View style={{flexDirection: 'row',
+														width: 100,
+														justifyContent: 'space-between',
+														alignSelf: 'center',
+														borderRadius: 6,
+														borderWidth: 1,
+														paddingTop: 3,
+														paddingBottom: 3,
+														borderColor: '#ea7b21'}}>
+									<TouchableOpacity style={{}}
+																		onPress={this._updateProductQty.bind(null,-1)}
+																		activeOpacity={0.4}>
+											<Text style={{fontSize: 15,
+																		paddingTop: 5,
+																		paddingBottom: 5,
+																		width: 30,
+																		textAlign: 'center',
+																		fontFamily:'FZZhunYuan-M02S'}}
+														allowFontScaling={false}>
+														-
+											</Text>
+									</TouchableOpacity>
+									<Text style={{paddingTop: 5,
+																paddingBottom: 5,
+																fontFamily:'FZZhunYuan-M02S'}}
+												allowFontScaling={false}>
+											{this.state.qty}
+									</Text>
+									<TouchableOpacity style={{}}
+																		onPress={this._updateProductQty.bind(null,1)}
+																		activeOpacity={0.4}>
+											<Text style={{fontSize: 15,
+																		paddingTop: 5,
+																		paddingBottom: 5,
+																		width: 30,
+																		textAlign: 'center',
+																		fontFamily:'FZZhunYuan-M02S'}}
+														allowFontScaling={false}>
+														+
+											</Text>
+									</TouchableOpacity>
+							</View>
+					</View>
+					<View style={{flex: 0.3}}>
+					</View>
 			</View>
 		)
 	}
@@ -413,11 +427,18 @@ export default class SecondMenu extends Component {
 	// 		</View>
 	// </View>
   render() {
+		let shouldRenderRightButton;
+		if(this.props.action == 'modify') {
+			shouldRenderRightButton = this._deleteHandler;
+		}
     return(
       <View style={styles.viewController}>
 					<Header title={this.props.dish.ds_name}
 									goBack={this._goBack}
-									leftButtonText={'x'}/>
+									leftButtonText={'x'}
+									rightButtonText={'删除'}
+									rightButton={shouldRenderRightButton}
+									/>
           <ScrollView style={{paddingBottom: 50}}>
               {this._renderToppingGroupList(this.state.toppingGroupList)}
               {this._renderQtyButton()}

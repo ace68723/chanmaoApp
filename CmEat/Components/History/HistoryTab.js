@@ -54,6 +54,7 @@ class HistoryTab extends Component {
         this._onChange = this._onChange.bind(this);
 				this._goBack = this._goBack.bind(this);
 				this._goBackToHistory = this._goBackToHistory.bind(this);
+				this._setOnRefresh = this._setOnRefresh.bind(this);
         this._onRefresh = this._onRefresh.bind(this);
         this._doAutoRefresh = this._doAutoRefresh.bind(this);
         this._HistoryOrderDetailVisible = this._HistoryOrderDetailVisible.bind(this);
@@ -137,6 +138,12 @@ class HistoryTab extends Component {
 	  //     },
 	  //   });
 	  // }
+		_setOnRefresh() {
+			this.setState({
+				isRefreshing: true,
+			});
+			this._onRefresh();
+		}
     _onRefresh(){
       this.setState({
         isRefreshing: true,
@@ -177,6 +184,7 @@ class HistoryTab extends Component {
 						goBack: this._goBackToHistory,
 						orderInfo: orderInfo,
 						onRefresh: this._onRefresh,
+						setOnRefresh: this._setOnRefresh,
 		      },
 		    });
     }
@@ -265,7 +273,9 @@ class HistoryTab extends Component {
 	 			        tabBarPosition = "top"
 	 			        initialPage={0}
 	 			        style={{flex:1, marginTop: marginTop}}
-				        renderTabBar={() => <TabBar/>}
+				        renderTabBar={() => <TabBar
+																			orderData={this.state.orderData}
+																		/>}
 								onChangeTab={this._handleOnChangeTab}
 		 			      >
 		 			      <AllOrders

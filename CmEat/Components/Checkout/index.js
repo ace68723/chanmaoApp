@@ -449,7 +449,6 @@ class Confirm extends Component {
       )
     }
 		_renderChoosePayment() {
-			console.log(this.state.available_payment_channels);
 			if (this.state.available_payment_channels) {
 				if (this.state.available_payment_channels.length > 1) {
 					return(

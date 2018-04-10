@@ -96,7 +96,6 @@ export default class CmEatAddress extends Component {
   _onChange() {
       const state = AddressStore.getState();
       this.setState(state);
-			console.log(state);
       this._handleStatus(state);
   }
   _handleStatus(state) {
@@ -526,7 +525,7 @@ export default class CmEatAddress extends Component {
 		}
 	}
   _renderIosConfirmBtn(){
-    if(Platform.OS!='ios' || this.state.selectedAddress == '') return;
+    if(Platform.OS!='ios' || this.state.selectedAddress == '' || this.state.searchAddress != '') return;
     return(
       <TouchableOpacity style={styles.button}
                         activeOpacity={0.4}
@@ -539,7 +538,7 @@ export default class CmEatAddress extends Component {
     )
   }
   _renderAndroidConfirmBtn(){
-    if(Platform.OS!='android' || this.state.selectedAddress == '') return;
+    if(Platform.OS!='android' || this.state.selectedAddress == '' || this.state.searchAddress != '') return;
     return(
       <TouchableOpacity style={{  height:buttonHeight,
                                   backgroundColor:'#ea7b21',

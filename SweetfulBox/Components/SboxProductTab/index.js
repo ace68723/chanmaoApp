@@ -145,7 +145,7 @@ export default class MyComponent extends Component {
         tar_index = Math.floor(counter / 3) - index + 1;
       }
     }
-    this._scrollVew.scrollToOffset({animated: true, offset: 200 + tar_index * 209 + (index - 1) * 30});
+    this._scrollVew.scrollToOffset({animated: true, offset: 210 + tar_index * 209 + (index - 1) * 30});
   }
   _renderHeaderSection(){
     if (!this.state.section_list){

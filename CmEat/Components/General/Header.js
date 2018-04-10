@@ -53,10 +53,12 @@ export default (props) =>{
   const rightButton = () => {
     if(props.rightButton && props.rightButtonText){
       return (
-          <TouchableOpacity style={{flex:0.2,}}
+          <TouchableOpacity style={{flex:0.2,flexDirection:"column-reverse",}}
                             onPress={props.rightButton}>
-            <View style={styles.rightButton}>
-              <Text style={styles.rightButtonText}
+            <View style={{marginBottom: 12}}>
+              <Text style={{fontSize:16,
+                            color:'#363646',
+                            fontFamily:'FZZhunYuan-M02S'}}
                     allowFontScaling={false}>
                   {props.rightButtonText}
               </Text>

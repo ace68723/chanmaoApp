@@ -204,6 +204,7 @@ export default class CmEatMenuSearch extends Component {
 			return(
 				<FlatList
 					scrollEventThrottle={1}
+					keyboardDismissMode={"on-drag"}
 					keyboardShouldPersistTaps={'always'}
 					data={this.state.dataSource}
 					renderItem={this._renderMenuList}

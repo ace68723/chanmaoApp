@@ -45,7 +45,7 @@ export default class pastOrderEN extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          complete_time: "Wed Mar 21 2018 14:22:04 GMT-0400 (EDT)",
+          complete_time: new Date(props.orderInfo.complete_time),
           driver_score: 0,
           driver_comment: "",
           restaurant_score: 0,
@@ -87,7 +87,7 @@ export default class pastOrderEN extends Component {
   _onChange() {
     const showReviewAdded = CommentsStore.getState().showReviewAdded;
     if (showReviewAdded) {
-      this.props.onRefresh();
+      this.props.setOnRefresh();
       this.props.navigator.dismissModal();
     }
   }
@@ -207,7 +207,7 @@ export default class pastOrderEN extends Component {
 
   _showConfirmSection() {
     if (this.state.driver_score === 0 || this.state.restaurant_score === 0) {
-      alert("请对送餐司机和餐馆打分");
+      alert(CMLabel.getCNLabel('PLEASE_COMMENT'));
     }
     else {
       this.setState({showHistoryOrderDetail: true});
@@ -307,7 +307,13 @@ export default class pastOrderEN extends Component {
     };
     const commentList = () => {
       let _commentList = [];
-      let list = ["准时", "有礼貌", "速度快", "服务周到", "送货上门", "保温", "包装完整"];
+      let list = [CMLabel.getCNLabel('ON_TIME'),
+                  CMLabel.getCNLabel('POLITE'),
+                  CMLabel.getCNLabel('QUICK'),
+                  CMLabel.getCNLabel('WELL_SERVERED'),
+                  CMLabel.getCNLabel('DELIVERY_TO_DOOR'),
+                  CMLabel.getCNLabel('WARM_DISH'),
+                  CMLabel.getCNLabel('WELL_PACKAGING')];
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleDriverQuickComments(text)}>
@@ -317,7 +323,8 @@ export default class pastOrderEN extends Component {
                             borderWidth: StyleSheet.hairlineWidth,
                             borderColor: '#bdc8d9',
                             marginBottom: 5,
-                            fontFamily:'FZZhunYuan-M02S'}}>
+                            fontFamily:'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
                     {text}
               </Text>
           </TouchableOpacity>
@@ -325,11 +332,9 @@ export default class pastOrderEN extends Component {
       }
       return _commentList;
     };
-    return (
-      <View style={{marginTop: 10,
-                    backgroundColor: 'white',
-                    borderBottomWidth: StyleSheet.hairlineWidth,
-                    borderBottomColor: '#bdc8d9'}}>
+    const driverHeader = () => {
+      if (this.props.orderInfo.complete_time) {
+        return (
           <View style={{flexDirection: 'row',
                         // padding: 20,
                         borderBottomWidth: StyleSheet.hairlineWidth,
@@ -344,12 +349,12 @@ export default class pastOrderEN extends Component {
                   <Text style={{fontSize: 18,
                                 fontFamily:'FZZhunYuan-M02S'}}
                         allowFontScaling={false}>
-                        馋猫专送
+                        {CMLabel.getCNLabel('CM_DELIVERY')}
                   </Text>
                   <Text style={{fontSize: 14,
                                 fontFamily:'FZZhunYuan-M02S'}}
                         allowFontScaling={false}>
-                      今日{this.state.complete_time.toString().split(" ")[4]}左右送达
+                      {CMLabel.getCNLabel('COMPLETE_TIME_PREFIX')}{this.state.complete_time.toString().split(" ")[4]}{CMLabel.getCNLabel('COMPLETE_TIME_SUFFIX')}
                   </Text>
               </View>
 
@@ -376,6 +381,37 @@ export default class pastOrderEN extends Component {
                 </View>
               </TouchableOpacity>
           </View>
+        )
+      }
+      else {
+        return (
+          <View style={{flexDirection: 'row',
+                        // padding: 20,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderBottomColor: '#bdc8d9',
+                        alignItems: 'center',
+                        justifyContent:'center',
+                      }}>
+              <Image style={{width:100,height:100, marginLeft: 20}}source={require('./Image/chanmao_logo.png')}/>
+              <View style={{flex: 1,
+                            flexDirection: 'column',
+                            marginLeft: 10}}>
+                  <Text style={{fontSize: 18,
+                                fontFamily:'FZZhunYuan-M02S'}}
+                        allowFontScaling={false}>
+                        {CMLabel.getCNLabel('CM_DELIVERY')}
+                  </Text>
+              </View>
+          </View>
+        )
+      }
+    }
+    return (
+      <View style={{marginTop: 10,
+                    backgroundColor: 'white',
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    borderBottomColor: '#bdc8d9'}}>
+          {driverHeader()}
           <View style={{padding: 20}}>
               <Text allowFontScaling={false}
                     style={{textAlign: 'center', marginBottom: 20, fontFamily:'FZZhunYuan-M02S'}}>
@@ -402,7 +438,7 @@ export default class pastOrderEN extends Component {
                          underlineColorAndroid='transparent'
                          value={this.state.driver_comment}
                          placeholder={CMLabel.getCNLabel('COMMENT_PLACEHOLDER')}
-                         onFocus={() => this._handleInputOnFocus(36)}
+                         onFocus={() => this._handleInputOnFocus(50)}
                          onChangeText={(text) => this._handleDriverComments(text)}
                          multiline = {true}>
               </TextInput>
@@ -434,7 +470,11 @@ export default class pastOrderEN extends Component {
     };
     const commentList = () => {
       let _commentList = [];
-      let list = ["包装精美", "物美价廉", "口味好", "实惠", "分量足"];
+      let list = [CMLabel.getCNLabel('NICE_PACKAGING'),
+                  CMLabel.getCNLabel('WORTHY'),
+                  CMLabel.getCNLabel('TASTY'),
+                  CMLabel.getCNLabel('ECONOMICAL'),
+                  CMLabel.getCNLabel('LARGE_AMOUNT')];
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleRestaurantQuickComments(text)}>
@@ -571,8 +611,8 @@ export default class pastOrderEN extends Component {
                                  fontFamily:'FZZhunYuan-M02S'}}
                          underlineColorAndroid='transparent'
                          value={this.state.restaurant_comment}
-                         placeholder={"写下您对商家的评价吧~"}
-                         onFocus={() => this._handleInputOnFocus(420)}
+                         placeholder={CMLabel.getCNLabel('RESTAURANT_PLACEHOLDER')}
+                         onFocus={() => this._handleInputOnFocus(435)}
                          onChangeText={(text) => this._handleRestaurantComments(text)}
                          multiline = {true}>
               </TextInput>

@@ -51,7 +51,7 @@ class MenuCard extends Component {
             </View>
 						<View style={{flex:1,}}>
 									<View style={{width:50,
-														    height:36,
+														    height:32,
 														    alignSelf:'center',
 														    alignItems:'center',
 														    justifyContent:'center',
@@ -59,7 +59,7 @@ class MenuCard extends Component {
 																backgroundColor:'#ff8b00',
 														    borderWidth:2,
 														    borderRadius:8,}}>
-		                <Text style={{fontSize:18,
+		                <Text style={{fontSize:16,
 								    							backgroundColor:'#ff8b00',
 																  color: 'white'}}
 													allowFontScaling={false}>

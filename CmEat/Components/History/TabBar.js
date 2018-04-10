@@ -35,6 +35,14 @@ export default class TabBar extends Component {
       // totalQuantity: SboxCartStore.getTotalQuantity()
     // })
   }
+  // <Text style={{textAlign: 'center',
+  //               color: textColor,
+  //               fontWeight: fontWeight,
+  //               fontFamily:'FZZhunYuan-M02S',
+  //               marginRight: 5}}
+  //       allowFontScaling={false}>
+  //       {this.props.orderData.length}
+  // </Text>
 
   renderTab(name, page, isTabActive, onPressHandler,activeIconImage,inactiveIconImage) {
 
@@ -43,6 +51,44 @@ export default class TabBar extends Component {
     const fontWeight = isTabActive ? 'bold' : 'normal';
     const iconImage = isTabActive ? activeIconImage : inactiveIconImage;
     const iconText = page === 1 ? this.state.totalQuantity : "";
+    if (page == 1) {
+      const iconColor = isTabActive ? activeTextColor : "rgba(0,0,0,0.4)";
+      let numOfOrderNotReviewed = 0;
+      for (let order of this.props.orderData) {
+        if (order.order_review_status === 0 && order.order_status > 30) {
+          numOfOrderNotReviewed++;
+        }
+      }
+      return (
+        <TouchableOpacity
+          key={page}
+          style={{flex: 1, padding: 15, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
+          onPress={() => this.props.goToPage(page)}>
+          <View style={{width:24,
+                        height:24,
+                        padding: 5,
+                        borderRadius:15,
+                        backgroundColor:iconColor,
+                        marginRight: 5,
+                        justifyContent: 'center'}}>
+            <Text style={{fontSize:15,
+                          textAlign:"center",
+                          color:"#ffffff",
+                          fontFamily:'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              {numOfOrderNotReviewed}
+            </Text>
+          </View>
+          <Text style={{textAlign: 'center',
+                        color: textColor,
+                        fontWeight: fontWeight,
+                        fontFamily:'FZZhunYuan-M02S'}}
+                allowFontScaling={false}>
+            {name}
+          </Text>
+        </TouchableOpacity>
+      )
+    }
     return (
       <TouchableOpacity
         key={page}
@@ -50,6 +96,7 @@ export default class TabBar extends Component {
         onPress={() => this.props.goToPage(page)}>
         <Text style={{textAlign: 'center',
                       color: textColor,
+                      fontWeight: fontWeight,
                       fontFamily:'FZZhunYuan-M02S'}}
               allowFontScaling={false}>
           {name}
