@@ -65,7 +65,7 @@ const  HomeMoule = {
         }
         return areaList
       } catch (e) {
-        console.error(e)
+        console.log(e)
       }
 
     },
@@ -89,7 +89,7 @@ const  HomeMoule = {
           // }
           return {restaurantList, zones};
         } catch (e) {
-          console.error(e)
+          console.log(e)
         }
 
       },

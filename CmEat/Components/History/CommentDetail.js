@@ -224,8 +224,15 @@ export default class pastOrderEN extends Component {
       delete _dish['name'];
       return _dish;
     })
+    let _complete_time;
+    if (this.props.orderInfo.complete_time) {
+      _complete_time = this.state.complete_time;
+    }
+    else {
+      _complete_time = 0;
+    }
     const data = {
-      complete_time: this.state.complete_time,
+      complete_time: _complete_time,
       oid: this.state.oid,
       driver_score: this.state.driver_score,
       driver_comment: this.state.driver_comment,
