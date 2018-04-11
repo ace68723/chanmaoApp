@@ -56,7 +56,8 @@ export default (props) =>{
           <TouchableOpacity style={{flex:0.2,}}
                             onPress={props.rightButton}>
             <View style={styles.rightButton}>
-              <Text style={styles.rightButtonText}>
+              <Text style={styles.rightButtonText}
+                    allowFontScaling={false}>
                   {props.rightButtonText}
               </Text>
             </View>
@@ -77,7 +78,9 @@ export default (props) =>{
                       flexDirection:'row',}}>
         {leftButton()}
         <View style={styles.titleView}>
-          <Text style={styles.title}numberOfLines={1}>
+          <Text style={styles.title}
+                allowFontScaling={false}
+                numberOfLines={1}>
             {props.title}
           </Text>
         </View>

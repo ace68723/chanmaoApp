@@ -223,7 +223,8 @@ export default class InputAnimation extends Component {
 						style={styles.wechatView}
 						onPress = { this.props.if_handleWechatLogin }>
 						<ImageBackground source={require('./Image/wechat.png')} style={styles.wechatButton} >
-							<Text style={styles.wechatButtonText}>
+							<Text style={styles.wechatButtonText}
+										allowFontScaling={false}>
 								 {this.props.is_wechat}
 							</Text>
 						</ImageBackground>

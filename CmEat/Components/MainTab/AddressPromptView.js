@@ -39,16 +39,18 @@ export default class AddressPromptView extends Component {
 
   componentDidMount() {
     const animationDuration = 500;
-    Animated.timing(this.state.fadeInOpacity, {
-        toValue: 1,
-        duration: animationDuration,
-        easing: Easing.linear
-    }).start();
-    Animated.timing(this.state.animatedHeaderHeight, {
-        toValue: headerHeight + 4,
-        duration: animationDuration,
-        easing: Easing.linear
-    }).start();
+    Animated.parallel([
+        Animated.timing(this.state.fadeInOpacity, {
+            toValue: 1,
+            duration: animationDuration,
+            easing: Easing.linear
+        }),
+        Animated.timing(this.state.animatedHeaderHeight, {
+            toValue: headerHeight + 4,
+            duration: animationDuration,
+            easing: Easing.linear
+        })
+    ]).start();
 
     AddressStore.addChangeListener(this._onChange);
   }
@@ -63,16 +65,18 @@ export default class AddressPromptView extends Component {
 
   _onPress(){
     const animationDuration = 500;
-    Animated.timing(this.state.fadeInOpacity, {
-        toValue: 0,
-        duration: animationDuration,
-        easing: Easing.linear
-    }).start();
-    Animated.timing(this.state.animatedHeaderHeight, {
-        toValue: headerHeight + 8,
-        duration: animationDuration,
-        easing: Easing.linear
-    }).start();
+    Animated.parallel([
+        Animated.timing(this.state.fadeInOpacity, {
+            toValue: 0,
+            duration: animationDuration,
+            easing: Easing.linear
+        }),
+        Animated.timing(this.state.animatedHeaderHeight, {
+            toValue: headerHeight + 8,
+            duration: animationDuration,
+            easing: Easing.linear
+        })
+    ]).start();
     setTimeout(() => {
         this.props.onPress();
     }, animationDuration * 2);
