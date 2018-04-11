@@ -101,7 +101,6 @@ const  HistoryModule = {
     try{
       const res = await HistoryApi.addReview(io_data);
       if(res.ev_error != 0){
-        console.log(res);
         Alert.errorAlert(res.ev_message);
       }
       return res;
