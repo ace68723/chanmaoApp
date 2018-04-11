@@ -127,6 +127,7 @@ const HistoryApi = {
       options.headers.authortoken = token;
       // options.body = JSON.stringify({channel:1});
       options.body = JSON.stringify({channel: 1})
+      console.log(options);
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw error})

@@ -63,7 +63,7 @@ const CartApi = {
         total = total.toFixed(2);
         return { qty, total};
       } catch (e) {
-        console.error(e)
+        console.log(e)
       }
 
     },
@@ -87,7 +87,7 @@ const CartApi = {
         // })
     },
     getFilteredMenu(filteredMenu) {
-  
+
         // this.la_cartItems.map(cartItem => {
         //   if (cartItem.qty === 0) {
         //       this.removeItem(cartItem)
@@ -97,9 +97,9 @@ const CartApi = {
         //   }
         // });
         // return this.la_menu;
-        
+
       return filteredMenu;
-        
+
         //old version for getMenu
         // return filteredMenu.map(item => {
         //     delete item.qty;

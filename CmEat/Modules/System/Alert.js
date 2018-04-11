@@ -10,9 +10,16 @@ const Alert = {
   errorAlert(message){
     if(!showAlert){
       showAlert = !showAlert;
+			let _message;
+			if (typeof message != 'string') {
+				_message = message.toString();
+			}
+			else {
+				_message = message;
+			}
       AlertIOS.alert(
         '馋猫订餐提醒您',
-        message,
+        _message,
         [
           {text: 'OK', onPress: () =>{ showAlert = !showAlert}},
         ]
