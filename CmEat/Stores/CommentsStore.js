@@ -15,7 +15,8 @@ const CommentsStore = Object.assign({},EventEmitter.prototype,{
 			this.on(CHANGE_EVENT, callback)
 	},
 	removeChangeListener(callback){
-			this.removeListener(CHANGE_EVENT, callback)
+      this.resetShowReviewedAdd();
+			this.removeListener(CHANGE_EVENT, callback);
 	},
   reviewAdded(data) {
     if (data.ev_error == 0) {
@@ -33,9 +34,6 @@ const CommentsStore = Object.assign({},EventEmitter.prototype,{
          case AppConstants.REVIEW_ADDED:
              CommentsStore.reviewAdded(action.data);
              CommentsStore.emitChange();
-             setTimeout(()=>{
-               CommentsStore.resetShowReviewedAdd();
-             },6000);
              break;
          default:
              break;

@@ -25,6 +25,7 @@ export default class CmAdvertisement extends Component {
       addr:addr,
       showingAd: true
     }
+    this._openAdView = this._openAdView.bind(this);
     this._closeAd = this._closeAd.bind(this);
   }
   componentDidMount() {
@@ -83,6 +84,20 @@ export default class CmAdvertisement extends Component {
   			})
   			.catch((error) => {throw error})
 	}
+  _openAdView() {
+    // To do
+    this.setState({showingAd: false});
+    this.props.navigator.dismissModal();
+    const {url} = this.state.AdUrl;
+    setInterval(
+      this.props.navigator.showModal({
+        screen: 'AdView',
+        animated: true,
+        navigatorStyle: {navBarHidden: true},
+        passProps: {url: url}
+      }),
+      2000);
+  }
   _renderAdvertisement(){
     if(this.state.AdImage){
       return(

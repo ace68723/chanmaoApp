@@ -22,6 +22,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import CMLabel from '../../Constants/AppLabel';
+const  CmAlert = require('../../Modules/System/Alert');
 const {height, width} = Dimensions.get('window');
 const deviceHeight = height;
 const deviceWidth = width;
@@ -89,6 +90,7 @@ export default class pastOrderEN extends Component {
     if (showReviewAdded) {
       this.props.setOnRefresh();
       this.props.navigator.dismissModal();
+      CmAlert.errorAlert("已成功评价");
     }
   }
 
@@ -224,15 +226,8 @@ export default class pastOrderEN extends Component {
       delete _dish['name'];
       return _dish;
     })
-    let _complete_time;
-    if (this.props.orderInfo.complete_time) {
-      _complete_time = this.state.complete_time;
-    }
-    else {
-      _complete_time = 0;
-    }
     const data = {
-      complete_time: _complete_time,
+      complete_time: this.state.complete_time,
       oid: this.state.oid,
       driver_score: this.state.driver_score,
       driver_comment: this.state.driver_comment,
