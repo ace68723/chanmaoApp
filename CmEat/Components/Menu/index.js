@@ -306,7 +306,7 @@ class Menu extends Component {
           const _rightButtonText = '商家休息了';
           return(
             <View style={{position:'absolute',left:0,right:0}}>
-              <Header title={'商家关门啦'}
+              <Header title={'商家休息啦'}
                       goBack={this._closeMenuAnimation}
                       leftButtonText={'×'}/>
             </View>

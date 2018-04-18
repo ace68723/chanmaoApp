@@ -54,7 +54,7 @@ class RestaurantCard extends Component {
                               textAlign:'center',
                               top:90,}}
 											allowFontScaling={false}>
-                  商家关门啦
+                  商家休息啦
                 </Text>
             </View>
           )

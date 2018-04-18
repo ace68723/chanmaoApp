@@ -25,66 +25,12 @@ if(height == 812){
 
 export default class AddressPromptView extends Component {
   constructor(){
-    super()
-    const state = {
-      fadeInOpacity: new Animated.Value(0),
-      animatedHeaderHeight: new Animated.Value(headerHeight + 12),
-    }
-
-    this.state = Object.assign({}, state);
-    this._onPress = this._onPress.bind(this);
-    this._onChange = this._onChange.bind(this);
-
-  }
-
-  componentDidMount() {
-    const animationDuration = 500;
-    Animated.parallel([
-        Animated.timing(this.state.fadeInOpacity, {
-            toValue: 1,
-            duration: animationDuration,
-            easing: Easing.linear
-        }),
-        Animated.timing(this.state.animatedHeaderHeight, {
-            toValue: headerHeight + 4,
-            duration: animationDuration,
-            easing: Easing.linear
-        })
-    ]).start();
-
-    AddressStore.addChangeListener(this._onChange);
-  }
-
-  componentWillUnmount(){
-    AddressStore.removeChangeListener(this._onChange);
-  }
-
-  _onChange(){
-    this._onPress();
-  }
-
-  _onPress(){
-    const animationDuration = 500;
-    Animated.parallel([
-        Animated.timing(this.state.fadeInOpacity, {
-            toValue: 0,
-            duration: animationDuration,
-            easing: Easing.linear
-        }),
-        Animated.timing(this.state.animatedHeaderHeight, {
-            toValue: headerHeight + 8,
-            duration: animationDuration,
-            easing: Easing.linear
-        })
-    ]).start();
-    setTimeout(() => {
-        this.props.onPress();
-    }, animationDuration * 2);
+    super();
   }
 
   render() {
     return (
-        <TouchableWithoutFeedback onPress={this._onPress}>
+        <TouchableWithoutFeedback onPress={this.props.onPress}>
           <Animated.View style={{
                     position: 'absolute',
                     height: 48,
@@ -92,8 +38,8 @@ export default class AddressPromptView extends Component {
                     width: (width * 0.9),
                     justifyContent:'center',
                     backgroundColor: 'transparent',
-                    marginTop: this.state.animatedHeaderHeight,
-                    opacity: this.state.fadeInOpacity,
+                    marginTop: this.props.animatedHeaderHeight,
+                    opacity: this.props.fadeInOpacity,
                   }}>
             <View style={styles.TriangleShapeCSS} />
             <Text style={{color:"white",

@@ -70,13 +70,13 @@ class OrdersNotReviewed extends Component {
 				else {
 					const { height, width } = Dimensions.get('window');
 					return(
-						<Image style={{height: height, width: width}} source={require('./Image/cm_no_order.png')}></Image>
+						<Image style={{height: height, width: width}} source={require('./Image/cm_no_order_for_review.png')}></Image>
 					)
 				}
 			}else {
 				const { height, width } = Dimensions.get('window');
 				return(
-					<Image style={{height: height, width: width}} source={require('./Image/cm_no_order.png')}></Image>
+					<Image style={{height: height, width: width}} source={require('./Image/cm_no_order_for_review.png')}></Image>
 				)
 			}
 		}

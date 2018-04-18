@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import {
   Animated,
+	Easing,
   Dimensions,
   Platform,
   StyleSheet,
@@ -40,12 +41,15 @@ const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 let _scrollY = 0;
 let marginTop;
+let headerHeight;
 if(height == 812){
   //min 34
   //header 88 + swiper 200 - FlatList margin 34 + tabbar 30
   marginTop = 0;
+	headerHeight = 88 - 12;
 }else{
   marginTop = -20;
+	headerHeight = 54 + 30 - 12;
 }
 export default class MainTab extends Component {
 
@@ -59,6 +63,8 @@ export default class MainTab extends Component {
       shouldRenderAddressPrompt:false,
 			showIntroduction: true,
 			restaurantList: [],
+			fadeInOpacity: new Animated.Value(0),
+      animatedHeaderHeight: new Animated.Value(headerHeight + 12),
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
@@ -69,6 +75,8 @@ export default class MainTab extends Component {
 		this._showAddressPrompt = this._showAddressPrompt.bind(this);
 		this._dismissAddressPrompt = this._dismissAddressPrompt.bind(this);
 		this._onScrollRestaurantsList = this._onScrollRestaurantsList.bind(this);
+		this._startRenderAddressPrompt = this._startRenderAddressPrompt.bind(this);
+		this.hideAddressPrompt = this.hideAddressPrompt.bind(this);
 
   }
 	async componentDidMount(){
@@ -111,17 +119,60 @@ export default class MainTab extends Component {
   // }
 
 	_showAddressPrompt(){
+		if (this.state.shouldRenderAddressPrompt) return;
 		this.setState({shouldRenderAddressPrompt:true});
+		setTimeout(() => {
+			this._startRenderAddressPrompt();
+		}, 5000);
 	}
 
 	_dismissAddressPrompt(){
 		this.setState({shouldRenderAddressPrompt:false});
 	}
 
+	_startRenderAddressPrompt() {
+		if (!this.state.shouldRenderAddressPrompt) return;
+    const animationDuration = 500;
+    Animated.parallel([
+        Animated.timing(this.state.fadeInOpacity, {
+            toValue: 1,
+            duration: animationDuration,
+            easing: Easing.linear
+        }),
+        Animated.timing(this.state.animatedHeaderHeight, {
+            toValue: headerHeight + 4,
+            duration: animationDuration,
+            easing: Easing.linear
+        })
+    ]).start();
+    setTimeout(() => {
+			this.hideAddressPrompt();
+		}, 15000);
+  }
+	hideAddressPrompt(){
+		if (!this.state.shouldRenderAddressPrompt) return;
+    const animationDuration = 500;
+    Animated.parallel([
+        Animated.timing(this.state.fadeInOpacity, {
+            toValue: 0,
+            duration: animationDuration,
+            easing: Easing.linear
+        }),
+        Animated.timing(this.state.animatedHeaderHeight, {
+            toValue: headerHeight + 8,
+            duration: animationDuration,
+            easing: Easing.linear
+        })
+    ]).start();
+		this.setState({shouldRenderAddressPrompt:false});
+  }
+
 	_onScrollRestaurantsList(event){
 		const DISMISS_OFFSET = 900;
-		if (event.nativeEvent.contentOffset.y >= DISMISS_OFFSET && this.state.shouldRenderAddressPrompt === true){
-			AddressAction.dismissAddressPromptView();
+		if (event.nativeEvent.contentOffset.y >= DISMISS_OFFSET &&
+				this.state.shouldRenderAddressPrompt === true){
+			// AddressAction.dismissAddressPromptView();
+			this.hideAddressPrompt();
 		}
 	}
 
@@ -140,14 +191,14 @@ export default class MainTab extends Component {
 			       handleBackToHome={this._handleBackToHome}
 			       renderSearch={this.state.renderSearch}
 			       showAddressPrompt={this._showAddressPrompt}
-						 dismissAddressPrompt={this._dismissAddressPrompt}
 						 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
 						 renderAddressPrompt={this.state.renderAddressPrompt}
 				 />
-				 {this.state.shouldRenderAddressPrompt && this.state.renderAddressPrompt &&
-						 <AddressPromptView
-							 ref='AddressPrompt' onPress={this._dismissAddressPrompt} />
-				 }
+				 <AddressPromptView
+					 ref='AddressPrompt'
+					 onPress={this.hideAddressPrompt}
+					 fadeInOpacity={this.state.fadeInOpacity}
+					 animatedHeaderHeight={this.state.animatedHeaderHeight}/>
      </View>
     )
   }

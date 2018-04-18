@@ -24,7 +24,6 @@ class ArticleDetail extends Component {
       showLoading:true,
       showWebView:new Animated.Value(0),
     }
-    console.log(this.props.url)
     this._startShowWebView = this._startShowWebView.bind(this);
     this._goBack = this._goBack.bind(this);
   }
