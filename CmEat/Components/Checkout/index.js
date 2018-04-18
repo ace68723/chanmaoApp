@@ -20,7 +20,6 @@ import {
 	Platform
 } from 'react-native';
 
-import {Navigation} from 'react-native-navigation';
 import Background from '../General/Background';
 import CheckoutCard from './CheckoutCard';
 import Address from './Address';

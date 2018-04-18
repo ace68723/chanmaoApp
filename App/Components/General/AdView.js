@@ -6,6 +6,7 @@ import React, {
 import {
   Animated,
   Image,
+  InteractionManager,
   StyleSheet,
   WebView,
   Text,
@@ -23,6 +24,7 @@ class ArticleDetail extends Component {
       showLoading:true,
       showWebView:new Animated.Value(0),
     }
+    console.log(this.props.url)
     this._startShowWebView = this._startShowWebView.bind(this);
     this._goBack = this._goBack.bind(this);
   }
@@ -42,18 +44,22 @@ class ArticleDetail extends Component {
   }
 
   _goBack(){
-    // this.props.navigator.pop();
-		// //for hide launch ad View
-		// if(this.props.unmount){
-		// 	setTimeout( ()=> {
-		// 		this.props.unmount()
-		// 	}, 500);
-		// }
-		//
-		//
-    this.props.navigator.dismissModal({
-       animationType: 'slide-down'
-    })
+    if(this.props.tag == "forChanmaoLaunchAd"){
+      InteractionManager.runAfterInteractions(() => {
+        this.props.navigator.dismissModal({
+           animationType: 'none'
+        })
+        setTimeout(() => {
+          this.props.navigator.dismissModal({
+             animationType: 'slide-down'
+          })
+        }, 500);
+      })
+    } else {
+      this.props.navigator.dismissModal({
+         animationType: 'slide-down'
+      })
+    }
   }
   render() {
     let loading = () =>{

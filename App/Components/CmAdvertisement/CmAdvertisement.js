@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation';
 import {
   Dimensions,
   Image,
@@ -85,18 +86,16 @@ export default class CmAdvertisement extends Component {
   			.catch((error) => {throw error})
 	}
   _openAdView() {
-    // To do
     this.setState({showingAd: false});
-    this.props.navigator.dismissModal();
-    const {url} = this.state.AdUrl;
-    setInterval(
       this.props.navigator.showModal({
         screen: 'AdView',
         animated: true,
         navigatorStyle: {navBarHidden: true},
-        passProps: {url: url}
-      }),
-      2000);
+        passProps: {
+          url: this.state.AdUrl,
+          tag:"forChanmaoLaunchAd"
+        }
+      })
   }
   _renderAdvertisement(){
     if(this.state.AdImage){
