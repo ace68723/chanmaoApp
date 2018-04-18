@@ -160,7 +160,7 @@ export function DatabaseInit() {
     if(!realm.objectForPrimaryKey('cm_system','cme_intro_count')){
         realm.create('cm_system',{type:"cme_intro_count",value:"0"}, true );
     }
-    realm.create('cm_system',{type: 'version', value: '2.5.9'}, true );
+    realm.create('cm_system',{type: 'version', value: '2.5.10-a'}, true );
   })
   console.log(realm.path)
 }
