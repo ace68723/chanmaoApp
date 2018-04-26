@@ -12,6 +12,7 @@ codePush.sync({ installMode: codePush.InstallMode.IMMEDIATE});
 
 DatabaseInit();
 registerScreens();
+
 Navigation.startSingleScreenApp({
   screen: {
     screen: 'cmHome',

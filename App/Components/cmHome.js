@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import {
+  AppState,
   Animated,
   Dimensions,
   Image,
@@ -12,9 +13,13 @@ import {
   StyleSheet,
   ScrollView,
   Platform,
+  Alert,
+  Linking,
+  NativeModules
 } from 'react-native';
 import AuthAction from '../Actions/AuthAction';
-
+import VersionModule from '../Modules/System/VersionModule';
+import {GetUserInfo} from '../Modules/Database';
 const { height, width } = Dimensions.get('window');
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -49,7 +54,9 @@ export default class Home extends Component {
           translateX:0,
           translateY:0,
       };
-
+      this._startUp = this._startUp.bind(this);
+      this._versionCheck = this._versionCheck.bind(this);
+      this._handleAppStateChange = this._handleAppStateChange.bind(this);
       this._handleChanmaoPress = this._handleChanmaoPress.bind(this);
       this._handleSboxPress = this._handleSboxPress.bind(this);
       this._handleBackToHome = this._handleBackToHome.bind(this);
@@ -62,8 +69,62 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentDidMount() {
-
-      AuthAction.doAuth();
+    AppState.addEventListener('change', this._handleAppStateChange);
+    this._versionCheck();
+    
+  }
+  componentWillUnmount(){
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+  _versionCheck(){
+    VersionModule.getCurrentVersion().then((versionObject)=>{
+      let userData = GetUserInfo();
+      let versionNum = versionObject.version;
+      if(userData.version != versionNum){
+        this._updateAlert(versionObject)
+      }else{
+        this._startUp();
+      }     
+  })
+  .catch((err)=>console.log(err)); 
+  }
+  _handleAppStateChange = (appState) =>{
+    if(appState == 'active'){
+      this._versionCheck();
+    }
+  }
+  _updateAlert(versionObj){
+    if(versionObj.forced){
+      Alert.alert(
+        '软件更新',
+        '有新版本可下载,请前往更新',
+        [
+          {text:'Update', onPress:()=>{
+            let url = 'https://itunes.apple.com/ca/app/%E9%A6%8B%E7%8C%AB%E7%94%9F%E6%B4%BB/id888553991?mt=8';
+            Linking.canOpenURL(url).then(supported => {
+              supported && Linking.openURL(url);
+            }, (err) => console.log(err));
+          }}
+        ]
+      ) 
+    }else{
+      Alert.alert(
+        '软件更新',
+        '有新版本可下载，要前往App Store?',
+        [
+          {text: '取消', onPress:()=>{this._startUp()} ,style: 'cancel'},
+          {text:'Go', onPress:()=>{
+            let url = 'https://itunes.apple.com/ca/app/%E9%A6%8B%E7%8C%AB%E7%94%9F%E6%B4%BB/id888553991?mt=8';
+            Linking.canOpenURL(url).then(supported => {
+              supported && Linking.openURL(url);
+            }, (err) => console.log(err));
+          }}
+        ]
+      ) 
+    }
+  }
+  _startUp(){
+    AuthAction.doAuth();
 
 
       if(this.props.goToCmEat){
