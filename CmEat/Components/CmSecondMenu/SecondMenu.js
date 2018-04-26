@@ -28,10 +28,13 @@ const viewHeight = Dimensions.get('window').height;
 const viewWidth = Dimensions.get('window').width;
 
 let viewMarginTop;
+let acceptButtonHeight;
 if(height == 812){
   viewMarginTop = 27;
+	acceptButtonHeight = 80;
 }else{
   viewMarginTop = 17;
+	acceptButtonHeight = 40;
 }
 const navigationHeight = viewHeight * (210/2208) - viewMarginTop;
 
@@ -384,8 +387,7 @@ export default class SecondMenu extends Component {
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  paddingTop: 15,
-                  paddingBottom: 15,
+                  height: acceptButtonHeight,
                   flexDirection: 'row'}}>
           <View style={{flex: 1, marginLeft: 20}}></View>
           <Text style={{flex: 1,
@@ -393,7 +395,8 @@ export default class SecondMenu extends Component {
                         color: 'white',
                         fontSize: 16,
                         fontWeight: '700',
-												fontFamily:'FZZhunYuan-M02S'}}
+												fontFamily:'FZZhunYuan-M02S',
+												alignSelf: 'center'}}
 								allowFontScaling={false}>
               {confirmMsg}
           </Text>
@@ -402,7 +405,8 @@ export default class SecondMenu extends Component {
                         marginRight: 20,
                         color: 'white',
                         fontSize: 16,
-												fontFamily:'FZZhunYuan-M02S'}}
+												fontFamily:'FZZhunYuan-M02S',
+												alignSelf: 'center'}}
 								allowFontScaling={false}>
               ${(this.state.total * this.state.qty).toFixed(2)}
           </Text>
