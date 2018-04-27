@@ -86,31 +86,38 @@ export default class pastOrderEN extends Component {
   }
 
   _onChange() {
-    const showReviewAdded = CommentsStore.getState().showReviewAdded;
-    if (showReviewAdded) {
+    const newState = CommentsStore.getState();
+    if (newState.showReviewAdded) {
       this.props.setOnRefresh();
       this.props.navigator.dismissModal();
-      CmAlert.errorAlert("已成功评价");
+      if (newState.toStoreReview) {
+        let url;
+        if (Platform.OS == 'ios') {
+          url = 'https://itunes.apple.com/ca/app/%E9%A6%8B%E7%8C%AB%E7%94%9F%E6%B4%BB/id888553991?mt=8';
+        }
+        else {
+          url = 'https://play.google.com/store/apps/details?id=ca.chanmao.app';
+        }
+        Alert.alert(
+          '已成功评价',
+          '觉得馋猫棒棒哒?去评分吧!',
+          [
+            {text: '取消', onPress:()=>{} ,style: 'cancel'},
+            {text:'前往', onPress:()=>{
+              Linking.canOpenURL(url).then(supported => {
+                supported && Linking.openURL(url);
+              }, (err) => console.log(err));
+            }}
+          ]
+        )
+      }
+      else {
+        CmAlert.errorAlert("已成功评价");
+      }
     }
   }
 
   _handleInputOnFocus(offset) {
-    // this.setState({inputPaddingTop: -250});
-
-    // InteractionManager.runAfterInteractions(() => {
-    //
-    //   Animated.parallel([
-    //     Animated.timing(this.state.inputPaddingTop, {
-    //       toValue: -250,
-    //       duration: 300,
-    //     }),
-    //     Animated.timing(this.state.inputMarginTop, {
-    //       toValue: 250,
-    //       duration: 300,
-    //     }),
-    //
-    //   ]).start();
-    // });
     this.refs.ScrollView.scrollTo({x:0,y:offset,animated:true})
   }
 

@@ -6,6 +6,7 @@ const CHANGE_EVENT = 'change4422';
 const ERRROR_TITLE = AppConstants.ERRROR_TITLE;
 let state = {
           showReviewAdded: false,
+          toStoreReview: false
         };
 const CommentsStore = Object.assign({},EventEmitter.prototype,{
 	emitChange(){
@@ -21,6 +22,7 @@ const CommentsStore = Object.assign({},EventEmitter.prototype,{
   reviewAdded(data) {
     if (data.ev_error == 0) {
       state.showReviewAdded = true;
+      state.toStoreReview = data.toStoreReview;
     }
   },
   resetShowReviewedAdd() {

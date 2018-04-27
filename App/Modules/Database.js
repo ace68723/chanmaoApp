@@ -160,6 +160,9 @@ export function DatabaseInit() {
     if(!realm.objectForPrimaryKey('cm_system','cme_intro_count')){
         realm.create('cm_system',{type:"cme_intro_count",value:"0"}, true );
     }
+    if(!realm.objectForPrimaryKey('cm_system','cme_comment_count')){
+        realm.create('cm_system',{type:"cme_comment_count",value:"0"}, true );
+    }
     realm.create('cm_system',{type: 'version', value: '2.5.10-a'}, true );
   })
   console.log(realm.path)
@@ -392,6 +395,15 @@ export function cme_updateHomeIntroCount() {
 }
 export function cme_getHomeIntroCount() {
   return realm.objectForPrimaryKey('cm_system','cme_intro_count').value;
+}
+export function cme_updateCommentCount() {
+  const _introCount = (parseInt(realm.objectForPrimaryKey('cm_system','cme_comment_count').value) + 1).toString();
+  realm.write(() => {
+      realm.create('cm_system',{type:"cme_comment_count",value:_introCount}, true );
+  });
+}
+export function cme_getCommentCount() {
+  return realm.objectForPrimaryKey('cm_system','cme_comment_count').value;
 }
 
 export function sbox_addToCart(product){
