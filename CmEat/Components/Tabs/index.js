@@ -19,7 +19,7 @@ import {
 import MainTab from '../MainTab';
 import HistoryTab from '../History/HistoryTab';
 import SettingTab from '../Setting/SettingTab';
-import SearchTab from '../Restaurant/CmRestaurantSearch';
+import SearchTab from '../Restaurant/RestaurantSearch/CmRestaurantSearch';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TabBar from './TabBar';
 import CMLabel from '../../Constants/AppLabel';

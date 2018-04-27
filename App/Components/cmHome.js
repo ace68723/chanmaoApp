@@ -71,7 +71,7 @@ export default class Home extends Component {
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
     this._versionCheck();
-    
+ 
   }
   componentWillUnmount(){
     AppState.removeEventListener('change', this._handleAppStateChange);
