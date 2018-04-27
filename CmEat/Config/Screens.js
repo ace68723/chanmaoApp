@@ -8,7 +8,7 @@ import CmEatAboutUs from '../Components/Setting/AboutUs';
 import CmEatMenuSearch from '../Components/Menu/CmEatMenuSearch';
 import CmEatHistory from '../Components/History/HistoryTab';
 import CmSecondMenu from '../Components/CmSecondMenu/SecondMenu';
-import CmRestaurantSearch from '../Components/Restaurant/CmRestaurantSearch';
+import CmRestaurantSearch from '../Components/Restaurant/RestaurantSearch/CmRestaurantSearch';
 import CmChooseCardType from '../Components/AddCard/ChooseCardType';
 import CmAddCard from '../Components/AddCard/AddCard';
 import CmCommentDetail from '../Components/History/CommentDetail';

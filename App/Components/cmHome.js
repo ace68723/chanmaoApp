@@ -75,7 +75,6 @@ export default class Home extends Component {
     setTimeout( () => {
       this._versionCheck();
     }, 500);
-
   }
   componentWillUnmount(){
     AppState.removeEventListener('change', this._handleAppStateChange);

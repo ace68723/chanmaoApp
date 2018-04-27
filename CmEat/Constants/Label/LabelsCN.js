@@ -4,7 +4,7 @@ module.exports={
     //Searching
     AREA_SEARCH:'分区&搜索',
     CITY_AREA:'城市&区域',
-
+    RES_TAG:'餐厅分类',
     //Setting
     MY_TAB:'我的',
     SETTING:'设置',

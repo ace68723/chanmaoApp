@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-import { PushNotificationIOS } from 'react-native';
+// import { PushNotificationIOS } from 'react-native';
 import { DatabaseInit } from './App/Modules/Database';
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './screens';
@@ -13,24 +13,24 @@ codePush.sync({ installMode: codePush.InstallMode.IMMEDIATE});
 
 DatabaseInit();
 registerScreens();
-setTimeout(() => {
-PushNotificationIOS.requestPermissions();
-    PushNotificationIOS.addEventListener('register', (deviceToken) => {
-        console.log(deviceToken);
-        // realm.write(() => {
-        //     realm.create('AppUserInfo', { param: 'deviceToken', value: deviceToken }, true);
-        // });
-    });
-    PushNotificationIOS.addEventListener('registrationError', (error) => {
-        console.log('here');
-        console.log(error);
-    });
-    PushNotificationIOS.addEventListener('notification', (notification) => {
-        console.log(notification);
-
-        console.log('get data', notification.getData());
-    });
-}, 500);
+// setTimeout(() => {
+// PushNotificationIOS.requestPermissions();
+//     PushNotificationIOS.addEventListener('register', (deviceToken) => {
+//         console.log(deviceToken);
+//         // realm.write(() => {
+//         //     realm.create('AppUserInfo', { param: 'deviceToken', value: deviceToken }, true);
+//         // });
+//     });
+//     PushNotificationIOS.addEventListener('registrationError', (error) => {
+//         console.log('here');
+//         console.log(error);
+//     });
+//     PushNotificationIOS.addEventListener('notification', (notification) => {
+//         console.log(notification);
+//
+//         console.log('get data', notification.getData());
+//     });
+// }, 500);
 
 Navigation.startSingleScreenApp({
   screen: {

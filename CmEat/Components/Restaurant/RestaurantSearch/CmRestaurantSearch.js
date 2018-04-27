@@ -22,12 +22,14 @@ import {
 import {
     filter,
 } from 'lodash';
-import HomeStore from '../../Stores/HomeStore';
-import HomeAction from '../../Actions/HomeAction';
-import RestaurantCard from './RestaurantCard';
-import WordProcessor from '../WordProcess/WordProcessor';
-import CMLabel from '../../Constants/AppLabel'
+import HomeStore from '../../../Stores/HomeStore';
+import HomeAction from '../../../Actions/HomeAction';
+import RestaurantCard from '../RestaurantCard';
+import WordProcessor from '../../WordProcess/WordProcessor';
+import CMLabel from '../../../Constants/AppLabel'
 import { orderBy } from 'lodash';
+import SearchByArea from './SearchByArea';
+import SearchByTag from './SearchByTag';
 const {width,height} = Dimensions.get('window');
 let marginTop,headerHeight;
 if(height == 812){
@@ -90,20 +92,21 @@ export default class CmRestaurantSearch extends Component {
 	}
   _setSearchText(text) {
   		if(text){
-					let processedText = WordProcessor.tranStr(text);
+				let processedText = WordProcessor.tranStr(text);
     			let filteredData;
     			if(text != "All"){
 						filteredData = this._filterNotes(processedText, this.state.allRestaurants);
     			}else{
 						filteredData = this.state.allRestaurants;
     			}
-					filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
+				filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
     			this.setState({
     				 searchText: text,
     				 filteredRestaurant:filteredData,
     				 isRendering:'restaurant',
     				 restaurantList: filteredData.slice(0, 5)
-    			 });
+				 });
+				this.refs.searchInput.value = text;
   		} else {
   			this.setState({
   				 searchText:'',
@@ -124,7 +127,7 @@ export default class CmRestaurantSearch extends Component {
 			<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', height: headerHeight}}>
 					<View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-start', marginLeft: 20, marginTop: marginTop}}>
 							<Image
-								source={require('./Image/icon_search_input.png')}
+								source={require('../Image/icon_search_input.png')}
 								style={{width: 22, height: 24.5
 								}}
 							/>
@@ -187,67 +190,31 @@ export default class CmRestaurantSearch extends Component {
 			/>
 			)
 	  }
-  _renderAreasHeader() {
-    return(
-      <View style={{padding:10,paddingTop:20,paddingBottom:0}}>
-        <Text style={{fontSize:18,
-											fontFamily:"FZZhunYuan-M02S"}}
-							allowFontScaling={false}>
-          {CMLabel.getCNLabel('CITY_AREA')}
-        </Text>
-      </View>
-    )
-  }
-	_renderArea({item ,index}) {
-		let area = item;
-		if(area){
+  _renderHeader(label) {
+		if(label == "area"){
 			return(
-				<TouchableOpacity onPress={()=>{
-  					this._setSearchText(area.name);
-  					this.refs.searchInput.value = area.name;
-					}}>
-					<ImageBackground
-            source={{uri:area.image}}
-            style={{
-              marginTop:10,
-              marginLeft:10,
-  						width:(width-30)/2,
-              height:(width-30)/2,
-  						alignItems:'center',
-  						justifyContent:'center',
-  						}}>
-  						<Text style={{backgroundColor:"rgba(0,0,0,0)",
-					    							color:"#ffffff",
-					                  fontSize:18,
-					                  fontFamily:'FZZongYi-M05S'}}
-									allowFontScaling={false}>
-                {area.name}
-              </Text>
-					</ImageBackground>
-				</TouchableOpacity>
+				<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
+					<Text style={{fontSize:18,
+												fontFamily:"FZZhunYuan-M02S"}}
+								allowFontScaling={false}>
+						{CMLabel.getCNLabel('CITY_AREA')}
+					</Text>
+				</View>
+			)
+		}else{
+			return(
+				<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
+					<Text style={{fontSize:18,
+												fontFamily:"FZZhunYuan-M02S"}}
+								allowFontScaling={false}>
+						{CMLabel.getCNLabel('RES_TAG')}
+					</Text>
+				</View>
 			)
 		}
 
-	}
-	_areaKeyExtractor = (area, index) => index + area.area +area.name;
-	_renderAreas() {
-		return(
-			<FlatList
-				numColumns={2}
-				key={'area'}
-        showsVerticalScrollIndicator={false}
-				data={this.state.zones}
-				keyboardDismissMode={"on-drag"}
-				keyboardShouldPersistTaps={"always"}
-        ListHeaderComponent={this._renderAreasHeader}
-				renderItem={(area)=>this._renderArea(area)}
-				keyExtractor={this._areaKeyExtractor}
-				removeClippedSubviews={true}
-				initialNumToRender={1}
-				extraData={this.state.zones}
-			/>
-		)
-	}
+  }
+	
 	_renderResult() {
 		if(this.state.restaurantList.length>0){
 			return(
@@ -257,15 +224,16 @@ export default class CmRestaurantSearch extends Component {
 			)
 		}else{
 			return(
-				<View style={{flex:1}}>
-					{this._renderAreas()}
-				</View>
+				<ScrollView style={{flex:1}}>
+					<SearchByTag />
+					<SearchByArea areas={this.state.zones} setSearchText={this._setSearchText}  />
+				</ScrollView>
 			)
 		}
 	}
 	render() {
 		if (this.state.allRestaurants.length == 0) {
-			return <Image  style={{height: height, width: width}} source={require('./Image/no_restaurants_area.png')}/>
+			return <Image  style={{height: height, width: width}} source={require('../Image/no_restaurants_area.png')}/>
 		}
 		return(
 			<KeyboardAvoidingView
