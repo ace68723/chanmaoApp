@@ -26,6 +26,7 @@
 		1BDD595C13AF42D896B1CEA2 /* libdouble-conversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF875E7A87A4FDEB4AB9850 /* libdouble-conversion.a */; };
 		1FAC36314A474A9FA5297279 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2608DF613AA447B5B58577C7 /* libCodePush.a */; };
 		250A663515E74D34AF648369 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6768C5507D634A3BBE7F4898 /* libAirMaps.a */; };
+		318ACDBE20976D3D00D53156 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 318ACDB720976C3F00D53156 /* libRCTPushNotification.a */; };
 		3830542F728D420F8699007C /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 382174EAB4BE4C44A4750517 /* MaterialIcons.ttf */; };
 		4148E0B4C52748BF8F07AC2B /* libthird-party.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEAE1EFA1D24D168286547F /* libthird-party.a */; };
 		5D26B1906EE243EBB55BD495 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E51CEEE6F46A4125842304C1 /* libReactNativeNavigation.a */; };
@@ -113,6 +114,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		318ACDB620976C3F00D53156 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 318ACDB120976C3E00D53156 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		318ACDB820976C3F00D53156 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 318ACDB120976C3E00D53156 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
+			remoteInfo = "RCTPushNotification-tvOS";
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -354,6 +369,8 @@
 		25C548088515495783D2644A /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
 		2608DF613AA447B5B58577C7 /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libCodePush.a; sourceTree = "<group>"; };
 		2D4D54C2AB274917A124EC13 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
+		318ACDB02097687200D53156 /* 馋猫生活.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "馋猫生活.entitlements"; path = "chanmao/馋猫生活.entitlements"; sourceTree = "<group>"; };
+		318ACDB120976C3E00D53156 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		382174EAB4BE4C44A4750517 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		42B70B99995B40128DF2CAB0 /* RealmReact.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RealmReact.xcodeproj; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -399,6 +416,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				318ACDBE20976D3D00D53156 /* libRCTPushNotification.a in Frameworks */,
 				DF23182A1F44EE3F000BC41A /* libRCTWeChat.a in Frameworks */,
 				0B8184750A0A4FB89D8D7597 /* libz.tbd in Frameworks */,
 				FE441D83AB884C26AF13567E /* libc++.tbd in Frameworks */,
@@ -515,6 +533,7 @@
 		13B07FAE1A68108700A75B9A /* chanmao */ = {
 			isa = PBXGroup;
 			children = (
+				318ACDB02097687200D53156 /* 馋猫生活.entitlements */,
 				DFB169741F55E89900C07B63 /* Classes */,
 				DF2317491F44D4ED000BC41A /* font */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -562,6 +581,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		318ACDB220976C3E00D53156 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				318ACDB720976C3F00D53156 /* libRCTPushNotification.a */,
+				318ACDB920976C3F00D53156 /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,6 +611,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				318ACDB120976C3E00D53156 /* RCTPushNotification.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -805,6 +834,12 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = P5WETSWY6J;
 						LastSwiftMigration = 830;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -851,6 +886,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 318ACDB220976C3E00D53156 /* Products */;
+					ProjectRef = 318ACDB120976C3E00D53156 /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -955,6 +994,20 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		318ACDB720976C3F00D53156 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 318ACDB620976C3F00D53156 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		318ACDB920976C3F00D53156 /* libRCTPushNotification-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTPushNotification-tvOS.a";
+			remoteRef = 318ACDB820976C3F00D53156 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -1295,6 +1348,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "chanmao/馋猫生活.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
@@ -1323,6 +1379,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.orderapp;
 				PRODUCT_NAME = "馋猫生活";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/chanmao-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1337,6 +1394,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "chanmao/馋猫生活.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P5WETSWY6J;
@@ -1364,6 +1424,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.orderapp;
 				PRODUCT_NAME = "馋猫生活";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/chanmao-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
