@@ -17,7 +17,7 @@ const AppConstants ={
     // API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',
     API_HISTORYORDER: 'https://chanmao.us/api/cmapp/v2/get_history_list',
     API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
-
+    API_CATEGORY_LIST: 'https://norgta.com/api/cmapp/v2/get_category_list',
 
     API_ADDRESS: Server + 'MobAddress10/addresslist',
     API_CREATE_ADDRESS: Server + 'MobAddress10/Addresscreate',

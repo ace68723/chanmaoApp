@@ -12,6 +12,7 @@ import {
   cme_beforCheckout,
   cme_updateCalculateDeliveryFee,
   cme_getCalculateDeliveryFee,
+  GetUserInfo
 } from '../../../App/Modules/Database';
 
 const RestaurantModule = {
@@ -28,6 +29,24 @@ const RestaurantModule = {
       }
     } catch (e) {
       Alert.errorAlert('菜单未知错误')
+    }
+  },
+  async getTag(){
+   
+    try{
+      let userData = GetUserInfo();
+      let data = await RestaurantApi.getTag(GetUserInfo());
+    
+      if(data.ev_error == 0){ //new api
+        // if(data.result == 0){
+            
+          return data
+        }else{
+          Alert.errorAlert(data.message)
+          return
+        }
+    }catch (e) {
+      console.log(e)
     }
   },
   async beforCheckout(reqData){
