@@ -56,7 +56,7 @@ export default (props) => {
                     <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
                       <Text style={styles.quantity}
                             allowFontScaling={false}>
-                        ${props.dish.price.toFixed(2)} × {props.dish.qty}
+                        ${parseFloat(props.dish.price).toFixed(2)} × {props.dish.qty}
                       </Text>
                     </View>
                   </View>
