@@ -13,59 +13,44 @@ import {
 	Image
 } from 'react-native';
 import CMLabel from '../../../Constants/AppLabel';
+import RestaurantModule from '../../../Modules/RestaurantModule/RestaurantModule';
 const {width,height} = Dimensions.get('window');
 const imageHeight = (width-30)/(3*1.157);
 const defaultTagViewHeight = (imageHeight+6) * 3 + 40+6;
 
 export default class SearchByTag extends Component{
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state={
 			height:defaultTagViewHeight,
-			tags:[
-				{
-					name:'北方菜',
-				},
-				{
-					name:'甜品饮料',
-				},
-				{
-					name:'东北菜',
-				},
-				{
-					name:'港式茶餐厅',
-				},
-				{
-					name:'四川菜',
-				},
-				{
-					name:'面食',
-				},
-				{
-					name:'西餐',
-				},
+			tags:[],
 			
-			],
-
 		}
 
 	}
 	componentDidMount(){
+		RestaurantModule.getTag().then((result) => this.setState({
+			tags: result.ea_category_list,
+		}));
+		
 		this._adjustArrayLength();
 		
 	}
 	_adjustArrayLength(){
 		let num = this.state.tags.length % 3;
+		let row =  Math.ceil(this.state.tags.length/3);
 		let adjustArray = this.state.tags;
 		if(num != 0){
 			for(let i = 0; i < 3 - num; i++){
 				adjustArray.push({})
 			}
-			this.setState({
-				tags: adjustArray,
-				fullTagsViewHeight:(imageHeight+6)* Math.ceil(this.state.tags.length/3)+ 40 + 20,
-			})
+			
 		}
+		this.setState({
+			tags: adjustArray,
+			fullTagsViewHeight:(imageHeight+6)* Math.ceil(this.state.tags.length/3)+ 40 + 20,
+		
+		})
 	}
 	_extendView(){
 		return(
@@ -99,7 +84,7 @@ export default class SearchByTag extends Component{
     _renderTag(tag, index) {
 		if(tag.name){
 			return(
-				<TouchableOpacity style={styles.singleTagView} key={index}>
+				<TouchableOpacity style={styles.singleTagView} key={index} onPress={()=>this.props.onPressTag(tag.name)}>
 					<ImageBackground
 						source={require('../Image/button_menu_open.png')}
 						style={styles.imageStyle}>
@@ -111,7 +96,7 @@ export default class SearchByTag extends Component{
 							{tag.name}
 						</Text>
 					</ImageBackground>
-					<View style={[styles.imageStyle,{position:'absolute', backgroundColor:'black', opacity:0.8}]}></View>
+					<View style={[styles.imageStyle,{position:'absolute'}]}></View>
 				</TouchableOpacity>
 			)
 		}else{

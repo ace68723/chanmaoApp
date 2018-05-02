@@ -33,6 +33,18 @@ const RestaurantApi = {
               .then((res) => res.json())
               .catch((error) => {throw error})
     },
+    getTag(userData){
+        const url = AuthConstants.API_CATEGORY_LIST;
+        let options = {
+            method: 'GET',
+            headers: {},
+        }
+        options.headers.authortoken = userData.token;
+       
+        return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw error})
+    },
     getMenu(reqData){
       const url = AuthConstants.API_MENU
       let options = {

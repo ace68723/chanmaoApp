@@ -49,7 +49,7 @@ export default class SearchByArea extends Component{
 		if(area){
 			return(
 				<TouchableOpacity onPress={()=>{
-  					this.props.setSearchText(area.name);
+					  this.props.onPressArea(area.name);
 					}}>
 					<ImageBackground
                         source={{uri:area.image}}

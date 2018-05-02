@@ -54,9 +54,13 @@ export default class CmRestaurantSearch extends Component {
 				zones: [],
 				length:5,
 				isRendering:'area',
-
+				isTagClicked: false,
+				clickedAreaTag:'',
+				tags:[],
+				categoryList:[],
 			}
 		this.state = Object.assign({},state,HomeStore.getHomeState());
+		this.setState = this.setState.bind(this);
 		this._setSearchText = this._setSearchText.bind(this);
 		this._onChange = this._onChange.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
@@ -82,45 +86,116 @@ export default class CmRestaurantSearch extends Component {
 	_filterNotes(searchText, restaurants) {
 
 		let text = searchText.toLowerCase();
-		return filter(restaurants, (rest) => {
-			if(rest.name){
-				let lowerCaseName = rest.name.toLowerCase();
-				return lowerCaseName.search(text) !== -1;
-			}
-		});
+		let filterArray = [];
+		
+		if(this.state.isTagClicked){
+			filterArray = filter(restaurants, (rest) => {
+				if(rest.name){
+					let lowerCaseName = rest.name.toLowerCase();
+					return lowerCaseName.search(this.state.clickedAreaTag.toLowerCase()) !== -1;
+				}
+			})	
+		}else{
+			filterArray = restaurants;
+		}
+		console.log(text)
+		if(text){
+			filterArray = filter(filterArray, (rest) => {
+				if(rest.name){
+					let lowerCaseName = rest.name.toLowerCase();
+					return lowerCaseName.search(text) !== -1;
+				}
+			});
+		}
+		
+		return filterArray;
 
 	}
   _setSearchText(text) {
-  		if(text){
-				let processedText = WordProcessor.tranStr(text);
-    			let filteredData;
-    			if(text != "All"){
-						filteredData = this._filterNotes(processedText, this.state.allRestaurants);
-    			}else{
-						filteredData = this.state.allRestaurants;
-    			}
-				filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
-    			this.setState({
-    				 searchText: text,
-    				 filteredRestaurant:filteredData,
-    				 isRendering:'restaurant',
-    				 restaurantList: filteredData.slice(0, 5)
+	 
+		if(text){
+			let processedText = WordProcessor.tranStr(text);
+			let filteredData;
+			if(text != "All"){
+					filteredData = this._filterNotes(processedText, this.state.allRestaurants);
+			}else{
+					filteredData = this.state.allRestaurants;
+			}
+			filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
+		
+			this.setState({
+				searchText: text,
+				filteredRestaurant:filteredData,
+				isRendering:'restaurant',
+				restaurantList: filteredData.slice(0, 5)
+			});
+			
+			
+			//this.refs.searchInput.value = text;
+	  	}else {
+			if(this.state.isTagClicked){
+				this.setState({
+					searchText:'',
+				})
+			}else{
+				this.setState({
+					searchText:'',
+					filteredRestaurant:[],
+					 restaurantList:[],
 				 });
-				this.refs.searchInput.value = text;
-  		} else {
-  			this.setState({
-  				 searchText:'',
-  				 filteredRestaurant:[],
-  				 restaurantList:[],
-  			 });
-  		}
+			}
+		  
+	  }
+	
+  		
   }
   _cleanInput() {
-  		this.setState({
-  			searchText:'',
-  			restaurantList:[],
-  			isRendering:'area'
-  		},()=>this.refs.searchInput.clear());
+	  if(this.state.isTagClicked){
+		this.setState({
+			searchText:'',
+			isRendering:'area'
+		},()=>this.refs.searchInput.clear())
+	  }else{
+		this.setState({
+			searchText:'',
+			restaurantList:[],
+			isRendering:'area'
+		},()=>this.refs.searchInput.clear());
+	  }
+  		
+	}
+	
+	_clickTag(tag){
+	
+		let	filteredData = this._filterNotes(tag, this.state.allRestaurants);
+		filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
+		
+		this.setState({
+			isTagClicked:true,
+			clickedAreaTag:tag,
+			filteredRestaurant:filteredData,
+			isRendering:'restaurant',
+			restaurantList: filteredData.slice(0, 5)
+		})
+	}
+	_delArea(){
+		this.setState({
+			isTagClicked:false,
+			clickedAreaTag:'',
+			restaurantList:[]
+		})
+	}
+	_renderAreaTag(){
+		if(this.state.isTagClicked){
+			return(
+				<View style={[styles.tagView,{width:this.state.clickedAreaTag.length * (1 + 16)^(-2) }]}>
+					<Text style={styles.tagFont}>{this.state.clickedAreaTag}</Text>
+					<TouchableOpacity style={{marginLeft:5,justifyContent:'center',backgroundColor:'rgba(0,0,0,0)'}} onPress={()=>this._delArea()}>
+						<Text style={{fontSize:20, color:'white'}}>×</Text>
+					</TouchableOpacity>
+				</View>
+			);
+		}
 	}
 	_renderSearchInput() {
 		return (
@@ -131,9 +206,10 @@ export default class CmRestaurantSearch extends Component {
 								style={{width: 22, height: 24.5
 								}}
 							/>
+							{this._renderAreaTag()}
 							<TextInput
 								ref={'searchInput'}
-								style={{flex: 1, marginLeft: 10, fontFamily:"FZZhunYuan-M02S", fontSize: 20,}}
+								style={{flex: 1, marginLeft: 10, fontFamily:"FZZhunYuan-M02S", fontSize: 16,}}
 								selectionColor={'#ea7b21'}
 								keyboardType = {'default'}
 								autoCorrect= { false}
@@ -225,8 +301,10 @@ export default class CmRestaurantSearch extends Component {
 		}else{
 			return(
 				<ScrollView style={{flex:1}}>
-					<SearchByTag />
-					<SearchByArea areas={this.state.zones} setSearchText={this._setSearchText}  />
+					<SearchByTag onPressTag={(tag)=>this._clickTag(tag)}/>
+					<SearchByArea 
+						onPressArea={(area)=>this._clickTag(area)}
+						areas={this.state.zones} />
 				</ScrollView>
 			)
 		}
@@ -254,25 +332,41 @@ export default class CmRestaurantSearch extends Component {
 
 const styles = StyleSheet.create({
 	opacityView:{
-    flex:1,
-    opacity: 0.3,
-    backgroundColor:'#000000'
-  },
-  imageTextContainer:{
-    position:'absolute',
-    left:0,
-    top:0,
-    right:0,
-    bottom:0,
-    backgroundColor:'rgba(0,0,0,0)',
-    //flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  imageText: {
-   fontSize: 20,
-   color:'white',
-   alignSelf:'center',
-   fontFamily:'FZZongYi-M05S',
-  },
+		flex:1,
+		opacity: 0.3,
+		backgroundColor:'#000000'
+	},
+	imageTextContainer:{
+		position:'absolute',
+		left:0,
+		top:0,
+		right:0,
+		bottom:0,
+		backgroundColor:'rgba(0,0,0,0)',
+		//flex:1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	imageText: {
+	fontSize: 20,
+	color:'white',
+	alignSelf:'center',
+	fontFamily:'FZZongYi-M05S',
+	},
+	tagView: {
+		height:24, 
+		backgroundColor:'#d0d0d0', 
+		flexDirection:'row',
+		borderRadius:12,
+		borderColor:'#d0d0d0',
+		borderWidth:1,
+		marginLeft:5,
+		marginTop:3,
+		alignItems:'center',
+		paddingHorizontal:5
+	},
+	tagFont:{
+		color:'white',
+		fontWeight:'bold'
+	}
 });
