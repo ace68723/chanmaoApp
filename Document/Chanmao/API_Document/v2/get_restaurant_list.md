@@ -1,24 +1,25 @@
-## 获取商家列表 API 
+## 获取餐馆列表 API 
 
 
 
-|    Tables    |                        说明                         | 默认值 |
-| :----------: | :-------------------------------------------------: | :----: |
-|     URL      |          /api/cmapp/v2/get_restaurant_list          |        |
-| HTTP请求方式 |                         GET                         |        |
-| 是否需要登录 |                         否                          |        |
-| 授权访问限制 |                        暂无                         |        |
-|  授权范围()  |                        暂无                         |        |
-|   支持格式   |                        JSON                         |        |
+|    Tables    |                        说明                        | 默认值 |
+| :----------: | :------------------------------------------------: | :----: |
+|     URL      |         /api/cmapp/v2/get_restaurant_list          |        |
+| HTTP请求方式 |                        GET                         |        |
+| 是否需要登录 |                         否                         |        |
+| 授权访问限制 |                        暂无                        |        |
+|  授权范围()  |                        暂无                        |        |
+|   支持格式   |                        JSON                        |        |
 |   测试接口   | http://norgta.com/api/cmapp/v2/get_restaurant_list |        |
 
 
 表头参数:
 
-| Tables      | 类型及其范围 | 说明          | 默认值        |
-| ----------- | ------------ | ------------- | ------------- |
-| Authortoken | string       | token验证信息 |               |
-| userloc     | string       | 经纬度        | 000000,000000 |
+| Tables      | 类型及其范围 | 说明                  | 默认值        |
+| ----------- | ------------ | --------------------- | ------------- |
+| Authortoken | string       | token验证信息         |               |
+| userloc     | string       | 经纬度                | 000000,000000 |
+| cid         | Number       | categor id (Optional) |               |
 
 返回:
 
@@ -49,27 +50,49 @@ Data Sample
 {
     ev_error	
     ev_message	
-    ea_history_list
+    ea_zone
+    countAd
+    countRR
+    countClose
+    ea_restaurant_list
 }
 ```
 ```
-[{
-	"area": 0,
-	"name": "All",
-	"restaurantList": [{
-		"rid": "76",
-		"name": "麻布小馆(North York)",
-		"desc": "央街最火爆的台湾小吃",
-		"tp": "0",
-		"area": "2",
-		"start_amount": "0.00",
-		"mob_banner": "https://www.chanmao.ca/img/mob_banner/076_20170118.png",
-		"watermark": 0,
-		"rank": 6,
-		"distance": 13342,
-		"start_time": "12:00",
-		"end_time": "02:00",
-		"open": 1
-	}]
-}]
+ea_zone:
+[
+	{
+	    "zone": 3,
+	    "name": "Richmond Hill",
+	    "lat": 43.841084,
+	    "lng": -79.399788,
+	    "image": "https://www.chanmao.ca/img/app/zone/004_20180329.png",
+	    "distance": 2180.953692155
+	},
+]
+```
+```
+ea_restaurant_list:
+[
+	{
+	    "area": 0,
+	    "name": "All",
+	    "restaurantList": [{
+	    	"rid": "76",
+	    	"name": "麻布小馆(North York)",
+	    	"desc": "央街最火爆的台湾小吃",
+	    	"tp": "0",
+	    	"area": "2",
+	    	"start_amount": "0.00",
+	    	"mob_banner": "https://www.chanmao.ca/img/mob_banner/076_20170118.png",
+	    	"watermark": 0,
+	    	"rank": 6,
+	    	"distance": 13342,
+	    	"start_time": "12:00",
+	    	"end_time": "02:00",
+	    	"open": 1,
+		"rank": 1,
+		"zone": 3
+	    }]
+	}
+]
 ```
