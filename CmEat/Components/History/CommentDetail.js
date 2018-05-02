@@ -13,6 +13,7 @@ import {
   TextInput,
   Image,
   ImageBackground,
+  Linking,
   Modal,
   Picker,
   Platform,
