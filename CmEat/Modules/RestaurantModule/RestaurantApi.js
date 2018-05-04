@@ -1,6 +1,7 @@
 'use strict';
 
 const AuthConstants = require( '../AuthModule/AuthConstants');
+const RestaurantConstants = require('./RestaurantConstants');
 import AppConstants from '../../Constants/AppConstants';
 const ERROR_NETWORK   = AuthConstants.ERROR_NETWORK;
 
@@ -34,7 +35,7 @@ const RestaurantApi = {
               .catch((error) => {throw error})
     },
     getTag(userData){
-        const url = AuthConstants.API_CATEGORY_LIST;
+        const url = RestaurantConstants.API_CATEGORY_LIST;
         let options = {
             method: 'GET',
             headers: {},
@@ -60,6 +61,27 @@ const RestaurantApi = {
       // const rid = 5;
       options.body =  JSON.stringify({rid})
       return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw error})
+    },
+    getRestaurantByTag(userData, cid){
+        const url = RestaurantConstants.API_RESTAURANT_LIST;
+        let options = {
+            method:'GET',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json', 
+                
+            }    
+        }
+        options.headers.authortoken = userData.token;
+        if(userData.userloc){
+            options.headers.userloc = userData.userloc
+        }else{
+            options.headers.userloc = "000000,000000"
+        }  
+        options.headers.cid = cid;
+        return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw error})
     },

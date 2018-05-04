@@ -12,9 +12,10 @@ import {
   cme_beforCheckout,
   cme_updateCalculateDeliveryFee,
   cme_getCalculateDeliveryFee,
-  GetUserInfo
+  GetUserInfo,
+  cme_getSelectedAddress
 } from '../../../App/Modules/Database';
-
+import LocationModule from '../../../App/Modules/System/LocationModule';
 const RestaurantModule = {
   async getMenu(io_Data){
     try {
@@ -45,6 +46,25 @@ const RestaurantModule = {
           Alert.errorAlert(data.message)
           return
         }
+    }catch (e) {
+      console.log(e)
+    }
+  },
+  async getRestaurantByTag(cid){
+    try{
+      let userData = GetUserInfo();
+      const selectedAddress = cme_getSelectedAddress();
+      let userlocation;
+      if (selectedAddress) {
+        userlocation =  selectedAddress.loc_la +','+selectedAddress.loc_lo;
+
+      } else {
+        userlocation = await LocationModule.getCurrentPosition();
+      }
+      userData.userloc = userlocation; 
+
+      let data = await RestaurantApi.getRestaurantByTag(userData,cid);
+      return data.ea_restaurant_list;
     }catch (e) {
       console.log(e)
     }

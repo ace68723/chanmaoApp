@@ -11,8 +11,10 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 		bannerList:[],
 		showAnimatedView:false,
     showIntroduction: true,
-    restaurantList: [],
-    zones: [],
+		restaurantList: [],
+		filteredList: [],
+		zones: [],
+		tags:[],
   },
 	emitChange(){
 			this.emit(CHANGE_EVENT)
@@ -34,8 +36,9 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 		 const bannerList = res.homeData.zone1;
 		 const advertisement = res.homeData.zone2;
      const restaurantList = res.restaurantList;
-     const zones = res.zones;
-		 this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones})
+		 const zones = res.zones;
+		 const tags = res.categories;
+		 this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones, tags})
   },
   getRestaurantWithRid(rid){
   		const restaurantData = _find(this.state.restaurantList, {rid:parseInt(rid)});
@@ -43,12 +46,32 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
   },
   getHomeState(){
     return this.state
-  },
+	},
+	saveTags(tags){
+		this.state.tags = tags;
+	},
+	setRestaurantListByTag(res){
+			this.state.filteredList = res;
+	},
+	getTags(){
+			return this.state.tags;
+	},
+	getRestaurantListByTag(){
+			return this.state.filteredList;
+	},
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
 				case AppConstants.GET_HOME_DATA:
-					   HomeStore.saveHomeData(action.res)
+					  HomeStore.saveHomeData(action.res)
              HomeStore.emitChange()
+				break;
+				case AppConstants.GET_TAG:
+						HomeStore.saveTags(action.menuData.ea_category_list)
+						HomeStore.emitChange()
+                break;
+        case AppConstants.GET_RESTAURANT_BY_TAG:
+						HomeStore.setRestaurantListByTag(action.menuData)
+						HomeStore.emitChange()
 				break;
 				// case AppConstants.CHECKOUT:
 				// 				HomeStore.closeMenu();

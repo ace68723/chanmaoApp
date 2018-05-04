@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 // import PickerItem from './PickerItem';
 import AddressCard from './AddressCard';
-import RestaurantStore from '../../Stores/RestaurantStore';
+//import RestaurantStore from '../../Stores/RestaurantStore';
 const deviceHeight = Dimensions.get('window').height;
 
 
@@ -36,14 +36,14 @@ class picker extends Component {
     };
 
     componentDidMount(){
-      RestaurantStore.addChangeListener(this._onChange);
+      //RestaurantStore.addChangeListener(this._onChange);
     }
     componentWillUnmount() {
-      RestaurantStore.removeChangeListener(this._onChange);
+      //RestaurantStore.removeChangeListener(this._onChange);
     }
     _onChange(){
         if(this.props.descriptionKey == 'description'){
-            const dltypeList = RestaurantStore.getCheckoutSate().dltypeList;
+           //const dltypeList = RestaurantStore.getCheckoutSate().dltypeList;
             if(dltypeList){
               this.setState({
                 dltypeList:dltypeList,

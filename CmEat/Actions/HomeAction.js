@@ -23,7 +23,8 @@ export default {
           const restaurantListInfo = await HomeModule.getRestaurantList(reqData);
           const restaurantList = restaurantListInfo.restaurantList;
           const zones = restaurantListInfo.zones;
-
+          const categories = restaurantListInfo.categories;
+          
           let showIntroduction = true;
           const introCount = await cme_getHomeIntroCount();
           if (introCount < 3) {
@@ -32,7 +33,7 @@ export default {
           else {
             showIntroduction = false;
           }
-          const res = {homeData,showIntroduction, restaurantList, zones}
+          const res = {homeData,showIntroduction, restaurantList, zones,categories}
           dispatch({
               actionType: AppConstants.GET_HOME_DATA, res
           });

@@ -3,7 +3,7 @@ import {dispatch, register} from '../Dispatchers/AppDispatcher';
 import AuthModule from '../../App/Modules/AuthModule/Auth';
 import LocationModule from '../Modules/System/LocationModule';
 import RestaurantModule from '../Modules/RestaurantModule/RestaurantModule';
-
+import { cme_getSelectedAddress } from '../../App/Modules/Database';
 
 export default {
 
@@ -23,4 +23,26 @@ export default {
       }catch (e){
       }
     },
+    async getTag(){
+        try{
+            
+            const menuData = await RestaurantModule.getTag();
+        
+            dispatch({
+                actionType: AppConstants.GET_TAG, menuData
+            })
+        }catch (e){
+        }
+    },
+    async getRestaurantByTag(cid){
+        try{
+           
+            const menuData = await RestaurantModule.getRestaurantByTag(cid);
+    
+            dispatch({
+                actionType: AppConstants.GET_RESTAURANT_BY_TAG, menuData
+            })
+        }catch (e){
+        }
+    }
 }

@@ -13,7 +13,8 @@ import {
 	Image
 } from 'react-native';
 import CMLabel from '../../../Constants/AppLabel';
-import RestaurantModule from '../../../Modules/RestaurantModule/RestaurantModule';
+import HomeStore from '../../../Stores/HomeStore';
+import RestaurantAction from '../../../Actions/RestaurantAction';
 const {width,height} = Dimensions.get('window');
 const imageHeight = (width-30)/(3*1.157);
 const defaultTagViewHeight = (imageHeight+6) * 3 + 40+6;
@@ -23,18 +24,22 @@ export default class SearchByTag extends Component{
 		super(props);
 		this.state={
 			height:defaultTagViewHeight,
-			tags:[],
+			tags:props.tags,
 			
 		}
-
+		this._onChange = this._onChange.bind(this);
 	}
+
 	componentDidMount(){
-		RestaurantModule.getTag().then((result) => this.setState({
-			tags: result.ea_category_list,
-		}));
-		
 		this._adjustArrayLength();
-		
+		HomeStore.addChangeListener(this._onChange);
+	
+	}
+	componentWillUnmount(){
+		HomeStore.removeChangeListener(this._onChange);
+	}
+	_onChange(){
+	
 	}
 	_adjustArrayLength(){
 		let num = this.state.tags.length % 3;
@@ -52,13 +57,17 @@ export default class SearchByTag extends Component{
 		
 		})
 	}
+	_pressTag(tag){
+		this.props.onPressTag(tag);
+		RestaurantAction.getRestaurantByTag(tag.cid);
+	}
 	_extendView(){
 		return(
 			<TouchableOpacity 
 				onPress={()=>{
 					this.setState({height:this.state.height == defaultTagViewHeight  ? this.state.fullTagsViewHeight  : defaultTagViewHeight })
 				}}
-				style={{width:width, height:40, 
+				style={{width:width, height:42, 
 					flexDirection:'row' , 
 					position:'absolute', 
 					top: this.state.height,
@@ -84,13 +93,13 @@ export default class SearchByTag extends Component{
     _renderTag(tag, index) {
 		if(tag.name){
 			return(
-				<TouchableOpacity style={styles.singleTagView} key={index} onPress={()=>this.props.onPressTag(tag.name)}>
+				<TouchableOpacity style={styles.singleTagView} key={index} onPress={()=>this._pressTag(tag)}>
 					<ImageBackground
-						source={require('../Image/button_menu_open.png')}
+						source={{uri:tag.mob_banner}}
 						style={styles.imageStyle}>
 						<Text style={{backgroundColor:"rgba(0,0,0,0)",
 													color:"#ffffff",
-										fontSize:12,
+										fontSize:18,
 										fontFamily:'FZZongYi-M05S'}}
 									allowFontScaling={false}>
 							{tag.name}
@@ -109,6 +118,7 @@ export default class SearchByTag extends Component{
 		
 	}
     _renderTags() {
+	
 		let currentHeight = this.state.height;
 		return(	
 			<View style={{height:currentHeight,flexWrap:'wrap',flexDirection:'row',justifyContent:'center'}}>

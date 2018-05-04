@@ -74,9 +74,11 @@ const  HomeMoule = {
           const res = await HomeApi.getRestaurantList(reqData);
           let restaurantList = [];
           let zones = [];
+          let categories  = [];
           if (res.ev_error == 0) {
             restaurantList = res.ea_restaurant_list;
             zones = res.ea_zone;
+            categories = res.ea_category_list;
           }
           // if(res.result == 0){
           //   areaList = res.area;
@@ -87,7 +89,7 @@ const  HomeMoule = {
           //     // console.log(newRestaurantList)
           //   })
           // }
-          return {restaurantList, zones};
+          return {restaurantList, zones, categories};
         } catch (e) {
           console.log(e)
         }

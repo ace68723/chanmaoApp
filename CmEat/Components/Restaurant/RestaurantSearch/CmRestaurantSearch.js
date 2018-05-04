@@ -24,6 +24,7 @@ import {
 } from 'lodash';
 import HomeStore from '../../../Stores/HomeStore';
 import HomeAction from '../../../Actions/HomeAction';
+import RestaurantAction from '../../../Actions/RestaurantAction';
 import RestaurantCard from '../RestaurantCard';
 import WordProcessor from '../../WordProcess/WordProcessor';
 import CMLabel from '../../../Constants/AppLabel'
@@ -46,59 +47,61 @@ export default class CmRestaurantSearch extends Component {
 
   constructor(props) {
         super(props);
-        const state = {
+        this.state = {
 				searchText:'',
 				filteredRestaurant:[],
 				restaurantList: [],
 				allRestaurants: [],
 				zones: [],
 				length:5,
-				isRendering:'area',
 				isTagClicked: false,
 				clickedAreaTag:'',
+				clickedFlavorTag:'',
 				tags:[],
 				categoryList:[],
 			}
-		this.state = Object.assign({},state,HomeStore.getHomeState());
+		
 		this.setState = this.setState.bind(this);
 		this._setSearchText = this._setSearchText.bind(this);
 		this._onChange = this._onChange.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
 		this._keyExtractor = this._keyExtractor.bind(this);
-  }
+	}
+
 	componentDidMount() {
-		// HomeAction.getHomeData();
 		HomeStore.addChangeListener(this._onChange);
 	}
 	componentWillUnmount() {
 		HomeStore.removeChangeListener(this._onChange);
 	}
+
 	_onChange() {
 		const newState = Object.assign({},HomeStore.getHomeState());
 		let zones = newState.zones;
+		let tags = newState.tags;
 		let allRestaurants = newState.restaurantList;
-		this.setState(Object.assign(newState,{restaurantList: [], allRestaurants: allRestaurants, zones: zones}));
-
+		let restaurants = HomeStore.getRestaurantListByTag();
+		if(this.state.isTagClicked){
+			this.setState({filteredRestaurant:restaurants,restaurantList:restaurants});
+	
+		}else{
+			this.setState(Object.assign(newState,{filteredRestaurant:[],
+				restaurantList:[], allRestaurants: allRestaurants, zones: zones}));
+	
+		}
+		
 	}
-    // _goBack(){
-    //     this.props.navigator.pop({animated: false,});
-	// }
+
 	_filterNotes(searchText, restaurants) {
 
 		let text = searchText.toLowerCase();
 		let filterArray = [];
 		
 		if(this.state.isTagClicked){
-			filterArray = filter(restaurants, (rest) => {
-				if(rest.name){
-					let lowerCaseName = rest.name.toLowerCase();
-					return lowerCaseName.search(this.state.clickedAreaTag.toLowerCase()) !== -1;
-				}
-			})	
+			filterArray = this.state.filteredRestaurant;	
 		}else{
 			filterArray = restaurants;
 		}
-		console.log(text)
 		if(text){
 			filterArray = filter(filterArray, (rest) => {
 				if(rest.name){
@@ -107,41 +110,39 @@ export default class CmRestaurantSearch extends Component {
 				}
 			});
 		}
-		
 		return filterArray;
-
+		
 	}
   _setSearchText(text) {
 	 
 		if(text){
 			let processedText = WordProcessor.tranStr(text);
 			let filteredData;
-			if(text != "All"){
-					filteredData = this._filterNotes(processedText, this.state.allRestaurants);
+			
+			if(this.state.isTagClicked){
+				filteredData = this._filterNotes(processedText, this.state.filteredRestaurant);
 			}else{
-					filteredData = this.state.allRestaurants;
+				filteredData = this._filterNotes(processedText, this.state.allRestaurants);
 			}
+			
 			filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
 		
 			this.setState({
 				searchText: text,
-				filteredRestaurant:filteredData,
-				isRendering:'restaurant',
-				restaurantList: filteredData.slice(0, 5)
+				restaurantList: filteredData//filteredData.slice(0, 5)
 			});
-			
-			
 			//this.refs.searchInput.value = text;
 	  	}else {
 			if(this.state.isTagClicked){
 				this.setState({
 					searchText:'',
+					restaurantList: this.state.filteredRestaurant
 				})
 			}else{
 				this.setState({
 					searchText:'',
 					filteredRestaurant:[],
-					 restaurantList:[],
+					restaurantList:[],
 				 });
 			}
 		  
@@ -153,19 +154,32 @@ export default class CmRestaurantSearch extends Component {
 	  if(this.state.isTagClicked){
 		this.setState({
 			searchText:'',
-			isRendering:'area'
 		},()=>this.refs.searchInput.clear())
 	  }else{
 		this.setState({
 			searchText:'',
 			restaurantList:[],
-			isRendering:'area'
 		},()=>this.refs.searchInput.clear());
 	  }
   		
 	}
-	
 	_clickTag(tag){
+		try{
+			
+			RestaurantAction.getRestaurantByTag(tag.cid);
+			
+
+			this.setState({
+				isTagClicked:true,
+				clickedFlavorTag:tag.name,
+			
+			})
+		}catch(e){
+			console.log(e)
+		}
+		
+	}
+	_clickArea(tag){
 	
 		let	filteredData = this._filterNotes(tag, this.state.allRestaurants);
 		filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
@@ -174,24 +188,29 @@ export default class CmRestaurantSearch extends Component {
 			isTagClicked:true,
 			clickedAreaTag:tag,
 			filteredRestaurant:filteredData,
-			isRendering:'restaurant',
-			restaurantList: filteredData.slice(0, 5)
+			restaurantList: filteredData//filteredData.slice(0, 5)
 		})
 	}
 	_delArea(){
 		this.setState({
 			isTagClicked:false,
 			clickedAreaTag:'',
+			clickedFlavorTag:'',
 			restaurantList:[]
+		},()=>{
+			if(this.state.searchText != ''){
+				this._filterNotes(this.state.searchText, this.state.allRestaurants);
+			}
 		})
 	}
 	_renderAreaTag(){
 		if(this.state.isTagClicked){
+
 			return(
 				<View style={[styles.tagView,{width:this.state.clickedAreaTag.length * (1 + 16)^(-2) }]}>
-					<Text style={styles.tagFont}>{this.state.clickedAreaTag}</Text>
+					<Text style={styles.tagFont} allowFontScaling={false}>{this.state.clickedAreaTag!=''?this.state.clickedAreaTag:this.state.clickedFlavorTag}</Text>
 					<TouchableOpacity style={{marginLeft:5,justifyContent:'center',backgroundColor:'rgba(0,0,0,0)'}} onPress={()=>this._delArea()}>
-						<Text style={{fontSize:20, color:'white'}}>×</Text>
+						<Text allowFontScaling={false} style={{fontSize:20, color:'white'}}>×</Text>
 					</TouchableOpacity>
 				</View>
 			);
@@ -240,6 +259,13 @@ export default class CmRestaurantSearch extends Component {
 										navigator={this.props.navigator}/>
 				}
 	  }
+	//   onEndReached = {({distanceFromEnd})=>{
+
+	// 	this.setState({
+	// 	length: this.state.length + 5,
+	// 	restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
+	// 	})
+	// }}
 	_keyExtractor = (item, index) => index;
 	_renderRestaurants() {
 			return(
@@ -255,15 +281,7 @@ export default class CmRestaurantSearch extends Component {
 				initialNumToRender={1}
 				onEndReachedThreshold={0.5}
 				extraData={this.state.restaurantList}
-				onEndReached = {({distanceFromEnd})=>{
-
-					this.setState({
-					length: this.state.length + 5,
-					restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
-					})
-				}}
-
-			/>
+				/>
 			)
 	  }
   _renderHeader(label) {
@@ -298,12 +316,27 @@ export default class CmRestaurantSearch extends Component {
 					{this._renderRestaurants()}
 				</View>
 			)
+		}else if(this.state.isTagClicked){
+			return(
+				<View style={{justifyContent:'center',
+							alignContent:'center',
+							alignSelf:'center',
+							marginTop:100
+							}}>
+					<Text style={{fontSize:16,
+												margin:3,
+												fontFamily:'FZZongYi-M05S'}}
+								allowFontScaling={false}>
+								找不到关于 "{this.state.searchText}" 的东西哦
+					</Text>
+				</View>
+			)
 		}else{
 			return(
 				<ScrollView style={{flex:1}}>
-					<SearchByTag onPressTag={(tag)=>this._clickTag(tag)}/>
+					<SearchByTag onPressTag={(tag)=>this._clickTag(tag)} tags={this.state.tags}/>
 					<SearchByArea 
-						onPressArea={(area)=>this._clickTag(area)}
+						onPressArea={(area)=>this._clickArea(area)}
 						areas={this.state.zones} />
 				</ScrollView>
 			)
@@ -318,11 +351,10 @@ export default class CmRestaurantSearch extends Component {
 						style={{flex:1,backgroundColor:"#ffffff"}}
 						behavior={Platform.OS === 'ios'?"padding":null}
 						>
-					{this._renderSearchInput()}
-          <View style={{borderBottomWidth: StyleSheet.hairlineWidth,
+				{this._renderSearchInput()}
+          		<View style={{borderBottomWidth: StyleSheet.hairlineWidth,
                         borderBottomColor: '#bdc8d9',}}/>
-					{this._renderResult()}
-
+				{this._renderResult()}
 			</KeyboardAvoidingView>
 
 		)
