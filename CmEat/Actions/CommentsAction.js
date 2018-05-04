@@ -11,7 +11,7 @@ export default {
         const data = await HistoryModule.addReview(lo_data);
         data.toStoreReview = false;
         const commentCount = await cme_getCommentCount();
-        if (commentCount === 0) {
+        if (commentCount == 0) {
           if (io_data.driver_score === 5 && io_data.restaurant_score === 5) {
             data.toStoreReview = true;
           }
