@@ -3,12 +3,13 @@ import React, {
 	Component,
 } from 'react';
 import {
+	Animated,
 	Dimensions,
 	StyleSheet,
 	Text,
 	TextInput,
 	TouchableOpacity,
-  	View,
+  View,
 	ImageBackground,
 	Image
 } from 'react-native';
@@ -17,29 +18,23 @@ import HomeStore from '../../../Stores/HomeStore';
 import RestaurantAction from '../../../Actions/RestaurantAction';
 const {width,height} = Dimensions.get('window');
 const imageHeight = (width-30)/(3*1.157);
-const defaultTagViewHeight = (imageHeight+6) * 3 + 40+6;
+const defaultTagViewHeight = (imageHeight+6) * 3 + 6;
 
 export default class SearchByTag extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			height:defaultTagViewHeight,
+			height: new Animated.Value(defaultTagViewHeight),
 			tags:props.tags,
-			
+			extendViewText: "更多分类",
+			showingMoreCategories: false
 		}
-		this._onChange = this._onChange.bind(this);
+		this._extendViewOnClick = this._extendViewOnClick.bind(this);
+		this._extendView = this._extendView.bind(this);
 	}
 
 	componentDidMount(){
 		this._adjustArrayLength();
-		HomeStore.addChangeListener(this._onChange);
-	
-	}
-	componentWillUnmount(){
-		HomeStore.removeChangeListener(this._onChange);
-	}
-	_onChange(){
-	
 	}
 	_adjustArrayLength(){
 		let num = this.state.tags.length % 3;
@@ -49,38 +44,50 @@ export default class SearchByTag extends Component{
 			for(let i = 0; i < 3 - num; i++){
 				adjustArray.push({})
 			}
-			
+
 		}
 		this.setState({
-			tags: adjustArray,
-			fullTagsViewHeight:(imageHeight+6)* Math.ceil(this.state.tags.length/3)+ 40 + 20,
-		
+			fullTagsViewHeight:(imageHeight+6)* Math.ceil(this.state.tags.length/3),
 		})
 	}
 	_pressTag(tag){
 		this.props.onPressTag(tag);
 		RestaurantAction.getRestaurantByTag(tag.cid);
 	}
+	_extendViewOnClick() {
+		if (this.state.showingMoreCategories) {
+			this.props.scrollToTop();
+		}
+		setTimeout(() => {
+			const animationDuration = 500;
+			Animated.timing(this.state.height, {
+					toValue: this.state.showingMoreCategories ? defaultTagViewHeight : this.state.fullTagsViewHeight,
+					duration: animationDuration
+			}).start();
+			this.setState({extendViewText: this.state.showingMoreCategories  ? "更多分类" : "收起",
+										 showingMoreCategories: !this.state.showingMoreCategories});
+		}, 300);
+	}
 	_extendView(){
 		return(
-			<TouchableOpacity 
-				onPress={()=>{
-					this.setState({height:this.state.height == defaultTagViewHeight  ? this.state.fullTagsViewHeight  : defaultTagViewHeight })
-				}}
-				style={{width:width, height:42, 
-					flexDirection:'row' , 
-					position:'absolute', 
-					top: this.state.height,
-					justifyContent:'center',
-					alignItems:'center',
-					backgroundColor:'white'}}>
-				<Text style={{color:'#ff8b00',fontFamily:"FZZhunYuan-M02S"}}>更多分类</Text>
-				<Image source={this.state.height == defaultTagViewHeight? require('../Image/down-arrow.png') : require('../Image/up-arrow.png')}
-					style={{marginLeft:5,width:10,height:10}}/>
-			</TouchableOpacity>
-		)	
+			<View style={{width:width,
+										height:42,
+										backgroundColor:'white'}}>
+				<TouchableOpacity
+					activeOpacity={0.4}
+					onPress={this._extendViewOnClick}
+					style={{flex: 1,
+									flexDirection:'row' ,
+									justifyContent:'center',
+									alignItems:'center',}}>
+					<Text style={{color:'#ff8b00',fontFamily:"FZZhunYuan-M02S"}}>{this.state.extendViewText}</Text>
+					<Image source={this.state.showingMoreCategories ? require('../Image/up-arrow.png') : require('../Image/down-arrow.png')}
+						style={{marginLeft:5,width:10,height:10}}/>
+				</TouchableOpacity>
+			</View>
+		)
 	}
-    _renderHeader() {	
+    _renderHeader() {
 		return(
 			<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
 				<Text style={{fontSize:18,fontFamily:"FZZhunYuan-M02S"}}
@@ -96,7 +103,8 @@ export default class SearchByTag extends Component{
 				<TouchableOpacity style={styles.singleTagView} key={index} onPress={()=>this._pressTag(tag)}>
 					<ImageBackground
 						source={{uri:tag.mob_banner}}
-						style={styles.imageStyle}>
+						style={styles.imageStyle}
+						imageStyle={{ borderRadius: 5}}>
 						<Text style={{backgroundColor:"rgba(0,0,0,0)",
 													color:"#ffffff",
 										fontSize:18,
@@ -111,23 +119,23 @@ export default class SearchByTag extends Component{
 		}else{
 			return(
 				<View key={index} style={styles.singleTagView}>
-					
+
 				</View>
 			)
 		}
-		
+
 	}
     _renderTags() {
-	
+
 		let currentHeight = this.state.height;
-		return(	
-			<View style={{height:currentHeight,flexWrap:'wrap',flexDirection:'row',justifyContent:'center'}}>
+		return(
+			<Animated.View style={{height:currentHeight,flexWrap:'wrap',flexDirection:'row',justifyContent:'center'}}>
 				{
 					this.state.tags.map((tag, index)=>{return this._renderTag(tag, index)})
 				}
-			</View>
-				
-			
+			</Animated.View>
+
+
 		)
     }
     render(){
@@ -141,7 +149,7 @@ export default class SearchByTag extends Component{
     }
 }
 const styles = StyleSheet.create({
-	singleTagView:{	
+	singleTagView:{
 		marginHorizontal:3,
 		marginTop:6,
 		width:(width-30)/3,

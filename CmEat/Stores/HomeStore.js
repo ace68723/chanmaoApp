@@ -27,6 +27,10 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
         updatePosition:false,
     		currentTab:1,
     		bannerList:[],
+        restaurantList: [],
+    		filteredList: [],
+    		zones: [],
+    		tags:[],
     		showAnimatedView:false,
       }
 			this.removeListener(CHANGE_EVENT, callback)

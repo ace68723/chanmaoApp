@@ -60,12 +60,11 @@ export default class CmRestaurantSearch extends Component {
 				tags:[],
 				categoryList:[],
 			}
-		
-		this.setState = this.setState.bind(this);
 		this._setSearchText = this._setSearchText.bind(this);
 		this._onChange = this._onChange.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
 		this._keyExtractor = this._keyExtractor.bind(this);
+		this._scrollToTop = this._scrollToTop.bind(this);
 	}
 
 	componentDidMount() {
@@ -83,22 +82,22 @@ export default class CmRestaurantSearch extends Component {
 		let restaurants = HomeStore.getRestaurantListByTag();
 		if(this.state.isTagClicked){
 			this.setState({filteredRestaurant:restaurants,restaurantList:restaurants});
-	
+
 		}else{
 			this.setState(Object.assign(newState,{filteredRestaurant:[],
 				restaurantList:[], allRestaurants: allRestaurants, zones: zones}));
-	
+
 		}
-		
+
 	}
 
 	_filterNotes(searchText, restaurants) {
 
 		let text = searchText.toLowerCase();
 		let filterArray = [];
-		
+
 		if(this.state.isTagClicked){
-			filterArray = this.state.filteredRestaurant;	
+			filterArray = this.state.filteredRestaurant;
 		}else{
 			filterArray = restaurants;
 		}
@@ -111,22 +110,22 @@ export default class CmRestaurantSearch extends Component {
 			});
 		}
 		return filterArray;
-		
+
 	}
   _setSearchText(text) {
-	 
+
 		if(text){
 			let processedText = WordProcessor.tranStr(text);
 			let filteredData;
-			
+
 			if(this.state.isTagClicked){
 				filteredData = this._filterNotes(processedText, this.state.filteredRestaurant);
 			}else{
 				filteredData = this._filterNotes(processedText, this.state.allRestaurants);
 			}
-			
+
 			filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
-		
+
 			this.setState({
 				searchText: text,
 				restaurantList: filteredData//filteredData.slice(0, 5)
@@ -145,45 +144,45 @@ export default class CmRestaurantSearch extends Component {
 					restaurantList:[],
 				 });
 			}
-		  
+
 	  }
-	
-  		
+
+
   }
   _cleanInput() {
 	  if(this.state.isTagClicked){
 		this.setState({
 			searchText:'',
-		},()=>this.refs.searchInput.clear())
+		})
 	  }else{
 		this.setState({
 			searchText:'',
 			restaurantList:[],
-		},()=>this.refs.searchInput.clear());
+		});
 	  }
-  		
+
 	}
 	_clickTag(tag){
 		try{
-			
+
 			RestaurantAction.getRestaurantByTag(tag.cid);
-			
+
 
 			this.setState({
 				isTagClicked:true,
 				clickedFlavorTag:tag.name,
-			
+
 			})
 		}catch(e){
 			console.log(e)
 		}
-		
+
 	}
 	_clickArea(tag){
-	
+
 		let	filteredData = this._filterNotes(tag, this.state.allRestaurants);
 		filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
-		
+
 		this.setState({
 			isTagClicked:true,
 			clickedAreaTag:tag,
@@ -203,16 +202,20 @@ export default class CmRestaurantSearch extends Component {
 			}
 		})
 	}
+	_scrollToTop() {
+		this.refs.searchPage.scrollTo({x: 0, y: 0, animated: true});
+	}
 	_renderAreaTag(){
 		if(this.state.isTagClicked){
 
 			return(
-				<View style={[styles.tagView,{width:this.state.clickedAreaTag.length * (1 + 16)^(-2) }]}>
+				<TouchableOpacity style={[styles.tagView,{width:this.state.clickedAreaTag.length * (1 + 16)^(-2) }]}
+													onPress={()=>this._delArea()}>
 					<Text style={styles.tagFont} allowFontScaling={false}>{this.state.clickedAreaTag!=''?this.state.clickedAreaTag:this.state.clickedFlavorTag}</Text>
-					<TouchableOpacity style={{marginLeft:5,justifyContent:'center',backgroundColor:'rgba(0,0,0,0)'}} onPress={()=>this._delArea()}>
+					<View style={{marginLeft:5,justifyContent:'center',backgroundColor:'rgba(0,0,0,0)'}}>
 						<Text allowFontScaling={false} style={{fontSize:20, color:'white'}}>×</Text>
-					</TouchableOpacity>
-				</View>
+					</View>
+				</TouchableOpacity>
 			);
 		}
 	}
@@ -270,17 +273,17 @@ export default class CmRestaurantSearch extends Component {
 	_renderRestaurants() {
 			return(
 				<FlatList
-				style={styles.scrollView}
-				key={this.props.index}
-				data={this.state.restaurantList}
-				keyboardDismissMode={"on-drag"}
-				keyboardShouldPersistTaps={"always"}
-				renderItem={(res) => this._renderRestaurant(res)}
-				keyExtractor={this._keyExtractor}
-				removeClippedSubviews={true}
-				initialNumToRender={1}
-				onEndReachedThreshold={0.5}
-				extraData={this.state.restaurantList}
+					style={styles.scrollView}
+					key={this.props.index}
+					data={this.state.restaurantList}
+					keyboardDismissMode={"on-drag"}
+					keyboardShouldPersistTaps={"always"}
+					renderItem={(res) => this._renderRestaurant(res)}
+					keyExtractor={this._keyExtractor}
+					removeClippedSubviews={true}
+					initialNumToRender={1}
+					onEndReachedThreshold={0.5}
+					extraData={this.state.restaurantList}
 				/>
 			)
 	  }
@@ -308,7 +311,7 @@ export default class CmRestaurantSearch extends Component {
 		}
 
   }
-	
+
 	_renderResult() {
 		if(this.state.restaurantList.length>0){
 			return(
@@ -333,9 +336,14 @@ export default class CmRestaurantSearch extends Component {
 			)
 		}else{
 			return(
-				<ScrollView style={{flex:1}}>
-					<SearchByTag onPressTag={(tag)=>this._clickTag(tag)} tags={this.state.tags}/>
-					<SearchByArea 
+				<ScrollView
+					style={{flex:1}}
+					ref={'searchPage'}>
+					<SearchByTag
+						onPressTag={(tag)=>this._clickTag(tag)}
+						scrollToTop={this._scrollToTop}
+						tags={this.state.tags}/>
+					<SearchByArea
 						onPressArea={(area)=>this._clickArea(area)}
 						areas={this.state.zones} />
 				</ScrollView>
@@ -386,14 +394,13 @@ const styles = StyleSheet.create({
 	fontFamily:'FZZongYi-M05S',
 	},
 	tagView: {
-		height:24, 
-		backgroundColor:'#d0d0d0', 
+		height:24,
+		backgroundColor:'#d0d0d0',
 		flexDirection:'row',
 		borderRadius:12,
 		borderColor:'#d0d0d0',
 		borderWidth:1,
-		marginLeft:5,
-		marginTop:3,
+		marginLeft:10,
 		alignItems:'center',
 		paddingHorizontal:5
 	},
