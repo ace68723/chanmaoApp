@@ -219,15 +219,27 @@ export default class CmRestaurantSearch extends Component {
 			);
 		}
 	}
+	_renderReturnButton(){
+		let isSearching = this.state.isTagClicked || this.state.searchText.length > 0;
+		return(
+			<TouchableOpacity 
+					onPress={()=>{
+						this._delArea();
+						this._cleanInput();}}
+					disabled={!isSearching} >
+				<Image
+								source={isSearching ? require('../Image/icon-back.png'): require('../Image/icon_search_input.png')}
+								style={isSearching ? {width: 20, height: 20, marginTop:2} : {width: 22, height: 24.5}}
+							/>
+			</TouchableOpacity>
+			
+		)
+	}
 	_renderSearchInput() {
 		return (
 			<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', height: headerHeight}}>
 					<View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-start', marginLeft: 20, marginTop: marginTop}}>
-							<Image
-								source={require('../Image/icon_search_input.png')}
-								style={{width: 22, height: 24.5
-								}}
-							/>
+							{this._renderReturnButton()}
 							{this._renderAreaTag()}
 							<TextInput
 								ref={'searchInput'}
@@ -319,7 +331,7 @@ export default class CmRestaurantSearch extends Component {
 					{this._renderRestaurants()}
 				</View>
 			)
-		}else if(this.state.isTagClicked){
+		}else if(this.state.searchText.length > 0){
 			return(
 				<View style={{justifyContent:'center',
 							alignContent:'center',
