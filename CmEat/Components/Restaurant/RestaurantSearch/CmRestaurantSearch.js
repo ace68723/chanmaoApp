@@ -207,7 +207,8 @@ export default class CmRestaurantSearch extends Component {
 			restaurantList:[]
 		},()=>{
 			if(this.state.searchText != ''){
-				this._filterNotes(this.state.searchText, this.state.allRestaurants);
+				//this._filterNotes(this.state.searchText, this.state.allRestaurants);
+				this._setSearchText(this.state.searchText)
 			}
 		})
 	}
