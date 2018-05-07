@@ -83,7 +83,7 @@ export default class CmRestaurantSearch extends Component {
 		let restaurants = HomeStore.getRestaurantListByTag();
 		if(this.state.isTagClicked){
 			this.setState({filteredRestaurant:restaurants,restaurantList:restaurants});
-		
+
 		}else{
 			this.setState(Object.assign(newState,{filteredRestaurant:[],
 				restaurantList:[], allRestaurants: allRestaurants, zones: zones}));
@@ -214,17 +214,21 @@ export default class CmRestaurantSearch extends Component {
 	}
 	_scrollToTop() {
 		this.refs.searchPage.scrollTo({x: 0, y: 0, animated: true});
+		// Added this timeout to fix blank section b/c animation
+		setTimeout(() => {
+			this.refs.searchPage.scrollTo({x: 0, y: 1, animated: true});
+		}, 500);
 	}
 	_renderTag(){
 		if(this.state.isTagClicked){
 			let clickedTag;
-			
+
 			if(this.state.clickedAreaTag.name){
 				clickedTag = this.state.clickedAreaTag;
 			}else{
 				clickedTag = this.state.clickedFlavorTag;
 			}
-		
+
 			return(
 				<TouchableOpacity style={[styles.tagView,{width: clickedTag.name.length * (1 + 16)^(-2) }]}
 						onPress={()=>this._delArea()}>
@@ -239,7 +243,7 @@ export default class CmRestaurantSearch extends Component {
 	_renderReturnButton(){
 		let isSearching = this.state.isTagClicked || this.state.searchText.length > 0;
 		return(
-			<TouchableOpacity 
+			<TouchableOpacity
 					style={{flex:0.1,justifyContent:'center',height:headerHeight}}
 					onPress={()=>this._clearAll()}
 					disabled={!isSearching} >
@@ -248,7 +252,7 @@ export default class CmRestaurantSearch extends Component {
 								style={[isSearching ? {width: 20, height: 20} : {width: 22, height: 24.5},{marginLeft:10,marginTop: marginTop}]}
 							/>
 			</TouchableOpacity>
-			
+
 		)
 	}
 	_renderSearchInput() {
