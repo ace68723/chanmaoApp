@@ -55,8 +55,8 @@ export default class CmRestaurantSearch extends Component {
 				zones: [],
 				length:5,
 				isTagClicked: false,
-				clickedAreaTag:'',
-				clickedFlavorTag:'',
+				clickedAreaTag:{},
+				clickedFlavorTag:{},
 				tags:[],
 				categoryList:[],
 			}
@@ -65,6 +65,7 @@ export default class CmRestaurantSearch extends Component {
 		this._renderRestaurant = this._renderRestaurant.bind(this);
 		this._keyExtractor = this._keyExtractor.bind(this);
 		this._scrollToTop = this._scrollToTop.bind(this);
+		this._clearAll = this._clearAll.bind(this);
 	}
 
 	componentDidMount() {
@@ -82,7 +83,7 @@ export default class CmRestaurantSearch extends Component {
 		let restaurants = HomeStore.getRestaurantListByTag();
 		if(this.state.isTagClicked){
 			this.setState({filteredRestaurant:restaurants,restaurantList:restaurants});
-
+		
 		}else{
 			this.setState(Object.assign(newState,{filteredRestaurant:[],
 				restaurantList:[], allRestaurants: allRestaurants, zones: zones}));
@@ -153,34 +154,33 @@ export default class CmRestaurantSearch extends Component {
 	  if(this.state.isTagClicked){
 		this.setState({
 			searchText:'',
+			restaurantList: this.state.filteredRestaurant,
 		})
 	  }else{
 		this.setState({
 			searchText:'',
 			restaurantList:[],
+			filteredRestaurant:[],
 		});
 	  }
 
 	}
 	_clickTag(tag){
 		try{
-
 			RestaurantAction.getRestaurantByTag(tag.cid);
-
 
 			this.setState({
 				isTagClicked:true,
-				clickedFlavorTag:tag.name,
+				clickedFlavorTag:tag,
 
 			})
 		}catch(e){
 			console.log(e)
 		}
-
 	}
 	_clickArea(tag){
 
-		let	filteredData = this._filterNotes(tag, this.state.allRestaurants);
+		let	filteredData = this._filterNotes(tag.name, this.state.allRestaurants);
 		filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
 
 		this.setState({
@@ -190,11 +190,20 @@ export default class CmRestaurantSearch extends Component {
 			restaurantList: filteredData//filteredData.slice(0, 5)
 		})
 	}
+	_clearAll(){
+		this.setState({
+			isTagClicked:false,
+			clickedAreaTag:{},
+			clickedFlavorTag:{},
+			restaurantList:[],
+			searchText:'',
+		})
+	}
 	_delArea(){
 		this.setState({
 			isTagClicked:false,
-			clickedAreaTag:'',
-			clickedFlavorTag:'',
+			clickedAreaTag:{},
+			clickedFlavorTag:{},
 			restaurantList:[]
 		},()=>{
 			if(this.state.searchText != ''){
@@ -205,13 +214,20 @@ export default class CmRestaurantSearch extends Component {
 	_scrollToTop() {
 		this.refs.searchPage.scrollTo({x: 0, y: 0, animated: true});
 	}
-	_renderAreaTag(){
+	_renderTag(){
 		if(this.state.isTagClicked){
-
+			let clickedTag;
+			
+			if(this.state.clickedAreaTag.name){
+				clickedTag = this.state.clickedAreaTag;
+			}else{
+				clickedTag = this.state.clickedFlavorTag;
+			}
+		
 			return(
-				<TouchableOpacity style={[styles.tagView,{width:this.state.clickedAreaTag.length * (1 + 16)^(-2) }]}
-													onPress={()=>this._delArea()}>
-					<Text style={styles.tagFont} allowFontScaling={false}>{this.state.clickedAreaTag!=''?this.state.clickedAreaTag:this.state.clickedFlavorTag}</Text>
+				<TouchableOpacity style={[styles.tagView,{width: clickedTag.name.length * (1 + 16)^(-2) }]}
+						onPress={()=>this._delArea()}>
+					<Text style={styles.tagFont} allowFontScaling={false}>{clickedTag.name}</Text>
 					<View style={{marginLeft:5,justifyContent:'center',backgroundColor:'rgba(0,0,0,0)'}}>
 						<Text allowFontScaling={false} style={{fontSize:20, color:'white'}}>×</Text>
 					</View>
@@ -223,13 +239,12 @@ export default class CmRestaurantSearch extends Component {
 		let isSearching = this.state.isTagClicked || this.state.searchText.length > 0;
 		return(
 			<TouchableOpacity 
-					onPress={()=>{
-						this._delArea();
-						this._cleanInput();}}
+					style={{flex:0.1,justifyContent:'center',height:headerHeight}}
+					onPress={()=>this._clearAll()}
 					disabled={!isSearching} >
 				<Image
 								source={isSearching ? require('../Image/icon-back.png'): require('../Image/icon_search_input.png')}
-								style={isSearching ? {width: 20, height: 20, marginTop:2} : {width: 22, height: 24.5}}
+								style={[isSearching ? {width: 20, height: 20} : {width: 22, height: 24.5},{marginLeft:10,marginTop: marginTop}]}
 							/>
 			</TouchableOpacity>
 			
@@ -238,31 +253,32 @@ export default class CmRestaurantSearch extends Component {
 	_renderSearchInput() {
 		return (
 			<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', height: headerHeight}}>
-					<View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-start', marginLeft: 20, marginTop: marginTop}}>
+					<View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-start'}}>
 							{this._renderReturnButton()}
-							{this._renderAreaTag()}
-							<TextInput
-								ref={'searchInput'}
-								style={{flex: 1, marginLeft: 10, fontFamily:"FZZhunYuan-M02S", fontSize: 16,}}
-								selectionColor={'#ea7b21'}
-								keyboardType = {'default'}
-								autoCorrect= { false}
-								autoFocus={false}
-								returnKeyType={'next'}
-								onChangeText={this._setSearchText}
-								underlineColorAndroid={"rgba(0,0,0,0)"}
-								placeholder={"搜索你想要的餐馆"}
-								value={this.state.searchText}
-							/>
+							<View style={{flex:0.75,flexDirection:'row', alignItems:'center'}}>
+								{this._renderTag()}
+								<TextInput
+									ref={'searchInput'}
+									style={{marginLeft: 10, fontFamily:"FZZhunYuan-M02S", fontSize: 16, marginTop: marginTop}}
+									selectionColor={'#ea7b21'}
+									keyboardType = {'default'}
+									autoCorrect= { false}
+									autoFocus={false}
+									returnKeyType={'next'}
+									onChangeText={this._setSearchText}
+									underlineColorAndroid={"rgba(0,0,0,0)"}
+									placeholder={"搜索你想要的餐馆"}
+									value={this.state.searchText}
+								/>
+							</View>
 					</View>
 					{this.state.searchText != '' &&
 						<TouchableOpacity
-						style={{marginRight: 20, marginTop: marginTop}}
-						onPress={()=>this._cleanInput()}>
-						<Text style={{fontSize: 16,
-													backgroundColor: 'white'}}
-								allowFontScaling={false}>取消</Text>
-					</TouchableOpacity>
+							style={{flex:0.15,height: headerHeight, justifyContent:'center'}}
+							onPress={()=>this._cleanInput()}>
+							<Text style={{fontSize: 16, marginTop:marginTop}}
+									allowFontScaling={false}>取消</Text>
+						</TouchableOpacity>
 					}
 			</View>
 		)
@@ -414,7 +430,8 @@ const styles = StyleSheet.create({
 		borderWidth:1,
 		marginLeft:10,
 		alignItems:'center',
-		paddingHorizontal:5
+		paddingHorizontal:5,
+		marginTop: marginTop
 	},
 	tagFont:{
 		color:'white',
