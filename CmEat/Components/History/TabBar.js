@@ -44,12 +44,11 @@ export default class TabBar extends Component {
   //       {this.props.orderData.length}
   // </Text>
 
-  renderTab(name, page, isTabActive, onPressHandler,activeIconImage,inactiveIconImage) {
+  renderTab(name, page, isTabActive, onPressHandler) {
 
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
-    const iconImage = isTabActive ? activeIconImage : inactiveIconImage;
     const iconText = page === 1 ? this.state.totalQuantity : "";
     if (page == 1) {
       const iconColor = isTabActive ? activeTextColor : "rgba(0,0,0,0.4)";
@@ -131,9 +130,7 @@ export default class TabBar extends Component {
         {this.props.tabs.map((name, page) => {
           const isTabActive = this.props.activeTab === page;
           const renderTab = this.props.renderTab || this.renderTab;
-          const activeIconImage = this.props.activeIconImages[page];
-          const inactiveIconImage = this.props.inactiveIconImages[page];
-          return renderTab(name, page, isTabActive, this.props.goToPage,activeIconImage,inactiveIconImage);
+          return renderTab(name, page, isTabActive, this.props.goToPage);
         })}
         <Animated.View
           style={[
