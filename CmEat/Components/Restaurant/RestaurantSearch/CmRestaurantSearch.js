@@ -215,9 +215,9 @@ export default class CmRestaurantSearch extends Component {
 	_scrollToTop() {
 		this.refs.searchPage.scrollTo({x: 0, y: 0, animated: true});
 		// Added this timeout to fix blank section b/c animation
-		setTimeout(() => {
-			this.refs.searchPage.scrollTo({x: 0, y: 1, animated: true});
-		}, 500);
+		// setTimeout(() => {
+		// 	this.refs.searchPage.scrollTo({x: 0, y: 0, animated: true});
+		// }, 500);
 	}
 	_renderTag(){
 		if(this.state.isTagClicked){
@@ -257,17 +257,29 @@ export default class CmRestaurantSearch extends Component {
 	}
 	_renderSearchInput() {
 		return (
-			<View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', height: headerHeight}}>
+			<View style={{flexDirection: 'row',
+										justifyContent: 'flex-start',
+										alignItems: 'center',
+										height: headerHeight,
+										borderBottomWidth: StyleSheet.hairlineWidth,
+                    borderBottomColor: '#bdc8d9'}}>
 					<View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-start'}}>
 							{this._renderReturnButton()}
-							<View style={{flex:0.75,flexDirection:'row', alignItems:'center'}}>
+							<View style={{flex:0.9,flexDirection:'row', alignItems:'center'}}>
 								{this._renderTag()}
 								<TextInput
 									ref={'searchInput'}
-									style={{marginLeft: 10, fontFamily:"FZZhunYuan-M02S", fontSize: 16, marginTop: marginTop}}
+									style={{flex: 1,
+													marginLeft: 10,
+													marginRight: 10,
+													fontFamily:"FZZhunYuan-M02S",
+													fontSize: 16,
+													paddingTop: 10,
+													paddingBottom: 10,
+													marginTop: marginTop}}
 									selectionColor={'#ea7b21'}
 									keyboardType = {'default'}
-									autoCorrect= { false}
+									autoCorrect= {false}
 									autoFocus={false}
 									returnKeyType={'next'}
 									onChangeText={this._setSearchText}
@@ -277,16 +289,22 @@ export default class CmRestaurantSearch extends Component {
 								/>
 							</View>
 					</View>
-					{this.state.searchText != '' &&
-						<TouchableOpacity
-							style={{flex:0.15,height: headerHeight, justifyContent:'center'}}
-							onPress={()=>this._cleanInput()}>
-							<Text style={{fontSize: 16, marginTop:marginTop}}
-									allowFontScaling={false}>取消</Text>
-						</TouchableOpacity>
-					}
+					{this._renderCleanSearchText()}
 			</View>
 		)
+	}
+
+	_renderCleanSearchText() {
+		if (this.state.searchText != '') {
+			return (
+				<TouchableOpacity
+					style={{flex:0.15,height: headerHeight, justifyContent:'center'}}
+					onPress={()=>this._cleanInput()}>
+					<Text style={{fontSize: 16, marginTop:marginTop}}
+							allowFontScaling={false}>取消</Text>
+				</TouchableOpacity>
+			)
+		}
 	}
 	_renderRestaurant({item}) {
 		const restaurant = item;
@@ -310,10 +328,9 @@ export default class CmRestaurantSearch extends Component {
 					key={this.props.index}
 					data={this.state.restaurantList}
 					keyboardDismissMode={"on-drag"}
-					keyboardShouldPersistTaps={"always"}
+					keyboardShouldPersistTaps={'always'}
 					renderItem={(res) => this._renderRestaurant(res)}
 					keyExtractor={this._keyExtractor}
-					removeClippedSubviews={true}
 					initialNumToRender={1}
 					onEndReachedThreshold={0.5}
 					extraData={this.state.restaurantList}
@@ -348,9 +365,7 @@ export default class CmRestaurantSearch extends Component {
 	_renderResult() {
 		if(this.state.restaurantList.length>0){
 			return(
-				<View style={{flex:1,marginTop:5}}>
-					{this._renderRestaurants()}
-				</View>
+				this._renderRestaurants()
 			)
 		}else if(this.state.searchText.length > 0){
 			return(
@@ -370,6 +385,8 @@ export default class CmRestaurantSearch extends Component {
 		}else{
 			return(
 				<ScrollView
+					keyboardDismissMode={"on-drag"}
+					keyboardShouldPersistTaps={'always'}
 					style={{flex:1}}
 					ref={'searchPage'}>
 					<SearchByTag
@@ -379,6 +396,8 @@ export default class CmRestaurantSearch extends Component {
 					<SearchByArea
 						onPressArea={(area)=>this._clickArea(area)}
 						areas={this.state.zones} />
+					<View style={{height: 10}}>
+					</View>
 				</ScrollView>
 			)
 		}
@@ -393,8 +412,6 @@ export default class CmRestaurantSearch extends Component {
 						behavior={Platform.OS === 'ios'?"padding":null}
 						>
 				{this._renderSearchInput()}
-          		<View style={{borderBottomWidth: StyleSheet.hairlineWidth,
-                        borderBottomColor: '#bdc8d9',}}/>
 				{this._renderResult()}
 			</KeyboardAvoidingView>
 

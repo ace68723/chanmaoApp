@@ -21,7 +21,7 @@ export default class SearchByArea extends Component{
         }
     }
     _renderHeader(label) {
-    
+
         return(
             <View style={{padding:10,paddingTop:20,paddingBottom:0}}>
                 <Text style={{fontSize:18,
@@ -57,7 +57,7 @@ export default class SearchByArea extends Component{
                             marginTop:10,
                             marginLeft:10,
   						    width:(width-30)/2,
-                            height:(width-30)/2,  
+                            height:(width-30)/2,
   						    alignItems:'center',
   						    justifyContent:'center',
   						}}
@@ -81,16 +81,16 @@ export default class SearchByArea extends Component{
 			<FlatList
 				numColumns={2}
 				key={'area'}
-                showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
 				data={this.state.zones}
 				keyboardDismissMode={"on-drag"}
 				keyboardShouldPersistTaps={"always"}
-                ListHeaderComponent={this._renderHeader()}
+        ListHeaderComponent={this._renderHeader()}
 				renderItem={(area)=>this._renderArea(area)}
 				keyExtractor={this._areaKeyExtractor}
-				removeClippedSubviews={true}
-                initialNumToRender={1}
-                scrollEnabled={false}
+				removeClippedSubviews={false}
+        initialNumToRender={1}
+        scrollEnabled={false}
 				extraData={this.state.zones}
 			/>
 		)
