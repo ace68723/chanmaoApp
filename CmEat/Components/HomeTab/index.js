@@ -109,9 +109,7 @@ export default class HomeTab extends Component {
       <HeaderWithBanner
            bannerList={this.props.bannerList}
            navigator={this.props.navigator}/>
-				<View style={{marginHorizontal:3, marginTop:6}}>
-					{this._renderAdv()}
-				</View>
+				{this._renderAdv()}
 				<View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 8}}>
 					<Image style={{height: 25, width: 25}} source={require('./Image/order.png')}/>
 					<Text allowFontScaling={false}
@@ -246,17 +244,18 @@ const styles = StyleSheet.create({
 	},
 	autoViewStyle:{
 		alignItems:'center',
-		width:(width-9)/3,
-		height:(width-9)/(3*1.157),
-		marginTop:1,
+		width:(width-9)/2,
+		height:(width-9)/(2*1.157),
+		marginLeft:3,
+		marginTop:3,
 	},
   adLarger:{
     borderRadius:5,
-    width:(width-30)/3,
-    height:(width-30)/(3*1.157),
+    width:(width-9)/2,
+    height:(width-9)/(2*1.157),
   },
   adSmall:{
-    width:(width-7)/3,
-    height:(width-7)/(3*2.358),
+    width:(width-7)/2,
+    height:(width-7)/(2*2.358),
   },
 });
