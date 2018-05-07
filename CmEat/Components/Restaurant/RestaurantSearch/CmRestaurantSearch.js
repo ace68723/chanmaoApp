@@ -8,6 +8,7 @@ import {
 	Dimensions,
 	Image,
   ImageBackground,
+	Keyboard,
 	KeyboardAvoidingView,
 	ListView,
 	StyleSheet,
@@ -168,7 +169,7 @@ export default class CmRestaurantSearch extends Component {
 	_clickTag(tag){
 		try{
 			RestaurantAction.getRestaurantByTag(tag.cid);
-
+			Keyboard.dismiss();
 			this.setState({
 				isTagClicked:true,
 				clickedFlavorTag:tag,
@@ -182,7 +183,7 @@ export default class CmRestaurantSearch extends Component {
 
 		let	filteredData = this._filterNotes(tag.name, this.state.allRestaurants);
 		filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
-
+		Keyboard.dismiss();
 		this.setState({
 			isTagClicked:true,
 			clickedAreaTag:tag,

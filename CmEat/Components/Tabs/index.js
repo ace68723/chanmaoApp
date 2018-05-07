@@ -105,7 +105,10 @@ export default class Tabs extends Component {
 												 prerenderingSiblingsNumber={3}
 												 renderTabBar={() => <TabBar />}
                          tabBarPosition={'bottom'}
-												 keyboardShouldPersistTaps={'always'}>
+												 contentProps={{
+													 keyboardDismissMode: "on-drag",
+													 keyboardShouldPersistTaps: 'always'
+												 }}>
 
 							<MainTab
 								tabLabel= {CMLabel.getCNLabel('MAIN_TAB')}
