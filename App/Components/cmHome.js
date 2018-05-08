@@ -98,8 +98,9 @@ export default class Home extends Component {
   }
   _handleAppStateChange = (appState) =>{
     if(appState == 'active'){
-      this.setState(Object.assign({}, this.state, {entryFlag: false}));
-      this._versionCheck();
+      if (!this.state.entryFlag) {
+        this._versionCheck();
+      }
     }
   }
   _updateAlert(versionObj){
@@ -124,7 +125,6 @@ export default class Home extends Component {
         ]
       )
     }else{
-      this.setState(Object.assign({}, this.state, {entryFlag: true}));
       Alert.alert(
         '软件更新',
         '有新版本可下载，要前往App Store?',
