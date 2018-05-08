@@ -25,8 +25,8 @@ export default class SearchByArea extends Component{
         return(
             <View style={{padding:10,paddingTop:20,paddingBottom:0}}>
                 <Text style={{fontSize:18,
-                                            fontFamily:"FZZhunYuan-M02S"}}
-                            allowFontScaling={false}>
+															fontFamily:"FZZhunYuan-M02S"}}
+                      allowFontScaling={false}>
                     {CMLabel.getCNLabel('CITY_AREA')}
                 </Text>
             </View>
@@ -48,7 +48,9 @@ export default class SearchByArea extends Component{
 		let area = item;
 		if(area){
 			return(
-				<TouchableOpacity onPress={()=>{
+				<TouchableOpacity
+					activeOpacity={0.4}
+					onPress={()=>{
 					  this.props.onPressArea(area);
 					}}>
 					<ImageBackground
@@ -66,7 +68,7 @@ export default class SearchByArea extends Component{
 					    							color:"#ffffff",
 					                  fontSize:18,
 					                  fontFamily:'FZZongYi-M05S'}}
-									allowFontScaling={false}>
+										allowFontScaling={false}>
                             {area.name}
                         </Text>
 					</ImageBackground>

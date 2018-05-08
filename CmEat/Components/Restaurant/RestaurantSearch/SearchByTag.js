@@ -80,7 +80,8 @@ export default class SearchByTag extends Component{
 									flexDirection:'row' ,
 									justifyContent:'center',
 									alignItems:'center',}}>
-					<Text style={{color:'#ff8b00',fontFamily:"FZZhunYuan-M02S"}}>{this.state.extendViewText}</Text>
+					<Text style={{color:'#ff8b00',fontFamily:"FZZhunYuan-M02S"}}
+								allowFontScaling={false}>{this.state.extendViewText}</Text>
 					<Image source={this.state.showingMoreCategories ? require('../Image/up-arrow.png') : require('../Image/down-arrow.png')}
 						style={{marginLeft:5,width:10,height:10}}/>
 				</TouchableOpacity>
@@ -100,7 +101,11 @@ export default class SearchByTag extends Component{
     _renderTag(tag, index) {
 		if(tag.name){
 			return(
-				<TouchableOpacity style={styles.singleTagView} key={index} onPress={()=>this._pressTag(tag)}>
+				<TouchableOpacity
+					activeOpacity={0.4}
+					style={styles.singleTagView}
+					key={index}
+					onPress={()=>this._pressTag(tag)}>
 					<ImageBackground
 						source={{uri:tag.mob_banner}}
 						style={styles.imageStyle}

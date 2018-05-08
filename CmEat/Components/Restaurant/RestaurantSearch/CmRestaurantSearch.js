@@ -231,11 +231,17 @@ export default class CmRestaurantSearch extends Component {
 			}
 
 			return(
-				<TouchableOpacity style={[styles.tagView,{width: clickedTag.name.length * (1 + 16)^(-2) }]}
+				<TouchableOpacity
+						activeOpacity={0.4}
+						style={[styles.tagView,{width: clickedTag.name.length * (1 + 16)^(-2) }]}
 						onPress={()=>this._delArea()}>
-					<Text style={styles.tagFont} allowFontScaling={false}>{clickedTag.name}</Text>
+					<Text style={styles.tagFont}
+								allowFontScaling={false}>
+								{clickedTag.name}
+					</Text>
 					<View style={{marginLeft:5,justifyContent:'center',backgroundColor:'rgba(0,0,0,0)'}}>
-						<Text allowFontScaling={false} style={{fontSize:20, color:'white'}}>×</Text>
+						<Text allowFontScaling={false}
+									style={{fontSize:20, color:'white'}}>×</Text>
 					</View>
 				</TouchableOpacity>
 			);
@@ -245,6 +251,7 @@ export default class CmRestaurantSearch extends Component {
 		let isSearching = this.state.isTagClicked || this.state.searchText.length > 0;
 		return(
 			<TouchableOpacity
+					activeOpacity={0.4}
 					style={{flex:0.1,justifyContent:'center',height:headerHeight}}
 					onPress={()=>this._clearAll()}
 					disabled={!isSearching} >
@@ -299,10 +306,11 @@ export default class CmRestaurantSearch extends Component {
 		if (this.state.searchText != '') {
 			return (
 				<TouchableOpacity
+					activeOpacity={0.4}
 					style={{flex:0.15,height: headerHeight, justifyContent:'center'}}
 					onPress={()=>this._cleanInput()}>
 					<Text style={{fontSize: 16, marginTop:marginTop}}
-							allowFontScaling={false}>取消</Text>
+								allowFontScaling={false}>取消</Text>
 				</TouchableOpacity>
 			)
 		}
