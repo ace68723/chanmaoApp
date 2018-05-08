@@ -87,12 +87,10 @@ export default class LogoAnimationView extends Component {
     			showLoading:false,
           loginSuccess:true,
     		})
+        this.props.navigator.dismissModal({
+           animationType: 'slide-down'
+        })
         this.props.handleLoginSuccessful();
-        // setTimeout(() => {
-          this.props.navigator.dismissModal({
-             animationType: 'slide-down'
-          })
-        // }, 1000);
     } catch (e) {
       console.log(e)
       this.setState({
@@ -115,14 +113,10 @@ export default class LogoAnimationView extends Component {
        showLoading:false,
        loginSuccess:true,
      })
+     this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+     })
      this.props.handleLoginSuccessful();
-     setTimeout(() => {
-       this.props.navigator.dismissModal({
-          animationType: 'slide-down'
-       })
-     }, 1000);
-		//  AuthService.doWechatAuth(data);
-
 	 } catch (e) {
 		 if(e == '-2'){
 			 console.log(e)

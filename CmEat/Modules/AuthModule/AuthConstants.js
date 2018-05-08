@@ -1,7 +1,10 @@
 'use strict';
 // const TestServer = 'http://cmtest.littlesailing.com/index.php?r=';
-const proructServer = 'https://www.chanmao.ca/index.php?r=';
-const Server = proructServer;
+const productServer = 'https://www.chanmao.ca/index.php?r=';
+const APIProductServer = 'https://chanmao.us/api/';
+
+const APIServer= APIProductServer;
+const Server = productServer;
 const AppConstants ={
     //chanmao login api,{username: , password: }
     // MobAddress10Test
@@ -10,15 +13,15 @@ const AppConstants ={
 
     API_AREALIST: Server + 'MobOrder10/RrAreaNew',
     API_RESTAURANTLIST: Server + 'MobOrder10/Rrlist',
-    API_MENU: 'https://chanmao.us/api/cmapp/v2/get_menu',
-    //API_RESTAURANT_LIST: 'https://chanmao.us/api/cmapp/v2/get_restaurant_list',
-    API_RESTAURANT_LIST: 'https://norgta.com/api/cmapp/v2/get_restaurant_list',
+    API_MENU: APIServer + 'cmapp/v2/get_menu',
     // API_MENU: Server + 'MobOrder10/Rrmenu',
     // API_HISTORYLIST: Server + 'MobOrder10/historylist',
     // API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',
-    API_HISTORYORDER: 'https://chanmao.us/api/cmapp/v2/get_history_list',
+    API_HISTORYORDER: APIServer + 'cmapp/v2/get_history_list',
     API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
-    
+    //restaurant
+    API_CATEGORY_LIST: APIServer + 'cmapp/v2/get_category_list',
+    API_RESTAURANT_LIST: APIServer + 'cmapp/v2/get_restaurant_list',
 
     API_ADDRESS: Server + 'MobAddress10/addresslist',
     API_CREATE_ADDRESS: Server + 'MobAddress10/Addresscreate',
@@ -29,7 +32,7 @@ const AppConstants ={
     API_CHECKOUT:Server + 'MobOrder10/checkout',
     API_GETVERIFYCODE: Server + 'MobOrder10/sendcode',
     API_VERIFYCODE: Server + 'MobOrder10/verifysms',
-    API_ADDREVIEW: 'https://chanmao.us/api/cmapp/v2/set_order_review',
+    API_ADDREVIEW: APIServer + 'cmapp/v2/set_order_review',
 
     GET_ATICLE_LIST: Server + 'MobContent10/PostList',
     GET_ARTICLE_AUTHOR: Server + 'MobContent10/ArticleOV',
