@@ -62,15 +62,15 @@
 -keep interface okhttp3.** { *; }
 -dontwarn okhttp3.**
 
+#react-native-wechat
+
+-keep class com.tencent.mm.sdk.** {
+  *;
+}
+
 # okio
 
 -keep class sun.misc.Unsafe { *; }
 -dontwarn java.nio.file.*
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
-
-
-#wechat
--keep class com.tencent.mm.sdk.** {
-  *;
-}

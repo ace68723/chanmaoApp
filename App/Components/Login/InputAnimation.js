@@ -22,25 +22,25 @@ import LoginButton from './LoginButton';
 
 const {width,height} = Dimensions.get('window');
 export default class InputAnimation extends Component {
-	  static propTypes = {
-			is_username :  React.PropTypes.string.isRequired,
-			is_password :  React.PropTypes.string.isRequired,
-			is_login :  React.PropTypes.string.isRequired,
-			is_register :  React.PropTypes.string.isRequired,
-			is_forgot :  React.PropTypes.string.isRequired,
-			is_wechat :  React.PropTypes.string.isRequired,
-			is_copyright :  React.PropTypes.string.isRequired,
-			is_version :  React.PropTypes.string.isRequired,
-
-			ir_USERNAME_INPUTREF : React.PropTypes.string.isRequired,
-			ir_PASSWORD_INPUTREF : React.PropTypes.string.isRequired,
-			ir_SUBMIT_BUTTON : React.PropTypes.string.isRequired,
-
-			if_handleLogin : React.PropTypes.func.isRequired,
-			if_handleUsername : React.PropTypes.func.isRequired,
-			if_handlePassword : React.PropTypes.func.isRequired,
-			if_handleWechatLogin : React.PropTypes.func.isRequired,
-	  }
+	  // static propTypes = {
+		// 	is_username :  React.PropTypes.string.isRequired,
+		// 	is_password :  React.PropTypes.string.isRequired,
+		// 	is_login :  React.PropTypes.string.isRequired,
+		// 	is_register :  React.PropTypes.string.isRequired,
+		// 	is_forgot :  React.PropTypes.string.isRequired,
+		// 	is_wechat :  React.PropTypes.string.isRequired,
+		// 	is_copyright :  React.PropTypes.string.isRequired,
+		// 	is_version :  React.PropTypes.string.isRequired,
+		//
+		// 	ir_USERNAME_INPUTREF : React.PropTypes.string.isRequired,
+		// 	ir_PASSWORD_INPUTREF : React.PropTypes.string.isRequired,
+		// 	ir_SUBMIT_BUTTON : React.PropTypes.string.isRequired,
+		//
+		// 	if_handleLogin : React.PropTypes.func.isRequired,
+		// 	if_handleUsername : React.PropTypes.func.isRequired,
+		// 	if_handlePassword : React.PropTypes.func.isRequired,
+		// 	if_handleWechatLogin : React.PropTypes.func.isRequired,
+	  // }
 	  constructor(){
 	    super()
 	    this.state={

@@ -13,12 +13,6 @@ import {
 } from 'react-native';
 const {width,height} = Dimensions.get('window');
 export default class LoginButton extends Component {
-  static propTypes = {
-    is_login : React.PropTypes.string.isRequired,
-    is_register : React.PropTypes.string.isRequired,
-    is_forgot : React.PropTypes.string.isRequired,
-    if_handleLogin : React.PropTypes.func.isRequired,
-  }
   constructor(){
     super()
 		this.state = {
