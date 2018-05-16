@@ -8,6 +8,7 @@ import com.facebook.react.ReactPackage;
 import io.realm.react.RealmReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.theweflex.react.WeChatPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
@@ -27,7 +28,8 @@ public class MainApplication extends NavigationApplication {
         return Arrays.<ReactPackage>asList(
                 new RNDeviceInfo(),
                 new RealmReactPackage(),
-                new WeChatPackage()
+                new WeChatPackage(),
+                new VectorIconsPackage()
         );
     }
 

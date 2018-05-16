@@ -141,6 +141,7 @@ dependencies {
     compile project(':react-native-device-info')
     compile project(':realm')
     compile project(':RCTWeChat')
+    compile project(':react-native-vector-icons')
 //    compile project(':react-native-vector-icons')
 ////    compile project(':react-native-code-push')
     compile fileTree(dir: "libs", include: ["*.jar"])
