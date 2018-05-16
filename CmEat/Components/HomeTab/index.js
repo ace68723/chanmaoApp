@@ -196,7 +196,7 @@ export default class HomeTab extends Component {
 			return <Image  style={{marginTop: 20, height: height, width: width}} source={require('./Image/no_restaurants_main.png')}/>;
 		}
 		let all = this.props.restaurantList;
-		let keyExtractor = (item, index) => item.rid;
+		let keyExtractor = (item, index) => item.rid.toString();
 		return (
 			<View style={{marginTop: marginTop}}>
 					<FlatList
