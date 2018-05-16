@@ -17,6 +17,7 @@
 #import "RCCManager.h"
 #import <React/RCTLinkingManager.h>
 #import <CodePush/CodePush.h>
+#import <AlipaySDK/AlipaySDK.h>
 
 //for stripe
 #import <Stripe/Stripe.h>
@@ -69,6 +70,7 @@
   return YES;
 }
 
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -76,5 +78,10 @@
                       sourceApplication:sourceApplication annotation:annotation];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+  return [RCTLinkingManager application:application openURL:url options:options];
+}
 @end
 

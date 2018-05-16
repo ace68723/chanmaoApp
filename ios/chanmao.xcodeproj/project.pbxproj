@@ -54,6 +54,18 @@
 		E252614AD703442FBE05663B /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B155FA5E6ADE475494B6B0FE /* libjschelpers.a */; };
 		EB30FB945A85435081309D78 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F9AA44EC22A43FFAD86BB0B /* EvilIcons.ttf */; };
 		EC564EB3808047C385DE325C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0FD2B11D6A84A3E97EF69A1 /* FontAwesome.ttf */; };
+		F90A92EC20A389980081EDC5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90A92EB20A389980081EDC5 /* QuartzCore.framework */; };
+		F90A92EE20A3899C0081EDC5 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90A92ED20A3899C0081EDC5 /* CoreText.framework */; };
+		F90A92F020A389A40081EDC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90A92EF20A389A40081EDC5 /* CoreGraphics.framework */; };
+		F90A92F220A389A80081EDC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90A92F120A389A80081EDC5 /* UIKit.framework */; };
+		F90A92F420A389AD0081EDC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90A92F320A389AD0081EDC5 /* Foundation.framework */; };
+		F90A92F620A389B00081EDC5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90A92F520A389B00081EDC5 /* CFNetwork.framework */; };
+		F90A92F820A389B40081EDC5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90A92F720A389B40081EDC5 /* CoreMotion.framework */; };
+		F93425B820AC791A00D35B8F /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F93425B220AC791A00D35B8F /* AlipaySDK.framework */; };
+		F93425B920AC791A00D35B8F /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F93425B320AC791A00D35B8F /* AlipaySDK.bundle */; };
+		F93425BA20AC791A00D35B8F /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = F93425B420AC791A00D35B8F /* Order.m */; };
+		F93425BB20AC791A00D35B8F /* AlipayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F93425B720AC791A00D35B8F /* AlipayModule.m */; };
+		F93425BE20AC7D8100D35B8F /* CmOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = F93425BD20AC7D8100D35B8F /* CmOrder.m */; };
 		FE441D83AB884C26AF13567E /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A8FFC87AF12841D0AD9B329B /* libc++.tbd */; };
 /* End PBXBuildFile section */
 
@@ -324,6 +336,48 @@
 			remoteGlobalIDString = F886647B1F4ADB500036D01B;
 			remoteInfo = "CodePush-tvOS";
 		};
+		F90A92C520A3892B0081EDC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DBE0D001F3B181A0099AA32;
+			remoteInfo = fishhook;
+		};
+		F90A92C720A3892B0081EDC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
+			remoteInfo = "fishhook-tvOS";
+		};
+		F90A92DB20A3892B0081EDC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBF21BDC1FC498900052F4D5;
+			remoteInfo = jsinspector;
+		};
+		F90A92DD20A3892B0081EDC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBF21BFA1FC4989A0052F4D5;
+			remoteInfo = "jsinspector-tvOS";
+		};
+		F90A92DF20A3892B0081EDC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+		F90A92E120A3892B0081EDC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
+			remoteInfo = "privatedata-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -392,6 +446,21 @@
 		E996899B837242B8928EBBBC /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		EDA543951AAC46F19FA8711C /* libyoga.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libyoga.a; sourceTree = "<group>"; };
 		EE9BD72C01A04C15A40CCDA1 /* libcxxreact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libcxxreact.a; sourceTree = "<group>"; };
+		F90A92EB20A389980081EDC5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F90A92ED20A3899C0081EDC5 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		F90A92EF20A389A40081EDC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F90A92F120A389A80081EDC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F90A92F320A389AD0081EDC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F90A92F520A389B00081EDC5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F90A92F720A389B40081EDC5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		F93425B220AC791A00D35B8F /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = Alipay/AlipaySDK.framework; sourceTree = "<group>"; };
+		F93425B320AC791A00D35B8F /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AlipaySDK.bundle; path = Alipay/AlipaySDK.bundle; sourceTree = "<group>"; };
+		F93425B420AC791A00D35B8F /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = Alipay/Order.m; sourceTree = "<group>"; };
+		F93425B520AC791A00D35B8F /* AlipayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlipayModule.h; path = Alipay/AlipayModule.h; sourceTree = "<group>"; };
+		F93425B620AC791A00D35B8F /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = Alipay/Order.h; sourceTree = "<group>"; };
+		F93425B720AC791A00D35B8F /* AlipayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlipayModule.m; path = Alipay/AlipayModule.m; sourceTree = "<group>"; };
+		F93425BC20AC7D8100D35B8F /* CmOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CmOrder.h; path = Alipay/CmOrder.h; sourceTree = "<group>"; };
+		F93425BD20AC7D8100D35B8F /* CmOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CmOrder.m; path = Alipay/CmOrder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,12 +468,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF23182A1F44EE3F000BC41A /* libRCTWeChat.a in Frameworks */,
-				0B8184750A0A4FB89D8D7597 /* libz.tbd in Frameworks */,
-				FE441D83AB884C26AF13567E /* libc++.tbd in Frameworks */,
-				DF2317F81F44EC88000BC41A /* libsqlite3.0.tbd in Frameworks */,
+				F90A92F820A389B40081EDC5 /* CoreMotion.framework in Frameworks */,
+				F90A92F620A389B00081EDC5 /* CFNetwork.framework in Frameworks */,
+				F90A92F420A389AD0081EDC5 /* Foundation.framework in Frameworks */,
+				F90A92F220A389A80081EDC5 /* UIKit.framework in Frameworks */,
+				F90A92F020A389A40081EDC5 /* CoreGraphics.framework in Frameworks */,
+				F90A92EE20A3899C0081EDC5 /* CoreText.framework in Frameworks */,
+				F90A92EC20A389980081EDC5 /* QuartzCore.framework in Frameworks */,
 				DF2317F61F44EC82000BC41A /* CoreTelephony.framework in Frameworks */,
 				DF2317F41F44EC7B000BC41A /* SystemConfiguration.framework in Frameworks */,
+				0B8184750A0A4FB89D8D7597 /* libz.tbd in Frameworks */,
+				FE441D83AB884C26AF13567E /* libc++.tbd in Frameworks */,
+				DF23182A1F44EE3F000BC41A /* libRCTWeChat.a in Frameworks */,
+				DF2317F81F44EC88000BC41A /* libsqlite3.0.tbd in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -414,6 +490,7 @@
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				F93425B820AC791A00D35B8F /* AlipaySDK.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				5D26B1906EE243EBB55BD495 /* libReactNativeNavigation.a in Frameworks */,
@@ -508,6 +585,8 @@
 			children = (
 				139FDEF41B06529B00C62182 /* libRCTWebSocket.a */,
 				3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */,
+				F90A92C620A3892B0081EDC5 /* libfishhook.a */,
+				F90A92C820A3892B0081EDC5 /* libfishhook-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -539,10 +618,14 @@
 				3DAD3EAB1DF850E9000B6D8A /* libcxxreact.a */,
 				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
 				3DAD3EAF1DF850E9000B6D8A /* libjschelpers.a */,
+				F90A92DC20A3892B0081EDC5 /* libjsinspector.a */,
+				F90A92DE20A3892B0081EDC5 /* libjsinspector-tvOS.a */,
 				DF23173F1F44CECF000BC41A /* libthird-party.a */,
 				DF2317411F44CECF000BC41A /* libthird-party.a */,
 				DF2317431F44CECF000BC41A /* libdouble-conversion.a */,
 				DF2317451F44CECF000BC41A /* libdouble-conversion.a */,
+				F90A92E020A3892B0081EDC5 /* libprivatedata.a */,
+				F90A92E220A3892B0081EDC5 /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -550,6 +633,13 @@
 		29C776DA8CF640C28B762769 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F90A92F720A389B40081EDC5 /* CoreMotion.framework */,
+				F90A92F520A389B00081EDC5 /* CFNetwork.framework */,
+				F90A92F320A389AD0081EDC5 /* Foundation.framework */,
+				F90A92F120A389A80081EDC5 /* UIKit.framework */,
+				F90A92EF20A389A40081EDC5 /* CoreGraphics.framework */,
+				F90A92ED20A3899C0081EDC5 /* CoreText.framework */,
+				F90A92EB20A389980081EDC5 /* QuartzCore.framework */,
 				DFE9A96D1F56044B00B053AE /* libSystem.B.tbd */,
 				DFB16A0E1F55F1F800C07B63 /* Stripe.framework */,
 				DF2317F71F44EC88000BC41A /* libsqlite3.0.tbd */,
@@ -720,6 +810,7 @@
 		DFB169741F55E89900C07B63 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F93425B120AC78F900D35B8F /* Alipay */,
 				DFB169991F55E8AB00C07B63 /* Stripe */,
 			);
 			name = Classes;
@@ -750,6 +841,21 @@
 				9085650A55166AD830629437 /* Pods-chanmao.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F93425B120AC78F900D35B8F /* Alipay */ = {
+			isa = PBXGroup;
+			children = (
+				F93425B520AC791A00D35B8F /* AlipayModule.h */,
+				F93425B720AC791A00D35B8F /* AlipayModule.m */,
+				F93425B320AC791A00D35B8F /* AlipaySDK.bundle */,
+				F93425B220AC791A00D35B8F /* AlipaySDK.framework */,
+				F93425B620AC791A00D35B8F /* Order.h */,
+				F93425B420AC791A00D35B8F /* Order.m */,
+				F93425BC20AC7D8100D35B8F /* CmOrder.h */,
+				F93425BD20AC7D8100D35B8F /* CmOrder.m */,
+			);
+			name = Alipay;
 			sourceTree = "<group>";
 		};
 		FA83D6D4C0674763BCED7F44 /* Resources */ = {
@@ -803,7 +909,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = P5WETSWY6J;
+						DevelopmentTeam = F8HZ33QZUT;
 						LastSwiftMigration = 830;
 					};
 				};
@@ -1167,6 +1273,48 @@
 			remoteRef = DFCBA9641F86AC3800503B6E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F90A92C620A3892B0081EDC5 /* libfishhook.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libfishhook.a;
+			remoteRef = F90A92C520A3892B0081EDC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F90A92C820A3892B0081EDC5 /* libfishhook-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libfishhook-tvOS.a";
+			remoteRef = F90A92C720A3892B0081EDC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F90A92DC20A3892B0081EDC5 /* libjsinspector.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsinspector.a;
+			remoteRef = F90A92DB20A3892B0081EDC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F90A92DE20A3892B0081EDC5 /* libjsinspector-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libjsinspector-tvOS.a";
+			remoteRef = F90A92DD20A3892B0081EDC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F90A92E020A3892B0081EDC5 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = F90A92DF20A3892B0081EDC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F90A92E220A3892B0081EDC5 /* libprivatedata-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libprivatedata-tvOS.a";
+			remoteRef = F90A92E120A3892B0081EDC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1184,6 +1332,7 @@
 				EC564EB3808047C385DE325C /* FontAwesome.ttf in Resources */,
 				C4BE6B43822840409AC4D8FC /* Foundation.ttf in Resources */,
 				DCB7F328548F413F9106726E /* Ionicons.ttf in Resources */,
+				F93425B920AC791A00D35B8F /* AlipaySDK.bundle in Resources */,
 				C870F361613445E082DE611B /* MaterialCommunityIcons.ttf in Resources */,
 				3830542F728D420F8699007C /* MaterialIcons.ttf in Resources */,
 				C124FCC9065E447A942C2E1C /* Octicons.ttf in Resources */,
@@ -1268,7 +1417,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				F93425BB20AC791A00D35B8F /* AlipayModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				F93425BA20AC791A00D35B8F /* Order.m in Sources */,
+				F93425BE20AC7D8100D35B8F /* CmOrder.m in Sources */,
 				DFB1699C1F55E8E600C07B63 /* StripeBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1298,8 +1450,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = P5WETSWY6J;
-				FRAMEWORK_SEARCH_PATHS = "";
+				DEVELOPMENT_TEAM = F8HZ33QZUT;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Alipay",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
@@ -1339,8 +1494,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = P5WETSWY6J;
-				FRAMEWORK_SEARCH_PATHS = "";
+				DEVELOPMENT_TEAM = F8HZ33QZUT;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Alipay",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
