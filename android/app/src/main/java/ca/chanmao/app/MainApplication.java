@@ -7,6 +7,7 @@ import com.facebook.react.BuildConfig;
 import com.facebook.react.ReactPackage;
 import io.realm.react.RealmReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.theweflex.react.WeChatPackage;
 import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
@@ -25,7 +26,8 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
                 new RNDeviceInfo(),
-                new RealmReactPackage()
+                new RealmReactPackage(),
+                new WeChatPackage()
         );
     }
 
