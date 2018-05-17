@@ -54,7 +54,7 @@ export default class TabBar extends Component {
       const iconColor = isTabActive ? activeTextColor : "rgba(0,0,0,0.4)";
       let numOfOrderNotReviewed = 0;
       for (let order of this.props.orderData) {
-        if (order.order_review_status === 0 && order.order_status > 30) {
+        if (order.order_review_status === 0 && order.order_status == 40) {
           numOfOrderNotReviewed++;
         }
       }
