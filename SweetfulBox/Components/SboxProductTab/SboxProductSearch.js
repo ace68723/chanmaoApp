@@ -229,7 +229,6 @@ export default class SboxProductSearch extends Component {
 								getItemLayout={(data, index) => (
 									{length: 250, offset: 250 * index, index}
 								)}
-								stickyHeaderIndices={[0]}
 								numColumns={3}
 								columnWrapperStyle={{ marginTop: 10,alignSelf:'center' }}
 						/>

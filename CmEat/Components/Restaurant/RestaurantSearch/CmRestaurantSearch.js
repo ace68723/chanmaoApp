@@ -237,12 +237,8 @@ export default class CmRestaurantSearch extends Component {
 						onPress={()=>this._delArea()}>
 					<Text style={styles.tagFont}
 								allowFontScaling={false}>
-								{clickedTag.name}
+								{clickedTag.name} ×
 					</Text>
-					<View style={{marginLeft:5,justifyContent:'center',backgroundColor:'rgba(0,0,0,0)'}}>
-						<Text allowFontScaling={false}
-									style={{fontSize:20, color:'white'}}>×</Text>
-					</View>
 				</TouchableOpacity>
 			);
 		}
@@ -461,6 +457,7 @@ const styles = StyleSheet.create({
 		borderWidth:1,
 		marginLeft:10,
 		alignItems:'center',
+		justifyContent: 'center',
 		paddingHorizontal:5,
 		marginTop: marginTop
 	},

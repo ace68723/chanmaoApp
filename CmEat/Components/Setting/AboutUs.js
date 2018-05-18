@@ -62,7 +62,7 @@ export default class InfoPage extends Component {
     return (
       <View style={styles.container}>
         <Header title={CMLabel.getCNLabel('ABOUT_US')} goBack={this._goBack}/>
-        <ScrollView style={{flex:1,  marginTop:64,paddingLeft:20,paddingRight:20}}>
+        <ScrollView style={{flex:1, paddingTop:64,paddingLeft:20,paddingRight:20, paddingBottom: 20}}>
 
             <View style={styles.fontContainer}>
                 <Text style={styles.headerFont} allowFontScaling={false} >

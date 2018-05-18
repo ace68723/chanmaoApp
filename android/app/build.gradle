@@ -72,6 +72,10 @@ import com.android.build.OutputFile
  * ]
  */
 
+project.ext.react = [
+    entryFile: "index.js"
+]
+
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
@@ -92,14 +96,14 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.1"
 
     defaultConfig {
         applicationId "ca.chanmao.app"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 3
-        versionName "2.4.0"
+        versionCode 1
+        versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -145,22 +149,16 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-code-push')
-    compile project(':react-native-maps')
-    compile 'com.google.android.gms:play-services-base:11.+'
-    compile 'com.google.android.gms:play-services-maps:11.+'
-    compile 'com.google.android.gms:play-services-location:11.+'
     compile project(':react-native-device-info')
     compile project(':realm')
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-navigation')
-    compile fileTree(dir: "libs", include: ["*.jar"])
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile "com.facebook.react:react-native:+"  // From node_modules
-    compile 'com.facebook.fresco:fresco:1.5.0'
-    compile 'com.facebook.fresco:animated-gif:1.5.0'
-    compile 'com.stripe:stripe-android:3.0.1'
     compile project(':RCTWeChat')
+    compile project(':react-native-vector-icons')
+//    compile project(':react-native-vector-icons')
+////    compile project(':react-native-code-push')
+    compile fileTree(dir: "libs", include: ["*.jar"])
+    compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.facebook.react:react-native:+"  // From node_modules
+    compile project(':react-native-navigation')
 }
 
 // Run this once to be able to run the application with BUCK

@@ -1,5 +1,4 @@
 import { Navigation } from 'react-native-navigation';
-
 import cmHome from './screens/cmHome';
 import CmLoading from './screens/CmLoading';
 import CmLogin from './screens/CmLogin';

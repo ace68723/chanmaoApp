@@ -1,13 +1,12 @@
 package ca.chanmao.app.wxapi;
 
+/**
+ * Created by Franky on 2018-05-16.
+ */
+
 import android.app.Activity;
 import android.os.Bundle;
-
 import com.theweflex.react.WeChatModule;
-
-/**
- * Created by aiden on 2018-02-21.
- */
 
 public class WXEntryActivity extends Activity {
     @Override

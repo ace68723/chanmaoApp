@@ -303,7 +303,6 @@ class Menu extends Component {
 									ListFooterComponent={this._renderFooter}
                   data={this.state.menu}
                   renderItem={this._renderItem}
-                  stickyHeaderIndices={[0]}
                   keyExtractor={this._keyExtractor}
                   getItemLayout={(data, index) => (
                      {length: 100, offset: 100 * index, index}
