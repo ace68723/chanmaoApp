@@ -5,6 +5,7 @@ import LocationModule from '../Modules/System/LocationModule';
 import RestaurantModule from '../Modules/RestaurantModule/RestaurantModule';
 import AddressModule from '../Modules/AddressModule/AddressModule';
 import CheckoutModule from '../Modules/CheckoutModule/CheckoutModule';
+import Alipay from '../../Alipay/Alipay';
 
 export default {
     async beforCheckout(rid,pretax,startAmount){
@@ -43,6 +44,11 @@ export default {
         // const reqData = {token,comment, payment_channel, tips};
         const reqData = {token,comment, payment_channel};
         const data = await RestaurantModule.checkout(reqData);
+
+        // if Alipay
+        if (payment_channel === 10){
+          // Alipay.constructAlipayOrder();
+        }
         dispatch({
             actionType: AppConstants.CHECKOUT, data,
         })

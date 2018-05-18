@@ -92,4 +92,29 @@ export default  {
       throw `getOrderBefore ${ev_message} `
     }
   },
+
+
+  async signAlipayOrder(order){
+    try {
+      let orderStr = '';
+      Object.keys(order).forEach(function(key) {
+          orderStr += key + '="' + order[key] + '"&';
+      });
+      orderStr = orderStr.slice(0, orderStr.length - 1);
+      // console.log('bbb', orderStr);
+
+      const lo_data = {
+        Authortoken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxMDYxMSIsImV4cGlyZWQiOjE1MTE0NjcyMDAsImxhc3Rsb2dpbiI6MTUwNTQyMTg1MX0.QbaQXdVSW9Tm3JrpEo7HHRQ6hjPGNqvVoovbpagqbBA",
+        sign_str: orderStr
+      }
+      const res = await CheckoutAPI.signAlipayOrder(lo_data);
+      if(res.ev_error === 1) { throw 'sign fail'}
+      const eo_data = res;
+      return eo_data;
+    } catch (e) {
+      console.log(e);
+      alert('签名失败');
+      throw e
+    }
+  },
 }

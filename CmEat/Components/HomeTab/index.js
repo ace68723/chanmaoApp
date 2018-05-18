@@ -20,8 +20,10 @@ import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 
+// testing
 import Alipay from '../../../Alipay/Alipay';
-// import Alipay from '@0x5e/react-native-alipay';
+// import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
+
 
 const {width,height} = Dimensions.get('window');
 let marginTop;
@@ -47,34 +49,7 @@ export default class HomeTab extends Component {
     this._renderHeader = this._renderHeader.bind(this);
 		this._renderScrollToResCards = this._renderScrollToResCards.bind(this);
 
-		this.pay = this.pay.bind(this);
-		this.pay();
   }
-
-	async pay() {
-		// get order str, and send server to sign
-		let order = {
-			partner: "2088031360615403",
-			seller_id: "api@rotating.ca",
-			out_trade_no: "OII3HNXHW3BZB09",
-			subject: "1",
-			body: "我是测试数据test data",
-			total_fee: "0.02",
-			return_url: "http://www.xxx.com",
-			currency: "CAD",
-			forex_biz: "FP",
-			notify_url: "http://www.xxx.com",
-			service: "mobile.securitypay.pay",
-			payment_type: "1",
-			_input_charset: "utf-8",
-			it_b_pay: "30m",
-			show_url: "m.alipay.com",
-			product_code: "NEW_WAP_OVERSEAS_SELLER"
-		}
-		// use native method to redirect alipay
-		let response = await Alipay.pay("");
-
-	}
 
 	_handleOnPress(advertisement){
 		if(advertisement.navitype == 2){
