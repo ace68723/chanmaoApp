@@ -20,6 +20,11 @@ import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 
+// testing
+import Alipay from '../../../Alipay/Alipay';
+// import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
+
+
 const {width,height} = Dimensions.get('window');
 let marginTop;
 if(height == 812){
@@ -43,7 +48,9 @@ export default class HomeTab extends Component {
 		this._renderRestaurant = this._renderRestaurant.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
 		this._renderScrollToResCards = this._renderScrollToResCards.bind(this);
+
   }
+
 	_handleOnPress(advertisement){
 		if(advertisement.navitype == 2){
       const {url} = advertisement.naviparam;

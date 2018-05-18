@@ -47,6 +47,9 @@ import AllOrders from './AllOrders';
 import OrdersNotReviewed from './OrdersNotReviewed';
 import BadOrders from './BadOrders';
 import CMLabel from '../../Constants/AppLabel';
+
+import Alipay from '../../../Alipay/Alipay';
+
 class HistoryTab extends Component {
     constructor(props) {
         super(props);
@@ -152,10 +155,14 @@ class HistoryTab extends Component {
     }
     _HistoryOrderDetailVisible(orderInfo){
 				if (orderInfo) {
-					this.setState({
-						showHistoryOrderDetail: !this.state.showHistoryOrderDetail,
-						historyDetailOid:orderInfo.order_oid,
-					});
+					// left button
+					Alipay.constructAlipayOrder(orderInfo);
+
+					// disabled for testing
+					// this.setState({
+					// 	showHistoryOrderDetail: !this.state.showHistoryOrderDetail,
+					// 	historyDetailOid:orderInfo.order_oid,
+					// });
 				}
 				else {
 					this.setState({
