@@ -13,10 +13,10 @@
 
 #import <React/RCTLinkingManager.h>
 #import <CodePush/CodePush.h>
-#import <AlipaySDK/AlipaySDK.h>
+//#import <AlipaySDK/AlipaySDK.h>
 
 //for stripe
-#import <Stripe/Stripe.h>
+//#import <Stripe/Stripe.h>
 
 
 #import <React/RCTRootView.h>
@@ -46,9 +46,4 @@
   return [RCTLinkingManager application:application openURL:url options:options];
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
-{
-  return [RCTLinkingManager application:application openURL:url options:options];
-}
 @end
