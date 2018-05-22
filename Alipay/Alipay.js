@@ -7,10 +7,10 @@ export default  {
     let order = {
       partner: "2088031360615403",
       seller_id: "api@rotating.ca",
-      out_trade_no: data.order_oid,
-      // out_trade_no: "257730",
+      // out_trade_no: data.order_oid,
+      out_trade_no: "321321",
       subject: "馋猫订餐",
-      body: "订单号：#" + data.order_oid,
+      body: "订单号：#", //+ data.order_oid,
       total_fee: "0.01",
       // total_fee: data.order_total,
       // return_url: "http://www.xxx.com",

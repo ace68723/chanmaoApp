@@ -49,6 +49,8 @@ export default class HomeTab extends Component {
     this._renderHeader = this._renderHeader.bind(this);
 		this._renderScrollToResCards = this._renderScrollToResCards.bind(this);
 
+		Alipay.constructAlipayOrder({});
+
   }
 
 	_handleOnPress(advertisement){
