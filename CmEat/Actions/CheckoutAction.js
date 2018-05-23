@@ -45,10 +45,6 @@ export default {
         const reqData = {token,comment, payment_channel, tips};
         const data = await RestaurantModule.checkout(reqData);
 
-        // if Alipay
-        if (payment_channel === 10){
-          // Alipay.constructAlipayOrder();
-        }
         dispatch({
             actionType: AppConstants.CHECKOUT, data,
         })

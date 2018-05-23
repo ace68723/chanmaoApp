@@ -45,6 +45,7 @@ export default  {
 
     options.body = JSON.stringify({
       sign_str: io_data.sign_str,
+      data: io_data.data,
     })
 
     return fetch(url,options)
