@@ -38,11 +38,11 @@ export default {
       }
     },
     // async checkout(comment, payment_channel, tips){
-    async checkout(comment, payment_channel){
+    async checkout(comment, payment_channel, tips){
       try{
         const token = await AuthModule.getToken();
         // const reqData = {token,comment, payment_channel, tips};
-        const reqData = {token,comment, payment_channel};
+        const reqData = {token,comment, payment_channel, tips};
         const data = await RestaurantModule.checkout(reqData);
 
         // if Alipay

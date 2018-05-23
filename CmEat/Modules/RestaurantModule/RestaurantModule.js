@@ -33,14 +33,14 @@ const RestaurantModule = {
     }
   },
   async getTag(){
-   
+
     try{
       let userData = GetUserInfo();
       let data = await RestaurantApi.getTag(GetUserInfo());
-    
+
       if(data.ev_error == 0){ //new api
         // if(data.result == 0){
-            
+
           return data
         }else{
           Alert.errorAlert(data.message)
@@ -61,7 +61,7 @@ const RestaurantModule = {
       } else {
         userlocation = await LocationModule.getCurrentPosition();
       }
-      userData.userloc = userlocation; 
+      userData.userloc = userlocation;
 
       let data = await RestaurantApi.getRestaurantByTag(userData,cid);
       return data.ea_restaurant_list;
@@ -173,7 +173,17 @@ const RestaurantModule = {
           channel = 2;
         }
         // const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel, payment_channel: io_data.payment_channel, tips: io_data.tips}
-				const reqData = {token,dltype,pretax,rid,uaid,dlexp,items,comment,channel, payment_channel: io_data.payment_channel}
+				const reqData = {token,
+												 dltype,
+												 pretax,
+												 rid,
+												 uaid,
+												 dlexp,
+												 items,
+												 comment,
+												 channel,
+												 payment_channel: io_data.payment_channel,
+												 tips: io_data.tips}
         const data = await RestaurantApi.checkout(reqData);
         return data
       }catch (e){

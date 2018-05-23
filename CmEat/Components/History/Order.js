@@ -187,13 +187,56 @@ export default class pastOrderEN extends Component {
       )
     }
   }
+
+  _renderOptionButton() {
+    // if (this.state.orderInfo.payment_channel == 10 && this.state.orderInfo.payment_status != 0 && this.state.orderInfo.order_status == 0) {
+      return (
+        <View style={{flex: 1, borderRightWidth:0.5}}>
+            <TouchableOpacity style={{flex:1,
+                                      flexDirection:'row',
+                                      justifyContent:'center',
+                                      alignItems:'center',
+                                      backgroundColor: '#ff8b00'}}
+                              onPress={this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}>
+              <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>再次尝试</Text>
+
+            </TouchableOpacity>
+        </View>
+      )
+    // }
+    // else {
+    //   return(
+    //     <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:10,}]}>
+    //         <TouchableOpacity style={{flex:1,
+    //                                   flexDirection:'row',
+    //                                   justifyContent:'center',
+    //                                   alignItems:'center'}}
+    //                           onPress={this._handleWechatBtn}>
+    //           <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
+    //           <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>chanmaoweixin</Text>
+    //
+    //         </TouchableOpacity>
+    //     </View>
+    //   )
+    // }
+  }
   render() {
     let statusMessage = "现金支付";
     let statusColor;
     switch (this.state.orderInfo.order_status) {
         case 0:
-            statusColor = {color:'#b2b2b2'};
-            statusMessage = '等待商家确认';
+            if(this.state.orderInfo.payment_channel == 10) {
+              if(this.state.orderInfo.payment_status == 0) {
+                statusColor = {color:'#33cd5f'};
+                statusMessage = '等待支付';
+              }else {
+                statusColor = {color:'#ef473a'};
+                statusMessage = '支付失败';
+              }
+            }else {
+              statusColor = {color:'#b2b2b2'};
+              statusMessage = '等待商家确认';
+            }
             break;
         case 10:
             statusColor = {color:'#33cd5f'};
@@ -258,17 +301,7 @@ export default class pastOrderEN extends Component {
               {this._phoneNumberVerify()}
               <View style={styles.buttonContainer}>
                   {this._renderDetialButton()}
-                  <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:10,}]}>
-                      <TouchableOpacity style={{flex:1,
-                                                flexDirection:'row',
-                                                justifyContent:'center',
-                                                alignItems:'center'}}
-                                        onPress={this._handleWechatBtn}>
-                        <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
-                        <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>chanmaoweixin</Text>
-
-                      </TouchableOpacity>
-                  </View>
+                  {this._renderOptionButton()}
               </View>
           </View>
         </TouchableOpacity>

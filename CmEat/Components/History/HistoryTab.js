@@ -69,6 +69,7 @@ class HistoryTab extends Component {
 				this._renderFilter = this._renderFilter.bind(this);
 				// this._goToRestaurant = this._goToRestaurant.bind(this);
 				this._handleOnChangeTab = this._handleOnChangeTab.bind(this);
+				this._handlePaymentRetry = this._handlePaymentRetry.bind(this);
     }
 
     componentDidMount(){
@@ -155,14 +156,10 @@ class HistoryTab extends Component {
     }
     _HistoryOrderDetailVisible(orderInfo){
 				if (orderInfo) {
-					// left button
-					Alipay.constructAlipayOrder(orderInfo);
-
-					// disabled for testing
-					// this.setState({
-					// 	showHistoryOrderDetail: !this.state.showHistoryOrderDetail,
-					// 	historyDetailOid:orderInfo.order_oid,
-					// });
+					this.setState({
+						showHistoryOrderDetail: !this.state.showHistoryOrderDetail,
+						historyDetailOid:orderInfo.order_oid,
+					});
 				}
 				else {
 					this.setState({
@@ -177,6 +174,15 @@ class HistoryTab extends Component {
 				// 	}
 				// }, 400);
     }
+		_handlePaymentRetry(orderInfo) {
+			// this.props.navigator.showModal({
+			// 	screen: 'CmChooseCardType',
+			// 	animated: true,
+			// 	passProps:{},
+			// 	navigatorStyle: {navBarHidden: true,},
+			// });
+			Alipay.constructAlipayOrder({oid: orderInfo.order_oid, total: orderInfo.order_total.toString()});
+		}
 
 		_handleOnChangeTab(tabRef) {
 			this.setState({renderingPage: tabRef.i});
@@ -293,6 +299,7 @@ class HistoryTab extends Component {
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
+										handlePaymentRetry={this._handlePaymentRetry}
 										tabLabel={CMLabel.getCNLabel('ALL_ORDER')}/>
 								<OrdersNotReviewed
 										navigator={this.props.navigator}

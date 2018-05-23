@@ -32,6 +32,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     		addressList:[],
         dltype:1,
         pretax:0,
+        available_payment_channels: [0],
         code:'',
         dltypeList:[
           {dltype:-1,
@@ -54,8 +55,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     		addressList:[],
         dltype:1,
         pretax:0,
-        payment_channel: null,
-        available_payment_channels: [],
+        payment_channel: 0,
+        available_payment_channels: [0],
         code:'',
         dltypeList:[
           {dltype:-1,
@@ -115,7 +116,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   		const promoted = data.result.promoted;
   		const total = data.result.total;
       // const available_payment_channels = data.result.available_payment_channels;
-      const available_payment_channels = [1, 10, 0];
+      const available_payment_channels = [10, 0];
       let paymentStatus = '现金';
       let tipInfoStatus = false;
       let payment_channel = 0;
@@ -159,13 +160,15 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 	},
 	checkout(data){
 		let checkoutSuccessful;
+    let oidFromUrl;
 		if(data.result == 0){
 			 checkoutSuccessful = true;
+       oidFromUrl = data.oid;
        MenuStore.initMenu();
 		}else{
 			checkoutSuccessful = false;
 		}
-		this.state = Object.assign({},this.state,{checkoutSuccessful});
+		this.state = Object.assign({},this.state,{checkoutSuccessful, oidFromUrl});
 
   },
   updateShouldAddAddress(data){

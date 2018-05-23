@@ -39,6 +39,10 @@ import MenuStore from '../../Stores/MenuStore';
 import HistoryAction from '../../Actions/HistoryAction';
 import Util from '../../Modules/Util';
 import CMLabel from '../../Constants/AppLabel';
+
+import Alipay from '../../../Alipay/Alipay';
+
+
 // device(size): get device height and width
 const {height, width} = Dimensions.get('window');
 const deviceHeight = height;
@@ -131,6 +135,10 @@ class Confirm extends Component {
 				}, 500);
 
 				if(this.state.checkoutSuccessful){
+					if (this.state.payment_channel == 10) {
+						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toString(),
+																				 oid: state.oidFromUrl});
+					}
 					this._goToHistory();
 				}
     }
@@ -166,7 +174,7 @@ class Confirm extends Component {
 				showOrderConfirm:false,
       })
       // CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
-      CheckoutAction.checkout(this.state.comment, this.state.payment_channel);
+      CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
     }
     _checkout(){
 
@@ -486,7 +494,7 @@ class Confirm extends Component {
 
 		}
 		_renderTipInfo(){
-			if (this.state.tipInfoStatus) {
+			if (this.state.payment_channel != 0) {
 				return(
 					<View style={{
 						height:100,
