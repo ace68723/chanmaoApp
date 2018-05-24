@@ -5,7 +5,6 @@ import LocationModule from '../Modules/System/LocationModule';
 import RestaurantModule from '../Modules/RestaurantModule/RestaurantModule';
 import AddressModule from '../Modules/AddressModule/AddressModule';
 import CheckoutModule from '../Modules/CheckoutModule/CheckoutModule';
-import Alipay from '../../Alipay/Alipay';
 
 export default {
     async beforCheckout(rid,pretax,startAmount){
