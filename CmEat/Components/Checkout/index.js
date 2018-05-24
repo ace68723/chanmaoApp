@@ -88,6 +88,8 @@ class Confirm extends Component {
         this._onChange = this._onChange.bind(this);
         this._updateUaid = this._updateUaid.bind(this);
 				this._saveModificationCallback = this._saveModificationCallback.bind(this);
+				this._alipaySelected = this._alipaySelected.bind(this);
+				this._cashSelected = this._cashSelected.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
         this._checkout = this._checkout.bind(this);
@@ -215,7 +217,10 @@ class Confirm extends Component {
 					screen: 'CmChooseCardType',
 					animated: true,
 					passProps:{available_payment_channels: this.state.available_payment_channels,
-										 saveModificationCallback: this._saveModificationCallback},
+										 saveModificationCallback: this._saveModificationCallback,
+									 	 alipaySelected: this._alipaySelected,
+									 	 cashSelected: this._cashSelected,
+									   flag: 'fromCheckout'},
 					navigatorStyle: {navBarHidden: true,},
 				});
       }
@@ -299,6 +304,13 @@ class Confirm extends Component {
 
 			const state = Object.assign({},CheckoutStore.getState(),{cart:cart, pretax: pretax});
 			this.setState(state);
+		}
+		_alipaySelected() {
+			CheckoutAction.updatePaymentStatus(10);
+		}
+
+		_cashSelected() {
+			CheckoutAction.updatePaymentStatus(0);
 		}
 		_setTips(tipsPercentage){
 			this.setState({

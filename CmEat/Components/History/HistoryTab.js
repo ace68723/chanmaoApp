@@ -70,6 +70,8 @@ class HistoryTab extends Component {
 				// this._goToRestaurant = this._goToRestaurant.bind(this);
 				this._handleOnChangeTab = this._handleOnChangeTab.bind(this);
 				this._handlePaymentRetry = this._handlePaymentRetry.bind(this);
+				this._alipaySelected = this._alipaySelected.bind(this);
+				this._cashSelected = this._cashSelected.bind(this);
     }
 
     componentDidMount(){
@@ -129,19 +131,7 @@ class HistoryTab extends Component {
           isRefreshing: true,
         })
         HistoryAction.getOrderData();
-      // }
     }
-		// _goToRestaurant(state) {
-	  //   this.props.navigator.showModal({
-	  //     screen: 'CmEatMenu',
-	  //     animated: false,
-	  //     navigatorStyle: {navBarHidden: true},
-	  //     passProps: {
-	  //       py:272,
-	  //       restaurant:state.orderInfo,
-	  //     },
-	  //   });
-	  // }
 		_setOnRefresh() {
 			this.setState({
 				isRefreshing: true,
@@ -166,22 +156,31 @@ class HistoryTab extends Component {
 						showHistoryOrderDetail: !this.state.showHistoryOrderDetail
 					});
 				}
-				// setTimeout( () =>{
-				// 	if(this.state.showHistoryOrderDetail){
-				// 		this.props.hideTabBar();
-				// 	}else{
-				// 		this.props.showTabBar();
-				// 	}
-				// }, 400);
     }
 		_handlePaymentRetry(orderInfo) {
-			// this.props.navigator.showModal({
-			// 	screen: 'CmChooseCardType',
-			// 	animated: true,
-			// 	passProps:{},
-			// 	navigatorStyle: {navBarHidden: true,},
-			// });
-			Alipay.constructAlipayOrder({oid: orderInfo.order_oid, total: orderInfo.order_total.toString()});
+			this.props.navigator.showModal({
+				screen: 'CmChooseCardType',
+				animated: true,
+				passProps:{available_payment_channels: orderInfo.available_payment_channels,
+									 alipaySelected: this._alipaySelected,
+									 cashSelected: this._cashSelected,
+								 	 flag: 'fromHistory',
+								 	 orderInfo: orderInfo},
+				navigatorStyle: {navBarHidden: true,},
+			});
+			// Alipay.constructAlipayOrder({oid: orderInfo.order_oid, total: orderInfo.order_total.toString()});
+		}
+
+		_alipaySelected(orderInfo) {
+			// console.log(orderInfo);
+			Alipay.constructAlipayOrder({total: (parseFloat(orderInfo.order_total) + parseFloat(orderInfo.order_tips)).toString(),
+																	 oid: orderInfo.order_oid});
+		}
+		_cashSelected(orderInfo) {
+			//Change to Pay by cash
+			// console.log(orderInfo.order_oid);
+			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
+			this._setOnRefresh();
 		}
 
 		_handleOnChangeTab(tabRef) {

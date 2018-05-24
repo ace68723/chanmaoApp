@@ -65,5 +65,15 @@ export default {
       }
     },
 
+    async changePaymentToCash(io_data){
+      try{
+        const token = await AuthModule.getToken();
+        const lo_data = {io_data,token};
+        const data = await HistoryModule.changePaymentToCash(lo_data);
+      }catch (e){
+        console.log(e);
+      }
+    },
+
 
 }

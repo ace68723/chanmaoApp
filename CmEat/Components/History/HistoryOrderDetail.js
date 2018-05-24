@@ -111,6 +111,67 @@ export default class orderHistory extends Component {
       )
     }
   }
+  _renderTips(){
+    if(this.state.payment_channel == 10) {
+      return(
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={{fontSize:15,
+                        fontWeight:'bold',
+                        color:'#ea7b21'}}
+                allowFontScaling={false}>
+            小费:
+          </Text>
+          <Text style={{fontSize:15,
+                        fontWeight:'bold',
+                        color:'#ea7b21',
+                        marginRight: 10}}
+                allowFontScaling={false}>
+            ${this.state.tips}
+          </Text>
+        </View>
+      )
+    }
+  }
+  _renderFooter(){
+    if(this.state.payment_channel == 10) {
+      return(
+        <View style={styles.modalFooter}>
+            <View style={{flex:1,backgroundColor:"yellow"}}></View>
+            <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
+
+                <Text style={{alignSelf: 'flex-end',
+                              color:'black',
+                              fontSize:18,
+                              fontWeight:'bold',
+                              flex:1,
+                              marginTop:15}}
+                      allowFontScaling={false}>
+                        合计: ${parseFloat(this.state.total) + parseFloat(this.state.tips)}
+                </Text>
+            </View>
+        </View>
+      )
+    }
+    else{
+      return(
+        <View style={styles.modalFooter}>
+            <View style={{flex:1,backgroundColor:"yellow"}}></View>
+            <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
+
+                <Text style={{alignSelf: 'flex-end',
+                              color:'black',
+                              fontSize:18,
+                              fontWeight:'bold',
+                              flex:1,
+                              marginTop:15}}
+                      allowFontScaling={false}>
+                        Total: ${this.state.total}
+                </Text>
+            </View>
+        </View>
+      )
+    }
+  }
   _renderLoading(){
     if(this.state.loading){
       return(
@@ -173,23 +234,10 @@ export default class orderHistory extends Component {
               <View style={styles.modalContent}>
                     {this._renderList()}
                     {this._renderComment()}
+                    {this._renderTips()}
               </View>
             </ScrollView>
-          <View style={styles.modalFooter}>
-              <View style={{flex:1,backgroundColor:"yellow"}}></View>
-              <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
-
-                  <Text style={{alignSelf: 'flex-end',
-                                color:'black',
-                                fontSize:18,
-                                fontWeight:'bold',
-                                flex:1,
-                                marginTop:15}}
-                        allowFontScaling={false}>
-                          Total: ${this.state.total}
-                  </Text>
-              </View>
-          </View>
+          {this._renderFooter()}
           {this._renderLoading()}
         </View>
     )

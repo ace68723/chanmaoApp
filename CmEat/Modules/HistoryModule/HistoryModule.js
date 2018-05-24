@@ -112,6 +112,18 @@ const  HistoryModule = {
     }
   },
 
+  async changePaymentToCash(io_data){
+    try{
+      const res = await HistoryApi.changePaymentToCash(io_data);
+      if(res.ev_error != 0){
+        Alert.errorAlert(res.ev_message);
+      }
+      return res;
+    }catch(e) {
+      console.log(e)
+    }
+  },
+
       // ===================================
       // getHistoryData API INTERFACE
       // API             Module

@@ -21,6 +21,7 @@ module.exports={
     YET_COMMENT:'待评价',
     ORDER_NO:'订单号',
     PRICE:'总价',
+    ACTUAL_PICE:'实付',
     VERTIFICATION_CODE:'获取验证码',
     NEW_CONFIRMING:'新用户订单确认中',
     ENTER_VERTIFICATION_CODE:'请输入验证码',
