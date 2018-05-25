@@ -94,9 +94,10 @@ const RestaurantApi = {
               'Content-Type': 'application/json'
           }
       }
-      const rid = reqData.rid
-      const pretax = reqData.pretax
-      const POST_DATA = {rid,pretax}
+      const rid = reqData.rid;
+      const pretax = reqData.pretax;
+      const version = reqData.version;
+      const POST_DATA = { rid, pretax, version }
       options.headers.authortoken = reqData.token;
       options.body =  JSON.stringify(POST_DATA)
       return fetch(url,options)

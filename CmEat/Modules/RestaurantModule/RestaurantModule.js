@@ -71,6 +71,8 @@ const RestaurantModule = {
   },
   async beforCheckout(reqData){
       try{
+					const { version } = GetUserInfo();
+					reqData.version = version;
           const data = await RestaurantApi.beforCheckout(reqData);
           if(data.result == 0){
             const pretax = data.pretax;

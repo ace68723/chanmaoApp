@@ -267,7 +267,7 @@ export default class pastOrderEN extends Component {
                   statusReminder = "请重新下单";
                 }
                 else {
-                  statusColor = {color:'#33cd5f'};
+                  statusColor = {color:'#ef473a'};
                   statusMessage = '等待支付';
                   statusReminder = "若状态没有及时更改, 请手动下拉刷新";
                 }

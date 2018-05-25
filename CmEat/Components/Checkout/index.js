@@ -161,6 +161,7 @@ class Confirm extends Component {
 				this.setState({dltype:deliverType.type,loading:true,})
 				const dltype = deliverType.type
 				CheckoutAction.updateDltype(dltype);
+				CheckoutAction.updatePaymentStatus(0);
 			}
     }
     _calculateDeliveryFee(){
@@ -398,7 +399,9 @@ class Confirm extends Component {
 			}
 		}
 		_renderDeliverFee(){
-			if(this.state.dltype == '0') return
+			//自取
+			if(this.state.dltype == '0') return;
+			//送餐
 			if(this.state.dlexp > 0){
 				return(
 					<CartItem icon={require('./Image/delivery-2.png')}
@@ -467,7 +470,7 @@ class Confirm extends Component {
       )
     }
 		_renderChoosePayment() {
-			if (this.state.available_payment_channels) {
+			if (this.state.available_payment_channels && (this.state.dlexp > 0 || this.state.dltype == '0')) {
 				if (this.state.available_payment_channels.length > 1) {
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>
@@ -475,13 +478,6 @@ class Confirm extends Component {
 												title={CMLabel.getCNLabel('PAY')}
 												value={this.state.paymentStatus}/>
 						</TouchableOpacity>
-					)
-				}
-				else if (this.state.available_payment_channels.length > 1) {
-					return(
-						<CartItem rightIcon={require('./Image/right.png')}
-											title={CMLabel.getCNLabel('PAY')}
-											value={this.state.paymentStatus}/>
 					)
 				}
 			}
