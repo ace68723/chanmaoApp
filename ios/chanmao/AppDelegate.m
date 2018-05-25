@@ -16,11 +16,12 @@
 #import <AlipaySDK/AlipaySDK.h>
 
 //for stripe
-//#import <Stripe/Stripe.h>
+#import <Stripe/Stripe.h>
 
 
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
+
 
 @implementation AppDelegate
 
@@ -36,6 +37,8 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   self.window.backgroundColor = [UIColor whiteColor];
   [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
+  //for stripe configure pk_live_XQlHKvkQ8N9yPEHlslQvaS7U   pk_test_MsgqDWzRTfpOKl5mBwX0J0u2
+  [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_live_XQlHKvkQ8N9yPEHlslQvaS7U"];
   return YES;
 }
 

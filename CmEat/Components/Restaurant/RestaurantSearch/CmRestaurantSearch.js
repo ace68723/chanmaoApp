@@ -325,7 +325,7 @@ export default class CmRestaurantSearch extends Component {
 	// 	restaurantList:this.state.filteredRestaurant.slice(0, this.state.length)
 	// 	})
 	// }}
-	_keyExtractor = (item, index) => index;
+	_keyExtractor = (item, index) => index.toString();
 	_renderRestaurants() {
 			return(
 				<FlatList

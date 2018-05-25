@@ -22,6 +22,8 @@ target 'chanmao' do
     'RCTVibration',
     'RCTWebSocket',
   ]
+  pod 'Stripe'
+  pod 'AFNetworking'
 
   # React Native third party dependencies podspecs
   pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"

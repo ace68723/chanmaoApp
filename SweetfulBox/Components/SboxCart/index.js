@@ -199,7 +199,7 @@ export default class SboxCart extends Component {
           	enableEmptySections
             data={this.state.cartList}
             renderItem={this._renderItem}
-            keyExtractor={(item, index) => item.sku_id}
+            keyExtractor={(item, index) => item.sku_id.toString()}
         />
       )
     }else {

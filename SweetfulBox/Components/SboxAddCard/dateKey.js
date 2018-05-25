@@ -42,7 +42,8 @@ export default class DateKey extends Component {
     for(var i = 1; i < 5; i++){
             const values = keysList.splice(0, 3);
             allKeys.push(
-              <View style={{flex: 0.2,
+              <View key={values[0].toString()}
+                    style={{flex: 0.2,
                             flexDirection: 'row',
                             justifyContent: 'space-around',
                             marginLeft: 10,
@@ -84,7 +85,8 @@ export default class DateKey extends Component {
     for(var i = 0; i < 4; i++){
         const values = keysList.splice(0, 2);
         allKeys.push(
-          <View style={{flex: 0.2,
+          <View key={values[0].toString()}
+                style={{flex: 0.2,
                         flexDirection: 'row',
                         justifyContent: 'space-around',
                         marginLeft: 10,

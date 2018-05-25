@@ -581,6 +581,7 @@ class Confirm extends Component {
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
 														 total={this.state.total}
+														 paymentChannel={this.state.payment_channel}
 														 dltype={this.state.dltype}/>)
 			}
 		}
