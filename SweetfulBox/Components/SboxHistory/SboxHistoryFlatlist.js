@@ -18,7 +18,7 @@ class App extends Component {
 				refreshing={this.props.refreshing}
 				onRefresh={() => this.props.onRefresh()}
 				style={styles.list}
-				keyExtractor={(item, index) => item.obid}
+				keyExtractor={(item, index) => item.obid.toString()}
 				renderItem={({item}) => {
           if(!item ) return;
 					const obid = item.obid;
