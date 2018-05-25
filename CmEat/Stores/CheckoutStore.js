@@ -115,8 +115,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   		const pretax_ori = data.result.pretax_ori;
   		const promoted = data.result.promoted;
   		const total = data.result.total;
-      // const available_payment_channels = data.result.available_payment_channels;
-      const available_payment_channels = [10, 0];
+      const available_payment_channels = data.result.available_payment_channels;
       let paymentStatus = '现金';
       let tipInfoStatus = false;
       let payment_channel = 0;
@@ -177,7 +176,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   updatePaymentStatus(data){
     if (data.payment_channel == 0) {
       this.state.tipInfoStatus = false;
-      this.state.paymentStatus = 'Cash';
+      this.state.paymentStatus = '现金';
       this.state.payment_channel = 0;
     }
     else if (data.payment_channel == 10) {

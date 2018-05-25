@@ -61,9 +61,7 @@
 		D7067B9C9D904789ABDE3188 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8F54AE4BDD44159B23D420 /* libCodePush.a */; };
 		D9ECDA9D5595465B9B858F7C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DF937DD84A748DB8ED1D5CD /* Entypo.ttf */; };
 		E3ACE0070FC5416AA3CC6F1A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 153D270FD29641D5BB5BCDB8 /* libz.tbd */; };
-		F963FD1920B4B86300C1C422 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = F963FCE420B4B86200C1C422 /* Order.m */; };
 		F963FD1A20B4B86300C1C422 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F963FCE520B4B86200C1C422 /* AlipaySDK.bundle */; };
-		F963FD1B20B4B86300C1C422 /* CmOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = F963FCE620B4B86200C1C422 /* CmOrder.m */; };
 		F963FD1C20B4B86300C1C422 /* AlipayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F963FCE920B4B86200C1C422 /* AlipayModule.m */; };
 		F963FD1D20B4B86300C1C422 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F963FCEB20B4B86200C1C422 /* AlipaySDK.framework */; };
 		F963FD1F20B4B8C000C1C422 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F963FD1E20B4B8C000C1C422 /* CFNetwork.framework */; };
@@ -208,6 +206,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
 			remoteInfo = "privatedata-tvOS";
+		};
+		3122F85920B88FCA00C388FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
+			remoteInfo = RNDeviceInfo;
+		};
+		3122F85B20B88FCA00C388FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E72EC1401F7ABB5A0001BC90;
+			remoteInfo = "RNDeviceInfo-tvOS";
 		};
 		3154E56120A39AF6000F4758 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -384,13 +396,6 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
-		F934262920B4AAF800D35B8F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F934262520B4AAF800D35B8F /* RNDeviceInfo.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
-			remoteInfo = RNDeviceInfo;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -420,6 +425,7 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3122F7CC20B76AA700C388FF /* StripeBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripeBridge.m; sourceTree = "<group>"; };
 		3122F7FA20B76ABC00C388FF /* StripeBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StripeBridge.h; sourceTree = "<group>"; };
+		3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		3154E56B20A39BA0000F4758 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		31CC7A8920A4CE74001561DB /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
 		31CC7AFC20A4D401001561DB /* 方正准圆简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "方正准圆简体.TTF"; path = "Fonts/方正准圆简体.TTF"; sourceTree = SOURCE_ROOT; };
@@ -462,14 +468,9 @@
 		D3EE8E983E40E5E7D59B9634 /* Pods-chanmao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chanmao.release.xcconfig"; path = "Pods/Target Support Files/Pods-chanmao/Pods-chanmao.release.xcconfig"; sourceTree = "<group>"; };
 		D8AB24399EE942769B9531AD /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		E1C568599B7346BA95206564 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		F934262520B4AAF800D35B8F /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
-		F963FCE420B4B86200C1C422 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		F963FCE520B4B86200C1C422 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		F963FCE620B4B86200C1C422 /* CmOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CmOrder.m; sourceTree = "<group>"; };
 		F963FCE720B4B86200C1C422 /* AlipayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayModule.h; sourceTree = "<group>"; };
-		F963FCE820B4B86200C1C422 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		F963FCE920B4B86200C1C422 /* AlipayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayModule.m; sourceTree = "<group>"; };
-		F963FCEA20B4B86200C1C422 /* CmOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmOrder.h; sourceTree = "<group>"; };
 		F963FCEB20B4B86200C1C422 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		F963FD1E20B4B8C000C1C422 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F963FD2020B4B8C500C1C422 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -691,6 +692,15 @@
 			path = Stripe;
 			sourceTree = "<group>";
 		};
+		3122F85520B88FC900C388FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3122F85A20B88FCA00C388FF /* libRNDeviceInfo.a */,
+				3122F85C20B88FCA00C388FF /* libRNDeviceInfo-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3154E53520A39AF2000F4758 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,7 +798,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				F934262520B4AAF800D35B8F /* RNDeviceInfo.xcodeproj */,
+				3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */,
 				31CC7A8920A4CE74001561DB /* RCTWeChat.xcodeproj */,
 				3154E56B20A39BA0000F4758 /* ReactNativeNavigation.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -862,24 +872,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F934262620B4AAF800D35B8F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F934262A20B4AAF800D35B8F /* libRNDeviceInfo.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		F963FCE320B4B86200C1C422 /* Alipay */ = {
 			isa = PBXGroup;
 			children = (
-				F963FCE820B4B86200C1C422 /* Order.h */,
-				F963FCE420B4B86200C1C422 /* Order.m */,
-				F963FCE620B4B86200C1C422 /* CmOrder.m */,
 				F963FCE520B4B86200C1C422 /* AlipaySDK.bundle */,
 				F963FCE720B4B86200C1C422 /* AlipayModule.h */,
 				F963FCE920B4B86200C1C422 /* AlipayModule.m */,
-				F963FCEA20B4B86200C1C422 /* CmOrder.h */,
 				F963FCEB20B4B86200C1C422 /* AlipaySDK.framework */,
 			);
 			path = Alipay;
@@ -999,8 +997,8 @@
 					ProjectRef = 2645443B7AE54A82BBAE984E /* RealmReact.xcodeproj */;
 				},
 				{
-					ProductGroup = F934262620B4AAF800D35B8F /* Products */;
-					ProjectRef = F934262520B4AAF800D35B8F /* RNDeviceInfo.xcodeproj */;
+					ProductGroup = 3122F85520B88FC900C388FF /* Products */;
+					ProjectRef = 3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */;
 				},
 				{
 					ProductGroup = 31E09C6720A3A445007902C5 /* Products */;
@@ -1146,6 +1144,20 @@
 			fileType = archive.ar;
 			path = "libprivatedata-tvOS.a";
 			remoteRef = 2DF0FFEC2056DD460020B375 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3122F85A20B88FCA00C388FF /* libRNDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNDeviceInfo.a;
+			remoteRef = 3122F85920B88FCA00C388FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3122F85C20B88FCA00C388FF /* libRNDeviceInfo-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNDeviceInfo-tvOS.a";
+			remoteRef = 3122F85B20B88FCA00C388FF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3154E56220A39AF6000F4758 /* libCodePush.a */ = {
@@ -1323,13 +1335,6 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F934262A20B4AAF800D35B8F /* libRNDeviceInfo.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNDeviceInfo.a;
-			remoteRef = F934262920B4AAF800D35B8F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1428,9 +1433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F963FD1B20B4B86300C1C422 /* CmOrder.m in Sources */,
 				F963FD1C20B4B86300C1C422 /* AlipayModule.m in Sources */,
-				F963FD1920B4B86300C1C422 /* Order.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				3122F7F920B76AA900C388FF /* StripeBridge.m in Sources */,

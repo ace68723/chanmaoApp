@@ -168,17 +168,13 @@ class HistoryTab extends Component {
 								 	 orderInfo: orderInfo},
 				navigatorStyle: {navBarHidden: true,},
 			});
-			// Alipay.constructAlipayOrder({oid: orderInfo.order_oid, total: orderInfo.order_total.toString()});
 		}
 
 		_alipaySelected(orderInfo) {
-			// console.log(orderInfo);
 			Alipay.constructAlipayOrder({total: (parseFloat(orderInfo.order_total) + parseFloat(orderInfo.order_tips)).toString(),
 																	 oid: orderInfo.order_oid});
 		}
 		_cashSelected(orderInfo) {
-			//Change to Pay by cash
-			// console.log(orderInfo.order_oid);
 			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
 			this._setOnRefresh();
 		}

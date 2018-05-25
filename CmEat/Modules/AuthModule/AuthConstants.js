@@ -17,8 +17,8 @@ const AppConstants ={
     // API_MENU: Server + 'MobOrder10/Rrmenu',
     // API_HISTORYLIST: Server + 'MobOrder10/historylist',
     // API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',
-    API_HISTORYORDER: APIServer + 'cmapp/v2/get_history_list',
-    // API_HISTORYORDER: 'https://norgta.com/api/cmapp/v2/get_history_list',
+    // API_HISTORYORDER: APIServer + 'cmapp/v2/get_history_list',
+    API_HISTORYORDER: 'https://norgta.com/api/cmapp/v2/get_history_list',
     API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
     //restaurant
     API_CATEGORY_LIST: APIServer + 'cmapp/v2/get_category_list',

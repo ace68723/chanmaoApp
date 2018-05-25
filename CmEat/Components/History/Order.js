@@ -189,7 +189,7 @@ export default class pastOrderEN extends Component {
   }
 
   _renderOptionButton() {
-    if (this.state.orderInfo.payment_channel == 10 && this.state.orderInfo.payment_status == 0 && this.state.orderInfo.order_status == 0) {
+    if (this.state.orderInfo.payment_channel == 10 && !this.state.orderInfo.payment_status && this.state.orderInfo.order_status == 0) {
       return (
         <View style={{flex: 1, borderRightWidth:0.5}}>
             <TouchableOpacity style={{flex:1,
@@ -257,19 +257,19 @@ export default class pastOrderEN extends Component {
     switch (this.state.orderInfo.order_status) {
         case 0:
             if (this.state.orderInfo.payment_channel == 10) {
-                if(this.state.orderInfo.payment_status == 0) {
-                  statusColor = {color:'#33cd5f'};
-                  statusMessage = '等待支付';
-                  statusReminder = "若状态没有及时更改, 请手动下拉刷新";
-                }
-                else if (this.state.orderInfo.payment_status == 20) {
+                if (this.state.orderInfo.payment_status == 20) {
                   statusColor = {color:'#b2b2b2'};
                   statusMessage = '已支付, 等待商家确认';
                 }
-                else {
+                else if(this.state.orderInfo.payment_status == 30) {
                   statusColor = {color:'#ef473a'};
                   statusMessage = '在线支付失败';
                   statusReminder = "请重新下单";
+                }
+                else {
+                  statusColor = {color:'#33cd5f'};
+                  statusMessage = '等待支付';
+                  statusReminder = "若状态没有及时更改, 请手动下拉刷新";
                 }
             }
             else {
@@ -318,16 +318,14 @@ export default class pastOrderEN extends Component {
       }
     }
     let _statusReminder = () => {
-      if (this.state.orderInfo.payment_channel == 10) {
-        return(
-          <Text style={{paddingBottom:5,
-                        fontWeight:'600',
-                        fontSize:12,
-                        fontFamily:'FZZhunYuan-M02S',
-                        color:'#b2b2b2'}}
-                allowFontScaling={false}>{statusReminder}</Text>
-        )
-      }
+      return(
+        <Text style={{paddingBottom:5,
+                      fontWeight:'600',
+                      fontSize:12,
+                      fontFamily:'FZZhunYuan-M02S',
+                      color:'#b2b2b2'}}
+              allowFontScaling={false}>{statusReminder}</Text>
+      )
     }
       return(
         <TouchableOpacity style={styles.orderContainer}

@@ -8,8 +8,6 @@
 
 #import "AlipayModule.h"
 #import <AlipaySDK/AlipaySDK.h>
-#import "Order.h"
-#import "CmOrder.h"
 
 @implementation AlipayModule
 

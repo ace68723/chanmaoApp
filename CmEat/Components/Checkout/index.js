@@ -175,7 +175,6 @@ class Confirm extends Component {
         loading:true,
 				showOrderConfirm:false,
       })
-      // CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
       CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
     }
     _checkout(){
