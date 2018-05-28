@@ -158,8 +158,11 @@ class Confirm extends Component {
     }
     _updateDltype(deliverType){
 			if(!this.state.loading){
-				this.setState({dltype:deliverType.type,loading:true,})
-				const dltype = deliverType.type
+				this.setState({dltype:deliverType.type,
+											 loading:true,
+											 tips: 0,
+											 tipsPercentage: 0.1});
+				const dltype = deliverType.type;
 				CheckoutAction.updateDltype(dltype);
 				CheckoutAction.updatePaymentStatus(0);
 			}
@@ -470,7 +473,7 @@ class Confirm extends Component {
       )
     }
 		_renderChoosePayment() {
-			if (this.state.available_payment_channels && (this.state.dlexp > 0 || this.state.dltype == '0')) {
+			if (this.state.available_payment_channels && this.state.dlexp > 0) {
 				if (this.state.available_payment_channels.length > 1) {
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>

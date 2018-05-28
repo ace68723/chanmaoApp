@@ -48,7 +48,7 @@ module.exports={
     //Check out
     GO_CHECKOUT:'去结账',
     ADD_PAYMENT:'添加支付方式',
-    PICK_UP:'自取',
+    PICK_UP:'现金自取',
     DELIVER:'送餐',
     SET_DELIVER_FEE:'定制运费',
     CHECK_OUT:'结账',
