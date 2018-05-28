@@ -466,6 +466,7 @@ class Confirm extends Component {
 					)
 				}
 			}
+			
 		}
 		_renderComment(){
 			return(

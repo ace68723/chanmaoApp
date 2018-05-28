@@ -83,7 +83,7 @@ export default class CmAdvertisement extends Component {
   					})
   				}
   			})
-  			.catch((error) => {throw error})
+  			.catch((error) => { console.log(error); throw error})
 	}
   _openAdView() {
     this.setState({showingAd: false});

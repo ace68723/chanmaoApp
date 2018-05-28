@@ -13,11 +13,19 @@ import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
 import java.util.List;
+//import ca.chanmao.app.AlipayReactPackage;
+import com.facebook.react.shell.MainReactPackage;
+import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.theweflex.react.WeChatPackage;
 
+import com.facebook.react.ReactInstanceManager;
 
+// Add CodePush imports
+import com.microsoft.codepush.react.ReactInstanceHolder;
+import com.microsoft.codepush.react.CodePush;
 
-
-public class MainApplication extends NavigationApplication {
+public class MainApplication extends NavigationApplication implements ReactInstanceHolder {
     @Override
     public boolean isDebug() {
         return BuildConfig.DEBUG;
@@ -29,7 +37,13 @@ public class MainApplication extends NavigationApplication {
                 new RNDeviceInfo(),
                 new RealmReactPackage(),
                 new WeChatPackage(),
-                new VectorIconsPackage()
+                new VectorIconsPackage(),
+                new AlipayReactPackage(),
+                new MainReactPackage(),
+            new MapsPackage(),
+                new WeChatPackage(),
+                new CodePush("3h54HiPlCHlTlQsTwIxIkYoHvbfmc889ad22-4792-484d-b870-7cc05a2db9bd", MainApplication.this, BuildConfig.DEBUG)
+
         );
     }
 
@@ -43,5 +57,17 @@ public class MainApplication extends NavigationApplication {
     @Override
     public String getJSMainModuleName() {
         return "index";
+    }
+
+    @Override
+    public String getJSBundleFile() {
+        // Override default getJSBundleFile method with the one CodePush is providing
+        return CodePush.getJSBundleFile();
+    }
+
+    @Override
+    public ReactInstanceManager getReactInstanceManager() {
+        // CodePush must be told how to find React Native instance
+        return getReactNativeHost().getReactInstanceManager();
     }
 }
