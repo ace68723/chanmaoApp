@@ -11,7 +11,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-// import MapView from 'react-native-maps';
+import MapView from 'react-native-maps';
 
 const {width,height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
