@@ -116,7 +116,7 @@ const HistoryApi = {
     },
     changePaymentToCash(reqData){
       // const url = AuthConstants.API_ADDREVIEW
-      const url = "https://norgta.com/api/cmapp/v2/change_payment_to_cash";
+      const url = AuthConstants.API_CHANGE_ORDER_TO_CASH;
       let options = {
           method: 'GET',
           mode:'cors',

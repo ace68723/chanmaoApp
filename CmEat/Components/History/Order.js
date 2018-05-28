@@ -191,17 +191,19 @@ export default class pastOrderEN extends Component {
   _renderOptionButton() {
     if (this.state.orderInfo.payment_channel == 10 && !this.state.orderInfo.payment_status && this.state.orderInfo.order_status == 0) {
       return (
-        <View style={{flex: 1, borderRightWidth:0.5}}>
-            <TouchableOpacity style={{flex:1,
-                                      flexDirection:'row',
-                                      justifyContent:'center',
-                                      alignItems:'center',
-                                      backgroundColor: '#ff8b00'}}
-                              onPress={this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}>
-              <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>再次尝试</Text>
+          <TouchableOpacity style={{flex:1,
+                                    flexDirection:'row',
+                                    justifyContent:'center',
+                                    alignItems:'center',
+                                    padding:10,
+                                    backgroundColor: '#ff8b00',
+                                    borderColor: '#ff8b00',
+                                    borderTopWidth: 1,
+                                    borderBottomWidth:1}}
+                            onPress={this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}>
+            <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>再次尝试</Text>
 
-            </TouchableOpacity>
-        </View>
+          </TouchableOpacity>
       )
     }
     else {
@@ -237,7 +239,7 @@ export default class pastOrderEN extends Component {
                         fontWeight:'bold',
                         fontFamily:'FZZhunYuan-M02S'}}
                 allowFontScaling={false}>
-                {CMLabel.getCNLabel('ACTUAL_PICE')}: ${parseFloat(this.state.orderInfo.order_total) + parseFloat(this.state.orderInfo.order_tips)}
+                {CMLabel.getCNLabel('ACTUAL_PICE')}: ${this.state.orderInfo.order_total}
           </Text>
         </View>
       )

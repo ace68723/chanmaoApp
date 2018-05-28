@@ -20,6 +20,7 @@ const AppConstants ={
     API_HISTORYORDER: APIServer + 'cmapp/v2/get_history_list',
     // API_HISTORYORDER: 'https://norgta.com/api/cmapp/v2/get_history_list',
     API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
+    API_CHANGE_ORDER_TO_CASH: APIProductServer + "cmapp/v2/change_payment_to_cash",
     //restaurant
     API_CATEGORY_LIST: APIServer + 'cmapp/v2/get_category_list',
     API_RESTAURANT_LIST: APIServer + 'cmapp/v2/get_restaurant_list',

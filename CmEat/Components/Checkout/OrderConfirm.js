@@ -81,7 +81,7 @@ export default class orderConfirm extends Component {
                           </View>
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',}}>
                               <Image source={require('./Image/icon_total.png')} style={{width:22,height:25,marginRight:15,marginLeft:15}}/>
-                              <Text style={styles.contentFont} allowFontScaling={false}>{this.props.total}</Text>
+                              <Text style={styles.contentFont} allowFontScaling={false}>{(parseFloat(this.props.total)+parseFloat(this.props.tips)).toFixed(2)}</Text>
                           </View>
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>
                               <Image source={require('./Image/icon_address.png')} style={{width:19,height:25,marginRight:15,marginLeft:15}}/>

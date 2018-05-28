@@ -122,7 +122,7 @@ class Confirm extends Component {
     _onChange(){
 
 				const state = Object.assign({},CheckoutStore.getState());
-        this.setState(state,()=>this.setState({tips:(this.state.total*this.state.tipsPercentage).toFixed(2)}));
+				this.setState(state);
 
 				setTimeout( () => {
 					if(this.state.shouldAddAddress){
@@ -138,7 +138,7 @@ class Confirm extends Component {
 
 				if(this.state.checkoutSuccessful){
 					if (this.state.payment_channel == 10) {
-						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toString(),
+						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
 																				 oid: state.oidFromUrl});
 					}
 					this._goToHistory();
@@ -557,6 +557,7 @@ class Confirm extends Component {
 													placeholder={'Customized'}
 													keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
 													returnKeyType={'done'}
+													value={this.state.tips.toString()}
 													onChangeText={(text)=>{
 														this.setState({
 															tips:text.length == 0 ? 0 : parseFloat(text),
@@ -576,6 +577,7 @@ class Confirm extends Component {
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
 														 total={this.state.total}
+														 tips={this.state.tips}
 														 paymentChannel={this.state.payment_channel}
 														 dltype={this.state.dltype}/>)
 			}
