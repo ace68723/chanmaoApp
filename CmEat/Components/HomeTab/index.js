@@ -20,8 +20,6 @@ import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 
-// testing
-import Alipay from '../../../Alipay/Alipay';
 // import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
 
 

@@ -105,7 +105,8 @@ export default  {
 
       const lo_data = {
         Authortoken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxMDYxMSIsImV4cGlyZWQiOjE1MTE0NjcyMDAsImxhc3Rsb2dpbiI6MTUwNTQyMTg1MX0.QbaQXdVSW9Tm3JrpEo7HHRQ6hjPGNqvVoovbpagqbBA",
-        sign_str: orderStr
+        sign_str: orderStr,
+        data: order,
       }
       const res = await CheckoutAPI.signAlipayOrder(lo_data);
       if(res.ev_error === 1) { throw 'sign fail'}

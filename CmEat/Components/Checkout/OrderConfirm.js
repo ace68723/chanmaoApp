@@ -31,6 +31,17 @@ export default class orderConfirm extends Component {
     }
   }
 
+  _renderPaymentChannel() {
+    if(this.props.paymentChannel == 10) {
+      return(
+        <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>
+            <Image source={require('./Image/alipay.png')} style={{width:24,height:25,marginRight:15,marginLeft:15}}/>
+            <Text style={styles.contentFont} allowFontScaling={false}>支付宝</Text>
+        </View>
+      )
+    }
+  }
+
 
   render() {
       let dldec;
@@ -70,12 +81,13 @@ export default class orderConfirm extends Component {
                           </View>
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',}}>
                               <Image source={require('./Image/icon_total.png')} style={{width:22,height:25,marginRight:15,marginLeft:15}}/>
-                              <Text style={styles.contentFont} allowFontScaling={false}>{this.props.total}</Text>
+                              <Text style={styles.contentFont} allowFontScaling={false}>{(parseFloat(this.props.total)+parseFloat(this.props.tips)).toFixed(2)}</Text>
                           </View>
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>
                               <Image source={require('./Image/icon_address.png')} style={{width:19,height:25,marginRight:15,marginLeft:15}}/>
                               <Text style={styles.contentFont} allowFontScaling={false}>{this.props.selectedAddress.addr}</Text>
                           </View>
+                          {this._renderPaymentChannel()}
 
                       </View>
                       <View style={styles.modalFooter}>
@@ -131,7 +143,7 @@ const styles = StyleSheet.create({
 
   modal: {
     justifyContent: 'center',
-    height: 350,
+    height: 400,
     width: 300,
 
   },

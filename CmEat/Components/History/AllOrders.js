@@ -47,6 +47,7 @@ class AllOrders extends Component {
 									 scrollRef={this._scrollView}
 									 getCurrentPosition={this._getCurrentPosition}
 									 page={0}
+									 handlePaymentRetry={this.props.handlePaymentRetry}
 									 reorder={this.props.reorder}/>
 					)
 				});

@@ -114,6 +114,25 @@ const HistoryApi = {
               .then((res) => res.json())
               .catch((error) => {throw error})
     },
+    changePaymentToCash(reqData){
+      // const url = AuthConstants.API_ADDREVIEW
+      const url = AuthConstants.API_CHANGE_ORDER_TO_CASH;
+      let options = {
+          method: 'GET',
+          mode:'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      }
+      options.headers.authortoken = reqData.token;
+      options.headers.oid = reqData.io_data.oid;
+      console.log(url);
+      console.log(options);
+      return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw error})
+    },
     getHistoryData(token){
       const url = AuthConstants.API_HISTORYLIST
       let options = {

@@ -262,7 +262,7 @@ class Menu extends Component {
               <Header title={this.state.restaurant.name}
                       goBack={this._closeMenuAnimation}
                       rightButton={this._goToMenuSearch}
-                      rightButtonImage={require('./Image/icon_search_input.png')}
+                      rightButtonText={"搜索"}
                       leftButtonText={'×'}/>
 
 							<TouchableOpacity onPress={this._goToCheckout}

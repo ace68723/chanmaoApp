@@ -21,6 +21,7 @@ module.exports={
     YET_COMMENT:'待评价',
     ORDER_NO:'订单号',
     PRICE:'总价',
+    ACTUAL_PICE:'实付',
     VERTIFICATION_CODE:'获取验证码',
     NEW_CONFIRMING:'新用户订单确认中',
     ENTER_VERTIFICATION_CODE:'请输入验证码',
@@ -47,7 +48,7 @@ module.exports={
     //Check out
     GO_CHECKOUT:'去结账',
     ADD_PAYMENT:'添加支付方式',
-    PICK_UP:'自取',
+    PICK_UP:'现金自取',
     DELIVER:'送餐',
     SET_DELIVER_FEE:'定制运费',
     CHECK_OUT:'结账',

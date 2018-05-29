@@ -39,6 +39,10 @@ import MenuStore from '../../Stores/MenuStore';
 import HistoryAction from '../../Actions/HistoryAction';
 import Util from '../../Modules/Util';
 import CMLabel from '../../Constants/AppLabel';
+
+import Alipay from '../../../Alipay/Alipay';
+
+
 // device(size): get device height and width
 const {height, width} = Dimensions.get('window');
 const deviceHeight = height;
@@ -84,6 +88,8 @@ class Confirm extends Component {
         this._onChange = this._onChange.bind(this);
         this._updateUaid = this._updateUaid.bind(this);
 				this._saveModificationCallback = this._saveModificationCallback.bind(this);
+				this._alipaySelected = this._alipaySelected.bind(this);
+				this._cashSelected = this._cashSelected.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
         this._checkout = this._checkout.bind(this);
@@ -116,7 +122,7 @@ class Confirm extends Component {
     _onChange(){
 
 				const state = Object.assign({},CheckoutStore.getState());
-        this.setState(state,()=>this.setState({tips:(this.state.total*this.state.tipsPercentage).toFixed(2)}));
+				this.setState(state);
 
 				setTimeout( () => {
 					if(this.state.shouldAddAddress){
@@ -131,6 +137,10 @@ class Confirm extends Component {
 				}, 500);
 
 				if(this.state.checkoutSuccessful){
+					if (this.state.payment_channel == 10) {
+						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
+																				 oid: state.oidFromUrl});
+					}
 					this._goToHistory();
 				}
     }
@@ -148,9 +158,13 @@ class Confirm extends Component {
     }
     _updateDltype(deliverType){
 			if(!this.state.loading){
-				this.setState({dltype:deliverType.type,loading:true,})
-				const dltype = deliverType.type
+				this.setState({dltype:deliverType.type,
+											 loading:true,
+											 tips: 0,
+											 tipsPercentage: 0.1});
+				const dltype = deliverType.type;
 				CheckoutAction.updateDltype(dltype);
+				CheckoutAction.updatePaymentStatus(0);
 			}
     }
     _calculateDeliveryFee(){
@@ -165,8 +179,7 @@ class Confirm extends Component {
         loading:true,
 				showOrderConfirm:false,
       })
-      // CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
-      CheckoutAction.checkout(this.state.comment, this.state.payment_channel);
+      CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
     }
     _checkout(){
 
@@ -207,7 +220,10 @@ class Confirm extends Component {
 					screen: 'CmChooseCardType',
 					animated: true,
 					passProps:{available_payment_channels: this.state.available_payment_channels,
-										 saveModificationCallback: this._saveModificationCallback},
+										 saveModificationCallback: this._saveModificationCallback,
+									 	 alipaySelected: this._alipaySelected,
+									 	 cashSelected: this._cashSelected,
+									   flag: 'fromCheckout'},
 					navigatorStyle: {navBarHidden: true,},
 				});
       }
@@ -291,6 +307,13 @@ class Confirm extends Component {
 
 			const state = Object.assign({},CheckoutStore.getState(),{cart:cart, pretax: pretax});
 			this.setState(state);
+		}
+		_alipaySelected() {
+			CheckoutAction.updatePaymentStatus(10);
+		}
+
+		_cashSelected() {
+			CheckoutAction.updatePaymentStatus(0);
 		}
 		_setTips(tipsPercentage){
 			this.setState({
@@ -379,7 +402,9 @@ class Confirm extends Component {
 			}
 		}
 		_renderDeliverFee(){
-			if(this.state.dltype == '0') return
+			//自取
+			if(this.state.dltype == '0') return;
+			//送餐
 			if(this.state.dlexp > 0){
 				return(
 					<CartItem icon={require('./Image/delivery-2.png')}
@@ -448,7 +473,7 @@ class Confirm extends Component {
       )
     }
 		_renderChoosePayment() {
-			if (this.state.available_payment_channels) {
+			if (this.state.available_payment_channels && this.state.dlexp > 0) {
 				if (this.state.available_payment_channels.length > 1) {
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>
@@ -456,13 +481,6 @@ class Confirm extends Component {
 												title={CMLabel.getCNLabel('PAY')}
 												value={this.state.paymentStatus}/>
 						</TouchableOpacity>
-					)
-				}
-				else if (this.state.available_payment_channels.length > 1) {
-					return(
-						<CartItem rightIcon={require('./Image/right.png')}
-											title={CMLabel.getCNLabel('PAY')}
-											value={this.state.paymentStatus}/>
 					)
 				}
 			}
@@ -487,7 +505,7 @@ class Confirm extends Component {
 
 		}
 		_renderTipInfo(){
-			if (this.state.tipInfoStatus) {
+			if (this.state.payment_channel != 0) {
 				return(
 					<View style={{
 						height:100,
@@ -543,6 +561,7 @@ class Confirm extends Component {
 													placeholder={'Customized'}
 													keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
 													returnKeyType={'done'}
+													value={this.state.tips.toString()}
 													onChangeText={(text)=>{
 														this.setState({
 															tips:text.length == 0 ? 0 : parseFloat(text),
@@ -562,6 +581,8 @@ class Confirm extends Component {
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
 														 total={this.state.total}
+														 tips={this.state.tips}
+														 paymentChannel={this.state.payment_channel}
 														 dltype={this.state.dltype}/>)
 			}
 		}

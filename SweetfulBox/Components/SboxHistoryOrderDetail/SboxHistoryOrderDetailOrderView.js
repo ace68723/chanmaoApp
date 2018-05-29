@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   total: {
     paddingLeft: width * (124 / 1242),
     paddingTop: height * (74 / 2208),
+    paddingBottom: height * (74 / 2208),
     },
   totalText: {
     color: '#EC7381',
@@ -219,7 +220,7 @@ _renderUserInfo() {
           <FlatList
             data={this.props.orderDetail.prod}
     				enableEmptySections
-    				keyExtractor={(item, index) => item.sku_id}
+    				keyExtractor={(item, index) => item.sku_id.toString()}
     				renderItem={this._renderProduct}>
 
           </FlatList>

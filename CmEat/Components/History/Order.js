@@ -187,13 +187,97 @@ export default class pastOrderEN extends Component {
       )
     }
   }
+
+  _renderOptionButton() {
+    if (this.state.orderInfo.payment_channel == 10 && !this.state.orderInfo.payment_status && this.state.orderInfo.order_status == 0) {
+      return (
+          <TouchableOpacity style={{flex:1,
+                                    flexDirection:'row',
+                                    justifyContent:'center',
+                                    alignItems:'center',
+                                    padding:10,
+                                    backgroundColor: '#ff8b00',
+                                    borderColor: '#ff8b00',
+                                    borderTopWidth: 1,
+                                    borderBottomWidth:1}}
+                            onPress={this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}>
+            <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>再次尝试</Text>
+
+          </TouchableOpacity>
+      )
+    }
+    else {
+      return(
+        <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:10,}]}>
+            <TouchableOpacity style={{flex:1,
+                                      flexDirection:'row',
+                                      justifyContent:'center',
+                                      alignItems:'center'}}
+                              onPress={this._handleWechatBtn}>
+              <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
+              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>chanmaoweixin</Text>
+
+            </TouchableOpacity>
+        </View>
+      )
+    }
+  }
+
+  _renderPriceDetail() {
+    if (this.state.orderInfo.payment_channel == 0) {
+      return(
+        <View style={styles.orderTotal}>
+          <Text style={{fontSize:18,marginLeft: 40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>{CMLabel.getCNLabel('PRICE')}: ${this.state.orderInfo.order_total}</Text>
+        </View>
+      )
+    }
+    else if(this.state.orderInfo.payment_channel == 10) {
+      return(
+        <View style={styles.orderTotal}>
+          <Text style={{fontSize:18,
+                        marginLeft: 40,
+                        fontWeight:'bold',
+                        fontFamily:'FZZhunYuan-M02S'}}
+                allowFontScaling={false}>
+                {CMLabel.getCNLabel('ACTUAL_PICE')}: ${this.state.orderInfo.order_total}
+          </Text>
+        </View>
+      )
+    }
+  }
+
   render() {
     let statusMessage = "现金支付";
     let statusColor;
+    let statusReminder;
+    if (this.state.orderInfo.payment_channel == 0) {
+      statusReminder = "支付方式: 现金";
+    }
+    else if (this.state.orderInfo.payment_channel == 10) {
+      statusReminder = "支付方式: 支付宝";
+    }
     switch (this.state.orderInfo.order_status) {
         case 0:
-            statusColor = {color:'#b2b2b2'};
-            statusMessage = '等待商家确认';
+            if (this.state.orderInfo.payment_channel == 10) {
+                if (this.state.orderInfo.payment_status == 20) {
+                  statusColor = {color:'#b2b2b2'};
+                  statusMessage = '已支付, 等待商家确认';
+                }
+                else if(this.state.orderInfo.payment_status == 30) {
+                  statusColor = {color:'#ef473a'};
+                  statusMessage = '在线支付失败';
+                  statusReminder = "请重新下单";
+                }
+                else {
+                  statusColor = {color:'#ef473a'};
+                  statusMessage = '等待支付';
+                  statusReminder = "若状态没有及时更改, 请手动下拉刷新";
+                }
+            }
+            else {
+              statusColor = {color:'#b2b2b2'};
+              statusMessage = '等待商家确认';
+            }
             break;
         case 10:
             statusColor = {color:'#33cd5f'};
@@ -228,6 +312,23 @@ export default class pastOrderEN extends Component {
             statusMessage = '订单已取消';
             break;
     }
+    let _paymentStatusMessage = () => {
+      if (this.state.orderInfo.payment_channel == 10) {
+        return(
+          <Text style={[styles.infoTitle,{...paymentStatusColor, textAlign:'right'}]} allowFontScaling={false}>{paymentStatusMessage}</Text>
+        )
+      }
+    }
+    let _statusReminder = () => {
+      return(
+        <Text style={{paddingBottom:5,
+                      fontWeight:'600',
+                      fontSize:12,
+                      fontFamily:'FZZhunYuan-M02S',
+                      color:'#b2b2b2'}}
+              allowFontScaling={false}>{statusReminder}</Text>
+      )
+    }
       return(
         <TouchableOpacity style={styles.orderContainer}
                           onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
@@ -244,6 +345,7 @@ export default class pastOrderEN extends Component {
               </View>
               <View style={styles.info}>
                   <Text style={[styles.infoTitle,statusColor]} allowFontScaling={false}>{statusMessage}</Text>
+                  {_statusReminder()}
                   <View style={{flexDirection:'row'}}>
                     <Text style={styles.infoText} allowFontScaling={false}>{CMLabel.getCNLabel('ORDER_NO')} #{this.state.orderInfo.order_oid}</Text>
                     <Text style={[styles.infoText,{textAlign:'right'}]} allowFontScaling={false}>{this.state.orderInfo.order_created}</Text>
@@ -252,23 +354,11 @@ export default class pastOrderEN extends Component {
               <View style={styles.orderList}>
                 {this._renderFoodList()}
               </View>
-              <View style={styles.orderTotal}>
-                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>{CMLabel.getCNLabel('PRICE')}: ${this.state.orderInfo.order_total}</Text>
-              </View>
+              {this._renderPriceDetail()}
               {this._phoneNumberVerify()}
               <View style={styles.buttonContainer}>
                   {this._renderDetialButton()}
-                  <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:10,}]}>
-                      <TouchableOpacity style={{flex:1,
-                                                flexDirection:'row',
-                                                justifyContent:'center',
-                                                alignItems:'center'}}
-                                        onPress={this._handleWechatBtn}>
-                        <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
-                        <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>chanmaoweixin</Text>
-
-                      </TouchableOpacity>
-                  </View>
+                  {this._renderOptionButton()}
               </View>
           </View>
         </TouchableOpacity>
@@ -333,6 +423,7 @@ const styles = StyleSheet.create({
     marginRight:18,
   },
   infoTitle:{
+    flex: 1,
     paddingBottom:5,
     // marginLeft:40,
     fontWeight:'bold',

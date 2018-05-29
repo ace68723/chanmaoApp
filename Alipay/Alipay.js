@@ -7,16 +7,13 @@ export default  {
     let order = {
       partner: "2088031360615403",
       seller_id: "api@rotating.ca",
-      out_trade_no: data.order_oid,
-      // out_trade_no: "257730",
+      out_trade_no: data.oid,
       subject: "馋猫订餐",
-      body: "订单号：#" + data.order_oid,
-      total_fee: "0.01",
-      // total_fee: data.order_total,
-      // return_url: "http://www.xxx.com",
+      body: "订单号：#" + data.oid,
+      total_fee: data.total,
       currency: "CAD",
       forex_biz: "FP",
-      notify_url: "https://norgta.com/api/cmapp/v2/alipay_notify_url",
+      notify_url: "https://chanmao.us/api/alipay/v2/alipay_notify_url",
       service: "mobile.securitypay.pay",
       payment_type: "1",
       _input_charset: "utf-8",
@@ -25,14 +22,17 @@ export default  {
       product_code: "NEW_WAP_OVERSEAS_SELLER"
     }
     let signed_data = await CheckoutModule.signAlipayOrder(order);
-    console.log('kkk', signed_data);
-    // add addtional parameter
-    let sign_str = signed_data.sign_str + '&sign="' + signed_data.sign + '"&sign_type="RSA"'
 
-    // use native method to redirect alipay
-    let response = await Alipay.pay(sign_str);
-
-    // console.log("aaa", response.resultStatus);
+    // check if successfully signed
+    if (signed_data.ev_error == 0){
+      // add addtional parameter
+      let sign_str = signed_data.sign_str + '&sign="' + signed_data.sign + '"&sign_type="RSA"'
+      // use native method to redirect alipay
+      let response = await Alipay.pay(sign_str);
+    }
+    else{
+      alert("该订单已成功支付, 请刷新页面");
+    }
   }
 }
 

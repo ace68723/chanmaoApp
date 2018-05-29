@@ -69,6 +69,9 @@ class HistoryTab extends Component {
 				this._renderFilter = this._renderFilter.bind(this);
 				// this._goToRestaurant = this._goToRestaurant.bind(this);
 				this._handleOnChangeTab = this._handleOnChangeTab.bind(this);
+				this._handlePaymentRetry = this._handlePaymentRetry.bind(this);
+				this._alipaySelected = this._alipaySelected.bind(this);
+				this._cashSelected = this._cashSelected.bind(this);
     }
 
     componentDidMount(){
@@ -128,19 +131,7 @@ class HistoryTab extends Component {
           isRefreshing: true,
         })
         HistoryAction.getOrderData();
-      // }
     }
-		// _goToRestaurant(state) {
-	  //   this.props.navigator.showModal({
-	  //     screen: 'CmEatMenu',
-	  //     animated: false,
-	  //     navigatorStyle: {navBarHidden: true},
-	  //     passProps: {
-	  //       py:272,
-	  //       restaurant:state.orderInfo,
-	  //     },
-	  //   });
-	  // }
 		_setOnRefresh() {
 			this.setState({
 				isRefreshing: true,
@@ -155,28 +146,38 @@ class HistoryTab extends Component {
     }
     _HistoryOrderDetailVisible(orderInfo){
 				if (orderInfo) {
-					// left button
-					Alipay.constructAlipayOrder(orderInfo);
-
-					// disabled for testing
-					// this.setState({
-					// 	showHistoryOrderDetail: !this.state.showHistoryOrderDetail,
-					// 	historyDetailOid:orderInfo.order_oid,
-					// });
+					this.setState({
+						showHistoryOrderDetail: !this.state.showHistoryOrderDetail,
+						historyDetailOid:orderInfo.order_oid,
+					});
 				}
 				else {
 					this.setState({
 						showHistoryOrderDetail: !this.state.showHistoryOrderDetail
 					});
 				}
-				// setTimeout( () =>{
-				// 	if(this.state.showHistoryOrderDetail){
-				// 		this.props.hideTabBar();
-				// 	}else{
-				// 		this.props.showTabBar();
-				// 	}
-				// }, 400);
     }
+		_handlePaymentRetry(orderInfo) {
+			this.props.navigator.showModal({
+				screen: 'CmChooseCardType',
+				animated: true,
+				passProps:{available_payment_channels: orderInfo.available_payment_channels,
+									 alipaySelected: this._alipaySelected,
+									 cashSelected: this._cashSelected,
+								 	 flag: 'fromHistory',
+								 	 orderInfo: orderInfo},
+				navigatorStyle: {navBarHidden: true,},
+			});
+		}
+
+		_alipaySelected(orderInfo) {
+			Alipay.constructAlipayOrder({total: parseFloat(orderInfo.order_total).toString(),
+																	 oid: orderInfo.order_oid});
+		}
+		_cashSelected(orderInfo) {
+			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
+			this._onRefresh();
+		}
 
 		_handleOnChangeTab(tabRef) {
 			this.setState({renderingPage: tabRef.i});
@@ -293,6 +294,7 @@ class HistoryTab extends Component {
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
+										handlePaymentRetry={this._handlePaymentRetry}
 										tabLabel={CMLabel.getCNLabel('ALL_ORDER')}/>
 								<OrdersNotReviewed
 										navigator={this.props.navigator}

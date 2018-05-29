@@ -70,23 +70,6 @@ export default class Address extends Component {
 		})
 	}
 
-  // <MapView
-  //     region={this.state.region}
-  //     style={{width:120,
-  //             height:120,
-  //             margin:10,
-  //             borderRadius:15,
-  //             borderColor:"#e2e2e4",
-  //             borderWidth: StyleSheet.hairlineWidth}}
-  //   >
-  //   <MapView.Marker
-  //      coordinate={this.state.marker.latlng}
-  //      title={this.state.marker.title}
-  //      description={this.state.marker.description}
-  //      image={this.state.marker.image}
-  //    />
-  // </MapView>
-
 
   render(){
     return(
@@ -94,7 +77,6 @@ export default class Address extends Component {
 				<View style={{flexDirection:"row",
 										borderColor:"#e2e2e4",
 										borderBottomWidth: StyleSheet.hairlineWidth,}}>
-
           <MapView
               region={this.state.region}
               style={{width:120,
@@ -111,6 +93,7 @@ export default class Address extends Component {
               image={this.state.marker.image}
             />
           </MapView>
+
 
 						<View style={{flex:1,margin:10}}>
 							<Text numberOfLines={2} style={{fontFamily:'FZZhunYuan-M02S',}}

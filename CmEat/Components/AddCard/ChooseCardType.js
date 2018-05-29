@@ -61,24 +61,31 @@ export default class ChooseCardType extends Component {
   }
 
   _goToAliPay() {
-    // this.props.navigator.push({
-    //     screen: "CmAddCard",
-    //     navigatorStyle: {navBarHidden:true},
-    //     passProps:{
-    //       title:"添加 支付宝"
-    //     }
-    //   });
-    CheckoutAction.updatePaymentStatus(10);
+    if (this.props.flag == 'fromCheckout') {
+      this.props.alipaySelected();
+    }
+    else if (this.props.flag == 'fromHistory') {
+      this.props.alipaySelected(this.props.orderInfo);
+    }
     this.props.navigator.dismissModal({
       animationType: 'slide-down'
     });
   }
 
   _goToCash() {
-    CheckoutAction.updatePaymentStatus(0);
-    this.props.navigator.dismissModal({
-      animationType: 'slide-down'
-    });
+    if (this.props.flag == 'fromCheckout') {
+      this.props.cashSelected();
+      this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+      });
+    }
+    else if (this.props.flag == 'fromHistory') {
+      this.props.cashSelected(this.props.orderInfo);
+      this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+      });
+      alert("已成功修改");
+    }
   }
 
   _renderGoBackBtn() {
@@ -117,6 +124,7 @@ export default class ChooseCardType extends Component {
       if (this.props.available_payment_channels.includes(1)) {
         _payment_channel_list.push(
           <TouchableOpacity onPress={this._goToCredit}
+              key={"card"}
               activeOpacity={0.4}
               style={{flexDirection: 'row',
                       paddingTop: 12,
@@ -166,6 +174,7 @@ export default class ChooseCardType extends Component {
       if (this.props.available_payment_channels.includes(10)) {
         _payment_channel_list.push(
           <TouchableOpacity onPress={this._goToAliPay}
+              key={"alipay"}
               activeOpacity={0.4}
               style={{flexDirection: 'row',
                       paddingTop: 12,
@@ -191,6 +200,7 @@ export default class ChooseCardType extends Component {
       if (this.props.available_payment_channels.includes(0)) {
         _payment_channel_list.push(
           <TouchableOpacity onPress={this._goToCash}
+              key={"cash"}
               activeOpacity={0.4}
               style={{flexDirection: 'row',
                       paddingTop: 12,
