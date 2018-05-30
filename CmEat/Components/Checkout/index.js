@@ -17,7 +17,7 @@ import {
   TouchableOpacity,
 	TouchableWithoutFeedback,
 	View,
-	Platform
+	Platform,
 } from 'react-native';
 
 import Background from '../General/Background';

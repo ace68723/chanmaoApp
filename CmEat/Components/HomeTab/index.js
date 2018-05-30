@@ -14,8 +14,8 @@ import {
   TouchableWithoutFeedback,
   View,
 	FlatList,
+	NativeModules
 } from 'react-native';
-
 import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
@@ -46,7 +46,7 @@ export default class HomeTab extends Component {
 		this._renderRestaurant = this._renderRestaurant.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
 		this._renderScrollToResCards = this._renderScrollToResCards.bind(this);
-		
+
   }
 
 	_handleOnPress(advertisement){

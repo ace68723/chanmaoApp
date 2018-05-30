@@ -1,7 +1,8 @@
-import { NativeModules } from 'react-native';
+import { NativeModules} from 'react-native';
 import CheckoutModule from '../CmEat/Modules/CheckoutModule/CheckoutModule';
 
 const { Alipay } = NativeModules;
+
 export default  {
   async constructAlipayOrder(data){
     let order = {
@@ -22,13 +23,13 @@ export default  {
       product_code: "NEW_WAP_OVERSEAS_SELLER"
     }
     let signed_data = await CheckoutModule.signAlipayOrder(order);
-
     // check if successfully signed
     if (signed_data.ev_error == 0){
       // add addtional parameter
       let sign_str = signed_data.sign_str + '&sign="' + signed_data.sign + '"&sign_type="RSA"'
       // use native method to redirect alipay
-      let response = await Alipay.pay(sign_str);
+      let response = await Alipay.pay(sign_str)
+    
     }
     else{
       alert("该订单已成功支付, 请刷新页面");

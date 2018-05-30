@@ -1,6 +1,5 @@
 package ca.chanmao.app;
 
-import ca.chanmao.app.cmAlipay.PayAction;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -9,7 +8,7 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+import ca.chanmao.app.cmAlipay.Alipay;
 
 public class AlipayReactPackage implements ReactPackage {
 
@@ -22,7 +21,7 @@ public class AlipayReactPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new PayAction(reactContext));
+        modules.add(new Alipay(reactContext));
 
         return modules;
     }

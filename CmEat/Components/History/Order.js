@@ -200,7 +200,8 @@ export default class pastOrderEN extends Component {
                                     borderColor: '#ff8b00',
                                     borderTopWidth: 1,
                                     borderBottomWidth:1}}
-                            onPress={this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}>
+                            onPress={
+                              this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}>
             <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>再次尝试</Text>
 
           </TouchableOpacity>

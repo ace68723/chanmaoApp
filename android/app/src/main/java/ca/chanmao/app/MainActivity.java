@@ -1,16 +1,13 @@
 package ca.chanmao.app;
 
 import com.reactnativenavigation.controllers.SplashActivity;
-//
-//public class MainActivity extends SplashActivity {
-//
-//}
+
 
 import android.app.Activity;
 import android.os.Bundle;
 
-//import com.facebook.react.ReactActivity;
-//import com.facebook.soloader.SoLoader;
+import com.facebook.react.ReactActivity;
+import com.facebook.soloader.SoLoader;
 
 public class MainActivity extends SplashActivity {
 
