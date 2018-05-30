@@ -8,6 +8,7 @@ import {
   Dimensions,
   Easing,
 	Keyboard,
+	KeyboardAvoidingView,
   Image,
   InteractionManager,
   StyleSheet,
@@ -103,6 +104,7 @@ class Confirm extends Component {
         this._handleSubmitComment = this._handleSubmitComment.bind(this);
 				this._handleProductOnPress = this._handleProductOnPress.bind(this);
 				this._closeOrderConfirm = this._closeOrderConfirm.bind(this);
+				this._handleTipsOnFocus = this._handleTipsOnFocus.bind(this);
     }
 
     componentDidMount(){
@@ -292,11 +294,17 @@ class Confirm extends Component {
 			}
 		}
 		_handleScroll(e) {
+			// Keyboard.dismiss();
       if(e.nativeEvent.contentOffset.y < 300){
         this.state.anim.setValue(e.nativeEvent.contentOffset.y);
         const height = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
       }
     }
+
+		_handleTipsOnFocus() {
+			let yOffset = this.state.cart.length * 49 + 450;
+			this._scrollView.scrollTo({x: 0, y: yOffset, animated: true});
+		}
 
 		_saveModificationCallback() {
 			const cart = MenuStore.getCart();
@@ -310,10 +318,14 @@ class Confirm extends Component {
 		}
 		_alipaySelected() {
 			CheckoutAction.updatePaymentStatus(10);
+			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+										 tipsPercentage:0.1});
 		}
 
 		_cashSelected() {
 			CheckoutAction.updatePaymentStatus(0);
+			this.setState({tips: 0,
+										 tipsPercentage:0.1});
 		}
 		_setTips(tipsPercentage){
 			this.setState({
@@ -505,7 +517,7 @@ class Confirm extends Component {
 
 		}
 		_renderTipInfo(){
-			if (this.state.payment_channel != 0) {
+			if (this.state.payment_channel && this.state.payment_channel != 0) {
 				return(
 					<View style={{
 						height:100,
@@ -561,6 +573,7 @@ class Confirm extends Component {
 													placeholder={'Customized'}
 													keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
 													returnKeyType={'done'}
+													onFocus={() => this._handleTipsOnFocus()}
 													value={this.state.tips.toString()}
 													onChangeText={(text)=>{
 														this.setState({
@@ -627,6 +640,8 @@ class Confirm extends Component {
 											scrollEventThrottle= {16}
 											showsVerticalScrollIndicator={false}
 											onScroll={ (e) => this._handleScroll(e)}
+											keyboardDismissMode={'on-drag'}
+											keyboardShouldPersistTaps={"always"}
 											{...this._gestureHandlers}>
 						<View style={{backgroundColor:"#000000",marginTop:200,}}>
 							<Animated.View style={{
@@ -635,7 +650,7 @@ class Confirm extends Component {
 																		 marginRight:margin,
 																	   backgroundColor:"#ffffff",
 																		 marginTop:-20,
-																		 paddingBottom:200,
+																		 paddingBottom:80,
 																	 }}>
 								<View style={{width:width-20,alignSelf:"center"}}>
 									{this._renderRestaurant()}
