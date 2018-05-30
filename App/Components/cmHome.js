@@ -82,7 +82,7 @@ export default class Home extends Component {
   _versionCheck(){
     let curVersion = GetUserInfo().version;
     VersionAction.getLatestVersion(curVersion).then((versionObject)=>{
-      if (versionObject && versionObject.need_update && curVersion != versionObject.version) {
+      if (versionObject && versionObject.need_update) {
         this._updateAlert(versionObject);
       }
       else {
