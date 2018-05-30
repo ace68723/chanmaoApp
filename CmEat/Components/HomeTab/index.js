@@ -13,8 +13,7 @@ import {
 	TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-	FlatList,
-	NativeModules
+	FlatList
 } from 'react-native';
 import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
