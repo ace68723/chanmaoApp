@@ -176,7 +176,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   updatePaymentStatus(data){
     if (data.payment_channel == 0) {
       this.state.tipInfoStatus = false;
-      this.state.paymentStatus = '现金';
+      this.state.paymentStatus = '到付';
       this.state.payment_channel = 0;
     }
     else if (data.payment_channel == 10) {

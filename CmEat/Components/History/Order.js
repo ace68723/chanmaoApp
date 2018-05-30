@@ -247,11 +247,11 @@ export default class pastOrderEN extends Component {
   }
 
   render() {
-    let statusMessage = "现金支付";
+    let statusMessage;
     let statusColor;
     let statusReminder;
     if (this.state.orderInfo.payment_channel == 0) {
-      statusReminder = "支付方式: 现金";
+      statusReminder = "支付方式: 到付";
     }
     else if (this.state.orderInfo.payment_channel == 10) {
       statusReminder = "支付方式: 支付宝";

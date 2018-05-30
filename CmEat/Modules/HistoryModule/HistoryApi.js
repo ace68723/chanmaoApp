@@ -127,8 +127,6 @@ const HistoryApi = {
       }
       options.headers.authortoken = reqData.token;
       options.headers.oid = reqData.io_data.oid;
-      console.log(url);
-      console.log(options);
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw error})
