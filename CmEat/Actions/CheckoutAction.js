@@ -41,6 +41,14 @@ export default {
       try{
         const token = await AuthModule.getToken();
         // const reqData = {token,comment, payment_channel, tips};
+        if(payment_channel == 10) {
+          if(comment) {
+            comment = '支付宝|' + comment;
+          }
+          else{
+            comment = "支付宝|";
+          }
+        }
         const reqData = {token,comment, payment_channel, tips};
         const data = await RestaurantModule.checkout(reqData);
 

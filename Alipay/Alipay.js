@@ -17,7 +17,7 @@ export default  {
       service: "mobile.securitypay.pay",
       payment_type: "1",
       _input_charset: "utf-8",
-      it_b_pay: "10m",
+      it_b_pay: "300m",
       show_url: "m.alipay.com",
       product_code: "NEW_WAP_OVERSEAS_SELLER"
     }
