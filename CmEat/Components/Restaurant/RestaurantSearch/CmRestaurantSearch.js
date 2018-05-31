@@ -138,7 +138,7 @@ export default class CmRestaurantSearch extends Component {
 				this.setState({
 					searchText:'',
 					restaurantList: this.state.filteredRestaurant
-				})
+				});
 			}else{
 				this.setState({
 					searchText:'',
@@ -153,16 +153,18 @@ export default class CmRestaurantSearch extends Component {
   }
   _cleanInput() {
 	  if(this.state.isTagClicked){
-		this.setState({
-			searchText:'',
-			restaurantList: this.state.filteredRestaurant,
-		})
+			this.setState({
+				searchText:'',
+				restaurantList: this.state.filteredRestaurant,
+			});
+			this.refs.searchInput.clear();
 	  }else{
-		this.setState({
-			searchText:'',
-			restaurantList:[],
-			filteredRestaurant:[],
-		});
+			this.setState({
+				searchText:'',
+				restaurantList:[],
+				filteredRestaurant:[],
+			});
+			this.refs.searchInput.clear();
 	  }
 
 	}
@@ -198,7 +200,8 @@ export default class CmRestaurantSearch extends Component {
 			clickedFlavorTag:{},
 			restaurantList:[],
 			searchText:'',
-		})
+		});
+		this.refs.searchInput.clear();
 	}
 	_delArea(){
 		this.setState({
@@ -289,7 +292,6 @@ export default class CmRestaurantSearch extends Component {
 									onChangeText={this._setSearchText}
 									underlineColorAndroid={"rgba(0,0,0,0)"}
 									placeholder={"搜索你想要的餐馆"}
-									value={this.state.searchText}
 								/>
 							</View>
 					</View>

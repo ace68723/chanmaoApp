@@ -695,7 +695,7 @@ export default class pastOrderEN extends Component {
                     leftButtonText={'x'}/>
                 <ScrollView ref="ScrollView"
                             keyboardShouldPersistTaps={'always'}
-                            keyboardDismissMode={'on-drag'}>
+                            keyboardDismissMode={Platform.OS === 'ios' ?'on-drag':'none'}>
                     {this._renderDriverComments()}
                     {this._renderRestaurantComments()}
                 </ScrollView>
