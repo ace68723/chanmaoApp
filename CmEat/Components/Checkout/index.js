@@ -8,7 +8,6 @@ import {
   Dimensions,
   Easing,
 	Keyboard,
-	KeyboardAvoidingView,
   Image,
   InteractionManager,
   StyleSheet,
@@ -19,6 +18,8 @@ import {
 	TouchableWithoutFeedback,
 	View,
 	Platform,
+	StatusBar,
+
 } from 'react-native';
 
 import Background from '../General/Background';
@@ -116,10 +117,16 @@ class Confirm extends Component {
 				CheckoutAction.beforCheckout(rid,pretax,startAmount);
 				this.setState({renderAddress:true})
 			}, 500);
-      CheckoutStore.addChangeListener(this._onChange);
+			CheckoutStore.addChangeListener(this._onChange);
+
+			this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+			this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
     }
     componentWillUnmount() {
-      CheckoutStore.removeChangeListener(this._onChange);
+			CheckoutStore.removeChangeListener(this._onChange);
+			
+			this.keyboardDidShowListener.remove();
+			this.keyboardDidHideListener.remove();
     }
     _onChange(){
 
@@ -294,7 +301,7 @@ class Confirm extends Component {
 			}
 		}
 		_handleScroll(e) {
-			// Keyboard.dismiss();
+			 Keyboard.dismiss();
       if(e.nativeEvent.contentOffset.y < 300){
         this.state.anim.setValue(e.nativeEvent.contentOffset.y);
         const height = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
@@ -625,7 +632,7 @@ class Confirm extends Component {
 				}
 			}
       return(
-        <View style={styles.mainContainer}>
+				<View style={styles.mainContainer} >
 					<Background
 							 minHeight={0}
 							 maxHeight={230}
@@ -640,7 +647,7 @@ class Confirm extends Component {
 											scrollEventThrottle= {16}
 											showsVerticalScrollIndicator={false}
 											onScroll={ (e) => this._handleScroll(e)}
-											keyboardDismissMode={'on-drag'}
+											keyboardDismissMode={Platform.OS=='ios'?'on-drag':null}
 											keyboardShouldPersistTaps={"always"}
 											{...this._gestureHandlers}>
 						<View style={{backgroundColor:"#000000",marginTop:200,}}>
@@ -745,7 +752,9 @@ let styles = StyleSheet.create({
     fontSize:25,
   },
   acceptButton:{
-    width:width,
+		width:width,
+		position:Platform.OS == "ios"? null:'absolute',
+		top:Platform.OS == "ios"? null:height-acceptButtonHeight-StatusBar.currentHeight,
     height:acceptButtonHeight,
     backgroundColor:'#ea7b21',
 		justifyContent:'center',

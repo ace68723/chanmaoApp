@@ -94,9 +94,10 @@ export default class CmRestaurantSearch extends Component {
 	}
 
 	_filterNotes(searchText, restaurants) {
-
-		let text = searchText.toLowerCase();
-		let filterArray = [];
+		
+		if(typeof(searchText) == 'string'){
+			let text = searchText.toLowerCase();
+			let filterArray = [];
 
 		if(this.state.isTagClicked){
 			filterArray = this.state.filteredRestaurant;
@@ -112,6 +113,8 @@ export default class CmRestaurantSearch extends Component {
 			});
 		}
 		return filterArray;
+		}
+		
 
 	}
   _setSearchText(text) {
@@ -132,7 +135,7 @@ export default class CmRestaurantSearch extends Component {
 				searchText: text,
 				restaurantList: filteredData//filteredData.slice(0, 5)
 			});
-			//this.refs.searchInput.value = text;
+			
 	  	}else {
 			if(this.state.isTagClicked){
 				this.setState({
@@ -164,7 +167,7 @@ export default class CmRestaurantSearch extends Component {
 			filteredRestaurant:[],
 		});
 	  }
-
+	
 	}
 	_clickTag(tag){
 		try{
@@ -289,8 +292,9 @@ export default class CmRestaurantSearch extends Component {
 									onChangeText={this._setSearchText}
 									underlineColorAndroid={"rgba(0,0,0,0)"}
 									placeholder={"搜索你想要的餐馆"}
-									value={this.state.searchText}
-								/>
+								
+								>
+								</TextInput>
 							</View>
 					</View>
 					{this._renderCleanSearchText()}
