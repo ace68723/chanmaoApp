@@ -4851,9 +4851,9 @@ react-native-modalbox@^1.4.2:
     create-react-class "^15.6.0"
     prop-types "^15.5.10"
 
-react-native-navigation@^1.1.458:
-  version "1.1.458"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.458.tgz#fe0ad5f7948768a82ebe69ed4bfc319c94ff9893"
+react-native-navigation@^1.1.464:
+  version "1.1.464"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.464.tgz#200e5bcedeeae47fcbd594e767449fb188d20416"
   dependencies:
     lodash "4.x.x"
 
