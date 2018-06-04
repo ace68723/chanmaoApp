@@ -294,7 +294,7 @@ export default class CmRestaurantSearch extends Component {
 									returnKeyType={'next'}
 									onChangeText={this._setSearchText}
 									underlineColorAndroid={"rgba(0,0,0,0)"}
-									placeholder={"搜索你想要的餐馆"}
+									placeholgder={"搜索你想要的餐馆"}
 								/>
 							</View>
 					</View>

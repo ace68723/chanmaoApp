@@ -105,7 +105,6 @@ class Confirm extends Component {
         this._handleSubmitComment = this._handleSubmitComment.bind(this);
 				this._handleProductOnPress = this._handleProductOnPress.bind(this);
 				this._closeOrderConfirm = this._closeOrderConfirm.bind(this);
-				this._handleTipsOnFocus = this._handleTipsOnFocus.bind(this);
     }
 
     componentDidMount(){
@@ -301,17 +300,12 @@ class Confirm extends Component {
 			}
 		}
 		_handleScroll(e) {
-			 Keyboard.dismiss();
       if(e.nativeEvent.contentOffset.y < 300){
         this.state.anim.setValue(e.nativeEvent.contentOffset.y);
         const height = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
       }
     }
 
-		_handleTipsOnFocus() {
-			let yOffset = this.state.cart.length * 49 + 450;
-			this._scrollView.scrollTo({x: 0, y: yOffset, animated: true});
-		}
 
 		_saveModificationCallback() {
 			const cart = MenuStore.getCart();
@@ -503,7 +497,7 @@ class Confirm extends Component {
 					)
 				}
 			}
-			
+
 		}
 		_renderComment(){
 			return(
@@ -577,10 +571,10 @@ class Confirm extends Component {
 								<Text allowFontScaling={false}>$</Text>
 								<TextInput
 													style={{flex:1,height: 40, marginHorizontal:5}}
+													underlineColorAndroid={"rgba(0,0,0,0)"}
 													placeholder={'Customized'}
 													keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
 													returnKeyType={'done'}
-													onFocus={() => this._handleTipsOnFocus()}
 													value={this.state.tips.toString()}
 													onChangeText={(text)=>{
 														this.setState({
@@ -642,54 +636,56 @@ class Confirm extends Component {
 							 backgroundColor={"rgba(0,0,0,0)"}>
 					 </Background>
 
-          <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}
-											style={styles.scrollView}
-											scrollEventThrottle= {16}
-											showsVerticalScrollIndicator={false}
-											onScroll={ (e) => this._handleScroll(e)}
-											keyboardDismissMode={Platform.OS=='ios'?'on-drag':null}
-											keyboardShouldPersistTaps={"always"}
-											{...this._gestureHandlers}>
-						<View style={{backgroundColor:"#000000",marginTop:200,}}>
-							<Animated.View style={{
-																		 bottom:this.state.viewBottom,
-																		 marginLeft:margin,
-																		 marginRight:margin,
-																	   backgroundColor:"#ffffff",
-																		 marginTop:-20,
-																		 paddingBottom:80,
-																	 }}>
-								<View style={{width:width-20,alignSelf:"center"}}>
-									{this._renderRestaurant()}
-									{this._renderAddress()}
-									{cartList}
-									{this._renderDeliverType()}
-									<TouchableWithoutFeedback onPress={()=>{this.setState({openEditComment:true})}}>
-										<View style={{alignItems:'flex-start',
-																	marginTop:10,
-																	padding:20,
-																	borderColor:"#e2e2e4",
-																	borderBottomWidth: StyleSheet.hairlineWidth,
-																  borderTopWidth: StyleSheet.hairlineWidth,}}>
-												{commentText()}
-										</View>
-									</TouchableWithoutFeedback>
-									<CartItem
-														title={CMLabel.getCNLabel('PRETAX_PRICE')}
-														value={'$'+this.state.pretax}/>
+				  <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === 'ios'?"padding":null}>
+		          <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}
+													style={styles.scrollView}
+													scrollEventThrottle= {16}
+													showsVerticalScrollIndicator={false}
+													onScroll={ (e) => this._handleScroll(e)}
+													keyboardDismissMode={Platform.OS === 'ios' ?'on-drag':'none'}
+													keyboardShouldPersistTaps={"always"}
+													{...this._gestureHandlers}>
+								<View style={{backgroundColor:"#000000",marginTop:200,}}>
+									<Animated.View style={{
+																				 bottom:this.state.viewBottom,
+																				 marginLeft:margin,
+																				 marginRight:margin,
+																			   backgroundColor:"#ffffff",
+																				 marginTop:-20,
+																				 paddingBottom:80,
+																			 }}>
+										<View style={{width:width-20,alignSelf:"center"}}>
+											{this._renderRestaurant()}
+											{this._renderAddress()}
+											{cartList}
+											{this._renderDeliverType()}
+											<TouchableWithoutFeedback onPress={()=>{this.setState({openEditComment:true})}}>
+												<View style={{alignItems:'flex-start',
+																			marginTop:10,
+																			padding:20,
+																			borderColor:"#e2e2e4",
+																			borderBottomWidth: StyleSheet.hairlineWidth,
+																		  borderTopWidth: StyleSheet.hairlineWidth,}}>
+														{commentText()}
+												</View>
+											</TouchableWithoutFeedback>
+											<CartItem
+																title={CMLabel.getCNLabel('PRETAX_PRICE')}
+																value={'$'+this.state.pretax}/>
 
-									{this._renderDeliverFee()}
-									<CartItem
-														title={CMLabel.getCNLabel('TAXED_PRICE')}
-														value={'$'+this.state.total}/>
-									{this._renderChoosePayment()}
-									{this._renderTipInfo()}
+											{this._renderDeliverFee()}
+											<CartItem
+																title={CMLabel.getCNLabel('TAXED_PRICE')}
+																value={'$'+this.state.total}/>
+											{this._renderChoosePayment()}
+											{this._renderTipInfo()}
+										</View>
+
+			            </Animated.View>
 								</View>
 
-	            </Animated.View>
-						</View>
-
-          </ScrollView>
+		          </ScrollView>
+					</KeyboardAvoidingView>
 					{this.renderCheckoutButton()}
 					<TouchableOpacity style={{
 																		paddingLeft:8,
