@@ -502,7 +502,6 @@ class Confirm extends Component {
 										 placeholder={CMLabel.getCNLabel('REMARK')}
 										 selectionColor="#ff8b00"
 										 multiline={true}
-										 value={this.state.comment}
 										 onChangeText={(text) => {this.setState({comment:text})}}
                      underlineColorAndroid={"rgba(0,0,0,0)"}>
 					</TextInput>
