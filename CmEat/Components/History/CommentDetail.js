@@ -446,7 +446,6 @@ export default class pastOrderEN extends Component {
                                  padding: 10,
                                  fontFamily:'FZZhunYuan-M02S'}}
                          underlineColorAndroid='transparent'
-                         value={this.state.driver_comment}
                          placeholder={CMLabel.getCNLabel('COMMENT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(50)}
                          onChangeText={(text) => this._handleDriverComments(text)}
@@ -620,7 +619,6 @@ export default class pastOrderEN extends Component {
                                  padding: 10,
                                  fontFamily:'FZZhunYuan-M02S'}}
                          underlineColorAndroid='transparent'
-                         value={this.state.restaurant_comment}
                          placeholder={CMLabel.getCNLabel('RESTAURANT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(435)}
                          onChangeText={(text) => this._handleRestaurantComments(text)}
