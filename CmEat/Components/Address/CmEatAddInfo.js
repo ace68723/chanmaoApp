@@ -23,7 +23,9 @@ import Loading from '../Helpers/Loading';
 import Header from '../General/Header';
 
 import AddressAction from '../../Actions/AddressAction';
+import AddressStore from '../../Stores/AddressStore';
 import CMLabel from '../../Constants/AppLabel';
+
 const _getFormatAddress = () =>{
   return AddressStore.getFormatAddress()
 }
@@ -46,6 +48,18 @@ export default class CmEatAddInfo extends Component {
           backToAddressList:false,
 					choosedType:'Home',
         }
+				// pre-fill editting address
+				if (AddressStore.getState().edittingAddress){
+					let edittingAddress = AddressStore.getState().edittingAddress;
+					this.state.name = edittingAddress.name;
+					this.state.phoneNumber = edittingAddress.tel;
+					this.state.apartmentNumber = edittingAddress.apt_no;
+					this.state.buzzCode = edittingAddress.buzz;
+
+					const choosedTypeMapping = {"H": "Home", "W": "Work", "O": "Other"}
+					this.state.choosedType = choosedTypeMapping[edittingAddress.type];
+
+				}
         this._submitAddress = this._submitAddress.bind(this);
         this._chooseType = this._chooseType.bind(this);
         this._goBack = this._goBack.bind(this);
@@ -57,6 +71,7 @@ export default class CmEatAddInfo extends Component {
 			this._chooseType()
     }
     _goBack() {
+			AddressStore.getState().edittingAddress = null;
 			this.props.updateAddressStatus("");
       this.props.navigator.pop();
     }
@@ -243,6 +258,7 @@ export default class CmEatAddInfo extends Component {
                             blurOnSubmit={false}
                             autoFocus={true}
                             style={styles.fistInput}
+														value={this.state.name}
                             placeholder="Name"
                             keyboardType = { 'default'}
                             autoCorrect= { false}
@@ -319,7 +335,9 @@ export default class CmEatAddInfo extends Component {
                                        activeOpacity={0.7}
                                        onPress={this._submitAddress}>
                         <Text style={ styles.buttonText }
-															allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')} </Text>
+
+															allowFontScaling={false}>{AddressStore.getState().edittingAddress ? CMLabel.getCNLabel('SAVE_ADDRESS') : CMLabel.getCNLabel('ADD_ADDRESS')}
+												 </Text>
                     </TouchableOpacity>
                </View>
 

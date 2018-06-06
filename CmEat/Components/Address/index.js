@@ -50,6 +50,7 @@ export default class CmEatAddress extends Component {
       this._handleSearchChange = this._handleSearchChange.bind(this);
       this._chooseAddress = this._chooseAddress.bind(this);
       this._deleteAddress = this._deleteAddress.bind(this);
+			this._editAddress = this._editAddress.bind(this);
       this._selectAddress = this._selectAddress.bind(this);
 			this._getCurrentGeolocation = this._getCurrentGeolocation.bind(this);
 			this._handleConfirm = this._handleConfirm.bind(this);
@@ -164,6 +165,13 @@ export default class CmEatAddress extends Component {
 			]
 		)
 	}
+	_editAddress(address){
+		console.log('123', JSON.stringify(address));
+		// temp fix
+		this._handleSearchChange(address.addr.split(',')[0]);
+		AddressStore.getState().edittingAddress = address;
+	}
+
 	_selectAddress(address){
     Keyboard.dismiss();
 		AddressAction.updateSelectedUaid(address.uaid);
@@ -367,12 +375,20 @@ export default class CmEatAddress extends Component {
   											}}>
   											{icon()}
   						<View style={{flex:1,flexDirection:"row",alignItems:"flex-end",justifyContent:"flex-end"}}>
-  							<TouchableOpacity
+								<TouchableOpacity
+										activeOpacity={0.4}
+										onPress={this._editAddress.bind(null,address)}>
+  									<Image style={{width:25,height:26.6,marginLeft:15,}}
+  												 source={require('./Image/button_address_edit.png')}/>
+  							</TouchableOpacity>
+
+								<TouchableOpacity
 										activeOpacity={0.4}
 										onPress={this._deleteAddress.bind(null,address)}>
   									<Image style={{width:25,height:26.6,marginLeft:15,}}
   												 source={require('./Image/icon_address_delete.png')}/>
   							</TouchableOpacity>
+
   						</View>
   					</View>
   					<Text style={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
