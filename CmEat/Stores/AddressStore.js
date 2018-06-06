@@ -71,6 +71,7 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 	},
 	clearAddressInput() {
 		this.state.searchAddress = '';
+		this.state.edittingAddress = null;
 	},
 	formatAddress(io_addrInfo){
     this.state.formattedAddress = io_addrInfo;

@@ -295,6 +295,7 @@ export default class CmEatAddInfo extends Component {
                       </Text>
                       <TextInput
                           blurOnSubmit={false}
+													value={this.state.apartmentNumber}
                           style={styles.fistInput}
                           placeholder="Optional(选填)"
                           keyboardType = { 'numbers-and-punctuation'}
@@ -313,6 +314,7 @@ export default class CmEatAddInfo extends Component {
                       <TextInput
                           blurOnSubmit={false}
                           style={styles.fistInput}
+													value={this.state.buzzCode}
                           placeholder="Optional(选填)"
                           keyboardType = { 'numbers-and-punctuation'}
                           autoCorrect= { false}
