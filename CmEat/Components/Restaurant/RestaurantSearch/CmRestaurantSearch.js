@@ -44,6 +44,11 @@ if(height == 812){
 const searchViewMarginHorizontal = 10;
 const iconSearchInputSize = 35;
 
+import restaurantSearch from './Reducers'
+import { createStore } from 'react-redux'
+
+const store = createStore(restaurantSearch)
+
 export default class CmRestaurantSearch extends Component {
 
   constructor(props) {
@@ -115,7 +120,7 @@ export default class CmRestaurantSearch extends Component {
 
 	}
   _setSearchText(text) {
-
+		console.log('gg', store.getState());
 		if(text){
 			let processedText = WordProcessor.tranStr(text);
 			let filteredData;
@@ -128,7 +133,8 @@ export default class CmRestaurantSearch extends Component {
 
 			filteredData = orderBy(filteredData, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
 
-			this.setState({
+
+			store.dispatch({
 				searchText: text,
 				restaurantList: filteredData//filteredData.slice(0, 5)
 			});
@@ -426,6 +432,7 @@ export default class CmRestaurantSearch extends Component {
 	}
 }
 
+// store.subscribe(render)
 
 const styles = StyleSheet.create({
 	opacityView:{
