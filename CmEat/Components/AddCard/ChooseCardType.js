@@ -124,7 +124,7 @@ export default class ChooseCardType extends Component {
       if (this.props.available_payment_channels.includes(1)) {
         _payment_channel_list.push(
           <TouchableOpacity onPress={this._goToCredit}
-              key={"card"}
+              key={"creditCard"}
               activeOpacity={0.4}
               style={{flexDirection: 'row',
                       paddingTop: 12,
@@ -148,7 +148,9 @@ export default class ChooseCardType extends Component {
           </TouchableOpacity>
         )
         _payment_channel_list.push(
-          <TouchableOpacity onPress={this._goToDebit}
+          <TouchableOpacity
+              key={"debitCard"}
+              onPress={this._goToDebit}
               activeOpacity={0.4}
               style={{flexDirection: 'row',
                       paddingTop: 12,
