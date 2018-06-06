@@ -166,10 +166,10 @@ export default class ChooseCardType extends Component {
                       borderBottomWidth: 1,
                       borderColor: "#D5D5D5"}}>
               <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-                <Image source={require('./Img/visa_master_icon.png')}
+                <Image source={require('./Img/visa_debit_icon.png')}
                        style={{alignSelf: 'center',
-                               height: 15,
-                               width: 80}}/>
+                               height: 20,
+                               width: 40}}/>
               </View>
               <Text allowFontScaling={false}
                     style={{flex: 1,
