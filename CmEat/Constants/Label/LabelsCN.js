@@ -10,6 +10,7 @@ module.exports={
     SETTING:'设置',
     MY_ORDER:'我的订单',
     ADD_ADDRESS:'添加地址',
+    SAVE_ADDRESS:'保存地址',
     CUSTOMER_SERVICE:'联系客服',
     SWEETBOX: '甜满箱 首单立减8刀 满60再减10刀',
     LOG_OUT: '退出登录',

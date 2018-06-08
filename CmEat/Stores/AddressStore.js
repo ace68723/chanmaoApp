@@ -33,6 +33,7 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 		selectedUaid: null,
 		currentLocation: "",
 		shouldDismissAddressPromptView: false,
+		edittingAddress: null
 	},
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -46,6 +47,7 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
   submitAddress(selectedUaid){
     this.state.selectedUaid = selectedUaid;
     this.state.addressStatus = "backToAddressList";
+		this.state.edittingAddress = null;
   },
 	showAddInfo(placeId){
 		addressListState.placeId = placeId;
@@ -69,6 +71,7 @@ const AddressStore = Object.assign({},EventEmitter.prototype,{
 	},
 	clearAddressInput() {
 		this.state.searchAddress = '';
+		this.state.edittingAddress = null;
 	},
 	formatAddress(io_addrInfo){
     this.state.formattedAddress = io_addrInfo;
