@@ -290,12 +290,8 @@ export default class CmEatAddress extends Component {
 				if(address.type == "H"){
 					return (
 						<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
-							<TouchableOpacity
-									activeOpacity={0.4}
-									onPress={this._deleteAddress.bind(null,address)}>
-									<Image style={{width:30,height:29.2}}
-												source={require('./Image/icon_address_home.png')}/>
-							</TouchableOpacity>
+							<Image style={{width:30,height:29.2}}
+										source={require('./Image/icon_address_home.png')}/>
 							<Text style={{fontSize:20,
 														marginLeft:15,
 														fontFamily:'FZZongYi-M05S',}}
