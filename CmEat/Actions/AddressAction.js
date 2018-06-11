@@ -121,6 +121,16 @@ export default {
       dispatch({
           actionType: AppConstants.DISMISS_ADDRESS_PROMPT
       })
-    }
-
+    },
+    setCurrentEdittingAddress(address) {
+      const data = {address: address}
+      dispatch({
+          actionType: AppConstants.SET_EDITTING_ADDRESS, data
+      })
+    },
+    resetCurrentEdittingAddress() {
+      dispatch({
+          actionType: AppConstants.RESET_EDITTING_ADDRESS
+      })
+    },
 }
