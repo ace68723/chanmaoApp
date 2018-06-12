@@ -49,6 +49,7 @@ import BadOrders from './BadOrders';
 import CMLabel from '../../Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
+import CheckoutAction from '../../Actions/CheckoutAction';
 
 class HistoryTab extends Component {
     constructor(props) {
@@ -72,6 +73,7 @@ class HistoryTab extends Component {
 				this._handlePaymentRetry = this._handlePaymentRetry.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
+		
     }
 
     componentDidMount(){
@@ -178,7 +180,10 @@ class HistoryTab extends Component {
 			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
 			this._onRefresh();
 		}
-
+		// _applePaySelected(){
+		// 		CheckoutAction.checkoutByApplepay()
+		// }
+	
 		_handleOnChangeTab(tabRef) {
 			this.setState({renderingPage: tabRef.i});
 		}

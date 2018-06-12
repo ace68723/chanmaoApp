@@ -39,6 +39,13 @@ export default class orderConfirm extends Component {
             <Text style={styles.contentFont} allowFontScaling={false}>支付宝</Text>
         </View>
       )
+    }else if(this.props.paymentChannel == 20){
+        return(
+          <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>
+              <Image source={require('./Image/alipay.png')} style={{width:24,height:25,marginRight:15,marginLeft:15}}/>
+              <Text style={styles.contentFont} allowFontScaling={false}>Apple Pay</Text>
+          </View>
+        )
     }
   }
 

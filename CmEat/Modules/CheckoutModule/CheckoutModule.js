@@ -92,8 +92,23 @@ export default  {
       throw `getOrderBefore ${ev_message} `
     }
   },
-
-
+  async oneTimeCharge({amount,oid,token}){
+    try{
+      let data = {
+        authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxMDYxMSIsImV4cGlyZWQiOjE1MTE0NjcyMDAsImxhc3Rsb2dpbiI6MTUwNTQyMTg1MX0.QbaQXdVSW9Tm3JrpEo7HHRQ6hjPGNqvVoovbpagqbBA',
+        amount:amount*100,
+        oid_str: "oid:" + oid,
+        token:token
+      }
+      console.log(token)
+      let res = await CheckoutAPI.oneTimeCharge(data);
+      if(res.ev_error === 1) throw res;
+      else return 'success';
+    }catch(e){
+      console.log(e)
+      return 'failed';
+    }
+  },
   async signAlipayOrder(order){
     try {
       let orderStr = '';

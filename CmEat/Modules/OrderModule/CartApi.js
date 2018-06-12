@@ -75,7 +75,7 @@ const CartApi = {
               this.removeItem(cartItem)
               delete this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty;
           } else {
-            this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty = cartItem.qty;
+            if(cartItem) this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty = cartItem.qty;
           }
         });
         return this.la_menu;

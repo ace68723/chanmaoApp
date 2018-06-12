@@ -19,7 +19,8 @@ import {
 	View,
 	Platform,
 	StatusBar,
-
+	KeyboardAvoidingView,
+	NativeModules
 } from 'react-native';
 
 import Background from '../General/Background';
@@ -43,7 +44,6 @@ import Util from '../../Modules/Util';
 import CMLabel from '../../Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
-
 
 // device(size): get device height and width
 const {height, width} = Dimensions.get('window');
@@ -92,6 +92,7 @@ class Confirm extends Component {
 				this._saveModificationCallback = this._saveModificationCallback.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
+				this._applePaySelected = this._applePaySelected.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
         this._checkout = this._checkout.bind(this);
@@ -148,8 +149,27 @@ class Confirm extends Component {
 					if (this.state.payment_channel == 10) {
 						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
 																				 oid: state.oidFromUrl});
+						this._goToHistory();
 					}
-					this._goToHistory();
+					else if(this.state.payment_channel == 20){
+						let pretax = Number(this.state.pretax);
+						let shipping = Number(this.state.dlexp);
+						let tips =  Number(this.state.tips);
+						let tax = Number(this.state.total - pretax - shipping).toFixed(2);
+						let total =  Number(this.state.total);
+			
+						let paymentData = {
+							subtotal:'' + this.state.pretax,
+							shipping:'' + this.state.dlexp,
+							tax:'' + tax,
+							tips:'' + this.state.tips,
+							oid: state.oidFromUrl,
+							amount:total
+						}
+						CheckoutAction.checkoutByApplepay(paymentData,()=>this._goToHistory());
+						
+					}
+					// this._goToHistory();
 				}
     }
 		_handleAddressAdded() {
@@ -221,17 +241,45 @@ class Confirm extends Component {
 		}
     _goBack(){
       this.props.navigator.pop();
-    }
+		}
+		
+		// async _payByApple({subtotal,shipping,tax,tips,oid}){
+		// 	// console.log(total)
+		// 	// console.log(this.state.total - this.state.pretax)
+		// 	let paymentData = {
+		// 		subtotal:'' + subtotal,
+		// 		shipping:'' + shipping,
+		// 		tax:'' + tax,
+		// 		tips:'' + tips,
+		// 	}
+		// 	let total =  this.state.total;
+		// 	let token = await NativeModules.cmApplePay.createPayment(paymentData);
+		// 	// let payResult = await CheckoutModule.oneTimeCharge({
+		// 	// 	amount:total,
+		// 	// 	token:token,
+		// 	// 	oid:oid,
+		// 	// 	tips:this.state.tips,
+		// 	// })
+		// 	let payResult = await CheckoutAction.checkoutByApplepay({
+		// 		amount:total,
+		// 		token:token,
+		// 		oid:oid,
+		// 		tips:this.state.tips,
+		// 	})
+
+		// 	NativeModules.cmApplePay.complete(payResult,()=>console.log('Payment Finished'));
+		// }
 		_goToChoosePayment(){
 			if (this.state.available_payment_channels.length != 1) {
 				this.props.navigator.showModal({
 					screen: 'CmChooseCardType',
 					animated: true,
 					passProps:{available_payment_channels: this.state.available_payment_channels,
-										 saveModificationCallback: this._saveModificationCallback,
-									 	 alipaySelected: this._alipaySelected,
-									 	 cashSelected: this._cashSelected,
-									   flag: 'fromCheckout'},
+											saveModificationCallback: this._saveModificationCallback,
+									 		alipaySelected: this._alipaySelected,
+											cashSelected: this._cashSelected,
+											applePaySelected:	this._applePaySelected,
+									  	flag: 'fromCheckout'},
 					navigatorStyle: {navBarHidden: true,},
 				});
       }
@@ -252,7 +300,12 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-        this.props.navigator.dismissModal({animationType: 'slide-down'});
+			//{animationType: 'slide-down'}
+				//this.props.navigator.dismissModal.bind(this);
+				this.props.navigator.dismissAllModals({
+					animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+				})
+			
     }
     showLoading(){
       if(this.state.isLoading)
@@ -319,6 +372,11 @@ class Confirm extends Component {
 		}
 		_alipaySelected() {
 			CheckoutAction.updatePaymentStatus(10);
+			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+										 tipsPercentage:0.1});
+		}
+		_applePaySelected(){
+			CheckoutAction.updatePaymentStatus(20);
 			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
 										 tipsPercentage:0.1});
 		}

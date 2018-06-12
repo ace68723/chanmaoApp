@@ -78,6 +78,7 @@ export default class TabBar extends Component {
   render() {
     const containerWidth = this.props.containerWidth;
     const numberOfTabs = this.props.tabs.length;
+  
     const tabUnderlineStyle = {
       position: 'absolute',
       width: containerWidth / numberOfTabs,
@@ -85,7 +86,7 @@ export default class TabBar extends Component {
       backgroundColor: 'navy',
       bottom: 0,
     };
-
+   
     const translateX = this.props.scrollValue.interpolate({
       inputRange: [0, 1],
       outputRange: [0,  containerWidth / numberOfTabs],

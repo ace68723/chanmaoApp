@@ -25,6 +25,7 @@ export default class ChooseCardType extends Component {
     this._goBack = this._goBack.bind(this);
     this._goToCredit = this._goToCredit.bind(this);
     this._goToAliPay = this._goToAliPay.bind(this);
+    this._goToApplePay = this._goToApplePay.bind(this);
     this._goToCash = this._goToCash.bind(this);
     this._goToDebit = this._goToDebit.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
@@ -87,7 +88,17 @@ export default class ChooseCardType extends Component {
       alert("已成功修改");
     }
   }
-
+  _goToApplePay(){
+    if (this.props.flag == 'fromCheckout') {
+      this.props.applePaySelected();
+    }
+    else if (this.props.flag == 'fromHistory') {
+      this.props.applePaySelected(this.props.orderInfo);
+    }
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
+  }
   _renderGoBackBtn() {
     // dismissAllModals bug
     this.props.navigator.dismissModal({
@@ -214,6 +225,30 @@ export default class ChooseCardType extends Component {
                             marginLeft :20,
                             color:"#808080",}}>
                             {CMLabel.getCNLabel('CASH')}
+              </Text>
+              <Text allowFontScaling={false} style={styles.arrowText}>
+                >
+              </Text>
+          </TouchableOpacity>
+        )
+      }
+      if (this.props.available_payment_channels.includes(20)) {
+        _payment_channel_list.push(
+          <TouchableOpacity onPress={this._goToApplePay}
+              key={"applepay"}
+              activeOpacity={0.4}
+              style={{flexDirection: 'row',
+                      paddingTop: 12,
+                      paddingBottom: 12,
+                      alignItems: 'center',
+                      backgroundColor: 'white'}}>
+              <Text allowFontScaling={false}
+                    style={{flex: 1,
+                            fontSize: 18,
+                            textAlign: 'left',
+                            marginLeft :20,
+                            color:"#808080",}}>
+                           Apple Pay
               </Text>
               <Text allowFontScaling={false} style={styles.arrowText}>
                 >

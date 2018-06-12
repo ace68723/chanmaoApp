@@ -24,8 +24,29 @@ export default  {
             .then((res) => res.json())
             .catch((error) => {throw error})
   },
+  oneTimeCharge(io_data){
+    let url = "https://chanmao.us/api/payment/v2/one_time_charge"
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    options.headers = Object.assign(options.headers,{
+        authortoken: io_data.authortoken,
+    })
+    options.body = JSON.stringify({
+        amount: io_data.amount,
+        info:io_data.oid_str,
+        token:io_data.token
+    })
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
 
-
+  },
   signAlipayOrder(io_data) {
 
     const url = API_SIGN_ALIPAY_ORDER;
