@@ -116,8 +116,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   		const promoted = data.result.promoted;
   		const total = data.result.total;
       const available_payment_channels = data.result.available_payment_channels;
-      available_payment_channels.push(20);
-      let paymentStatus = '到付';
+      let paymentStatus = '到付(现金/刷卡)';
       let tipInfoStatus = false;
       let payment_channel = 0;
       // 在线支付
@@ -177,7 +176,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   updatePaymentStatus(data){
     if (data.payment_channel == 0) {
       this.state.tipInfoStatus = false;
-      this.state.paymentStatus = '到付';
+      this.state.paymentStatus = '到付(现金/刷卡)';
       this.state.payment_channel = 0;
     }
     else if (data.payment_channel == 10) {

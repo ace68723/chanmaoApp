@@ -145,7 +145,7 @@ export default class MyComponent extends Component {
         tar_index = Math.floor(counter / 3) - index + 1;
       }
     }
-    this._scrollVew.scrollToOffset({animated: true, offset: 210 + tar_index * 209 + (index - 1) * 30});
+    this._scrollVew.scrollToOffset({animated: true, offset: 190 + tar_index * 210 + (index - 1) * 29});
   }
   _renderHeaderSection(){
     if (!this.state.section_list){
@@ -171,7 +171,8 @@ export default class MyComponent extends Component {
     // height * 0.4106 + 80
     return(
       <View style={{
-          marginTop: width*0.4831*1.3699 + 20,
+          // marginTop: width*0.4831*1.3699 + 20,
+          marginTop: 290,
           marginBottom: Settings.getY(72),
           height: 30,
           flex: 1,

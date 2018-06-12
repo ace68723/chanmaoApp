@@ -135,7 +135,7 @@ export default class ChooseCardType extends Component {
       if (this.props.available_payment_channels.includes(1)) {
         _payment_channel_list.push(
           <TouchableOpacity onPress={this._goToCredit}
-              key={"card"}
+              key={"creditCard"}
               activeOpacity={0.4}
               style={{flexDirection: 'row',
                       paddingTop: 12,
@@ -144,6 +144,12 @@ export default class ChooseCardType extends Component {
                       backgroundColor: 'white',
                       borderBottomWidth: 1,
                       borderColor: "#D5D5D5"}}>
+              <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                <Image source={require('./Img/visa_master_icon.png')}
+                       style={{alignSelf: 'center',
+                               height: 15,
+                               width: 80}}/>
+              </View>
               <Text allowFontScaling={false}
                     style={{flex: 1,
                             fontSize: 18,
@@ -159,7 +165,9 @@ export default class ChooseCardType extends Component {
           </TouchableOpacity>
         )
         _payment_channel_list.push(
-          <TouchableOpacity onPress={this._goToDebit}
+          <TouchableOpacity
+              key={"debitCard"}
+              onPress={this._goToDebit}
               activeOpacity={0.4}
               style={{flexDirection: 'row',
                       paddingTop: 12,
@@ -168,6 +176,12 @@ export default class ChooseCardType extends Component {
                       backgroundColor: 'white',
                       borderBottomWidth: 1,
                       borderColor: "#D5D5D5"}}>
+              <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                <Image source={require('./Img/visa_debit_icon.png')}
+                       style={{alignSelf: 'center',
+                               height: 20,
+                               width: 40}}/>
+              </View>
               <Text allowFontScaling={false}
                     style={{flex: 1,
                             fontSize: 18,
@@ -194,6 +208,12 @@ export default class ChooseCardType extends Component {
                       backgroundColor: 'white',
                       borderBottomWidth: 1,
                       borderColor: "#D5D5D5"}}>
+              <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                <Image source={require('./Img/alipay_icon.png')}
+                       style={{alignSelf: 'center',
+                               height: 28,
+                               width: 28}}/>
+              </View>
               <Text allowFontScaling={false}
                     style={{flex: 1,
                             fontSize: 18,
@@ -218,6 +238,12 @@ export default class ChooseCardType extends Component {
                       paddingBottom: 12,
                       alignItems: 'center',
                       backgroundColor: 'white'}}>
+                      <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                        <Image source={require('./Img/cash.png')}
+                               style={{alignSelf: 'center',
+                                       height: 20,
+                                       width: 45}}/>
+                      </View>
               <Text allowFontScaling={false}
                     style={{flex: 1,
                             fontSize: 18,
