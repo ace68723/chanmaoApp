@@ -20,7 +20,7 @@ const AppConstants ={
     API_HISTORYORDER: APIServer + 'cmapp/v2/get_history_list',
     // API_HISTORYORDER: 'https://norgta.com/api/cmapp/v2/get_history_list',
     API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
-    API_CHANGE_ORDER_TO_CASH: APIProductServer + "cmapp/v2/change_payment_to_cash",
+    API_CHANGE_ORDER_TO_CASH: APIServer + "cmapp/v2/change_payment_to_cash",
     //restaurant
     API_CATEGORY_LIST: APIServer + 'cmapp/v2/get_category_list',
     API_RESTAURANT_LIST: APIServer + 'cmapp/v2/get_restaurant_list',
@@ -29,7 +29,8 @@ const AppConstants ={
     API_CREATE_ADDRESS: Server + 'MobAddress10/Addresscreate',
     API_DELET_ADDRESS: Server + 'MobAddress10/Addressupdate',
 
-    API_BEFOR_CHECKOUT: Server + 'MobOrder10/BeforeCO',
+    // API_BEFOR_CHECKOUT: Server + 'MobOrder10/BeforeCO',
+    API_BEFOR_CHECKOUT: APIServer + "cmapp/v2/before_checkout",
     API_CALCULATE_DELIVERY_FEE: Server + 'MobOrder10/CalcFee',
     API_CHECKOUT:Server + 'MobOrder10/checkout',
     API_GETVERIFYCODE: Server + 'MobOrder10/sendcode',

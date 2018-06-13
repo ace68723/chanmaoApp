@@ -24,6 +24,7 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
     totalQuantity:0,
     loading:true,
     outOfStock: false,
+    detailHeight: 555
   },
 	emitChange(){
 			this.emit( CHANGE_EVENT)
@@ -44,6 +45,7 @@ const SboxProductStore = Object.assign({},EventEmitter.prototype,{
         totalQuantity:0,
         loading:true,
         outOfStock: false,
+        detailHeight: 555
       }
 	},
 

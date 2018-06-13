@@ -252,7 +252,7 @@ export default class pastOrderEN extends Component {
     let statusColor;
     let statusReminder;
     if (this.state.orderInfo.payment_channel == 0) {
-      statusReminder = "支付方式: 到付";
+      statusReminder = "支付方式: 到付(现金/刷卡)";
     }
     else if (this.state.orderInfo.payment_channel == 10) {
       statusReminder = "支付方式: 支付宝";
@@ -265,6 +265,10 @@ export default class pastOrderEN extends Component {
                   statusMessage = '已支付, 等待商家确认';
                 }
                 else if(this.state.orderInfo.payment_status == 30) {
+                  statusColor = {color:'#11c1f3'};
+                  statusMessage = '已退款';
+                }
+                else if(this.state.orderInfo.payment_status == 40) {
                   statusColor = {color:'#ef473a'};
                   statusMessage = '在线支付失败';
                   statusReminder = "请重新下单";

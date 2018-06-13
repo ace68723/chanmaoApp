@@ -10,6 +10,7 @@ module.exports={
     SETTING:'设置',
     MY_ORDER:'我的订单',
     ADD_ADDRESS:'添加地址',
+    SAVE_ADDRESS:'保存地址',
     CUSTOMER_SERVICE:'联系客服',
     SWEETBOX: '甜满箱 首单立减8刀 满60再减10刀',
     LOG_OUT: '退出登录',
@@ -92,7 +93,7 @@ module.exports={
     CREDIT_CARD:'信用卡',
     DEBIT_CARD:'借记卡',
     ALIPAY:'支付宝',
-    CASH:'到付',
+    CASH:'到付(现金/刷卡)',
     PAYMENT_TYPE:"支付方式",
     //About us
     ABOUT_US:'关于我们',

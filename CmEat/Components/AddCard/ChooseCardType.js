@@ -23,6 +23,7 @@ export default class ChooseCardType extends Component {
     super()
     this.state = {};
     this._goBack = this._goBack.bind(this);
+    this._goToPreviousCard = this._goToPreviousCard.bind(this);
     this._goToCredit = this._goToCredit.bind(this);
     this._goToAliPay = this._goToAliPay.bind(this);
     this._goToCash = this._goToCash.bind(this);
@@ -36,6 +37,13 @@ export default class ChooseCardType extends Component {
     this.props.navigator.dismissModal({
         animationType: 'slide-down'
       });
+  }
+
+  _goToPreviousCard() {
+    this.props.previousCardSelected();
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
   }
 
   _goToCredit() {
@@ -119,117 +127,318 @@ export default class ChooseCardType extends Component {
     return buttonList
   }
   render() {
-    const payment_channel_list = () => {
-      let _payment_channel_list =[];
-      if (this.props.available_payment_channels.includes(1)) {
-        _payment_channel_list.push(
-          <TouchableOpacity onPress={this._goToCredit}
-              key={"card"}
-              activeOpacity={0.4}
-              style={{flexDirection: 'row',
-                      paddingTop: 12,
-                      paddingBottom: 12,
-                      alignItems: 'center',
-                      backgroundColor: 'white',
-                      borderBottomWidth: 1,
-                      borderColor: "#D5D5D5"}}>
-              <Text allowFontScaling={false}
-                    style={{flex: 1,
-                            fontSize: 18,
-                            textAlign: 'left',
-                            marginLeft :20,
-                            color:"#808080",}}>
-                        {CMLabel.getCNLabel('CREDIT_CARD')}
-              </Text>
-              <Text allowFontScaling={false}
-                    style={styles.arrowText}>
-                >
-              </Text>
-          </TouchableOpacity>
+    const previousVisa = () => {
+      let _previousVisa = [];
+      if (this.props.cusid && this.props.cusid.length > 0) {
+        _previousVisa.push(
+          <Text key={"previousCardHeader"}
+                style={{padding: 10,
+                        fontSize: 16,
+                        color: "#808080",
+                        fontFamily:'FZZhunYuan-M02S'}}
+                allowFontScaling={false}>最近使用</Text>
         )
-        _payment_channel_list.push(
-          <TouchableOpacity onPress={this._goToDebit}
+        _previousVisa.push(
+          <TouchableOpacity onPress={this._goToPreviousCard}
+              key={"previousCard"}
               activeOpacity={0.4}
               style={{flexDirection: 'row',
-                      paddingTop: 12,
-                      paddingBottom: 12,
-                      alignItems: 'center',
-                      backgroundColor: 'white',
-                      borderBottomWidth: 1,
-                      borderColor: "#D5D5D5"}}>
-              <Text allowFontScaling={false}
-                    style={{flex: 1,
-                            fontSize: 18,
-                            textAlign: 'left',
-                            marginLeft :20,
-                            color:"#808080",}}>
-                            {CMLabel.getCNLabel('DEBIT_CARD')}
-              </Text>
-              <Text allowFontScaling={false} style={styles.arrowText}>
-                >
-              </Text>
-          </TouchableOpacity>
-        )
-      }
-      if (this.props.available_payment_channels.includes(10)) {
-        _payment_channel_list.push(
-          <TouchableOpacity onPress={this._goToAliPay}
-              key={"alipay"}
-              activeOpacity={0.4}
-              style={{flexDirection: 'row',
-                      paddingTop: 12,
-                      paddingBottom: 12,
-                      alignItems: 'center',
-                      backgroundColor: 'white',
-                      borderBottomWidth: 1,
-                      borderColor: "#D5D5D5"}}>
-              <Text allowFontScaling={false}
-                    style={{flex: 1,
-                            fontSize: 18,
-                            textAlign: 'left',
-                            marginLeft :20,
-                            color:"#808080",}}>
-                            {CMLabel.getCNLabel('ALIPAY')}
-              </Text>
-              <Text allowFontScaling={false} style={styles.arrowText}>
-                >
-              </Text>
-          </TouchableOpacity>
-        )
-      }
-      if (this.props.available_payment_channels.includes(0)) {
-        _payment_channel_list.push(
-          <TouchableOpacity onPress={this._goToCash}
-              key={"cash"}
-              activeOpacity={0.4}
-              style={{flexDirection: 'row',
-                      paddingTop: 12,
-                      paddingBottom: 12,
+                      height: 59,
                       alignItems: 'center',
                       backgroundColor: 'white'}}>
+              <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                <Image source={require('./Img/visa_master_icon.png')}
+                       style={{alignSelf: 'center',
+                               height: 15,
+                               width: 80}}/>
+              </View>
               <Text allowFontScaling={false}
                     style={{flex: 1,
                             fontSize: 18,
-                            textAlign: 'left',
-                            marginLeft :20,
-                            color:"#808080",}}>
-                            {CMLabel.getCNLabel('CASH')}
-              </Text>
-              <Text allowFontScaling={false} style={styles.arrowText}>
-                >
+                            textAlign: 'right',
+                            marginRight :20,
+                            color:"#808080",
+                            fontFamily:'FZZhunYuan-M02S'}}>
+                        {this.props.brand} XXXX XXXX XXXX {this.props.last4}
               </Text>
           </TouchableOpacity>
         )
+        _previousVisa.push(
+          <Text key={"paymentChannelListHeader"}
+                style={{padding: 10,
+                        fontSize: 16,
+                        color: "#808080",
+                        fontFamily:'FZZhunYuan-M02S'}}
+                allowFontScaling={false}>更多方式</Text>
+        )
       }
+      return _previousVisa;
+    }
+    const payment_channel_list = () => {
+      let _payment_channel_list =[];
+      for(let _channel of this.props.available_payment_channels) {
+        if (_channel.channel == 1) {
+          _payment_channel_list.push(
+            <TouchableOpacity onPress={this._goToCredit}
+                key={"creditCard"}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        height: 59,
+                        alignItems: 'center',
+                        backgroundColor: 'white',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderColor: "#D5D5D5"}}>
+                <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                  <Image source={require('./Img/visa_master_icon.png')}
+                         style={{alignSelf: 'center',
+                                 height: 15,
+                                 width: 80}}/>
+                </View>
+                <Text allowFontScaling={false}
+                      style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20,
+                              color:"#808080",
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                          {CMLabel.getCNLabel('CREDIT_CARD')}
+                </Text>
+                <Text allowFontScaling={false}
+                      style={styles.arrowText}>
+                  >
+                </Text>
+            </TouchableOpacity>
+          )
+          _payment_channel_list.push(
+            <TouchableOpacity
+                key={"debitCard"}
+                onPress={this._goToDebit}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        height: 59,
+                        alignItems: 'center',
+                        backgroundColor: 'white',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderColor: "#D5D5D5"}}>
+                <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                  <Image source={require('./Img/visa_debit_icon.png')}
+                         style={{alignSelf: 'center',
+                                 height: 20,
+                                 width: 40}}/>
+                </View>
+                <Text allowFontScaling={false}
+                      style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20,
+                              color:"#808080",
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                              {CMLabel.getCNLabel('DEBIT_CARD')}
+                </Text>
+                <Text allowFontScaling={false} style={styles.arrowText}>
+                  >
+                </Text>
+            </TouchableOpacity>
+          )
+        }
+        else if(_channel.channel == 10) {
+          _payment_channel_list.push(
+            <TouchableOpacity onPress={this._goToAliPay}
+                key={"alipay"}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        height: 59,
+                        alignItems: 'center',
+                        backgroundColor: 'white',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderColor: "#D5D5D5"}}>
+                <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                  <Image source={require('./Img/alipay_icon.png')}
+                         style={{alignSelf: 'center',
+                                 height: 28,
+                                 width: 28}}/>
+                </View>
+                <Text allowFontScaling={false}
+                      style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20,
+                              color:"#808080",
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                              {CMLabel.getCNLabel('ALIPAY')}
+                </Text>
+                <Text allowFontScaling={false} style={styles.arrowText}>
+                  >
+                </Text>
+            </TouchableOpacity>
+          )
+        }
+        else if(_channel.channel == 0) {
+          _payment_channel_list.push(
+            <TouchableOpacity onPress={this._goToCash}
+                key={"cash"}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        height: 59,
+                        alignItems: 'center',
+                        backgroundColor: 'white'}}>
+                        <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                          <Image source={require('./Img/cash.png')}
+                                 style={{alignSelf: 'center',
+                                         height: 20,
+                                         width: 45}}/>
+                        </View>
+                <Text allowFontScaling={false}
+                      style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20,
+                              color:"#808080",
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                              {CMLabel.getCNLabel('CASH')}
+                </Text>
+                <Text allowFontScaling={false} style={styles.arrowText}>
+                  >
+                </Text>
+            </TouchableOpacity>
+          )
+        }
+      }
+      // if (this.props.available_payment_channels.includes(1)) {
+      //   // _payment_channel_list.push(
+      //   //   <TouchableOpacity onPress={this._goToCredit}
+      //   //       key={"creditCard"}
+      //   //       activeOpacity={0.4}
+      //   //       style={{flexDirection: 'row',
+      //   //               height: 59,
+      //   //               alignItems: 'center',
+      //   //               backgroundColor: 'white',
+      //   //               borderBottomWidth: StyleSheet.hairlineWidth,
+      //   //               borderColor: "#D5D5D5"}}>
+      //   //       <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+      //   //         <Image source={require('./Img/visa_master_icon.png')}
+      //   //                style={{alignSelf: 'center',
+      //   //                        height: 15,
+      //   //                        width: 80}}/>
+      //   //       </View>
+      //   //       <Text allowFontScaling={false}
+      //   //             style={{flex: 1,
+      //   //                     fontSize: 18,
+      //   //                     textAlign: 'left',
+      //   //                     marginLeft :20,
+      //   //                     color:"#808080",
+      //   //                     fontFamily:'FZZhunYuan-M02S'}}>
+      //   //                 {CMLabel.getCNLabel('CREDIT_CARD')}
+      //   //       </Text>
+      //   //       <Text allowFontScaling={false}
+      //   //             style={styles.arrowText}>
+      //   //         >
+      //   //       </Text>
+      //   //   </TouchableOpacity>
+      //   // )
+      //   // _payment_channel_list.push(
+      //   //   <TouchableOpacity
+      //   //       key={"debitCard"}
+      //   //       onPress={this._goToDebit}
+      //   //       activeOpacity={0.4}
+      //   //       style={{flexDirection: 'row',
+      //   //               height: 59,
+      //   //               alignItems: 'center',
+      //   //               backgroundColor: 'white',
+      //   //               borderBottomWidth: StyleSheet.hairlineWidth,
+      //   //               borderColor: "#D5D5D5"}}>
+      //   //       <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+      //   //         <Image source={require('./Img/visa_debit_icon.png')}
+      //   //                style={{alignSelf: 'center',
+      //   //                        height: 20,
+      //   //                        width: 40}}/>
+      //   //       </View>
+      //   //       <Text allowFontScaling={false}
+      //   //             style={{flex: 1,
+      //   //                     fontSize: 18,
+      //   //                     textAlign: 'left',
+      //   //                     marginLeft :20,
+      //   //                     color:"#808080",
+      //   //                     fontFamily:'FZZhunYuan-M02S'}}>
+      //   //                     {CMLabel.getCNLabel('DEBIT_CARD')}
+      //   //       </Text>
+      //   //       <Text allowFontScaling={false} style={styles.arrowText}>
+      //   //         >
+      //   //       </Text>
+      //   //   </TouchableOpacity>
+      //   // )
+      // }
+      // if (this.props.available_payment_channels.includes(10)) {
+      //   // _payment_channel_list.push(
+      //   //   <TouchableOpacity onPress={this._goToAliPay}
+      //   //       key={"alipay"}
+      //   //       activeOpacity={0.4}
+      //   //       style={{flexDirection: 'row',
+      //   //               height: 59,
+      //   //               alignItems: 'center',
+      //   //               backgroundColor: 'white',
+      //   //               borderBottomWidth: StyleSheet.hairlineWidth,
+      //   //               borderColor: "#D5D5D5"}}>
+      //   //       <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+      //   //         <Image source={require('./Img/alipay_icon.png')}
+      //   //                style={{alignSelf: 'center',
+      //   //                        height: 28,
+      //   //                        width: 28}}/>
+      //   //       </View>
+      //   //       <Text allowFontScaling={false}
+      //   //             style={{flex: 1,
+      //   //                     fontSize: 18,
+      //   //                     textAlign: 'left',
+      //   //                     marginLeft :20,
+      //   //                     color:"#808080",
+      //   //                     fontFamily:'FZZhunYuan-M02S'}}>
+      //   //                     {CMLabel.getCNLabel('ALIPAY')}
+      //   //       </Text>
+      //   //       <Text allowFontScaling={false} style={styles.arrowText}>
+      //   //         >
+      //   //       </Text>
+      //   //   </TouchableOpacity>
+      //   // )
+      // }
+      // if (this.props.available_payment_channels.includes(0)) {
+      //   // _payment_channel_list.push(
+      //   //   <TouchableOpacity onPress={this._goToCash}
+      //   //       key={"cash"}
+      //   //       activeOpacity={0.4}
+      //   //       style={{flexDirection: 'row',
+      //   //               height: 59,
+      //   //               alignItems: 'center',
+      //   //               backgroundColor: 'white'}}>
+      //   //               <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+      //   //                 <Image source={require('./Img/cash.png')}
+      //   //                        style={{alignSelf: 'center',
+      //   //                                height: 20,
+      //   //                                width: 45}}/>
+      //   //               </View>
+      //   //       <Text allowFontScaling={false}
+      //   //             style={{flex: 1,
+      //   //                     fontSize: 18,
+      //   //                     textAlign: 'left',
+      //   //                     marginLeft :20,
+      //   //                     color:"#808080",
+      //   //                     fontFamily:'FZZhunYuan-M02S'}}>
+      //   //                     {CMLabel.getCNLabel('CASH')}
+      //   //       </Text>
+      //   //       <Text allowFontScaling={false} style={styles.arrowText}>
+      //   //         >
+      //   //       </Text>
+      //   //   </TouchableOpacity>
+      //   // )
+      // }
       return _payment_channel_list;
     }
-
     return (
       <View style={styles.container}>
         <Header title={CMLabel.getCNLabel('PAYMENT_TYPE')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>
+            {previousVisa()}
             {payment_channel_list()}
         </ScrollView>
       </View>

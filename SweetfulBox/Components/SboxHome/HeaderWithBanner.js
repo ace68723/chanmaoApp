@@ -20,7 +20,8 @@ import {
 import Swiper from 'react-native-swiper'
 
 const {width,height} = Dimensions.get('window');
-const HEADER_MAX_HEIGHT = width*0.4831*1.3699;
+// const HEADER_MAX_HEIGHT = width*0.4831*1.3699;
+const HEADER_MAX_HEIGHT = 200;
 
 
 // const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
