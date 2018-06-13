@@ -91,6 +91,7 @@ class Confirm extends Component {
 				this._saveModificationCallback = this._saveModificationCallback.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
+				this._previousCardSelected = this._previousCardSelected.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
         this._checkout = this._checkout.bind(this);
@@ -224,7 +225,11 @@ class Confirm extends Component {
 										 saveModificationCallback: this._saveModificationCallback,
 									 	 alipaySelected: this._alipaySelected,
 									 	 cashSelected: this._cashSelected,
-									   flag: 'fromCheckout'},
+										 previousCardSelected: this._previousCardSelected,
+									   flag: 'fromCheckout',
+									 	 cusid: this.state.cusid,
+									 	 last4: this.state.last4,
+									 	 brand: this.state.brand},
 					navigatorStyle: {navBarHidden: true,},
 				});
       }
@@ -321,6 +326,13 @@ class Confirm extends Component {
 			this.setState({tips: 0,
 										 tipsPercentage:0.1});
 		}
+
+		_previousCardSelected() {
+			CheckoutAction.updatePaymentStatus(1);
+			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+										 tipsPercentage:0.1});
+		}
+
 		_setTips(tipsPercentage){
 			this.setState({
 				tips:(this.state.total * tipsPercentage).toFixed(2),

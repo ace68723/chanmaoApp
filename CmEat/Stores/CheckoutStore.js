@@ -25,6 +25,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       }],
 		showBanner:true,
     shouldAddAddress:false,
+    payment_channel: 0
   },
   initState(){
     this.state = {
@@ -32,7 +33,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     		addressList:[],
         dltype:1,
         pretax:0,
-        available_payment_channels: [0],
+        available_payment_channels: [{channel: 0, visa_fee: 0}],
         code:'',
         dltypeList:[
           {dltype:-1,
@@ -40,6 +41,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
           }],
     		showBanner:true,
         shouldAddAddress:false,
+        payment_channel: 0
       };
   },
 	emitChange(){
@@ -56,7 +58,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         dltype:1,
         pretax:0,
         payment_channel: 0,
-        available_payment_channels: [0],
+        available_payment_channels: [{channel: 0, visa_fee: 0}],
         code:'',
         dltypeList:[
           {dltype:-1,
@@ -116,6 +118,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   		const promoted = data.result.promoted;
   		const total = data.result.total;
       const available_payment_channels = data.result.available_payment_channels;
+      // const available_payment_channels = [0, 1, 10];
       let paymentStatus = '到付(现金/刷卡)';
       let tipInfoStatus = false;
       let payment_channel = 0;
@@ -123,11 +126,14 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       // let paymentStatus = '添加支付方式';
       // let tipInfoStatus = false;
       // let payment_channel;
-      // if (this.state.payment_channel == null || this.state.payment_channel == 1) {
-      //   paymentStatus = data.result.brand + ' xxxx xxxx xxxx ' + data.result.last4;
-      //   tipInfoStatus = true;
-      //   payment_channel = 1;
-      // }
+      if (this.state.payment_channel == 1) {
+        paymentStatus = data.result.brand + ' XXXX XXXX XXXX ' + data.result.last4;
+        // tipInfoStatus = true;
+        // payment_channel = 1;
+      }
+      let cusid = data.result.cusid;
+      let last4 = data.result.last4;
+      let brand = data.result.brand;
 
   		const loading = false;
   		const selectedAddress = cme_getSelectedAddress();
@@ -149,8 +155,11 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
                                         tipInfoStatus,
   																			loading,
                                         selectedAddress,
-                                        payment_channel,
-                                        available_payment_channels
+                                        // payment_channel,
+                                        available_payment_channels,
+                                        cusid,
+                                        last4,
+                                        brand
   																		 });
 	},
 	updateAddress(){
@@ -178,6 +187,11 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       this.state.tipInfoStatus = false;
       this.state.paymentStatus = '到付(现金/刷卡)';
       this.state.payment_channel = 0;
+    }
+    else if (data.payment_channel == 1) {
+      this.state.tipInfoStatus = false;
+      this.state.paymentStatus = this.state.brand + ' XXXX XXXX XXXX ' + this.state.last4;
+      this.state.payment_channel = 1;
     }
     else if (data.payment_channel == 10) {
       this.state.tipInfoStatus = false;
