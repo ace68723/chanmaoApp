@@ -47,12 +47,38 @@ export default {
       NativeModules.cmApplePay.cancelcallback(callback);
       let token = await NativeModules.cmApplePay.createPayment(paymentData);
       return token;
-		},
+    },
+    async _repayByApple({tips,total},callback){
+      let paymentData = {
+				total:'' + total,
+				tips:'' + tips,
+      }
+      NativeModules.cmApplePay.cancelcallback(callback);
+      let token = await NativeModules.cmApplePay.reCreatePayment(paymentData);
+      return token;
+    },
     // async checkout(comment, payment_channel, tips){
+    async recheckoutByApplepay({total,tips,oid},callback){
+
+      let token = await this._repayByApple({total,tips,oid},()=>callback());
+
+      if(token){
+        let payResult = await CheckoutModule.oneTimeCharge({
+          amount:total*100,
+          token:token,
+          oid:oid,
+          tips:tips,
+        })
+        
+        NativeModules.cmApplePay.complete(payResult,()=>{
+          console.log("Payment Finished.");
+        });
+      }
+    },
     async checkoutByApplepay({subtotal,shipping,tax, amount, oid,tips},callback){
-     
+    
       let token = await this._payByApple({subtotal,shipping,tax,tips,oid},()=>callback());
-     
+      
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
           amount:amount*100,

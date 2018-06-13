@@ -89,6 +89,51 @@ RCT_EXPORT_METHOD(createPayment:(NSDictionary *)data
   }
   
 }
+RCT_EXPORT_METHOD(reCreatePayment:(NSDictionary *)data
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject){
+  self.resolver = resolve;
+  self.rejecter = reject;
+  NSString* validation= [self paymentValidation];
+  if(validation != nil){
+    [self ErrorAlert:validation];
+    return;
+  }
+  
+  NSString *merchantIdentifier = @"merchant.ca.chanmao.applypay";
+  PKPaymentRequest *paymentRequest = [Stripe paymentRequestWithMerchantIdentifier:merchantIdentifier country:@"CA" currency:@"CAD"];
+  
+  NSDecimalNumber *tips = [NSDecimalNumber decimalNumberWithString:data[@"tips"]];
+  NSDecimalNumber *totalAmount = [NSDecimalNumber decimalNumberWithString:data[@"total"]];
+  //totalAmount = [totalAmount decimalNumberByAdding:tips];
+  NSDecimalNumber *subtotal = [totalAmount decimalNumberBySubtracting:tips];
+  paymentRequest.paymentSummaryItems = @[
+                                         [PKPaymentSummaryItem summaryItemWithLabel:@"SUBTOTAL" amount:subtotal],
+                                         [PKPaymentSummaryItem summaryItemWithLabel:@"TIPS" amount:tips],
+                                         [PKPaymentSummaryItem summaryItemWithLabel:@"CHANMAO" amount:totalAmount]
+                                         ];
+  
+  if ([Stripe canSubmitPaymentRequest:paymentRequest]) {
+    // Setup payment authorization view controller
+    self.viewController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
+    self.viewController.delegate = self;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self.rootViewController = RCTPresentedViewController();
+      if(self.viewController != nil){
+        [self.rootViewController presentViewController:self.viewController animated:YES completion:nil];
+      }else{
+        NSLog(@"View Controller is not ready.");
+      }
+      
+    });
+    
+  }else {
+    // There is a problem with your Apple Pay configuration
+    NSLog(@"Configuration Error.");
+  }
+  
+}
 RCT_EXPORT_METHOD(cancelcallback:(RCTResponseSenderBlock)callback){
    self.callback = callback;
 }

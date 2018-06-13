@@ -73,7 +73,7 @@ class HistoryTab extends Component {
 				this._handlePaymentRetry = this._handlePaymentRetry.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
-		
+				this._applePaySelected = this._applePaySelected.bind(this);
     }
 
     componentDidMount(){
@@ -160,12 +160,14 @@ class HistoryTab extends Component {
 				}
     }
 		_handlePaymentRetry(orderInfo) {
+			console.log(orderInfo)
 			this.props.navigator.showModal({
 				screen: 'CmChooseCardType',
 				animated: true,
 				passProps:{available_payment_channels: orderInfo.available_payment_channels,
 									 alipaySelected: this._alipaySelected,
 									 cashSelected: this._cashSelected,
+									 applePaySelected:	this._applePaySelected,
 								 	 flag: 'fromHistory',
 								 	 orderInfo: orderInfo},
 				navigatorStyle: {navBarHidden: true,},
@@ -180,9 +182,13 @@ class HistoryTab extends Component {
 			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
 			this._onRefresh();
 		}
-		// _applePaySelected(){
-		// 		CheckoutAction.checkoutByApplepay()
-		// }
+		_applePaySelected(orderInfo){
+				CheckoutAction.recheckoutByApplepay({
+					oid: orderInfo.order_oid,
+					total: parseFloat(orderInfo.order_total),
+					tips:	parseFloat(orderInfo.order_tips)	
+				},()=>this._onRefresh())
+		}
 	
 		_handleOnChangeTab(tabRef) {
 			this.setState({renderingPage: tabRef.i});
@@ -273,6 +279,7 @@ class HistoryTab extends Component {
 		 // </TouchableOpacity>
 		}
     render(){
+			
       return(
          <View style={styles.mainContainer}>
 						 <ScrollableTabView

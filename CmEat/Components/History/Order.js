@@ -232,7 +232,7 @@ export default class pastOrderEN extends Component {
         </View>
       )
     }
-    else if(this.state.orderInfo.payment_channel == 10) {
+    else if(this.state.orderInfo.payment_channel > 0) {
       return(
         <View style={styles.orderTotal}>
           <Text style={{fontSize:18,

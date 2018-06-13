@@ -130,6 +130,7 @@ export default class ChooseCardType extends Component {
     return buttonList
   }
   render() {
+    console.log(this.props.available_payment_channels)
     const payment_channel_list = () => {
       let _payment_channel_list =[];
       if (this.props.available_payment_channels.includes(1)) {
@@ -268,6 +269,12 @@ export default class ChooseCardType extends Component {
                       paddingBottom: 12,
                       alignItems: 'center',
                       backgroundColor: 'white'}}>
+                      <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                        <Image source={require('./Img/apple_pay_icon.png')}
+                               style={{alignSelf: 'center',
+                                       height: 20,
+                                       width: 33.6}}/>
+                      </View>
               <Text allowFontScaling={false}
                     style={{flex: 1,
                             fontSize: 18,
