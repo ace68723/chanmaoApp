@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Platform,
   ScrollView,
   TouchableOpacity,
   ActivityIndicator
@@ -253,6 +254,10 @@ export default class SweetProductDetial extends Component {
   }
 
   render() {
+    let scrollableTabViewStyle = {};
+    if(Platform.OS != 'ios') {
+      scrollableTabViewStyle = {height: 630}
+    }
       // if(this.state.loading) {
       //   return(
       //     <View style={{flex: 1,
@@ -297,7 +302,7 @@ export default class SweetProductDetial extends Component {
                                                  height:3,
 
                                                }}
-                          style={{marginTop:20}}
+                          style={[scrollableTabViewStyle, {marginTop:20}]}
                           tabBarActiveTextColor={"#ff768b"}
                           tabBarTextStyle={{ fontSize: 15} }
                   >

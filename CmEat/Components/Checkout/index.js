@@ -93,6 +93,7 @@ class Confirm extends Component {
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
 				this._applePaySelected = this._applePaySelected.bind(this);
+				this._previousCardSelected = this._previousCardSelected.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
         this._checkout = this._checkout.bind(this);
@@ -275,11 +276,15 @@ class Confirm extends Component {
 					screen: 'CmChooseCardType',
 					animated: true,
 					passProps:{available_payment_channels: this.state.available_payment_channels,
-											saveModificationCallback: this._saveModificationCallback,
-									 		alipaySelected: this._alipaySelected,
-											cashSelected: this._cashSelected,
-											applePaySelected:	this._applePaySelected,
-									  	flag: 'fromCheckout'},
+										saveModificationCallback: this._saveModificationCallback,
+									 	alipaySelected: this._alipaySelected,
+										cashSelected: this._cashSelected,
+										applePaySelected:	this._applePaySelected,
+										previousCardSelected: this._previousCardSelected,
+									  flag: 'fromCheckout',
+									 	cusid: this.state.cusid,
+									 	last4: this.state.last4,
+									 	brand: this.state.brand},
 					navigatorStyle: {navBarHidden: true,},
 				});
       }
@@ -386,6 +391,13 @@ class Confirm extends Component {
 			this.setState({tips: 0,
 										 tipsPercentage:0.1});
 		}
+
+		_previousCardSelected() {
+			CheckoutAction.updatePaymentStatus(1);
+			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+										 tipsPercentage:0.1});
+		}
+
 		_setTips(tipsPercentage){
 			this.setState({
 				tips:(this.state.total * tipsPercentage).toFixed(2),
@@ -544,6 +556,7 @@ class Confirm extends Component {
       )
     }
 		_renderChoosePayment() {
+			console.log(this.state)
 			if (this.state.available_payment_channels && this.state.dlexp > 0) {
 				if (this.state.available_payment_channels.length > 1) {
 					return(

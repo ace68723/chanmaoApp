@@ -61,10 +61,10 @@ export default {
     async recheckoutByApplepay({total,tips,oid},callback){
 
       let token = await this._repayByApple({total,tips,oid},()=>callback());
-
+      console.log({total,tips,oid})
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
-          amount:total*100,
+          amount:total,
           token:token,
           oid:oid,
           tips:tips,
@@ -81,7 +81,7 @@ export default {
       
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
-          amount:amount*100,
+          amount:amount,
           token:token,
           oid:oid,
           tips:tips,

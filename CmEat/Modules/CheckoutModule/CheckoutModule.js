@@ -30,7 +30,7 @@ export default  {
       return eo_data;
     } catch (e) {
       console.log(e);
-      alert('您输入的支付信息输入有误');
+      // alert('您输入的支付信息输入有误');
       throw e
     }
   },
@@ -117,9 +117,9 @@ export default  {
       });
       orderStr = orderStr.slice(0, orderStr.length - 1);
       // console.log('bbb', orderStr);
-
+      const {uid,token,version} = GetUserInfo();
       const lo_data = {
-        Authortoken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxMDYxMSIsImV4cGlyZWQiOjE1MTE0NjcyMDAsImxhc3Rsb2dpbiI6MTUwNTQyMTg1MX0.QbaQXdVSW9Tm3JrpEo7HHRQ6hjPGNqvVoovbpagqbBA",
+        Authortoken: token,
         sign_str: orderStr,
         data: order,
       }

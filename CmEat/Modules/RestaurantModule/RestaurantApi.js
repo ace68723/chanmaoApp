@@ -85,7 +85,8 @@ const RestaurantApi = {
               .catch((error) => {throw error})
     },
     beforCheckout(reqData){
-      const url = AuthConstants.API_BEFOR_CHECKOUT
+      // const url = AuthConstants.API_BEFOR_CHECKOUT
+      const url = "https://chanmao.us/api/cmapp/v2/before_checkout";
       let options = {
           method: 'POST',
           mode:'cors',

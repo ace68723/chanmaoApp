@@ -226,15 +226,15 @@ export default class MyComponent extends Component {
     } catch (e) {
       this.setState({showLoading:false});
       console.log(e);
-      // this.props.navigator.showInAppNotification({
-      //  screen: "Notification",
-      //  passProps: {
-      //    backgroundColor:'#ff768b',
-      //    title:'甜满箱',
-      //    content:'您输入的支付信息输入有误',
-      //  },
-      //  autoDismissTimerSec: 3
-      // });
+      this.props.navigator.showInAppNotification({
+       screen: "Notification",
+       passProps: {
+         backgroundColor:'#ea7b21',
+         title:'馋猫订餐',
+         content:'您输入的支付信息输入有误',
+       },
+       autoDismissTimerSec: 3
+      });
 
     }
 
@@ -265,7 +265,7 @@ export default class MyComponent extends Component {
                     deleteNumber={()=>{this.state.isNumOpen?this._deleteNumber():this._deleteCVV()}}
                     isInfoFilled={this.state.infoFilled}
                     submitButtonDefaultColor='#d9d9d9'
-                    submitButtonFinishedColor='#ff768b'
+                    submitButtonFinishedColor='#ea7b21'
                     handleSubmitPress={this._handleSubmitPress}
                     showLoading={this.state.showLoading}
         />

@@ -73,22 +73,27 @@ const RestaurantModule = {
       try{
 					const { version } = GetUserInfo();
 					reqData.version = version;
-          const data = await RestaurantApi.beforCheckout(reqData);
-          if(data.result == 0){
+          const result = await RestaurantApi.beforCheckout(reqData);
+					if(result.ev_error == 0){
+          // if(data.result == 0){
+						let data = result.ea_response;
             const pretax = data.pretax;
             const pretax_ori = data.pretax_ori;
             const promoted = data.promoted;
             const total = data.total;
-						const cusid = data.cusid;
+						const cusid = data.ev_cusid;
 						const available_payment_channels = data.available_payment_channels;
 						let last4 = "";
 						let brand = "";
-						if (data.last4) {
-							last4 = data.last4;
+						if (data.ev_last4) {
+							last4 = data.ev_last4;
 						}
-						if (data.brand) {
-							brand = data.brand;
+						if (data.ev_last4) {
+							brand = data.ev_brand;
 						}
+						// last4 = "1234";
+						// brand = "visa";
+						// cusid = "123f12";
             const eo_data ={pretax,pretax_ori,promoted,total,cusid,last4,brand,available_payment_channels}
             const startAmount = reqData.startAmount;
             let rid = reqData.rid;
@@ -185,9 +190,10 @@ const RestaurantModule = {
 												 comment,
 												 channel,
 												 payment_channel: io_data.payment_channel,
-												 tips: io_data.tips}
+												 tips: io_data.tips};
         const data = await RestaurantApi.checkout(reqData);
         return data
+				return {};
       }catch (e){
         console.log(e)
       }
