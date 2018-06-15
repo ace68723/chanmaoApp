@@ -19,7 +19,7 @@ import {
 	View,
 	Platform,
 	StatusBar,
-
+	KeyboardAvoidingView
 } from 'react-native';
 
 import Background from '../General/Background';
