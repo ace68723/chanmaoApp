@@ -58,7 +58,7 @@ export default class CmEatAddress extends Component {
       this._goToAddAddressInfo = this._goToAddAddressInfo.bind(this);
   }
 	componentDidMount() {
-    AddressStore.addChangeListener(this._onChange);
+		AddressStore.addChangeListener(this._onChange);
 		navigator.geolocation.getCurrentPosition (
       (position) => {
 				const url = "https://maps.googleapis.com/maps/api/geocode/" +
@@ -81,7 +81,7 @@ export default class CmEatAddress extends Component {
 		      })
 		      .catch((error) => {throw error});
 			},
-      (error)    => {
+      (error) => {
 				console.log(error)
 			},
       {
@@ -95,7 +95,7 @@ export default class CmEatAddress extends Component {
       AddressStore.removeChangeListener(this._onChange);
   }
   _onChange() {
-      const state = AddressStore.getState();
+			const state = AddressStore.getState();
       this.setState(state);
       this._handleStatus(state);
   }
@@ -230,7 +230,7 @@ export default class CmEatAddress extends Component {
 			this.props.handleAddressAdded();
 		}
 		if(this.props.tag === "fromHome") {
-      // this.props.handleBackToHome("fromChanmao");
+			// this.props.handleBackToHome("fromChanmao");
       this.props.navigator.resetTo({
   				screen: 'cmHome',
   				animated: true,
@@ -424,7 +424,7 @@ export default class CmEatAddress extends Component {
         <TextInput
             style={[styles.input]}
 						value={this.state.searchAddress}
-						autoFocus={true}
+					
             onFocus={()=>{this.setState({showConfirmBtn:false})}}
             onBlur={()=>{this.setState({showConfirmBtn:true})}}
             placeholder={CMLabel.getCNLabel('ENTER_ADDRESS')}
