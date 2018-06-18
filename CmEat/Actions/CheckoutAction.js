@@ -36,8 +36,16 @@ export default {
       }catch (e){
       }
     },
+    async stripeChargeAndUpdate({amount, oid}){
+      try{
+          const token = await AuthModule.getToken();
+          const reqData = {amount,oid,token};
+          const result = await CheckoutModule.stripeChargeAndUpdate(reqData);
+      }catch (e){
+      }
+    },
     // async checkout(comment, payment_channel, tips){
-    async checkout(comment, payment_channel, tips){
+    async checkout(comment, payment_channel, tips, visa_fee){
       try{
         const token = await AuthModule.getToken();
         // const reqData = {token,comment, payment_channel, tips};
@@ -49,7 +57,7 @@ export default {
             comment = "支付宝|";
           }
         }
-        const reqData = {token,comment, payment_channel, tips};
+        const reqData = {token,comment, payment_channel, tips, visa_fee};
         const data = await RestaurantModule.checkout(reqData);
 
         dispatch({

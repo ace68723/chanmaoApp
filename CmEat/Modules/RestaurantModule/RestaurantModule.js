@@ -190,10 +190,10 @@ const RestaurantModule = {
 												 comment,
 												 channel,
 												 payment_channel: io_data.payment_channel,
-												 tips: io_data.tips};
+												 tips: io_data.tips,
+											   visa_fee: io_data.visa_fee};
         const data = await RestaurantApi.checkout(reqData);
-        return data
-				return {};
+        return data;
       }catch (e){
         console.log(e)
       }

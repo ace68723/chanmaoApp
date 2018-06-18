@@ -57,11 +57,12 @@ const  HistoryModule = {
       const token = io_data.token;
       const iv_oid = io_data.oid;
       const reqData = {token,iv_oid};
-      const res = await HistoryApi.getHistoryDetail(reqData)
-      if(res.result == 0){
-        return res
+      const res = await HistoryApi.getHistoryDetail(reqData);
+      if(res.ev_error == 0){
+      // if(res.result == 0){
+        return res.ea_order_detail;
       }else{
-          Alert.errorAlert(res.message)
+          Alert.errorAlert(res.ev_message)
       }
 
     } catch (e) {

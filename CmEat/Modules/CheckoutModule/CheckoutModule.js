@@ -118,4 +118,13 @@ export default  {
       throw e
     }
   },
+  async stripeChargeAndUpdate(reqData) {
+    try {
+      const res = await CheckoutAPI.stripeChargeAndUpdate(reqData);
+      return res;
+    } catch (e) {
+      console.log(e);
+      throw e
+    }
+  }
 }

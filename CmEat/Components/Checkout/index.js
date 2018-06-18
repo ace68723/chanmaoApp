@@ -139,7 +139,11 @@ class Confirm extends Component {
 				}, 500);
 
 				if(this.state.checkoutSuccessful){
-					if (this.state.payment_channel == 10) {
+					if (this.state.payment_channel == 1) {
+						CheckoutAction.stripeChargeAndUpdate({amount: parseInt((parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2) * 100),
+																				 					oid: state.oidFromUrl});
+					}
+					else if (this.state.payment_channel == 10) {
 						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
 																				 oid: state.oidFromUrl});
 					}
@@ -181,7 +185,10 @@ class Confirm extends Component {
         loading:true,
 				showOrderConfirm:false,
       })
-      CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
+      CheckoutAction.checkout(this.state.comment,
+															this.state.payment_channel,
+															this.state.tips,
+															this.state.visa_fee);
     }
     _checkout(){
 
@@ -438,6 +445,15 @@ class Confirm extends Component {
 			}
 
 		}
+		_renderVisaFee(){
+			if(this.state.visa_fee > 0) {
+				return(
+					<CartItem icon={require('./Image/delivery-2.png')}
+										title={"手续费"}
+										value={'$'+this.state.visa_fee}/>
+				)
+			}
+		}
 		_renderDeliverType(){
       let typeListData=[{
                           text:CMLabel.getCNLabel('DELIVER'),
@@ -600,6 +616,7 @@ class Confirm extends Component {
 														 selectedAddress={this.state.selectedAddress}
 														 total={this.state.total}
 														 tips={this.state.tips}
+														 visaFee={this.state.visa_fee}
 														 paymentChannel={this.state.payment_channel}
 														 dltype={this.state.dltype}/>)
 			}
@@ -682,6 +699,7 @@ class Confirm extends Component {
 																title={CMLabel.getCNLabel('TAXED_PRICE')}
 																value={'$'+this.state.total}/>
 											{this._renderChoosePayment()}
+											{this._renderVisaFee()}
 											{this._renderTipInfo()}
 										</View>
 

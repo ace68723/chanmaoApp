@@ -25,7 +25,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       }],
 		showBanner:true,
     shouldAddAddress:false,
-    payment_channel: 0
+    payment_channel: 0,
+    visa_fee: 0
   },
   initState(){
     this.state = {
@@ -41,7 +42,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
           }],
     		showBanner:true,
         shouldAddAddress:false,
-        payment_channel: 0
+        payment_channel: 0,
+        visa_fee: 0
       };
   },
 	emitChange(){
@@ -197,6 +199,11 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       this.state.tipInfoStatus = false;
       this.state.paymentStatus = '支付宝';
       this.state.payment_channel = 10;
+    }
+    for (let _channel of this.state.available_payment_channels) {
+      if (_channel.channel == data.payment_channel) {
+        this.state.visa_fee = _channel.visa_fee;
+      }
     }
   },
   updateCardStatus(data){

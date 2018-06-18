@@ -81,13 +81,13 @@ export default class orderHistory extends Component {
             <View style={styles.quantityIcon}>
                 <Text allowFontScaling={false}
                       style={{fontSize:12}}>
-                      {item.qty}
+                      {item.amount}
                 </Text>
             </View>
-            <Text style={{fontSize:15,paddingLeft:5,}} allowFontScaling={false}>{item.name}</Text>
+            <Text style={{fontSize:15,paddingLeft:5,}} allowFontScaling={false}>{item.ds_name}</Text>
             <View style={{flex:1}}></View>
             <Text style={{fontSize:15,alignSelf:'flex-end',color:'#969696',marginRight:10}} allowFontScaling={false}>
-              ${(item.price * item.qty).toFixed(2)}
+              ${(item.price * item.amount).toFixed(2)}
             </Text>
           </View>
           {toppingGroup()}
@@ -112,9 +112,12 @@ export default class orderHistory extends Component {
     }
   }
   _renderTips(){
-    if(this.state.payment_channel == 10) {
+    if(this.state.tips > 0) {
       return(
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      paddingTop: 15,
+                      paddingBottom: 15}}>
           <Text style={{fontSize:15,
                         fontWeight:'bold',
                         color:'#ea7b21'}}

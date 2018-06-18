@@ -1,4 +1,8 @@
-import { API_ORDER_BEFORE, API_ADD_CARD, API_ADD_ORDER, API_SIGN_ALIPAY_ORDER } from '../../Config/API';
+import { API_ORDER_BEFORE,
+         API_ADD_CARD,
+         API_ADD_ORDER,
+         API_SIGN_ALIPAY_ORDER,
+         API_CHARGE_UPDATE } from '../../Config/API';
 export default  {
   addCard(io_data) {
 
@@ -51,5 +55,26 @@ export default  {
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})
-  }
+  },
+
+  stripeChargeAndUpdate(reqData){
+    const url = API_CHARGE_UPDATE;
+    // const url = "https://norgta.com/api/payment/v2/charge_and_update";
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    const amount = reqData.amount;
+    const oid = reqData.oid;
+    const POST_DATA = { amount, oid }
+    options.headers.authortoken = reqData.token;
+    options.body =  JSON.stringify(POST_DATA)
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
 }

@@ -6,6 +6,7 @@ import {
   View,
   Text,
   Image,
+  Platform,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
@@ -130,6 +131,13 @@ export default class ChooseCardType extends Component {
     const previousVisa = () => {
       let _previousVisa = [];
       if (this.props.cusid && this.props.cusid.length > 0) {
+        let icon_url = "";
+        if (this.props.brand == "Visa") {
+          icon_url = require('./Img/visa_master_icon.png');
+        }
+        else {
+          icon_url = require('./Img/visa_debit_icon.png');
+        }
         _previousVisa.push(
           <Text key={"previousCardHeader"}
                 style={{padding: 10,
@@ -147,7 +155,7 @@ export default class ChooseCardType extends Component {
                       alignItems: 'center',
                       backgroundColor: 'white'}}>
               <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-                <Image source={require('./Img/visa_master_icon.png')}
+                <Image source={icon_url}
                        style={{alignSelf: 'center',
                                height: 15,
                                width: 80}}/>
