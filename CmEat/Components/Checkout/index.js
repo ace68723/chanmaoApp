@@ -119,14 +119,10 @@ class Confirm extends Component {
 			}, 500);
 			CheckoutStore.addChangeListener(this._onChange);
 
-			this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
-			this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
     }
     componentWillUnmount() {
 			CheckoutStore.removeChangeListener(this._onChange);
-			
-			this.keyboardDidShowListener.remove();
-			this.keyboardDidHideListener.remove();
+		
     }
     _onChange(){
 
