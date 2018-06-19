@@ -103,7 +103,7 @@ const RestaurantModule = {
             cme_beforCheckout({pretax,total,rid,startAmount})
             return eo_data
           }else{
-            Alert.errorAlert(data.message)
+            Alert.errorAlert(result.ev_message)
           }
 
       }catch (error){
@@ -193,6 +193,7 @@ const RestaurantModule = {
 												 tips: io_data.tips,
 											   visa_fee: io_data.visa_fee};
         const data = await RestaurantApi.checkout(reqData);
+				console.log(data);
         return data;
       }catch (e){
         console.log(e)

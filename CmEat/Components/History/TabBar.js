@@ -107,7 +107,10 @@ export default class TabBar extends Component {
   render() {
     const containerWidth = this.props.containerWidth;
     let numberOfTabs = 1;
-    if (this.props.tabs.length == 0) {
+    if (!this.props.tabs) {
+      numberOfTabs = 1;
+    }
+    else if(this.props.tabs.length == 0) {
       numberOfTabs = 1;
     }
     else {

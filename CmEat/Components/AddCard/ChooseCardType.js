@@ -27,6 +27,7 @@ export default class ChooseCardType extends Component {
     this._goToPreviousCard = this._goToPreviousCard.bind(this);
     this._goToCredit = this._goToCredit.bind(this);
     this._goToAliPay = this._goToAliPay.bind(this);
+    this._goToApplePay = this._goToApplePay.bind(this);
     this._goToCash = this._goToCash.bind(this);
     this._goToDebit = this._goToDebit.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
@@ -96,7 +97,17 @@ export default class ChooseCardType extends Component {
       alert("已成功修改");
     }
   }
-
+  _goToApplePay(){
+    if (this.props.flag == 'fromCheckout') {
+      this.props.applePaySelected();
+    }
+    else if (this.props.flag == 'fromHistory') {
+      this.props.applePaySelected(this.props.orderInfo);
+    }
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down'
+    });
+  }
   _renderGoBackBtn() {
     // dismissAllModals bug
     this.props.navigator.dismissModal({
@@ -311,133 +322,39 @@ export default class ChooseCardType extends Component {
             </TouchableOpacity>
           )
         }
+        else if(_channel.channel == 20) {
+          _payment_channel_list.push(
+            <TouchableOpacity onPress={this._goToApplePay}
+                key={"applepay"}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        paddingTop: 12,
+                        paddingBottom: 12,
+                        alignItems: 'center',
+                        backgroundColor: 'white',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderColor: "#D5D5D5"}}>
+                        <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                          <Image source={require('./Img/apple_pay_icon.png')}
+                                style={{alignSelf: 'center',
+                                        height: 25,
+                                        width: 42}}/>
+                        </View>
+                <Text allowFontScaling={false}
+                      style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20,
+                              color:"#808080",}}>
+                            Apple Pay
+                </Text>
+                <Text allowFontScaling={false} style={styles.arrowText}>
+                  >
+                </Text>
+            </TouchableOpacity>
+          )
+        }
       }
-      // if (this.props.available_payment_channels.includes(1)) {
-      //   // _payment_channel_list.push(
-      //   //   <TouchableOpacity onPress={this._goToCredit}
-      //   //       key={"creditCard"}
-      //   //       activeOpacity={0.4}
-      //   //       style={{flexDirection: 'row',
-      //   //               height: 59,
-      //   //               alignItems: 'center',
-      //   //               backgroundColor: 'white',
-      //   //               borderBottomWidth: StyleSheet.hairlineWidth,
-      //   //               borderColor: "#D5D5D5"}}>
-      //   //       <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-      //   //         <Image source={require('./Img/visa_master_icon.png')}
-      //   //                style={{alignSelf: 'center',
-      //   //                        height: 15,
-      //   //                        width: 80}}/>
-      //   //       </View>
-      //   //       <Text allowFontScaling={false}
-      //   //             style={{flex: 1,
-      //   //                     fontSize: 18,
-      //   //                     textAlign: 'left',
-      //   //                     marginLeft :20,
-      //   //                     color:"#808080",
-      //   //                     fontFamily:'FZZhunYuan-M02S'}}>
-      //   //                 {CMLabel.getCNLabel('CREDIT_CARD')}
-      //   //       </Text>
-      //   //       <Text allowFontScaling={false}
-      //   //             style={styles.arrowText}>
-      //   //         >
-      //   //       </Text>
-      //   //   </TouchableOpacity>
-      //   // )
-      //   // _payment_channel_list.push(
-      //   //   <TouchableOpacity
-      //   //       key={"debitCard"}
-      //   //       onPress={this._goToDebit}
-      //   //       activeOpacity={0.4}
-      //   //       style={{flexDirection: 'row',
-      //   //               height: 59,
-      //   //               alignItems: 'center',
-      //   //               backgroundColor: 'white',
-      //   //               borderBottomWidth: StyleSheet.hairlineWidth,
-      //   //               borderColor: "#D5D5D5"}}>
-      //   //       <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-      //   //         <Image source={require('./Img/visa_debit_icon.png')}
-      //   //                style={{alignSelf: 'center',
-      //   //                        height: 20,
-      //   //                        width: 40}}/>
-      //   //       </View>
-      //   //       <Text allowFontScaling={false}
-      //   //             style={{flex: 1,
-      //   //                     fontSize: 18,
-      //   //                     textAlign: 'left',
-      //   //                     marginLeft :20,
-      //   //                     color:"#808080",
-      //   //                     fontFamily:'FZZhunYuan-M02S'}}>
-      //   //                     {CMLabel.getCNLabel('DEBIT_CARD')}
-      //   //       </Text>
-      //   //       <Text allowFontScaling={false} style={styles.arrowText}>
-      //   //         >
-      //   //       </Text>
-      //   //   </TouchableOpacity>
-      //   // )
-      // }
-      // if (this.props.available_payment_channels.includes(10)) {
-      //   // _payment_channel_list.push(
-      //   //   <TouchableOpacity onPress={this._goToAliPay}
-      //   //       key={"alipay"}
-      //   //       activeOpacity={0.4}
-      //   //       style={{flexDirection: 'row',
-      //   //               height: 59,
-      //   //               alignItems: 'center',
-      //   //               backgroundColor: 'white',
-      //   //               borderBottomWidth: StyleSheet.hairlineWidth,
-      //   //               borderColor: "#D5D5D5"}}>
-      //   //       <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-      //   //         <Image source={require('./Img/alipay_icon.png')}
-      //   //                style={{alignSelf: 'center',
-      //   //                        height: 28,
-      //   //                        width: 28}}/>
-      //   //       </View>
-      //   //       <Text allowFontScaling={false}
-      //   //             style={{flex: 1,
-      //   //                     fontSize: 18,
-      //   //                     textAlign: 'left',
-      //   //                     marginLeft :20,
-      //   //                     color:"#808080",
-      //   //                     fontFamily:'FZZhunYuan-M02S'}}>
-      //   //                     {CMLabel.getCNLabel('ALIPAY')}
-      //   //       </Text>
-      //   //       <Text allowFontScaling={false} style={styles.arrowText}>
-      //   //         >
-      //   //       </Text>
-      //   //   </TouchableOpacity>
-      //   // )
-      // }
-      // if (this.props.available_payment_channels.includes(0)) {
-      //   // _payment_channel_list.push(
-      //   //   <TouchableOpacity onPress={this._goToCash}
-      //   //       key={"cash"}
-      //   //       activeOpacity={0.4}
-      //   //       style={{flexDirection: 'row',
-      //   //               height: 59,
-      //   //               alignItems: 'center',
-      //   //               backgroundColor: 'white'}}>
-      //   //               <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-      //   //                 <Image source={require('./Img/cash.png')}
-      //   //                        style={{alignSelf: 'center',
-      //   //                                height: 20,
-      //   //                                width: 45}}/>
-      //   //               </View>
-      //   //       <Text allowFontScaling={false}
-      //   //             style={{flex: 1,
-      //   //                     fontSize: 18,
-      //   //                     textAlign: 'left',
-      //   //                     marginLeft :20,
-      //   //                     color:"#808080",
-      //   //                     fontFamily:'FZZhunYuan-M02S'}}>
-      //   //                     {CMLabel.getCNLabel('CASH')}
-      //   //       </Text>
-      //   //       <Text allowFontScaling={false} style={styles.arrowText}>
-      //   //         >
-      //   //       </Text>
-      //   //   </TouchableOpacity>
-      //   // )
-      // }
       return _payment_channel_list;
     }
     return (
@@ -452,8 +369,8 @@ export default class ChooseCardType extends Component {
       </View>
     );
   }
-}
 
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

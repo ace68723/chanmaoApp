@@ -132,7 +132,7 @@ export default class CmRestaurantSearch extends Component {
 				searchText: text,
 				restaurantList: filteredData//filteredData.slice(0, 5)
 			});
-			//this.refs.searchInput.value = text;
+
 	  	}else {
 			if(this.state.isTagClicked){
 				this.setState({

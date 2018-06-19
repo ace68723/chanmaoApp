@@ -39,6 +39,9 @@ export default class orderConfirm extends Component {
     else if(this.props.paymentChannel == 10) {
       payment_channel = "支付宝";
     }
+    else if(this.props.paymentChannel == 20) {
+      payment_channel = "Apple Pay";
+    }
     if(this.props.paymentChannel > 0) {
       return(
         <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>

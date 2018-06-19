@@ -49,6 +49,7 @@ import BadOrders from './BadOrders';
 import CMLabel from '../../Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
+import CheckoutAction from '../../Actions/CheckoutAction';
 
 class HistoryTab extends Component {
     constructor(props) {
@@ -72,6 +73,7 @@ class HistoryTab extends Component {
 				this._handlePaymentRetry = this._handlePaymentRetry.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
+				this._applePaySelected = this._applePaySelected.bind(this);
     }
 
     componentDidMount(){
@@ -166,6 +168,7 @@ class HistoryTab extends Component {
 				passProps:{available_payment_channels: orderInfo.available_payment_channels,
 									 alipaySelected: this._alipaySelected,
 									 cashSelected: this._cashSelected,
+									 applePaySelected:	this._applePaySelected,
 								 	 flag: 'fromHistory',
 								 	 orderInfo: orderInfo,
 									 cusid: previous_payment.cusid,
@@ -182,6 +185,13 @@ class HistoryTab extends Component {
 		_cashSelected(orderInfo) {
 			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
 			this._onRefresh();
+		}
+		_applePaySelected(orderInfo){
+				CheckoutAction.recheckoutByApplepay({
+					oid: orderInfo.order_oid,
+					total: parseFloat(orderInfo.order_total),
+					tips:	parseFloat(orderInfo.order_tips)
+				},()=>this._onRefresh())
 		}
 
 		_handleOnChangeTab(tabRef) {

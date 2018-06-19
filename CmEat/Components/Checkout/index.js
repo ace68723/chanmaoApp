@@ -8,7 +8,6 @@ import {
   Dimensions,
   Easing,
 	Keyboard,
-	KeyboardAvoidingView,
   Image,
   InteractionManager,
   StyleSheet,
@@ -19,6 +18,9 @@ import {
 	TouchableWithoutFeedback,
 	View,
 	Platform,
+	StatusBar,
+	KeyboardAvoidingView,
+	NativeModules
 } from 'react-native';
 
 import Background from '../General/Background';
@@ -91,6 +93,7 @@ class Confirm extends Component {
 				this._saveModificationCallback = this._saveModificationCallback.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
+				this._applePaySelected = this._applePaySelected.bind(this);
 				this._previousCardSelected = this._previousCardSelected.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
@@ -116,10 +119,12 @@ class Confirm extends Component {
 				CheckoutAction.beforCheckout(rid,pretax,startAmount);
 				this.setState({renderAddress:true})
 			}, 500);
-      CheckoutStore.addChangeListener(this._onChange);
+			CheckoutStore.addChangeListener(this._onChange);
+
     }
     componentWillUnmount() {
-      CheckoutStore.removeChangeListener(this._onChange);
+			CheckoutStore.removeChangeListener(this._onChange);
+
     }
     _onChange(){
 
@@ -131,8 +136,9 @@ class Confirm extends Component {
 	          this.props.navigator.showModal({
 	            screen: 'CmEatAddress',
 	            animated: true,
-	            passProps:{updateUaid:this._updateUaid,
-												 handleAddressAdded: this._handleAddressAdded},
+	            passProps:{
+								updateUaid:this._updateUaid,
+								handleAddressAdded: this._handleAddressAdded},
 	            navigatorStyle: {navBarHidden: true},
 	          });
 	        }
@@ -142,12 +148,32 @@ class Confirm extends Component {
 					if (this.state.payment_channel == 1) {
 						CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2),
 																				 					oid: state.oidFromUrl});
+						this._goToHistory();
 					}
 					else if (this.state.payment_channel == 10) {
 						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
 																				 oid: state.oidFromUrl});
+						this._goToHistory();
 					}
-					this._goToHistory();
+					else if(this.state.payment_channel == 20){
+						let pretax = Number(this.state.pretax);
+						let shipping = Number(this.state.dlexp);
+						let tips =  Number(this.state.tips);
+						let tax = Number(this.state.total - pretax - shipping).toFixed(2);
+						let total =  Number(this.state.total);
+
+						let paymentData = {
+							subtotal:'' + this.state.pretax,
+							shipping:'' + this.state.dlexp,
+							tax:'' + tax,
+							tips:'' + this.state.tips,
+							oid: state.oidFromUrl,
+							amount:total
+						}
+						CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
+
+					}
+					// this._goToHistory();
 				}
     }
 		_handleAddressAdded() {
@@ -207,15 +233,6 @@ class Confirm extends Component {
 			this.setState({
 				showOrderConfirm:true
 			});
-			// console.log(this.state)
-      // Alert.alert(
-      //   dldec,
-      //   '  税后总价: $' + this.state.total + '\n' +
-      //   '确认就不可以修改了哟～' ,
-      //   [ {text:'取消',onPress:() => { }, style: 'cancel'},
-      //     {text: '确认', onPress: () => this._doCheckout()},
-      //   ],
-      // );
     }
 		_closeOrderConfirm(){
 			this.setState({showOrderConfirm:false});
@@ -230,13 +247,14 @@ class Confirm extends Component {
 					animated: true,
 					passProps:{available_payment_channels: this.state.available_payment_channels,
 										 saveModificationCallback: this._saveModificationCallback,
-									 	 alipaySelected: this._alipaySelected,
-									 	 cashSelected: this._cashSelected,
+								 		 alipaySelected: this._alipaySelected,
+										 cashSelected: this._cashSelected,
+										 applePaySelected:	this._applePaySelected,
 										 previousCardSelected: this._previousCardSelected,
-									   flag: 'fromCheckout',
-									 	 cusid: this.state.cusid,
-									 	 last4: this.state.last4,
-									 	 brand: this.state.brand},
+										 flag: 'fromCheckout',
+								 		 cusid: this.state.cusid,
+								 		 last4: this.state.last4,
+								 		 brand: this.state.brand},
 					navigatorStyle: {navBarHidden: true,},
 				});
       }
@@ -257,7 +275,11 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-        this.props.navigator.dismissModal({animationType: 'slide-down'});
+			// this.props.navigator.dismissModal({animationType: 'slide-down'});
+			this.props.navigator.dismissAllModals({
+				animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+			});
+
     }
     showLoading(){
       if(this.state.isLoading)
@@ -324,6 +346,11 @@ class Confirm extends Component {
 		}
 		_alipaySelected() {
 			CheckoutAction.updatePaymentStatus(10);
+			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+										 tipsPercentage:0.1});
+		}
+		_applePaySelected(){
+			CheckoutAction.updatePaymentStatus(20);
 			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
 										 tipsPercentage:0.1});
 		}
@@ -647,7 +674,7 @@ class Confirm extends Component {
 				}
 			}
       return(
-        <View style={styles.mainContainer}>
+				<View style={styles.mainContainer} >
 					<Background
 							 minHeight={0}
 							 maxHeight={230}
@@ -770,7 +797,9 @@ let styles = StyleSheet.create({
     fontSize:25,
   },
   acceptButton:{
-    width:width,
+		width:width,
+		position:Platform.OS == "ios"? null:'absolute',
+		top:Platform.OS == "ios"? null:height-acceptButtonHeight-StatusBar.currentHeight,
     height:acceptButtonHeight,
     backgroundColor:'#ea7b21',
 		justifyContent:'center',

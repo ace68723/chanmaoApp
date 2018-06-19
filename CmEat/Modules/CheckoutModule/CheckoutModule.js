@@ -92,8 +92,23 @@ export default  {
       throw `getOrderBefore ${ev_message} `
     }
   },
-
-
+  async oneTimeCharge(io_data){
+    try{
+      const {uid,token,version} = GetUserInfo();
+      let data = {
+        authortoken: token,
+        amount: io_data.amount*100,
+        oid_str: "oid:" + io_data.oid,
+        token: io_data.token
+      }
+      let res = await CheckoutAPI.oneTimeCharge(data);
+      if(res.ev_error === 1) throw res;
+      else return 'success';
+    }catch(e){
+      console.log(e)
+      return 'failed';
+    }
+  },
   async signAlipayOrder(order){
     try {
       let orderStr = '';
