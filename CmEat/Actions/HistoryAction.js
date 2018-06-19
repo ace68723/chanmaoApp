@@ -19,6 +19,24 @@ export default {
         console.log(e);
       }
     },
+    async getLast4(){
+      try{
+        const token = await AuthModule.getToken();
+        const res = await HistoryModule.getLast4(token);
+        if (res.ev_error == 0) {
+          const data = {
+            cusid: res.ev_cusid,
+            last4: res.ev_last4,
+            brand: res.ev_brand
+          };
+          dispatch({
+              actionType: AppConstants.GET_LAST4, data
+          });
+        }
+      }catch (e){
+        console.log(e);
+      }
+    },
     async getVerifyCode(oid){
       try{
         const token = await AuthModule.getToken();

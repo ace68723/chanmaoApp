@@ -130,6 +130,7 @@ class HistoryTab extends Component {
         this.setState({
           isRefreshing: true,
         })
+				HistoryAction.getLast4();
         HistoryAction.getOrderData();
     }
 		_setOnRefresh() {
@@ -158,6 +159,7 @@ class HistoryTab extends Component {
 				}
     }
 		_handlePaymentRetry(orderInfo) {
+			let previous_payment = HistoryStore.getLast4();
 			this.props.navigator.showModal({
 				screen: 'CmChooseCardType',
 				animated: true,
@@ -165,7 +167,10 @@ class HistoryTab extends Component {
 									 alipaySelected: this._alipaySelected,
 									 cashSelected: this._cashSelected,
 								 	 flag: 'fromHistory',
-								 	 orderInfo: orderInfo},
+								 	 orderInfo: orderInfo,
+									 cusid: previous_payment.cusid,
+									 last4: previous_payment.last4,
+									 brand: previous_payment.brand},
 				navigatorStyle: {navBarHidden: true,},
 			});
 		}

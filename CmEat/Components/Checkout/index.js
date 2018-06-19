@@ -140,7 +140,7 @@ class Confirm extends Component {
 
 				if(this.state.checkoutSuccessful){
 					if (this.state.payment_channel == 1) {
-						CheckoutAction.stripeChargeAndUpdate({amount: parseInt((parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2) * 100),
+						CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2),
 																				 					oid: state.oidFromUrl});
 					}
 					else if (this.state.payment_channel == 10) {

@@ -11,6 +11,9 @@ let state = {
           unavailable:[],
           isRefreshing:false,
           showReviewAdded: false,
+          cusid: '',
+          last4: '',
+          brand: '',
         };
 let HistoryDetailData;
 const HistoryStore = Object.assign({},EventEmitter.prototype,{
@@ -64,6 +67,18 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
   initVerifyPhoneResult(){
       state.verifyPhoneResult = '';
   },
+  updateLast4(data) {
+    state.cusid = data.cusid;
+    state.last4 = data.last4;
+    state.brand = data.brand;
+  },
+  getLast4(){
+    return {
+      cusid: state.cusid,
+      last4: state.last4,
+      brand: state.brand,
+    }
+  },
 	doRefresh(){
 		state = Object.assign({},state,{doRefresh:true})
 	},
@@ -72,24 +87,26 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
          case AppConstants.GET_ORDERS:
               HistoryStore.getOrders(action.orderData)
               HistoryStore.emitChange()
-         break;
-
+              break;
 				 case AppConstants.VERIFY_PHONE:
 					    HistoryStore.verifyPhone(action.data)
 						 	HistoryStore.emitChange()
-				 break;
+		          break;
 				 case AppConstants.GET_HISTORY_DETAIL:
 						 HistoryStore.saveHistoryDetail(action.data)
 						 HistoryStore.emitChange()
-				 break;
+		         break;
 				 // case AppConstants.CHECKOUT:
 							// HistoryStore.doRefresh()
 							// HistoryStore.emitChange()
-			   break;
+			   // break;
          case AppConstants.GET_HISTORY_SUCCESS:
              HistoryStore.getHistorySuccess(action.data)
              HistoryStore.emitChange()
-         break;
+             break;
+         case AppConstants.GET_LAST4:
+             HistoryStore.updateLast4(action.data);
+             break;
 
 		  }
 

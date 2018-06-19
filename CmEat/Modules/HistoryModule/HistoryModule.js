@@ -49,6 +49,15 @@ const  HistoryModule = {
               })
           })
     },
+    async getLast4(token){
+      try {
+        const res = await HistoryApi.getLast4(token);
+        return res;
+
+      } catch (e) {
+        console.log(e)
+      }
+    },
 // ===================================
 // getVerifyCode input parameter
 // ===================================

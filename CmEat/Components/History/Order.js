@@ -189,7 +189,7 @@ export default class pastOrderEN extends Component {
   }
 
   _renderOptionButton() {
-    if (this.state.orderInfo.payment_channel == 10 && !this.state.orderInfo.payment_status && this.state.orderInfo.order_status == 0) {
+    if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && this.state.orderInfo.order_status == 0) {
       return (
           <TouchableOpacity style={{flex:1,
                                     flexDirection:'row',
