@@ -39,7 +39,7 @@ export default {
     async stripeChargeAndUpdate({amount, oid}){
       try{
           const token = await AuthModule.getToken();
-          const reqData = {amount,oid,token};
+          const reqData = {amount: amount * 100,oid,token};
           const result = await CheckoutModule.stripeChargeAndUpdate(reqData);
       }catch (e){
       }

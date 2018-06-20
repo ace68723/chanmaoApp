@@ -74,6 +74,7 @@ class HistoryTab extends Component {
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
 				this._applePaySelected = this._applePaySelected.bind(this);
+				this._stripeCardSelected = this._stripeCardSelected.bind(this);
     }
 
     componentDidMount(){
@@ -161,14 +162,16 @@ class HistoryTab extends Component {
 				}
     }
 		_handlePaymentRetry(orderInfo) {
-			let previous_payment = HistoryStore.getLast4();
+			const previous_payment = HistoryStore.getLast4();
 			this.props.navigator.showModal({
 				screen: 'CmChooseCardType',
 				animated: true,
 				passProps:{available_payment_channels: orderInfo.available_payment_channels,
+									 stripeCardAdded: this._stripeCardSelected,
 									 alipaySelected: this._alipaySelected,
 									 cashSelected: this._cashSelected,
 									 applePaySelected:	this._applePaySelected,
+									 stripeCardSelected: this._stripeCardSelected,
 								 	 flag: 'fromHistory',
 								 	 orderInfo: orderInfo,
 									 cusid: previous_payment.cusid,
@@ -178,20 +181,24 @@ class HistoryTab extends Component {
 			});
 		}
 
-		_alipaySelected(orderInfo) {
-			Alipay.constructAlipayOrder({total: parseFloat(orderInfo.order_total).toString(),
+		_alipaySelected(orderInfo, visa_fee) {
+			Alipay.constructAlipayOrder({total: (parseFloat(orderInfo.order_total) + visa_fee).toString(),
 																	 oid: orderInfo.order_oid});
 		}
 		_cashSelected(orderInfo) {
 			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
 			this._onRefresh();
 		}
-		_applePaySelected(orderInfo){
+		_applePaySelected(orderInfo, visa_fee){
 				CheckoutAction.recheckoutByApplepay({
 					oid: orderInfo.order_oid,
-					total: parseFloat(orderInfo.order_total),
+					total: parseFloat(orderInfo.order_total) + visa_fee,
 					tips:	parseFloat(orderInfo.order_tips)
 				},()=>this._onRefresh())
+		}
+		_stripeCardSelected(orderInfo, visa_fee) {
+				CheckoutAction.stripeChargeAndUpdate({amount: parseFloat(orderInfo.order_total) + visa_fee,
+																						oid: orderInfo.order_oid});
 		}
 
 		_handleOnChangeTab(tabRef) {

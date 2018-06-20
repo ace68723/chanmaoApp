@@ -91,6 +91,7 @@ class Confirm extends Component {
         this._onChange = this._onChange.bind(this);
         this._updateUaid = this._updateUaid.bind(this);
 				this._saveModificationCallback = this._saveModificationCallback.bind(this);
+				this._stripeCardAdded = this._stripeCardAdded.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
 				this._applePaySelected = this._applePaySelected.bind(this);
@@ -246,7 +247,7 @@ class Confirm extends Component {
 					screen: 'CmChooseCardType',
 					animated: true,
 					passProps:{available_payment_channels: this.state.available_payment_channels,
-										 saveModificationCallback: this._saveModificationCallback,
+										 stripeCardAdded: this._stripeCardAdded,
 								 		 alipaySelected: this._alipaySelected,
 										 cashSelected: this._cashSelected,
 										 applePaySelected:	this._applePaySelected,
@@ -342,6 +343,21 @@ class Confirm extends Component {
 			CheckoutAction.beforCheckout(rid,pretax,startAmount);
 
 			const state = Object.assign({},CheckoutStore.getState(),{cart:cart, pretax: pretax});
+			this.setState(state);
+		}
+		_stripeCardAdded() {
+			CheckoutAction.updatePaymentStatus(1);
+			const cart = MenuStore.getCart();
+			const rid = this.state.rid;
+			const pretax = MenuStore.getCartTotals().total;
+			const startAmount = this.state.startAmount;
+			CheckoutAction.beforCheckout(rid,pretax,startAmount);
+			const newState = CheckoutStore.getState();
+			const state = Object.assign({},newState,
+																	{cart:cart,
+																	 pretax: pretax,
+																	 tips: parseFloat(newState.total*0.1).toFixed(2),
+																 	 tipsPercentage:0.1});
 			this.setState(state);
 		}
 		_alipaySelected() {

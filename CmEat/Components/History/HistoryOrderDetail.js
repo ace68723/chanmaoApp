@@ -36,9 +36,8 @@ export default class orderHistory extends Component {
     HistoryStore.removeChangeListener(this._onChange);
   }
   _onChange(){
-    const state = Object.assign({},HistoryStore.getHistoryDetail())
-    console.log(state);
-    this.setState(state)
+    const state = Object.assign({},HistoryStore.getHistoryDetail());
+    this.setState(state);
     setTimeout(() => {
       this.setState({loading:false})
     }, 500);
