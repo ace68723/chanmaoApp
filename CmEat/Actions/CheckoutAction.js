@@ -104,7 +104,15 @@ export default {
       try{
         const token = await AuthModule.getToken();
         // const reqData = {token,comment, payment_channel, tips};
-        if(payment_channel == 10) {
+        if(payment_channel == 1) {
+          if(comment) {
+            comment = '网上刷卡|' + comment;
+          }
+          else{
+            comment = "网上刷卡|";
+          }
+        }
+        else if(payment_channel == 10) {
           if(comment) {
             comment = '支付宝|' + comment;
           }
@@ -112,7 +120,7 @@ export default {
             comment = "支付宝|";
           }
         }
-        else if(payment_channel == 20) {
+        else if(payment_channel == 30) {
 
           if(comment) {
             comment = 'ApplePay|' + comment;

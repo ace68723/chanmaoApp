@@ -200,10 +200,10 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       this.state.paymentStatus = '支付宝';
       this.state.payment_channel = 10;
     }
-    else if (data.payment_channel == 20) {
+    else if (data.payment_channel == 30) {
       this.state.tipInfoStatus = false;
       this.state.paymentStatus = 'Apple Pay';
-      this.state.payment_channel = 20;
+      this.state.payment_channel = 30;
     }
     for (let _channel of this.state.available_payment_channels) {
       if (_channel.channel == data.payment_channel) {

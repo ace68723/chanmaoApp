@@ -322,7 +322,7 @@ export default class ChooseCardType extends Component {
             </TouchableOpacity>
           )
         }
-        else if(_channel.channel == 20) {
+        else if(_channel.channel == 30) {
           _payment_channel_list.push(
             <TouchableOpacity onPress={this._goToApplePay}
                 key={"applepay"}

@@ -148,14 +148,14 @@ class Confirm extends Component {
 					if (this.state.payment_channel == 1) {
 						CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2),
 																				 					oid: state.oidFromUrl});
-						this._goToHistory();
+						this.props.navigator.dismissModal({animationType: 'slide-down'});
 					}
 					else if (this.state.payment_channel == 10) {
 						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
 																				 oid: state.oidFromUrl});
-						this._goToHistory();
+						this.props.navigator.dismissModal({animationType: 'slide-down'});
 					}
-					else if(this.state.payment_channel == 20){
+					else if(this.state.payment_channel == 30){
 						let pretax = Number(this.state.pretax);
 						let shipping = Number(this.state.dlexp);
 						let tips =  Number(this.state.tips);
@@ -350,7 +350,7 @@ class Confirm extends Component {
 										 tipsPercentage:0.1});
 		}
 		_applePaySelected(){
-			CheckoutAction.updatePaymentStatus(20);
+			CheckoutAction.updatePaymentStatus(30);
 			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
 										 tipsPercentage:0.1});
 		}

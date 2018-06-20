@@ -39,7 +39,7 @@ export default class orderConfirm extends Component {
     else if(this.props.paymentChannel == 10) {
       payment_channel = "支付宝";
     }
-    else if(this.props.paymentChannel == 20) {
+    else if(this.props.paymentChannel == 30) {
       payment_channel = "Apple Pay";
     }
     if(this.props.paymentChannel > 0) {

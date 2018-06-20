@@ -37,6 +37,7 @@ export default class orderHistory extends Component {
   }
   _onChange(){
     const state = Object.assign({},HistoryStore.getHistoryDetail())
+    console.log(state);
     this.setState(state)
     setTimeout(() => {
       this.setState({loading:false})
@@ -136,44 +137,23 @@ export default class orderHistory extends Component {
     }
   }
   _renderFooter(){
-    if(this.state.payment_channel == 10) {
-      return(
-        <View style={styles.modalFooter}>
-            <View style={{flex:1,backgroundColor:"yellow"}}></View>
-            <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
+    return(
+      <View style={styles.modalFooter}>
+          <View style={{flex:1,backgroundColor:"yellow"}}></View>
+          <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
 
-                <Text style={{alignSelf: 'flex-end',
-                              color:'black',
-                              fontSize:18,
-                              fontWeight:'bold',
-                              flex:1,
-                              marginTop:15}}
-                      allowFontScaling={false}>
-                        合计: ${parseFloat(this.state.total) + parseFloat(this.state.tips)}
-                </Text>
-            </View>
-        </View>
-      )
-    }
-    else{
-      return(
-        <View style={styles.modalFooter}>
-            <View style={{flex:1,backgroundColor:"yellow"}}></View>
-            <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
-
-                <Text style={{alignSelf: 'flex-end',
-                              color:'black',
-                              fontSize:18,
-                              fontWeight:'bold',
-                              flex:1,
-                              marginTop:15}}
-                      allowFontScaling={false}>
-                        Total: ${this.state.total}
-                </Text>
-            </View>
-        </View>
-      )
-    }
+              <Text style={{alignSelf: 'flex-end',
+                            color:'black',
+                            fontSize:18,
+                            fontWeight:'bold',
+                            flex:1,
+                            marginTop:15}}
+                    allowFontScaling={false}>
+                      Total: ${this.state.charge_total}
+              </Text>
+          </View>
+      </View>
+    )
   }
   _renderLoading(){
     if(this.state.loading){
