@@ -5,7 +5,7 @@ import LocationModule from '../Modules/System/LocationModule';
 import RestaurantModule from '../Modules/RestaurantModule/RestaurantModule';
 import AddressModule from '../Modules/AddressModule/AddressModule';
 import CheckoutModule from '../Modules/CheckoutModule/CheckoutModule';
-
+import {NativeModules} from 'react-native';
 export default {
     async beforCheckout(rid,pretax,startAmount){
       try{
@@ -36,12 +36,83 @@ export default {
       }catch (e){
       }
     },
+    async stripeChargeAndUpdate({amount, oid}){
+      try{
+          const token = await AuthModule.getToken();
+          const reqData = {amount: amount * 100,oid,token};
+          const result = await CheckoutModule.stripeChargeAndUpdate(reqData);
+      }catch (e){
+      }
+    },
+
+		async _payByApple({subtotal,shipping,tax,tips},callback){
+			let paymentData = {
+				subtotal:'' + subtotal,
+        shipping:'' + shipping,
+				tax:'' + tax,
+				tips:'' + tips,
+			}
+      NativeModules.cmApplePay.cancelcallback(callback);
+      let token = await NativeModules.cmApplePay.createPayment(paymentData);
+      return token;
+    },
+    async _repayByApple({tips,total},callback){
+      let paymentData = {
+				total:'' + total,
+				tips:'' + tips,
+      }
+
+      NativeModules.cmApplePay.cancelcallback(callback);
+      let token = await NativeModules.cmApplePay.reCreatePayment(paymentData);
+      return token;
+    },
+    async recheckoutByApplepay({total,tips,oid},callback){
+
+      let token = await this._repayByApple({total,tips,oid},()=>callback());
+      if(token){
+        let payResult = await CheckoutModule.oneTimeCharge({
+          amount:total,
+          token:token,
+          oid:oid,
+          tips:tips,
+        })
+
+        NativeModules.cmApplePay.complete(payResult,()=>{
+          console.log("Payment Finished.");
+        });
+      }
+    },
+    async checkoutByApplepay({subtotal,shipping,tax, amount, oid,tips},callback){
+
+      let token = await this._payByApple({subtotal,shipping,tax,tips,oid},()=>callback());
+      if(token){
+        let payResult = await CheckoutModule.oneTimeCharge({
+          amount:amount,
+          token:token,
+          oid:oid,
+          tips:tips,
+        })
+
+        NativeModules.cmApplePay.complete(payResult,()=>{
+          console.log("Payment Finished.");
+        });
+      }
+
+    },
     // async checkout(comment, payment_channel, tips){
-    async checkout(comment, payment_channel, tips){
+    async checkout(comment, payment_channel, tips, visa_fee){
       try{
         const token = await AuthModule.getToken();
         // const reqData = {token,comment, payment_channel, tips};
-        if(payment_channel == 10) {
+        if(payment_channel == 1) {
+          if(comment) {
+            comment = '网上刷卡|' + comment;
+          }
+          else{
+            comment = "网上刷卡|";
+          }
+        }
+        else if(payment_channel == 10) {
           if(comment) {
             comment = '支付宝|' + comment;
           }
@@ -49,7 +120,17 @@ export default {
             comment = "支付宝|";
           }
         }
-        const reqData = {token,comment, payment_channel, tips};
+        else if(payment_channel == 30) {
+
+          if(comment) {
+            comment = 'ApplePay|' + comment;
+          }
+          else{
+            comment = "ApplePay|";
+          }
+
+        }
+        const reqData = {token,comment, payment_channel, tips, visa_fee};
         const data = await RestaurantModule.checkout(reqData);
 
         dispatch({

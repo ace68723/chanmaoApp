@@ -61,6 +61,7 @@
 		D7067B9C9D904789ABDE3188 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8F54AE4BDD44159B23D420 /* libCodePush.a */; };
 		D9ECDA9D5595465B9B858F7C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DF937DD84A748DB8ED1D5CD /* Entypo.ttf */; };
 		E3ACE0070FC5416AA3CC6F1A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 153D270FD29641D5BB5BCDB8 /* libz.tbd */; };
+		EBE8C3DF20C5E563002EE5C3 /* cmApplePay.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE8C3AF20C5E563002EE5C3 /* cmApplePay.m */; };
 		F963FD1A20B4B86300C1C422 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F963FCE520B4B86200C1C422 /* AlipaySDK.bundle */; };
 		F963FD1C20B4B86300C1C422 /* AlipayModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F963FCE920B4B86200C1C422 /* AlipayModule.m */; };
 		F963FD1D20B4B86300C1C422 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F963FCEB20B4B86200C1C422 /* AlipaySDK.framework */; };
@@ -468,6 +469,9 @@
 		D3EE8E983E40E5E7D59B9634 /* Pods-chanmao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chanmao.release.xcconfig"; path = "Pods/Target Support Files/Pods-chanmao/Pods-chanmao.release.xcconfig"; sourceTree = "<group>"; };
 		D8AB24399EE942769B9531AD /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		E1C568599B7346BA95206564 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		EBE8C3AF20C5E563002EE5C3 /* cmApplePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cmApplePay.m; sourceTree = "<group>"; };
+		EBE8C3B020C5E563002EE5C3 /* cmApplePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmApplePay.h; sourceTree = "<group>"; };
+		EBE8C42220C5E5E9002EE5C3 /* chanmao.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = chanmao.entitlements; path = chanmao/chanmao.entitlements; sourceTree = "<group>"; };
 		F963FCE520B4B86200C1C422 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		F963FCE720B4B86200C1C422 /* AlipayModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayModule.h; sourceTree = "<group>"; };
 		F963FCE920B4B86200C1C422 /* AlipayModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayModule.m; sourceTree = "<group>"; };
@@ -607,6 +611,8 @@
 		13B07FAE1A68108700A75B9A /* chanmao */ = {
 			isa = PBXGroup;
 			children = (
+				EBE8C42220C5E5E9002EE5C3 /* chanmao.entitlements */,
+				EBE8C3AE20C5E563002EE5C3 /* cmApplePay */,
 				3122F7FB20B76BA400C388FF /* Stripe */,
 				F963FCE320B4B86200C1C422 /* Alipay */,
 				31E09C4120A3A29C007902C5 /* Fonts */,
@@ -872,6 +878,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EBE8C3AE20C5E563002EE5C3 /* cmApplePay */ = {
+			isa = PBXGroup;
+			children = (
+				EBE8C3AF20C5E563002EE5C3 /* cmApplePay.m */,
+				EBE8C3B020C5E563002EE5C3 /* cmApplePay.h */,
+			);
+			path = cmApplePay;
+			sourceTree = "<group>";
+		};
 		F963FCE320B4B86200C1C422 /* Alipay */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +932,11 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = P5WETSWY6J;
+						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1433,6 +1453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE8C3DF20C5E563002EE5C3 /* cmApplePay.m in Sources */,
 				F963FD1C20B4B86300C1C422 /* AlipayModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -1460,6 +1481,7 @@
 			baseConfigurationReference = 11A35EE0B073629238D3946A /* Pods-chanmao.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = chanmao/chanmao.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = P5WETSWY6J;
@@ -1494,6 +1516,7 @@
 			baseConfigurationReference = D3EE8E983E40E5E7D59B9634 /* Pods-chanmao.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = chanmao/chanmao.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P5WETSWY6J;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1608,7 +1631,7 @@
 				13B07F951A680F5B00A75B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "chanmao" */ = {
 			isa = XCConfigurationList;
@@ -1617,7 +1640,7 @@
 				83CBBA211A601CBA00E9B192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

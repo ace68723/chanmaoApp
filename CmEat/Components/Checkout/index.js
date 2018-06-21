@@ -19,7 +19,8 @@ import {
 	View,
 	Platform,
 	StatusBar,
-	KeyboardAvoidingView
+	KeyboardAvoidingView,
+	NativeModules
 } from 'react-native';
 
 import Background from '../General/Background';
@@ -90,8 +91,10 @@ class Confirm extends Component {
         this._onChange = this._onChange.bind(this);
         this._updateUaid = this._updateUaid.bind(this);
 				this._saveModificationCallback = this._saveModificationCallback.bind(this);
+				this._stripeCardAdded = this._stripeCardAdded.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
+				this._applePaySelected = this._applePaySelected.bind(this);
 				this._previousCardSelected = this._previousCardSelected.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
@@ -122,7 +125,6 @@ class Confirm extends Component {
     }
     componentWillUnmount() {
 			CheckoutStore.removeChangeListener(this._onChange);
-		
     }
     _onChange(){
 
@@ -134,19 +136,44 @@ class Confirm extends Component {
 	          this.props.navigator.showModal({
 	            screen: 'CmEatAddress',
 	            animated: true,
-	            passProps:{updateUaid:this._updateUaid,
-												 handleAddressAdded: this._handleAddressAdded},
+	            passProps:{
+								updateUaid:this._updateUaid,
+								handleAddressAdded: this._handleAddressAdded},
 	            navigatorStyle: {navBarHidden: true},
 	          });
 	        }
 				}, 500);
 
 				if(this.state.checkoutSuccessful){
-					if (this.state.payment_channel == 10) {
+					if (this.state.payment_channel == 1) {
+						CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2),
+																				 					oid: state.oidFromUrl});
+						this.props.navigator.dismissModal({animationType: 'slide-down'});
+					}
+					else if (this.state.payment_channel == 10) {
 						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
 																				 oid: state.oidFromUrl});
+						this.props.navigator.dismissModal({animationType: 'slide-down'});
 					}
-					this._goToHistory();
+					else if(this.state.payment_channel == 30){
+						let pretax = Number(this.state.pretax);
+						let shipping = Number(this.state.dlexp);
+						let tips =  Number(this.state.tips);
+						let tax = Number(this.state.total - pretax - shipping).toFixed(2);
+						let total =  Number(this.state.total);
+
+						let paymentData = {
+							subtotal:'' + this.state.pretax,
+							shipping:'' + this.state.dlexp,
+							tax:'' + tax,
+							tips:'' + this.state.tips,
+							oid: state.oidFromUrl,
+							amount:total
+						}
+						CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
+
+					}
+					// this._goToHistory();
 				}
     }
 		_handleAddressAdded() {
@@ -184,7 +211,10 @@ class Confirm extends Component {
         loading:true,
 				showOrderConfirm:false,
       })
-      CheckoutAction.checkout(this.state.comment, this.state.payment_channel, this.state.tips);
+      CheckoutAction.checkout(this.state.comment,
+															this.state.payment_channel,
+															this.state.tips,
+															this.state.visa_fee);
     }
     _checkout(){
 
@@ -203,15 +233,6 @@ class Confirm extends Component {
 			this.setState({
 				showOrderConfirm:true
 			});
-			// console.log(this.state)
-      // Alert.alert(
-      //   dldec,
-      //   '  税后总价: $' + this.state.total + '\n' +
-      //   '确认就不可以修改了哟～' ,
-      //   [ {text:'取消',onPress:() => { }, style: 'cancel'},
-      //     {text: '确认', onPress: () => this._doCheckout()},
-      //   ],
-      // );
     }
 		_closeOrderConfirm(){
 			this.setState({showOrderConfirm:false});
@@ -225,14 +246,15 @@ class Confirm extends Component {
 					screen: 'CmChooseCardType',
 					animated: true,
 					passProps:{available_payment_channels: this.state.available_payment_channels,
-										 saveModificationCallback: this._saveModificationCallback,
-									 	 alipaySelected: this._alipaySelected,
-									 	 cashSelected: this._cashSelected,
+										 stripeCardAdded: this._stripeCardAdded,
+								 		 alipaySelected: this._alipaySelected,
+										 cashSelected: this._cashSelected,
+										 applePaySelected:	this._applePaySelected,
 										 previousCardSelected: this._previousCardSelected,
-									   flag: 'fromCheckout',
-									 	 cusid: this.state.cusid,
-									 	 last4: this.state.last4,
-									 	 brand: this.state.brand},
+										 flag: 'fromCheckout',
+								 		 cusid: this.state.cusid,
+								 		 last4: this.state.last4,
+								 		 brand: this.state.brand},
 					navigatorStyle: {navBarHidden: true,},
 				});
       }
@@ -253,7 +275,11 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-        this.props.navigator.dismissModal({animationType: 'slide-down'});
+			// this.props.navigator.dismissModal({animationType: 'slide-down'});
+			this.props.navigator.dismissAllModals({
+				animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+			});
+
     }
     showLoading(){
       if(this.state.isLoading)
@@ -318,8 +344,28 @@ class Confirm extends Component {
 			const state = Object.assign({},CheckoutStore.getState(),{cart:cart, pretax: pretax});
 			this.setState(state);
 		}
+		_stripeCardAdded() {
+			CheckoutAction.updatePaymentStatus(1);
+			const cart = MenuStore.getCart();
+			const rid = this.state.rid;
+			const pretax = MenuStore.getCartTotals().total;
+			const startAmount = this.state.startAmount;
+			CheckoutAction.beforCheckout(rid,pretax,startAmount);
+			const newState = CheckoutStore.getState();
+			const state = Object.assign({},newState,
+																	{cart:cart,
+																	 pretax: pretax,
+																	 tips: parseFloat(newState.total*0.1).toFixed(2),
+																 	 tipsPercentage:0.1});
+			this.setState(state);
+		}
 		_alipaySelected() {
 			CheckoutAction.updatePaymentStatus(10);
+			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+										 tipsPercentage:0.1});
+		}
+		_applePaySelected(){
+			CheckoutAction.updatePaymentStatus(30);
 			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
 										 tipsPercentage:0.1});
 		}
@@ -440,6 +486,15 @@ class Confirm extends Component {
 				)
 			}
 
+		}
+		_renderVisaFee(){
+			if(this.state.visa_fee > 0) {
+				return(
+					<CartItem icon={require('./Image/delivery-2.png')}
+										title={"手续费"}
+										value={'$'+this.state.visa_fee}/>
+				)
+			}
 		}
 		_renderDeliverType(){
       let typeListData=[{
@@ -603,6 +658,7 @@ class Confirm extends Component {
 														 selectedAddress={this.state.selectedAddress}
 														 total={this.state.total}
 														 tips={this.state.tips}
+														 visaFee={this.state.visa_fee}
 														 paymentChannel={this.state.payment_channel}
 														 dltype={this.state.dltype}/>)
 			}
@@ -685,6 +741,7 @@ class Confirm extends Component {
 																title={CMLabel.getCNLabel('TAXED_PRICE')}
 																value={'$'+this.state.total}/>
 											{this._renderChoosePayment()}
+											{this._renderVisaFee()}
 											{this._renderTipInfo()}
 										</View>
 

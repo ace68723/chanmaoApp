@@ -36,8 +36,8 @@ export default class orderHistory extends Component {
     HistoryStore.removeChangeListener(this._onChange);
   }
   _onChange(){
-    const state = Object.assign({},HistoryStore.getHistoryDetail())
-    this.setState(state)
+    const state = Object.assign({},HistoryStore.getHistoryDetail());
+    this.setState(state);
     setTimeout(() => {
       this.setState({loading:false})
     }, 500);
@@ -81,13 +81,13 @@ export default class orderHistory extends Component {
             <View style={styles.quantityIcon}>
                 <Text allowFontScaling={false}
                       style={{fontSize:12}}>
-                      {item.qty}
+                      {item.amount}
                 </Text>
             </View>
-            <Text style={{fontSize:15,paddingLeft:5,}} allowFontScaling={false}>{item.name}</Text>
+            <Text style={{fontSize:15,paddingLeft:5,}} allowFontScaling={false}>{item.ds_name}</Text>
             <View style={{flex:1}}></View>
             <Text style={{fontSize:15,alignSelf:'flex-end',color:'#969696',marginRight:10}} allowFontScaling={false}>
-              ${(item.price * item.qty).toFixed(2)}
+              ${(item.price * item.amount).toFixed(2)}
             </Text>
           </View>
           {toppingGroup()}
@@ -112,9 +112,12 @@ export default class orderHistory extends Component {
     }
   }
   _renderTips(){
-    if(this.state.payment_channel == 10) {
+    if(this.state.tips > 0) {
       return(
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      paddingTop: 15,
+                      paddingBottom: 15}}>
           <Text style={{fontSize:15,
                         fontWeight:'bold',
                         color:'#ea7b21'}}
@@ -133,44 +136,23 @@ export default class orderHistory extends Component {
     }
   }
   _renderFooter(){
-    if(this.state.payment_channel == 10) {
-      return(
-        <View style={styles.modalFooter}>
-            <View style={{flex:1,backgroundColor:"yellow"}}></View>
-            <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
+    return(
+      <View style={styles.modalFooter}>
+          <View style={{flex:1,backgroundColor:"yellow"}}></View>
+          <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
 
-                <Text style={{alignSelf: 'flex-end',
-                              color:'black',
-                              fontSize:18,
-                              fontWeight:'bold',
-                              flex:1,
-                              marginTop:15}}
-                      allowFontScaling={false}>
-                        合计: ${parseFloat(this.state.total) + parseFloat(this.state.tips)}
-                </Text>
-            </View>
-        </View>
-      )
-    }
-    else{
-      return(
-        <View style={styles.modalFooter}>
-            <View style={{flex:1,backgroundColor:"yellow"}}></View>
-            <View style={{flex:1,alignSelf: 'flex-end', justifyContent: 'center',}}>
-
-                <Text style={{alignSelf: 'flex-end',
-                              color:'black',
-                              fontSize:18,
-                              fontWeight:'bold',
-                              flex:1,
-                              marginTop:15}}
-                      allowFontScaling={false}>
-                        Total: ${this.state.total}
-                </Text>
-            </View>
-        </View>
-      )
-    }
+              <Text style={{alignSelf: 'flex-end',
+                            color:'black',
+                            fontSize:18,
+                            fontWeight:'bold',
+                            flex:1,
+                            marginTop:15}}
+                    allowFontScaling={false}>
+                      Total: ${this.state.charge_total}
+              </Text>
+          </View>
+      </View>
+    )
   }
   _renderLoading(){
     if(this.state.loading){

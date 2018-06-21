@@ -19,7 +19,9 @@ const AppConstants ={
     // API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',
     API_HISTORYORDER: APIServer + 'cmapp/v2/get_history_list',
     // API_HISTORYORDER: 'https://norgta.com/api/cmapp/v2/get_history_list',
-    API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
+    // API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
+    API_GETHISTORYDETAIL: 'https://chanmao.us/api/cmapp/v2/get_history_order_detail',
+    API_GET_LAST4: APIServer + "payment/v2/get_last4",
     API_CHANGE_ORDER_TO_CASH: APIServer + "cmapp/v2/change_payment_to_cash",
     //restaurant
     API_CATEGORY_LIST: APIServer + 'cmapp/v2/get_category_list',

@@ -32,11 +32,21 @@ export default class orderConfirm extends Component {
   }
 
   _renderPaymentChannel() {
-    if(this.props.paymentChannel == 10) {
+    let payment_channel = "";
+    if(this.props.paymentChannel == 1) {
+      payment_channel = "刷卡";
+    }
+    else if(this.props.paymentChannel == 10) {
+      payment_channel = "支付宝";
+    }
+    else if(this.props.paymentChannel == 30) {
+      payment_channel = "Apple Pay";
+    }
+    if(this.props.paymentChannel > 0) {
       return(
         <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>
             <Image source={require('./Image/alipay.png')} style={{width:24,height:25,marginRight:15,marginLeft:15}}/>
-            <Text style={styles.contentFont} allowFontScaling={false}>支付宝</Text>
+            <Text style={styles.contentFont} allowFontScaling={false}>{payment_channel}</Text>
         </View>
       )
     }
@@ -81,7 +91,9 @@ export default class orderConfirm extends Component {
                           </View>
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',}}>
                               <Image source={require('./Image/icon_total.png')} style={{width:22,height:25,marginRight:15,marginLeft:15}}/>
-                              <Text style={styles.contentFont} allowFontScaling={false}>{(parseFloat(this.props.total)+parseFloat(this.props.tips)).toFixed(2)}</Text>
+                              <Text style={styles.contentFont} allowFontScaling={false}>
+                                {(parseFloat(this.props.total)+parseFloat(this.props.tips)+parseFloat(this.props.visaFee)).toFixed(2)}
+                              </Text>
                           </View>
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>
                               <Image source={require('./Image/icon_address.png')} style={{width:19,height:25,marginRight:15,marginLeft:15}}/>

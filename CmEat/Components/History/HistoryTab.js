@@ -49,6 +49,7 @@ import BadOrders from './BadOrders';
 import CMLabel from '../../Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
+import CheckoutAction from '../../Actions/CheckoutAction';
 
 class HistoryTab extends Component {
     constructor(props) {
@@ -72,6 +73,8 @@ class HistoryTab extends Component {
 				this._handlePaymentRetry = this._handlePaymentRetry.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
+				this._applePaySelected = this._applePaySelected.bind(this);
+				this._stripeCardSelected = this._stripeCardSelected.bind(this);
     }
 
     componentDidMount(){
@@ -130,6 +133,7 @@ class HistoryTab extends Component {
         this.setState({
           isRefreshing: true,
         })
+				HistoryAction.getLast4();
         HistoryAction.getOrderData();
     }
 		_setOnRefresh() {
@@ -158,25 +162,43 @@ class HistoryTab extends Component {
 				}
     }
 		_handlePaymentRetry(orderInfo) {
+			const previous_payment = HistoryStore.getLast4();
 			this.props.navigator.showModal({
 				screen: 'CmChooseCardType',
 				animated: true,
 				passProps:{available_payment_channels: orderInfo.available_payment_channels,
+									 stripeCardAdded: this._stripeCardSelected,
 									 alipaySelected: this._alipaySelected,
 									 cashSelected: this._cashSelected,
+									 applePaySelected:	this._applePaySelected,
+									 stripeCardSelected: this._stripeCardSelected,
 								 	 flag: 'fromHistory',
-								 	 orderInfo: orderInfo},
+								 	 orderInfo: orderInfo,
+									 cusid: previous_payment.cusid,
+									 last4: previous_payment.last4,
+									 brand: previous_payment.brand},
 				navigatorStyle: {navBarHidden: true,},
 			});
 		}
 
-		_alipaySelected(orderInfo) {
-			Alipay.constructAlipayOrder({total: parseFloat(orderInfo.order_total).toString(),
+		_alipaySelected(orderInfo, visa_fee) {
+			Alipay.constructAlipayOrder({total: (parseFloat(orderInfo.order_total) + visa_fee).toString(),
 																	 oid: orderInfo.order_oid});
 		}
 		_cashSelected(orderInfo) {
 			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
 			this._onRefresh();
+		}
+		_applePaySelected(orderInfo, visa_fee){
+				CheckoutAction.recheckoutByApplepay({
+					oid: orderInfo.order_oid,
+					total: parseFloat(orderInfo.order_total) + visa_fee,
+					tips:	parseFloat(orderInfo.order_tips)
+				},()=>this._onRefresh())
+		}
+		_stripeCardSelected(orderInfo, visa_fee) {
+				CheckoutAction.stripeChargeAndUpdate({amount: parseFloat(orderInfo.order_total) + visa_fee,
+																						oid: orderInfo.order_oid});
 		}
 
 		_handleOnChangeTab(tabRef) {

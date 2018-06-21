@@ -31,6 +31,23 @@ const HistoryApi = {
             .then((res) => res.json())
             .catch((error) => {throw error})
   },
+  getLast4(token){
+    const url = AuthConstants.API_GET_LAST4;
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    options.headers.authortoken = token;
+    // options.body = JSON.stringify({channel:1});
+    // options.body = JSON.stringify({channel: 1})
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
     getHistoryDetail(reqData){
       const url = AuthConstants.API_GETHISTORYDETAIL
       let options = {

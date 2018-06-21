@@ -189,7 +189,7 @@ export default class pastOrderEN extends Component {
   }
 
   _renderOptionButton() {
-    if (this.state.orderInfo.payment_channel == 10 && !this.state.orderInfo.payment_status && this.state.orderInfo.order_status == 0) {
+    if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && this.state.orderInfo.order_status == 0) {
       return (
           <TouchableOpacity style={{flex:1,
                                     flexDirection:'row',
@@ -232,7 +232,7 @@ export default class pastOrderEN extends Component {
         </View>
       )
     }
-    else if(this.state.orderInfo.payment_channel == 10) {
+    else if(this.state.orderInfo.payment_channel > 0) {
       return(
         <View style={styles.orderTotal}>
           <Text style={{fontSize:18,
@@ -254,12 +254,18 @@ export default class pastOrderEN extends Component {
     if (this.state.orderInfo.payment_channel == 0) {
       statusReminder = "支付方式: 到付(现金/刷卡)";
     }
+    else if (this.state.orderInfo.payment_channel == 1) {
+      statusReminder = "支付方式: 刷卡";
+    }
     else if (this.state.orderInfo.payment_channel == 10) {
       statusReminder = "支付方式: 支付宝";
     }
+    else if (this.state.orderInfo.payment_channel == 30) {
+      statusReminder = "支付方式: Apple Pay";
+    }
     switch (this.state.orderInfo.order_status) {
         case 0:
-            if (this.state.orderInfo.payment_channel == 10) {
+            if (this.state.orderInfo.payment_channel > 0) {
                 if (this.state.orderInfo.payment_status == 20) {
                   statusColor = {color:'#b2b2b2'};
                   statusMessage = '已支付, 等待商家确认';
