@@ -193,7 +193,6 @@ const RestaurantModule = {
 												 tips: io_data.tips,
 											   visa_fee: io_data.visa_fee};
         const data = await RestaurantApi.checkout(reqData);
-				console.log(data);
         return data;
       }catch (e){
         console.log(e)

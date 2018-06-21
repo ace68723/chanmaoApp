@@ -98,7 +98,7 @@ export default  {
       let data = {
         authortoken: token,
         amount: io_data.amount*100,
-        oid_str: "oid:" + io_data.oid,
+        oid: io_data.oid,
         token: io_data.token
       }
       let res = await CheckoutAPI.oneTimeCharge(data);

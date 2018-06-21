@@ -43,14 +43,11 @@ export default  {
     })
     options.body = JSON.stringify({
         amount: io_data.amount,
-        info:io_data.oid_str,
+        oid:io_data.oid,
         token:io_data.token
     })
     return fetch(url,options)
-            .then((res) => {
-                console.log(res);
-                return res.json();
-            })
+            .then((res) => res.json())
             .catch((error) => {throw error})
   },
   signAlipayOrder(io_data) {
