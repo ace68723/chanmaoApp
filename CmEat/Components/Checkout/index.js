@@ -160,7 +160,7 @@ class Confirm extends Component {
 						let shipping = Number(this.state.dlexp);
 						let tips =  Number(this.state.tips);
 						let tax = Number(this.state.total - pretax - shipping).toFixed(2);
-						let total =  Number(this.state.total);
+						let total =  Number(this.state.total).toFixed(2);
 
 						let paymentData = {
 							subtotal:'' + this.state.pretax,

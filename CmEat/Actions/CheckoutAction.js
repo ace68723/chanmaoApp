@@ -67,7 +67,11 @@ export default {
       return token;
     },
     async recheckoutByApplepay({total,tips,oid},callback){
-
+      console.log({
+        amount:total,
+        oid:oid,
+        tips:tips,
+      })
       let token = await this._repayByApple({total,tips,oid},()=>callback());
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
@@ -76,14 +80,14 @@ export default {
           oid:oid,
           tips:tips,
         })
-
+      
         NativeModules.cmApplePay.complete(payResult,()=>{
           console.log("Payment Finished.");
         });
       }
     },
     async checkoutByApplepay({subtotal,shipping,tax, amount, oid,tips},callback){
-
+      console.log({subtotal,shipping,tax,tips,oid,amount})
       let token = await this._payByApple({subtotal,shipping,tax,tips,oid},()=>callback());
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
