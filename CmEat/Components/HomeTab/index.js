@@ -19,7 +19,7 @@ import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 
-// import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
+import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
 
 
 const {width,height} = Dimensions.get('window');
@@ -46,6 +46,18 @@ export default class HomeTab extends Component {
     this._renderHeader = this._renderHeader.bind(this);
 		this._renderScrollToResCards = this._renderScrollToResCards.bind(this);
 
+		let id = '578710';
+		let order = {
+			partner: "2088031360615403",
+      service: "forex_refund",
+      out_trade_no: id,
+			out_return_no:  id + '_return',
+      currency: "CAD",
+      product_code: "NEW_OVERSEAS_SELLER",
+			_input_charset: "utf-8",
+			return_amount: '0.01'
+		};
+		let signed_data = CheckoutModule.signAlipayRefund(order);
   }
 
 	_handleOnPress(advertisement){

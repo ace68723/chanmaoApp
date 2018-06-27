@@ -109,6 +109,44 @@ export default  {
       return 'failed';
     }
   },
+  async signAlipayRefund(order){
+    try {
+      let orderStr = '';
+      Object.keys(order).sort().forEach(function(key) {
+      	orderStr += key + '=' + order[key] + '&';
+      });
+      orderStr = orderStr.slice(0, orderStr.length - 1);
+
+      const {uid,token,version} = GetUserInfo();
+      const lo_data = {
+        Authortoken: token,
+        sign_str: orderStr,
+        data: order,
+      }
+      const res = await CheckoutAPI.signAlipayOrder(lo_data);
+
+      // start
+      order.sign = res.sign;
+      order.sign_type = "RSA";
+
+      let orderStr2 = '';
+      Object.keys(order).sort().forEach(function(key) {
+      	orderStr2 += key + '=' + order[key] + '&';
+      });
+      orderStr2 = orderStr2.slice(0, orderStr2.length - 1);
+      console.log('orderStr2', orderStr2);
+
+
+      if(res.ev_error === 1) { throw 'sign fail'}
+      const eo_data = res;
+
+      return eo_data;
+    } catch (e) {
+      console.log(e);
+      alert('签名失败');
+      throw e
+    }
+  },
   async signAlipayOrder(order){
     try {
       let orderStr = '';
