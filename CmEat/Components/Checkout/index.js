@@ -145,35 +145,39 @@ class Confirm extends Component {
 				}, 500);
 
 				if(this.state.checkoutSuccessful){
-					if (this.state.payment_channel == 1) {
-						CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2),
-																				 					oid: state.oidFromUrl});
-						this.props.navigator.dismissModal({animationType: 'slide-down'});
-					}
-					else if (this.state.payment_channel == 10) {
-						Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
-																				 oid: state.oidFromUrl});
-						this.props.navigator.dismissModal({animationType: 'slide-down'});
-					}
-					else if(this.state.payment_channel == 30){
-						let pretax = Number(this.state.pretax);
-						let shipping = Number(this.state.dlexp);
-						let tips =  Number(this.state.tips);
-						let tax = Number(this.state.total - pretax - shipping).toFixed(2);
-						let total =  Number(this.state.total).toFixed(2);
-
-						let paymentData = {
-							subtotal:'' + this.state.pretax,
-							shipping:'' + this.state.dlexp,
-							tax:'' + tax,
-							tips:'' + this.state.tips,
-							oid: state.oidFromUrl,
-							amount:total
+					// if the distance is > 8km, do the charging
+					if (this.state.dlexp > 0) {
+						if (this.state.payment_channel == 0) {
 						}
-						CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
+						else if (this.state.payment_channel == 1) {
+							CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2),
+																					 					oid: state.oidFromUrl});
+						}
+						else if (this.state.payment_channel == 10) {
+							Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
+																					 oid: state.oidFromUrl});
+						}
+						else if(this.state.payment_channel == 30){
+							let pretax = Number(this.state.pretax);
+							let shipping = Number(this.state.dlexp);
+							let tips =  Number(this.state.tips);
+							let tax = Number(this.state.total - pretax - shipping).toFixed(2);
+							let total =  Number(this.state.total);
 
+							let paymentData = {
+								subtotal:'' + this.state.pretax,
+								shipping:'' + this.state.dlexp,
+								tax:'' + tax,
+								tips:'' + this.state.tips,
+								oid: state.oidFromUrl,
+								amount:total
+							}
+							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
+
+						}
 					}
 					// this._goToHistory();
+					this.props.navigator.dismissModal({animationType: 'slide-down'});
 				}
     }
 		_handleAddressAdded() {
@@ -276,9 +280,9 @@ class Confirm extends Component {
     }
     _goToHistory(){
 			// this.props.navigator.dismissModal({animationType: 'slide-down'});
-			this.props.navigator.dismissAllModals({
-				animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-			});
+			// this.props.navigator.dismissAllModals({
+			// 	animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+			// });
 
     }
     showLoading(){
@@ -549,7 +553,7 @@ class Confirm extends Component {
       )
     }
 		_renderChoosePayment() {
-			if (this.state.available_payment_channels && this.state.dlexp > 0) {
+			if (this.state.available_payment_channels) {
 				if (this.state.available_payment_channels.length > 1) {
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>

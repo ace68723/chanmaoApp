@@ -136,29 +136,29 @@ export default class ChooseCardType extends Component {
   }
 
   _goToCash() {
-    Alert.alert(
-      '确认修改为到付?',
-      '',
-      [
-        {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-        {text: '确认', onPress: () => {
-            if (this.props.flag == 'fromCheckout') {
-              this.props.cashSelected();
-              this.props.navigator.dismissModal({
-                animationType: 'slide-down'
-              });
-            }
-            else if (this.props.flag == 'fromHistory') {
+    if (this.props.flag == 'fromCheckout') {
+      this.props.cashSelected();
+      this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+      });
+    }
+    else if (this.props.flag == 'fromHistory') {
+      Alert.alert(
+        '确认修改为到付?',
+        '',
+        [
+          {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: '确认', onPress: () => {
               this.props.cashSelected(this.props.orderInfo);
               this.props.navigator.dismissModal({
                 animationType: 'slide-down'
               });
               alert("已成功修改");
             }
-          }
-        },
-     ]
-    );
+          },
+       ]
+      );
+    }
   }
   _goToApplePay(){
     if (this.props.flag == 'fromCheckout') {

@@ -16,7 +16,7 @@ const APIConstants ={
 
     // Payment
     API_SIGN_ALIPAY_ORDER: 'https://chanmao.us/api/alipay/v2/test_sign_order',
-    API_CHARGE_UPDATE: "https://norgta.com/api/payment/v2/charge_and_update",
+    API_CHARGE_UPDATE: Server + "charge_and_update",
 
     //Product
     API_CATEGORY: Server + 'category',
