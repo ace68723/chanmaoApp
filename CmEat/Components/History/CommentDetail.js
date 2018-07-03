@@ -131,10 +131,16 @@ export default class pastOrderEN extends Component {
   }
 
   _handleDriverQuickComments(text) {
+    //Set the value of textinput by native props
+    this.refs.driverComment.setNativeProps({text: this.state.driver_comment + " " + text + " "})
+  
     this.setState({driver_comment: this.state.driver_comment + " " + text + " "})
   }
 
   _handleRestaurantQuickComments(text) {
+    //Set the value of textinput by native props
+    this.refs.restaurantComment.setNativeProps({text: this.state.restaurant_comment + " " + text + " "})
+  
     this.setState({restaurant_comment: this.state.restaurant_comment + " " + text + " "})
   }
 
@@ -445,6 +451,7 @@ export default class pastOrderEN extends Component {
                                  textAlignVertical: 'top',
                                  padding: 10,
                                  fontFamily:'FZZhunYuan-M02S'}}
+                         ref={'driverComment'}
                          underlineColorAndroid='transparent'
                          placeholder={CMLabel.getCNLabel('COMMENT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(50)}
@@ -618,6 +625,7 @@ export default class pastOrderEN extends Component {
                                  textAlignVertical: 'top',
                                  padding: 10,
                                  fontFamily:'FZZhunYuan-M02S'}}
+                        ref={'restaurantComment'}
                          underlineColorAndroid='transparent'
                          placeholder={CMLabel.getCNLabel('RESTAURANT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(435)}
