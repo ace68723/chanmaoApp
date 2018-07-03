@@ -11,11 +11,11 @@ RCT_EXPORT_MODULE(cmApplePay);
 
 - (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller didAuthorizePayment:(PKPayment *)payment completion:(void (^)(PKPaymentAuthorizationStatus))completion {
   self.completion = completion;
-  NSLog(@"pppppppppppppp: %@", payment.description);
+  NSLog(@"pppppppppp: %@",payment.description);
   [[STPAPIClient sharedClient] createTokenWithPayment:payment completion:^(STPToken *token, NSError *error) {
     if (token == nil || error != nil) {
       // Present error to user...
-      [self ErrorAlert:error.localizedDescription];
+      //[self ErrorAlert:error.localizedDescription];
       self.rejecter( [NSString stringWithFormat: @"%ld", (long)error.code], error.localizedDescription, error);
       return;
     }
@@ -106,7 +106,7 @@ RCT_EXPORT_METHOD(reCreatePayment:(NSDictionary *)data
   
   NSDecimalNumber *tips = [NSDecimalNumber decimalNumberWithString:data[@"tips"]];
   NSDecimalNumber *totalAmount = [NSDecimalNumber decimalNumberWithString:data[@"total"]];
-  
+  //totalAmount = [totalAmount decimalNumberByAdding:tips];
   NSDecimalNumber *subtotal = [totalAmount decimalNumberBySubtracting:tips];
   paymentRequest.paymentSummaryItems = @[
                                          [PKPaymentSummaryItem summaryItemWithLabel:@"SUBTOTAL" amount:subtotal],
@@ -160,7 +160,7 @@ RCT_EXPORT_METHOD(complete: (NSString *)paymentStatus
   
   UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * action) {
-    self.callback(@[[NSNull null]]);
+    //self.callback(@[[NSNull null]]);
   }];
   
   [alert addAction:defaultAction];

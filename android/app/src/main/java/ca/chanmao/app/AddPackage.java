@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import ca.chanmao.app.cmAlipay.Alipay;
-
-public class AlipayReactPackage implements ReactPackage {
+import ca.chanmao.app.cmNotification.RNFirebaseMessagingService;
+public class AddPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
@@ -22,6 +22,7 @@ public class AlipayReactPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new Alipay(reactContext));
+        modules.add(new RNFirebaseMessagingService(reactContext));
 
         return modules;
     }

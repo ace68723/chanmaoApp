@@ -13,11 +13,12 @@ import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
 import java.util.List;
-//import ca.chanmao.app.AlipayReactPackage;
+
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.react.ReactApplication;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.theweflex.react.WeChatPackage;
+
 
 import com.facebook.react.ReactInstanceManager;
 
@@ -38,9 +39,9 @@ public class MainApplication extends NavigationApplication implements ReactInsta
                 new RealmReactPackage(),
                 new WeChatPackage(),
                 new VectorIconsPackage(),
-                new AlipayReactPackage(),
+                new AddPackage(),
                 new MainReactPackage(),
-            new MapsPackage(),
+                new MapsPackage(),
                 new WeChatPackage(),
                 new CodePush("3h54HiPlCHlTlQsTwIxIkYoHvbfmc889ad22-4792-484d-b870-7cc05a2db9bd", MainApplication.this, BuildConfig.DEBUG)
 
