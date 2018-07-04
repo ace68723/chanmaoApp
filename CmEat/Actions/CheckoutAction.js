@@ -39,7 +39,9 @@ export default {
     async stripeChargeAndUpdate({amount, oid}){
       try{
           const token = await AuthModule.getToken();
-          const reqData = {amount: amount * 100,oid,token};
+          const reqData = {amount: parseInt(amount * 100),
+                           oid: parseInt(oid),
+                           token};
           const result = await CheckoutModule.stripeChargeAndUpdate(reqData);
       }catch (e){
       }
@@ -80,7 +82,7 @@ export default {
           oid:oid,
           tips:tips,
         })
-      
+
         NativeModules.cmApplePay.complete(payResult,()=>{
           console.log("Payment Finished.");
         });
@@ -110,10 +112,10 @@ export default {
         // const reqData = {token,comment, payment_channel, tips};
         if(payment_channel == 1) {
           if(comment) {
-            comment = '网上刷卡|' + comment;
+            comment = '刷卡|' + comment;
           }
           else{
-            comment = "网上刷卡|";
+            comment = "刷卡|";
           }
         }
         else if(payment_channel == 10) {
