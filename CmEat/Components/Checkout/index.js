@@ -553,7 +553,7 @@ class Confirm extends Component {
       )
     }
 		_renderChoosePayment() {
-			if (this.state.available_payment_channels) {
+			if (this.state.available_payment_channels && this.state.dltype != 0) {
 				if (this.state.available_payment_channels.length > 1) {
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>

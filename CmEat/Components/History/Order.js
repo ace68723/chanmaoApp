@@ -202,7 +202,7 @@ export default class pastOrderEN extends Component {
                                     borderBottomWidth:1}}
                             onPress={
                               this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}>
-            <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>再次尝试</Text>
+            <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>支付</Text>
 
           </TouchableOpacity>
       )

@@ -133,14 +133,14 @@ export default class pastOrderEN extends Component {
   _handleDriverQuickComments(text) {
     //Set the value of textinput by native props
     this.refs.driverComment.setNativeProps({text: this.state.driver_comment + " " + text + " "})
-  
+
     this.setState({driver_comment: this.state.driver_comment + " " + text + " "})
   }
 
   _handleRestaurantQuickComments(text) {
     //Set the value of textinput by native props
     this.refs.restaurantComment.setNativeProps({text: this.state.restaurant_comment + " " + text + " "})
-  
+
     this.setState({restaurant_comment: this.state.restaurant_comment + " " + text + " "})
   }
 
@@ -452,6 +452,7 @@ export default class pastOrderEN extends Component {
                                  padding: 10,
                                  fontFamily:'FZZhunYuan-M02S'}}
                          ref={'driverComment'}
+                         allowFontScaling={false}
                          underlineColorAndroid='transparent'
                          placeholder={CMLabel.getCNLabel('COMMENT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(50)}
@@ -592,9 +593,7 @@ export default class pastOrderEN extends Component {
                     backgroundColor: 'white',
                     borderTopWidth: StyleSheet.hairlineWidth,
                     borderTopColor: '#bdc8d9',
-                    borderBottomWidth: StyleSheet.hairlineWidth,
-                    borderBottomColor: '#bdc8d9',
-                    marginBottom: 50}}>
+                    marginBottom: 20}}>
           <ImageBackground style={{height: 110, width: width,alignSelf:'center'}} source={{uri:this.props.orderInfo.rr_url}}>
             <View style={styles.opacityView}/>
               <View style={styles.imageTextContainer}>
@@ -625,7 +624,8 @@ export default class pastOrderEN extends Component {
                                  textAlignVertical: 'top',
                                  padding: 10,
                                  fontFamily:'FZZhunYuan-M02S'}}
-                        ref={'restaurantComment'}
+                         ref={'restaurantComment'}
+                         allowFontScaling={false}
                          underlineColorAndroid='transparent'
                          placeholder={CMLabel.getCNLabel('RESTAURANT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(435)}
@@ -706,9 +706,15 @@ export default class pastOrderEN extends Component {
                     {this._renderRestaurantComments()}
                 </ScrollView>
                 <TouchableOpacity
-                    style={{backgroundColor: '#ff8b00', padding: 15, height: acceptButtonHeight, justifyContent: 'center'}}
+                    style={{backgroundColor: '#ff8b00', height: acceptButtonHeight, justifyContent: 'center'}}
                     onPress={this._showConfirmSection}>
-                  <Text style={{textAlign: 'center', color: 'white', fontSize: 18}}>{CMLabel.getCNLabel('CONFIRM')}</Text>
+                  <Text style={{textAlign: 'center',
+                                color: 'white',
+                                fontSize: 18,
+                                fontFamily:'FZZhunYuan-M02S'}}
+                        allowFontScaling={false}>
+                    {CMLabel.getCNLabel('CONFIRM')}
+                  </Text>
                 </TouchableOpacity>
                 {this._renderTimePicker()}
 
