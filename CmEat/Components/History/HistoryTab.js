@@ -182,7 +182,7 @@ class HistoryTab extends Component {
 		}
 
 		_alipaySelected(orderInfo, visa_fee) {
-			Alipay.constructAlipayOrder({total: (parseFloat(orderInfo.order_total) + visa_fee).toString(),
+			Alipay.constructAlipayOrder({total: (parseFloat(orderInfo.order_total)).toString(),
 																	 oid: orderInfo.order_oid});
 		}
 		_cashSelected(orderInfo) {
@@ -192,12 +192,12 @@ class HistoryTab extends Component {
 		_applePaySelected(orderInfo, visa_fee){
 				CheckoutAction.recheckoutByApplepay({
 					oid: orderInfo.order_oid,
-					total: parseFloat(orderInfo.order_total) + visa_fee,
+					total: parseFloat(orderInfo.order_total),
 					tips:	parseFloat(orderInfo.order_tips)
 				},()=>this._onRefresh())
 		}
 		_stripeCardSelected(orderInfo, visa_fee) {
-				CheckoutAction.stripeChargeAndUpdate({amount: parseFloat(orderInfo.order_total) + visa_fee,
+				CheckoutAction.stripeChargeAndUpdate({amount: parseFloat(orderInfo.order_total),
 																						oid: orderInfo.order_oid});
 		}
 

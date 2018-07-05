@@ -145,16 +145,18 @@ class Confirm extends Component {
 				}, 500);
 
 				if(this.state.checkoutSuccessful){
-					// if the distance is > 8km, do the charging
-					if (this.state.dlexp > 0) {
-						if (this.state.payment_channel == 0) {
-						}
-						else if (this.state.payment_channel == 1) {
-							CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2),
+					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
+					if (this.state.dlexp > 0 && this.state.payment_channel != 0) {
+						if (this.state.payment_channel == 1) {
+							CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total)
+																														 + parseFloat(this.state.tips)
+																														 + parseFloat(this.state.visa_fee)).toFixed(2),
 																					 					oid: state.oidFromUrl});
 						}
 						else if (this.state.payment_channel == 10) {
-							Alipay.constructAlipayOrder({total: (parseFloat(this.state.total) + parseFloat(this.state.tips)).toFixed(2).toString(),
+							Alipay.constructAlipayOrder({total: (parseFloat(this.state.total)
+																									 + parseFloat(this.state.tips)
+																								 	 + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
 																					 oid: state.oidFromUrl});
 						}
 						else if(this.state.payment_channel == 30){
@@ -162,7 +164,7 @@ class Confirm extends Component {
 							let shipping = Number(this.state.dlexp);
 							let tips =  Number(this.state.tips);
 							let tax = Number(this.state.total - pretax - shipping).toFixed(2);
-							let total =  Number(this.state.total);
+							let total =  Number(parseFloat(this.state.total) + parseFloat(this.state.visa_fee));
 
 							let paymentData = {
 								subtotal:'' + this.state.pretax,
@@ -173,7 +175,6 @@ class Confirm extends Component {
 								amount:total
 							}
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
-
 						}
 					}
 					// this._goToHistory();

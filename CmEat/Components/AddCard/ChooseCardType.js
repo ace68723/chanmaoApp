@@ -62,10 +62,11 @@ export default class ChooseCardType extends Component {
     }
     else if (this.props.flag == 'fromHistory') {
       const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 1);
-      let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
-      if (visa_fee == 0) {
-        payment_description = '';
-      }
+      let payment_description = '';
+      // let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
+      // if (visa_fee == 0) {
+      //   payment_description = '';
+      // }
       Alert.alert(
         '确认刷卡支付?',
         payment_description,
@@ -114,10 +115,11 @@ export default class ChooseCardType extends Component {
     }
     else if (this.props.flag == 'fromHistory') {
       const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 10);
-      let payment_description = '支付宝将会有'+ visa_fee +'加币的手续费哦亲~';
-      if (visa_fee == 0) {
-        payment_description = '';
-      }
+      let payment_description = '';
+      // let payment_description = '支付宝将会有'+ visa_fee +'加币的手续费哦亲~';
+      // if (visa_fee == 0) {
+      //   payment_description = '';
+      // }
       Alert.alert(
         '确认支付?',
         payment_description,
@@ -169,10 +171,11 @@ export default class ChooseCardType extends Component {
     }
     else if (this.props.flag == 'fromHistory') {
       const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 30);
-      let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
-      if (visa_fee == 0) {
-        payment_description = '';
-      }
+      let payment_description = '';
+      // let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
+      // if (visa_fee == 0) {
+      //   payment_description = '';
+      // }
       Alert.alert(
         '确认支付?',
         payment_description,
@@ -199,10 +202,11 @@ export default class ChooseCardType extends Component {
     }
     else if (this.props.flag == 'fromHistory') {
       const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 30);
-      let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
-      if (visa_fee == 0) {
-        payment_description = '';
-      }
+      let payment_description = '';
+      // let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
+      // if (visa_fee == 0) {
+      //   payment_description = '';
+      // }
       Alert.alert(
         '新卡添加成功,确认支付?',
         payment_description,
