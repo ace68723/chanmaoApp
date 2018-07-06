@@ -258,7 +258,7 @@ export default class ChooseCardType extends Component {
       let _previousVisa = [];
       if (this.props.cusid && this.props.cusid.length > 0) {
         let icon_url = "";
-        if (this.props.brand == "Visa") {
+        if (this.props.brand == "Visa" || this.props.brand == "Master") {
           icon_url = require('./Img/visa_master_icon.png');
         }
         else {
