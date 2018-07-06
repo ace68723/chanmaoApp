@@ -252,7 +252,13 @@ export default class pastOrderEN extends Component {
     let statusColor;
     let statusReminder;
     if (this.state.orderInfo.payment_channel == 0) {
-      statusReminder = "支付方式: 到付(现金/刷卡)";
+      //自取
+      if (this.state.orderInfo.dltype == 0) {
+        statusReminder = "支付方式: 现金自取";
+      }
+      else {
+        statusReminder = "支付方式: 到付(现金/刷卡)";
+      }
     }
     else if (this.state.orderInfo.payment_channel == 1) {
       statusReminder = "支付方式: 刷卡";
@@ -296,7 +302,13 @@ export default class pastOrderEN extends Component {
             break;
         case 20:
             statusColor = {color:'#33cd5f'};
-            statusMessage = '商家已确认, 准备中';
+            //自取
+            if(this.state.dltype == 0) {
+              statusMessage = '商家已确认, 请取餐';
+            }
+            else {
+              statusMessage = '商家已确认, 准备中';
+            }
             break;
         case 30:
             statusColor = {color:'#9bc8df'};
