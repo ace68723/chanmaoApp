@@ -192,7 +192,7 @@ class HistoryTab extends Component {
 		_applePaySelected(orderInfo, visa_fee){
 				CheckoutAction.recheckoutByApplepay({
 					oid: orderInfo.order_oid,
-					total: parseFloat(orderInfo.order_total),
+					total: parseFloat(orderInfo.order_total+orderInfo.order_tips),
 					tips:	parseFloat(orderInfo.order_tips)
 				},()=>this._onRefresh())
 		}

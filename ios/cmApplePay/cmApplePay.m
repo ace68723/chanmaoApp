@@ -11,11 +11,12 @@ RCT_EXPORT_MODULE(cmApplePay);
 
 - (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller didAuthorizePayment:(PKPayment *)payment completion:(void (^)(PKPaymentAuthorizationStatus))completion {
   self.completion = completion;
-  NSLog(@"pppppppppppppp: %@", payment.description);
+
   [[STPAPIClient sharedClient] createTokenWithPayment:payment completion:^(STPToken *token, NSError *error) {
     if (token == nil || error != nil) {
       // Present error to user...
       [self ErrorAlert:error.localizedDescription];
+      NSLog(@"%@",error.localizedDescription);
       self.rejecter( [NSString stringWithFormat: @"%ld", (long)error.code], error.localizedDescription, error);
       return;
     }

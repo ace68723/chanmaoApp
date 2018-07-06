@@ -97,8 +97,8 @@ export default  {
       const {uid,token,version} = GetUserInfo();
       let data = {
         authortoken: token,
-        amount: io_data.amount*100,
-        oid: io_data.oid,
+        amount: parseInt(io_data.amount*100),
+        oid: parseInt(io_data.oid),
         token: io_data.token
       }
       let res = await CheckoutAPI.oneTimeCharge(data);
