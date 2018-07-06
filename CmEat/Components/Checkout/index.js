@@ -160,19 +160,19 @@ class Confirm extends Component {
 																					 oid: state.oidFromUrl});
 						}
 						else if(this.state.payment_channel == 30){
-							let pretax = parseFloat(this.state.pretax);
+							let pretax = Number(this.state.pretax);
 							let shipping = Number(this.state.dlexp);
 							let tips =  Number(this.state.tips);
 							let tax = Number(this.state.total - pretax - shipping).toFixed(2);
 							let total =  Number(parseFloat(this.state.total) + parseFloat(this.state.visa_fee));
 
 							let paymentData = {
-								subtotal:'' + (pretax + parseFloat(this.state.visa_fee)),
+								subtotal:'' + this.state.pretax,
 								shipping:'' + this.state.dlexp,
 								tax:'' + tax,
 								tips:'' + this.state.tips,
 								oid: state.oidFromUrl,
-								amount:(total + this.state.tips)
+								amount:total
 							}
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
 						}
