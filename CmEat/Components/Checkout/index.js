@@ -167,12 +167,12 @@ class Confirm extends Component {
 							let total =  Number(parseFloat(this.state.total) + parseFloat(this.state.visa_fee));
 
 							let paymentData = {
-								subtotal:'' + this.state.pretax,
+								subtotal:'' + (pretax + parseFloat(this.state.visa_fee)),
 								shipping:'' + this.state.dlexp,
 								tax:'' + tax,
 								tips:'' + this.state.tips,
 								oid: state.oidFromUrl,
-								amount:total
+								amount:(total + this.state.tips)
 							}
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
 						}

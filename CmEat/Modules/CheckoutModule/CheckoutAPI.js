@@ -2,7 +2,8 @@ import { API_ORDER_BEFORE,
          API_ADD_CARD,
          API_ADD_ORDER,
          API_SIGN_ALIPAY_ORDER,
-         API_CHARGE_UPDATE } from '../../Config/API';
+         API_CHARGE_UPDATE,
+         API_ONE_TIME_CHARGE } from '../../Config/API';
 export default  {
   addCard(io_data) {
 
@@ -29,7 +30,7 @@ export default  {
             .catch((error) => {throw error})
   },
   oneTimeCharge(io_data){
-    let url = "https://norgta.com/api/payment/v2/one_time_charge";
+    let url = API_ONE_TIME_CHARGE;
     let options = {
         method: 'POST',
         mode:'cors',
