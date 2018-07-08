@@ -26,7 +26,10 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 		showBanner:true,
     shouldAddAddress:false,
     payment_channel: 0,
-    visa_fee: 0
+    visa_fee: 0,
+    goToHistory: false,
+    paymentFail: false,
+    after_order_payment_channel: 0,
   },
   initState(){
     this.state = {
@@ -43,7 +46,10 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     		showBanner:true,
         shouldAddAddress:false,
         payment_channel: 0,
-        visa_fee: 0
+        visa_fee: 0,
+        goToHistory: false,
+        paymentFail: false,
+        after_order_payment_channel: 0,
       };
   },
 	emitChange(){
@@ -68,6 +74,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
           }],
     		showBanner:true,
         shouldAddAddress:false,
+        goToHistory: false,
       }
 	},
   calculateDeliveryFee(data){
@@ -181,6 +188,17 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 		this.state = Object.assign({},this.state,{checkoutSuccessful, oidFromUrl});
 
   },
+  updateGoToHistory(data){
+    if (data.ev_error == 0) {
+      if (data.payment_channel) {
+        this.state = Object.assign({},this.state,{goToHistory: true, paymentFail: false, after_order_payment_channel: data.payment_channel});
+      }else {
+        this.state = Object.assign({},this.state,{goToHistory: true, paymentFail: false});
+      }
+    } else {
+      this.state = Object.assign({},this.state,{goToHistory: true, paymentFail: true});
+    }
+  },
   updateShouldAddAddress(data){
     this.state.shouldAddAddress = data.shouldAddAddress;
   },
@@ -248,6 +266,10 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 								setTimeout(()=>{
 									RestaurantStore.initState()
 								},10000)
+                break;
+        case AppConstants.CHECKOUT_GO_TO_HISTORY:
+                RestaurantStore.updateGoToHistory(action.data);
+                RestaurantStore.emitChange();
                 break;
         case AppConstants.SHOULD_ADD_ADDRESS:
                 RestaurantStore.updateShouldAddAddress(action.data);

@@ -155,7 +155,6 @@ const RestaurantApi = {
       // const POST_DATA = {dltype,pretax,rid,uaid,dlexp,items,version,channel,comment, payment_channel}
       options.headers.authortoken = reqData.token;
       options.body =  JSON.stringify(POST_DATA);
-      console.log(options);
       return fetch(url,options)
               .then(function(res) {
                 return res.json();

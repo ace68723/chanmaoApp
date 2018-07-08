@@ -42,8 +42,24 @@ export default {
           const reqData = {amount: parseInt(amount * 100),
                            oid: parseInt(oid),
                            token};
-          const result = await CheckoutModule.stripeChargeAndUpdate(reqData);
+          const data = await CheckoutModule.stripeChargeAndUpdate(reqData);
+          dispatch({
+              actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
+          })
       }catch (e){
+      }
+    },
+
+    alipayGoToHistory() {
+      try{
+          const data = {
+            ev_error: 0
+          };
+          dispatch({
+              actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
+          })
+      }catch (e){
+        console.log(e)
       }
     },
 
@@ -54,7 +70,18 @@ export default {
 				tax:'' + tax,
 				tips:'' + tips,
 			}
-      NativeModules.cmApplePay.cancelcallback(callback);
+      //Apple Pay canceled
+      // NativeModules.cmApplePay.cancelcallback(callback);
+      NativeModules.cmApplePay.cancelcallback(() => {
+        console.log("canceled");
+        const data = {
+          ev_error: 1
+        };
+        dispatch({
+            actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
+        })
+      });
+      // NativeModules.cmApplePay.complete(() => callback());
       let token = await NativeModules.cmApplePay.createPayment(paymentData);
       return token;
     },
@@ -69,11 +96,6 @@ export default {
       return token;
     },
     async recheckoutByApplepay({total,tips,oid},callback){
-      console.log({
-        amount:total,
-        oid:oid,
-        tips:tips,
-      })
       let token = await this._repayByApple({total,tips,oid},()=>callback());
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
@@ -89,7 +111,6 @@ export default {
       }
     },
     async checkoutByApplepay({subtotal,shipping,tax, amount, oid,tips},callback){
-      console.log({subtotal,shipping,tax,tips,oid,amount})
       let token = await this._payByApple({subtotal,shipping,tax,tips,oid},()=>callback());
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
@@ -98,9 +119,32 @@ export default {
           oid:oid,
           tips:tips,
         })
+        if(payResult == 'success') {
+          let data = {
+            ev_error: 1
+          };
+          // callback();
+          data.ev_error = 0;
+          data.payment_channel = 30;
+          dispatch({
+              actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
+          });
+        }
+        else {
+          // console.log('cmApplePay complete in else');
+          // dispatch({
+          //     actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
+          // });
+        }
 
         NativeModules.cmApplePay.complete(payResult,()=>{
-          console.log("Payment Finished.");
+          console.log('cmApplePay complete');
+          // data = {
+          //   ev_error: 1
+          // };
+          // dispatch({
+          //     actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
+          // })
         });
       }
 
@@ -137,8 +181,8 @@ export default {
 
         }
         const reqData = {token,comment, payment_channel, tips, visa_fee};
-        const data = await RestaurantModule.checkout(reqData);
-
+        let data = await RestaurantModule.checkout(reqData);
+        data.payment_channel = payment_channel;
         dispatch({
             actionType: AppConstants.CHECKOUT, data,
         })

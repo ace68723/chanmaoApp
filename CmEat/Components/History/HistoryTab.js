@@ -80,6 +80,15 @@ class HistoryTab extends Component {
     componentDidMount(){
       // setTimeout( () =>{
 				const _doAutoRefresh = this._doAutoRefresh;
+				if(this.props.paymentFail) {
+					Alert.alert(
+            '在线支付失败',
+            '请再次尝试支付',
+            [
+              {text: '确认', onPress: () => {}},
+            ],
+          );
+				}
 	      HistoryStore.addChangeListener(this._onChange);
 	      this._doAutoRefresh();
 				HistoryStore.autoRefresh();

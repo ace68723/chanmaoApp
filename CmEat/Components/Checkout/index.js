@@ -44,6 +44,7 @@ import Util from '../../Modules/Util';
 import CMLabel from '../../Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
+import TabsAction from '../../Actions/TabsAction';
 
 
 // device(size): get device height and width
@@ -144,7 +145,22 @@ class Confirm extends Component {
 	        }
 				}, 500);
 
-				if(this.state.checkoutSuccessful){
+				if(state.goToHistory) {
+					this.props.navigator.dismissModal({animationType: 'slide-down'});
+					if (state.after_order_payment_channel && state.after_order_payment_channel == 30) {
+						setTimeout(()=>{
+							this.props.navigator.dismissModal({animationType: 'slide-down'});
+						}, 600)
+					}
+					setTimeout(()=> {
+						TabsAction.tab_go_to_history(state.paymentFail);
+					}, 1000);
+				}
+				else if(this.state.checkoutSuccessful){
+					this.setState({
+		        loading:true,
+						showOrderConfirm:false,
+		      });
 					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
 					if (this.state.dlexp > 0 && this.state.payment_channel != 0) {
 						if (this.state.payment_channel == 1) {
@@ -158,6 +174,10 @@ class Confirm extends Component {
 																									 + parseFloat(this.state.tips)
 																								 	 + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
 																					 oid: state.oidFromUrl});
+							this.props.navigator.dismissModal({animationType: 'slide-down'});
+							setTimeout(() => {
+					      CheckoutAction.alipayGoToHistory();
+					    }, 1000);
 						}
 						else if(this.state.payment_channel == 30){
 							let pretax = Number(this.state.pretax);
@@ -176,9 +196,17 @@ class Confirm extends Component {
 							}
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
 						}
+						// setTimeout(() => {
+						// 	HistoryAction.getOrderData();
+						// 	this.props.navigator.dismissModal({animationType: 'slide-down'});
+						// }, 2000);
+					}else {
+						this.props.navigator.dismissModal({animationType: 'slide-down'});
+						setTimeout(()=> {
+							TabsAction.tab_go_to_history();
+						}, 1000);
 					}
 					// this._goToHistory();
-					this.props.navigator.dismissModal({animationType: 'slide-down'});
 				}
     }
 		_handleAddressAdded() {
@@ -280,10 +308,6 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-			// this.props.navigator.dismissModal({animationType: 'slide-down'});
-			// this.props.navigator.dismissAllModals({
-			// 	animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-			// });
 
     }
     showLoading(){

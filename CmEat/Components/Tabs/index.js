@@ -46,7 +46,8 @@ export default class Tabs extends Component {
 		AppState.removeEventListener('change', this._handleAppStateChange);
 	}
   _onChange() {
-    if(TabsStore.getState().goToHistory){
+		const state = TabsStore.getState();
+    if(state.goToHistory){
       this.tabView.goToPage(2);
       this.props.navigator.popToRoot({animated: false,});
       setTimeout( () => {
@@ -54,6 +55,9 @@ export default class Tabs extends Component {
           screen: 'CmEatHistory',
           animated: true,
           navigatorStyle: {navBarHidden: true},
+					passProps: {
+						paymentFail: state.paymentFail
+					}
         });
       }, 1000);
 
