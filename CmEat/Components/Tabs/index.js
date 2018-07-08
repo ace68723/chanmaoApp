@@ -59,7 +59,7 @@ export default class Tabs extends Component {
 						paymentFail: state.paymentFail
 					}
         });
-      }, 1000);
+      }, 800);
 
     }
   }

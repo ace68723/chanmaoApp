@@ -198,6 +198,9 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     } else {
       this.state = Object.assign({},this.state,{goToHistory: true, paymentFail: true});
     }
+    setTimeout(() => {
+      this.state = Object.assign({},this.state,{goToHistory: false, paymentFail: false});
+    }, 2000);
   },
   updateShouldAddAddress(data){
     this.state.shouldAddAddress = data.shouldAddAddress;

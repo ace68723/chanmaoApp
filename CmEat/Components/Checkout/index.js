@@ -150,11 +150,11 @@ class Confirm extends Component {
 					if (state.after_order_payment_channel && state.after_order_payment_channel == 30) {
 						setTimeout(()=>{
 							this.props.navigator.dismissModal({animationType: 'slide-down'});
-						}, 600)
+						}, 500)
 					}
 					setTimeout(()=> {
 						TabsAction.tab_go_to_history(state.paymentFail);
-					}, 1000);
+					}, 800);
 				}
 				else if(this.state.checkoutSuccessful){
 					this.setState({
@@ -167,17 +167,18 @@ class Confirm extends Component {
 							CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total)
 																														 + parseFloat(this.state.tips)
 																														 + parseFloat(this.state.visa_fee)).toFixed(2),
-																					 					oid: state.oidFromUrl});
+																					 					oid: state.oidFromUrl,
+																										checkoutFrom: 'checkout'});
 						}
 						else if (this.state.payment_channel == 10) {
-							Alipay.constructAlipayOrder({total: (parseFloat(this.state.total)
-																									 + parseFloat(this.state.tips)
-																								 	 + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
-																					 oid: state.oidFromUrl});
 							this.props.navigator.dismissModal({animationType: 'slide-down'});
 							setTimeout(() => {
-					      CheckoutAction.alipayGoToHistory();
-					    }, 1000);
+								CheckoutAction.alipayGoToHistory();
+								Alipay.constructAlipayOrder({total: (parseFloat(this.state.total)
+																										 + parseFloat(this.state.tips)
+																									 	 + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
+																						 oid: state.oidFromUrl});
+							}, 300);
 						}
 						else if(this.state.payment_channel == 30){
 							let pretax = Number(this.state.pretax);
@@ -204,7 +205,7 @@ class Confirm extends Component {
 						this.props.navigator.dismissModal({animationType: 'slide-down'});
 						setTimeout(()=> {
 							TabsAction.tab_go_to_history();
-						}, 1000);
+						}, 800);
 					}
 					// this._goToHistory();
 				}

@@ -52,7 +52,6 @@ export default  {
         version:version,
       }
       const res = await OrderAPI.getOrderBefore(lo_data);
-      // console.log(res);
       const eo_data ={
         prod: res.ea_prod,
         addr: res.eo_addr,
@@ -116,7 +115,6 @@ export default  {
           orderStr += key + '="' + order[key] + '"&';
       });
       orderStr = orderStr.slice(0, orderStr.length - 1);
-      // console.log('bbb', orderStr);
       const {uid,token,version} = GetUserInfo();
       const lo_data = {
         Authortoken: token,

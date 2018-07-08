@@ -193,6 +193,9 @@ class HistoryTab extends Component {
 		_alipaySelected(orderInfo, visa_fee) {
 			Alipay.constructAlipayOrder({total: (parseFloat(orderInfo.order_total)).toString(),
 																	 oid: orderInfo.order_oid});
+			setTimeout(() => {
+				this._onRefresh();
+			}, 3000)
 		}
 		_cashSelected(orderInfo) {
 			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
@@ -207,7 +210,9 @@ class HistoryTab extends Component {
 		}
 		_stripeCardSelected(orderInfo, visa_fee) {
 				CheckoutAction.stripeChargeAndUpdate({amount: parseFloat(orderInfo.order_total),
-																						oid: orderInfo.order_oid});
+																						oid: orderInfo.order_oid,
+																						checkoutFrom: 'history'});
+				this._onRefresh();
 		}
 
 		_handleOnChangeTab(tabRef) {

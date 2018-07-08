@@ -36,16 +36,18 @@ export default {
       }catch (e){
       }
     },
-    async stripeChargeAndUpdate({amount, oid}){
+    async stripeChargeAndUpdate({amount, oid, checkoutFrom}){
       try{
           const token = await AuthModule.getToken();
           const reqData = {amount: parseInt(amount * 100),
                            oid: parseInt(oid),
                            token};
           const data = await CheckoutModule.stripeChargeAndUpdate(reqData);
-          dispatch({
-              actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
-          })
+          if (checkoutFrom == 'checkout') {
+            dispatch({
+                actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
+            });
+          }
       }catch (e){
       }
     },
