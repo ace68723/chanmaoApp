@@ -147,12 +147,7 @@ class Confirm extends Component {
 
 				if(state.goToHistory) {
 					this.props.navigator.dismissModal({animationType: 'slide-down'});
-					if (state.after_order_payment_channel && state.after_order_payment_channel == 30) {
-						setTimeout(()=>{
-							this.props.navigator.dismissModal({animationType: 'slide-down'});
-						}, 500)
-					}
-					setTimeout(()=> {
+					setTimeout(() => {
 						TabsAction.tab_go_to_history(state.paymentFail);
 					}, 800);
 				}
@@ -173,7 +168,7 @@ class Confirm extends Component {
 						else if (this.state.payment_channel == 10) {
 							this.props.navigator.dismissModal({animationType: 'slide-down'});
 							setTimeout(() => {
-								CheckoutAction.alipayGoToHistory();
+								CheckoutAction.afterPayGoToHistory();
 								Alipay.constructAlipayOrder({total: (parseFloat(this.state.total)
 																										 + parseFloat(this.state.tips)
 																									 	 + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
@@ -181,19 +176,19 @@ class Confirm extends Component {
 							}, 300);
 						}
 						else if(this.state.payment_channel == 30){
-							let pretax = Number(this.state.pretax);
+							let pretax = parseFloat(this.state.pretax);
 							let shipping = Number(this.state.dlexp);
 							let tips =  Number(this.state.tips);
 							let tax = Number(this.state.total - pretax - shipping).toFixed(2);
-							let total =  Number(parseFloat(this.state.total) + parseFloat(this.state.visa_fee));
+							let total = (parseFloat(this.state.total) + parseFloat(this.state.visa_fee) + parseFloat(this.state.tips)).toFixed(2);;
 
 							let paymentData = {
-								subtotal:'' + (pretax + parseFloat(this.state.visa_fee)),
-								shipping:'' + this.state.dlexp,
-								tax:'' + tax,
-								tips:'' + this.state.tips,
+								subtotal: (pretax + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
+								shipping: this.state.dlexp.toString(),
+								tax: tax.toString(),
+								tips: this.state.tips.toString(),
 								oid: state.oidFromUrl,
-								amount:(total + this.state.tips)
+								amount:total
 							}
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
 						}
@@ -207,7 +202,6 @@ class Confirm extends Component {
 							TabsAction.tab_go_to_history();
 						}, 800);
 					}
-					// this._goToHistory();
 				}
     }
 		_handleAddressAdded() {
@@ -309,7 +303,8 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-
+			this.props.navigator.dismissModal({animationType: 'slide-down'});
+			CheckoutAction.afterPayGoToHistory();
     }
     showLoading(){
       if(this.state.isLoading)

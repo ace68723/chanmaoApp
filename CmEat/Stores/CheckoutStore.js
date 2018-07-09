@@ -29,7 +29,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     visa_fee: 0,
     goToHistory: false,
     paymentFail: false,
-    after_order_payment_channel: 0,
   },
   initState(){
     this.state = {
@@ -49,7 +48,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         visa_fee: 0,
         goToHistory: false,
         paymentFail: false,
-        after_order_payment_channel: 0,
       };
   },
 	emitChange(){
@@ -190,11 +188,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   },
   updateGoToHistory(data){
     if (data.ev_error == 0) {
-      if (data.payment_channel) {
-        this.state = Object.assign({},this.state,{goToHistory: true, paymentFail: false, after_order_payment_channel: data.payment_channel});
-      }else {
-        this.state = Object.assign({},this.state,{goToHistory: true, paymentFail: false});
-      }
+      this.state = Object.assign({},this.state,{goToHistory: true, paymentFail: false});
     } else {
       this.state = Object.assign({},this.state,{goToHistory: true, paymentFail: true});
     }
