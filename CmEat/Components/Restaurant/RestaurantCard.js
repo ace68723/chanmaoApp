@@ -13,6 +13,9 @@ import {
   PixelRatio,
 } from 'react-native';
 
+import { YellowBox } from 'react-native'
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated']);
+
 import {cme_GetRestaurantWithRid} from '../../../App/Modules/Database'
 
 const {width,height} = Dimensions.get('window');
