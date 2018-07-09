@@ -303,7 +303,6 @@ class Confirm extends Component {
 			}
     }
     _goToHistory(){
-			this.props.navigator.dismissModal({animationType: 'slide-down'});
 			CheckoutAction.afterPayGoToHistory();
     }
     showLoading(){
