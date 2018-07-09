@@ -52,7 +52,7 @@ export default {
       }
     },
 
-    alipayGoToHistory() {
+    afterPayGoToHistory() {
       try{
           const data = {
             ev_error: 0
@@ -73,17 +73,7 @@ export default {
 				tips:'' + tips,
 			}
       //Apple Pay canceled
-      // NativeModules.cmApplePay.cancelcallback(callback);
-      NativeModules.cmApplePay.cancelcallback(() => {
-        console.log("canceled");
-        const data = {
-          ev_error: 1
-        };
-        dispatch({
-            actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
-        })
-      });
-      // NativeModules.cmApplePay.complete(() => callback());
+      NativeModules.cmApplePay.cancelcallback(callback);
       let token = await NativeModules.cmApplePay.createPayment(paymentData);
       return token;
     },
@@ -120,33 +110,10 @@ export default {
           token:token,
           oid:oid,
           tips:tips,
-        })
-        if(payResult == 'success') {
-          let data = {
-            ev_error: 1
-          };
-          // callback();
-          data.ev_error = 0;
-          data.payment_channel = 30;
-          dispatch({
-              actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
-          });
-        }
-        else {
-          // console.log('cmApplePay complete in else');
-          // dispatch({
-          //     actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
-          // });
-        }
+        });
 
         NativeModules.cmApplePay.complete(payResult,()=>{
-          console.log('cmApplePay complete');
-          // data = {
-          //   ev_error: 1
-          // };
-          // dispatch({
-          //     actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
-          // })
+          // cmApplePay complete
         });
       }
 

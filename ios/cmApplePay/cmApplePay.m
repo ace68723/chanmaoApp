@@ -151,7 +151,7 @@ RCT_EXPORT_METHOD(complete: (NSString *)paymentStatus
     self.completion(PKPaymentAuthorizationStatusFailure);
   }
   
-  //callback(@[[NSNull null]]);
+  callback(@[[NSNull null]]);
 }
 -(void)ErrorAlert:(NSString *)errorMessage{
   UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Oops!"
