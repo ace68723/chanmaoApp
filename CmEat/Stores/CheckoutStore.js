@@ -72,7 +72,9 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
           }],
     		showBanner:true,
         shouldAddAddress:false,
+        visa_fee: 0,
         goToHistory: false,
+        paymentFail: false,
       }
 	},
   calculateDeliveryFee(data){
@@ -120,10 +122,10 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   		CheckoutAction.calculateDeliveryFee()
   },
   beforCheckout(data){
-  		const pretax = data.result.pretax;
-  		const pretax_ori = data.result.pretax_ori;
+  		const pretax = parseFloat(data.result.pretax);
+  		const pretax_ori = parseFloat(data.result.pretax_ori);
   		const promoted = data.result.promoted;
-  		const total = data.result.total;
+  		const total = parseFloat(data.result.total);
       const available_payment_channels = data.result.available_payment_channels;
       // const available_payment_channels = [0, 1, 10];
       let paymentStatus = '到付(现金/刷卡)';
