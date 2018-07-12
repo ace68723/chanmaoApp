@@ -139,7 +139,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       let tipInfoStatus, paymentStatus, payment_channel, visa_fee;
       if (last_payment_channel == 1) {
         tipInfoStatus = false;
-        paymentStatus = this.state.brand + ' XXXX XXXX XXXX ' + this.state.last4;
+        paymentStatus = this.state.brand + ' **** **** **** ' + this.state.last4;
         payment_channel = 1;
       }
       else if (last_payment_channel == 10) {
@@ -171,7 +171,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       // let tipInfoStatus = false;
       // let payment_channel;
       // if (this.state.payment_channel == 1) {
-      //   paymentStatus = data.result.brand + ' XXXX XXXX XXXX ' + data.result.last4;
+      //   paymentStatus = data.result.brand + ' **** **** **** ' + data.result.last4;
         // tipInfoStatus = true;
         // payment_channel = 1;
       // }
@@ -248,7 +248,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     }
     else if (data.payment_channel == 1) {
       this.state.tipInfoStatus = false;
-      this.state.paymentStatus = this.state.brand + ' XXXX XXXX XXXX ' + this.state.last4;
+      this.state.paymentStatus = this.state.brand + ' **** **** **** ' + this.state.last4;
       this.state.payment_channel = 1;
     }
     else if (data.payment_channel == 10) {

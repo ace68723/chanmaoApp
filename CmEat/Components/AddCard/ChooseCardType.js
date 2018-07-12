@@ -257,12 +257,34 @@ export default class ChooseCardType extends Component {
     const previousVisa = () => {
       let _previousVisa = [];
       if (this.props.cusid && this.props.cusid.length > 0) {
-        let icon_url = "";
-        if (this.props.brand == "Visa" || this.props.brand == "Master") {
-          icon_url = require('./Img/visa_master_icon.png');
-        }
-        else {
-          icon_url = require('./Img/visa_debit_icon.png');
+        // let icon_url = "";
+        // if (this.props.brand == "Visa" || this.props.brand == "Master") {
+        //   icon_url = require('./Img/visa_master_icon.png');
+        // }
+        // else {
+        //   icon_url = require('./Img/visa_debit_icon.png');
+        // }
+        let previous_icon = () => {
+          let _previous_icon = [];
+          if (this.props.brand == "Visa" || this.props.brand == "MasterCard") {
+            _previous_icon.push(
+              <Image key={'visa_master'}
+                     source={require('./Img/visa_master_icon.png')}
+                     style={{alignSelf: 'center',
+                             height: 15,
+                             width: 80}}/>
+            );
+          }
+          else {
+            _previous_icon.push(
+              <Image key={'visa_debit'}
+                     source={require('./Img/visa_debit_icon.png')}
+                     style={{alignSelf: 'center',
+                             height: 20,
+                             width: 40}}/>
+            );
+          }
+          return _previous_icon;
         }
         _previousVisa.push(
           <Text key={"previousCardHeader"}
@@ -281,19 +303,16 @@ export default class ChooseCardType extends Component {
                       alignItems: 'center',
                       backgroundColor: 'white'}}>
               <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-                <Image source={icon_url}
-                       style={{alignSelf: 'center',
-                               height: 15,
-                               width: 80}}/>
+                {previous_icon()}
               </View>
               <Text allowFontScaling={false}
                     style={{flex: 1,
                             fontSize: 18,
-                            textAlign: 'right',
-                            marginRight :20,
+                            textAlign: 'left',
+                            marginLeft: 20,
                             color:"#808080",
                             fontFamily:'FZZhunYuan-M02S'}}>
-                        {this.props.brand} XXXX XXXX XXXX {this.props.last4}
+                        {this.props.brand} **** **** **** {this.props.last4}
               </Text>
           </TouchableOpacity>
         )
@@ -332,7 +351,7 @@ export default class ChooseCardType extends Component {
                       style={{flex: 1,
                               fontSize: 18,
                               textAlign: 'left',
-                              marginLeft :20,
+                              marginLeft: 20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
                           {CMLabel.getCNLabel('CREDIT_CARD')}

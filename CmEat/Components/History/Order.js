@@ -130,7 +130,7 @@ export default class pastOrderEN extends Component {
 
   _renderDetialButton() {
     if (this.props.page == 0) {
-      if(this.state.orderInfo.order_status == '5' && !this.state.orderInfo.payment_status){
+      if(!this.state.orderInfo.payment_status){
         return (
           <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
               <TouchableOpacity style={{flex:1,
@@ -327,19 +327,17 @@ export default class pastOrderEN extends Component {
             statusMessage = '客服稍后联系您改运费';
             break;
         case 5:
-            if(this.state.orderInfo.payment_status == 30) {
-              statusColor = {color:'#11c1f3'};
-              statusMessage = '已退款';
-            }
-            else {
-              statusColor = {color:'#ef473a'};
-              statusMessage = '糟糕, 有的菜没了';
-            }
+            statusColor = {color:'#ef473a'};
+            statusMessage = '糟糕, 有的菜没了';
             break;
         case 90:
             statusColor = {color:'#ef473a'};
             statusMessage = '订单已取消';
             break;
+    }
+    if(this.state.orderInfo.payment_status == 30) {
+      statusColor = {color:'#11c1f3'};
+      statusMessage = '已退款';
     }
     let _paymentStatusMessage = () => {
       if (this.state.orderInfo.payment_channel == 10) {
