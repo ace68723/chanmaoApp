@@ -629,11 +629,24 @@ class Confirm extends Component {
 		_renderChoosePayment() {
 			if (this.state.available_payment_channels && this.state.dltype != 0) {
 				if (this.state.available_payment_channels.length > 1) {
+					let payment_description = '到付(现金/刷卡)';
+					if (this.state.payment_channel == 1) {
+						payment_description = this.state.brand + ' **** **** **** ' + this.state.last4;
+					}
+					else if (this.state.payment_channel == 10) {
+						payment_description = '支付宝';
+					}
+					else if (this.state.payment_channel == 30) {
+						payment_description = 'Apple Pay';
+					}
+					else {
+						payment_description = '到付(现金/刷卡)';
+					}
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>
 							<CartItem rightIcon={require('./Image/right.png')}
 												title={CMLabel.getCNLabel('PAY')}
-												value={this.state.paymentStatus}/>
+												value={payment_description}/>
 						</TouchableOpacity>
 					)
 				}

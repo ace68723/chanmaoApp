@@ -135,26 +135,11 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       if(last_payment_channel == 0) {
         jumpToChoosePayment = true;
       }
-      // RestaurantStore.updatePaymentStatus(last_payment_channel);
-      let tipInfoStatus, paymentStatus, payment_channel, visa_fee;
-      if (last_payment_channel == 1) {
-        tipInfoStatus = false;
-        paymentStatus = this.state.brand + ' **** **** **** ' + this.state.last4;
-        payment_channel = 1;
-      }
-      else if (last_payment_channel == 10) {
-        tipInfoStatus = false;
-        paymentStatus = '支付宝';
-        payment_channel = 10;
-      }
-      else if (last_payment_channel == 30) {
-        tipInfoStatus = false;
-        paymentStatus = 'Apple Pay';
-        payment_channel = 30;
+      let payment_channel, visa_fee;
+      if (last_payment_channel) {
+        payment_channel = last_payment_channel;
       }
       else{
-        tipInfoStatus = false;
-        paymentStatus = '到付(现金/刷卡)';
         payment_channel = 0;
       }
       for (let _channel of available_payment_channels) {
@@ -162,19 +147,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
           visa_fee = visa_fee;
         }
       }
-      // const available_payment_channels = [0, 1, 10];
-      // let paymentStatus = '到付(现金/刷卡)';
-      // let tipInfoStatus = false;
-      // let payment_channel = 0;
-      // 在线支付
-      // let paymentStatus = '添加支付方式';
-      // let tipInfoStatus = false;
-      // let payment_channel;
-      // if (this.state.payment_channel == 1) {
-      //   paymentStatus = data.result.brand + ' **** **** **** ' + data.result.last4;
-        // tipInfoStatus = true;
-        // payment_channel = 1;
-      // }
       let cusid = data.result.cusid;
       let last4 = data.result.last4;
       let brand = data.result.brand;
@@ -195,8 +167,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   																			pretax_ori,
   																			promoted,
   																			total,
-                                        paymentStatus,
-                                        tipInfoStatus,
   																			loading,
                                         selectedAddress,
                                         available_payment_channels,
@@ -204,8 +174,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
                                         last4,
                                         brand,
                                         jumpToChoosePayment,
-                                        tipInfoStatus,
-                                        paymentStatus,
                                         payment_channel,
                                         visa_fee
   																		 });
@@ -242,23 +210,15 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   },
   updatePaymentStatus(data){
     if (data.payment_channel == 0) {
-      this.state.tipInfoStatus = false;
-      this.state.paymentStatus = '到付(现金/刷卡)';
       this.state.payment_channel = 0;
     }
     else if (data.payment_channel == 1) {
-      this.state.tipInfoStatus = false;
-      this.state.paymentStatus = this.state.brand + ' **** **** **** ' + this.state.last4;
       this.state.payment_channel = 1;
     }
     else if (data.payment_channel == 10) {
-      this.state.tipInfoStatus = false;
-      this.state.paymentStatus = '支付宝';
       this.state.payment_channel = 10;
     }
     else if (data.payment_channel == 30) {
-      this.state.tipInfoStatus = false;
-      this.state.paymentStatus = 'Apple Pay';
       this.state.payment_channel = 30;
     }
     for (let _channel of this.state.available_payment_channels) {
