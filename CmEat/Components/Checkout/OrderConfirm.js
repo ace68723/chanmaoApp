@@ -54,7 +54,7 @@ export default class orderConfirm extends Component {
 
 
   render() {
-      let dldec;
+      let dldec, visa_fee;
       switch (this.props.dltype) {
         case '0':
           dldec = '自取'
@@ -65,6 +65,12 @@ export default class orderConfirm extends Component {
         case '2':
           dldec = '定制运费'
         break;
+      }
+      if (this.props.visaFee >= 0) {
+        visa_fee = parseFloat(this.props.visaFee);
+      }
+      else{
+        visa_fee = 0;
       }
 
 
@@ -92,7 +98,7 @@ export default class orderConfirm extends Component {
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',}}>
                               <Image source={require('./Image/icon_total.png')} style={{width:22,height:25,marginRight:15,marginLeft:15}}/>
                               <Text style={styles.contentFont} allowFontScaling={false}>
-                                {(parseFloat(this.props.total)+parseFloat(this.props.tips)+parseFloat(this.props.visaFee)).toFixed(2)}
+                                {(parseFloat(this.props.total)+parseFloat(this.props.tips)+visa_fee).toFixed(2)}
                               </Text>
                           </View>
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>

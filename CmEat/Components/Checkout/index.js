@@ -130,20 +130,39 @@ class Confirm extends Component {
     _onChange(){
 
 				const state = Object.assign({},CheckoutStore.getState());
-				this.setState(state);
-
-				setTimeout( () => {
-					if(this.state.shouldAddAddress){
-	          this.props.navigator.showModal({
-	            screen: 'CmEatAddress',
-	            animated: true,
-	            passProps:{
+				if(state.shouldAddAddress){
+					setTimeout( () => {
+						this.props.navigator.showModal({
+							screen: 'CmEatAddress',
+							animated: true,
+							passProps:{
 								updateUaid:this._updateUaid,
 								handleAddressAdded: this._handleAddressAdded},
-	            navigatorStyle: {navBarHidden: true},
-	          });
-	        }
-				}, 500);
+							navigatorStyle: {navBarHidden: true},
+						});
+					}, 500);
+				}
+				else if (!this.state.jumpToChoosePayment && state.jumpToChoosePayment && state.available_payment_channels.length != 1) {
+					setTimeout( () => {
+						this.props.navigator.showModal({
+							screen: 'CmChooseCardType',
+							animated: true,
+							passProps:{available_payment_channels: this.state.available_payment_channels,
+												 stripeCardAdded: this._stripeCardAdded,
+												 alipaySelected: this._alipaySelected,
+												 cashSelected: this._cashSelected,
+												 applePaySelected:	this._applePaySelected,
+												 previousCardSelected: this._previousCardSelected,
+												 flag: 'fromCheckout',
+												 cusid: this.state.cusid,
+												 last4: this.state.last4,
+												 brand: this.state.brand},
+							navigatorStyle: {navBarHidden: true,},
+						});
+					}, 500);
+				}
+				this.setState(state);
+
 
 				if(state.goToHistory) {
 					this.props.navigator.dismissModal({animationType: 'slide-down'});
@@ -412,35 +431,70 @@ class Confirm extends Component {
 				tipsPercentage:tipsPercentage,
 			})
 		}
-		renderCheckoutButton(){
-      if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
-        return(
-            <TouchableOpacity style={styles.acceptButton}
-                              activeOpacity={0.4}
-                              onPress={this._checkout}>
-									<Text style={styles.acceptText}
-												allowFontScaling={false}>
-										 {CMLabel.getCNLabel('CHECK_OUT')}
-									</Text>
-            </TouchableOpacity>
-        )
-      }else if(this.state.loading){
-				return(
-					<View style={styles.acceptButton}>
-							<Image source={require('./Image/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
-					</View>
-				)
-			}else{
-        return(
-          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
-            <View style={styles.acceptButton}>
-              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
-										allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
-            </View>
-          </TouchableOpacity>
+		_renderAndroidCheckoutButton(){
+			if (Platform.OS !== 'ios') {
+				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
+	        return(
+	            <TouchableOpacity style={[styles.acceptButton, {marginBottom: 50}]}
+	                              activeOpacity={0.4}
+	                              onPress={this._checkout}>
+										<Text style={styles.acceptText}
+													allowFontScaling={false}>
+											 {CMLabel.getCNLabel('CHECK_OUT')}
+										</Text>
+	            </TouchableOpacity>
+	        )
+	      }else if(this.state.loading){
+					return(
+						<View style={styles.acceptButton}>
+								<Image source={require('./Image/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
+						</View>
+					)
+				}else{
+	        return(
+	          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
+	            <View style={styles.acceptButton}>
+	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
+											allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
+	            </View>
+	          </TouchableOpacity>
 
-        )
-      }
+	        )
+	      }
+			}
+		}
+
+		renderCheckoutButton(){
+			if (Platform.OS === 'ios') {
+				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
+	        return(
+	            <TouchableOpacity style={styles.acceptButton}
+	                              activeOpacity={0.4}
+	                              onPress={this._checkout}>
+										<Text style={styles.acceptText}
+													allowFontScaling={false}>
+											 {CMLabel.getCNLabel('CHECK_OUT')}
+										</Text>
+	            </TouchableOpacity>
+	        )
+	      }else if(this.state.loading){
+					return(
+						<View style={styles.acceptButton}>
+								<Image source={require('./Image/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
+						</View>
+					)
+				}else{
+	        return(
+	          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
+	            <View style={styles.acceptButton}>
+	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
+											allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
+	            </View>
+	          </TouchableOpacity>
+
+	        )
+	      }
+			}
     }
 		_renderRestaurant(){
 			return(
@@ -771,6 +825,7 @@ class Confirm extends Component {
 
 			            </Animated.View>
 								</View>
+								{this._renderAndroidCheckoutButton()}
 
 		          </ScrollView>
 					</KeyboardAvoidingView>
@@ -837,8 +892,8 @@ let styles = StyleSheet.create({
   },
   acceptButton:{
 		width:width,
-		position:Platform.OS == "ios"? null:'absolute',
-		top:Platform.OS == "ios"? null:height-acceptButtonHeight-StatusBar.currentHeight,
+		// position:Platform.OS == "ios"? null:'absolute',
+		// top:Platform.OS == "ios"? null:height-acceptButtonHeight-StatusBar.currentHeight,
     height:acceptButtonHeight,
     backgroundColor:'#ea7b21',
 		justifyContent:'center',

@@ -83,6 +83,7 @@ const RestaurantModule = {
             const total = data.total;
 						const cusid = data.ev_cusid;
 						const available_payment_channels = data.available_payment_channels;
+						const last_payment_channel = data.last_payment_channel;
 						let last4 = "";
 						let brand = "";
 						if (data.ev_last4) {
@@ -94,7 +95,7 @@ const RestaurantModule = {
 						// last4 = "1234";
 						// brand = "visa";
 						// cusid = "123f12";
-            const eo_data ={pretax,pretax_ori,promoted,total,cusid,last4,brand,available_payment_channels}
+            const eo_data ={pretax,pretax_ori,promoted,total,cusid,last4,brand,available_payment_channels,last_payment_channel}
             const startAmount = reqData.startAmount;
             let rid = reqData.rid;
             if(typeof rid !== 'string'){
