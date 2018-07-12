@@ -201,7 +201,7 @@ export default class ChooseCardType extends Component {
       });
     }
     else if (this.props.flag == 'fromHistory') {
-      const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 30);
+      const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 1);
       let payment_description = '';
       // let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
       // if (visa_fee == 0) {

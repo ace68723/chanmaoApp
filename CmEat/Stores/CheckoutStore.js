@@ -140,7 +140,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         payment_channel = last_payment_channel;
       }
       else{
-        payment_channel = 0;
+        payment_channel = this.state.payment_channel;
       }
       for (let _channel of available_payment_channels) {
         if (_channel.channel == last_payment_channel) {
