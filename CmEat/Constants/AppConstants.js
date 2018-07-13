@@ -105,5 +105,5 @@ module.exports ={
 
     //api key
     GOOGLE_API_KEY:'AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8',
-    CM_VERSION:'2.7.0',
+    CM_VERSION:'2.7.2',
 }

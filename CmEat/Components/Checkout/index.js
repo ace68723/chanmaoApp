@@ -130,6 +130,11 @@ class Confirm extends Component {
     _onChange(){
 
 				const state = Object.assign({},CheckoutStore.getState());
+				if(state.payment_channel != 0) {
+					this.setState({
+						tips: parseFloat(state.total*0.1).toFixed(2),
+					})
+				}
 				if(state.shouldAddAddress){
 					setTimeout( () => {
 						this.props.navigator.showModal({
@@ -174,6 +179,7 @@ class Confirm extends Component {
 					this.setState({
 		        loading:true,
 						showOrderConfirm:false,
+						checkoutSuccessful: false,
 		      });
 					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
 					if (this.state.dlexp > 0 && this.state.payment_channel != 0) {
@@ -388,7 +394,6 @@ class Confirm extends Component {
 			this.setState(state);
 		}
 		_stripeCardAdded() {
-			CheckoutAction.updatePaymentStatus(1);
 			const cart = MenuStore.getCart();
 			const rid = this.state.rid;
 			const pretax = MenuStore.getCartTotals().total;
@@ -401,6 +406,9 @@ class Confirm extends Component {
 																	 tips: parseFloat(newState.total*0.1).toFixed(2),
 																 	 tipsPercentage:0.1});
 			this.setState(state);
+			setTimeout( () => {
+				CheckoutAction.updatePaymentStatus(1);
+			}, 500);
 		}
 		_alipaySelected() {
 			CheckoutAction.updatePaymentStatus(10);

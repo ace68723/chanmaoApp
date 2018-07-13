@@ -49,7 +49,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         visa_fee: 0,
         goToHistory: false,
         paymentFail: false,
-        jumpToChoosePayment: false
+        jumpToChoosePayment: false,
+        tips: 0
       };
   },
 	emitChange(){
@@ -135,15 +136,16 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       if(last_payment_channel == 0) {
         jumpToChoosePayment = true;
       }
-      let payment_channel, visa_fee;
-      if (last_payment_channel) {
+      let payment_channel;
+      let visa_fee = 0;
+      if (last_payment_channel != 0) {
         payment_channel = last_payment_channel;
       }
       else{
         payment_channel = this.state.payment_channel;
       }
       for (let _channel of available_payment_channels) {
-        if (_channel.channel == last_payment_channel) {
+        if (_channel.channel == payment_channel) {
           visa_fee = visa_fee;
         }
       }
