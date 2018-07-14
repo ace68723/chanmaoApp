@@ -130,11 +130,6 @@ class Confirm extends Component {
     _onChange(){
 
 				const state = Object.assign({},CheckoutStore.getState());
-				if(state.payment_channel != 0) {
-					this.setState({
-						tips: parseFloat(state.total*0.1).toFixed(2),
-					})
-				}
 				if(state.shouldAddAddress){
 					setTimeout( () => {
 						this.props.navigator.showModal({
@@ -167,6 +162,13 @@ class Confirm extends Component {
 					}, 500);
 				}
 				this.setState(state);
+				if(state.payment_channel != 0) {
+					setTimeout( () => {
+						this.setState({
+							tips: (parseFloat(state.total)*0.1).toFixed(2),
+						});
+					}, 300);
+				}
 
 
 				if(state.goToHistory) {

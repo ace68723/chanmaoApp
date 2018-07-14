@@ -78,7 +78,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         visa_fee: 0,
         goToHistory: false,
         paymentFail: false,
-        jumpToChoosePayment: false
+        jumpToChoosePayment: false,
+        tips: 0
       }
 	},
   calculateDeliveryFee(data){
@@ -146,7 +147,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       }
       for (let _channel of available_payment_channels) {
         if (_channel.channel == payment_channel) {
-          visa_fee = visa_fee;
+          visa_fee = _channel.visa_fee;
         }
       }
       let cusid = data.result.cusid;
