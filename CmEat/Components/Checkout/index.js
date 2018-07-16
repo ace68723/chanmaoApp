@@ -639,7 +639,7 @@ class Confirm extends Component {
 		_renderChoosePayment() {
 			if (this.state.available_payment_channels && this.state.dltype != 0) {
 				if (this.state.available_payment_channels.length > 1) {
-					let payment_description = '到付(现金/刷卡)';
+					let payment_description = '现金到付';
 					if (this.state.payment_channel == 1) {
 						payment_description = this.state.brand + ' **** **** **** ' + this.state.last4;
 					}
@@ -650,7 +650,7 @@ class Confirm extends Component {
 						payment_description = 'Apple Pay';
 					}
 					else {
-						payment_description = '到付(现金/刷卡)';
+						payment_description = '现金到付';
 					}
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>

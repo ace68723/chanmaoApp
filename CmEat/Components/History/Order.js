@@ -257,7 +257,7 @@ export default class pastOrderEN extends Component {
         statusReminder = "支付方式: 现金自取";
       }
       else {
-        statusReminder = "支付方式: 到付(现金/刷卡)";
+        statusReminder = "支付方式: 现金到付";
       }
     }
     else if (this.state.orderInfo.payment_channel == 1) {

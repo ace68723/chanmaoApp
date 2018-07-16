@@ -93,7 +93,7 @@ module.exports={
     CREDIT_CARD:'信用卡',
     DEBIT_CARD:'借记卡',
     ALIPAY:'支付宝',
-    CASH:'到付(现金/刷卡)',
+    CASH:'现金到付',
     PAYMENT_TYPE:"支付方式",
     //About us
     ABOUT_US:'关于我们',
