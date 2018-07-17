@@ -56,6 +56,7 @@ export default class pastOrderEN extends Component {
           modalVisible: false,
           oid: props.orderInfo.order_oid,
           showHistoryOrderDetail: false,
+          shouldDisable: false,
       };
       this._handleInputOnFocus = this._handleInputOnFocus.bind(this);
       this._handleDriverScore = this._handleDriverScore.bind(this);
@@ -234,22 +235,27 @@ export default class pastOrderEN extends Component {
   }
 
   _handleConfirm() {
-    this.setState({showHistoryOrderDetail: false});
-    let dish_ratings = this.state.dish_ratings;
-    dish_ratings.map((_dish) => {
-      delete _dish['name'];
-      return _dish;
-    })
-    const data = {
-      complete_time: this.state.complete_time,
-      oid: this.state.oid,
-      driver_score: this.state.driver_score,
-      driver_comment: this.state.driver_comment,
-      restaurant_score: this.state.restaurant_score,
-      restaurant_comment: this.state.restaurant_comment,
-      dish_ratings: dish_ratings,
+    if (this.state.shouldDisable) {
+      return;
     }
-    CommentsAction.addReview(data);
+    else {
+      this.setState({showHistoryOrderDetail: false, shouldDisable: true});
+      let dish_ratings = this.state.dish_ratings;
+      dish_ratings.map((_dish) => {
+        delete _dish['name'];
+        return _dish;
+      })
+      const data = {
+        complete_time: this.state.complete_time,
+        oid: this.state.oid,
+        driver_score: this.state.driver_score,
+        driver_comment: this.state.driver_comment,
+        restaurant_score: this.state.restaurant_score,
+        restaurant_comment: this.state.restaurant_comment,
+        dish_ratings: dish_ratings,
+      }
+      CommentsAction.addReview(data);
+    }
   }
 
   _renderConfirmSection() {

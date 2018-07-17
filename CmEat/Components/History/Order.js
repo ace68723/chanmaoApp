@@ -118,7 +118,7 @@ export default class pastOrderEN extends Component {
   }
 
   _phoneNumberVerify (){
-    if(this.state.orderInfo.order_status == 55){
+    if(this.state.orderInfo.order_status == 55 && (this.state.orderInfo.payment_channel == 0 || this.state.orderInfo.payment_status == 20)){
       return(
           <PhoneNumberVerify  orderId={this.state.orderInfo.order_oid}
                               phoneNumber ={this.state.orderInfo.user_tel}
@@ -130,7 +130,7 @@ export default class pastOrderEN extends Component {
 
   _renderDetialButton() {
     if (this.props.page == 0) {
-      if(!this.state.orderInfo.payment_status){
+      if(this.state.orderInfo.order_status == '5' && !this.state.orderInfo.payment_status){
         return (
           <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
               <TouchableOpacity style={{flex:1,
@@ -189,7 +189,7 @@ export default class pastOrderEN extends Component {
   }
 
   _renderOptionButton() {
-    if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && this.state.orderInfo.order_status == 0) {
+    if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && (this.state.orderInfo.order_status == 0 || this.state.orderInfo.order_status == 55)) {
       return (
           <TouchableOpacity style={{flex:1,
                                     flexDirection:'row',
@@ -201,7 +201,8 @@ export default class pastOrderEN extends Component {
                                     borderTopWidth: 1,
                                     borderBottomWidth:1}}
                             onPress={
-                              this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}>
+                              this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}
+                            disabled={this.props.isRefreshing}>
             <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>支付</Text>
 
           </TouchableOpacity>
@@ -319,8 +320,30 @@ export default class pastOrderEN extends Component {
             statusMessage = '已送到, 满意吗？';
             break;
         case 55:
-            statusColor = {color:'#886aea'};
-            statusMessage = '新用户订单确认中';
+            if (this.state.orderInfo.payment_channel > 0) {
+                if (this.state.orderInfo.payment_status == 20) {
+                  statusColor = {color:'#886aea'};
+                  statusMessage = '新用户订单确认中';
+                }
+                else if(this.state.orderInfo.payment_status == 30) {
+                  statusColor = {color:'#11c1f3'};
+                  statusMessage = '已退款';
+                }
+                else if(this.state.orderInfo.payment_status == 40) {
+                  statusColor = {color:'#ef473a'};
+                  statusMessage = '在线支付失败';
+                  statusReminder = "请重新下单";
+                }
+                else {
+                  statusColor = {color:'#ef473a'};
+                  statusMessage = '等待支付';
+                  statusReminder = "若状态没有及时更改, 请手动下拉刷新";
+                }
+            }
+            else {
+              statusColor = {color:'#886aea'};
+              statusMessage = '新用户订单确认中';
+            }
             break;
         case 60:
             statusColor = {color:'#11c1f3'};

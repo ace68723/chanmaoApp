@@ -48,7 +48,8 @@ class AllOrders extends Component {
 									 getCurrentPosition={this._getCurrentPosition}
 									 page={0}
 									 handlePaymentRetry={this.props.handlePaymentRetry}
-									 reorder={this.props.reorder}/>
+									 reorder={this.props.reorder}
+									 isRefreshing={this.props.isRefreshing}/>
 					)
 				});
 				return(

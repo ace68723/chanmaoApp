@@ -50,7 +50,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         goToHistory: false,
         paymentFail: false,
         jumpToChoosePayment: false,
-        tips: 0
       };
   },
 	emitChange(){
@@ -61,26 +60,26 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 	},
 	removeChangeListener(callback){
 			this.removeListener(CHANGE_EVENT, callback)
-      this.state = {
-        checkoutSuccessful:false,
-    		addressList:[],
-        dltype:1,
-        pretax:0,
-        payment_channel: 0,
-        available_payment_channels: [{channel: 0, visa_fee: 0}],
-        code:'',
-        dltypeList:[
-          {dltype:-1,
-           description:'请先选择地址信息'
-          }],
-    		showBanner:true,
-        shouldAddAddress:false,
-        visa_fee: 0,
-        goToHistory: false,
-        paymentFail: false,
-        jumpToChoosePayment: false,
-        tips: 0
-      }
+      // this.state = {
+      //   checkoutSuccessful:false,
+    	// 	addressList:[],
+      //   dltype:1,
+      //   pretax:0,
+      //   payment_channel: 0,
+      //   available_payment_channels: [{channel: 0, visa_fee: 0}],
+      //   code:'',
+      //   dltypeList:[
+      //     {dltype:-1,
+      //      description:'请先选择地址信息'
+      //     }],
+    	// 	showBanner:true,
+      //   shouldAddAddress:false,
+      //   visa_fee: 0,
+      //   goToHistory: false,
+      //   paymentFail: false,
+      //   jumpToChoosePayment: false,
+      // }
+      this.initState();
 	},
   calculateDeliveryFee(data){
   		const dlexp = data.dlexp;
