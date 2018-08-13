@@ -68,7 +68,7 @@ export default class LoginButton extends Component {
 																		 height:this.state.height}]}
 														 >
 							 <Animated.Text style={[styles.loginText,{opacity:this.state.textOpacity}]}>
-									{this.props.is_login}
+								 {this.props.is_register}
 							 </Animated.Text>
 							</Animated.View>
 					</TouchableWithoutFeedback>
@@ -98,7 +98,7 @@ export default class LoginButton extends Component {
 															{width:this.state.width,
 															 height:this.state.height}]}
 											 >
-				 <Animated.Image source={require('./Image/loading.gif')}
+				 <Animated.Image source={require('../Image/loading.gif')}
  												style={{
  												 opacity:this.state.loadingOpacity,
  												 width:height*0.0765,
@@ -116,8 +116,8 @@ export default class LoginButton extends Component {
 						<TouchableWithoutFeedback onPress={this.props.toggleViewType}>
 							<View style={{flex:1}}>
 								<Text allowFontScaling={false} style={styles.registerText}>
-		               {this.props.is_register}
-		            </Text>
+									{this.props.is_login}
+							  </Text>
 							</View>
 						</TouchableWithoutFeedback>
 						<TouchableWithoutFeedback onPress={()=>{this.props.if_openAdView('https://chanmao.ca/index.php?r=site/recovery')}}>

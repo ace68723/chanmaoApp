@@ -18,6 +18,7 @@ import AuthAction from '../../Actions/AuthAction';
 // import AuthStore from '../../Stores/AuthStore';
 
 import InputAnimation from './InputAnimation';
+import RegisterInputAnimation from './register/InputAnimation';
 
 const {width,height} = Dimensions.get('window');
 let marginTop;
@@ -38,6 +39,10 @@ const scope = 'snsapi_userinfo';
 const state = 'wechat_sdk_demos';
 const appid = 'wx20fd1aeb9b6fcf82';
 
+
+const VIEW_TYPE_LOGIN = 'view_type_login';
+const VIEW_TYPE_REGISTER = 'view_type_register';
+
 export default class LogoAnimationView extends Component {
   constructor(){
     super()
@@ -47,6 +52,8 @@ export default class LogoAnimationView extends Component {
     			showLoading:false,
     			isAuthed:false,
     			isWXAppInstalled:true,
+					// viewType: VIEW_TYPE_LOGIN,
+					viewType: VIEW_TYPE_REGISTER,
     	}
     this._handleLogin 		= this._handleLogin.bind(this);
 		this._handleUsername 	= this._handleUsername.bind(this);
@@ -54,6 +61,7 @@ export default class LogoAnimationView extends Component {
 		this._handleWechatLogin = this._handleWechatLogin.bind(this);
     this._handleBackToHome = this._handleBackToHome.bind(this);
     this._openAdView = this._openAdView.bind(this);
+		this._toggleViewType	= this._toggleViewType.bind(this);
   }
 	async componentDidMount() {
 		const registerResult = await WeChat.registerApp(appid);
@@ -73,8 +81,14 @@ export default class LogoAnimationView extends Component {
 		})
   }
   _loginStarted
+
   async _handleLogin(){
     if(this._loginStarted) return
+		if (this.state.viewType == VIEW_TYPE_REGISTER){
+			// if register
+
+			return;
+		}
     this._loginStarted = true;
 		this.setState({
 			showLoading:true,
@@ -166,6 +180,14 @@ export default class LogoAnimationView extends Component {
       </TouchableOpacity>
     )
   }
+	_toggleViewType(){
+		if (this.state.viewType == VIEW_TYPE_LOGIN){
+			this.setState({viewType: VIEW_TYPE_REGISTER})
+		}
+		else if (this.state.viewType == VIEW_TYPE_REGISTER){
+			this.setState({viewType: VIEW_TYPE_LOGIN})
+		}
+	}
   render(){
     return(
       <View style={styles.container}>
@@ -174,26 +196,57 @@ export default class LogoAnimationView extends Component {
 										style={styles.backgroundImage}/>
 				</View>
 
+				{ this.state.viewType == VIEW_TYPE_LOGIN &&
+					<InputAnimation	is_username = {AppString('username')}
+													is_password = {AppString('password')}
+													is_login = {AppString('login')}
+												  is_register = {AppString('register')}
+												  is_forgot = {AppString('forgot')}
+													is_wechat = {AppString('wechat')}
+													ib_isWXAppInstalled = {this.state.isWXAppInstalled}
+													is_copyright = {AppString('copyright')}
+													is_version = {AppConstants.CM_VERSION}
+													ib_loginSuccess = {this.state.loginSuccess}
+													ib_showLoading = {this.state.showLoading}
+												  if_handleLogin = {this._handleLogin}
+													ir_USERNAME_INPUTREF = {USERNAME_INPUTREF}
+													ir_PASSWORD_INPUTREF = {PASSWORD_INPUTREF}
+													ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
+													if_handleUsername = {this._handleUsername}
+													if_handlePassword = {this._handlePassword}
+													if_handleWechatLogin = {this._handleWechatLogin}
+													if_openAdView = {this._openAdView}
+													viewType = {this.state.viewType}
+													toggleViewType = {this._toggleViewType}
+													/>
+				}
 
-				<InputAnimation	is_username = {AppString('username')}
-												is_password = {AppString('password')}
-												is_login = {AppString('login')}
-											  is_register = {AppString('register')}
-											  is_forgot = {AppString('forgot')}
-												is_wechat = {AppString('wechat')}
-												ib_isWXAppInstalled = {this.state.isWXAppInstalled}
-												is_copyright = {AppString('copyright')}
-												is_version = {AppConstants.CM_VERSION}
-												ib_loginSuccess = {this.state.loginSuccess}
-												ib_showLoading = {this.state.showLoading}
-											  if_handleLogin = {this._handleLogin}
-												ir_USERNAME_INPUTREF = {USERNAME_INPUTREF}
-												ir_PASSWORD_INPUTREF = {PASSWORD_INPUTREF}
-												ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
-												if_handleUsername = {this._handleUsername}
-												if_handlePassword = {this._handlePassword}
-												if_handleWechatLogin = {this._handleWechatLogin}
-												if_openAdView = {this._openAdView}/>
+				{ this.state.viewType == VIEW_TYPE_REGISTER &&
+					<RegisterInputAnimation
+													is_username = {AppString('username')}
+													is_password = {AppString('password')}
+													is_login = {AppString('login')}
+												  is_register = {AppString('register')}
+												  is_forgot = {AppString('forgot')}
+													is_wechat = {AppString('wechat')}
+													ib_isWXAppInstalled = {this.state.isWXAppInstalled}
+													is_copyright = {AppString('copyright')}
+													is_version = {AppConstants.CM_VERSION}
+													ib_loginSuccess = {this.state.loginSuccess}
+													ib_showLoading = {this.state.showLoading}
+												  if_handleLogin = {this._handleLogin}
+													ir_USERNAME_INPUTREF = {USERNAME_INPUTREF}
+													ir_PASSWORD_INPUTREF = {PASSWORD_INPUTREF}
+													ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
+													if_handleUsername = {this._handleUsername}
+													if_handlePassword = {this._handlePassword}
+													if_handleWechatLogin = {this._handleWechatLogin}
+													if_openAdView = {this._openAdView}
+													viewType = {this.state.viewType}
+													toggleViewType = {this._toggleViewType}
+													/>
+				}
+
           {this._renderGoBackBtn()}
 
       </View>

@@ -7,6 +7,7 @@ import {
   Dimensions,
 	Easing,
   Image,
+  Platform,
   ImageBackground,
 	InteractionManager,
 	Keyboard,
@@ -17,10 +18,29 @@ import {
   View,
 } from 'react-native';
 import LoginButton from './LoginButton';
-import AuthStore from '../../Stores/AuthStore';
+// import AuthStore from '../../Stores/AuthStore';
 
 const {width,height} = Dimensions.get('window');
 export default class InputAnimation extends Component {
+	  // static propTypes = {
+		// 	is_username :  React.PropTypes.string.isRequired,
+		// 	is_password :  React.PropTypes.string.isRequired,
+		// 	is_login :  React.PropTypes.string.isRequired,
+		// 	is_register :  React.PropTypes.string.isRequired,
+		// 	is_forgot :  React.PropTypes.string.isRequired,
+		// 	is_wechat :  React.PropTypes.string.isRequired,
+		// 	is_copyright :  React.PropTypes.string.isRequired,
+		// 	is_version :  React.PropTypes.string.isRequired,
+		//
+		// 	ir_USERNAME_INPUTREF : React.PropTypes.string.isRequired,
+		// 	ir_PASSWORD_INPUTREF : React.PropTypes.string.isRequired,
+		// 	ir_SUBMIT_BUTTON : React.PropTypes.string.isRequired,
+		//
+		// 	if_handleLogin : React.PropTypes.func.isRequired,
+		// 	if_handleUsername : React.PropTypes.func.isRequired,
+		// 	if_handlePassword : React.PropTypes.func.isRequired,
+		// 	if_handleWechatLogin : React.PropTypes.func.isRequired,
+	  // }
 	  constructor(){
 	    super()
 	    this.state={
@@ -56,20 +76,20 @@ export default class InputAnimation extends Component {
 
     }
     componentDidMount(){
-			 AuthStore.addChangeListener(this._onChange);
+			//  AuthStore.addChangeListener(this._onChange);
 		}
     componentWillUnmount() {
       // Event(Keybaord): remove keybaord event
       this._keyboardWillShowSubscription.remove();
       this._keyboardWillHideSubscription.remove();
-			AuthStore.removeChangeListener(this._onChange);
+			// AuthStore.removeChangeListener(this._onChange);
     }
 		_onChange(){
-			if(AuthStore.loginState().loginSuccess){
+			// if(AuthStore.loginState().loginSuccess){
 				// InteractionManager.runAfterInteractions(() => {
-					this._transition()
+					// this._transition()
 				// })
-			}
+			// }
 	  }
 		_keyboardWillShow(e) {
         // keyboard(e.endCoordinates.height): get keyboard height
@@ -164,6 +184,7 @@ export default class InputAnimation extends Component {
 			 });
 		}
     renderAnimationLine(lineLeft,lineTop,lineWidth,objectHeight){
+      // console.log(lineWidth,lineTop)
       this.setState({
         lineLeft:lineLeft,
         lineTop:lineTop+objectHeight,
@@ -201,7 +222,7 @@ export default class InputAnimation extends Component {
 					<TouchableOpacity
 						style={styles.wechatView}
 						onPress = { this.props.if_handleWechatLogin }>
-						<ImageBackground source={require('./Image/wechat.png')} style={styles.wechatButton} >
+						<ImageBackground source={require('../Image/wechat.png')} style={styles.wechatButton} >
 							<Text style={styles.wechatButtonText}
 										allowFontScaling={false}>
 								 {this.props.is_wechat}
@@ -219,18 +240,16 @@ export default class InputAnimation extends Component {
 
 							<Animated.View style={{opacity:this.state.logoOpacity,marginTop:height*0.1042}}>
 							<View style={styles.logoBox}>
-									<Image source={require('./Image/logo.png')} style={{width:240,height:80}} />
+									<Image source={require('../Image/logo.png')} style={{width:240,height:80}} />
 						 </View>
 							</Animated.View>
 
 	            <TextInput
-
-	                  style={[styles.input,{marginTop:height*0.068},]}
-	                  placeholder={this.props.is_username}
+	                  style={[styles.input,{marginTop:height*0.068}]}
+	                  placeholder="Username"
 	                  placeholderTextColor={'#ffffff'}
 	                  selectionColor={'#ea7b21'}
 	                  keyboardType = { 'url'}
-
 	                  autoCorrect= { false}
 	                  returnKeyType={'next'}
 	                  ref={this.props.ir_USERNAME_INPUTREF}
@@ -242,17 +261,33 @@ export default class InputAnimation extends Component {
 	             </View>
 	            <TextInput
 	                    style={styles.input}
-	                    placeholder={this.props.is_password}
+	                    placeholder="Email"
 	                    placeholderTextColor={'#ffffff'}
 	                    selectionColor={'#ea7b21'}
-	                    keyboardType = { 'email-address'}
 	                    autoCorrect= { false}
+											textContentType = 'emailAddress'
 	                    returnKeyType={'next'}
-	                    secureTextEntry={true}
 	                    ref={this.props.ir_PASSWORD_INPUTREF}
 	                    onChangeText={this.props.if_handlePassword}
                       underlineColorAndroid={"rgba(0,0,0,0)"}
 	                />
+
+								<View style={{height:1, backgroundColor:'#ffffff',}}/>
+								<TextInput
+												style={[styles.input]}
+												placeholder={this.props.is_password}
+												placeholderTextColor={'#ffffff'}
+												selectionColor={'#ea7b21'}
+												keyboardType = { 'url'}
+												autoCorrect= { false}
+												secureTextEntry={true}
+												returnKeyType={'next'}
+												ref={this.props.ir_USERNAME_INPUTREF}
+												onChangeText={this.props.if_handleUsername}
+												underlineColorAndroid={"rgba(0,0,0,0)"}
+										/>
+
+
 								<View ref={this.props.ir_SUBMIT_BUTTON} >
 									<LoginButton is_login = {this.props.is_login}
 															 is_register = {this.props.is_register}
@@ -260,13 +295,18 @@ export default class InputAnimation extends Component {
 															 if_handleLogin = {this._handleLogin}
 															 if_openAdView = {this.props.if_openAdView}
 															 ib_showLoading = {this.props.ib_showLoading}
-															 is_viewType = {this.props.is_viewType}
+															 viewType = {this.props.viewType}
 															 toggleViewType = {this.props.toggleViewType}
 															 />
 								</View>
 								{this._renderWechat()}
 
-							 <View style={{position:'absolute',bottom:5,width:width,alignItems:'center',backgroundColor:"rgba(0,0,0,0)"}}>
+							 <View style={{position:Platform.OS == 'ios'?'absolute':'relative',
+                             bottom:5,
+                             width:Platform.OS == 'ios'?width:'auto',
+                             alignItems:'center',
+                             backgroundColor:'rgba(0,0,0,0)'
+                           }}>
 	                  <Text allowFontScaling={false} style={{color:"#ffffff",marginBottom:5}}>
 	                    {this.props.is_version}
 	                  </Text>
@@ -339,7 +379,8 @@ const styles = StyleSheet.create({
     textAlign:"right"
   },
 	wechatView:{
-    position:'absolute',
+    position:Platform.OS == 'ios'?'absolute':'relative',
+    marginTop:Platform.OS == 'ios'? 0 :50,
     right:0,
     left:0,
     bottom:height*0.08,
