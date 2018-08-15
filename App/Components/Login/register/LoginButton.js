@@ -62,7 +62,7 @@ export default class LoginButton extends Component {
 			}, 300);
 			return(
 				<TouchableWithoutFeedback
-						onPress = { this.props.if_handleLogin }>
+						onPress = { this.props.if_handleRegister }>
 							<Animated.View style={[styles.button,
 																		{width:this.state.width,
 																		 height:this.state.height}]}

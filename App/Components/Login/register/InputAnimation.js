@@ -73,6 +73,7 @@ export default class InputAnimation extends Component {
         this._keyboardWillShowSubscription = Keyboard.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
         this._keyboardWillHideSubscription = Keyboard.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
 				this._handleLogin = this._handleLogin.bind(this);
+				this._handleRegister = this._handleRegister.bind(this);
 
     }
     componentDidMount(){
@@ -104,7 +105,7 @@ export default class InputAnimation extends Component {
               //View(bottom): add enough space for keyboard appear
 
               Animated.timing(this.state.viewBottom, {
-                  toValue: keyboardHeight-submitButton + 60,
+                  toValue: keyboardHeight-submitButton-50,//+ 60,
                   easing: Easing.out(Easing.quad),
                   duration: 300,
               }).start()
@@ -144,16 +145,23 @@ export default class InputAnimation extends Component {
     }
 		_hideKeyboard(){
       // keyboar(hide): hide keyboard by blur input
-      this.refs[this.props.ir_USERNAME_INPUTREF].blur()
-      this.refs[this.props.ir_PASSWORD_INPUTREF].blur()
+      this.refs[this.props.ir_PHONE_INPUTREF].blur();
+			this.refs[this.props.ir_VERIFICATION_INPUTREF].blur();
+      this.refs[this.props.ir_EMAIL_INPUTREF].blur();
+      this.refs[this.props.ir_PASSWORD_INPUTREF].blur();
+			this.refs[this.props.ir_RE_PASSWORD_INPUTREF].blur();
     }
     _onFocus(){
-        this.refs[this.props.ir_USERNAME_INPUTREF].measure((ox, oy, width, height, px, py) =>{
+        this.refs[this.props.ir_PHONE_INPUTREF].measure((ox, oy, width, height, px, py) =>{
           this.renderAnimationLine(ox,oy,width,height)
         });
     }
 		_handleLogin(){
 			this.props.if_handleLogin();
+			this._hideKeyboard();
+		}
+		_handleRegister(){
+			this.props.if_handleRegister();
 			this._hideKeyboard();
 		}
 		_transition(){
@@ -244,21 +252,39 @@ export default class InputAnimation extends Component {
 						 </View>
 							</Animated.View>
 
-	            <TextInput
-	                  style={[styles.input,{marginTop:height*0.068}]}
-	                  placeholder="Username"
-	                  placeholderTextColor={'#ffffff'}
-	                  selectionColor={'#ea7b21'}
-	                  keyboardType = { 'url'}
-	                  autoCorrect= { false}
-	                  returnKeyType={'next'}
-	                  ref={this.props.ir_USERNAME_INPUTREF}
-	                  onChangeText={this.props.if_handleUsername}
-                    underlineColorAndroid={"rgba(0,0,0,0)"}
-	              />
+
+						 <TextInput
+											style={styles.input}
+											placeholder="Phone Number"
+											placeholderTextColor={'#ffffff'}
+											selectionColor={'#ea7b21'}
+											autoCorrect= { false}
+											textContentType = 'telephoneNumber'
+											returnKeyType={'next'}
+											ref={this.props.ir_PHONE_INPUTREF}
+											onChangeText={this.props.if_handlePhone}
+											underlineColorAndroid={"rgba(0,0,0,0)"}
+											keyboardType = 'number-pad'
+									/>
 	             <View style={{height:1,
 	                           backgroundColor:'#ffffff',}}>
 	             </View>
+							 <TextInput
+												style={styles.input}
+												placeholder="Verification Code"
+												placeholderTextColor={'#ffffff'}
+												selectionColor={'#ea7b21'}
+												autoCorrect= { false}
+												textContentType = 'telephoneNumber'
+												returnKeyType={'next'}
+												ref={this.props.ir_VERIFICATION_INPUTREF}
+												onChangeText={this.props.if_handleVerification}
+												underlineColorAndroid={"rgba(0,0,0,0)"}
+												keyboardType = 'number-pad'
+										/>
+		             <View style={{height:1,
+		                           backgroundColor:'#ffffff',}}>
+		             </View>
 	            <TextInput
 	                    style={styles.input}
 	                    placeholder="Email"
@@ -267,9 +293,10 @@ export default class InputAnimation extends Component {
 	                    autoCorrect= { false}
 											textContentType = 'emailAddress'
 	                    returnKeyType={'next'}
-	                    ref={this.props.ir_PASSWORD_INPUTREF}
-	                    onChangeText={this.props.if_handlePassword}
+	                    ref={this.props.ir_EMAIL_INPUTREF}
+	                    onChangeText={this.props.if_handleEmail}
                       underlineColorAndroid={"rgba(0,0,0,0)"}
+											keyboardType = 'email-address'
 	                />
 
 								<View style={{height:1, backgroundColor:'#ffffff',}}/>
@@ -282,8 +309,22 @@ export default class InputAnimation extends Component {
 												autoCorrect= { false}
 												secureTextEntry={true}
 												returnKeyType={'next'}
-												ref={this.props.ir_USERNAME_INPUTREF}
-												onChangeText={this.props.if_handleUsername}
+												ref={this.props.ir_PASSWORD_INPUTREF}
+		                    onChangeText={this.props.if_handlePassword}
+												underlineColorAndroid={"rgba(0,0,0,0)"}
+										/>
+								<View style={{height:1, backgroundColor:'#ffffff',}}/>
+								<TextInput
+												style={[styles.input]}
+												placeholder={'ReEnter Password'}
+												placeholderTextColor={'#ffffff'}
+												selectionColor={'#ea7b21'}
+												keyboardType = { 'url'}
+												autoCorrect= { false}
+												secureTextEntry={true}
+												returnKeyType={'next'}
+												ref={this.props.ir_RE_PASSWORD_INPUTREF}
+		                    onChangeText={this.props.if_handleRePassword}
 												underlineColorAndroid={"rgba(0,0,0,0)"}
 										/>
 
@@ -293,6 +334,7 @@ export default class InputAnimation extends Component {
 															 is_register = {this.props.is_register}
 															 is_forgot = {this.props.is_forgot}
 															 if_handleLogin = {this._handleLogin}
+															 if_handleRegister = {this._handleRegister}
 															 if_openAdView = {this.props.if_openAdView}
 															 ib_showLoading = {this.props.ib_showLoading}
 															 viewType = {this.props.viewType}
