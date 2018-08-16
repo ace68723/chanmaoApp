@@ -113,16 +113,16 @@ export default class InputAnimation extends Component {
 			console.log(this.state.sentVerification);
 			if (!this.state.sentVerification) return(
 				<TouchableOpacity onPress={this._getVerification}>
-					<View style={{marginLeft:50,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
-					,alignItems:'center',justifyContent:'center',width:90}}>
+					<View style={{marginLeft:30,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
+					,alignItems:'center',justifyContent:'center',width:70}}>
 						<Text style={{fontSize:15,color:'#ea7b21'}}>Get Code</Text>
 					</View>
 				</TouchableOpacity>
 			)
 			else return(
 				<TouchableOpacity onPress={this._getVerification} disabled={true}>
-					<View style={{marginLeft:40,borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
-					,alignItems:'center',justifyContent:'center',width:100}}>
+					<View style={{flex:1,marginLeft:30,borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
+					,alignItems:'center',justifyContent:'center',width:70}}>
 						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.state.secondLeft}s</Text>
 					</View>
 				</TouchableOpacity>
@@ -314,7 +314,12 @@ export default class InputAnimation extends Component {
 	             </View>
 							 <View style={{flexDirection: 'row'}}>
 								 <TextInput
-												style={styles.input}
+												style={{fontSize: 18,
+												    borderRadius: 8,
+												    color: '#ffffff',
+												    height:50,
+												    marginTop:5,
+													width:120,}}
 												placeholder="Verification Code"
 												placeholderTextColor={'#ffffff'}
 												selectionColor={'#ea7b21'}
@@ -332,7 +337,12 @@ export default class InputAnimation extends Component {
 		                           backgroundColor:'#ffffff',}}>
 		             </View>
 	            <TextInput
-	                    style={styles.input}
+	                    style={{    fontSize: 18,
+											    borderRadius: 8,
+											    color: '#ffffff',
+											    height:50,
+											    marginTop:5,
+												}}
 	                    placeholder="Email(Optional)"
 	                    placeholderTextColor={'#ffffff'}
 	                    selectionColor={'#ea7b21'}
