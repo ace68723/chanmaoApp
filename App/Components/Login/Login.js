@@ -75,6 +75,7 @@ export default class LogoAnimationView extends Component {
 	  this._handlePassword 	= this._handlePassword.bind(this);
 		this._handleRePassword = this._handleRePassword.bind(this);
 		this._handleWechatLogin = this._handleWechatLogin.bind(this);
+		this._sendVerification = this._sendVerification.bind(this);
     this._handleBackToHome = this._handleBackToHome.bind(this);
     this._openAdView = this._openAdView.bind(this);
 		this._toggleViewType	= this._toggleViewType.bind(this);
@@ -116,6 +117,9 @@ export default class LogoAnimationView extends Component {
 		this.setState({
 			re_password:password
 		});
+	}
+	_sendVerification() {
+		const res = await AuthAction.sendVerification();
 	}
 	_handleBindSuccessful() {
 		this.props.navigator.dismissModal({
@@ -354,6 +358,7 @@ export default class LogoAnimationView extends Component {
 													ib_registerSuccess = {this.state.registerSuccess}
 													ib_showLoading = {this.state.showLoading}
 												  if_handleLogin = {this._handleLogin}
+													if_sendVerification = {this._sendVerification}
 													if_handleRegister = {this._handleRegister}
 													ir_VERIFICATION_INPUTREF = {VERIFICATION_INPUTREF}
 													ir_PHONE_INPUTREF = {PHONE_INPUTREF}
