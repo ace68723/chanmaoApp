@@ -71,13 +71,13 @@ export default class InfoPage extends Component {
             </View>
                 <View style={styles.centerContent}>
                           <View style={styles.imgContainer} >
-                            <Image source={require('./Image/cmQRcode.jpeg')} style={{width: 140, height: 140}} />
+                            <Image source={require('./Image/cmQRcode.jpg')} style={{width: 140, height: 140}} />
                           </View>
                           <View style={styles.centerFontContainer}>
                               <Text style={styles.centerFontWEIXIN}
                                     selectable={true}
                                     allowFontScaling={false}>
-                                    微信客服：chanmaoweixin
+                                    微信客服：chanmao_kefu
                               </Text>
                               <Text style={styles.centerFont} onPress={()=>{
                                 this.contact("marketing@chanmao.ca","email");

@@ -233,7 +233,7 @@ export default class InputAnimation extends Component {
 			}
 		}
 	  render(){
-
+// {this._renderWechat()}
 	    return(
 	      <Animated.View style={{flex:1,paddingLeft:width*0.1562,paddingRight:width*0.1562,bottom:this.state.viewBottom}} {...this._gestureHandlers}>
 
@@ -280,7 +280,7 @@ export default class InputAnimation extends Component {
 															 ib_showLoading = {this.props.ib_showLoading}
 															 />
 								</View>
-								{this._renderWechat()}
+
 
 							 <View style={{position:Platform.OS == 'ios'?'absolute':'relative',
                              bottom:5,

@@ -107,10 +107,10 @@ export default class pastOrderEN extends Component {
   }
 
   _handleWechatBtn(){
-     Clipboard.setString('chanmaoweixin');
+     Clipboard.setString('chanmao_kefu');
      Alert.alert(
             '已复制',
-            '馋猫公众号: chanmaoweixin',
+            '馋猫公众号: chanmao_kefu',
             [
               {text: 'OK', onPress: () => {}},
             ]
@@ -217,7 +217,7 @@ export default class pastOrderEN extends Component {
                                       alignItems:'center'}}
                               onPress={this._handleWechatBtn}>
               <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
-              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>chanmaoweixin</Text>
+              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>chanmao_kefu</Text>
 
             </TouchableOpacity>
         </View>

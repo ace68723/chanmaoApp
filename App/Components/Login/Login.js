@@ -36,7 +36,7 @@ const SUBMIT_BUTTON = 'Submit_Button';
 var WeChat = require('react-native-wechat');
 const scope = 'snsapi_userinfo';
 const state = 'wechat_sdk_demos';
-const appid = 'wx20fd1aeb9b6fcf82';
+const appid = 'wx447c419e84aa1496';
 
 export default class LogoAnimationView extends Component {
   constructor(){
