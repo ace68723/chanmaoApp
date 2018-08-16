@@ -110,7 +110,7 @@ export default class InputAnimation extends Component {
 			if (!this.state.sentVerification) return(
 				<TouchableOpacity onPress={this._getVerification}>
 					<View style={{marginLeft:30,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
-					,alignItems:'center',justifyContent:'center',width:70}}>
+					,alignItems:'center',justifyContent:'center',width:90}}>
 						<Text style={{fontSize:15,color:'#ea7b21'}}>Get Code</Text>
 					</View>
 				</TouchableOpacity>
@@ -118,7 +118,7 @@ export default class InputAnimation extends Component {
 			else return(
 				<TouchableOpacity onPress={this._getVerification} disabled={true}>
 					<View style={{flex:1,marginLeft:30,borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
-					,alignItems:'center',justifyContent:'center',width:70}}>
+					,alignItems:'center',justifyContent:'center',width:90}}>
 						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.state.secondLeft}s</Text>
 					</View>
 				</TouchableOpacity>
