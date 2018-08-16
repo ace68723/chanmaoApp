@@ -79,8 +79,13 @@ const AuthModule = {
     async phoneRegister(io_data){
       try{
         console.log(io_data);
-        const res = await AuthApi.phoneRegister(io_data);
-        console.log(res);
+        // const res = await AuthApi.phoneRegister(io_data);
+        // console.log(res);
+        const res = {
+          ev_error: 0,
+          ev_uid: '123',
+          ev_authortoken: '123',
+        }
         if (res.ev_error === 0) {
           SaveUserInfo({uid:res.ev_uid, token:res.ev_authortoken});
           return res;
