@@ -91,9 +91,13 @@ export default class InputAnimation extends Component {
     }
 		_getVerification()
 		{
+			if (this.state.phone.length == 0) {
+
+			}
 			let _this = this;
 			this.setState({sentVerification:true});
 			this.setState({secondLeft:10});
+			this.props.if_sendVerification();
 			let interval = setInterval(() => {
 				console.log(_this.state);
 				_this.setState({secondLeft: _this.state.secondLeft-1})
