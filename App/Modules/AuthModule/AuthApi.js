@@ -34,7 +34,8 @@ const AuthApi = {
                 .catch((error) => {throw ERROR_NETWORK})
     },
     AppAuth(userInfo){
-      const url = AuthConstants.API_AUTH
+      // const url = AuthConstants.API_AUTH;
+      const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_login_wc';
       let options = {
         method: 'GET',
         mode:'cors',
@@ -43,24 +44,58 @@ const AuthApi = {
             'Content-Type': 'application/json'
         }
       }
-      if(userInfo.token){
+      console.log(userInfo);
+      if(userInfo.authortoken){
 
           options.headers = Object.assign(options.headers,{
-              authortoken:userInfo.token
+              authortoken:userInfo.authortoken
           })
 
-      }else if (userInfo.rescode){
+      }else if (userInfo.resCode){
           options.headers = Object.assign(options.headers,{
-              rescode:userInfo.rescode,
-              devicetoken:userInfo.deviceToken
+              rescode:userInfo.resCode,
           })
       }
-      options.headers = Object.assign(options.headers,{
-        Cmos:userInfo.os,
-        Cmuuid:userInfo.uuid,
-        Cmversion:userInfo.version
+      console.log(options);
+      // if(userInfo.token){
+      //
+      //     options.headers = Object.assign(options.headers,{
+      //         authortoken:userInfo.token
+      //     })
+      //
+      // }else if (userInfo.rescode){
+      //     options.headers = Object.assign(options.headers,{
+      //         rescode:userInfo.rescode,
+      //         devicetoken:userInfo.deviceToken
+      //     })
+      // }
+      // options.headers = Object.assign(options.headers,{
+      //   Cmos:userInfo.os,
+      //   Cmuuid:userInfo.uuid,
+      //   Cmversion:userInfo.version
+      // })
+      // var d = new Date();
+      return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw ERROR_NETWORK})
+    },
+    bindPhone(io_data) {
+      const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_login_wc';
+      let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+      }
+      console.log(io_data);
+      options.body = JSON.stringify({
+        phone: io_data.phone,
+        verification: io_data.verification,
+        cty: io_data.cty,
       })
-      var d = new Date();
+      console.log(options);
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})

@@ -41,11 +41,13 @@ const SUBMIT_BUTTON = 'Submit_Button';
 var WeChat = require('react-native-wechat');
 const scope = 'snsapi_userinfo';
 const state = 'wechat_sdk_demos';
-const appid = 'wx20fd1aeb9b6fcf82';
+// const appid = 'wx20fd1aeb9b6fcf82';
+const appid = 'wx447c419e84aa1496';
 
 
 const VIEW_TYPE_LOGIN = 'view_type_login';
 const VIEW_TYPE_REGISTER = 'view_type_register';
+const VIEW_TYPE_BINDPHONE = 'view_type_bindphone';
 
 export default class LogoAnimationView extends Component {
   constructor(){
@@ -61,7 +63,7 @@ export default class LogoAnimationView extends Component {
     			isAuthed:false,
     			isWXAppInstalled:true,
 					// viewType: VIEW_TYPE_LOGIN,
-					viewType: VIEW_TYPE_REGISTER,
+					viewType: VIEW_TYPE_LOGIN,
 					_registerStarted: false,
     	}
     this._handleLogin 		= this._handleLogin.bind(this);
@@ -76,6 +78,7 @@ export default class LogoAnimationView extends Component {
     this._handleBackToHome = this._handleBackToHome.bind(this);
     this._openAdView = this._openAdView.bind(this);
 		this._toggleViewType	= this._toggleViewType.bind(this);
+		this._handleBindSuccessful = this._handleBindSuccessful.bind(this);
   }
 	async componentDidMount() {
 		const registerResult = await WeChat.registerApp(appid);
@@ -113,6 +116,14 @@ export default class LogoAnimationView extends Component {
 		this.setState({
 			re_password:password
 		});
+	}
+	_handleBindSuccessful() {
+		this.props.navigator.dismissModal({
+		   animationType: 'slide-down'
+		})
+		setTimeout( () => {
+			this.props.handleLoginSuccessful();
+		}, 800);
 	}
   _loginStarted
 
@@ -183,17 +194,32 @@ export default class LogoAnimationView extends Component {
 
 		 const result = await WeChat.sendAuthRequest(scope, state);
 		 const resCode = result.code;
-		 const deviceToken = this.state.deviceToken;
-		 const data = {resCode,deviceToken};
+		 // const deviceToken = this.state.deviceToken;
+		 // const data = {resCode,deviceToken};
+		 const data = {resCode};
+		 console.log(data);
 		 const res = await AuthAction.doWechatAuth(data);
-     this.setState({
-       showLoading:false,
-       loginSuccess:true,
-     })
-     this.props.navigator.dismissModal({
-        animationType: 'slide-down'
-     })
-     this.props.handleLoginSuccessful();
+		 console.log(res);
+		 if (res.ev_openid) {
+			 this.props.navigator.showModal({
+				 screen: 'CmBindPhone',
+				 animationType: 'slide-up',
+				 navigatorStyle: {navBarHidden: true},
+				 passProps: {handleBackToHome: this._handleBackToHome,
+										 handleBindSuccessful: this._handleBindSuccessful,
+										 openid: res.ev_openid
+				 },
+			 })
+		 }
+
+     // this.setState({
+     //   showLoading:false,
+     //   loginSuccess:true,
+     // })
+     // this.props.navigator.dismissModal({
+     //    animationType: 'slide-down'
+     // })
+     // this.props.handleLoginSuccessful();
 	 } catch (e) {
 		 if(e == '-2'){
 			 console.log(e)
@@ -286,6 +312,40 @@ export default class LogoAnimationView extends Component {
 
 				{ this.state.viewType == VIEW_TYPE_REGISTER &&
 					<RegisterInputAnimation
+													is_username = {AppString('username')}
+													is_password = {AppString('password')}
+													is_login = {AppString('login')}
+												  is_register = {AppString('register')}
+												  is_forgot = {AppString('forgot')}
+													is_wechat = {AppString('wechat')}
+													ib_isWXAppInstalled = {this.state.isWXAppInstalled}
+													is_copyright = {AppString('copyright')}
+													is_version = {AppConstants.CM_VERSION}
+													ib_loginSuccess = {this.state.loginSuccess}
+													ib_registerSuccess = {this.state.registerSuccess}
+													ib_showLoading = {this.state.showLoading}
+												  if_handleLogin = {this._handleLogin}
+													if_handleRegister = {this._handleRegister}
+													ir_VERIFICATION_INPUTREF = {VERIFICATION_INPUTREF}
+													ir_PHONE_INPUTREF = {PHONE_INPUTREF}
+													ir_EMAIL_INPUTREF = {EMAIL_INPUTREF}
+													ir_PASSWORD_INPUTREF = {PASSWORD_INPUTREF}
+													ir_RE_PASSWORD_INPUTREF = {RE_PASSWORD_INPUTREF}
+													ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
+													if_handlePhone = {this._handlePhone}
+													if_handleVerification = {this._handleVerification}
+													if_handleEmail = {this._handleEmail}
+													if_handlePassword = {this._handlePassword}
+													if_handleRePassword = {this._handleRePassword}
+													if_handleWechatLogin = {this._handleWechatLogin}
+													if_openAdView = {this._openAdView}
+													viewType = {this.state.viewType}
+													toggleViewType = {this._toggleViewType}
+													/>
+				}
+
+				{ this.state.viewType == VIEW_TYPE_BINDPHONE &&
+					<BindPhoneInputAnimation
 													is_username = {AppString('username')}
 													is_password = {AppString('password')}
 													is_login = {AppString('login')}

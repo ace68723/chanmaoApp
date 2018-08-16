@@ -17,6 +17,7 @@ export default {
     async doAuth(){
           try{
             const res = await Auth.doAuth()
+            console.log('In authAction isAuthed: ', res);
             if(res.result == 0){
               // dispatch({
               //     actionType: AppConstants.LOGIN_SUCCESS, res
@@ -33,16 +34,28 @@ export default {
     },
     async doWechatAuth(io_data){
       try{
-        const deviceToken = io_data.deviceToken;
+        // const deviceToken = io_data.deviceToken;
         const resCode     = io_data.resCode;
-        const data        = {deviceToken,resCode};
-        const res         = await Auth.AppDoWechatAuth(data);
-        return 'success';
+        // const data        = {deviceToken,resCode};
+        const res         = await Auth.AppDoWechatAuth(io_data);
+        console.log(res);
+        // return 'success';
+        return res;
         // dispatch({
         //     actionType: AppConstants.LOGIN_SUCCESS, res
         // })
       }catch(error){
         console.log(error)
+      }
+    },
+    async bindPhone(io_data) {
+      try{
+        const res = await Auth.bindPhone(io_data);
+        console.log(res);
+        return res;
+      }catch(error){
+        console.log(error)
+        alert('Binding failed');
       }
     },
     isAuthed(){

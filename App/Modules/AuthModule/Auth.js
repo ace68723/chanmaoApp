@@ -36,14 +36,26 @@ let authStarted = false;
 const AuthModule = {
 
     async doAuth(){
-        const data = GetUserInfo();
-        const reqData = formatAuth(data);
-        const res = await AuthApi.AppAuth(reqData);
-        if (res.result === 0) {
+        // const data = GetUserInfo();
+        // const reqData = formatAuth(data);
+        // const res = await AuthApi.AppAuth(reqData);
+        // if (res.result === 0) {
+        //   return res;
+        // }else{
+        //   InitUserInfo();
+        //   throw res;
+        // }
+        try{
+          const authortoken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjI0LCJleHBpcmVkX3RpbWUiOjE1MzQzNTM2MjIsImxhc3RfbG9naW4iOjE1MzQzNTM2MjJ9.s6h_AhApaN92t9TV_N7GIYqFxaAMKVQwvvqa4uggLsQ';
+          const data = {
+            authortoken
+          };
+          const res = await AuthApi.AppAuth(data);
+          console.log('In authModule isAuthed: ', res);
           return res;
-        }else{
-          InitUserInfo();
-          throw res;
+        } catch(e) {
+            InitUserInfo();
+          //   throw res;
         }
     },
 
@@ -66,16 +78,45 @@ const AuthModule = {
 
     async AppDoWechatAuth(io_data){
       var d = new Date();
-      const deviceToken = io_data.deviceToken;
-      const resCode     = io_data.resCode;
-      const userInfo = formatWecahtAuth(resCode,deviceToken)
-      const res = await AuthApi.AppAuth(userInfo)
-      if (res.result === 0) {
-        SaveUserInfo({uid:res.uid, token:res.token});
+      // const deviceToken = io_data.deviceToken;
+      // const resCode     = io_data.resCode;
+      // const userInfo = formatWecahtAuth(resCode,deviceToken)
+
+      // const res = await AuthApi.AppAuth(io_data)
+      const res = {
+        ev_error: 0,
+        ev_openid: 123,
+      }
+      console.log(res);
+      if (res.ev_error === 0) {
         return res;
-      }else{
+      } else {
         InitUserInfo();
         throw res;
+      }
+      // if (res.result === 0) {
+      //   SaveUserInfo({uid:res.uid, token:res.token});
+      //   return res;
+      // }else{
+      //   InitUserInfo();
+      //   throw res;
+      // }
+    },
+    async bindPhone(io_data) {
+      try {
+        const res = await AuthApi.bindPhone(io_data);
+        // const res = {
+        //   ev_error: 0,
+        //   ev_authortoken: '2321',
+        //   ev_uid: 123,
+        // }
+        if (res.ev_error === 0) {
+          return res;
+        } else {
+          throw res;
+        }
+      } catch (e) {
+        console.log(e)
       }
     },
     isAuthed() {
