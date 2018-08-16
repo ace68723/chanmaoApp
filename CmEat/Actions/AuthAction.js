@@ -4,27 +4,6 @@ import Auth from '../Modules/AuthModule/Auth';
 import Alert from '../Components/General/Alert';
 
 export default {
-    async phoneRegister(io_data) {
-      try{
-        const {username,email,phoneNumber,verification,password,deviceToken} = io_data;
-        const reqData = {username,email,phoneNumber,verification,password,deviceToken};
-        const res = await Auth.phoneRegister(reqData);
-        const data = {
-          authortoken: res.authortoken,
-          uid: res.uid,
-        };
-        dispatch({
-            actionType: AppConstants.REGISTER_SUCCESS, data
-        })
-      }catch(error){
-        dispatch({
-            actionType: AppConstants.REGISTER_FAIL, error
-        })
-        setTimeout( () => {
-           Alert.errorAlert(error.message || '未知错误')
-        }, 1000);
-      }
-    },
     async wechatRegister(io_data) {
       try{
         const {phoneNumber,verification,password,deviceToken} = io_data;

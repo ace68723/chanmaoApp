@@ -1,7 +1,12 @@
+import {
+  Platform,
+} from 'react-native';
+
 import AppConstants from '../Constants/AppConstants';
 // // import {dispatch, register} from '../Dispatchers/AppDispatcher';
 import Auth from '../Modules/AuthModule/Auth';
-// // import Alert from '../Components/General/Alert';
+import Alert from '../Components/General/Alert';
+
 
 export default {
     async doLogin(io_data){
@@ -12,6 +17,29 @@ export default {
         return 'success'
       }catch(error){
         throw error
+      }
+    },
+    async phoneRegister(io_data) {
+      try{
+        let cmos;
+        if (Platform.OS == 'ios') {
+          cmos = 'ios';
+        } else {
+          cmos = 'android';
+        }
+        const {email,phone,verification,password} = io_data;
+        const reqData = {email,phone,verification,password,cmos};
+        console.log(reqData);
+        const res = await Auth.phoneRegister(reqData);
+        const data = {
+          authortoken: res.authortoken,
+          uid: res.uid,
+        };
+        return 'success'
+      }catch(error){
+        setTimeout( () => {
+           Alert.errorAlert('注册失败, 请重新尝试')
+        }, 1000);
       }
     },
     async doAuth(){

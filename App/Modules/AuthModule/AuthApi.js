@@ -33,6 +33,31 @@ const AuthApi = {
                 .then((res) => res.json())
                 .catch((error) => {throw ERROR_NETWORK})
     },
+    phoneRegister(io_data) {
+      // const url = AuthConstants.API_LOGIN
+      const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_register_user';
+      let options = {
+          method: 'POST',
+          mode:'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      }
+      options.headers = Object.assign(options.headers,{
+          cmos:io_data.cmos,
+      })
+      options.body = JSON.stringify({
+        iv_num: io_data.phone,
+        iv_verification_code: io_data.verification,
+        iv_cty: 1,
+        iv_password: io_data.password,
+        iv_email: io_data.email
+      })
+      return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw ERROR_NETWORK})
+    },
     AppAuth(userInfo){
       // const url = AuthConstants.API_AUTH;
       const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_login_wc';

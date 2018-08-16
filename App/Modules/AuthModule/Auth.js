@@ -63,17 +63,34 @@ const AuthModule = {
           const username = io_data.username;
           const password = io_data.password;
           const deviceToken = io_data.deviceToken;
-          const data = {username,password,deviceToken}
-          const userInfo = formatLogin(data)
-          const res = await AuthApi.AppLogin(userInfo)
+          const data = {username,password,deviceToken};
+          const userInfo = formatLogin(data);
+          const res = await AuthApi.AppLogin(userInfo);
+          console.log(res);
           if (res.result === 0) {
             SaveUserInfo({uid:res.uid, token:res.token});
-            console.log(res);
             return res;
           }else{
             InitUserInfo();
             throw res;
           }
+    },
+
+    async phoneRegister(io_data){
+      try{
+        console.log(io_data);
+        const res = await AuthApi.phoneRegister(io_data);
+        console.log(res);
+        if (res.ev_error === 0) {
+          SaveUserInfo({uid:res.ev_uid, token:res.ev_authortoken});
+          return res;
+        }else{
+          InitUserInfo();
+          throw res;
+        }
+      }catch(e) {
+        console.log(e)
+      }
     },
 
     async AppDoWechatAuth(io_data){

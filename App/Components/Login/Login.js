@@ -16,7 +16,7 @@ import AppConstants from '../../Constants/AppConstants';
 import AppString from '../../Constants/AppString';
 import AuthAction from '../../Actions/AuthAction';
 // import AuthStore from '../../Stores/AuthStore';
-
+import Alert from '../General/Alert';
 import InputAnimation from './InputAnimation';
 import RegisterInputAnimation from './register/InputAnimation';
 
@@ -128,64 +128,93 @@ export default class LogoAnimationView extends Component {
   _loginStarted
 
   async _handleLogin(){
-    if(this._loginStarted) return
-		if (this.state.viewType == VIEW_TYPE_REGISTER){
-			// if register
-
-			return;
-		}
-    this._loginStarted = true;
+		if(this._loginStarted) return;
+		this._loginStarted = true;
 		this.setState({
 			showLoading:true,
 		})
-		const {username,verification,email,password,re_password} = this.state;
-		const io_data							= {username,verification,email,password,re_password};
-    try {
-        const res = await AuthAction.phoneRegister(io_data);
-        this.setState({
-    			showLoading:false,
-          registerSuccess:true,
-    		})
-        this.props.navigator.dismissModal({
-           animationType: 'slide-down'
-        })
-        this.props.handleLoginSuccessful();
-    } catch (e) {
-      console.log(e)
-      this.setState({
-        showLoading:false,
-        registerSuccess:false,
-      })
-      this._loginStarted = false;
-    }
+		const {username,password} = this.state;
+		const io_data							= {username,password}
+		try {
+				const res = await AuthAction.doLogin(io_data);
+				this.setState({
+					showLoading:false,
+					loginSuccess:true,
+				})
+				this.props.navigator.dismissModal({
+					animationType: 'slide-down'
+			 })
+			 this.props.handleLoginSuccessful();
+		} catch (e) {
+		 console.log(e)
+		 this.setState({
+			 showLoading:false,
+			 loginSuccess:false,
+		 })
+		 this._loginStarted = false;
+	 }
   }
 
 	async _handleRegister() {
 		console.log(this.state);
-		if(this.state._registerStarted) return
+		if(this.state._registerStarted) return;
 		this.setState({
 			showLoading:true,
 			_registerStarted: true,
-		})
+		});
+		if (this.state.phone.length == 0 || this.state.verification.length == 0) {
+			this.setState({
+				showLoading:false,
+				loginSuccess:false,
+				_registerStarted:false,
+			});
+			Alert.errorAlert('请填写账户信息');
+			return;
+		}
+		else if (this.state.password != this.state.re_password) {
+			this.setState({
+				showLoading:false,
+				loginSuccess:false,
+				_registerStarted:false,
+			});
+			Alert.errorAlert('密码配对不上 请重新输入');
+			return;
+		} else if (this.state.password.length < 8 || this.state.password.length > 32) {
+			this.setState({
+				showLoading:false,
+				loginSuccess:false,
+				_registerStarted:false,
+			});
+			Alert.errorAlert('密码必须在8到32位之间');
+			return;
+		}
 		const {phone,verification,email,password} = this.state;
-		const io_data							= {username,password}
+		const io_data	= {phone,verification,email,password}
     try {
-        const res = await AuthAction.doLogin(io_data);
-        this.setState({
-    			showLoading:false,
-          loginSuccess:true,
-    		})
-        this.props.navigator.dismissModal({
-           animationType: 'slide-down'
-        })
-        this.props.handleLoginSuccessful();
+        const res = await AuthAction.phoneRegister(io_data);
+				if (res == 'success') {
+					this.setState({
+	    			showLoading:false,
+	          loginSuccess:true,
+	    		});
+	        this.props.navigator.dismissModal({
+	           animationType: 'slide-down'
+	        })
+	        this.props.handleLoginSuccessful();
+				} else {
+					this.setState({
+	    			showLoading:false,
+	          loginSuccess:false,
+						_registerStarted:false,
+	    		});
+				}
     } catch (e) {
       console.log(e)
       this.setState({
         showLoading:false,
         loginSuccess:false,
+				_registerStarted:false,
       })
-      this._loginStarted = false;
     }
 	}
 	async _handleWechatLogin(event){

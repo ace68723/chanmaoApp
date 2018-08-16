@@ -287,10 +287,10 @@ export default class InputAnimation extends Component {
 		             </View>
 	            <TextInput
 	                    style={styles.input}
-	                    placeholder="Email"
+	                    placeholder="Email(Optional)"
 	                    placeholderTextColor={'#ffffff'}
 	                    selectionColor={'#ea7b21'}
-	                    autoCorrect= { false}
+	                    autoCorrect= {false}
 											textContentType = 'emailAddress'
 	                    returnKeyType={'next'}
 	                    ref={this.props.ir_EMAIL_INPUTREF}
