@@ -58,6 +58,24 @@ const AuthApi = {
               .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
+    sendVerification(io_data) {
+      const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_send_vcode';
+      let options = {
+          method: 'GET',
+          mode:'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      }
+      options.headers = Object.assign(options.headers,{
+          cty:1,
+          num:io_data.phone
+      })
+      return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw ERROR_NETWORK})
+    },
     AppAuth(userInfo){
       // const url = AuthConstants.API_AUTH;
       const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_login_wc';

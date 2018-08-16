@@ -124,6 +124,22 @@ const AuthModule = {
       //   throw res;
       // }
     },
+    async sendVerification(io_data) {
+      try {
+        const res = await AuthApi.sendVerification(io_data);
+        // const res = {
+        //   ev_error: 0,
+        //   ev_verification: '1234',
+        // }
+        if (res.ev_error === 0) {
+          return res;
+        } else {
+          throw res;
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async bindPhone(io_data) {
       try {
         const res = await AuthApi.bindPhone(io_data);

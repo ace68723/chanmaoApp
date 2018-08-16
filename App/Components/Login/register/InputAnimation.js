@@ -55,10 +55,7 @@ export default class InputAnimation extends Component {
 					transitionWidth:new Animated.Value(0),
 					transitionHight:new Animated.Value(0),
 					transitionRadius:new Animated.Value(30),
-					sentVerification:false,
-					secondLeft:0,
 	    }
-			this._getVerification = this._getVerification.bind(this);
 			this._renderSentCode = this._renderSentCode.bind(this);
 			this._hideKeyboard = this._hideKeyboard.bind(this);
 	    this._keyboardWillShow = this._keyboardWillShow.bind(this);
@@ -89,30 +86,30 @@ export default class InputAnimation extends Component {
       this._keyboardWillHideSubscription.remove();
 			// AuthStore.removeChangeListener(this._onChange);
     }
-		_getVerification()
-		{
-			if (this.state.phone.length == 0) {
-
-			}
-			let _this = this;
-			this.setState({sentVerification:true});
-			this.setState({secondLeft:10});
-			this.props.if_sendVerification();
-			let interval = setInterval(() => {
-				console.log(_this.state);
-				_this.setState({secondLeft: _this.state.secondLeft-1})
-			}, 1000);
-			setTimeout(() => {
-				clearInterval(interval);
-				_this.setState({sentVerification:false});
-			},10000)
-
-		}
+		// _getVerification()
+		// {
+		// 	if (this.state.phone.length == 0) {
+		//
+		// 	}
+		// 	let _this = this;
+		// 	this.setState({sentVerification:true});
+		// 	this.setState({secondLeft:10});
+		// 	this.props.if_sendVerification();
+		// 	let interval = setInterval(() => {
+		// 		console.log(_this.state);
+		// 		_this.setState({secondLeft: _this.state.secondLeft-1})
+		// 	}, 1000);
+		// 	setTimeout(() => {
+		// 		clearInterval(interval);
+		// 		_this.setState({sentVerification:false});
+		// 	},10000)
+		//
+		// }
 		_renderSentCode()
 		{
 			console.log(this.state.sentVerification);
 			if (!this.state.sentVerification) return(
-				<TouchableOpacity onPress={this._getVerification}>
+				<TouchableOpacity onPress={this.props.if_getVerification}>
 					<View style={{marginLeft:30,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:70}}>
 						<Text style={{fontSize:15,color:'#ea7b21'}}>Get Code</Text>
@@ -120,10 +117,10 @@ export default class InputAnimation extends Component {
 				</TouchableOpacity>
 			)
 			else return(
-				<TouchableOpacity onPress={this._getVerification} disabled={true}>
+				<TouchableOpacity onPress={this.props.if_getVerification} disabled={true}>
 					<View style={{flex:1,marginLeft:30,borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:70}}>
-						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.state.secondLeft}s</Text>
+						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.props.secondLeft}s</Text>
 					</View>
 				</TouchableOpacity>
 			);

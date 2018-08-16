@@ -76,6 +76,16 @@ export default {
         console.log(error)
       }
     },
+    async sendVerification(io_data) {
+      try{
+        const res = await Auth.sendVerification(io_data);
+        console.log(res);
+        return res;
+      }catch(error){
+        console.log(error)
+        alert('Send verification code failed');
+      }
+    },
     async bindPhone(io_data) {
       try{
         const res = await Auth.bindPhone(io_data);

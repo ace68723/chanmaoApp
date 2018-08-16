@@ -65,6 +65,8 @@ export default class LogoAnimationView extends Component {
 					// viewType: VIEW_TYPE_LOGIN,
 					viewType: VIEW_TYPE_LOGIN,
 					_registerStarted: false,
+					sentVerification:false,
+					secondLeft:0,
     	}
     this._handleLogin 		= this._handleLogin.bind(this);
 		this._handleRegister = this._handleRegister.bind(this);
@@ -80,6 +82,7 @@ export default class LogoAnimationView extends Component {
     this._openAdView = this._openAdView.bind(this);
 		this._toggleViewType	= this._toggleViewType.bind(this);
 		this._handleBindSuccessful = this._handleBindSuccessful.bind(this);
+		this._getVerification = this._getVerification.bind(this);
   }
 	async componentDidMount() {
 		const registerResult = await WeChat.registerApp(appid);
@@ -118,8 +121,29 @@ export default class LogoAnimationView extends Component {
 			re_password:password
 		});
 	}
-	_sendVerification() {
+	_getVerification()
+	{
+		if (this.state.phone.length < 10) {
+			Alert.errorAlert('请填写正确手机号码');
+			return;
+		}
+		let _this = this;
+		this.setState({sentVerification:true});
+		this.setState({secondLeft:10});
+		this._sendVerification();
+		let interval = setInterval(() => {
+			console.log(_this.state);
+			_this.setState({secondLeft: _this.state.secondLeft-1})
+		}, 1000);
+		setTimeout(() => {
+			clearInterval(interval);
+			_this.setState({sentVerification:false});
+		},10000)
+
+	}
+	async _sendVerification() {
 		const res = await AuthAction.sendVerification();
+		// this.setState(res.ev_verification)
 	}
 	_handleBindSuccessful() {
 		this.props.navigator.dismissModal({
@@ -372,43 +396,11 @@ export default class LogoAnimationView extends Component {
 													if_handlePassword = {this._handlePassword}
 													if_handleRePassword = {this._handleRePassword}
 													if_handleWechatLogin = {this._handleWechatLogin}
+													if_getVerification = {this._getVerification}
 													if_openAdView = {this._openAdView}
 													viewType = {this.state.viewType}
 													toggleViewType = {this._toggleViewType}
-													/>
-				}
-
-				{ this.state.viewType == VIEW_TYPE_BINDPHONE &&
-					<BindPhoneInputAnimation
-													is_username = {AppString('username')}
-													is_password = {AppString('password')}
-													is_login = {AppString('login')}
-												  is_register = {AppString('register')}
-												  is_forgot = {AppString('forgot')}
-													is_wechat = {AppString('wechat')}
-													ib_isWXAppInstalled = {this.state.isWXAppInstalled}
-													is_copyright = {AppString('copyright')}
-													is_version = {AppConstants.CM_VERSION}
-													ib_loginSuccess = {this.state.loginSuccess}
-													ib_registerSuccess = {this.state.registerSuccess}
-													ib_showLoading = {this.state.showLoading}
-												  if_handleLogin = {this._handleLogin}
-													if_handleRegister = {this._handleRegister}
-													ir_VERIFICATION_INPUTREF = {VERIFICATION_INPUTREF}
-													ir_PHONE_INPUTREF = {PHONE_INPUTREF}
-													ir_EMAIL_INPUTREF = {EMAIL_INPUTREF}
-													ir_PASSWORD_INPUTREF = {PASSWORD_INPUTREF}
-													ir_RE_PASSWORD_INPUTREF = {RE_PASSWORD_INPUTREF}
-													ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
-													if_handlePhone = {this._handlePhone}
-													if_handleVerification = {this._handleVerification}
-													if_handleEmail = {this._handleEmail}
-													if_handlePassword = {this._handlePassword}
-													if_handleRePassword = {this._handleRePassword}
-													if_handleWechatLogin = {this._handleWechatLogin}
-													if_openAdView = {this._openAdView}
-													viewType = {this.state.viewType}
-													toggleViewType = {this._toggleViewType}
+													secondLeft = {this.state.secondLeft}
 													/>
 				}
 
