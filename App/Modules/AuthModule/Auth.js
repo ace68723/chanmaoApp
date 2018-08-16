@@ -129,7 +129,6 @@ const AuthModule = {
         const res = await AuthApi.sendVerification(io_data);
         // const res = {
         //   ev_error: 0,
-        //   ev_verification: '1234',
         // }
         if (res.ev_error === 0) {
           return res;

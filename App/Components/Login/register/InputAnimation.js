@@ -316,7 +316,7 @@ export default class InputAnimation extends Component {
 												    color: '#ffffff',
 												    height:50,
 												    marginTop:5,
-													width:120,}}
+													width:140,}}
 												placeholder="Verification Code"
 												placeholderTextColor={'#ffffff'}
 												selectionColor={'#ea7b21'}
