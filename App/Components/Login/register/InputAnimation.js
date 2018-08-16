@@ -55,7 +55,11 @@ export default class InputAnimation extends Component {
 					transitionWidth:new Animated.Value(0),
 					transitionHight:new Animated.Value(0),
 					transitionRadius:new Animated.Value(30),
+					sentVerification:false,
+					secondLeft:0,
 	    }
+			this._getVerification = this._getVerification.bind(this);
+			this._renderSentCode = this._renderSentCode.bind(this);
 			this._hideKeyboard = this._hideKeyboard.bind(this);
 	    this._keyboardWillShow = this._keyboardWillShow.bind(this);
 	    this._keyboardWillHide = this._keyboardWillHide.bind(this);
@@ -85,6 +89,41 @@ export default class InputAnimation extends Component {
       this._keyboardWillHideSubscription.remove();
 			// AuthStore.removeChangeListener(this._onChange);
     }
+		_getVerification()
+		{
+			let _this = this;
+			this.setState({sentVerification:true});
+			this.setState({secondLeft:10});
+			let interval = setInterval(() => {
+				console.log(_this.state);
+				_this.setState({secondLeft: _this.state.secondLeft-1})
+			}, 1000);
+			setTimeout(() => {
+				clearInterval(interval);
+				_this.setState({sentVerification:false});
+			},10000)
+
+		}
+		_renderSentCode()
+		{
+			console.log(this.state.sentVerification);
+			if (!this.state.sentVerification) return(
+				<TouchableOpacity onPress={this._getVerification}>
+					<View style={{marginLeft:50,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
+					,alignItems:'center',justifyContent:'center',width:90}}>
+						<Text style={{fontSize:15,color:'#ea7b21'}}>Get Code</Text>
+					</View>
+				</TouchableOpacity>
+			)
+			else return(
+				<TouchableOpacity onPress={this._getVerification} disabled={true}>
+					<View style={{marginLeft:40,borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
+					,alignItems:'center',justifyContent:'center',width:100}}>
+						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.state.secondLeft}s</Text>
+					</View>
+				</TouchableOpacity>
+			);
+		}
 		_onChange(){
 			// if(AuthStore.loginState().loginSuccess){
 				// InteractionManager.runAfterInteractions(() => {
@@ -269,7 +308,8 @@ export default class InputAnimation extends Component {
 	             <View style={{height:1,
 	                           backgroundColor:'#ffffff',}}>
 	             </View>
-							 <TextInput
+							 <View style={{flexDirection: 'row'}}>
+								 <TextInput
 												style={styles.input}
 												placeholder="Verification Code"
 												placeholderTextColor={'#ffffff'}
@@ -281,7 +321,9 @@ export default class InputAnimation extends Component {
 												onChangeText={this.props.if_handleVerification}
 												underlineColorAndroid={"rgba(0,0,0,0)"}
 												keyboardType = 'number-pad'
-										/>
+											/>
+									{this._renderSentCode()}
+							 </View>
 		             <View style={{height:1,
 		                           backgroundColor:'#ffffff',}}>
 		             </View>
