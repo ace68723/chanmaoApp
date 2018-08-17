@@ -373,7 +373,6 @@ export default class LogoAnimationView extends Component {
 													is_password = {AppString('password')}
 													is_login = {AppString('login')}
 												  is_register = {AppString('register')}
-												  is_forgot = {AppString('forgot')}
 													is_wechat = {AppString('wechat')}
 													ib_isWXAppInstalled = {this.state.isWXAppInstalled}
 													is_copyright = {AppString('copyright')}
@@ -399,7 +398,6 @@ export default class LogoAnimationView extends Component {
 													is_password = {AppString('password')}
 													is_login = {AppString('login')}
 												  is_register = {AppString('register')}
-												  is_forgot = {AppString('forgot')}
 													is_wechat = {AppString('wechat')}
 													ib_isWXAppInstalled = {this.state.isWXAppInstalled}
 													is_copyright = {AppString('copyright')}
