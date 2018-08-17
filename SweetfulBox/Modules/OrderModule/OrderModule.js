@@ -140,7 +140,13 @@ export default  {
   async checkout(comment) {
     try {
       const {uid,token,version} = GetUserInfo();
-      if(!token) return {checkoutStatus:"shouldDoAuth"}
+      // if(!token) return {checkoutStatus:"shouldDoAuth"}
+      const authRes = await AuthAction.isAuthed();
+      if (authRes.ev_error !== 0) {
+        return {checkoutStatus:"shouldDoAuth"};
+      } else if (authRes.ev_error === 0 && authRes.ev_missing_phone === 1) {
+        return {checkoutStatus:"shouldDoBindPhone"};
+      }
 
       let allItems = sbox_getAllItemsFromCart();
       let prod = [];

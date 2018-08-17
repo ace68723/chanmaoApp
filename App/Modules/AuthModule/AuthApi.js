@@ -57,18 +57,35 @@ const AuthApi = {
               'Content-Type': 'application/json'
           }
       }
+      if (io_data.openid) {
+        options.body = JSON.stringify({
+          iv_num: io_data.phone,
+          iv_verification_code: io_data.verification,
+          iv_cty: 1,
+          iv_openid: io_data.openid,
+          iv_unionid: io_data.unionid,
+          iv_refresh_token: io_data.refresh_token,
+        })
+      } else {
+        options.body = JSON.stringify({
+          iv_num: io_data.phone,
+          iv_verification_code: io_data.verification,
+          iv_cty: 1,
+          iv_password: io_data.password,
+          iv_email: io_data.email
+        })
+      }
       options.headers = Object.assign(options.headers,{
           cmos:io_data.cmos,
       })
-      options.body = JSON.stringify({
-        iv_num: io_data.phone,
-        iv_verification_code: io_data.verification,
-        iv_cty: 1,
-        iv_password: io_data.password,
-        iv_email: io_data.email
-      })
+      console.log(io_data);
+      console.log(options);
       return fetch(url,options)
-              .then((res) => res.json())
+              .then(function(res) {
+                console.log(res);
+                // (res) => res.json()
+                return res.json();
+              })
               .catch((error) => {throw ERROR_NETWORK})
     },
     sendVerification(io_data) {
@@ -157,6 +174,7 @@ const AuthApi = {
         iv_num: io_data.phone,
         iv_verification_code: io_data.verification,
         iv_cty: io_data.cty,
+        iv_openid: io_data.openid,
       })
       console.log(options);
       return fetch(url,options)

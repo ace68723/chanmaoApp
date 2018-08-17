@@ -266,9 +266,7 @@ export default class LogoAnimationView extends Component {
 		 // const deviceToken = this.state.deviceToken;
 		 // const data = {resCode,deviceToken};
 		 const data = {resCode};
-		 console.log(data);
 		 const res = await AuthAction.doWechatAuth(data);
-		 console.log(res);
 		 if (res.ev_openid) {
 			 this.props.navigator.showModal({
 				 screen: 'CmBindPhone',
@@ -276,9 +274,20 @@ export default class LogoAnimationView extends Component {
 				 navigatorStyle: {navBarHidden: true},
 				 passProps: {handleBackToHome: this._handleBackToHome,
 										 handleBindSuccessful: this._handleBindSuccessful,
-										 openid: res.ev_openid
+										 openid: res.ev_openid,
+										 unionid: res.ev_unionid,
+										 refresh_token: res.ev_refresh_token,
 				 },
 			 })
+		 } else if (res.ev_error === 0) {
+			 this.setState({
+	       showLoading:false,
+	       loginSuccess:true,
+	     })
+	     this.props.navigator.dismissModal({
+	        animationType: 'slide-down'
+	     })
+	     this.props.handleLoginSuccessful();
 		 }
 
      // this.setState({

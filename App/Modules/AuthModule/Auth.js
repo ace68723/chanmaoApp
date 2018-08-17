@@ -66,28 +66,20 @@ const AuthModule = {
           // const data = {username,password,deviceToken};
           const data = {username,password};
           const userInfo = formatLogin(data);
-          console.log(userInfo);
           const res = await AuthApi.AppLogin(userInfo);
-          console.log(res);
           if (res.ev_error === 0) {
             SaveUserInfo({uid:res.ev_uid.toString(), token:res.ev_authortoken.toString()});
             return res;
           }else{
             InitUserInfo();
-            throw res;
+            // throw res;
+            return {ev_error: 1};
           }
     },
 
     async phoneRegister(io_data){
       try{
-        console.log(io_data);
         const res = await AuthApi.phoneRegister(io_data);
-        // console.log(res);
-        // const res = {
-        //   ev_error: 0,
-        //   ev_uid: '123',
-        //   ev_authortoken: '123',
-        // }
         if (res.ev_error === 0) {
           SaveUserInfo({uid:res.ev_uid.toString(), token:res.ev_authortoken.toString()});
           return res;
@@ -106,11 +98,7 @@ const AuthModule = {
       // const resCode     = io_data.resCode;
       // const userInfo = formatWecahtAuth(resCode,deviceToken)
 
-      // const res = await AuthApi.AppAuth(io_data)
-      const res = {
-        ev_error: 0,
-        ev_openid: 123,
-      }
+      const res = await AuthApi.AppAuth(io_data);
       console.log(res);
       if (res.ev_error === 0) {
         return res;
@@ -118,6 +106,8 @@ const AuthModule = {
         InitUserInfo();
         throw res;
       }
+
+
       // if (res.result === 0) {
       //   SaveUserInfo({uid:res.uid, token:res.token});
       //   return res;
@@ -161,6 +151,7 @@ const AuthModule = {
         return res;
       } catch (e) {
         console.log(e)
+        return {ev_error: 1}
       }
     },
     async getToken() {

@@ -30,7 +30,6 @@ export default {
         }
         const {email,phone,verification,password} = io_data;
         const reqData = {email,phone,verification,password,cmos};
-        console.log(reqData);
         const res = await Auth.phoneRegister(reqData);
         if (res.ev_error === 0) {
           return 'success'
@@ -48,13 +47,11 @@ export default {
     async doAuth(){
           try{
             const res = await Auth.doAuth()
-            console.log('In authAction isAuthed: ', res);
             if(res.result == 0){
               // dispatch({
               //     actionType: AppConstants.LOGIN_SUCCESS, res
               // })
             }else{
-              console.log(res)
               const errorMessage = res.message  || '验证失效,未知错误'
               throw errorMessage
             }
@@ -65,12 +62,8 @@ export default {
     },
     async doWechatAuth(io_data){
       try{
-        // const deviceToken = io_data.deviceToken;
-        const resCode     = io_data.resCode;
-        // const data        = {deviceToken,resCode};
+        console.log(io_data);
         const res         = await Auth.AppDoWechatAuth(io_data);
-        console.log(res);
-        // return 'success';
         return res;
         // dispatch({
         //     actionType: AppConstants.LOGIN_SUCCESS, res
@@ -82,7 +75,6 @@ export default {
     async sendVerification(io_data) {
       try{
         const res = await Auth.sendVerification(io_data);
-        console.log(res);
         if (res.ev_error == 0) {
           return res;
         } else {
@@ -99,8 +91,12 @@ export default {
     },
     async bindPhone(io_data) {
       try{
-        const res = await Auth.bindPhone(io_data);
-        console.log(res);
+        let res;
+        if (io_data.openid && io_data.unionid && io_data.refresh_token) {
+          res = await Auth.phoneRegister(io_data);
+        } else {
+          res = await Auth.bindPhone(io_data);
+        }
         return res;
       }catch(error){
         console.log(error)
