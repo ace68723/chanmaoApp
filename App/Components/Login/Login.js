@@ -123,27 +123,32 @@ export default class LogoAnimationView extends Component {
 		});
 	}
 	_getVerification() {
-		if (this.state.phone.length < 10) {
+		if (this.state.phone.length < 10 || this.state.phone.match(/^[0-9]+$/) == null) {
 			Alert.errorAlert('请填写正确手机号码');
 			return;
 		}
-		let _this = this;
-		this.setState({isVerificationSent:true});
-		this.setState({secondLeft:10});
 		this._sendVerification();
-		let interval = setInterval(() => {
-			_this.setState({secondLeft: _this.state.secondLeft-1})
-		}, 1000);
-		setTimeout(() => {
-			clearInterval(interval);
-			_this.setState({isVerificationSent:false});
-		},10000)
-
 	}
 	async _sendVerification() {
 		const res = await AuthAction.sendVerification({phone: this.state.phone});
+		if (!res){
+			Alert.errorAlert('验证码发送失败，请重试');
+			return;
+		}
 		if (res.ev_error == 0) {
 			Alert.errorAlert('验证码已发送');
+
+			// Update UI
+			this.setState({isVerificationSent:true});
+			this.setState({secondLeft:10});
+			let _this = this;
+			let interval = setInterval(() => {
+				_this.setState({secondLeft: _this.state.secondLeft-1})
+			}, 1000);
+			setTimeout(() => {
+				clearInterval(interval);
+				_this.setState({isVerificationSent:false});
+			},10000)
 		}
 	}
 	_handleBindSuccessful() {
