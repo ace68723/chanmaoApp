@@ -240,7 +240,7 @@ export default class Home extends Component {
             },
           })
         },1000)
-      } else if (res.ev_error === 0 && res.ev_missing_phone === 1) {
+      } else if (res.ev_error === 0 && res.ev_missing_phone && res.ev_missing_phone === 1) {
         setTimeout(() => {
           this.props.navigator.showModal({
             screen: 'CmBindPhone',
