@@ -99,7 +99,6 @@ const AuthModule = {
       // const userInfo = formatWecahtAuth(resCode,deviceToken)
 
       const res = await AuthApi.AppAuth(io_data);
-      console.log(res);
       if (res.ev_error === 0) {
         return res;
       } else {
@@ -147,7 +146,6 @@ const AuthModule = {
           authortoken: token
         };
         const res = await AuthApi.AppAuth(data);
-        console.log(res);
         return res;
       } catch (e) {
         console.log(e)
@@ -271,7 +269,6 @@ const formatWecahtAuth = (resCode,deviceToken) => {
 }
 const authResult = (res) => {
   return new Promise((resolve, reject) => {
-    console.log(res)
       if(res.result == FAIL){
         AuthStore.removeData([TOKEN, UID])
           .then(()=>{

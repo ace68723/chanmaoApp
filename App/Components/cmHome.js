@@ -228,7 +228,6 @@ export default class Home extends Component {
       ]).start();
       // const isAuthed =  AuthAction.isAuthed();
       const res =  await AuthAction.isAuthed();
-      console.log('First ======', res);
       if(res.ev_error !== 0) {
         setTimeout(() => {
           this.props.navigator.showModal({

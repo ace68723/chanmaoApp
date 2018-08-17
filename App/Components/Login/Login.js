@@ -201,7 +201,6 @@ export default class LogoAnimationView extends Component {
   }
 
 	async _handleRegister() {
-		console.log(this.state);
 		if(this.state._registerStarted) return;
 		this.setState({
 			showLoading:true,

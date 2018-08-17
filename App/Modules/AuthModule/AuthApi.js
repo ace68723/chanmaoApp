@@ -39,11 +39,7 @@ const AuthApi = {
         //   password: userInfo.password
         // })
         return fetch(url,options)
-                .then(function(res) {
-                  // (res) => res.json()
-                  console.log(res);
-                  return res.json();
-                })
+                .then((res) => res.json())
                 .catch((error) => {throw ERROR_NETWORK})
     },
     phoneRegister(io_data) {
@@ -78,14 +74,8 @@ const AuthApi = {
       options.headers = Object.assign(options.headers,{
           cmos:io_data.cmos,
       })
-      console.log(io_data);
-      console.log(options);
       return fetch(url,options)
-              .then(function(res) {
-                console.log(res);
-                // (res) => res.json()
-                return res.json();
-              })
+              .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
     sendVerification(io_data) {
@@ -117,7 +107,6 @@ const AuthApi = {
             'Content-Type': 'application/json'
         }
       }
-      console.log(userInfo);
       if(userInfo.authortoken){
 
           options.headers = Object.assign(options.headers,{
@@ -129,7 +118,6 @@ const AuthApi = {
               rescode:userInfo.resCode,
           })
       }
-      console.log(options);
       // if(userInfo.token){
       //
       //     options.headers = Object.assign(options.headers,{
@@ -149,11 +137,7 @@ const AuthApi = {
       // })
       // var d = new Date();
       return fetch(url,options)
-              .then(function(res) {
-                // (res) => res.json()
-                console.log(res);
-                return res.json();
-              })
+              .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
     bindPhone(io_data) {
@@ -166,7 +150,6 @@ const AuthApi = {
             'Content-Type': 'application/json'
         }
       }
-      console.log(io_data);
       options.headers = Object.assign(options.headers,{
           authortoken:io_data.authortoken
       })
@@ -176,13 +159,8 @@ const AuthApi = {
         iv_cty: io_data.cty,
         iv_openid: io_data.openid,
       })
-      console.log(options);
       return fetch(url,options)
-              .then(function(res) {
-                // (res) => res.json()
-                console.log(res);
-                return res.json();
-              })
+              .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     }
 }

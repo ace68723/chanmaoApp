@@ -62,7 +62,6 @@ export default {
     },
     async doWechatAuth(io_data){
       try{
-        console.log(io_data);
         const res         = await Auth.AppDoWechatAuth(io_data);
         return res;
         // dispatch({
