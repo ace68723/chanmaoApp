@@ -365,7 +365,6 @@ export default class InputAnimation extends Component {
 								<View ref={this.props.ir_SUBMIT_BUTTON} >
 									<LoginButton is_login = {this.props.is_login}
 															 is_register = {this.props.is_register}
-															 is_forgot = {this.props.is_forgot}
 															 if_handleLogin = {this._handleLogin}
 															 if_handleRegister = {this._handleRegister}
 															 if_openAdView = {this.props.if_openAdView}
@@ -444,14 +443,6 @@ const styles = StyleSheet.create({
     fontWeight:"500",
     color:"#ffffff",
     marginBottom:5
-  },
-  forgotText:{
-    flex:1,
-    fontSize:15,
-    fontWeight:"500",
-    color:"#ffffff",
-    marginBottom:5,
-    textAlign:"right"
   },
 	wechatView:{
     position:Platform.OS == 'ios'?'absolute':'relative',

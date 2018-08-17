@@ -120,14 +120,6 @@ export default class LoginButton extends Component {
 		            </Text>
 							</View>
 						</TouchableWithoutFeedback>
-						<TouchableWithoutFeedback onPress={()=>{this.props.if_openAdView('https://chanmao.ca/index.php?r=site/recovery')}}>
-							<View style={{flex:1}}>
-								<Text allowFontScaling={false} style={styles.forgotText}>
-									{this.props.is_forgot}
-								</Text>
-							</View>
-						</TouchableWithoutFeedback>
-
           </View>
 
       </View>
@@ -177,13 +169,5 @@ const styles = StyleSheet.create({
     fontWeight:"500",
     color:"#ffffff",
     marginBottom:5
-  },
-  forgotText:{
-    flex:1,
-    fontSize:15,
-    fontWeight:"500",
-    color:"#ffffff",
-    marginBottom:5,
-    textAlign:"right"
   },
 });
