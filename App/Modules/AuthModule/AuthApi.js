@@ -132,7 +132,11 @@ const AuthApi = {
       // })
       // var d = new Date();
       return fetch(url,options)
-              .then((res) => res.json())
+              .then(function(res) {
+                // (res) => res.json()
+                console.log(res);
+                return res.json();
+              })
               .catch((error) => {throw ERROR_NETWORK})
     },
     bindPhone(io_data) {

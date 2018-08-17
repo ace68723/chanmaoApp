@@ -6,6 +6,7 @@ const StripeBridge = NativeModules.StripeBridge;
 
 import {GetUserInfo} from '../../../App/Modules/Database';
 import { sbox_getAllItemsFromCart, sbox_updateCartStock, sbox_deleteCart } from '../../Modules/Database';
+import AuthAction from '../../../App/Actions/AuthAction';
 export default  {
   async putUserAddr(io_data){
     const {uid,token,version} = GetUserInfo();
@@ -74,7 +75,13 @@ export default  {
   async getOrderBefore() {
     try {
       const {uid,token,version} = GetUserInfo();
-      if(!token) return {checkoutStatus:"shouldDoAuth"}
+      // if(!token) return {checkoutStatus:"shouldDoAuth"}
+      const authRes = await AuthAction.isAuthed();
+      if (authRes.ev_error !== 0) {
+        return {checkoutStatus:"shouldDoAuth"};
+      } else if (authRes.ev_error === 0 && authRes.ev_missing_phone === 1) {
+        return {checkoutStatus:"shouldDoBindPhone"};
+      }
 
       const allItems = sbox_getAllItemsFromCart();
       let _productList = [];

@@ -140,7 +140,7 @@ export default class Home extends Component {
     }
   }
   _startUp(){
-    AuthAction.doAuth();
+    // AuthAction.doAuth();
 
 
       if(this.props.goToCmEat){
@@ -205,7 +205,7 @@ export default class Home extends Component {
           ),
       ]).start();
   }
-  _handleChanmaoPress() {
+  async _handleChanmaoPress() {
       if(this._openStarted) return;
       if(!this.state.entryFlag) return;
       this._openStarted = true;
@@ -226,8 +226,10 @@ export default class Home extends Component {
               }
           ),
       ]).start();
-      const isAuthed =  AuthAction.isAuthed()
-      if(!isAuthed) {
+      // const isAuthed =  AuthAction.isAuthed();
+      const res =  await AuthAction.isAuthed();
+      console.log('First ======', res);
+      if(res.ev_error !== 0) {
         setTimeout(() => {
           this.props.navigator.showModal({
             screen: 'CmLogin',
@@ -238,7 +240,19 @@ export default class Home extends Component {
             },
           })
         },1000)
-      }else{
+      } else if (res.ev_error === 0 && res.ev_missing_phone === 1) {
+        setTimeout(() => {
+          this.props.navigator.showModal({
+            screen: 'CmBindPhone',
+            animationType: 'slide-up',
+            navigatorStyle: {navBarHidden: true},
+            passProps: {handleBackToHome: this._handleBackToHome,
+                        handleLoginSuccessful: this._handleLoginSuccessful,
+            },
+          })
+        },1000)
+      }
+      else{
         // setTimeout(() => {
         //   InteractionManager.runAfterInteractions(() => {
         //     this.props.navigator.showLightBox({

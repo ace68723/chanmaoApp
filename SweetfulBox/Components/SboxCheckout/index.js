@@ -57,6 +57,7 @@ export default class MyComponent extends Component {
 
     this._goToAddress = this._goToAddress.bind(this);
     this._goToAddCard = this._goToAddCard.bind(this);
+    this._goToBindPhone = this._goToBindPhone.bind(this);
     this._goBack = this._goBack.bind(this);
 
     this._getOrderBefore = this._getOrderBefore.bind(this);
@@ -92,6 +93,9 @@ export default class MyComponent extends Component {
     switch(this.state.checkoutStatus){
       case "shouldDoAuth":
         this._goToLogin();
+      break;
+      case "shouldDoBindPhone":
+        this._goToBindPhone();
       break;
       case "soldOut":
         this._goBack();
@@ -209,7 +213,16 @@ export default class MyComponent extends Component {
         navigatorStyle: {navBarHidden: true},
         passProps: {handleBackToHome: this._handleLoginGoBack,
                     handleLoginSuccessful: this._handleLoginSuccessful},
-      })
+      });
+  }
+  _goToBindPhone() {
+    this.props.navigator.showModal({
+      screen: 'CmBindPhone',
+      animationType: 'slide-up',
+      navigatorStyle: {navBarHidden: true},
+      passProps: {handleBackToHome: this._handleLoginGoBack,
+                  handleLoginSuccessful: this._handleLoginSuccessful},
+    });
   }
   _goToAddress() {
     this.props.navigator.showModal({

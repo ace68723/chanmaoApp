@@ -142,20 +142,26 @@ const AuthModule = {
         const { token } = GetUserInfo();
         io_data.authortoken = token;
         const res = await AuthApi.bindPhone(io_data);
-        // const res = {
-        //   ev_error: 0,
-        //   ev_authortoken: '2321',
-        //   ev_uid: 123,
-        // }
         return res;
       } catch (e) {
         console.log(e)
       }
     },
-    isAuthed() {
-      const userInfo = GetUserInfo();
-      if(!userInfo.token) return false;
-      return true;
+    async isAuthed() {
+      // const userInfo = GetUserInfo();
+      // if(!userInfo.token) return false;
+      // return true;
+      try {
+        const { token } = GetUserInfo();
+        const data = {
+          authortoken: token
+        };
+        const res = await AuthApi.AppAuth(data);
+        console.log(res);
+        return res;
+      } catch (e) {
+        console.log(e)
+      }
     },
     async getToken() {
       try {

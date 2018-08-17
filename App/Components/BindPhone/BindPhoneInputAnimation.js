@@ -275,9 +275,17 @@ export default class BindPhoneInputAnimation extends Component {
 						 </View>
 							</Animated.View>
 
+						 <Text style={{fontSize: 15,
+											     borderRadius: 8,
+											     color: '#ffffff',
+											     height:50,
+												 	 marginTop:height*0.034}}>
+							 For security purpose, please bind your phone number to your account.
+						 </Text>
+
 
 						 <TextInput
-											style={[styles.input,{marginTop:height*0.068}]}
+											style={[styles.input,{}]}
 											placeholder="Phone Number"
 											placeholderTextColor={'#ffffff'}
 											selectionColor={'#ea7b21'}

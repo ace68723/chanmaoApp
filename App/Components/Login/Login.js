@@ -181,8 +181,8 @@ export default class LogoAnimationView extends Component {
 			 } else if(res.ev_error === 0) {
 				 this.setState({loginSuccess:true})
 				 this.props.navigator.dismissModal({
- 					animationType: 'slide-down'
-	 			 })
+					 animationType: 'slide-down'
+				 });
 	 			 this.props.handleLoginSuccessful();
 			 }
 		} catch (e) {
