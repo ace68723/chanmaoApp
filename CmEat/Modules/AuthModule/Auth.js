@@ -30,6 +30,16 @@ let _token = "";
 let loginStarted = false;
 let authStarted = false;
 const AuthModule = {
+    wechatRegister(io_data){
+      try{
+        const res = await AuthApi.wechatRegister(io_data);
+        if(res.ev_error == 0){
+          return res.ev_data;
+        }
+      }catch(e) {
+        console.log(e)
+      }
+    },
 
     doAuth(){
       if(!authStarted){

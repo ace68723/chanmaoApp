@@ -74,7 +74,7 @@ export default class LoginButton extends Component {
 																		 height:this.state.height}]}
 														 >
 							 <Animated.Text style={[styles.loginText,{opacity:this.state.textOpacity}]}>
-									{this.props.is_login}
+									{this.props.is_viewType == 'view_type_login' ? this.props.is_login : this.props.is_register}
 							 </Animated.Text>
 							</Animated.View>
 					</TouchableWithoutFeedback>
@@ -119,10 +119,10 @@ export default class LoginButton extends Component {
       <View style={styles.container} ref={"LOGIN"}>
 						{this._renderLoginButton()}
           <View style={styles.registerView}>
-						<TouchableWithoutFeedback onPress={()=>{this.props.if_openAdView('https://chanmao.ca/index.php?r=site/register')}}>
+						<TouchableWithoutFeedback onPress={()=>{this.props.toggleViewType}>
 							<View style={{flex:1}}>
 								<Text allowFontScaling={false} style={styles.registerText}>
-		               {this.props.is_register}
+									 {this.props.is_viewType == 'view_type_register' ? this.props.is_register : this.props.is_login}
 		            </Text>
 							</View>
 						</TouchableWithoutFeedback>

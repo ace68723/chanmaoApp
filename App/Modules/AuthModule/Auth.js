@@ -36,52 +36,123 @@ let authStarted = false;
 const AuthModule = {
 
     async doAuth(){
-        const data = GetUserInfo();
-        const reqData = formatAuth(data);
-        const res = await AuthApi.AppAuth(reqData);
-        if (res.result === 0) {
+        // const data = GetUserInfo();
+        // const reqData = formatAuth(data);
+        // const res = await AuthApi.AppAuth(reqData);
+        // if (res.result === 0) {
+        //   return res;
+        // }else{
+        //   InitUserInfo();
+        //   throw res;
+        // }
+        try{
+          const authortoken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjI0LCJleHBpcmVkX3RpbWUiOjE1MzQzNTM2MjIsImxhc3RfbG9naW4iOjE1MzQzNTM2MjJ9.s6h_AhApaN92t9TV_N7GIYqFxaAMKVQwvvqa4uggLsQ';
+          const data = {
+            authortoken
+          };
+          const res = await AuthApi.AppAuth(data);
+          console.log('In authModule isAuthed: ', res);
           return res;
-        }else{
-          InitUserInfo();
-          throw res;
+        } catch(e) {
+            InitUserInfo();
+          //   throw res;
         }
     },
 
     async AppLogin(io_data){
           const username = io_data.username;
           const password = io_data.password;
-          const deviceToken = io_data.deviceToken;
-          const data = {username,password,deviceToken}
-          const userInfo = formatLogin(data)
-          const res = await AuthApi.AppLogin(userInfo)
-          if (res.result === 0) {
-            SaveUserInfo({uid:res.uid, token:res.token});
-            console.log(res);
+          // const deviceToken = io_data.deviceToken;
+          // const data = {username,password,deviceToken};
+          const data = {username,password};
+          const userInfo = formatLogin(data);
+          const res = await AuthApi.AppLogin(userInfo);
+          if (res.ev_error === 0) {
+            SaveUserInfo({uid:res.ev_uid.toString(), token:res.ev_authortoken.toString()});
             return res;
           }else{
             InitUserInfo();
-            throw res;
+            // throw res;
+            return {ev_error: 1};
           }
+    },
+
+    async phoneRegister(io_data){
+      try{
+        const res = await AuthApi.phoneRegister(io_data);
+        if (res.ev_error === 0) {
+          SaveUserInfo({uid:res.ev_uid.toString(), token:res.ev_authortoken.toString()});
+          return res;
+        }else{
+          InitUserInfo();
+          throw res;
+        }
+      }catch(e) {
+        console.log(e)
+      }
     },
 
     async AppDoWechatAuth(io_data){
       var d = new Date();
-      const deviceToken = io_data.deviceToken;
-      const resCode     = io_data.resCode;
-      const userInfo = formatWecahtAuth(resCode,deviceToken)
-      const res = await AuthApi.AppAuth(userInfo)
-      if (res.result === 0) {
-        SaveUserInfo({uid:res.uid, token:res.token});
+      // const deviceToken = io_data.deviceToken;
+      // const resCode     = io_data.resCode;
+      // const userInfo = formatWecahtAuth(resCode,deviceToken)
+
+      const res = await AuthApi.AppAuth(io_data);
+      console.log(res);
+      if (res.ev_error === 0) {
         return res;
-      }else{
+      } else {
         InitUserInfo();
         throw res;
       }
+
+
+      // if (res.result === 0) {
+      //   SaveUserInfo({uid:res.uid, token:res.token});
+      //   return res;
+      // }else{
+      //   InitUserInfo();
+      //   throw res;
+      // }
     },
-    isAuthed() {
-      const userInfo = GetUserInfo()
-      if(!userInfo.token) return false;
-      return true;
+    async sendVerification(io_data) {
+      try {
+        const res = await AuthApi.sendVerification(io_data);
+        // const res = {
+        //   ev_error: 0,
+        // }
+        return res;
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async bindPhone(io_data) {
+      try {
+        const { token } = GetUserInfo();
+        io_data.authortoken = token;
+        const res = await AuthApi.bindPhone(io_data);
+        return res;
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async isAuthed() {
+      // const userInfo = GetUserInfo();
+      // if(!userInfo.token) return false;
+      // return true;
+      try {
+        const { token } = GetUserInfo();
+        const data = {
+          authortoken: token
+        };
+        const res = await AuthApi.AppAuth(data);
+        console.log(res);
+        return res;
+      } catch (e) {
+        console.log(e)
+        return {ev_error: 1}
+      }
     },
     async getToken() {
       try {
@@ -163,7 +234,7 @@ const formatLogin = (io_data) => {
            DeviceInfo.getSystemName() +" | " +
            DeviceInfo.getSystemVersion() +" | " +
            DeviceInfo.getDeviceName(),
-    deviceToken:io_data.deviceToken,
+    // deviceToken:io_data.deviceToken,
     username:io_data.username,
     password:io_data.password,
     uuid: DeviceInfo.getUniqueID(),

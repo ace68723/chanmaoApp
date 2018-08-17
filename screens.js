@@ -2,6 +2,7 @@ import { Navigation } from 'react-native-navigation';
 import cmHome from './screens/cmHome';
 import CmLoading from './screens/CmLoading';
 import CmLogin from './screens/CmLogin';
+import CmBindPhone from './App/Components/BindPhone/BindPhone';
 import CmAdvertisement from './App/Components/CmAdvertisement/CmAdvertisement';
 import Notification from './screens/Notification';
 import AdView from './App/Components/General/AdView';
@@ -21,6 +22,7 @@ export function registerScreens() {
   Navigation.registerComponent('cmHome', () => cmHome);
   Navigation.registerComponent('CmLoading', () => CmLoading);
   Navigation.registerComponent('CmLogin', () => CmLogin);
+  Navigation.registerComponent('CmBindPhone', () => CmBindPhone);
   Navigation.registerComponent('AdView', () => AdView);
   Navigation.registerComponent('Notification', () => Notification);
   Navigation.registerComponent('CmAdvertisement', () => CmAdvertisement);

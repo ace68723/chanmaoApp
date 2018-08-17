@@ -22,31 +22,9 @@ export default class LoginButton extends Component {
 			loadingOpacity:new Animated.Value(0),
 			showLoading:false,
 		}
-		this._handleLogin = this._handleLogin.bind(this);
   }
-	componentDidMount(){
-	}
-	_handleLogin(){
-		Animated.parallel([
-				Animated.timing(this.state.width, {
-						toValue: height*0.0765,
-						duration: 300,
-				}),
-				Animated.timing(this.state.textOpacity, {
-						toValue: 0,
-						duration: 300
-				})
-		]).start()
-		setTimeout(() =>{
-			this.setState({
-				showLoading:true
-			})
-		}, 300);
-		this.props.if_handleLogin()
-	}
 
-
-	_renderLoginButton(){
+	_renderBindButton(){
 		if(!this.props.ib_showLoading){
 			setTimeout(()=>{
 				Animated.parallel([
@@ -62,13 +40,13 @@ export default class LoginButton extends Component {
 			}, 300);
 			return(
 				<TouchableWithoutFeedback
-						onPress = { this.props.if_handleLogin }>
+						onPress = { this.props.if_handleBindPhone }>
 							<Animated.View style={[styles.button,
 																		{width:this.state.width,
 																		 height:this.state.height}]}
 														 >
 							 <Animated.Text style={[styles.loginText,{opacity:this.state.textOpacity}]}>
-									{this.props.is_login}
+									Bind
 							 </Animated.Text>
 							</Animated.View>
 					</TouchableWithoutFeedback>
@@ -111,25 +89,7 @@ export default class LoginButton extends Component {
   render(){
     return(
       <View style={styles.container} ref={"LOGIN"}>
-						{this._renderLoginButton()}
-          <View style={styles.registerView}>
-						<TouchableWithoutFeedback onPress={this.props.toggleViewType}>
-							<View style={{flex:1}}>
-								<Text allowFontScaling={false} style={styles.registerText}>
-		               {this.props.is_register}
-		            </Text>
-							</View>
-						</TouchableWithoutFeedback>
-						<TouchableWithoutFeedback onPress={()=>{this.props.if_openAdView('https://chanmao.ca/index.php?r=site/recovery')}}>
-							<View style={{flex:1}}>
-								<Text allowFontScaling={false} style={styles.forgotText}>
-									{this.props.is_forgot}
-								</Text>
-							</View>
-						</TouchableWithoutFeedback>
-
-          </View>
-
+						{this._renderBindButton()}
       </View>
     )
   }

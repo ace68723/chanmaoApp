@@ -278,6 +278,7 @@ export default class InputAnimation extends Component {
 															 if_handleLogin = {this._handleLogin}
 															 if_openAdView = {this.props.if_openAdView}
 															 ib_showLoading = {this.props.ib_showLoading}
+															 toggleViewType = {this.props.toggleViewType}
 															 />
 								</View>
                 {this._renderWechat()}

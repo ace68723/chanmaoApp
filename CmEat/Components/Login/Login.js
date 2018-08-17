@@ -30,6 +30,9 @@ const scope = 'snsapi_userinfo';
 const state = 'wechat_sdk_demos';
 const appid = 'wx20fd1aeb9b6fcf82';
 
+const VIEW_TYPE_LOGIN = 'view_type_login';
+const VIEW_TYPE_REGISTER = 'view_type_register';
+
 export default class LogoAnimationView extends Component {
   constructor(){
     super()
@@ -41,15 +44,18 @@ export default class LogoAnimationView extends Component {
 		this._handleLogin 		= this._handleLogin.bind(this);
 		this._onChange 				= this._onChange.bind(this);
 		this._openAdView			= this._openAdView.bind(this);
+		this._toggleViewType	= this._toggleViewType.bind(this);
   }
+
 	_viewOpacity =  new Animated.Value(1);
+
 	async componentDidMount() {
-			// AuthAction.doAuth();
-			AuthStore.addChangeListener(this._onChange);
+		AuthStore.addChangeListener(this._onChange);
 		const registerResult = await WeChat.registerApp(appid);
 		const isWXAppInstalled = await WeChat.isWXAppInstalled()
 		this.setState({
-			isWXAppInstalled:isWXAppInstalled
+			isWXAppInstalled:isWXAppInstalled,
+			viewType: VIEW_TYPE_LOGIN
 		})
 	}
 	componentWillUnmount(){
@@ -116,6 +122,14 @@ export default class LogoAnimationView extends Component {
 			url:url,
 		})
 	}
+	_toggleViewType(){
+		if (this.state.viewType == VIEW_TYPE_LOGIN){
+			this.setState({viewType: VIEW_TYPE_REGISTER})
+		}
+		else if (this.state.viewType == VIEW_TYPE_REGISTER){
+			this.setState({viewType: VIEW_TYPE_LOGIN})
+		}
+	}
 
   render(){
     return(
@@ -143,7 +157,10 @@ export default class LogoAnimationView extends Component {
 												if_handleUsername = {this._handleUsername}
 												if_handlePassword = {this._handlePassword}
 												if_handleWechatLogin = {this._handleWechatLogin}
-												if_openAdView = {this._openAdView}/>
+												if_openAdView = {this._openAdView}
+												is_viewType = {this.state.viewType}
+												toggleViewType = {this._toggleViewType}
+												/>
 
       </Animated.View>
     )
