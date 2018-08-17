@@ -79,7 +79,7 @@ export default  {
       const authRes = await AuthAction.isAuthed();
       if (authRes.ev_error !== 0) {
         return {checkoutStatus:"shouldDoAuth"};
-      } else if (authRes.ev_error === 0 && authRes.ev_missing_phone === 1) {
+      } else if (authRes.ev_error === 0 && authRes.ev_missing_phone && authRes.ev_missing_phone === 1) {
         return {checkoutStatus:"shouldDoBindPhone"};
       }
 
