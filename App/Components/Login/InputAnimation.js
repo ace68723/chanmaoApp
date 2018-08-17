@@ -281,8 +281,7 @@ export default class InputAnimation extends Component {
 															 toggleViewType = {this.props.toggleViewType}
 															 />
 								</View>
-								{this._renderWechat()}
-
+                {this._renderWechat()}
 							 <View style={{position:Platform.OS == 'ios'?'absolute':'relative',
                              bottom:5,
                              width:Platform.OS == 'ios'?width:'auto',

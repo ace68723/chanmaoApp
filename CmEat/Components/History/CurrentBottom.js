@@ -74,7 +74,7 @@ const createdTime = moment(props.created).format('h:mm:ss a');
              </Text>
              <Text style={[styles.title,{fontWeight:"700",fontFamily:'FZZhunYuan-M02S',}]}
                    allowFontScaling={false}>
-                chanmaoweixin
+                chanmao_kefu
               </Text>
            </View>
             <View style={styles.col}>
