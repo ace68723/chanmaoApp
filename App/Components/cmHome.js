@@ -247,7 +247,7 @@ export default class Home extends Component {
             animationType: 'slide-up',
             navigatorStyle: {navBarHidden: true},
             passProps: {handleBackToHome: this._handleBackToHome,
-                        handleLoginSuccessful: this._handleLoginSuccessful,
+                        handleBindSuccessful: this._handleLoginSuccessful,
             },
           })
         },1000)

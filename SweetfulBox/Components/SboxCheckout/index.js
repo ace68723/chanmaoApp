@@ -221,7 +221,7 @@ export default class MyComponent extends Component {
       animationType: 'slide-up',
       navigatorStyle: {navBarHidden: true},
       passProps: {handleBackToHome: this._handleLoginGoBack,
-                  handleLoginSuccessful: this._handleLoginSuccessful},
+                  handleBindSuccessful: this._handleLoginSuccessful},
     });
   }
   _goToAddress() {
