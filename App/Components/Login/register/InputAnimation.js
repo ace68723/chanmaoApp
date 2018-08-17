@@ -86,29 +86,9 @@ export default class InputAnimation extends Component {
       this._keyboardWillHideSubscription.remove();
 			// AuthStore.removeChangeListener(this._onChange);
     }
-		// _getVerification()
-		// {
-		// 	if (this.state.phone.length == 0) {
-		//
-		// 	}
-		// 	let _this = this;
-		// 	this.setState({sentVerification:true});
-		// 	this.setState({secondLeft:10});
-		// 	this.props.if_sendVerification();
-		// 	let interval = setInterval(() => {
-		// 		console.log(_this.state);
-		// 		_this.setState({secondLeft: _this.state.secondLeft-1})
-		// 	}, 1000);
-		// 	setTimeout(() => {
-		// 		clearInterval(interval);
-		// 		_this.setState({sentVerification:false});
-		// 	},10000)
-		//
-		// }
 		_renderSentCode()
 		{
-			console.log(this.state.sentVerification);
-			if (!this.state.sentVerification) return(
+			if (!this.props.isVerificationSent) return(
 				<TouchableOpacity onPress={this.props.if_getVerification}>
 					<View style={{marginLeft:30,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:90}}>

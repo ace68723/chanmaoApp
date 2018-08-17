@@ -65,7 +65,8 @@ export default class LogoAnimationView extends Component {
 					// viewType: VIEW_TYPE_LOGIN,
 					viewType: VIEW_TYPE_LOGIN,
 					_registerStarted: false,
-					sentVerification:false,
+					_loginStarted: false,
+					isVerificationSent:false,
 					secondLeft:0,
     	}
     this._handleLogin 		= this._handleLogin.bind(this);
@@ -121,14 +122,13 @@ export default class LogoAnimationView extends Component {
 			re_password:password
 		});
 	}
-	_getVerification()
-	{
+	_getVerification() {
 		if (this.state.phone.length < 10) {
 			Alert.errorAlert('请填写正确手机号码');
 			return;
 		}
 		let _this = this;
-		this.setState({sentVerification:true});
+		this.setState({isVerificationSent:true});
 		this.setState({secondLeft:10});
 		this._sendVerification();
 		let interval = setInterval(() => {
@@ -136,12 +136,12 @@ export default class LogoAnimationView extends Component {
 		}, 1000);
 		setTimeout(() => {
 			clearInterval(interval);
-			_this.setState({sentVerification:false});
+			_this.setState({isVerificationSent:false});
 		},10000)
 
 	}
 	async _sendVerification() {
-		// const res = await AuthAction.sendVerification({phone: this.state.phone});
+		const res = await AuthAction.sendVerification({phone: this.state.phone});
 		if (res.ev_error == 0) {
 			Alert.errorAlert('验证码已发送');
 		}
@@ -154,26 +154,37 @@ export default class LogoAnimationView extends Component {
 			this.props.handleLoginSuccessful();
 		}, 800);
 	}
-  _loginStarted
 
   async _handleLogin(){
-		if(this._loginStarted) return;
-		this._loginStarted = true;
+		if(this.state._loginStarted) return;
 		this.setState({
 			showLoading:true,
+			_loginStarted:true,
 		})
 		const {username,password} = this.state;
 		const io_data							= {username,password}
 		try {
 				const res = await AuthAction.doLogin(io_data);
-				this.setState({
-					showLoading:false,
-					loginSuccess:true,
-				})
-				this.props.navigator.dismissModal({
-					animationType: 'slide-down'
-			 })
-			 this.props.handleLoginSuccessful();
+			 this.setState({
+	       showLoading:false,
+				 _loginStarted:false,
+	     });
+			 if (res.ev_missing_phone == 1) {
+				 this.props.navigator.showModal({
+					 screen: 'CmBindPhone',
+					 animationType: 'slide-up',
+					 navigatorStyle: {navBarHidden: true},
+					 passProps: {handleBackToHome: this._handleBackToHome,
+											 handleBindSuccessful: this._handleBindSuccessful,
+					 },
+				 })
+			 } else if(res.ev_error === 0) {
+				 this.setState({loginSuccess:true})
+				 this.props.navigator.dismissModal({
+ 					animationType: 'slide-down'
+	 			 })
+	 			 this.props.handleLoginSuccessful();
+			 }
 		} catch (e) {
 		 console.log(e)
 		 this.setState({
@@ -383,7 +394,6 @@ export default class LogoAnimationView extends Component {
 													ib_registerSuccess = {this.state.registerSuccess}
 													ib_showLoading = {this.state.showLoading}
 												  if_handleLogin = {this._handleLogin}
-													if_sendVerification = {this._sendVerification}
 													if_handleRegister = {this._handleRegister}
 													ir_VERIFICATION_INPUTREF = {VERIFICATION_INPUTREF}
 													ir_PHONE_INPUTREF = {PHONE_INPUTREF}
@@ -402,6 +412,7 @@ export default class LogoAnimationView extends Component {
 													viewType = {this.state.viewType}
 													toggleViewType = {this._toggleViewType}
 													secondLeft = {this.state.secondLeft}
+													isVerificationSent = {this.state.isVerificationSent}
 													/>
 				}
 

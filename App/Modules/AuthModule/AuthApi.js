@@ -10,7 +10,8 @@ let getOptiopns = AuthConstants.getOptiopns
 
 const AuthApi = {
     AppLogin(userInfo){
-        const url = AuthConstants.API_LOGIN
+        // const url = AuthConstants.API_LOGIN
+        const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_login_phone';
         let options = {
             method: 'POST',
             mode:'cors',
@@ -20,17 +21,29 @@ const AuthApi = {
             }
         }
         options.headers = Object.assign(options.headers,{
-            devicetoken:userInfo.deviceToken,
-            Cmos:userInfo.os,
-            Cmuuid:userInfo.uuid,
-            Cmversion:userInfo.version
+            cmos:userInfo.os,
+            cmuuid:userInfo.uuid,
         })
         options.body = JSON.stringify({
-          username: userInfo.username,
-          password: userInfo.password
+          iv_username: userInfo.username,
+          iv_password: userInfo.password
         })
+        // options.headers = Object.assign(options.headers,{
+        //     devicetoken:userInfo.deviceToken,
+        //     Cmos:userInfo.os,
+        //     Cmuuid:userInfo.uuid,
+        //     Cmversion:userInfo.version
+        // })
+        // options.body = JSON.stringify({
+        //   username: userInfo.username,
+        //   password: userInfo.password
+        // })
         return fetch(url,options)
-                .then((res) => res.json())
+                .then(function(res) {
+                  // (res) => res.json()
+                  console.log(res);
+                  return res.json();
+                })
                 .catch((error) => {throw ERROR_NETWORK})
     },
     phoneRegister(io_data) {
@@ -123,7 +136,7 @@ const AuthApi = {
               .catch((error) => {throw ERROR_NETWORK})
     },
     bindPhone(io_data) {
-      const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_login_wc';
+      const url = 'https://www.cmapi.ca/cm_rtt/dev/api/v1/auth_register_addphone';
       let options = {
         method: 'POST',
         mode:'cors',
@@ -133,14 +146,21 @@ const AuthApi = {
         }
       }
       console.log(io_data);
+      options.headers = Object.assign(options.headers,{
+          authortoken:io_data.authortoken
+      })
       options.body = JSON.stringify({
-        phone: io_data.phone,
-        verification: io_data.verification,
-        cty: io_data.cty,
+        iv_num: io_data.phone,
+        iv_verification_code: io_data.verification,
+        iv_cty: io_data.cty,
       })
       console.log(options);
       return fetch(url,options)
-              .then((res) => res.json())
+              .then(function(res) {
+                // (res) => res.json()
+                console.log(res);
+                return res.json();
+              })
               .catch((error) => {throw ERROR_NETWORK})
     }
 }

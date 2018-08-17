@@ -11,11 +11,12 @@ import Alert from '../Components/General/Alert';
 export default {
     async doLogin(io_data){
       try{
-        const {username,password,deviceToken} = io_data
-        const data                            = {username,password,deviceToken}
-        const res                             = await Auth.AppLogin(data)
-        return 'success'
+        const {username,password} = io_data;
+        const data = {username,password};
+        const res = await Auth.AppLogin(data);
+        return res;
       }catch(error){
+        console.log(error);
         throw error
       }
     },
@@ -31,11 +32,13 @@ export default {
         const reqData = {email,phone,verification,password,cmos};
         console.log(reqData);
         const res = await Auth.phoneRegister(reqData);
-        const data = {
-          authortoken: res.authortoken,
-          uid: res.uid,
-        };
-        return 'success'
+        if (res.ev_error === 0) {
+          return 'success'
+        } else {
+          if (res.ev_message === 10019) {
+            Alert.errorAlert('Phone is already registered');
+          }
+        }
       }catch(error){
         setTimeout( () => {
            Alert.errorAlert('注册失败, 请重新尝试')
@@ -80,10 +83,18 @@ export default {
       try{
         const res = await Auth.sendVerification(io_data);
         console.log(res);
-        return res;
+        if (res.ev_error == 0) {
+          return res;
+        } else {
+          if (res.ev_message == 10019) {
+            Alert.errorAlert('Phone is already registered');
+          } else if (res.ev_message == 10020) {
+            Alert.errorAlert('Can send verification code 3 times only per day');
+          }
+        }
       }catch(error){
         console.log(error)
-        alert('Send verification code failed');
+        Alert.errorAlert('Send verification code failed');
       }
     },
     async bindPhone(io_data) {
@@ -93,7 +104,6 @@ export default {
         return res;
       }catch(error){
         console.log(error)
-        alert('Binding failed');
       }
     },
     isAuthed(){

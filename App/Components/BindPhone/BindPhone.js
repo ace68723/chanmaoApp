@@ -16,6 +16,7 @@ import AppConstants from '../../Constants/AppConstants';
 import AppString from '../../Constants/AppString';
 import AuthAction from '../../Actions/AuthAction';
 // import AuthStore from '../../Stores/AuthStore';
+import Alert from '../General/Alert';
 
 import BindPhoneInputAnimation from './BindPhoneInputAnimation';
 
@@ -52,13 +53,17 @@ export default class LogoAnimationView extends Component {
     			showLoading:false,
     			isAuthed:false,
 					_bindStarted: false,
+					sentVerification:false,
+					secondLeft:0,
     	}
 		this._handleBindPhone = this._handleBindPhone.bind(this);
 		this._handlePhone = this._handlePhone.bind(this);
 		this._handleVerification = this._handleVerification.bind(this);
+		this._sendVerification = this._sendVerification.bind(this);
     this._handleBackToHome = this._handleBackToHome.bind(this);
     this._openAdView = this._openAdView.bind(this);
 		this._toggleViewType	= this._toggleViewType.bind(this);
+		this._getVerification = this._getVerification.bind(this);
   }
 	async componentDidMount() {
 	}
@@ -73,35 +78,71 @@ export default class LogoAnimationView extends Component {
 		});
 	}
 
+	_getVerification() {
+		if (this.state.phone.length < 10) {
+			Alert.errorAlert('请填写正确手机号码');
+			return;
+		}
+		let _this = this;
+		this.setState({isVerificationSent:true});
+		this.setState({secondLeft:10});
+		this._sendVerification();
+		let interval = setInterval(() => {
+			_this.setState({secondLeft: _this.state.secondLeft-1})
+		}, 1000);
+		setTimeout(() => {
+			clearInterval(interval);
+			_this.setState({isVerificationSent:false});
+		},10000)
+
+	}
+
+	async _sendVerification() {
+		const res = await AuthAction.sendVerification({phone: this.state.phone});
+		if (res.ev_error == 0) {
+			Alert.errorAlert('验证码已发送');
+		}
+	}
+
 	async _handleBindPhone() {
-		console.log(this.state);
 		if(this.state._bindStarted) return
 		this.setState({
 			showLoading:true,
 			_bindStarted: true,
 		})
 		const {phone,verification} = this.state;
-		const cty = 0;
+		const cty = 1;
 		const io_data	= {phone,verification,cty}
     try {
         const res = await AuthAction.bindPhone(io_data);
-				this.setState({
-					showLoading:false,
-		      loginSuccess:true,
-				})
-		    this.props.navigator.dismissModal({
-		       animationType: 'slide-down'
-		    })
-				setTimeout( () => {
-					this.props.handleBindSuccessful();
-				}, 800);
+				console.log(res);
+				if (res.ev_error === 0) {
+					this.setState({
+						showLoading:false,
+			      loginSuccess:true,
+					})
+			    this.props.navigator.dismissModal({
+			       animationType: 'slide-down'
+			    })
+					setTimeout( () => {
+						this.props.handleBindSuccessful();
+					}, 800);
+				} else {
+					this.setState({
+		        showLoading:false,
+		        loginSuccess:false,
+						_bindStarted:false,
+		      });
+					Alert.errorAlert('绑定失败');
+				}
     } catch (e) {
       console.log(e)
       this.setState({
         showLoading:false,
         loginSuccess:false,
-      })
-      this._loginStarted = false;
+				_bindStarted:false,
+      });
+			Alert.errorAlert('绑定失败');
     }
 
 
@@ -181,8 +222,11 @@ export default class LogoAnimationView extends Component {
                         ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
                         if_handlePhone = {this._handlePhone}
                         if_handleVerification = {this._handleVerification}
+												if_getVerification = {this._getVerification}
                         if_openAdView = {this._openAdView}
                         toggleViewType = {this._toggleViewType}
+												sentVerification = {this.state.sentVerification}
+												secondLeft = {this.state.secondLeft}
                         />
 
         {this._renderGoBackBtn()}

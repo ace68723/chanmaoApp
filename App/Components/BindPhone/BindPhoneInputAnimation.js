@@ -105,11 +105,9 @@ export default class BindPhoneInputAnimation extends Component {
 			},10000)
 
 		}
-		_renderSentCode()
-		{
-			console.log(this.state.sentVerification);
-			if (!this.state.sentVerification) return(
-				<TouchableOpacity onPress={this._getVerification}>
+		_renderSentCode() {
+			if (!this.props.sentVerification) return(
+				<TouchableOpacity onPress={this.props.if_getVerification}>
 					<View style={{marginLeft:30,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:90}}>
 						<Text style={{fontSize:15,color:'#ea7b21'}}>Get Code</Text>
@@ -117,10 +115,10 @@ export default class BindPhoneInputAnimation extends Component {
 				</TouchableOpacity>
 			)
 			else return(
-				<TouchableOpacity onPress={this._getVerification} disabled={true}>
+				<TouchableOpacity onPress={this.props.if_getVerification} disabled={true}>
 					<View style={{marginLeft:30,borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:90}}>
-						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.state.secondLeft}s</Text>
+						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.props.secondLeft}s</Text>
 					</View>
 				</TouchableOpacity>
 			);
