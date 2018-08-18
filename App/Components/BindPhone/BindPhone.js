@@ -99,9 +99,6 @@ export default class LogoAnimationView extends Component {
 
 	async _sendVerification() {
 		const res = await AuthAction.sendVerification({phone: this.state.phone});
-		if (res.ev_error == 0) {
-			Alert.errorAlert('验证码已发送');
-		}
 	}
 
 	async _handleBindPhone() {
