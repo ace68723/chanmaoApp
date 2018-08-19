@@ -132,7 +132,14 @@ const AuthModule = {
         const { token } = GetUserInfo();
         io_data.authortoken = token;
         const res = await AuthApi.bindPhone(io_data);
-        return res;
+        if (res.ev_error === 0) {
+          SaveUserInfo({uid:res.ev_uid.toString(), token:res.ev_authortoken.toString()});
+          return res;
+        }else{
+          InitUserInfo();
+          // throw res;
+          return {ev_error: 1};
+        }
       } catch (e) {
         console.log(e)
       }

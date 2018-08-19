@@ -110,16 +110,13 @@ export default class LogoAnimationView extends Component {
 		const {phone,verification} = this.state;
 		const cty = 1;
 		const io_data	= {phone,verification,cty}
-		console.log(this.props);
 		if (this.props.openid && this.props.unionid && this.props.refresh_token) {
 			io_data.openid = this.props.openid;
 			io_data.unionid = this.props.unionid;
 			io_data.refresh_token = this.props.refresh_token;
 		}
     try {
-				console.log(io_data);
         const res = await AuthAction.bindPhone(io_data);
-				console.log(res);
 				if (res.ev_error === 0) {
 					this.setState({
 						showLoading:false,
