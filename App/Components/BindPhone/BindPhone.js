@@ -85,7 +85,7 @@ export default class LogoAnimationView extends Component {
 		}
 		let _this = this;
 		this.setState({isVerificationSent:true});
-		this.setState({secondLeft:10});
+		this.setState({secondLeft:60});
 		this._sendVerification();
 		let interval = setInterval(() => {
 			_this.setState({secondLeft: _this.state.secondLeft-1})
@@ -93,15 +93,12 @@ export default class LogoAnimationView extends Component {
 		setTimeout(() => {
 			clearInterval(interval);
 			_this.setState({isVerificationSent:false});
-		},10000)
+		},60000)
 
 	}
 
 	async _sendVerification() {
 		const res = await AuthAction.sendVerification({phone: this.state.phone});
-		if (res.ev_error == 0) {
-			Alert.errorAlert('验证码已发送');
-		}
 	}
 
 	async _handleBindPhone() {

@@ -75,17 +75,19 @@ export default {
       try{
         const res = await Auth.sendVerification(io_data);
         if (res.ev_error == 0) {
+          Alert.errorAlert('验证码已发送');
           return res;
         } else {
           if (res.ev_message == 10019) {
-            Alert.errorAlert('Phone is already registered');
+            Alert.errorAlert('手机号码已被注册');
           } else if (res.ev_message == 10020) {
-            Alert.errorAlert('Can send verification code 3 times only per day');
+            Alert.errorAlert('每天最多只能发送3次验证码');
+          } else {
+            Alert.errorAlert('验证码发送失败');
           }
         }
       }catch(error){
         console.log(error)
-        Alert.errorAlert('Send verification code failed');
       }
     },
     async bindPhone(io_data) {

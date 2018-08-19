@@ -100,6 +100,7 @@ const AuthModule = {
 
       const res = await AuthApi.AppAuth(io_data);
       if (res.ev_error === 0) {
+        SaveUserInfo({uid:res.ev_uid.toString(), token:res.ev_authortoken.toString()});
         return res;
       } else {
         InitUserInfo();
