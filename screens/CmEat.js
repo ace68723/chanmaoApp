@@ -5,4 +5,4 @@ import CmEatRouter from '../CmEat/Components/Router';
 // import CmEatMenu from '../CmEat/Components/Restaurant/Menu';
 // Navigation.registerComponent('CmEatMenu', () => CmEatMenu);
 
-module.exports = CmEatRouter;
+module.exports = CmEatRouter; 
