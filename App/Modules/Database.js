@@ -118,7 +118,7 @@ const sbox_cache_scheam = {
 let realm
 export function DatabaseInit() {
   realm = new Realm({
-      path: 'cm_2.4.0.realm',
+      path: 'cm_2.7.5.realm',
       schema: [
                 cme_address_schema,
                 cme_cart_schema,
