@@ -189,8 +189,8 @@ export default class LogoAnimationView extends Component {
 		 this.setState({
 			 showLoading:false,
 			 loginSuccess:false,
+			 _loginStarted:false,
 		 })
-		 this._loginStarted = false;
 	 }
   }
 

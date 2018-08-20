@@ -106,7 +106,7 @@ export default class BindPhoneInputAnimation extends Component {
 
 		}
 		_renderSentCode() {
-			if (!this.props.sentVerification) return(
+			if (!this.props.isVerificationSent) return(
 				<TouchableOpacity onPress={this.props.if_getVerification}>
 					<View style={{marginLeft:30,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:90}}>

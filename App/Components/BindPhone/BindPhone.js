@@ -53,7 +53,7 @@ export default class LogoAnimationView extends Component {
     			showLoading:false,
     			isAuthed:false,
 					_bindStarted: false,
-					sentVerification:false,
+					isVerificationSent:false,
 					secondLeft:0,
     	}
 		this._handleBindPhone = this._handleBindPhone.bind(this);
@@ -79,26 +79,28 @@ export default class LogoAnimationView extends Component {
 	}
 
 	_getVerification() {
-		if (this.state.phone.length < 10) {
+		if (this.state.phone.length < 10 || this.state.phone.match(/^[0-9]+$/) == null) {
 			Alert.errorAlert('请填写正确手机号码');
 			return;
 		}
-		let _this = this;
-		this.setState({isVerificationSent:true});
-		this.setState({secondLeft:60});
 		this._sendVerification();
-		let interval = setInterval(() => {
-			_this.setState({secondLeft: _this.state.secondLeft-1})
-		}, 1000);
-		setTimeout(() => {
-			clearInterval(interval);
-			_this.setState({isVerificationSent:false});
-		},60000)
-
 	}
-
 	async _sendVerification() {
 		const res = await AuthAction.sendVerification({phone: this.state.phone});
+		if (res.ev_error == 0) {
+			// Update UI
+			this.setState({isVerificationSent:true});
+			this.setState({secondLeft:60});
+			let _this = this;
+			let interval = setInterval(() => {
+				_this.setState({secondLeft: _this.state.secondLeft-1})
+				console.log(_this.state);
+			}, 1000);
+			setTimeout(() => {
+				clearInterval(interval);
+				_this.setState({isVerificationSent:false});
+			},60000)
+		}
 	}
 
 	async _handleBindPhone() {
@@ -226,8 +228,8 @@ export default class LogoAnimationView extends Component {
 												if_getVerification = {this._getVerification}
                         if_openAdView = {this._openAdView}
                         toggleViewType = {this._toggleViewType}
-												sentVerification = {this.state.sentVerification}
 												secondLeft = {this.state.secondLeft}
+												isVerificationSent = {this.state.isVerificationSent}
                         />
 
         {this._renderGoBackBtn()}
