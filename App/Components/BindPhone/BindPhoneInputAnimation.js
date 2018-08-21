@@ -59,8 +59,8 @@ export default class BindPhoneInputAnimation extends Component {
 					secondLeft:0,
 	    }
 			this._hideKeyboard = this._hideKeyboard.bind(this);
-	    this._keyboardWillShow = this._keyboardWillShow.bind(this);
-	    this._keyboardWillHide = this._keyboardWillHide.bind(this);
+	    this._keyboardDidShow = this._keyboardDidShow.bind(this);
+	    this._keyboardDidHide = this._keyboardDidHide.bind(this);
 			this._onChange 				= this._onChange.bind(this);
 			this._getVerification = this._getVerification.bind(this);
 			this._renderSentCode = this._renderSentCode.bind(this);
@@ -74,8 +74,8 @@ export default class BindPhoneInputAnimation extends Component {
        }
 
        //Event(Keybaord): hanlde keybord event, add keyabord event listener
-        this._keyboardWillShowSubscription = Keyboard.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
-        this._keyboardWillHideSubscription = Keyboard.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
+			 this._keyboardDidShowSubscription = Keyboard.addListener('keyboardDidShow', (e) => this._keyboardDidShow(e));
+			 this._keyboardDidHideSubscription = Keyboard.addListener('keyboardDidHide', (e) => this._keyboardDidHide(e));
 				this._handleLogin = this._handleLogin.bind(this);
 				this._handleBindPhone = this._handleBindPhone.bind(this);
 				this._handleRegister = this._handleRegister.bind(this);
@@ -86,8 +86,8 @@ export default class BindPhoneInputAnimation extends Component {
 		}
     componentWillUnmount() {
       // Event(Keybaord): remove keybaord event
-      this._keyboardWillShowSubscription.remove();
-      this._keyboardWillHideSubscription.remove();
+      this._keyboardDidShowSubscription.remove();
+      this._keyboardDidHideSubscription.remove();
 			// AuthStore.removeChangeListener(this._onChange);
     }
 		_getVerification()
@@ -130,7 +130,7 @@ export default class BindPhoneInputAnimation extends Component {
 				// })
 			// }
 	  }
-		_keyboardWillShow(e) {
+		_keyboardDidShow(e) {
         // keyboard(e.endCoordinates.height): get keyboard height
         const keyboardHeight = e.endCoordinates.height;
 
@@ -156,11 +156,13 @@ export default class BindPhoneInputAnimation extends Component {
 
             }
          });
-         this._onFocus()
+				 if (Platform.OS == 'ios') {
+					 this._onFocus();
+				 }
 
 
     }
-    _keyboardWillHide(e) {
+    _keyboardDidHide(e) {
       //View(bottom): init viewBottom to default
       Animated.timing(this.state.viewBottom, {
           toValue: 0,
@@ -285,7 +287,7 @@ export default class BindPhoneInputAnimation extends Component {
 
 
 						 <TextInput
-											style={[styles.input,{}]}
+											style={[styles.input,{opacity: 1}]}
 											placeholder="Phone Number"
 											placeholderTextColor={'#ffffff'}
 											selectionColor={'#ea7b21'}

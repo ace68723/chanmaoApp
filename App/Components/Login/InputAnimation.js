@@ -57,8 +57,8 @@ export default class InputAnimation extends Component {
 					transitionRadius:new Animated.Value(30),
 	    }
 			this._hideKeyboard = this._hideKeyboard.bind(this);
-	    this._keyboardWillShow = this._keyboardWillShow.bind(this);
-	    this._keyboardWillHide = this._keyboardWillHide.bind(this);
+	    this._keyboardDidShow = this._keyboardDidShow.bind(this);
+	    this._keyboardDidHide = this._keyboardDidHide.bind(this);
 			this._onChange 				= this._onChange.bind(this);
 	  }
 	  componentWillMount(){
@@ -70,8 +70,8 @@ export default class InputAnimation extends Component {
        }
 
        //Event(Keybaord): hanlde keybord event, add keyabord event listener
-        this._keyboardWillShowSubscription = Keyboard.addListener('keyboardWillShow', (e) => this._keyboardWillShow(e));
-        this._keyboardWillHideSubscription = Keyboard.addListener('keyboardWillHide', (e) => this._keyboardWillHide(e));
+			 this._keyboardDidShowSubscription = Keyboard.addListener('keyboardDidShow', (e) => this._keyboardDidShow(e));
+			 this._keyboardDidHideSubscription = Keyboard.addListener('keyboardDidHide', (e) => this._keyboardDidHide(e));
 				this._handleLogin = this._handleLogin.bind(this);
 
     }
@@ -80,8 +80,8 @@ export default class InputAnimation extends Component {
 		}
     componentWillUnmount() {
       // Event(Keybaord): remove keybaord event
-      this._keyboardWillShowSubscription.remove();
-      this._keyboardWillHideSubscription.remove();
+      this._keyboardDidShowSubscription.remove();
+      this._keyboardDidHideSubscription.remove();
 			// AuthStore.removeChangeListener(this._onChange);
     }
 		_onChange(){
@@ -91,7 +91,7 @@ export default class InputAnimation extends Component {
 				// })
 			// }
 	  }
-		_keyboardWillShow(e) {
+		_keyboardDidShow(e) {
         // keyboard(e.endCoordinates.height): get keyboard height
         const keyboardHeight = e.endCoordinates.height;
 
@@ -117,11 +117,13 @@ export default class InputAnimation extends Component {
 
             }
          });
-         this._onFocus()
+				 if (Platform.OS == 'ios') {
+					 this._onFocus();
+				 }
 
 
     }
-    _keyboardWillHide(e) {
+    _keyboardDidHide(e) {
       //View(bottom): init viewBottom to default
       Animated.timing(this.state.viewBottom, {
           toValue: 0,
@@ -245,7 +247,7 @@ export default class InputAnimation extends Component {
 							</Animated.View>
 
 	            <TextInput
-	                  style={[styles.input,{marginTop:height*0.068}]}
+	                  style={[styles.input,{marginTop:height*0.068, opacity: 1}]}
 	                  placeholder={this.props.is_username}
 	                  placeholderTextColor={'#ffffff'}
 	                  selectionColor={'#ea7b21'}
