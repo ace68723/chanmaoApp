@@ -108,7 +108,7 @@ export default class BindPhoneInputAnimation extends Component {
 		_renderSentCode() {
 			if (!this.props.isVerificationSent) return(
 				<TouchableOpacity onPress={this.props.if_getVerification}>
-					<View style={{marginLeft:30,borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
+					<View style={{borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:90}}>
 						<Text style={{fontSize:15,color:'#ea7b21'}}>Get Code</Text>
 					</View>
@@ -116,7 +116,7 @@ export default class BindPhoneInputAnimation extends Component {
 			)
 			else return(
 				<TouchableOpacity onPress={this.props.if_getVerification} disabled={true}>
-					<View style={{marginLeft:30,borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
+					<View style={{borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:90}}>
 						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.props.secondLeft}s</Text>
 					</View>
@@ -302,7 +302,7 @@ export default class BindPhoneInputAnimation extends Component {
 	             <View style={{height:1,
 	                           backgroundColor:'#ffffff',}}>
 	             </View>
-							 <View style={{flexDirection: 'row'}}>
+							 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 								 <TextInput
 												style={{fontSize: 18,
 												    borderRadius: 8,
