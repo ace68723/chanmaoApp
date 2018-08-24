@@ -40,6 +40,7 @@ public class MainApplication extends NavigationApplication implements ReactInsta
                 new VectorIconsPackage(),
                 new AlipayReactPackage(),
                 new MainReactPackage(),
+                new NativePackage(),
             new MapsPackage(),
                 new WeChatPackage(),
                 new CodePush("3h54HiPlCHlTlQsTwIxIkYoHvbfmc889ad22-4792-484d-b870-7cc05a2db9bd", MainApplication.this, BuildConfig.DEBUG)
