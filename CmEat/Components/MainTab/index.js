@@ -26,6 +26,7 @@ import HomeTab from '../HomeTab/'
 import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import AddressPromptView from './AddressPromptView';
+import HomeAlert from './HomeAlert';
 // import Menu from '../Restaurant/Menu';
 
 import HomeAction from '../../Actions/HomeAction';
@@ -77,7 +78,6 @@ export default class MainTab extends Component {
 		this._onScrollRestaurantsList = this._onScrollRestaurantsList.bind(this);
 		this._startRenderAddressPrompt = this._startRenderAddressPrompt.bind(this);
 		this.hideAddressPrompt = this.hideAddressPrompt.bind(this);
-
   }
 	async componentDidMount(){
     await AddressAction.getAddress();
@@ -199,6 +199,8 @@ export default class MainTab extends Component {
 					 onPress={this.hideAddressPrompt}
 					 fadeInOpacity={this.state.fadeInOpacity}
 					 animatedHeaderHeight={this.state.animatedHeaderHeight}/>
+
+				 <HomeAlert/>
      </View>
     )
   }
