@@ -17,6 +17,7 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Keyboard
 } from 'react-native';
 
 import Loading from '../Helpers/Loading';
@@ -204,6 +205,7 @@ export default class CmEatAddInfo extends Component {
         </View>
       )
     }
+    // keyboardDismissMode={'on-drag'}
     render(){
         const interpolatedRotateAnimation = this._animatedChooseType.interpolate({
            inputRange: [0, 100],
@@ -215,14 +217,15 @@ export default class CmEatAddInfo extends Component {
           });
 
         return(
-          <View style={styles.mainContainer}>
+          <View style={styles.mainContainer} >
           <Header title={CMLabel.getCNLabel('ADDRESS')}
 	                goBack={this._goBack}
 	                leftButtonText={'×'}/>
             <ScrollView scrollEnabled={true}
+                        ref={'scollView'}
                         keyboardShouldPersistTaps="always"
-                        keyboardDismissMode={'on-drag'}
-                        style={styles.scrollView}>
+                        style={styles.scrollView}
+                        onScrollBeginDrag={Keyboard.dismiss}>
                 <View style={styles.inputForm}>
                     <View style={styles.addressBox}>
                       <Text style={styles.inputText}
