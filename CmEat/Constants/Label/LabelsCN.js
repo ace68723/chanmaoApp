@@ -12,7 +12,7 @@ module.exports={
     ADD_ADDRESS:'添加地址',
     SAVE_ADDRESS:'保存地址',
     CUSTOMER_SERVICE:'联系客服',
-    SWEETBOX: '甜满箱 首单立减8刀 满60再减10刀',
+    SWEETBOX: '甜满箱 全场免运费 满$25起送',
     LOG_OUT: '退出登录',
 
     //Order
