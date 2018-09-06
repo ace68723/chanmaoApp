@@ -151,9 +151,9 @@ export default class CmEatAddress extends Component {
 		AddressAction.updateAddressStatus(status);
 	}
 
-	_chooseAddress(placeId) {
+	_chooseAddress(description) {
     Keyboard.dismiss();
-    AddressAction.formatAddress(placeId);
+    AddressAction.formatAddress(description);
 	}
 	_deleteAddress(address){
 		Alert.alert(
