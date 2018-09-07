@@ -98,7 +98,7 @@ KeyboardView.defaultProps = {
 
 const styles = StyleSheet.create({
   modal: {
-    height: 300,
+    height: 328,
     width: deviceWidth,
 
   },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   modalContainer:{
     width:deviceWidth,
-    height:300,
+    height:328,
   },
   submitButton: {
     height:60,
