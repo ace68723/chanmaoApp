@@ -20,7 +20,7 @@ export default class DateKey extends Component {
     this.state={
       expMonth:"",
       expYear:"",
-      years: [2018,2019,2020,2021,2022,2023,2024,2025]
+      years: [2018,2019,2020,2021,2022,2023,2024,2025,2026,2027]
     }
     this._onPressMonth = this._onPressMonth.bind(this);
     this._onPressYear = this._onPressYear.bind(this);
@@ -81,13 +81,13 @@ export default class DateKey extends Component {
         <View style={{flex:1,flexDirection:'row'}}>
                <View style={styles.modalMonthContainer}>
 
-                   <View style={{height:40,paddingLeft:30,justifyContent:'center'}}><Text style={{color:'#ff768b'}} allowFontScaling={false}>MONTH</Text></View>
+                   <View style={{height:36,paddingLeft:30,justifyContent:'center'}}><Text style={{color:'#ff768b'}} allowFontScaling={false}>MONTH</Text></View>
                    <View style={styles.modalMonthContent}>
                      {this._renderMonthKeys()}
                    </View>
                </View>
                <View style={styles.modalYearContainer}>
-                       <View style={{height:40,paddingLeft:40,justifyContent:'center'}}><Text style={{color:'#ff768b'}} allowFontScaling={false}>YEAR</Text></View>
+                       <View style={{height:36,paddingLeft:40,justifyContent:'center'}}><Text style={{color:'#ff768b'}} allowFontScaling={false}>YEAR</Text></View>
                        <View style={styles.modalYearContent}>
                          {this._renderYearKeys()}
                        </View>
@@ -108,8 +108,6 @@ const styles = StyleSheet.create({
   },
   modalYearContainer:{
     flex:0.5,
-    paddingLeft:10,
-    paddingRight:20,
 
   },
   modalMonthContent:{
@@ -124,7 +122,9 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection:'row',
     flexWrap:'wrap',
-    paddingLeft:20,
+    justifyContent: 'space-around',
+    paddingLeft: 10,
+    marginRight: 10,
     marginBottom:20,
     borderLeftWidth:1,
     borderColor:'#d9d9d9',
