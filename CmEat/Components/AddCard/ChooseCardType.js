@@ -488,6 +488,36 @@ export default class ChooseCardType extends Component {
             </TouchableOpacity>
           )
         }
+        else if(_channel.channel == 40) {
+          _payment_channel_list.push(
+            <TouchableOpacity onPress={this._goToUnionpay}
+                key={"unionpay"}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        height: 59,
+                        alignItems: 'center',
+                        backgroundColor: 'white'}}>
+                        <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                          <Image source={require('./Img/cash.png')}
+                                 style={{alignSelf: 'center',
+                                         height: 20,
+                                         width: 45}}/>
+                        </View>
+                <Text allowFontScaling={false}
+                      style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft :20,
+                              color:"#808080",
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                              {CMLabel.getCNLabel('UNIONPAY')}
+                </Text>
+                <Text allowFontScaling={false} style={styles.arrowText}>
+                  >
+                </Text>
+            </TouchableOpacity>
+          )
+        }
       }
       return _payment_channel_list;
     }
