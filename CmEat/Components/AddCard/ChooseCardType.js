@@ -31,6 +31,7 @@ export default class ChooseCardType extends Component {
     this._goToApplePay = this._goToApplePay.bind(this);
     this._goToCash = this._goToCash.bind(this);
     this._goToDebit = this._goToDebit.bind(this);
+    this._goToUnionpay = this._goToUnionpay.bind(this);
     this._stripeCardAdded = this._stripeCardAdded.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
     this._renderButton = this._renderButton.bind(this);
@@ -102,6 +103,19 @@ export default class ChooseCardType extends Component {
         passProps:{
           title:"添加 Debit Card",
           stripeCardAdded: this._stripeCardAdded
+        }
+      });
+  }
+
+
+  _goToUnionpay(){
+    this.props.navigator.push({
+        screen: "CmAddCard",
+        navigatorStyle: {navBarHidden:true},
+        passProps:{
+          title:"添加银联卡",
+          stripeCardAdded: this._stripeCardAdded,
+          IsUnionpay: true
         }
       });
   }
@@ -329,7 +343,9 @@ export default class ChooseCardType extends Component {
     }
     const payment_channel_list = () => {
       let _payment_channel_list =[];
-      for(let _channel of this.props.available_payment_channels) {
+      let available_payment_channels = this.props.available_payment_channels.slice();
+      available_payment_channels.push({channel: 40});
+      for(let _channel of available_payment_channels) {
         if (_channel.channel == 1) {
           _payment_channel_list.push(
             <TouchableOpacity onPress={this._goToCredit}

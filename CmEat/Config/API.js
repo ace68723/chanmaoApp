@@ -12,6 +12,7 @@ const APIConstants ={
     //Order
     API_ORDER_BEFORE: Server + 'order_before',
     API_ADD_CARD: Server + 'stripe_card',
+    API_ADD_UNIONPAY_CARD: Server + 'unionpay_card', // 银联
     API_ADD_ORDER: Server + 'add_order',
 
     // Payment

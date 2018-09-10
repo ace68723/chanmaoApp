@@ -34,6 +34,46 @@ export default  {
       throw e
     }
   },
+  async addUnionpayCard({cardNumber, expMonth, expYear, cvv, name}){
+    try {
+       cardNumber = cardNumber.replace(/ /g,'');
+       expMonth = Number(expMonth);
+       expYear = Number(expYear);
+       cvv = cvv;
+       name = name;
+
+       // Do API calls
+       const {uid,token,version} = GetUserInfo();
+       const lo_data = {
+         authortoken:token,
+         iv_token: cardToken
+       }
+       const res = await CheckoutAPI.addUnionpayCard(lo_data);
+       if(res.ev_error === 1) { throw 'add unionpay card fail'}
+       const eo_data = res.ea_card_info;
+       return eo_data;
+
+      // const cardToken = await StripeBridge.pay( cardNumber,
+      //                                           expMonth,
+      //                                           expYear,
+      //                                           cvv);
+      // if(!cardToken) throw 'no cardToken'
+      // // alert(cardToken);
+      // const {uid,token,version} = GetUserInfo();
+      // const lo_data = {
+      //   authortoken:token,
+      //   iv_token: cardToken
+      // }
+      // const res = await CheckoutAPI.addCard(lo_data);
+      // if(res.ev_error === 1) { throw 'add card fail'}
+      // const eo_data = res.ea_card_info;
+      // return eo_data;
+    } catch (e) {
+      console.log(e);
+      // alert('您输入的支付信息输入有误');
+      throw e
+    }
+  },
   async getOrderBefore() {
     try {
       const {uid,token,version} = GetUserInfo();

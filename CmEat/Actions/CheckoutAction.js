@@ -189,4 +189,15 @@ export default {
         throw 'no cardToken'
       }
     },
+    async addUnionpayCard(io_data) {
+      try{
+        const data = await CheckoutModule.addUnionpayCard(io_data);
+        dispatch({
+             actionType: AppConstants.ADD_CARD,data
+         })
+      }catch(error){
+        console.log(error)
+        throw 'no cardToken'
+      }
+    },
 }

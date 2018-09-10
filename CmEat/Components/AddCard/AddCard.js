@@ -215,8 +215,18 @@ export default class MyComponent extends Component {
       const expMonth = this.state.expMonth;
       const expYear = this.state.expYear;
       const cvv = this.state.cvv;
-      const reqData = {cardNumber,expMonth,expYear,cvv};
-      const result = await CheckoutAction.addCard(reqData);
+      const isUnionpay = this.props.isUnionpay ? this.props.isUnionpay : false;
+
+      if (isUnionpay){
+        const name = this.state.name;
+        const reqData = {cardNumber,expMonth,expYear,cvv, name};
+        const result = await CheckoutAction.addUnionpayCard(reqData);
+      }
+      else{
+        const reqData = {cardNumber,expMonth,expYear,cvv};
+        const result = await CheckoutAction.addCard(reqData);
+      }
+      
       this.props.navigator.pop();
       // CheckoutAction.updatePaymentStatus(1);
       this.props.stripeCardAdded();
