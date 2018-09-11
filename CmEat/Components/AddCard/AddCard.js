@@ -7,6 +7,7 @@ import {
   View,
   Image,
   Dimensions,
+  Keyboard,
   NativeModules,
   TextInput,
   TouchableWithoutFeedback,
@@ -37,6 +38,8 @@ export default class MyComponent extends Component {
         expMonth:"MM",
         expYear:"YYYY",
         cvv:"",
+        firstname:"",
+        lastname:"",
         focus:'cardNumber',
         //判断是否全部填满信息
         infoFilled:false,
@@ -50,6 +53,8 @@ export default class MyComponent extends Component {
         cardNumAnimated: new Animated.Value(0),
         CVVAnimated:  new Animated.Value(0),
         dateAnimated:  new Animated.Value(0),
+        firstNameAnimated:  new Animated.Value(0),
+        lastNameAnimated:  new Animated.Value(0),
 
         showLoading:false,
       }
@@ -68,6 +73,7 @@ export default class MyComponent extends Component {
     // let _AnimatedValue
     switch (type) {
       case 'cardNum':
+          Keyboard.dismiss();
           if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
           this._currentType = type;
           this._AnimatedValue = this.state.cardNumAnimated;
@@ -76,6 +82,7 @@ export default class MyComponent extends Component {
           });
         break;
       case 'CVV':
+        Keyboard.dismiss();
         if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
           this._currentType = type;
           this._AnimatedValue = this.state.CVVAnimated;
@@ -84,6 +91,7 @@ export default class MyComponent extends Component {
           });
         break;
       case 'date':
+        Keyboard.dismiss();
         if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
           this._currentType = type;
           this._AnimatedValue = this.state.dateAnimated
@@ -93,6 +101,20 @@ export default class MyComponent extends Component {
             }, 10);
 
           });
+        break;
+      case 'firstname':
+        if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
+          this._currentType = type;
+          this._AnimatedValue = this.state.firstNameAnimated;
+          this.setState({isNumOpen:false,isDateOpen:false,isCVVOpen:false});
+          this.firstNameTextInput.focus();
+        break;
+      case 'lastname':
+        if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
+          this._currentType = type;
+          this._AnimatedValue = this.state.lastNameAnimated;
+          this.setState({isNumOpen:false,isDateOpen:false,isCVVOpen:false});
+          this.lastNameTextInput.focus();
         break;
     }
 
@@ -134,6 +156,28 @@ export default class MyComponent extends Component {
         break;
       case 'date':
             if(this.state.expMonth === 'MM'&& this.state.expYear == 'YYYY') {
+              Animated.timing(
+                AnimatedValue,
+              {
+                toValue: 0,
+                friction: 1,
+                duration:300
+              }).start()
+            }
+        break;
+      case 'firstname':
+            if(this.state.firstname === '') {
+              Animated.timing(
+                AnimatedValue,
+              {
+                toValue: 0,
+                friction: 1,
+                duration:300
+              }).start()
+            }
+        break;
+      case 'lastname':
+            if(this.state.lastname === '') {
               Animated.timing(
                 AnimatedValue,
               {
@@ -226,7 +270,7 @@ export default class MyComponent extends Component {
         const reqData = {cardNumber,expMonth,expYear,cvv};
         const result = await CheckoutAction.addCard(reqData);
       }
-      
+
       this.props.navigator.pop();
       // CheckoutAction.updatePaymentStatus(1);
       this.props.stripeCardAdded();
@@ -266,7 +310,7 @@ export default class MyComponent extends Component {
       }
   }
   _renderKeyboard(isOpenObj){
-    let isOpen = isOpenObj.isNumOpen || isOpenObj.isCVVOpen || isOpenObj.isDateOpen;
+    let isOpen = this.state.isNumOpen || this.state.isCVVOpen || this.state.isDateOpen;
     if(isOpen){
       return(
         <KeyboardView ref="_KeyboardView"
@@ -453,6 +497,120 @@ export default class MyComponent extends Component {
       </TouchableWithoutFeedback>
     )
   }
+  _renderFirstName() {
+    const bounceValueDateTop =  this.state.firstNameAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[0.05*height,0],
+    })
+    const bounceValueDateFontSize =  this.state.firstNameAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[20,15],
+    })
+    const opacityDate =  this.state.firstNameAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[0,1],
+    })
+    return(
+      <View style={styles.otherInfo}>
+          <Animated.Text style={{
+              backgroundColor:'white',
+              position:'absolute',
+              top:bounceValueDateTop,
+              left:0,
+              fontSize:bounceValueDateFontSize,
+              fontSize:16,color:'#6d6e71',
+            }}
+            allowFontScaling={false}
+            >
+            名
+          </Animated.Text>
+
+          <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"firstname")} >
+              <View style={styles.input}>
+                  <Animated.View style={{flex:0.9,
+                                marginTop:25,
+                                opacity:opacityDate,
+                              }}>
+                        <TextInput
+                          ref={(input) => { this.firstNameTextInput = input; }}
+                          style={{fontSize:25}}
+                          allowFontScaling={false}
+                          onFocus={() => {this._showKeyboard("firstname")}}
+                          onChangeText={(text) => this.setState({firstname: text})}>
+                          {this.state.firstname}
+                        </TextInput>
+                  </Animated.View>
+                  <View style={{flex:0.1,paddingTop:15}}>
+
+                  </View>
+              </View>
+          </TouchableWithoutFeedback>
+
+
+      </View>
+    )
+  }
+  _renderLastName() {
+    const bounceValueDateTop =  this.state.lastNameAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[0.05*height,0],
+    })
+    const bounceValueDateFontSize =  this.state.lastNameAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[20,15],
+    })
+    const opacityDate =  this.state.lastNameAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[0,1],
+    })
+    return(
+      <View style={styles.otherInfo}>
+          <Animated.Text style={{
+              backgroundColor:'white',
+              position:'absolute',
+              top:bounceValueDateTop,
+              left:0,
+              fontSize:bounceValueDateFontSize,
+              fontSize:16,color:'#6d6e71',
+            }}
+            allowFontScaling={false}
+            >
+            姓
+          </Animated.Text>
+
+          <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"lastname")} >
+              <View style={styles.input}>
+                  <Animated.View style={{flex:0.9,
+                                marginTop:25,
+                                opacity:opacityDate,
+                              }}>
+                          <TextInput
+                            ref={(input) => { this.lastNameTextInput = input; }}
+                            style={{fontSize:25}}
+                            allowFontScaling={false}
+                            onFocus={() => {this._showKeyboard("lastname")}}
+                            onChangeText={(text) => this.setState({lastname: text})}>
+                            {this.state.lastname}
+                          </TextInput>
+                  </Animated.View>
+                  <View style={{flex:0.1,paddingTop:15}}>
+
+                  </View>
+              </View>
+          </TouchableWithoutFeedback>
+
+
+      </View>
+    )
+  }
+  _rednerCardName() {
+    return(
+      <View style={styles.cardDetails}>
+        {this._renderFirstName()}
+        {this._renderLastName()}
+      </View>
+    )
+  }
   _rednerCardDetails() {
     return(
       <View style={styles.cardDetails}>
@@ -469,6 +627,7 @@ export default class MyComponent extends Component {
                   leftButtonText={'×'}/>
           <View style={styles.infoContainer}>
             {this._renderCardNo()}
+            {this._rednerCardName()}
             {this._rednerCardDetails()}
           </View>
           {this._renderKeyboard({
