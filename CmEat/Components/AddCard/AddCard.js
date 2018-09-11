@@ -11,7 +11,6 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Animated,
-  Keyboard,
 } from 'react-native';
 
 import Marker from './marker';
@@ -31,7 +30,7 @@ export default class MyComponent extends Component {
         //keyboard state
         isNumOpen:false,
         isDateOpen:false,
-        isNameOpen:false,
+        isCVVOpen:false,
 
         //card Number
         cardNumber:"",
@@ -45,18 +44,18 @@ export default class MyComponent extends Component {
         bounceValueDateTop: new Animated.Value(0.05*height),
         bounceValueDateFontSize: new Animated.Value(20),
 
-        bounceValueNameTop: new Animated.Value(0.05*height),
-        bounceValueNameFontSize: new Animated.Value(20),
+        bounceValueCVVTop: new Animated.Value(0.05*height),
+        bounceValueCVVFontSize: new Animated.Value(20),
 
         cardNumAnimated: new Animated.Value(0),
-        NameAnimated:  new Animated.Value(0),
+        CVVAnimated:  new Animated.Value(0),
         dateAnimated:  new Animated.Value(0),
 
         showLoading:false,
       }
       this._showKeyboard = this._showKeyboard.bind(this);
       this._inputNumber = this._inputNumber.bind(this);
-      this._inputName = this._inputName.bind(this);
+      this._inputCVV = this._inputCVV.bind(this);
       this._inputDate = this._inputDate.bind(this);
       this._goBack = this._goBack.bind(this);
       this._handleSubmitPress = this._handleSubmitPress.bind(this);
@@ -65,16 +64,22 @@ export default class MyComponent extends Component {
   _AnimatedValue
   _currentType
   _showKeyboard(type) {
-    console.log(123);
     // 选中输入后进行提示字动画效果
     // let _AnimatedValue
-    alert(123)
     switch (type) {
       case 'cardNum':
           if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
           this._currentType = type;
           this._AnimatedValue = this.state.cardNumAnimated;
-          this.setState({isNumOpen:true,isDateOpen:false},()=>{
+          this.setState({isNumOpen:true,isDateOpen:false,isCVVOpen:false},()=>{
+            this.refs._KeyboardView.scrollTo('number');
+          });
+        break;
+      case 'CVV':
+        if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
+          this._currentType = type;
+          this._AnimatedValue = this.state.CVVAnimated;
+          this.setState({isNumOpen:false,isDateOpen:false,isCVVOpen:true},()=>{
             this.refs._KeyboardView.scrollTo('number');
           });
         break;
@@ -82,21 +87,9 @@ export default class MyComponent extends Component {
         if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
           this._currentType = type;
           this._AnimatedValue = this.state.dateAnimated
-          this.setState({isNumOpen:false,isDateOpen:true},()=>{
+          this.setState({isNumOpen:false,isDateOpen:true,isCVVOpen:false},()=>{
             setTimeout(() => {
                 this.refs._KeyboardView.scrollTo('date');
-            }, 10);
-
-          });
-        break;
-      case 'name':
-        if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
-          this._currentType = type;
-          this._AnimatedValue = this.state.dateAnimated
-
-          this.setState({isNumOpen:false,isDateOpen:false},()=>{
-            setTimeout(() => {
-                // this.refs._KeyboardView.scrollTo('date');
             }, 10);
 
           });
@@ -128,8 +121,8 @@ export default class MyComponent extends Component {
               }).start()
             }
         break;
-      case 'name':
-          if(this.state.name == '') {
+      case 'CVV':
+          if(this.state.cvv == '') {
             Animated.timing(
               AnimatedValue,
             {
@@ -174,10 +167,10 @@ export default class MyComponent extends Component {
           }
     }
   }
-  _inputName(input:number){
+  _inputCVV(input:number){
       if(this.state.cvv.length < 3){
-         var inputName = input.toString();
-         this.setState({cvv:this.state.cvv+inputName},()=>{
+         var inputCVV = input.toString();
+         this.setState({cvv:this.state.cvv+inputCVV},()=>{
              this._valid();
          });
 
@@ -205,7 +198,7 @@ export default class MyComponent extends Component {
         this.setState({infoFilled:false});
       }
   }
-  _deleteName(){
+  _deleteCVV(){
       if(this.state.cvv.length > 0){
         let newStr = this.state.cvv.substring(0, this.state.cvv.length-1);
         this.setState({cvv:newStr,infoFilled:false});
@@ -233,7 +226,7 @@ export default class MyComponent extends Component {
         const reqData = {cardNumber,expMonth,expYear,cvv};
         const result = await CheckoutAction.addCard(reqData);
       }
-
+      
       this.props.navigator.pop();
       // CheckoutAction.updatePaymentStatus(1);
       this.props.stripeCardAdded();
@@ -273,14 +266,14 @@ export default class MyComponent extends Component {
       }
   }
   _renderKeyboard(isOpenObj){
-    let isOpen = isOpenObj.isNumOpen ||  isOpenObj.isDateOpen;
+    let isOpen = isOpenObj.isNumOpen || isOpenObj.isCVVOpen || isOpenObj.isDateOpen;
     if(isOpen){
       return(
         <KeyboardView ref="_KeyboardView"
                     isOpen={isOpen}
-                    inputNumber={(num)=>{this.state.isNumOpen?this._inputNumber(num):this._inputName(num)}}
+                    inputNumber={(num)=>{this.state.isNumOpen?this._inputNumber(num):this._inputCVV(num)}}
                     inputDate={(date)=>this._inputDate(date)}
-                    deleteNumber={()=>{this.state.isNumOpen?this._deleteNumber():this._deleteName()}}
+                    deleteNumber={()=>{this.state.isNumOpen?this._deleteNumber():this._deleteCVV()}}
                     isInfoFilled={this.state.infoFilled}
                     submitButtonDefaultColor='#d9d9d9'
                     submitButtonFinishedColor='#ea7b21'
@@ -291,8 +284,8 @@ export default class MyComponent extends Component {
     }
 
   }
-  _renderNameMarker(){
-      if(this.state.isNameOpen){
+  _renderCVVMarker(){
+      if(this.state.isCVVOpen){
         return(<Marker/>)
       }
   }
@@ -405,33 +398,66 @@ export default class MyComponent extends Component {
       </View>
     )
   }
-  _renderCardName() {
+  _renderCardCVV() {
+    const bounceValueCVVTop =  this.state.CVVAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[0.05*height,0],
+    })
+    const bounceValueCVVFontSize =  this.state.CVVAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[20,15],
+    })
+    const opacityCVV =  this.state.CVVAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[0,1],
+    })
     return(
-        <View style={styles.otherInfo}>
-          <TextInput
-             style = {{
-               position:'absolute',
-               height:40 ,
-               width:300,
-               bottom:0,
-               marginLeft:40,
-               flexDirection:'row',
-               fontSize: 25,
-              }}
-             onChangeText={(text) => this.setState({text})}
-             onFocus={{this._showKeyboard.bind(null,"name")}}
-             value={this.state.text}
-           />
-          <View style={{flex:0.1,paddingTop:15}}>
+      <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"CVV")} >
+          <View style={styles.otherInfo}>
+
+                <Animated.Text style={{
+                    position:'absolute',
+                    left:0,
+                    fontSize:bounceValueCVVFontSize,
+                    top:bounceValueCVVTop,
+                    fontSize:16,color:'#6d6e71'
+                    }}
+                    allowFontScaling={false}
+                  >
+                  CVV
+                </Animated.Text>
+
+                <View style={[styles.input,{backgroundColor:'rgba(0,0,0,0)'}]}>
+                  <View style={{flex:0.9, marginTop:10}}>
+                    <Animated.View style={{
+                                    opacity:opacityCVV,
+                                    marginTop:15,
+                                    height:40,
+                                    width:100,
+                                    flexDirection:'row' }} >
+                      <Text style={{fontSize:25,backgroundColor:'transparent'}}
+                                  allowFontScaling={false}>
+                                  {this.state.cvv}</Text>
+                        {this._renderCVVMarker()}
+                    </Animated.View>
+
+                  </View>
+
+                  <View style={{flex:0.1,paddingTop:15}}>
+                  </View>
+                </View>
+
+
+
           </View>
-        </View>
+      </TouchableWithoutFeedback>
     )
   }
   _rednerCardDetails() {
     return(
       <View style={styles.cardDetails}>
         {this._renderCardDate()}
-        {this._renderCardName()}
+        {this._renderCardCVV()}
       </View>
     )
   }
@@ -448,6 +474,7 @@ export default class MyComponent extends Component {
           {this._renderKeyboard({
                         isNumOpen:this.state.isNumOpen,
                         isDateOpen:this.state.isDateOpen,
+                        isCVVOpen:this.state.isCVVOpen,
                       })}
       </View>
     );

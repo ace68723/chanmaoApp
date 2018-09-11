@@ -34,24 +34,23 @@ export default  {
       throw e
     }
   },
-  async addUnionpayCard({cardNumber, expMonth, expYear, first_name, last_name}){
+  async addUnionpayCard({cardNumber, expMonth, expYear, cvv, name}){
     try {
-       account_number = cardNumber.replace(/ /g,'');
-       expire_month = expMonth;
-       expire_year = expYear;
-       first_name = first_name;
-       last_name = last_name;
+       cardNumber = cardNumber.replace(/ /g,'');
+       expMonth = Number(expMonth);
+       expYear = Number(expYear);
+       cvv = cvv;
+       name = name;
 
+       // Do API calls
+       const {uid,token,version} = GetUserInfo();
        const lo_data = {
-         account_number:account_number,
-         expire_month:expire_month,
-         expire_year:expire_year,
-         first_name:first_name,
-         last_name:last_name,
+         authortoken:token,
+         iv_token: cardToken
        }
        const res = await CheckoutAPI.addUnionpayCard(lo_data);
        if(res.ev_error === 1) { throw 'add unionpay card fail'}
-       const eo_data = res.ev_ret;
+       const eo_data = res.ea_card_info;
        return eo_data;
 
       // const cardToken = await StripeBridge.pay( cardNumber,
