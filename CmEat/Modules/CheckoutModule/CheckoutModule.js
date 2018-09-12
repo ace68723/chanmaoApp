@@ -166,5 +166,14 @@ export default  {
       console.log(e);
       throw e
     }
+  },
+  async unionPayChargeAndUpdate(reqData) {
+    try {
+      const res = await CheckoutAPI.unionPayChargeAndUpdate(reqData);
+      return res;
+    } catch (e) {
+      console.log(e);
+      throw e
+    }
   }
 }

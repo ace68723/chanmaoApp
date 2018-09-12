@@ -4,7 +4,8 @@ import { API_ORDER_BEFORE,
          API_ADD_ORDER,
          API_SIGN_ALIPAY_ORDER,
          API_CHARGE_UPDATE,
-         API_ONE_TIME_CHARGE } from '../../Config/API';
+         API_ONE_TIME_CHARGE,
+         API_UNION_CHARGE_UPDATE } from '../../Config/API';
 export default  {
   addCard(io_data) {
 
@@ -122,6 +123,27 @@ export default  {
     const amount = reqData.amount;
     const oid = reqData.oid;
     const POST_DATA = { amount, oid }
+    options.headers.authortoken = reqData.token;
+    options.body =  JSON.stringify(POST_DATA)
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
+  unionPayChargeAndUpdate(reqData) {
+    const url = API_UNION_CHARGE_UPDATE;
+    // const url = "https://norgta.com/api/payment/v2/charge_and_update";
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    const amount = reqData.amount;
+    const oid = reqData.oid;
+    const sec_code = reqData.securityCode;
+    const POST_DATA = { amount, oid, sec_code }
     options.headers.authortoken = reqData.token;
     options.body =  JSON.stringify(POST_DATA)
     return fetch(url,options)
