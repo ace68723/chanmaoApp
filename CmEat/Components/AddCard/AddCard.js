@@ -192,10 +192,18 @@ export default class MyComponent extends Component {
   }
 
   _valid(){
-    if(this.state.cardNumber.length == 19 && this.state.cvv.length == 3 && this.state.expYear != "YYYY" && this.state.expMonth !="MM"){
-      this.setState({infoFilled:true})
-    }else{
-      this.setState({infoFilled:false})
+    if (this.props.isUnionpay) {
+      if(this.state.cardNumber.length == 19 && this.state.firstname.length > 0 && this.state.lastname.length > 0 && this.state.expYear != "YYYY" && this.state.expMonth !="MM"){
+        this.setState({infoFilled:true})
+      }else{
+        this.setState({infoFilled:false})
+      }
+    } else {
+      if(this.state.cardNumber.length == 19 && this.state.cvv.length == 3 && this.state.expYear != "YYYY" && this.state.expMonth !="MM"){
+        this.setState({infoFilled:true})
+      }else{
+        this.setState({infoFilled:false})
+      }
     }
   }
   _inputNumber(input:number){
@@ -265,15 +273,15 @@ export default class MyComponent extends Component {
         const name = this.state.name;
         const reqData = {cardNumber,expMonth,expYear,cvv, name};
         const result = await CheckoutAction.addUnionpayCard(reqData);
+        this.props.navigator.pop();
+        this.props.unionCardAdded();
       }
       else{
         const reqData = {cardNumber,expMonth,expYear,cvv};
         const result = await CheckoutAction.addCard(reqData);
+        this.props.navigator.pop();
+        this.props.stripeCardAdded();
       }
-
-      this.props.navigator.pop();
-      // CheckoutAction.updatePaymentStatus(1);
-      this.props.stripeCardAdded();
       this.setState({showLoading:false});
       // this.props.navigator.dismissModal({
       //   animationType: 'slide-down'

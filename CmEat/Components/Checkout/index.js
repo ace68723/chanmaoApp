@@ -93,6 +93,7 @@ class Confirm extends Component {
         this._updateUaid = this._updateUaid.bind(this);
 				this._saveModificationCallback = this._saveModificationCallback.bind(this);
 				this._stripeCardAdded = this._stripeCardAdded.bind(this);
+				this._unionCardAdded = this._unionCardAdded.bind(this);
 				this._alipaySelected = this._alipaySelected.bind(this);
 				this._cashSelected = this._cashSelected.bind(this);
 				this._applePaySelected = this._applePaySelected.bind(this);
@@ -149,6 +150,7 @@ class Confirm extends Component {
 							animated: true,
 							passProps:{available_payment_channels: this.state.available_payment_channels,
 												 stripeCardAdded: this._stripeCardAdded,
+												 unionCardAdded: this._unionCardAdded,
 												 alipaySelected: this._alipaySelected,
 												 cashSelected: this._cashSelected,
 												 applePaySelected:	this._applePaySelected,
@@ -302,6 +304,7 @@ class Confirm extends Component {
 					animated: true,
 					passProps:{available_payment_channels: this.state.available_payment_channels,
 										 stripeCardAdded: this._stripeCardAdded,
+										 unionCardAdded: this._unionCardAdded,
 								 		 alipaySelected: this._alipaySelected,
 										 cashSelected: this._cashSelected,
 										 applePaySelected:	this._applePaySelected,
@@ -410,6 +413,23 @@ class Confirm extends Component {
 			this.setState(state);
 			setTimeout( () => {
 				CheckoutAction.updatePaymentStatus(1);
+			}, 500);
+		}
+		_unionCardAdded() {
+			const cart = MenuStore.getCart();
+			const rid = this.state.rid;
+			const pretax = MenuStore.getCartTotals().total;
+			const startAmount = this.state.startAmount;
+			CheckoutAction.beforCheckout(rid,pretax,startAmount);
+			const newState = CheckoutStore.getState();
+			const state = Object.assign({},newState,
+																	{cart:cart,
+																	 pretax: pretax,
+																	 tips: parseFloat(newState.total*0.1).toFixed(2),
+																 	 tipsPercentage:0.1});
+			this.setState(state);
+			setTimeout( () => {
+				CheckoutAction.updatePaymentStatus(40);
 			}, 500);
 		}
 		_alipaySelected() {
@@ -648,6 +668,9 @@ class Confirm extends Component {
 					}
 					else if (this.state.payment_channel == 30) {
 						payment_description = 'Apple Pay';
+					}
+					else if (this.state.payment_channel == 40) {
+						payment_description = '银联卡';
 					}
 					else {
 						payment_description = '现金到付';

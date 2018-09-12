@@ -33,6 +33,7 @@ export default class ChooseCardType extends Component {
     this._goToDebit = this._goToDebit.bind(this);
     this._goToUnionpay = this._goToUnionpay.bind(this);
     this._stripeCardAdded = this._stripeCardAdded.bind(this);
+    this._unionCardAdded = this._unionCardAdded.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
     this._renderButton = this._renderButton.bind(this);
 
@@ -114,7 +115,7 @@ export default class ChooseCardType extends Component {
         navigatorStyle: {navBarHidden:true},
         passProps:{
           title:"添加银联卡",
-          stripeCardAdded: this._stripeCardAdded,
+          unionCardAdded: this._unionCardAdded,
           isUnionpay: true
         }
       });
@@ -221,6 +222,32 @@ export default class ChooseCardType extends Component {
       // if (visa_fee == 0) {
       //   payment_description = '';
       // }
+      Alert.alert(
+        '新卡添加成功,确认支付?',
+        payment_description,
+        [
+          {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: '确认', onPress: () => {
+              this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
+              this.props.navigator.dismissModal({
+                animationType: 'slide-down'
+              });
+            }
+          },
+       ]
+      );
+    }
+  }
+  _unionCardAdded() {
+    if (this.props.flag == 'fromCheckout') {
+      this.props.unionCardAdded();
+      this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+      });
+    }
+    else if (this.props.flag == 'fromHistory') {
+      const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 40);
+      let payment_description = '';
       Alert.alert(
         '新卡添加成功,确认支付?',
         payment_description,
@@ -344,7 +371,6 @@ export default class ChooseCardType extends Component {
     const payment_channel_list = () => {
       let _payment_channel_list =[];
       let available_payment_channels = this.props.available_payment_channels.slice();
-      available_payment_channels.push({channel: 40});
       for(let _channel of available_payment_channels) {
         if (_channel.channel == 1) {
           _payment_channel_list.push(

@@ -83,6 +83,7 @@ const RestaurantModule = {
             const total = data.total;
 						const cusid = data.ev_cusid;
 						const available_payment_channels = data.available_payment_channels;
+						available_payment_channels.push({channel: 40, visa_fee: 2});
 						const last_payment_channel = data.last_payment_channel;
 						let last4 = "";
 						let brand = "";
