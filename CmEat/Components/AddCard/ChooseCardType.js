@@ -507,7 +507,7 @@ export default class ChooseCardType extends Component {
         else if(_channel.channel == 40) {
           _payment_channel_list.push(
             <TouchableOpacity onPress={this._goToUnionpay}
-                key={"applepay"}
+                key={"unionpay"}
                 activeOpacity={0.4}
                 style={{flexDirection: 'row',
                         paddingTop: 12,
@@ -517,10 +517,10 @@ export default class ChooseCardType extends Component {
                         borderBottomWidth: StyleSheet.hairlineWidth,
                         borderColor: "#D5D5D5"}}>
                         <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-                          <Image source={require('./Img/apple_pay_icon.png')}
+                          <Image source={require('./Img/union_pay_icon.png')}
                                 style={{alignSelf: 'center',
-                                        height: 25,
-                                        width: 42}}/>
+                                        height: 30,
+                                        width: 48}}/>
                         </View>
                 <Text allowFontScaling={false}
                       style={{flex: 1,

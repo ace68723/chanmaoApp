@@ -443,6 +443,7 @@ export default class MyComponent extends Component {
     )
   }
   _renderCardCVV() {
+    if (this.props.isUnionpay) return;
     const bounceValueCVVTop =  this.state.CVVAnimated.interpolate({
       inputRange: [0,1],
       outputRange:[0.05*height,0],
