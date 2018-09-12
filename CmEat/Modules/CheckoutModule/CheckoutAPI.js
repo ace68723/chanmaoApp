@@ -48,8 +48,13 @@ export default  {
     })
 
     options.body = JSON.stringify({
-      iv_token: io_data.iv_token,
+      account_number: io_data.account_number,
+      expire_month: io_data.expire_month,
+      expire_year: io_data.expire_year,
+      first_name: io_data.first_name,
+      last_name: io_data.last_name,
     })
+
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

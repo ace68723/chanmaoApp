@@ -223,6 +223,9 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     else if (data.payment_channel == 30) {
       this.state.payment_channel = 30;
     }
+    else if (data.payment_channel == 40) {
+      this.state.payment_channel = 40;
+    }
     for (let _channel of this.state.available_payment_channels) {
       if (_channel.channel == data.payment_channel) {
         this.state.visa_fee = _channel.visa_fee;
