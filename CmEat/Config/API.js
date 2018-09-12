@@ -19,6 +19,7 @@ const APIConstants ={
     API_SIGN_ALIPAY_ORDER: 'https://chanmao.us/api/alipay/v2/test_sign_order',
     API_ONE_TIME_CHARGE: Server + 'one_time_charge',
     API_CHARGE_UPDATE: Server + "charge_and_update",
+    API_UNION_CHARGE_UPDATE: Server + "chinaunionpay/charge_and_update",
 
     //Product
     API_CATEGORY: Server + 'category',

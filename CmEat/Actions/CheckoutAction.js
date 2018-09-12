@@ -52,6 +52,23 @@ export default {
       }
     },
 
+    async unionPayChargeAndUpdate({amount, oid, checkoutFrom, securityCode}) {
+      try{
+          const token = await AuthModule.getToken();
+          const reqData = {amount: parseInt(amount * 100),
+                           oid: parseInt(oid),
+                           token,
+                           securityCode: parseInt(securityCode)};
+          const data = await CheckoutModule.unionPayChargeAndUpdate(reqData);
+          if (checkoutFrom == 'checkout') {
+            dispatch({
+                actionType: AppConstants.CHECKOUT_GO_TO_HISTORY, data
+            });
+          }
+      }catch (e){
+      }
+    },
+
     afterPayGoToHistory() {
       try{
           const data = {
