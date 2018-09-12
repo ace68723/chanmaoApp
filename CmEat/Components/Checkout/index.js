@@ -221,6 +221,14 @@ class Confirm extends Component {
 							}
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
 						}
+						else if (this.state.payment_channel == 40) {
+							// await union pay action
+							// Then run codes below
+							this.props.navigator.dismissModal({animationType: 'slide-down'});
+							setTimeout(() => {
+								CheckoutAction.afterPayGoToHistory();
+							}, 300);
+						}
 						// setTimeout(() => {
 						// 	HistoryAction.getOrderData();
 						// 	this.props.navigator.dismissModal({animationType: 'slide-down'});
