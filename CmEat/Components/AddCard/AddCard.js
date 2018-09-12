@@ -604,12 +604,14 @@ export default class MyComponent extends Component {
     )
   }
   _rednerCardName() {
-    return(
-      <View style={styles.cardDetails}>
-        {this._renderFirstName()}
-        {this._renderLastName()}
-      </View>
-    )
+    if (this.props.isUnionpay) {
+      return(
+        <View style={styles.cardDetails}>
+          {this._renderFirstName()}
+          {this._renderLastName()}
+        </View>
+      )
+    }
   }
   _rednerCardDetails() {
     return(

@@ -115,7 +115,7 @@ export default class ChooseCardType extends Component {
         passProps:{
           title:"添加银联卡",
           stripeCardAdded: this._stripeCardAdded,
-          IsUnionpay: true
+          isUnionpay: true
         }
       });
   }
@@ -507,26 +507,28 @@ export default class ChooseCardType extends Component {
         else if(_channel.channel == 40) {
           _payment_channel_list.push(
             <TouchableOpacity onPress={this._goToUnionpay}
-                key={"unionpay"}
+                key={"applepay"}
                 activeOpacity={0.4}
                 style={{flexDirection: 'row',
-                        height: 59,
+                        paddingTop: 12,
+                        paddingBottom: 12,
                         alignItems: 'center',
-                        backgroundColor: 'white'}}>
+                        backgroundColor: 'white',
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderColor: "#D5D5D5"}}>
                         <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-                          <Image source={require('./Img/cash.png')}
-                                 style={{alignSelf: 'center',
-                                         height: 20,
-                                         width: 45}}/>
+                          <Image source={require('./Img/apple_pay_icon.png')}
+                                style={{alignSelf: 'center',
+                                        height: 25,
+                                        width: 42}}/>
                         </View>
                 <Text allowFontScaling={false}
                       style={{flex: 1,
                               fontSize: 18,
                               textAlign: 'left',
                               marginLeft :20,
-                              color:"#808080",
-                              fontFamily:'FZZhunYuan-M02S'}}>
-                              {CMLabel.getCNLabel('UNIONPAY')}
+                              color:"#808080",}}>
+                            {CMLabel.getCNLabel('UNIONPAY')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
                   >
