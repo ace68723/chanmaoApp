@@ -45,7 +45,7 @@ import CMLabel from '../../Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
 import TabsAction from '../../Actions/TabsAction';
-
+import CVVPrompt from '../CVVPrompt'
 
 // device(size): get device height and width
 const {height, width} = Dimensions.get('window');
@@ -86,7 +86,8 @@ class Confirm extends Component {
 											paymentStatus:'添加支付方式',
 											tips:0,
 											tipsPercentage:0.1,
-
+											showCVVPrompt: true,
+											cvvValue: '',
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
@@ -224,10 +225,12 @@ class Confirm extends Component {
 						else if (this.state.payment_channel == 40) {
 							// await union pay action
 							// Then run codes below
-							this.props.navigator.dismissModal({animationType: 'slide-down'});
-							setTimeout(() => {
-								CheckoutAction.afterPayGoToHistory();
-							}, 300);
+							this.setState({showCVVPrompt:true});
+
+							// this.props.navigator.dismissModal({animationType: 'slide-down'});
+							// setTimeout(() => {
+							// 	CheckoutAction.afterPayGoToHistory();
+							// }, 300);
 						}
 						// setTimeout(() => {
 						// 	HistoryAction.getOrderData();
@@ -831,6 +834,24 @@ class Confirm extends Component {
 							 backgroundShift={0}
 							 backgroundColor={"rgba(0,0,0,0)"}>
 					 </Background>
+
+					 <CVVPrompt
+				      isVisible={this.state.showCVVPrompt}
+				      onChangeText={(text) => {
+								this.setState({cvvValue: text});
+				      }}
+				      onCancel={() => {
+								this.setState({showCVVPrompt: false});
+								this.props.navigator.dismissModal({animationType: 'slide-down'});
+								setTimeout(() => {
+									CheckoutAction.afterPayGoToHistory();
+								}, 300);
+				      }}
+				      onSubmit={() => {
+								console.log(this.state.cvvValue);
+								this.setState({showCVVPrompt: false});
+				      }}
+				   />
 
 				  <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === 'ios'?"padding":null}>
 		          <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}
