@@ -25,7 +25,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       }],
 		showBanner:true,
     shouldAddAddress:false,
-    payment_channel: 0,
+    payment_channel: -1,
     visa_fee: 0,
     goToHistory: false,
     paymentFail: false,
@@ -45,7 +45,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
           }],
     		showBanner:true,
         shouldAddAddress:false,
-        payment_channel: 0,
+        payment_channel: -1,
         visa_fee: 0,
         goToHistory: false,
         paymentFail: false,
@@ -138,7 +138,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       }
       let payment_channel;
       let visa_fee = 0;
-      if (last_payment_channel != 0) {
+      if (this.state.payment_channel < 0) {
         payment_channel = last_payment_channel;
       }
       else{

@@ -407,37 +407,38 @@ class Confirm extends Component {
 			this.setState(state);
 		}
 		_stripeCardAdded() {
+			CheckoutAction.updatePaymentStatus(1);
 			const cart = MenuStore.getCart();
 			const rid = this.state.rid;
 			const pretax = MenuStore.getCartTotals().total;
 			const startAmount = this.state.startAmount;
-			CheckoutAction.beforCheckout(rid,pretax,startAmount);
-			const newState = CheckoutStore.getState();
-			const state = Object.assign({},newState,
-																	{cart:cart,
-																	 pretax: pretax,
-																	 tips: parseFloat(newState.total*0.1).toFixed(2),
-																 	 tipsPercentage:0.1});
-			this.setState(state);
 			setTimeout( () => {
-				CheckoutAction.updatePaymentStatus(1);
+				CheckoutAction.beforCheckout(rid,pretax,startAmount);
+				const newState = CheckoutStore.getState();
+				const state = Object.assign({},newState,
+																		{cart:cart,
+																		 pretax: pretax,
+																		 tips: parseFloat(newState.total*0.1).toFixed(2),
+																	 	 tipsPercentage:0.1});
+				this.setState(state);
 			}, 500);
 		}
 		_unionCardAdded() {
+			CheckoutAction.updatePaymentStatus(40);
 			const cart = MenuStore.getCart();
 			const rid = this.state.rid;
 			const pretax = MenuStore.getCartTotals().total;
 			const startAmount = this.state.startAmount;
-			CheckoutAction.beforCheckout(rid,pretax,startAmount);
-			const newState = CheckoutStore.getState();
-			const state = Object.assign({},newState,
-																	{cart:cart,
-																	 pretax: pretax,
-																	 tips: parseFloat(newState.total*0.1).toFixed(2),
-																 	 tipsPercentage:0.1});
-			this.setState(state);
 			setTimeout( () => {
-				CheckoutAction.updatePaymentStatus(40);
+				CheckoutAction.beforCheckout(rid,pretax,startAmount);
+				const newState = CheckoutStore.getState();
+				const state = Object.assign({},newState,
+																		{cart:cart,
+																		 pretax: pretax,
+																		 tips: parseFloat(newState.total*0.1).toFixed(2),
+																	 	 tipsPercentage:0.1});
+				this.setState(state);
+
 			}, 500);
 		}
 		_alipaySelected() {
