@@ -86,7 +86,7 @@ class Confirm extends Component {
 											paymentStatus:'添加支付方式',
 											tips:0,
 											tipsPercentage:0.1,
-											showCVVPrompt: true,
+											showCVVPrompt: false,
 											cvvValue: '',
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
@@ -410,38 +410,37 @@ class Confirm extends Component {
 			this.setState(state);
 		}
 		_stripeCardAdded() {
-			CheckoutAction.updatePaymentStatus(1);
 			const cart = MenuStore.getCart();
 			const rid = this.state.rid;
 			const pretax = MenuStore.getCartTotals().total;
 			const startAmount = this.state.startAmount;
+			CheckoutAction.beforCheckout(rid,pretax,startAmount);
+			const newState = CheckoutStore.getState();
+			const state = Object.assign({},newState,
+																	{cart:cart,
+																	 pretax: pretax,
+																	 tips: parseFloat(newState.total*0.1).toFixed(2),
+																 	 tipsPercentage:0.1});
+			this.setState(state);
 			setTimeout( () => {
-				CheckoutAction.beforCheckout(rid,pretax,startAmount);
-				const newState = CheckoutStore.getState();
-				const state = Object.assign({},newState,
-																		{cart:cart,
-																		 pretax: pretax,
-																		 tips: parseFloat(newState.total*0.1).toFixed(2),
-																	 	 tipsPercentage:0.1});
-				this.setState(state);
+				CheckoutAction.updatePaymentStatus(1);
 			}, 500);
 		}
 		_unionCardAdded() {
-			CheckoutAction.updatePaymentStatus(40);
 			const cart = MenuStore.getCart();
 			const rid = this.state.rid;
 			const pretax = MenuStore.getCartTotals().total;
 			const startAmount = this.state.startAmount;
+			CheckoutAction.beforCheckout(rid,pretax,startAmount);
+			const newState = CheckoutStore.getState();
+			const state = Object.assign({},newState,
+																	{cart:cart,
+																	 pretax: pretax,
+																	 tips: parseFloat(newState.total*0.1).toFixed(2),
+																 	 tipsPercentage:0.1});
+			this.setState(state);
 			setTimeout( () => {
-				CheckoutAction.beforCheckout(rid,pretax,startAmount);
-				const newState = CheckoutStore.getState();
-				const state = Object.assign({},newState,
-																		{cart:cart,
-																		 pretax: pretax,
-																		 tips: parseFloat(newState.total*0.1).toFixed(2),
-																	 	 tipsPercentage:0.1});
-				this.setState(state);
-
+				CheckoutAction.updatePaymentStatus(40);
 			}, 500);
 		}
 		_alipaySelected() {
@@ -849,6 +848,13 @@ class Confirm extends Component {
 				      }}
 				      onSubmit={() => {
 								console.log(this.state.cvvValue);
+								CheckoutAction.unionPayChargeAndUpdate(
+									{amount: "12",
+										oid: '123',
+										checkoutFrom: 'checkout',
+										securityCode: this.state.cvvValue
+									}
+								);
 								this.setState({showCVVPrompt: false});
 				      }}
 				   />
