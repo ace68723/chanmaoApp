@@ -87,7 +87,7 @@ class Confirm extends Component {
 											tips:0,
 											tipsPercentage:0.1,
 											showCVVPrompt: false,
-											cvvValue: '',
+											securityCode: '',
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
@@ -173,7 +173,6 @@ class Confirm extends Component {
 					}, 300);
 				}
 
-
 				if(state.goToHistory) {
 					this.props.navigator.dismissModal({animationType: 'slide-down'});
 					setTimeout(() => {
@@ -210,7 +209,7 @@ class Confirm extends Component {
 							let shipping = Number(this.state.dlexp);
 							let tips =  Number(this.state.tips);
 							let tax = Number(this.state.total - pretax - shipping).toFixed(2);
-							let total = (parseFloat(this.state.total) + parseFloat(this.state.visa_fee) + parseFloat(this.state.tips)).toFixed(2);;
+							let total = (parseFloat(this.state.total) + parseFloat(this.state.visa_fee) + parseFloat(this.state.tips)).toFixed(2);
 
 							let paymentData = {
 								subtotal: (pretax + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
@@ -837,22 +836,23 @@ class Confirm extends Component {
 					 <CVVPrompt
 				      isVisible={this.state.showCVVPrompt}
 				      onChangeText={(text) => {
-								this.setState({cvvValue: text});
+								this.setState({securityCode: text});
 				      }}
 				      onCancel={() => {
-								this.setState({showCVVPrompt: false});
-								this.props.navigator.dismissModal({animationType: 'slide-down'});
+								// this.setState({showCVVPrompt: false});
+								// this.props.navigator.dismissModal({animationType: 'slide-down'});
 								setTimeout(() => {
 									CheckoutAction.afterPayGoToHistory();
-								}, 300);
+								}, 600);
+								this.setState({showCVVPrompt: false});
 				      }}
 				      onSubmit={() => {
-								console.log(this.state.cvvValue);
+								const total = (parseFloat(this.state.total) + parseFloat(this.state.visa_fee) + parseFloat(this.state.tips)).toFixed(2);
 								CheckoutAction.unionPayChargeAndUpdate(
-									{amount: "12",
-										oid: '123',
+									{amount: total,
+										oid: this.state.oidFromUrl,
 										checkoutFrom: 'checkout',
-										securityCode: this.state.cvvValue
+										securityCode: this.state.securityCode
 									}
 								);
 								this.setState({showCVVPrompt: false});

@@ -58,7 +58,7 @@ export default {
           const reqData = {amount: parseInt(amount * 100),
                            oid: parseInt(oid),
                            token,
-                           securityCode: parseInt(securityCode)};
+                           securityCode: securityCode.toString()};
           const data = await CheckoutModule.unionPayChargeAndUpdate(reqData);
           if (checkoutFrom == 'checkout') {
             dispatch({

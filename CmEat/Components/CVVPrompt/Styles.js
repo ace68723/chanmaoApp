@@ -38,16 +38,17 @@ export default StyleSheet.create({
   heading: {
     color: COLORS.Black,
     fontFamily:'FZZhunYuan-M02S',
-    fontSize: 18,
+    fontSize: 20,
     // marginBottom: 20,
     marginTop: 20,
   },
   subHeading: {
     color: 'grey',
     fontFamily:'FZZhunYuan-M02S',
-    fontSize: 12,
-    marginBottom: 16,
-    marginTop: 8,
+    fontSize: 18,
+    // marginBottom: 16,
+    // marginTop: 8,
+    alignSelf: 'center'
   },
   promptInput: {
     width: '90%',
@@ -72,7 +73,7 @@ export default StyleSheet.create({
   errorContainer: {
     marginTop: 10,
     width: '100%',
-    minHeight: 20,
+    minHeight: 0,
   },
   errorText: {
     marginLeft: 20,
@@ -82,7 +83,7 @@ export default StyleSheet.create({
   btnTxt: {
     textAlign: 'center',
     fontFamily:'FZZhunYuan-M02S',
-    fontSize: 14,
+    fontSize: 16,
   },
   cardIcon: {
     width: 100,

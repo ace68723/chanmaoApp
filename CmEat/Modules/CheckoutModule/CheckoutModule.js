@@ -36,17 +36,17 @@ export default  {
   },
   async addUnionpayCard({cardNumber, expMonth, expYear, first_name, last_name}){
     try {
-       account_number = "6250946000000017";
-       expire_month = "12";
-       expire_year = "2033";
-       first_name = "John";
-       last_name = "Doe";
+       // account_number = "6250946000000016";
+       // expire_month = "12";
+       // expire_year = "2033";
+       // first_name = "John";
+       // last_name = "Doe";
        const {token} = GetUserInfo();
 
        const lo_data = {
-         account_number:account_number,
-         expire_month:expire_month,
-         expire_year:expire_year,
+         account_number:cardNumber,
+         expire_month:expMonth,
+         expire_year:expYear,
          first_name:first_name,
          last_name:last_name,
          authortoken: token

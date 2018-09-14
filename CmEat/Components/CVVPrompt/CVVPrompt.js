@@ -33,11 +33,29 @@ const CVVPrompt = ({
   >
     <View style={styles.container}>
       <View style={[styles.promptBox, promptBoxStyle]}>
-        <Text style={[styles.heading, headingStyle]} ellipsizeMode="tail" numberOfLines={1}>
+        <Text style={[styles.heading, headingStyle]}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              allowFontScaling={false}>
           请输入您的CVV
         </Text>
+        <View style={{flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                      alignSelf: 'center',
+                      width: '90%',
+                      marginBottom: 8,
+                      marginTop: 30,}}>
+          <Image source={require('./Image/union_pay_icon.png')}
+                style={{alignSelf: 'center',
+                        height: 40,
+                        width: 64,
+                        marginRight: 20,}}/>
 
-        <Text style={[styles.subHeading, headingStyle]} ellipsizeMode="tail" numberOfLines={1}>**** **** **** 1232</Text>
+          <Text style={[styles.subHeading, headingStyle]}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                allowFontScaling={false}>**** **** **** 1232</Text>
+        </View>
 
         <TextInput
           maxLength={3}
@@ -50,7 +68,8 @@ const CVVPrompt = ({
           {...inputProps}
         />
         <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{errorText}</Text>
+          <Text style={styles.errorText}
+                allowFontScaling={false}>{errorText}</Text>
         </View>
         <View style={styles.btnContainer}>
           <TouchableOpacity
@@ -59,6 +78,7 @@ const CVVPrompt = ({
           >
             <Text
               style={[{ color: primaryColor }, styles.btnTxt, btnTextStyle]}
+              allowFontScaling={false}
             >
               {cancelButtonText}
             </Text>
@@ -67,9 +87,8 @@ const CVVPrompt = ({
             style={[styles.promptBtn, btnStyle]}
             onPress={onSubmit}
           >
-            <Text
-              style={[{ color: primaryColor }, styles.btnTxt, btnTextStyle]}
-            >
+            <Text style={[{ color: primaryColor }, styles.btnTxt, btnTextStyle]}
+                  allowFontScaling={false}>
               {submitButtonText}
             </Text>
           </TouchableOpacity>
