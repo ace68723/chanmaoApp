@@ -58,6 +58,15 @@ const  HistoryModule = {
         console.log(e)
       }
     },
+    async getUnionPayLast4(token){
+      try {
+        const res = await HistoryApi.getUnionPayLast4(token);
+        return res;
+
+      } catch (e) {
+        console.log(e)
+      }
+    },
 // ===================================
 // getVerifyCode input parameter
 // ===================================

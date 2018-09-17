@@ -87,16 +87,29 @@ const RestaurantModule = {
 						const last_payment_channel = data.last_payment_channel;
 						let last4 = "";
 						let brand = "";
+						let unionpay_last4 = '';
 						if (data.ev_last4) {
 							last4 = data.ev_last4;
 						}
 						if (data.ev_last4) {
 							brand = data.ev_brand;
 						}
+						if (data.ev_unionpay_last4) {
+							unionpay_last4 = data.ev_unionpay_last4;
+						}
 						// last4 = "1234";
 						// brand = "visa";
 						// cusid = "123f12";
-            const eo_data ={pretax,pretax_ori,promoted,total,cusid,last4,brand,available_payment_channels,last_payment_channel}
+            const eo_data ={pretax,
+														pretax_ori,
+														promoted,
+														total,
+														cusid,
+														last4,
+														brand,
+														available_payment_channels,
+														last_payment_channel,
+														unionpay_last4}
             const startAmount = reqData.startAmount;
             let rid = reqData.rid;
             if(typeof rid !== 'string'){

@@ -14,6 +14,7 @@ let state = {
           cusid: '',
           last4: '',
           brand: '',
+          unionpay_last4: '',
         };
 let HistoryDetailData;
 const HistoryStore = Object.assign({},EventEmitter.prototype,{
@@ -72,6 +73,9 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
     state.last4 = data.last4;
     state.brand = data.brand;
   },
+  updateUnionPayLast4(data) {
+    state.unionpay_last4 = data.unionpay_last4;
+  },
   getLast4(){
     return {
       cusid: state.cusid,
@@ -107,7 +111,9 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
          case AppConstants.GET_LAST4:
              HistoryStore.updateLast4(action.data);
              break;
-
+         case AppConstants.GET_UNIONPAY_LAST4:
+             HistoryStore.updateUnionPayLast4(action.data);
+             break;
 		  }
 
 	})

@@ -45,7 +45,7 @@ import CMLabel from '../../Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
 import TabsAction from '../../Actions/TabsAction';
-import CVVPrompt from '../CVVPrompt'
+import CVVPrompt from '../CVVPrompt';
 
 // device(size): get device height and width
 const {height, width} = Dimensions.get('window');
@@ -85,6 +85,7 @@ class Confirm extends Component {
 											showOrderConfirm:false,
 											paymentStatus:'添加支付方式',
 											tips:0,
+											pretax: 0,
 											tipsPercentage:0.1,
 											showCVVPrompt: false,
 											securityCode: '',
@@ -99,6 +100,7 @@ class Confirm extends Component {
 				this._cashSelected = this._cashSelected.bind(this);
 				this._applePaySelected = this._applePaySelected.bind(this);
 				this._previousCardSelected = this._previousCardSelected.bind(this);
+				this._previousUnionPaySelected = this._previousUnionPaySelected.bind(this);
         this._updateDltype = this._updateDltype.bind(this);
         this._calculateDeliveryFee = this._calculateDeliveryFee.bind(this);
         this._checkout = this._checkout.bind(this);
@@ -156,9 +158,11 @@ class Confirm extends Component {
 												 cashSelected: this._cashSelected,
 												 applePaySelected:	this._applePaySelected,
 												 previousCardSelected: this._previousCardSelected,
+												 previousUnionPaySelected: this._previousUnionPaySelected,
 												 flag: 'fromCheckout',
 												 cusid: this.state.cusid,
 												 last4: this.state.last4,
+												 unionpay_last4: this.state.unionpay_last4,
 												 brand: this.state.brand},
 							navigatorStyle: {navBarHidden: true,},
 						});
@@ -319,9 +323,11 @@ class Confirm extends Component {
 										 cashSelected: this._cashSelected,
 										 applePaySelected:	this._applePaySelected,
 										 previousCardSelected: this._previousCardSelected,
+										 previousUnionPaySelected: this._previousUnionPaySelected,
 										 flag: 'fromCheckout',
 								 		 cusid: this.state.cusid,
 								 		 last4: this.state.last4,
+										 unionpay_last4: this.state.unionpay_last4,
 								 		 brand: this.state.brand},
 					navigatorStyle: {navBarHidden: true,},
 				});
@@ -461,6 +467,12 @@ class Confirm extends Component {
 
 		_previousCardSelected() {
 			CheckoutAction.updatePaymentStatus(1);
+			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+										 tipsPercentage:0.1});
+		}
+
+		_previousUnionPaySelected() {
+			CheckoutAction.updatePaymentStatus(40);
 			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
 										 tipsPercentage:0.1});
 		}
@@ -680,7 +692,7 @@ class Confirm extends Component {
 						payment_description = 'Apple Pay';
 					}
 					else if (this.state.payment_channel == 40) {
-						payment_description = '银联卡';
+						payment_description = '银联卡' + ' **** **** **** ' + this.state.unionpay_last4;
 					}
 					else {
 						payment_description = '现金到付';

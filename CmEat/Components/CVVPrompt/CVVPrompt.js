@@ -37,7 +37,7 @@ const CVVPrompt = ({
               ellipsizeMode="tail"
               numberOfLines={1}
               allowFontScaling={false}>
-          请输入您的CVV
+          请输入您的CVV支付
         </Text>
         <View style={{flexDirection: 'row',
                       justifyContent: 'flex-start',

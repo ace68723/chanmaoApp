@@ -37,6 +37,22 @@ export default {
         console.log(e);
       }
     },
+    async getUnionPayLast4() {
+      try{
+        const token = await AuthModule.getToken();
+        const res = await HistoryModule.getUnionPayLast4(token);
+        if (res.ev_error == 0) {
+          const data = {
+            unionpay_last4: res.ev_last4,
+          };
+          dispatch({
+              actionType: AppConstants.GET_UNIONPAY_LAST4, data
+          });
+        }
+      }catch (e){
+        console.log(e);
+      }
+    },
     async getVerifyCode(oid){
       try{
         const token = await AuthModule.getToken();

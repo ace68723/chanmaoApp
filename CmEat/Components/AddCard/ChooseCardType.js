@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import CheckoutAction from '../../Actions/CheckoutAction';
+import CVVPrompt from '../CVVPrompt'
 // import SboxHeader from '../../../App/Components/General/SboxHeader';
 import Header from '../General/Header';
 import CMLabel from '../../Constants/AppLabel';
@@ -23,9 +24,13 @@ export default class ChooseCardType extends Component {
 
   constructor(){
     super()
-    this.state = {};
+    this.state = {
+      showCVVPrompt: false,
+      securityCode: ''
+    };
     this._goBack = this._goBack.bind(this);
     this._goToPreviousCard = this._goToPreviousCard.bind(this);
+    this._goToPreviousUnionPay = this._goToPreviousUnionPay.bind(this);
     this._goToCredit = this._goToCredit.bind(this);
     this._goToAliPay = this._goToAliPay.bind(this);
     this._goToApplePay = this._goToApplePay.bind(this);
@@ -57,7 +62,8 @@ export default class ChooseCardType extends Component {
 
   _goToPreviousCard() {
     if (this.props.flag == 'fromCheckout') {
-      this.props.previousCardSelected(this.props.orderInfo);
+      // this.props.previousCardSelected(this.props.orderInfo);
+      this.props.previousCardSelected();
       this.props.navigator.dismissModal({
         animationType: 'slide-down'
       });
@@ -65,10 +71,6 @@ export default class ChooseCardType extends Component {
     else if (this.props.flag == 'fromHistory') {
       const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 1);
       let payment_description = '';
-      // let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
-      // if (visa_fee == 0) {
-      //   payment_description = '';
-      // }
       Alert.alert(
         '确认刷卡支付?',
         payment_description,
@@ -83,6 +85,18 @@ export default class ChooseCardType extends Component {
           },
        ]
       );
+    }
+  }
+
+  _goToPreviousUnionPay() {
+    if (this.props.flag == 'fromCheckout') {
+      this.props.previousUnionPaySelected();
+      this.props.navigator.dismissModal({
+        animationType: 'slide-down'
+      });
+    }
+    else if (this.props.flag == 'fromHistory') {
+      this.setState({showCVVPrompt: true});
     }
   }
 
@@ -254,7 +268,7 @@ export default class ChooseCardType extends Component {
         [
           {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
           {text: '确认', onPress: () => {
-              this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
+              this.props.unionCardSelected(this.props.orderInfo, visa_fee);
               this.props.navigator.dismissModal({
                 animationType: 'slide-down'
               });
@@ -297,7 +311,8 @@ export default class ChooseCardType extends Component {
   render() {
     const previousVisa = () => {
       let _previousVisa = [];
-      if (this.props.cusid && this.props.cusid.length > 0) {
+      if ((this.props.cusid && this.props.cusid.length > 0) ||
+          (this.props.unionpay_last4 && this.props.unionpay_last4.length > 0)) {
         // let icon_url = "";
         // if (this.props.brand == "Visa" || this.props.brand == "Master") {
         //   icon_url = require('./Img/visa_master_icon.png');
@@ -305,28 +320,6 @@ export default class ChooseCardType extends Component {
         // else {
         //   icon_url = require('./Img/visa_debit_icon.png');
         // }
-        let previous_icon = () => {
-          let _previous_icon = [];
-          if (this.props.brand == "Visa" || this.props.brand == "MasterCard") {
-            _previous_icon.push(
-              <Image key={'visa_master'}
-                     source={require('./Img/visa_master_icon.png')}
-                     style={{alignSelf: 'center',
-                             height: 15,
-                             width: 80}}/>
-            );
-          }
-          else {
-            _previous_icon.push(
-              <Image key={'visa_debit'}
-                     source={require('./Img/visa_debit_icon.png')}
-                     style={{alignSelf: 'center',
-                             height: 20,
-                             width: 40}}/>
-            );
-          }
-          return _previous_icon;
-        }
         _previousVisa.push(
           <Text key={"previousCardHeader"}
                 style={{padding: 10,
@@ -335,28 +328,88 @@ export default class ChooseCardType extends Component {
                         fontFamily:'FZZhunYuan-M02S'}}
                 allowFontScaling={false}>最近使用</Text>
         )
-        _previousVisa.push(
-          <TouchableOpacity onPress={this._goToPreviousCard}
-              key={"previousCard"}
-              activeOpacity={0.4}
-              style={{flexDirection: 'row',
-                      height: 59,
-                      alignItems: 'center',
-                      backgroundColor: 'white'}}>
-              <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
-                {previous_icon()}
-              </View>
-              <Text allowFontScaling={false}
-                    style={{flex: 1,
-                            fontSize: 18,
-                            textAlign: 'left',
-                            marginLeft: 20,
-                            color:"#808080",
-                            fontFamily:'FZZhunYuan-M02S'}}>
-                        {this.props.brand} **** **** **** {this.props.last4}
-              </Text>
-          </TouchableOpacity>
-        )
+        if (this.props.cusid && this.props.cusid.length > 0) {
+          let previous_icon = () => {
+            let _previous_icon = [];
+            if (this.props.brand == "Visa" || this.props.brand == "MasterCard") {
+              _previous_icon.push(
+                <Image key={'visa_master'}
+                       source={require('./Img/visa_master_icon.png')}
+                       style={{alignSelf: 'center',
+                               height: 15,
+                               width: 80}}/>
+              );
+            }
+            else {
+              _previous_icon.push(
+                <Image key={'visa_debit'}
+                       source={require('./Img/visa_debit_icon.png')}
+                       style={{alignSelf: 'center',
+                               height: 20,
+                               width: 40}}/>
+              );
+            }
+            return _previous_icon;
+          }
+          _previousVisa.push(
+            <TouchableOpacity onPress={this._goToPreviousCard}
+                key={"previousStripe"}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        height: 59,
+                        alignItems: 'center',
+                        backgroundColor: 'white'}}>
+                <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                  {previous_icon()}
+                </View>
+                <Text allowFontScaling={false}
+                      style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft: 20,
+                              color:"#808080",
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                          {this.props.brand} **** **** **** {this.props.last4}
+                </Text>
+            </TouchableOpacity>
+          )
+        }
+        if (this.props.unionpay_last4 &&
+            this.props.unionpay_last4.length > 0 &&
+            this.props.cusid &&
+            this.props.cusid.length > 0) {
+          _previousVisa.push(
+            <View style={{borderTopWidth: StyleSheet.hairlineWidth,
+                          borderColor: "#D5D5D5"}}/>
+          )
+        }
+        if (this.props.unionpay_last4 && this.props.unionpay_last4.length > 0) {
+          _previousVisa.push(
+            <TouchableOpacity onPress={this._goToPreviousUnionPay}
+                key={"previousUnionpay"}
+                activeOpacity={0.4}
+                style={{flexDirection: 'row',
+                        height: 59,
+                        alignItems: 'center',
+                        backgroundColor: 'white'}}>
+                <View style={{marginLeft: 10, width: 80, justifyContent:'center'}}>
+                  <Image source={require('./Img/union_pay_icon.png')}
+                        style={{alignSelf: 'center',
+                                height: 30,
+                                width: 48}}/>
+                </View>
+                <Text allowFontScaling={false}
+                      style={{flex: 1,
+                              fontSize: 18,
+                              textAlign: 'left',
+                              marginLeft: 20,
+                              color:"#808080",
+                              fontFamily:'FZZhunYuan-M02S'}}>
+                          银联卡 **** **** **** {this.props.unionpay_last4}
+                </Text>
+            </TouchableOpacity>
+          )
+        }
         _previousVisa.push(
           <Text key={"paymentChannelListHeader"}
                 style={{padding: 10,
@@ -574,6 +627,25 @@ export default class ChooseCardType extends Component {
             {previousVisa()}
             {payment_channel_list()}
         </ScrollView>
+        <CVVPrompt
+				      isVisible={this.state.showCVVPrompt}
+				      onChangeText={(text) => {
+								this.setState({securityCode: text});
+				      }}
+				      onCancel={() => {
+								this.setState({showCVVPrompt: false});
+				      }}
+				      onSubmit={() => {
+                const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 1);
+                this.props.unionCardSelected(this.props.orderInfo, visa_fee);
+                this.setState({showCVVPrompt: false});
+                setTimeout( () => {
+                  this.props.navigator.dismissModal({
+                    animationType: 'slide-down'
+                  });
+                }, 800);
+				      }}
+				   />
       </View>
     );
   }

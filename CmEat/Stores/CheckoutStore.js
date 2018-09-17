@@ -36,7 +36,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         checkoutSuccessful:false,
     		addressList:[],
         dltype:1,
-        pretax:0,
         available_payment_channels: [{channel: 0, visa_fee: 0}],
         code:'',
         dltypeList:[
@@ -46,7 +45,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     		showBanner:true,
         shouldAddAddress:false,
         payment_channel: -1,
-        visa_fee: 0,
         goToHistory: false,
         paymentFail: false,
         jumpToChoosePayment: false,
@@ -152,6 +150,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       let cusid = data.result.cusid;
       let last4 = data.result.last4;
       let brand = data.result.brand;
+      let unionpay_last4 = data.result.unionpay_last4;
 
   		const loading = false;
   		const selectedAddress = cme_getSelectedAddress();
@@ -177,7 +176,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
                                         brand,
                                         jumpToChoosePayment,
                                         payment_channel,
-                                        visa_fee
+                                        visa_fee,
+                                        unionpay_last4
   																		 });
 	},
 	updateAddress(){

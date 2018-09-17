@@ -75,6 +75,7 @@ class HistoryTab extends Component {
 				this._cashSelected = this._cashSelected.bind(this);
 				this._applePaySelected = this._applePaySelected.bind(this);
 				this._stripeCardSelected = this._stripeCardSelected.bind(this);
+				this._unionCardSelected = this._unionCardSelected.bind(this);
     }
 
     componentDidMount(){
@@ -143,6 +144,7 @@ class HistoryTab extends Component {
           isRefreshing: true,
         })
 				HistoryAction.getLast4();
+				HistoryAction.getUnionPayLast4();
         HistoryAction.getOrderData();
     }
 		_setOnRefresh() {
@@ -171,21 +173,22 @@ class HistoryTab extends Component {
 				}
     }
 		_handlePaymentRetry(orderInfo) {
-			const previous_payment = HistoryStore.getLast4();
+			const stateFromStore = HistoryStore.getState();
 			this.props.navigator.showModal({
 				screen: 'CmChooseCardType',
 				animated: true,
 				passProps:{available_payment_channels: orderInfo.available_payment_channels,
-									 stripeCardAdded: this._stripeCardSelected,
 									 alipaySelected: this._alipaySelected,
 									 cashSelected: this._cashSelected,
 									 applePaySelected:	this._applePaySelected,
 									 stripeCardSelected: this._stripeCardSelected,
+									 unionCardSelected: this._unionCardSelected,
 								 	 flag: 'fromHistory',
 								 	 orderInfo: orderInfo,
-									 cusid: previous_payment.cusid,
-									 last4: previous_payment.last4,
-									 brand: previous_payment.brand},
+									 cusid: stateFromStore.cusid,
+									 last4: stateFromStore.last4,
+									 brand: stateFromStore.brand,
+								 	 unionpay_last4: stateFromStore.unionpay_last4},
 				navigatorStyle: {navBarHidden: true,},
 			});
 		}
@@ -213,6 +216,12 @@ class HistoryTab extends Component {
 																						oid: orderInfo.order_oid,
 																						checkoutFrom: 'history'});
 				this._onRefresh();
+		}
+		_unionCardSelected(orderInfo, visa_fee) {
+			CheckoutAction.unionPayChargeAndUpdate({amount: parseFloat(orderInfo.order_total),
+																					oid: orderInfo.order_oid,
+																					checkoutFrom: 'history'});
+			this._onRefresh();
 		}
 
 		_handleOnChangeTab(tabRef) {

@@ -48,6 +48,21 @@ const HistoryApi = {
             .then((res) => res.json())
             .catch((error) => {throw error})
   },
+  getUnionPayLast4(token){
+    const url = AuthConstants.API_GET_UNIONPAY_LAST4;
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    options.headers.authortoken = token;
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
     getHistoryDetail(reqData){
       const url = AuthConstants.API_GETHISTORYDETAIL
       let options = {
