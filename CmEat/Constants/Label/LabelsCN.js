@@ -9,7 +9,7 @@ module.exports={
     MY_TAB:'我的',
     SETTING:'设置',
     MY_ORDER:'我的订单',
-    ADD_ADDRESS:'添加地址',
+    ADD_ADDRESS:'地址维护',
     SAVE_ADDRESS:'保存地址',
     CUSTOMER_SERVICE:'联系客服',
     SWEETBOX: '甜满箱 全场免运费 满$25起送',

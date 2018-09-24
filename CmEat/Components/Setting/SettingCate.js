@@ -16,11 +16,14 @@ export default (props) => {
             <View style={[styles.col,{  flex:0.2,}]}>
                   <Image source={props.icon} style={styles.icon} />
             </View>
-          <View style={styles.col}>
+          <View style={[styles.col,{  flex:0.6,}]}>
             <Text style={styles.title}
                   allowFontScaling={false}>
                 {props.title}
             </Text>
+          </View>
+          <View style={[styles.col,{  flex:0.2,}]}>
+                <Image source={require('./Image/down-arrow.png')} style={styles.icon} />
           </View>
 
         </View>
@@ -42,6 +45,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: '#fff',
         height:60,
+        marginTop:10,
+        marginLeft:10,
+        marginRight:10,
+        borderRadius:8,
         // borderBottomColor:'#ddd',
         // borderBottomWidth:1,
     },
