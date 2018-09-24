@@ -98,4 +98,7 @@ module.exports={
     //About us
     ABOUT_US:'关于我们',
 
+    //ALERT_TITLE
+    ALERT_TITLE:'馋猫订餐',
+    ALERT_CONTENT:'您输入的支付信息输入有误',
 }

@@ -70,23 +70,23 @@ class SettingTab extends Component {
     render(){
       return(
         <View style={styles.mainContainer}>
-            <Header title={CMLabel.getCNLabel('SETTING')}/>
+            <Header title={CMLabel.getLabel('SETTING')}/>
             <ScrollView style={styles.scrollView}>
               <View style={{height:30,flex:1,backgroundColor:"#ffffff"}}/>
-							<SettingCate  title={CMLabel.getCNLabel('MY_ORDER')}
+							<SettingCate  title={CMLabel.getLabel('MY_ORDER')}
                             onPress={this._goToHistory.bind(this)}
                             icon={require('./Image/history.png')}/>
-              <SettingCate  title={CMLabel.getCNLabel('ADD_ADDRESS')}
+              <SettingCate  title={CMLabel.getLabel('ADD_ADDRESS')}
                             onPress={this._goToAddress.bind(this)}
                             icon={require('./Image/setting.png')}/>
-							<SettingCate  title={CMLabel.getCNLabel('CUSTOMER_SERVICE')}
+							<SettingCate  title={CMLabel.getLabel('CUSTOMER_SERVICE')}
 														icon={require('./Image/information.png')}
 														onPress={this._goToAboutUs}
 														/>
-							<SettingCate  title={CMLabel.getCNLabel('SWEETBOX')}
+							<SettingCate  title={CMLabel.getLabel('SWEETBOX')}
                 icon={require('./Image/sbox.png')}
                 onPress={this._goToSbox}/>
-              <SettingCate  title={CMLabel.getCNLabel('LOG_OUT')}
+              <SettingCate  title={CMLabel.getLabel('LOG_OUT')}
                             icon={require('./Image/logout.png')}
                             onPress={this._cmeLogOut}/>
             </ScrollView>

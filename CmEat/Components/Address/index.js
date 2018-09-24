@@ -160,8 +160,8 @@ export default class CmEatAddress extends Component {
 			'删除地址',
 			"addressDescription",
 			[
-				{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-				{text: CMLabel.getCNLabel('CONFIRM'), onPress: password => AddressAction.deleteAddress(address)},
+				{text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+				{text: CMLabel.getLabel('CONFIRM'), onPress: password => AddressAction.deleteAddress(address)},
 			]
 		)
 	}
@@ -427,7 +427,7 @@ export default class CmEatAddress extends Component {
 						autoFocus={true}
             onFocus={()=>{this.setState({showConfirmBtn:false})}}
             onBlur={()=>{this.setState({showConfirmBtn:true})}}
-            placeholder={CMLabel.getCNLabel('ENTER_ADDRESS')}
+            placeholder={CMLabel.getLabel('ENTER_ADDRESS')}
             placeholderTextColor={'#999999'}
             selectionColor={'#ea7b21'}
             keyboardType = { 'default'}
@@ -467,7 +467,7 @@ export default class CmEatAddress extends Component {
 											fontSize: 16,
 											fontFamily:'FZZhunYuan-M02S',
 											color: '#A5A5A5',}}
-							allowFontScaling={false}>{CMLabel.getCNLabel('CHOOSE')}: </Text>
+							allowFontScaling={false}>{CMLabel.getLabel('CHOOSE')}: </Text>
 
         {predictionList}
       </ScrollView>
@@ -544,7 +544,7 @@ export default class CmEatAddress extends Component {
                         onPress={this._handleConfirm}>
             <Text style={styles.buttonText}
 									allowFontScaling={false}>
-               {CMLabel.getCNLabel('CONFIRM')}
+               {CMLabel.getLabel('CONFIRM')}
             </Text>
       </TouchableOpacity>
     )
@@ -562,7 +562,7 @@ export default class CmEatAddress extends Component {
                         onPress={this._handleConfirm}>
             <Text style={styles.buttonText}
 									allowFontScaling={false}>
-							{CMLabel.getCNLabel('CONFIRM')}
+							{CMLabel.getLabel('CONFIRM')}
             </Text>
       </TouchableOpacity>
     )
@@ -571,7 +571,7 @@ export default class CmEatAddress extends Component {
     return(
       <View style={{  flex:1,
                       backgroundColor:"#ffffff"}}>
-        <Header title={CMLabel.getCNLabel('ADDRESS')}
+        <Header title={CMLabel.getLabel('ADDRESS')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
 					{this._renderSearchInput()}

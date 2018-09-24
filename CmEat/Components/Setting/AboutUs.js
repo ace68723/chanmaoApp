@@ -61,7 +61,7 @@ export default class InfoPage extends Component {
     // }} allowFontScaling={false}>客服电话：647-515-6699</Text>
     return (
       <View style={styles.container}>
-        <Header title={CMLabel.getCNLabel('ABOUT_US')} goBack={this._goBack}/>
+        <Header title={CMLabel.getLabel('ABOUT_US')} goBack={this._goBack}/>
         <ScrollView style={{flex:1, paddingTop:64,paddingLeft:20,paddingRight:20, paddingBottom: 20}}>
 
             <View style={styles.fontContainer}>

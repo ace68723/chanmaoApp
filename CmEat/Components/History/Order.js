@@ -46,7 +46,7 @@ export default class pastOrderEN extends Component {
                               textAlign: 'center',
                               color: soldoutColor }}
                 >
-                        {CMLabel.getCNLabel('SOLD_OUT')}
+                        {CMLabel.getLabel('SOLD_OUT')}
                 </Text>
               );
           }
@@ -139,7 +139,7 @@ export default class pastOrderEN extends Component {
                                  onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
                 <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
                       allowFontScaling={false}>
-                      {CMLabel.getCNLabel('REORDER')}
+                      {CMLabel.getLabel('REORDER')}
                 </Text>
               </TouchableOpacity>
           </View>
@@ -152,7 +152,7 @@ export default class pastOrderEN extends Component {
                                         alignItems:'center'}}
                                  onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
                 <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
-                        allowFontScaling={false}>{CMLabel.getCNLabel('DETAIL')}</Text>
+                        allowFontScaling={false}>{CMLabel.getLabel('DETAIL')}</Text>
               </TouchableOpacity>
           </View>
         )
@@ -166,7 +166,7 @@ export default class pastOrderEN extends Component {
                                       alignItems:'center'}}
                                onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
               <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
-                      allowFontScaling={false}>{CMLabel.getCNLabel('COMMENT')}</Text>
+                      allowFontScaling={false}>{CMLabel.getLabel('COMMENT')}</Text>
             </TouchableOpacity>
         </View>
       )
@@ -180,7 +180,7 @@ export default class pastOrderEN extends Component {
                                onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
               <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
                     allowFontScaling={false}>
-                    {CMLabel.getCNLabel('REORDER')}
+                    {CMLabel.getLabel('REORDER')}
               </Text>
             </TouchableOpacity>
         </View>
@@ -229,7 +229,7 @@ export default class pastOrderEN extends Component {
     if (this.state.orderInfo.payment_channel == 0) {
       return(
         <View style={styles.orderTotal}>
-          <Text style={{fontSize:18,marginLeft: 40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>{CMLabel.getCNLabel('PRICE')}: ${this.state.orderInfo.order_total}</Text>
+          <Text style={{fontSize:18,marginLeft: 40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>{CMLabel.getLabel('PRICE')}: ${this.state.orderInfo.order_total}</Text>
         </View>
       )
     }
@@ -241,7 +241,7 @@ export default class pastOrderEN extends Component {
                         fontWeight:'bold',
                         fontFamily:'FZZhunYuan-M02S'}}
                 allowFontScaling={false}>
-                {CMLabel.getCNLabel('ACTUAL_PICE')}: ${this.state.orderInfo.order_total}
+                {CMLabel.getLabel('ACTUAL_PICE')}: ${this.state.orderInfo.order_total}
           </Text>
         </View>
       )
@@ -397,7 +397,7 @@ export default class pastOrderEN extends Component {
                   <Text style={[styles.infoTitle,statusColor]} allowFontScaling={false}>{statusMessage}</Text>
                   {_statusReminder()}
                   <View style={{flexDirection:'row'}}>
-                    <Text style={styles.infoText} allowFontScaling={false}>{CMLabel.getCNLabel('ORDER_NO')} #{this.state.orderInfo.order_oid}</Text>
+                    <Text style={styles.infoText} allowFontScaling={false}>{CMLabel.getLabel('ORDER_NO')} #{this.state.orderInfo.order_oid}</Text>
                     <Text style={[styles.infoText,{textAlign:'right'}]} allowFontScaling={false}>{this.state.orderInfo.order_created}</Text>
                   </View>
               </View>

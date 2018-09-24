@@ -276,13 +276,13 @@ class Confirm extends Component {
       let dldec;
       switch (this.state.dltype) {
         case 0:
-          dldec = CMLabel.getCNLabel('PICK_UP')
+          dldec = CMLabel.getLabel('PICK_UP')
         break;
         case 1:
-          dldec = CMLabel.getCNLabel('DELIVER')
+          dldec = CMLabel.getLabel('DELIVER')
         break;
         case 2:
-          dldec = CMLabel.getCNLabel('SET_DELIVER_FEE')
+          dldec = CMLabel.getLabel('SET_DELIVER_FEE')
         break;
       }
 			this.setState({
@@ -450,7 +450,7 @@ class Confirm extends Component {
 	                              onPress={this._checkout}>
 										<Text style={styles.acceptText}
 													allowFontScaling={false}>
-											 {CMLabel.getCNLabel('CHECK_OUT')}
+											 {CMLabel.getLabel('CHECK_OUT')}
 										</Text>
 	            </TouchableOpacity>
 	        )
@@ -465,7 +465,7 @@ class Confirm extends Component {
 	          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
 	            <View style={styles.acceptButton}>
 	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
-											allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
+											allowFontScaling={false}>{CMLabel.getLabel('ADD_ADDRESS')}</Text>
 	            </View>
 	          </TouchableOpacity>
 
@@ -483,7 +483,7 @@ class Confirm extends Component {
 	                              onPress={this._checkout}>
 										<Text style={styles.acceptText}
 													allowFontScaling={false}>
-											 {CMLabel.getCNLabel('CHECK_OUT')}
+											 {CMLabel.getLabel('CHECK_OUT')}
 										</Text>
 	            </TouchableOpacity>
 	        )
@@ -498,7 +498,7 @@ class Confirm extends Component {
 	          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
 	            <View style={styles.acceptButton}>
 	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
-											allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
+											allowFontScaling={false}>{CMLabel.getLabel('ADD_ADDRESS')}</Text>
 	            </View>
 	          </TouchableOpacity>
 
@@ -563,13 +563,13 @@ class Confirm extends Component {
 			if(this.state.dlexp > 0){
 				return(
 					<CartItem icon={require('./Image/delivery-2.png')}
-										title={CMLabel.getCNLabel('DELIVER_FEE')}
+										title={CMLabel.getLabel('DELIVER_FEE')}
 										value={'$'+this.state.dlexp}/>
 				)
 			}else if(this.state.dltype == '2'){
 				return(
 					<CartItem icon={require('./Image/delivery-2.png')}
-										title={CMLabel.getCNLabel('DELIVER_FEE')}
+										title={CMLabel.getLabel('DELIVER_FEE')}
 										value={'客服将稍后与您联系确认运费'}/>
 				)
 			}
@@ -586,13 +586,13 @@ class Confirm extends Component {
 		}
 		_renderDeliverType(){
       let typeListData=[{
-                          text:CMLabel.getCNLabel('DELIVER'),
+                          text:CMLabel.getLabel('DELIVER'),
 													type:'1',
                           backgroundColor:"#fff",
                           textColor:"#999999",
                           borderColor:"#999999",
                         },{
-                          text:CMLabel.getCNLabel('PICK_UP'),
+                          text:CMLabel.getLabel('PICK_UP'),
 													type:'0',
                           backgroundColor:"#fff",
                           textColor:"#999999",
@@ -655,7 +655,7 @@ class Confirm extends Component {
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>
 							<CartItem rightIcon={require('./Image/right.png')}
-												title={CMLabel.getCNLabel('PAY')}
+												title={CMLabel.getLabel('PAY')}
 												value={payment_description}/>
 						</TouchableOpacity>
 					)
@@ -670,7 +670,7 @@ class Confirm extends Component {
 											 isOpen={this.state.openEditComment}
 											 onClosed={()=>{this.setState({openEditComment:false})}}>
 					<TextInput style={styles.TextInput}
-										 placeholder={CMLabel.getCNLabel('REMARK')}
+										 placeholder={CMLabel.getLabel('REMARK')}
 										 selectionColor="#ff8b00"
 										 multiline={true}
 										 onChangeText={(text) => {this.setState({comment:text})}}
@@ -693,7 +693,7 @@ class Confirm extends Component {
 												 fontFamily:'FZZhunYuan-M02S',
 											}}
 									allowFontScaling={false}>
-	              {CMLabel.getCNLabel('TIPS')}:
+	              {CMLabel.getLabel('TIPS')}:
 	            </Text>
 	            <Text style={{marginLeft:5,
 													  fontSize:15,
@@ -783,10 +783,10 @@ class Confirm extends Component {
 			});
 			let commentText = ()=>{
 				if(this.state.comment){
-					return(	<Text>{CMLabel.getCNLabel('REMARK')}： {this.state.comment}</Text>)
+					return(	<Text>{CMLabel.getLabel('REMARK')}： {this.state.comment}</Text>)
 				}else{
 					return(<Text style={{color:'#ababb0'}}
-											 allowFontScaling={false}>{CMLabel.getCNLabel('ADD_REMARK')}</Text>)
+											 allowFontScaling={false}>{CMLabel.getLabel('ADD_REMARK')}</Text>)
 				}
 			}
       return(
@@ -834,12 +834,12 @@ class Confirm extends Component {
 												</View>
 											</TouchableWithoutFeedback>
 											<CartItem
-																title={CMLabel.getCNLabel('PRETAX_PRICE')}
+																title={CMLabel.getLabel('PRETAX_PRICE')}
 																value={'$'+this.state.pretax}/>
 
 											{this._renderDeliverFee()}
 											<CartItem
-																title={CMLabel.getCNLabel('TAXED_PRICE')}
+																title={CMLabel.getLabel('TAXED_PRICE')}
 																value={'$'+this.state.total}/>
 											{this._renderChoosePayment()}
 											{this._renderVisaFee()}

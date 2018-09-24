@@ -136,27 +136,27 @@ export default class pastOrderEN extends Component {
               <View style={styles.info}>
                   <Text style={styles.infoTitle} allowFontScaling={false}>{orderInfo.statue}</Text>
                   <Text style={styles.infoText} allowFontScaling={false}>{orderInfo.time}</Text>
-                  <Text style={styles.infoText} allowFontScaling={false}>{CMLabel.getCNLabel('ORDER_NO')} #{orderInfo.orderID}</Text>
+                  <Text style={styles.infoText} allowFontScaling={false}>{CMLabel.getLabel('ORDER_NO')} #{orderInfo.orderID}</Text>
               </View>
               <View style={styles.orderList}>
                 {this._renderFoodList()}
               </View>
               <View style={styles.orderTotal}>
-                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getCNLabel('PRICE')}: {orderInfo.total}</Text>
+                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getLabel('PRICE')}: {orderInfo.total}</Text>
               </View>
               <View style={styles.buttonContainer}>
                   <View style={[styles.ButtonStyle,{borderRightWidth:0.5}]}>
                       <TouchableOpacity style={{flex:1,
                                                 justifyContent:'center',
                                                 alignItems:'center'}}>
-                        <Text style={{fontSize:12,color:'#666666',fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getCNLabel('RECIPT')}</Text>
+                        <Text style={{fontSize:12,color:'#666666',fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getLabel('RECIPT')}</Text>
                       </TouchableOpacity>
                   </View>
                   <View style={[styles.ButtonStyle,{borderRightWidth:0.5}]}>
                       <TouchableOpacity style={{flex:1,
                                                 justifyContent:'center',
                                                 alignItems:'center'}}>
-                        <Text style={{fontSize:12,color:'#666666',fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getCNLabel('HELP')}</Text>
+                        <Text style={{fontSize:12,color:'#666666',fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getLabel('HELP')}</Text>
                       </TouchableOpacity>
                   </View>
               </View>

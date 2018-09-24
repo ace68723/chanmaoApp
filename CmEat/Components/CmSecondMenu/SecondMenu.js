@@ -318,7 +318,7 @@ export default class SecondMenu extends Component {
 										alignItems: 'center'}}>
 					<Text style={{flex: 0.3, fontSize: 16, fontFamily:'FZZhunYuan-M02S', color: '#a5a5a5'}}
 								allowFontScaling={false}>
-					{CMLabel.getCNLabel('DISH_QUANTITY')}:
+					{CMLabel.getLabel('DISH_QUANTITY')}:
 					</Text>
 					<View style={{flex: 0.4}}>
 							<View style={{flexDirection: 'row',

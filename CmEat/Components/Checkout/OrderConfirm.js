@@ -114,7 +114,7 @@ export default class orderConfirm extends Component {
                                                         justifyContent:'center',
                                                         alignItems:'center'}}
                                                 onPress={() => this.setState({isOpen: !this.state.isOpen})}>
-                                <Text style={styles.buttonFont} allowFontScaling={false}>{CMLabel.getCNLabel('CANCEL')}</Text>
+                                <Text style={styles.buttonFont} allowFontScaling={false}>{CMLabel.getLabel('CANCEL')}</Text>
                               </TouchableOpacity>
                           </View>
                           <View style={styles.modalButton}>
@@ -122,7 +122,7 @@ export default class orderConfirm extends Component {
                                                         justifyContent:'center',
                                                         alignItems:'center'}}
                                                 onPress={this.props.doCheckout}>
-                                <Text style={{fontSize:18,color:'#ea7b21',}} allowFontScaling={false}>{CMLabel.getCNLabel('CONFIRM')}</Text>
+                                <Text style={{fontSize:18,color:'#ea7b21',}} allowFontScaling={false}>{CMLabel.getLabel('CONFIRM')}</Text>
                               </TouchableOpacity>
                           </View>
                       </View>

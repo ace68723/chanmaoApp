@@ -15,7 +15,7 @@ import {
 
 import Marker from './marker';
 import KeyboardView from './keyboardView';
-
+import CMLabel from '../../Constants/AppLabel';
 const {height, width} = Dimensions.get('window');
 
 // import SboxOrderAction from '../../Actions/SboxOrderAction';
@@ -231,8 +231,8 @@ export default class MyComponent extends Component {
        screen: "Notification",
        passProps: {
          backgroundColor:'#ea7b21',
-         title:'馋猫订餐',
-         content:'您输入的支付信息输入有误',
+         title:CMLabel.getLabel('ALERT_TITLE'),
+         content:CMLabel.getLabel('ALERT_CONTENT'),
        },
        autoDismissTimerSec: 3
       });

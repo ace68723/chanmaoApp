@@ -99,7 +99,7 @@ export default class AddressForHomeHeader extends Component {
                         marginBottom:10,}}
                         numberOfLines={1}
                 allowFontScaling={false}>
-              {CMLabel.getCNLabel('DELIVER_TO')}   {this.state.selectedAddress}
+              {CMLabel.getLabel('DELIVER_TO')}   {this.state.selectedAddress}
           </Text>
 
         </View>
@@ -114,7 +114,7 @@ export default class AddressForHomeHeader extends Component {
                       marginBottom:10,}}
                       numberOfLines={1}
               allowFontScaling={false}>
-            {CMLabel.getCNLabel('CHOOSE_ADDRESS')}
+            {CMLabel.getLabel('CHOOSE_ADDRESS')}
         </Text>
       )
     }

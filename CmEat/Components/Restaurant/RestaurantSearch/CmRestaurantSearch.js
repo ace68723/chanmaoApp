@@ -351,7 +351,7 @@ export default class CmRestaurantSearch extends Component {
 					<Text style={{fontSize:18,
 												fontFamily:"FZZhunYuan-M02S"}}
 								allowFontScaling={false}>
-						{CMLabel.getCNLabel('CITY_AREA')}
+						{CMLabel.getLabel('CITY_AREA')}
 					</Text>
 				</View>
 			)
@@ -361,7 +361,7 @@ export default class CmRestaurantSearch extends Component {
 					<Text style={{fontSize:18,
 												fontFamily:"FZZhunYuan-M02S"}}
 								allowFontScaling={false}>
-						{CMLabel.getCNLabel('RES_TAG')}
+						{CMLabel.getLabel('RES_TAG')}
 					</Text>
 				</View>
 			)

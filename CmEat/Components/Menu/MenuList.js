@@ -128,8 +128,8 @@ class Menu extends Component {
             '馋猫订餐提醒您',
             '不足'+this.state.startAmount+'只能自取哦～',
             [
-              {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-              {text: CMLabel.getCNLabel('CONFIRM'), onPress: () => {
+              {text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+              {text: CMLabel.getLabel('CONFIRM'), onPress: () => {
                    this.props.navigator.push({
                       id: 'Confirm',
                       restaurant:this.props.restaurant,
@@ -189,9 +189,9 @@ class Menu extends Component {
       if(this.props.offsetY > 100){
 
         if(!this.props.restaurant.close){
-          const _rightButtonText = '$'+this.state.cartTotals.total+CMLabel.getCNLabel('CHECK_OUT');
+          const _rightButtonText = '$'+this.state.cartTotals.total+CMLabel.getLabel('CHECK_OUT');
           return(
-            <Header title={CMLabel.getCNLabel('ORDER')}
+            <Header title={CMLabel.getLabel('ORDER')}
                     goBack={this._goBack}
                     rightButton={this._goToCinfirm}
                     rightButtonText={_rightButtonText}/>
@@ -199,7 +199,7 @@ class Menu extends Component {
         }else{
           const _rightButtonText = '商家休息了';
           return(
-            <Header title={CMLabel.getCNLabel('ORDER')}
+            <Header title={CMLabel.getLabel('ORDER')}
                     goBack={this._goBack}
                     rightButton={() => {}}
                     rightButtonText={_rightButtonText}/>
@@ -270,7 +270,7 @@ class Menu extends Component {
                 <View style={styles.checkoutButton}>
                   <Text style={styles.checkoutText}
 												allowFontScaling={false}>
-                    ${this.state.cartTotals.total}{CMLabel.getCNLabel('CHECK_OUT')}
+                    ${this.state.cartTotals.total}{CMLabel.getLabel('CHECK_OUT')}
                   </Text>
                 </View>
               </TouchableOpacity>

@@ -13,7 +13,7 @@ export default (props) =>{
           <View style={styles.container}>
               <Text style={styles.title}
                     allowFontScaling={false}>
-                {CMLabel.getCNLabel('SETTING')}
+                {CMLabel.getLabel('SETTING')}
               </Text>
           </View>
         )

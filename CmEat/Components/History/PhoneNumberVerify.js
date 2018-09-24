@@ -73,7 +73,7 @@ class PhoneNumberVerify extends Component{
                     style={styles.button}
                     onPress={() => {this.getVerifyCode()}}>
                        <Text allowFontScaling={false}
-											 			style={ styles.buttonText }>{CMLabel.getCNLabel('VERTIFICATION_CODE')}: {this.props.phoneNumber}  </Text>
+											 			style={ styles.buttonText }>{CMLabel.getLabel('VERTIFICATION_CODE')}: {this.props.phoneNumber}  </Text>
                 </TouchableOpacity>
 
             )
@@ -93,7 +93,7 @@ class PhoneNumberVerify extends Component{
                     onChangeText={(code) => this.setState({code})}
                     value={this.state.text}
                     placeholderTextColor={'#ff8b00'}
-                    placeholder={CMLabel.getCNLabel('ENTER_VERTIFICATION_CODE')}
+                    placeholder={CMLabel.getLabel('ENTER_VERTIFICATION_CODE')}
                     underlineColorAndroid={"rgba(0,0,0,0)"}
                   />
                 <TouchableOpacity
@@ -101,7 +101,7 @@ class PhoneNumberVerify extends Component{
                     style={[styles.button,{marginTop:10}]}
                     onPress={() => {this.verifyPhone()}}>
                        <Text allowFontScaling={false}
-											 			style={ styles.buttonText }>{CMLabel.getCNLabel('CONFIRM')} </Text>
+											 			style={ styles.buttonText }>{CMLabel.getLabel('CONFIRM')} </Text>
                 </TouchableOpacity>
               </View>
             )

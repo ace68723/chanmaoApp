@@ -87,7 +87,7 @@ export default class CmEatMenuSearch extends Component {
 					'馋猫订餐提醒您',
 					'不足'+this.state.restaurant.start_amount+'只能自取哦～',
 					[
-						{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+						{text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
 						{text: '好哒', onPress: () => {
 								this.props.navigator.showModal({
 									screen: 'CmEatCheckout',
@@ -268,7 +268,7 @@ export default class CmEatMenuSearch extends Component {
 													fontSize:13,
 													fontFamily:'FZZongYi-M05S',}}
 									allowFontScaling={false}>
-									{CMLabel.getCNLabel('GO_CHECKOUT')}
+									{CMLabel.getLabel('GO_CHECKOUT')}
 						</Text>
 					</View>
 

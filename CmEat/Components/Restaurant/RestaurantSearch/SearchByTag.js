@@ -93,7 +93,7 @@ export default class SearchByTag extends Component{
 			<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
 				<Text style={{fontSize:18,fontFamily:"FZZhunYuan-M02S"}}
 							allowFontScaling={false}>
-					{CMLabel.getCNLabel('RES_TAG')}
+					{CMLabel.getLabel('RES_TAG')}
 				</Text>
 			</View>
 		)

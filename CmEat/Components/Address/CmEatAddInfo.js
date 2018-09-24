@@ -218,7 +218,7 @@ export default class CmEatAddInfo extends Component {
 
         return(
           <View style={styles.mainContainer} >
-          <Header title={CMLabel.getCNLabel('ADDRESS')}
+          <Header title={CMLabel.getLabel('ADDRESS')}
 	                goBack={this._goBack}
 	                leftButtonText={'×'}/>
             <ScrollView scrollEnabled={true}
@@ -244,7 +244,7 @@ export default class CmEatAddInfo extends Component {
 												<Animated.View style={{flexDirection:"column",flex:1,marginTop:interpolatedMarginTop}}>
 														<Text style={{marginLeft:10,marginTop:12,fontFamily:'FZZhunYuan-M02S',}}
 																	allowFontScaling={false}>
-															{CMLabel.getCNLabel('ADD_DEFAULT_ADDRESS')}
+															{CMLabel.getLabel('ADD_DEFAULT_ADDRESS')}
 														</Text>
 														{this._renderChooseType()}
 
@@ -255,7 +255,7 @@ export default class CmEatAddInfo extends Component {
                     <View style={styles.inputBox}>
                       <Text style={styles.inputText}
 														allowFontScaling={false}>
-                        {CMLabel.getCNLabel('CONTACT')}:
+                        {CMLabel.getLabel('CONTACT')}:
                       </Text>
                         <TextInput
                             blurOnSubmit={false}
@@ -275,7 +275,7 @@ export default class CmEatAddInfo extends Component {
                     <View style={styles.inputBox}>
                       <Text style={styles.inputText}
 														allowFontScaling={false}>
-                        {CMLabel.getCNLabel('PHONE')}: ＋1:
+                        {CMLabel.getLabel('PHONE')}: ＋1:
                       </Text>
                       <TextInput
                           blurOnSubmit={false}
@@ -341,7 +341,7 @@ export default class CmEatAddInfo extends Component {
                                        onPress={this._submitAddress}>
                         <Text style={ styles.buttonText }
 
-															allowFontScaling={false}>{AddressStore.getState().edittingAddress ? CMLabel.getCNLabel('SAVE_ADDRESS') : CMLabel.getCNLabel('ADD_ADDRESS')}
+															allowFontScaling={false}>{AddressStore.getState().edittingAddress ? CMLabel.getLabel('SAVE_ADDRESS') : CMLabel.getLabel('ADD_ADDRESS')}
 												 </Text>
                     </TouchableOpacity>
                </View>

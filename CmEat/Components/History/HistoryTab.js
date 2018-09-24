@@ -279,7 +279,7 @@ class HistoryTab extends Component {
 													color: firstFilterColor,
 													fontFamily:'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							{CMLabel.getCNLabel('ALL_ORDER')}
+							{CMLabel.getLabel('ALL_ORDER')}
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
@@ -289,7 +289,7 @@ class HistoryTab extends Component {
 													color: secondFilterColor,
 													fontFamily:'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							{CMLabel.getCNLabel('YET_COMMENT')}
+							{CMLabel.getLabel('YET_COMMENT')}
 						</Text>
 					</TouchableOpacity>
 
@@ -331,7 +331,7 @@ class HistoryTab extends Component {
 										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
 										handlePaymentRetry={this._handlePaymentRetry}
-										tabLabel={CMLabel.getCNLabel('ALL_ORDER')}/>
+										tabLabel={CMLabel.getLabel('ALL_ORDER')}/>
 								<OrdersNotReviewed
 										navigator={this.props.navigator}
 										orderData={this.state.orderData}
@@ -340,7 +340,7 @@ class HistoryTab extends Component {
 										goToComments={this._goToComments}
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
-										tabLabel={CMLabel.getCNLabel('YET_COMMENT')}/>
+										tabLabel={CMLabel.getLabel('YET_COMMENT')}/>
 	 			     </ScrollableTabView>
 						 <Modal style={styles.modal}
 						 			 position={"center"}

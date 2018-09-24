@@ -115,18 +115,18 @@ export default class Tabs extends Component {
 												 }}>
 
 							<MainTab
-								tabLabel= {CMLabel.getCNLabel('MAIN_TAB')}
+								tabLabel= {CMLabel.getLabel('MAIN_TAB')}
 								hideTabBar = {this._hideTabBar}
 								showTabBar = {this._showTabBar}
                 navigator={this.props.navigator}/>
 
 							<SearchTab
-								tabLabel = {CMLabel.getCNLabel('AREA_SEARCH')}
+								tabLabel = {CMLabel.getLabel('AREA_SEARCH')}
 								navigator={this.props.navigator}
 								hideTabBar = {this._hideTabBar}
 								showTabBar = {this._showTabBar}
                 />
-							<SettingTab tabLabel={CMLabel.getCNLabel('MY_TAB')}
+							<SettingTab tabLabel={CMLabel.getLabel('MY_TAB')}
                     navigator={this.props.navigator}
                     handleBackToHome={this.props.handleBackToHome}/>
 
