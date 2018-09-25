@@ -15,14 +15,14 @@ export default (props) => {
           if (props.dish.tpgs[tpg_id].tps[tp_id].quantity > 0) {
             _toppingGroupList.push(
               <View key={tp_id}
-                    style={{flexDirection: 'row', marginTop: 5, marginLeft: 32}}>
+                    style={{flexDirection: 'row', marginTop: 12}}>
 
                 <View style={{flex:1,justifyContent:'center'}}>
                     <Text style={{color:'#ababb0',
-                                  fontSize:16,
+                                  fontSize:14,
                                   fontFamily:'FZZhunYuan-M02S'}}
                           allowFontScaling={false}>
-                      {props.dish.tpgs[tpg_id].tps[tp_id].tp_name}
+                      {props.dish.tpgs[tpg_id].tps[tp_id].tp_name} × {props.dish.tpgs[tpg_id].tps[tp_id].quantity}
                     </Text>
                 </View>
                 <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
@@ -31,7 +31,7 @@ export default (props) => {
                                 fontFamily:'FZZhunYuan-M02S',
                                 textAlign: 'left'}}
                         allowFontScaling={false}>
-                    ${props.dish.tpgs[tpg_id].tps[tp_id].tp_price} × {props.dish.tpgs[tpg_id].tps[tp_id].quantity}
+                    ${props.dish.tpgs[tpg_id].tps[tp_id].tp_price}
                   </Text>
                 </View>
               </View>
@@ -45,26 +45,37 @@ export default (props) => {
           <TouchableOpacity style={styles.container}
                             activeOpacity={0.4}
                             onPress={props.onPress}>
-                <View style={{flex: 1, marginRight: 12}}>
+                <View style={{marginRight: 10,
+                              backgroundColor: '#d8d8d8',
+                              width: 22,
+                              height: 22,
+                              justifyContent: 'center'}}>
+                  <Text style={{color: 'white',
+                                fontSize: 12,
+                                alignSelf: 'center'}}
+                        allowFontScaling={false}>
+                    {props.dish.qty}
+                  </Text>
+                </View>
+                <View style={{flex: 1, marginTop: 2}}>
                   <View style={{flexDirection: 'row'}}>
-                    <View style={{flex:1,justifyContent:'center',}}>
-                        <Text style={styles.itemTitle}
-                              allowFontScaling={false}>
-                          {props.ds_name}
-                        </Text>
-                    </View>
-                    <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
-                      <Text style={styles.quantity}
-                            allowFontScaling={false}>
-                        ${parseFloat(props.dish.price).toFixed(2)} × {props.dish.qty}
-                      </Text>
-                    </View>
+                    <Text style={styles.itemTitle}
+                          allowFontScaling={false}>
+                      {props.ds_name}
+                    </Text>
+                    <Text style={styles.quantity}
+                          allowFontScaling={false}>
+                      ${parseFloat(props.dish.price).toFixed(2)}
+                    </Text>
                   </View>
                   {_toppingGroupList}
                 </View>
-                <Image source={require('./Image/icon_edit.png')}
-                       style={{width: 20, height: 20}}>
-                </Image>
+                <TouchableOpacity style={{marginLeft: 20}} onPress={() => alert('123')}>
+                  <Image source={require('./Image/icon_edit.png')}
+                         style={{width: 24,
+                                 height: 24}}>
+                  </Image>
+                </TouchableOpacity>
            </TouchableOpacity>
 
   		)
@@ -72,23 +83,32 @@ export default (props) => {
     else {
       return (
         <View style={styles.container}>
-              <View style={{flex: 1, marginRight: 12}}>
-                <View style={{flexDirection: 'row'}}>
-                  <View style={{flex:1,justifyContent:'center',}}>
-                      <Text style={styles.itemTitle}
-                            allowFontScaling={false}>
-                        {props.ds_name}
-                      </Text>
-                  </View>
-                  <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
-                    <Text style={styles.quantity}
-                          allowFontScaling={false}>
-                      {props.dish.price} × {props.dish.qty}
-                    </Text>
-                  </View>
-                </View>
-                {_toppingGroupList}
-              </View>
+            <View style={{marginRight: 10,
+                          backgroundColor: '#d8d8d8',
+                          width: 22,
+                          height: 22,
+                          justifyContent: 'center'}}>
+              <Text style={{color: 'white',
+                            fontSize: 12,
+                            alignSelf: 'center'}}
+                    allowFontScaling={false}>
+                {props.dish.qty}
+              </Text>
+            </View>
+            <Text style={styles.itemTitle}
+                  allowFontScaling={false}>
+              {props.ds_name}
+            </Text>
+            <Text style={styles.quantity}
+                  allowFontScaling={false}>
+              ${props.dish.price}
+            </Text>
+            <TouchableOpacity style={{marginLeft: 20}} onPress={() => alert('123')}>
+              <Image source={require('./Image/icon_edit.png')}
+                     style={{width: 24,
+                             height: 24}}>
+              </Image>
+            </TouchableOpacity>
          </View>
       )
     }
@@ -100,16 +120,17 @@ const styles = StyleSheet.create({
     flex:1,
     // height:80,
     backgroundColor: '#fff',
-    borderColor:"#e2e2e4",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    padding:15,
+    marginTop:20,
+    marginLeft: 12,
+    marginRight: 12,
     flexDirection:'row',
-
   },
   itemTitle:{
+    flex: 1,
     color:'#4d4d4d',
     fontSize:16,
     fontFamily:'FZZhunYuan-M02S',
+    alignSelf: 'center',
   },
   price:{
     marginTop:10,
@@ -121,6 +142,9 @@ const styles = StyleSheet.create({
     color:'#4d4d4d',
     fontSize:16,
     fontFamily:'FZZhunYuan-M02S',
+    flex:1,
+    textAlign: 'right',
+    alignSelf: 'center',
   },
   decreaseButton:{
     width:50,

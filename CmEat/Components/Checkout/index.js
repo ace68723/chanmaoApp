@@ -379,8 +379,8 @@ class Confirm extends Component {
 		}
 		_handleScroll(e) {
       if(e.nativeEvent.contentOffset.y < 300){
-        this.state.anim.setValue(e.nativeEvent.contentOffset.y);
-        const height = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
+        // this.state.anim.setValue(e.nativeEvent.contentOffset.y);
+        // const height = EMPTY_CELL_HEIGHT - this.state.stickyHeaderHeight;
       }
     }
 
@@ -498,7 +498,9 @@ class Confirm extends Component {
 	          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
 	            <View style={styles.acceptButton}>
 	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
-											allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
+											allowFontScaling={false}>
+									{CMLabel.getCNLabel('ADD_ADDRESS')}
+								</Text>
 	            </View>
 	          </TouchableOpacity>
 
@@ -617,10 +619,10 @@ class Confirm extends Component {
                             backgroundColor:deliverType.backgroundColor,
                             borderColor:deliverType.borderColor,
                             borderWidth:1,
-                            borderRadius:15,
-                            marginLeft:5,
-                            marginRight:5,
-                            padding:5
+                            borderRadius:25,
+                            marginLeft:8,
+                            marginRight:8,
+                            padding:10
                           }}>
                 <Text style={{color:deliverType.textColor,fontFamily:'FZZhunYuan-M02S',}}
 											allowFontScaling={false}>
@@ -631,7 +633,14 @@ class Confirm extends Component {
           )
         })
       return(
-        <View style={{flexDirection:"row",marginTop:25}}>
+        <View style={{flexDirection:"row",
+											marginTop:25,
+											backgroundColor: "#ccd3db",
+					 						marginHorizontal: 30,
+											paddingTop: 8,
+											paddingBottom: 8,
+											borderRadius: 25,
+											marginBottom: 20}}>
             {TypeList}
         </View>
       )
@@ -670,7 +679,7 @@ class Confirm extends Component {
 											 isOpen={this.state.openEditComment}
 											 onClosed={()=>{this.setState({openEditComment:false})}}>
 					<TextInput style={styles.TextInput}
-										 placeholder={CMLabel.getCNLabel('REMARK')}
+										 placeholder={CMLabel.getCNLabel('`REMARK')}
 										 selectionColor="#ff8b00"
 										 multiline={true}
 										 onChangeText={(text) => {this.setState({comment:text})}}
@@ -776,31 +785,32 @@ class Confirm extends Component {
 										  onPress = {this._handleProductOnPress.bind(null, dish)}/>
           )
       })
-			const margin = this.state.anim.interpolate({
-				inputRange: [0, 100],
-				outputRange: [10, 0],
-				extrapolate: 'clamp',
-			});
+			// const margin = this.state.anim.interpolate({
+			// 	inputRange: [0, 100],
+			// 	outputRange: [10, 0],
+			// 	extrapolate: 'clamp',
+			// });
 			let commentText = ()=>{
 				if(this.state.comment){
-					return(	<Text>{CMLabel.getCNLabel('REMARK')}： {this.state.comment}</Text>)
+					return(	<Text style={{color:'#666666'}}
+												allowFontScaling={false}>
+										{CMLabel.getCNLabel('REMARK')}： {this.state.comment}
+									</Text>)
 				}else{
-					return(<Text style={{color:'#ababb0'}}
-											 allowFontScaling={false}>{CMLabel.getCNLabel('ADD_REMARK')}</Text>)
+					return(<Text style={{color:'#666666'}}
+											 allowFontScaling={false}>
+									 	{CMLabel.getCNLabel('ADD_REMARK')}
+								 </Text>)
 				}
 			}
       return(
 				<View style={styles.mainContainer} >
-					<Background
-							 minHeight={0}
-							 maxHeight={230}
-							 offset={this.state.anim}
-							 backgroundImage={{uri:this.state.AnimatedImage}}
-							 backgroundShift={0}
-							 backgroundColor={"rgba(0,0,0,0)"}>
-					 </Background>
-
-				  <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === 'ios'?"padding":null}>
+					<Header title={'确认订单'}
+									goBack={this._goBack}
+									leftButtonText={'<'}/>
+					<KeyboardAvoidingView style={{flex: 1,
+																				backgroundColor: "#f4f4f4"}}
+																behavior={Platform.OS === 'ios'?"padding":null}>
 		          <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}
 													style={styles.scrollView}
 													scrollEventThrottle= {16}
@@ -809,65 +819,114 @@ class Confirm extends Component {
 													keyboardDismissMode={Platform.OS === 'ios' ?'on-drag':'none'}
 													keyboardShouldPersistTaps={"always"}
 													{...this._gestureHandlers}>
-								<View style={{backgroundColor:"#000000",marginTop:200,}}>
-									<Animated.View style={{
-																				 bottom:this.state.viewBottom,
-																				 marginLeft:margin,
-																				 marginRight:margin,
-																			   backgroundColor:"#ffffff",
-																				 marginTop:-20,
-																				 paddingBottom:80,
-																			 }}>
-										<View style={{width:width-20,alignSelf:"center"}}>
-											{this._renderRestaurant()}
-											{this._renderAddress()}
-											{cartList}
-											{this._renderDeliverType()}
-											<TouchableWithoutFeedback onPress={()=>{this.setState({openEditComment:true})}}>
-												<View style={{alignItems:'flex-start',
-																			marginTop:10,
-																			padding:20,
-																			borderColor:"#e2e2e4",
-																			borderBottomWidth: StyleSheet.hairlineWidth,
-																		  borderTopWidth: StyleSheet.hairlineWidth,}}>
-														{commentText()}
-												</View>
-											</TouchableWithoutFeedback>
-											<CartItem
-																title={CMLabel.getCNLabel('PRETAX_PRICE')}
-																value={'$'+this.state.pretax}/>
-
-											{this._renderDeliverFee()}
-											<CartItem
-																title={CMLabel.getCNLabel('TAXED_PRICE')}
-																value={'$'+this.state.total}/>
-											{this._renderChoosePayment()}
-											{this._renderVisaFee()}
-											{this._renderTipInfo()}
+								<View style={{backgroundColor:"#f4f4f4",
+															marginLeft:10,
+															marginRight:10,
+															marginBottom: 20,
+															paddingBottom:20,
+															width: width - 20,
+															backgroundColor:"#ffffff",
+															borderRadius: 5,
+															alignSelf:"center",
+															shadowOffset: { width: 2, height: 2 },
+															shadowOpacity: 0.15,
+															shadowRadius: 3,
+															elevation: 1}}>
+										<View>
+											<Text style={{color:'#404041',
+																		fontSize:21,
+																		fontWeight:'500',
+																		textAlign:'center',
+																		marginTop:20,
+																		fontFamily:'FZZongYi-M05S',
+																	}}
+														allowFontScaling={false}>
+										 		{this.props.restaurant.name}
+											</Text>
+											<View style={{height:2,
+																		marginTop:15,
+																		marginBottom:10,
+																		width:40,
+																		backgroundColor:"#ff8b00",
+																		alignSelf:"center"}}/>
 										</View>
+										{cartList}
+										<TouchableWithoutFeedback onPress={()=>{this.setState({openEditComment:true})}}>
+											<View style={{alignItems:'flex-start',
+																		marginTop: 20,
+																		marginLeft: 10,
+																		marginRight: 10,
+																		padding: 15,
+																		borderRadius: 30,
+																		backgroundColor: '#f4f4f4'}}>
+													{commentText()}
+											</View>
+										</TouchableWithoutFeedback>
+										<Text style={{color: '#40a2e7',
+																	fontSize: 15,
+																	marginTop: 15,
+																	marginLeft: 20}}
+													allowFontScaling={false}>
+											*全场九折
+										</Text>
+								</View>
+								<View style={{backgroundColor:"#f4f4f4",
+															marginLeft:10,
+															marginRight:10,
+															marginBottom: 20,
+															paddingBottom:20,
+															width: width - 20,
+															backgroundColor:"#ffffff",
+															borderRadius: 5,
+															alignSelf:"center",
+															shadowOffset: { width: 2, height: 2 },
+															shadowOpacity: 0.15,
+															shadowRadius: 3,
+															elevation: 1}}>
+											{this._renderDeliverType()}
+											{this._renderAddress()}
+								</View>
 
-			            </Animated.View>
+
+								<View style={{backgroundColor:"#f4f4f4",
+															marginLeft:10,
+															marginRight:10,
+															paddingBottom:80,
+															width: width - 20,
+															backgroundColor:"#ffffff",
+															borderRadius: 5,
+															alignSelf:"center"}}>
+									{this._renderRestaurant()}
+									{this._renderAddress()}
+									{cartList}
+									{this._renderDeliverType()}
+									<TouchableWithoutFeedback onPress={()=>{this.setState({openEditComment:true})}}>
+										<View style={{alignItems:'flex-start',
+																	marginTop:10,
+																	padding:20,
+																	borderColor:"#e2e2e4",
+																	borderBottomWidth: StyleSheet.hairlineWidth,
+																  borderTopWidth: StyleSheet.hairlineWidth,}}>
+												{commentText()}
+										</View>
+									</TouchableWithoutFeedback>
+									<CartItem
+														title={CMLabel.getCNLabel('PRETAX_PRICE')}
+														value={'$'+this.state.pretax}/>
+
+									{this._renderDeliverFee()}
+									<CartItem
+														title={CMLabel.getCNLabel('TAXED_PRICE')}
+														value={'$'+this.state.total}/>
+									{this._renderChoosePayment()}
+									{this._renderVisaFee()}
+									{this._renderTipInfo()}
 								</View>
 								{this._renderAndroidCheckoutButton()}
 
 		          </ScrollView>
 					</KeyboardAvoidingView>
 					{this.renderCheckoutButton()}
-					<TouchableOpacity style={{
-																		paddingLeft:8,
-																		paddingRight:20,
-																		paddingBottom:20,
-																		position:'absolute',
-																		top:marginTop,
-																		left:0,}}
-														onPress={this._goBack}>
-						<View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
-							<Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}
-										allowFontScaling={false}>
-								×
-							</Text>
-						</View>
-					</TouchableOpacity>
 					{this._renderComment()}
 					{this._renderOrderConfirm()}
 
@@ -890,6 +949,7 @@ let styles = StyleSheet.create({
     flex: 1,
     // marginTop: 64,
 		// backgroundColor:"#000000",
+		paddingTop: 20,
   },
   orderContainer:{
     margin:10,

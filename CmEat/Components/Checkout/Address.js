@@ -76,6 +76,7 @@ export default class Address extends Component {
 			<TouchableWithoutFeedback onPress={this.props.goToAddressList}>
 				<View style={{flexDirection:"row",
 										borderColor:"#e2e2e4",
+										borderTopWidth: StyleSheet.hairlineWidth,
 										borderBottomWidth: StyleSheet.hairlineWidth,}}>
           <MapView
               region={this.state.region}
