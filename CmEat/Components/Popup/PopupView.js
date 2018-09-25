@@ -17,6 +17,24 @@ import Popup from './Popup.js';
 
 const {height, width} = Dimensions.get('window');
 
+/*
+  ========== Usage ==========
+
+  导入
+  import PopupView from '../Popup/PopupView'
+
+  在constructor init
+  this.popupView = PopupView.getInstance();
+
+  触发
+  this.popupView.setMessagePopup({title: "测试", subtitle: "测试", onDismiss: () => {this.setState({showPopup: false})}});
+  this.setState({showPopup: true});
+
+  加入render
+  {this.state.showPopup && this.popupView.show()}
+
+*/
+
 export default class PopupView {
 
     static instance = null;
@@ -30,7 +48,7 @@ export default class PopupView {
         return this.instance;
     }
 
-    setMessagePopup({title, subtitle, confirmText = '确定', cancelText, confirmCallback = ()=> {} , cancelCallback}){
+    setMessagePopup({title, subtitle, confirmText = '确定', cancelText, confirmCallback = ()=> {} , cancelCallback, onDismiss}){
       this.state = {
         title: title,
         detailText: subtitle,
@@ -39,11 +57,13 @@ export default class PopupView {
         confirmCallback: confirmCallback,
         cancelCallback: cancelCallback,
         containerStyle: {height: 160},
-        titleTextStyle: {marginTop: 12}
+        titleTextStyle: {marginTop: 12},
+        isShow: true,
+        onDismiss: onDismiss
       }
     }
 
-    getPopup(){
+    show(){
       return (
         <Popup
           title={this.state.title}
@@ -61,6 +81,7 @@ export default class PopupView {
 
           onConfirm={this.state.confirmCallback ? this.state.confirmCallback : () => {}}
           onCancel={this.state.cancelCallback ? this.state.cancelCallback : () => {}}
+          onDismiss={this.state.onDismiss}
         />
       )
     }

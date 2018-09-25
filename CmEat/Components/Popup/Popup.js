@@ -100,6 +100,7 @@ export default class Popup extends Component {
 
     setTimeout( () => {
        this.setState({isShow: false});
+       this.props.onDismiss();
     }, 200);
 
   };
