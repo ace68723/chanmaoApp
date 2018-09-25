@@ -819,8 +819,7 @@ class Confirm extends Component {
 													keyboardDismissMode={Platform.OS === 'ios' ?'on-drag':'none'}
 													keyboardShouldPersistTaps={"always"}
 													{...this._gestureHandlers}>
-								<View style={{backgroundColor:"#f4f4f4",
-															marginLeft:10,
+								<View style={{marginLeft:10,
 															marginRight:10,
 															marginBottom: 20,
 															paddingBottom:20,
@@ -870,8 +869,7 @@ class Confirm extends Component {
 											*全场九折
 										</Text>
 								</View>
-								<View style={{backgroundColor:"#f4f4f4",
-															marginLeft:10,
+								<View style={{marginLeft:10,
 															marginRight:10,
 															marginBottom: 20,
 															paddingBottom:20,
@@ -888,8 +886,7 @@ class Confirm extends Component {
 								</View>
 
 
-								<View style={{backgroundColor:"#f4f4f4",
-															marginLeft:10,
+								<View style={{marginLeft:10,
 															marginRight:10,
 															paddingBottom:80,
 															width: width - 20,
