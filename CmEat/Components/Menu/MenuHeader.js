@@ -160,6 +160,8 @@ export default class MenuHeader extends Component {
 								allowFontScaling={false}>
 						{this.props.start_time} - {this.props.end_time}
 					</Text>
+					<View style={{backgroundColor:'black',height:30,width:10}} >
+					</View>
 				</Animated.View>
 
 			</Animated.View>

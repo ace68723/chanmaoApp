@@ -1,5 +1,5 @@
 module.exports={
-    MAIN_TAB:'主页',
+    MAIN_TAB:'主页1111',
     DELIVER_TO: '配送至',
     //Searching
     AREA_SEARCH:'分区&搜索',
