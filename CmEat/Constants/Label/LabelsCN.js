@@ -1,5 +1,5 @@
 module.exports={
-    MAIN_TAB:'主页1111',
+    MAIN_TAB:'主页',
     DELIVER_TO: '配送至',
     //Searching
     AREA_SEARCH:'分区&搜索',
@@ -12,6 +12,7 @@ module.exports={
     ADD_ADDRESS:'地址维护',
     SAVE_ADDRESS:'保存地址',
     CUSTOMER_SERVICE:'联系客服',
+    LANGUAGE_SETTING:'选择语言',
     SWEETBOX: '甜满箱 全场免运费 满$25起送',
     LOG_OUT: '退出登录',
 

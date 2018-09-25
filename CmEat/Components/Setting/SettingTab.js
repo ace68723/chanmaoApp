@@ -86,6 +86,9 @@ class SettingTab extends Component {
 							<SettingCate  title={CMLabel.getCNLabel('SWEETBOX')}
                 icon={require('./Image/icon_setting_icon_setting_sweetful-box.png')}
                 onPress={this._goToSbox}/>
+								<SettingCate  title={CMLabel.getCNLabel('LANGUAGE_SETTING')} 
+									icon={require('./Image/icon_language.png')}
+									onPress={this._goToAboutUs}/>
               <SettingCate  title={CMLabel.getCNLabel('LOG_OUT')}
                             icon={require('./Image/icon_setting_icon_setting_log-out.png')}
                             onPress={this._cmeLogOut}/>
