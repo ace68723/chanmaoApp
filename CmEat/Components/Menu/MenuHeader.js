@@ -9,6 +9,7 @@ import {
   Text,
 	InteractionManager,
   View,
+	Image,
 } from 'react-native';
 const {width,height} = Dimensions.get('window');
 export default class MenuHeader extends Component {
@@ -160,8 +161,15 @@ export default class MenuHeader extends Component {
 								allowFontScaling={false}>
 						{this.props.start_time} - {this.props.end_time}
 					</Text>
-					<View style={{backgroundColor:'black',height:30,width:50}} >
+					<View style={{marginTop:15,justifyContent:'center',alignItems:'center',height:30,width:width*0.85}}>
+						<Image source={require('./Image/icon_coupon_small.png')} style={{width:40,height:25,}} />
 					</View>
+					<Text style={{textAlign:'center',
+												color:'#40a2e7',marginTop:5,
+												fontFamily:'FZZhunYuan-M02S'}}
+								allowFontScaling={false}>
+						税前满$66.66可享受85折
+					</Text>
 				</Animated.View>
 
 			</Animated.View>
