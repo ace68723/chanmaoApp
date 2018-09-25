@@ -619,10 +619,10 @@ class Confirm extends Component {
                             backgroundColor:deliverType.backgroundColor,
                             borderColor:deliverType.borderColor,
                             borderWidth:1,
-                            borderRadius:15,
-                            marginLeft:5,
-                            marginRight:5,
-                            padding:5
+                            borderRadius:25,
+                            marginLeft:8,
+                            marginRight:8,
+                            padding:10
                           }}>
                 <Text style={{color:deliverType.textColor,fontFamily:'FZZhunYuan-M02S',}}
 											allowFontScaling={false}>
@@ -633,7 +633,14 @@ class Confirm extends Component {
           )
         })
       return(
-        <View style={{flexDirection:"row",marginTop:25}}>
+        <View style={{flexDirection:"row",
+											marginTop:25,
+											backgroundColor: "#ccd3db",
+					 						marginHorizontal: 30,
+											paddingTop: 8,
+											paddingBottom: 8,
+											borderRadius: 25,
+											marginBottom: 20}}>
             {TypeList}
         </View>
       )
@@ -672,7 +679,7 @@ class Confirm extends Component {
 											 isOpen={this.state.openEditComment}
 											 onClosed={()=>{this.setState({openEditComment:false})}}>
 					<TextInput style={styles.TextInput}
-										 placeholder={CMLabel.getCNLabel('REMARK')}
+										 placeholder={CMLabel.getCNLabel('`REMARK')}
 										 selectionColor="#ff8b00"
 										 multiline={true}
 										 onChangeText={(text) => {this.setState({comment:text})}}
@@ -823,7 +830,8 @@ class Confirm extends Component {
 															alignSelf:"center",
 															shadowOffset: { width: 2, height: 2 },
 															shadowOpacity: 0.15,
-															shadowRadius: 3}}>
+															shadowRadius: 3,
+															elevation: 1}}>
 										<View>
 											<Text style={{color:'#404041',
 																		fontSize:21,
@@ -873,10 +881,13 @@ class Confirm extends Component {
 															alignSelf:"center",
 															shadowOffset: { width: 2, height: 2 },
 															shadowOpacity: 0.15,
-															shadowRadius: 3}}>
+															shadowRadius: 3,
+															elevation: 1}}>
 											{this._renderDeliverType()}
 											{this._renderAddress()}
 								</View>
+
+
 								<View style={{backgroundColor:"#f4f4f4",
 															marginLeft:10,
 															marginRight:10,
