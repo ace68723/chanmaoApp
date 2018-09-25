@@ -60,7 +60,8 @@ export default class Popup extends Component {
     this.dismiss = this.dismiss.bind(this);
 
     this.state = {
-      promptValue: ""
+      promptValue: "",
+      isShow: true,
     };
   };
 
@@ -96,6 +97,11 @@ export default class Popup extends Component {
       duration: 200,
       easing: Easing.linear
     }).start(() => cb(promptValue));
+
+    setTimeout( () => {
+       this.setState({isShow: false});
+    }, 200);
+
   };
 
   renderText() {
@@ -105,7 +111,7 @@ export default class Popup extends Component {
             textAlign: 'center',
             color: '#757575',
             fontWeight: '700',
-            fontSize: 12
+            fontSize: 14
           },
           this.props.detailTextStyle
         ]}>
@@ -117,7 +123,7 @@ export default class Popup extends Component {
   renderSubTitle() {
     if (this.props.subTitle) {
       return (<Text style={[{
-            fontSize: 13,
+            fontSize: 14,
             fontWeight: '700',
             textAlign: 'center',
             color: '#4397DC'
@@ -129,8 +135,11 @@ export default class Popup extends Component {
   };
 
   render() {
+    if (!this.state.isShow){
+      return <View></View>
+    }
     return (<View style={{
-        zIndex: this.props.zIndex || 0,
+        zIndex: this.props.zIndex || 999,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -188,7 +197,11 @@ export default class Popup extends Component {
             },
             this.props.titleTextStyle
           ]}>
-          {this.props.title}
+          {
+            this.props.title
+              ? this.props.title
+              : "提示"
+          }
         </Text>
 
         {this.renderSubTitle()}
