@@ -19,6 +19,8 @@ import Header from '../General/Header';
 import CMLabel from '../../Constants/AppLabel';
 const { height, width } = Dimensions.get('window');
 
+import PopupView from '../Popup/PopupView'
+
 export default class ChooseCardType extends Component {
 
   constructor(){
@@ -35,6 +37,7 @@ export default class ChooseCardType extends Component {
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
     this._renderButton = this._renderButton.bind(this);
 
+    this.popupView = PopupView.getInstance();
   }
 
   _goBack() {
@@ -67,20 +70,22 @@ export default class ChooseCardType extends Component {
       // if (visa_fee == 0) {
       //   payment_description = '';
       // }
-      Alert.alert(
-        '确认刷卡支付?',
-        payment_description,
-        [
-          {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-          {text: '确认', onPress: () => {
-              this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
-              this.props.navigator.dismissModal({
-                animationType: 'slide-down'
-              });
-            }
-          },
-       ]
-      );
+
+      this.popupView.setMessagePopup({
+        subtitle: "确认刷卡支付?",
+        confirmText: "确认",
+        cancelText: "取消",
+        confirmCallback: () => {
+          this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
+          this.props.navigator.dismissModal({
+            animationType: 'slide-down'
+          });
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
     }
   }
 
@@ -120,20 +125,35 @@ export default class ChooseCardType extends Component {
       // if (visa_fee == 0) {
       //   payment_description = '';
       // }
-      Alert.alert(
-        '确认支付?',
-        payment_description,
-        [
-          {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-          {text: '确认', onPress: () => {
-              this.props.alipaySelected(this.props.orderInfo, visa_fee);
-              this.props.navigator.dismissModal({
-                animationType: 'slide-down'
-              });
-            }
-          },
-       ]
-      );
+
+      this.popupView.setMessagePopup({
+        subtitle: "确认支付?",
+        confirmText: "确认",
+        cancelText: "取消",
+        confirmCallback: () => {
+          this.props.alipaySelected(this.props.orderInfo, visa_fee);
+          this.props.navigator.dismissModal({animationType: 'slide-down'});
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
+
+      // Alert.alert(
+      //   '确认支付?',
+      //   payment_description,
+      //   [
+      //     {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+      //     {text: '确认', onPress: () => {
+      //         this.props.alipaySelected(this.props.orderInfo, visa_fee);
+      //         this.props.navigator.dismissModal({
+      //           animationType: 'slide-down'
+      //         });
+      //       }
+      //     },
+      //  ]
+      // );
     }
   }
 
@@ -145,21 +165,39 @@ export default class ChooseCardType extends Component {
       });
     }
     else if (this.props.flag == 'fromHistory') {
-      Alert.alert(
-        '确认修改为到付?',
-        '',
-        [
-          {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-          {text: '确认', onPress: () => {
-              this.props.cashSelected(this.props.orderInfo);
-              this.props.navigator.dismissModal({
-                animationType: 'slide-down'
-              });
-              alert("已成功修改");
-            }
-          },
-       ]
-      );
+
+      this.popupView.setMessagePopup({
+        subtitle: "确认修改为到付?",
+        confirmText: "确认",
+        cancelText: "取消",
+        confirmCallback: () => {
+          this.props.cashSelected(this.props.orderInfo);
+          this.props.navigator.dismissModal({
+            animationType: 'slide-down'
+          });
+          alert("已成功修改");
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
+
+      // Alert.alert(
+      //   '确认修改为到付?',
+      //   '',
+      //   [
+      //     {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+      //     {text: '确认', onPress: () => {
+      //         this.props.cashSelected(this.props.orderInfo);
+      //         this.props.navigator.dismissModal({
+      //           animationType: 'slide-down'
+      //         });
+      //         alert("已成功修改");
+      //       }
+      //     },
+      //  ]
+      // );
     }
   }
   _goToApplePay(){
@@ -176,20 +214,37 @@ export default class ChooseCardType extends Component {
       // if (visa_fee == 0) {
       //   payment_description = '';
       // }
-      Alert.alert(
-        '确认支付?',
-        payment_description,
-        [
-          {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-          {text: '确认', onPress: () => {
-              this.props.applePaySelected(this.props.orderInfo, visa_fee);
-              this.props.navigator.dismissModal({
-                animationType: 'slide-down'
-              });
-            }
-          },
-       ]
-      );
+
+      this.popupView.setMessagePopup({
+        subtitle: "确认支付?",
+        confirmText: "确认",
+        cancelText: "取消",
+        confirmCallback: () => {
+          this.props.applePaySelected(this.props.orderInfo, visa_fee);
+          this.props.navigator.dismissModal({
+            animationType: 'slide-down'
+          });
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
+
+      // Alert.alert(
+      //   '确认支付?',
+      //   payment_description,
+      //   [
+      //     {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+      //     {text: '确认', onPress: () => {
+      //         this.props.applePaySelected(this.props.orderInfo, visa_fee);
+      //         this.props.navigator.dismissModal({
+      //           animationType: 'slide-down'
+      //         });
+      //       }
+      //     },
+      //  ]
+      // );
     }
   }
 
@@ -207,20 +262,37 @@ export default class ChooseCardType extends Component {
       // if (visa_fee == 0) {
       //   payment_description = '';
       // }
-      Alert.alert(
-        '新卡添加成功,确认支付?',
-        payment_description,
-        [
-          {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-          {text: '确认', onPress: () => {
-              this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
-              this.props.navigator.dismissModal({
-                animationType: 'slide-down'
-              });
-            }
-          },
-       ]
-      );
+
+      this.popupView.setMessagePopup({
+        subtitle: "新卡添加成功,确认支付?",
+        confirmText: "确认",
+        cancelText: "取消",
+        confirmCallback: () => {
+          this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
+          this.props.navigator.dismissModal({
+            animationType: 'slide-down'
+          });
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
+
+      // Alert.alert(
+      //   '新卡添加成功,确认支付?',
+      //   payment_description,
+      //   [
+      //     {text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+      //     {text: '确认', onPress: () => {
+      //         this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
+      //         this.props.navigator.dismissModal({
+      //           animationType: 'slide-down'
+      //         });
+      //       }
+      //     },
+      //  ]
+      // );
     }
   }
   _renderGoBackBtn() {
@@ -493,6 +565,7 @@ export default class ChooseCardType extends Component {
     }
     return (
       <View style={styles.container}>
+        {this.state.showPopup && this.popupView.show()}
         <Header title={CMLabel.getCNLabel('PAYMENT_TYPE')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>

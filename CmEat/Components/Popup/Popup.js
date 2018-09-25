@@ -100,6 +100,7 @@ export default class Popup extends Component {
 
     setTimeout( () => {
        this.setState({isShow: false});
+       this.props.onDismiss();
     }, 200);
 
   };
@@ -126,7 +127,7 @@ export default class Popup extends Component {
             fontSize: 14,
             fontWeight: '700',
             textAlign: 'center',
-            color: '#4397DC'
+            color: '#F58330'
           }
         ]}>
         {this.props.subTitle}
@@ -214,7 +215,7 @@ export default class Popup extends Component {
           <View style={{
               borderBottomWidth: 1,
               borderColor: "#E8E8EA",
-              minHeight: width * 0.18,
+              minHeight: width * 0.19,
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center"
@@ -240,7 +241,7 @@ export default class Popup extends Component {
                   }}>
                   <TouchableOpacity style={[
                       {
-                        padding: 16,
+                        padding: 14,
                         backgroundColor: '#fff',
                         alignItems: 'center',
                         marginLeft: 0,
@@ -275,7 +276,7 @@ export default class Popup extends Component {
                   }}>
                   <TouchableOpacity style={[
                       {
-                        padding: 16,
+                        padding: 14,
                         backgroundColor: '#fff',
                         alignItems: 'center',
                         marginRight: 0,
