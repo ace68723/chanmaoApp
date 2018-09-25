@@ -62,6 +62,7 @@ export default class Popup extends Component {
     this.state = {
       promptValue: "",
       isShow: true,
+
     };
   };
 
@@ -146,7 +147,7 @@ export default class Popup extends Component {
         left: 0,
         height: height,
         width: width,
-        backgroundColor: this.props.backgroundColor || 'rgba(111,111,111,.9)',
+        backgroundColor: this.props.backgroundColor || 'rgba(0, 0, 0, 0.6)',
         alignItems: 'center',
         justifyContent: 'center'
       }}>
