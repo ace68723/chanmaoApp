@@ -18,37 +18,74 @@ const {height, width} = Dimensions.get('window');
 const deviceWidth = width;
 const deviceHeight = height;
 import Header from '../General/Header';
+import PopupView from '../Popup/PopupView'
+
 export default class InfoPage extends Component {
   constructor(){
     super();
 
+    this.state = {
+
+    }
     this._goBack = this._goBack.bind(this);
+    this.contact = this.contact.bind(this);
+
+    this.popupView = PopupView.getInstance();
   }
 
   contact(num,type){
     if(type == "phone"){
-      Alert.alert("拨打号码",num,[{
-       text: 'OK',
-       onPress: () => {
-         return Linking.openURL('tel:'+num);
-       }
-     },
-      {
-       text: 'Cancel',
-       style: 'cancel',
-      }]);
+      this.popupView.setMessagePopup({
+        title: "拨打号码",
+        subtitle: num,
+        confirmText: '确定',
+        cancelText: '取消',
+        onConfirm: () => {
+          return Linking.openURL('tel:'+num);
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
+
+     //  Alert.alert("拨打号码",num,[{
+     //   text: 'OK',
+     //   onPress: () => {
+     //     return Linking.openURL('tel:'+num);
+     //   }
+     // },
+     //  {
+     //   text: 'Cancel',
+     //   style: 'cancel',
+     //  }]);
     }
     else if(type == "email"){
-      Alert.alert("发送邮件",num,[{
-       text: 'OK',
-       onPress: () => {
-         return Linking.openURL('mailto:'+num);
-       }
-     },
-      {
-       text: 'Cancel',
-       style: 'cancel',
-      }]);
+
+      this.popupView.setMessagePopup({
+        title: "发送邮件",
+        subtitle: num,
+        confirmText: '确定',
+        cancelText: '取消',
+        onConfirm: () => {
+          return Linking.openURL('mailto:'+num);
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
+
+     //  Alert.alert("发送邮件",num,[{
+     //   text: 'OK',
+     //   onPress: () => {
+     //     return Linking.openURL('mailto:'+num);
+     //   }
+     // },
+     //  {
+     //   text: 'Cancel',
+     //   style: 'cancel',
+     //  }]);
     }
   }
   _goBack(){
@@ -61,6 +98,7 @@ export default class InfoPage extends Component {
     // }} allowFontScaling={false}>客服电话：647-515-6699</Text>
     return (
       <View style={styles.container}>
+        {this.state.showPopup && this.popupView.show()}
         <Header title={CMLabel.getCNLabel('ABOUT_US')} goBack={this._goBack}/>
         <ScrollView style={{flex:1, paddingTop:64,paddingLeft:20,paddingRight:20, paddingBottom: 20}}>
 

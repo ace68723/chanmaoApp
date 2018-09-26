@@ -3,7 +3,6 @@ import React, {
 	Component,
 } from 'react';
 import {
-	Alert,
 	Animated,
 	Dimensions,
 	Image,
@@ -26,6 +25,8 @@ import MenuCard from './MenuCard';
 
 import MenuStore from '../../Stores/MenuStore';
 import CMLabel from '../../Constants/AppLabel';
+import PopupView from '../Popup/PopupView'
+
 const {width,height} = Dimensions.get('window');
 const searchViewMarginHorizontal = 30;
 const iconSearchInputSize = 35;
@@ -47,6 +48,8 @@ export default class CmEatMenuSearch extends Component {
 		this._cleanInput = this._cleanInput.bind(this);
 		this._filterNotes = this._filterNotes.bind(this);
 		this.setState = this.setState.bind(this);
+
+		this.popupView = PopupView.getInstance();
   }
 	componentDidMount(){
 		const menuState = MenuStore.menuState();
@@ -83,24 +86,45 @@ export default class CmEatMenuSearch extends Component {
           },
         });
 			}else{
-				Alert.alert(
-					'馋猫订餐提醒您',
-					'不足'+this.state.restaurant.start_amount+'只能自取哦～',
-					[
-						{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-						{text: '好哒', onPress: () => {
-								this.props.navigator.showModal({
-									screen: 'CmEatCheckout',
-									animated: true,
-									navigatorStyle: {navBarHidden: true},
-									passProps: {
-									restaurant:this.state.restaurant,
-									},
-								});
-							}
-						},
-					],
-				);
+				this.popupView.setMessagePopup({
+				  title: "馋猫订餐提醒您",
+				  subtitle: '不足' + this.state.restaurant.start_amount + '只能自取哦～',
+					confirmText: '好哒',
+					cancelText: "取消",
+				  onDismiss: () => {
+				    this.setState({showPopup: false})
+				  },
+					onConfirm: () => {
+							this.props.navigator.showModal({
+								screen: 'CmEatCheckout',
+								animated: true,
+								navigatorStyle: {navBarHidden: true},
+								passProps: {
+								restaurant:this.state.restaurant,
+								},
+							});
+						}
+				});
+				this.setState({showPopup: true});
+
+				// Alert.alert(
+				// 	'馋猫订餐提醒您',
+				// 	'不足'+this.state.restaurant.start_amount+'只能自取哦～',
+				// 	[
+				// 		{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+				// 		{text: '好哒', onPress: () => {
+				// 				this.props.navigator.showModal({
+				// 					screen: 'CmEatCheckout',
+				// 					animated: true,
+				// 					navigatorStyle: {navBarHidden: true},
+				// 					passProps: {
+				// 					restaurant:this.state.restaurant,
+				// 					},
+				// 				});
+				// 			}
+				// 		},
+				// 	],
+				// );
 			}
 
 		}
@@ -240,6 +264,7 @@ export default class CmEatMenuSearch extends Component {
 						style={{flex:1,backgroundColor:"#ffffff"}}
 						behavior={Platform.OS === 'ios'?"padding":null}
 						>
+				{this.state.showPopup && this.popupView.show()}
 				{this._renderSearchInput()}
 				<TouchableOpacity onPress={this._goToCheckout}
 						style={{backgroundColor:"rgba(234,123,33,0.9)",

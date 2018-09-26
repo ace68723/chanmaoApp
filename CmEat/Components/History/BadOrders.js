@@ -30,6 +30,7 @@ import HomeStore from '../../Stores/HomeStore'
 import Header from '../General/Header';
 import HistoryOrderDetail from './HistoryOrderDetail';
 import Modal from 'react-native-modalbox';
+import PopupView from '../Popup/PopupView'
 
 class AllOrders extends Component {
     constructor(props) {
@@ -47,6 +48,8 @@ class AllOrders extends Component {
 				this._getCurrentPosition = this._getCurrentPosition.bind(this);
 				this._renderContent = this._renderContent.bind(this);
 				this._goToRestaurant = this._goToRestaurant.bind(this);
+
+				this.popupView = PopupView.getInstance();
     }
 
     componentDidMount(){
@@ -69,13 +72,23 @@ class AllOrders extends Component {
         this.setState(state)
         if(this.state.verifyPhoneResult === 'FAIL'){
           HistoryStore.initVerifyPhoneResult();
-          Alert.alert(
-            '验证码错误',
-            '请检查您输入的验证码',
-            [
-              {text: '确认', onPress: () => {}},
-            ],
-          );
+
+					this.popupView.setMessagePopup({
+					  title: "验证码错误",
+					  subtitle: "请检查您输入的验证码",
+					  onDismiss: () => {
+					    this.setState({showPopup: false})
+					  }
+					});
+					this.setState({showPopup: true});
+
+          // Alert.alert(
+          //   '验证码错误',
+          //   '请检查您输入的验证码',
+          //   [
+          //     {text: '确认', onPress: () => {}},
+          //   ],
+          // );
         }else if(this.state.verifyPhoneResult === 'SUCCESS'){
             HistoryStore.initVerifyPhoneResult();
             this._doAutoRefresh();
@@ -207,6 +220,7 @@ class AllOrders extends Component {
     render(){
       return(
          <View style={styles.mainContainer}>
+							{this.state.showPopup && this.popupView.show()}
              <ScrollView style={styles.scrollView}
    										 scrollEventThrottle= {16}
    										 onScroll={(e)=>{this.currentPosition = e.nativeEvent.contentOffset.y}}

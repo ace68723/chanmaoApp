@@ -27,7 +27,13 @@ const {height, width} = Dimensions.get('window');
   this.popupView = PopupView.getInstance();
 
   触发
-  this.popupView.setMessagePopup({title: "测试", subtitle: "测试", onDismiss: () => {this.setState({showPopup: false})}});
+  this.popupView.setMessagePopup({
+    title: "测试",
+    subtitle: "测试",
+    onDismiss: () => {
+      this.setState({showPopup: false})
+    }
+  });
   this.setState({showPopup: true});
 
   或是完整形式
@@ -61,15 +67,15 @@ export default class PopupView {
         return this.instance;
     }
 
-    setMessagePopup({title = '提示', subtitle, confirmText = '确定', cancelText, confirmCallback = ()=> {} , cancelCallback, onDismiss, confirmButtonStyle}){
+    setMessagePopup({title = '提示', subtitle, confirmText = '确定', cancelText, onConfirm = ()=> {} , onCancel, onDismiss, confirmButtonStyle}){
       this.state = {
         title: title,
         detailText: subtitle,
         confirmText: confirmText,
         cancelText: cancelText,
-        confirmCallback: confirmCallback,
-        cancelCallback: cancelCallback,
-        containerStyle: {height: 150},
+        onConfirm: onConfirm,
+        onCancel: onCancel,
+        containerStyle: {height: 160},
         titleTextStyle: {marginTop: 12},
         confirmButtonStyle: confirmButtonStyle,
         isShow: true,
@@ -77,7 +83,7 @@ export default class PopupView {
       }
     }
 
-    setFullPopup({title, subtitle, icon, detailText, confirmText = '确定', cancelText, confirmCallback = ()=> {} , cancelCallback = ()=> {} , onDismiss, confirmButtonStyle}){
+    setFullPopup({title, subtitle, icon, detailText, confirmText = '确定', cancelText, onConfirm = ()=> {} , onCancel = ()=> {} , onDismiss, confirmButtonStyle}){
       this.state = {
         icon: icon,
         title: title,
@@ -85,8 +91,8 @@ export default class PopupView {
         detailText: detailText,
         confirmText: confirmText,
         cancelText: cancelText,
-        confirmCallback: confirmCallback,
-        cancelCallback: cancelCallback,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
         confirmButtonStyle: confirmButtonStyle,
         // containerStyle: {height: 160},
         // titleTextStyle: {marginTop: 12},
@@ -114,8 +120,8 @@ export default class PopupView {
           cancelButtonStyle={[
                         {backgroundColor: '#C5C5C5',},
                         this.state.cancelButtonStyle]}
-          onConfirm={this.state.confirmCallback ? this.state.confirmCallback : () => {}}
-          onCancel={this.state.cancelCallback ? this.state.cancelCallback : () => {}}
+          onConfirm={this.state.onConfirm ? this.state.onConfirm : () => {}}
+          onCancel={this.state.onCancel ? this.state.onCancel : () => {}}
           onDismiss={this.state.onDismiss}
         />
       )

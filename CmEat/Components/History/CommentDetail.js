@@ -43,6 +43,8 @@ import Header from '../General/Header';
 import CommentsAction from '../../Actions/CommentsAction';
 import CommentsStore from '../../Stores/CommentsStore';
 import ModalBox from 'react-native-modalbox';
+import PopupView from '../Popup/PopupView'
+
 export default class pastOrderEN extends Component {
   constructor(props) {
       super(props);
@@ -73,6 +75,8 @@ export default class pastOrderEN extends Component {
       this._hideConfirmSection = this._hideConfirmSection.bind(this);
       this._renderConfirmSection = this._renderConfirmSection.bind(this);
       this._onChange = this._onChange.bind(this);
+
+      this.popupView = PopupView.getInstance();
   }
 
   componentDidMount() {
@@ -100,18 +104,36 @@ export default class pastOrderEN extends Component {
         else {
           url = 'https://play.google.com/store/apps/details?id=ca.chanmao.app';
         }
-        Alert.alert(
-          '已成功评价',
-          '觉得馋猫棒棒哒?去评分吧!',
-          [
-            {text: '取消', onPress:()=>{} ,style: 'cancel'},
-            {text:'前往', onPress:()=>{
-              Linking.canOpenURL(url).then(supported => {
-                supported && Linking.openURL(url);
-              }, (err) => console.log(err));
-            }}
-          ]
-        )
+
+        this.popupView.setMessagePopup({
+          title: "已成功评价",
+          subtitle: "觉得馋猫棒棒哒?去评分吧!",
+          confirmText: '前往',
+          cancelText: '取消',
+          onConfirm: ()=>{
+            Linking.canOpenURL(url).then(supported => {
+              supported && Linking.openURL(url);
+            }, (err) => console.log(err));
+          },
+          onDismiss: () => {
+            this.setState({showPopup: false})
+          }
+        });
+        this.setState({showPopup: true});
+
+        // Alert.alert(
+        //   '已成功评价',
+        //   '觉得馋猫棒棒哒?去评分吧!',
+        //   [
+        //     {text: '取消', onPress:()=>{} ,style: 'cancel'},
+        //     {text:'前往', onPress:()=>{
+        //       Linking.canOpenURL(url).then(supported => {
+        //         supported && Linking.openURL(url);
+        //       }, (err) => console.log(err));
+        //     }}
+        //   ]
+        // )
+
       }
       else {
         CmAlert.errorAlert("已成功评价");
@@ -702,6 +724,7 @@ export default class pastOrderEN extends Component {
   render() {
       return(
         <View style={styles.container} >
+          {this.state.showPopup && this.popupView.show()}
             <Header title={CMLabel.getCNLabel('COMMENT')}
                     goBack={this.props.goBack}
                     leftButtonText={'x'}/>

@@ -18,6 +18,8 @@ import AuthAction from '../../Actions/AuthAction';
 // import AuthStore from '../../Stores/AuthStore';
 import Alert from '../General/Alert';
 
+import PopupView from '../../../CmEat/Components/Popup/PopupView'
+
 import BindPhoneInputAnimation from './BindPhoneInputAnimation';
 
 const {width,height} = Dimensions.get('window');
@@ -64,6 +66,8 @@ export default class LogoAnimationView extends Component {
     this._openAdView = this._openAdView.bind(this);
 		this._toggleViewType	= this._toggleViewType.bind(this);
 		this._getVerification = this._getVerification.bind(this);
+
+		this.popupView = PopupView.getInstance();
   }
 	async componentDidMount() {
 	}
@@ -80,7 +84,15 @@ export default class LogoAnimationView extends Component {
 
 	_getVerification() {
 		if (this.state.phone.length < 10 || this.state.phone.match(/^[0-9]+$/) == null) {
-			Alert.errorAlert('请填写正确手机号码');
+
+			this.popupView.setMessagePopup({
+			  subtitle: "请填写正确手机号码",
+			  onDismiss: () => {
+			    this.setState({showPopup: false})
+			  }
+			});
+			this.setState({showPopup: true});
+
 			return;
 		}
 		this._sendVerification();
@@ -136,7 +148,16 @@ export default class LogoAnimationView extends Component {
 		        loginSuccess:false,
 						_bindStarted:false,
 		      });
-					Alert.errorAlert('绑定失败');
+
+					this.popupView.setMessagePopup({
+						subtitle: "绑定失败",
+						onDismiss: () => {
+							this.setState({showPopup: false})
+						}
+					});
+					this.setState({showPopup: true});
+
+					// Alert.errorAlert('绑定失败');
 				}
     } catch (e) {
       console.log(e)
@@ -145,7 +166,17 @@ export default class LogoAnimationView extends Component {
         loginSuccess:false,
 				_bindStarted:false,
       });
-			Alert.errorAlert('绑定失败');
+
+
+			this.popupView.setMessagePopup({
+				subtitle: "绑定失败",
+				onDismiss: () => {
+					this.setState({showPopup: false})
+				}
+			});
+			this.setState({showPopup: true});
+
+			// Alert.errorAlert('绑定失败');
     }
 
 
@@ -205,6 +236,7 @@ export default class LogoAnimationView extends Component {
   render(){
     return(
       <View style={styles.container}>
+				{this.state.showPopup && this.popupView.show()}
         <View style={styles.bgImageWrapper}>
 						 <Image source={require('./Image/background.png')}
 										style={styles.backgroundImage}/>

@@ -38,6 +38,9 @@ import CheckoutAction from '../../Actions/CheckoutAction';
 import AddressStore from '../../Stores/AddressStore';
 import Util from '../../Modules/Util';
 import CMLabel from '../../Constants/AppLabel';
+
+import PopupView from '../Popup/PopupView'
+
 export default class CmEatAddress extends Component {
 
   constructor(props) {
@@ -56,6 +59,8 @@ export default class CmEatAddress extends Component {
 			this._handleConfirm = this._handleConfirm.bind(this);
 			this._updateAddressStatus = this._updateAddressStatus.bind(this);
       this._goToAddAddressInfo = this._goToAddAddressInfo.bind(this);
+
+			this.popupView = PopupView.getInstance();
   }
 	componentDidMount() {
 		AddressStore.addChangeListener(this._onChange);
@@ -156,14 +161,25 @@ export default class CmEatAddress extends Component {
     AddressAction.formatAddress(description);
 	}
 	_deleteAddress(address){
-		Alert.alert(
-			'删除地址',
-			"addressDescription",
-			[
-				{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-				{text: CMLabel.getCNLabel('CONFIRM'), onPress: password => AddressAction.deleteAddress(address)},
-			]
-		)
+
+		this.popupView.setMessagePopup({
+		  subtitle: "确认删除地址吗？",
+			cancelText: "取消",
+		  onDismiss: () => {
+		    this.setState({showPopup: false})
+		  },
+			onConfirm: password => AddressAction.deleteAddress(address)
+		});
+		this.setState({showPopup: true});
+
+		// Alert.alert(
+		// 	'删除地址',
+		// 	"addressDescription",
+		// 	[
+		// 		{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+		// 		{text: CMLabel.getCNLabel('CONFIRM'), onPress: password => AddressAction.deleteAddress(address)},
+		// 	]
+		// )
 	}
 	_editAddress(address){
 		console.log('123', JSON.stringify(address));
@@ -571,6 +587,7 @@ export default class CmEatAddress extends Component {
     return(
       <View style={{  flex:1,
                       backgroundColor:"#ffffff"}}>
+				{this.state.showPopup && this.popupView.show()}
         <Header title={CMLabel.getCNLabel('ADDRESS')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>

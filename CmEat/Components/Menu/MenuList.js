@@ -117,6 +117,7 @@ class Menu extends Component {
         })
     }
     _goToCinfirm(){
+
       if(Number(this.state.cartTotals.total)>0){
         if(Number(this.state.cartTotals.total)>=Number(this.state.startAmount)){
           this.props.navigator.push({

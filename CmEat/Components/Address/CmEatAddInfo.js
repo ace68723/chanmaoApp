@@ -26,6 +26,7 @@ import Header from '../General/Header';
 import AddressAction from '../../Actions/AddressAction';
 import AddressStore from '../../Stores/AddressStore';
 import CMLabel from '../../Constants/AppLabel';
+import PopupView from '../Popup/PopupView'
 
 const _getFormatAddress = () =>{
   return AddressStore.getFormatAddress()
@@ -64,6 +65,8 @@ export default class CmEatAddInfo extends Component {
         this._submitAddress = this._submitAddress.bind(this);
         this._chooseType = this._chooseType.bind(this);
         this._goBack = this._goBack.bind(this);
+
+				this.popupView = PopupView.getInstance();
     }
     componentWillMount() {
       this._animatedChooseType = new Animated.Value(0);
@@ -110,10 +113,19 @@ export default class CmEatAddInfo extends Component {
     _submitAddress(){
       const  phoneNumber = this.state.phoneNumber.toString().trim().replace(/[()-]/g , '');
       if(phoneNumber.length != 10){
-        Alert.alert(
-          '馋猫订餐提请您',
-          '请输入10位电话号码'
-        )
+				this.popupView.setMessagePopup({
+					title: "馋猫订餐提醒您",
+					subtitle: "请输入10位电话号码",
+					onDismiss: () => {
+						this.setState({showPopup: false})
+					}
+				});
+				this.setState({showPopup: true});
+
+        // Alert.alert(
+        //   '馋猫订餐提请您',
+        //   '请输入10位电话号码'
+        // )
       }else{
         this.setState({
           isLoading: true,
@@ -218,6 +230,7 @@ export default class CmEatAddInfo extends Component {
 
         return(
           <View style={styles.mainContainer} >
+					{this.state.showPopup && this.popupView.show()}
           <Header title={CMLabel.getCNLabel('ADDRESS')}
 	                goBack={this._goBack}
 	                leftButtonText={'×'}/>

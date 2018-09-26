@@ -75,7 +75,7 @@ export default class ChooseCardType extends Component {
         subtitle: "确认刷卡支付?",
         confirmText: "确认",
         cancelText: "取消",
-        confirmCallback: () => {
+        onConfirm: () => {
           this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
           this.props.navigator.dismissModal({
             animationType: 'slide-down'
@@ -130,7 +130,7 @@ export default class ChooseCardType extends Component {
         subtitle: "确认支付?",
         confirmText: "确认",
         cancelText: "取消",
-        confirmCallback: () => {
+        onConfirm: () => {
           this.props.alipaySelected(this.props.orderInfo, visa_fee);
           this.props.navigator.dismissModal({animationType: 'slide-down'});
         },
@@ -170,7 +170,7 @@ export default class ChooseCardType extends Component {
         subtitle: "确认修改为到付?",
         confirmText: "确认",
         cancelText: "取消",
-        confirmCallback: () => {
+        onConfirm: () => {
           this.props.cashSelected(this.props.orderInfo);
           this.props.navigator.dismissModal({
             animationType: 'slide-down'
@@ -219,7 +219,7 @@ export default class ChooseCardType extends Component {
         subtitle: "确认支付?",
         confirmText: "确认",
         cancelText: "取消",
-        confirmCallback: () => {
+        onConfirm: () => {
           this.props.applePaySelected(this.props.orderInfo, visa_fee);
           this.props.navigator.dismissModal({
             animationType: 'slide-down'
@@ -267,7 +267,7 @@ export default class ChooseCardType extends Component {
         subtitle: "新卡添加成功,确认支付?",
         confirmText: "确认",
         cancelText: "取消",
-        confirmCallback: () => {
+        onConfirm: () => {
           this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
           this.props.navigator.dismissModal({
             animationType: 'slide-down'

@@ -216,7 +216,7 @@ export default class Popup extends Component {
           <View style={{
               borderBottomWidth: 1,
               borderColor: "#E8E8EA",
-              minHeight: width * 0.19,
+              minHeight: width * 0.22,
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center"

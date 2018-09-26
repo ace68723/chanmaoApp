@@ -20,6 +20,8 @@ import Alert from '../General/Alert';
 import InputAnimation from './InputAnimation';
 import RegisterInputAnimation from './register/InputAnimation';
 
+import PopupView from '../../../CmEat/Components/Popup/PopupView'
+
 const {width,height} = Dimensions.get('window');
 let marginTop;
 if(height == 812){
@@ -84,6 +86,8 @@ export default class LogoAnimationView extends Component {
 		this._toggleViewType	= this._toggleViewType.bind(this);
 		this._handleBindSuccessful = this._handleBindSuccessful.bind(this);
 		this._getVerification = this._getVerification.bind(this);
+
+		this.popupView = PopupView.getInstance();
   }
 	async componentDidMount() {
 		const registerResult = await WeChat.registerApp(appid);
@@ -124,7 +128,15 @@ export default class LogoAnimationView extends Component {
 	}
 	_getVerification() {
 		if (this.state.phone.length < 10 || this.state.phone.match(/^[0-9]+$/) == null) {
-			Alert.errorAlert('请填写正确手机号码');
+			this.popupView.setMessagePopup({
+			  subtitle: "请填写正确手机号码",
+			  onDismiss: () => {
+			    this.setState({showPopup: false})
+			  }
+			});
+			this.setState({showPopup: true});
+
+			// Alert.errorAlert('请填写正确手机号码');
 			return;
 		}
 		this._sendVerification();
@@ -184,8 +196,25 @@ export default class LogoAnimationView extends Component {
 				 });
 	 			 this.props.handleLoginSuccessful();
 			 }
+			 else{
+				 this.popupView.setMessagePopup({
+				   subtitle: "登录失败，请检查信息",
+				   onDismiss: () => {
+				     this.setState({showPopup: false})
+				   }
+				 });
+				 this.setState({showPopup: true});
+			 }
 		} catch (e) {
-		 console.log(e)
+
+		 this.popupView.setMessagePopup({
+			 subtitle: "登录失败，请检查信息",
+			 onDismiss: () => {
+				 this.setState({showPopup: false})
+			 }
+		 });
+		 this.setState({showPopup: true});
+
 		 this.setState({
 			 showLoading:false,
 			 loginSuccess:false,
@@ -206,7 +235,16 @@ export default class LogoAnimationView extends Component {
 				loginSuccess:false,
 				_registerStarted:false,
 			});
-			Alert.errorAlert('请填写账户信息');
+
+			this.popupView.setMessagePopup({
+				subtitle: "请填写账户信息",
+				onDismiss: () => {
+					this.setState({showPopup: false})
+				}
+			});
+			this.setState({showPopup: true});
+
+			// Alert.errorAlert('请填写账户信息');
 			return;
 		}
 		else if (this.state.password != this.state.re_password) {
@@ -215,7 +253,16 @@ export default class LogoAnimationView extends Component {
 				loginSuccess:false,
 				_registerStarted:false,
 			});
-			Alert.errorAlert('密码配对不上 请重新输入');
+
+			this.popupView.setMessagePopup({
+				subtitle: "密码配对不上 请重新输入",
+				onDismiss: () => {
+					this.setState({showPopup: false})
+				}
+			});
+			this.setState({showPopup: true});
+
+			// Alert.errorAlert('密码配对不上 请重新输入');
 			return;
 		} else if (this.state.password.length < 8 || this.state.password.length > 32) {
 			this.setState({
@@ -223,7 +270,16 @@ export default class LogoAnimationView extends Component {
 				loginSuccess:false,
 				_registerStarted:false,
 			});
-			Alert.errorAlert('密码必须在8到32位之间');
+
+			this.popupView.setMessagePopup({
+				subtitle: "密码必须在8到32位之间",
+				onDismiss: () => {
+					this.setState({showPopup: false})
+				}
+			});
+			this.setState({showPopup: true});
+
+			// Alert.errorAlert('密码必须在8到32位之间');
 			return;
 		}
 		const {phone,verification,email,password} = this.state;
@@ -356,6 +412,7 @@ export default class LogoAnimationView extends Component {
   render(){
     return(
       <View style={styles.container}>
+				{this.state.showPopup && this.popupView.show()}
         <View style={styles.bgImageWrapper}>
 						 <Image source={require('./Image/background.png')}
 										style={styles.backgroundImage}/>

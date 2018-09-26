@@ -20,6 +20,8 @@ import {
 import AuthAction from '../Actions/AuthAction';
 import VersionAction from '../Actions/VersionAction';
 import {GetUserInfo} from '../Modules/Database';
+import PopupView from '../../CmEat/Components/Popup/PopupView'
+
 const { height, width } = Dimensions.get('window');
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -67,6 +69,7 @@ export default class Home extends Component {
       this._getSBoxHomePage = this._getSBoxHomePage.bind(this);
       this._getCMHomePage = this._getCMHomePage.bind(this);
 
+      this.popupView = PopupView.getInstance();
   }
   _openStarted = false
   componentDidMount() {
@@ -113,30 +116,63 @@ export default class Home extends Component {
     }
     if(versionObj.forced){
       this.setState(Object.assign({}, this.state, {entryFlag: false}));
-      Alert.alert(
-        '软件更新',
-        '有新版本可下载,请前往更新',
-        [
-          {text:'立即更新', onPress:()=>{
-            Linking.canOpenURL(url).then(supported => {
-              supported && Linking.openURL(url);
-            }, (err) => console.log(err));
-          }}
-        ]
-      )
+
+      this.popupView.setMessagePopup({
+        title: "软件更新",
+        subtitle: "有新版本可下载,请前往更新",
+        confirmText: "立即更新",
+        onConfirm: ()=>{
+          Linking.canOpenURL(url).then(supported => {
+            supported && Linking.openURL(url);
+          }, (err) => console.log(err));
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
+
+      // Alert.alert(
+      //   '软件更新',
+      //   '有新版本可下载,请前往更新',
+      //   [
+      //     {text:'立即更新', onPress:()=>{
+      //       Linking.canOpenURL(url).then(supported => {
+      //         supported && Linking.openURL(url);
+      //       }, (err) => console.log(err));
+      //     }}
+      //   ]
+      // )
     }else{
-      Alert.alert(
-        '软件更新',
-        '有新版本可下载，要前往App Store?',
-        [
-          {text: '以后再说', onPress:()=>{} ,style: 'cancel'},
-          {text:'立即更新', onPress:()=>{
-            Linking.canOpenURL(url).then(supported => {
-              supported && Linking.openURL(url);
-            }, (err) => console.log(err));
-          }}
-        ]
-      )
+
+      this.popupView.setMessagePopup({
+        title: "软件更新",
+        subtitle: "有新版本可下载,请前往更新",
+        confirmText: "立即更新",
+        cancelText: '以后再说',
+        onConfirm: ()=>{
+          Linking.canOpenURL(url).then(supported => {
+            supported && Linking.openURL(url);
+          }, (err) => console.log(err));
+        },
+        onDismiss: () => {
+          this.setState({showPopup: false})
+        }
+      });
+      this.setState({showPopup: true});
+
+      // Alert.alert(
+      //   '软件更新',
+      //   '有新版本可下载，要前往App Store?',
+      //   [
+      //     {text: '以后再说', onPress:()=>{} ,style: 'cancel'},
+      //     {text:'立即更新', onPress:()=>{
+      //       Linking.canOpenURL(url).then(supported => {
+      //         supported && Linking.openURL(url);
+      //       }, (err) => console.log(err));
+      //     }}
+      //   ]
+      // )
     }
   }
   _startUp(){
@@ -465,6 +501,7 @@ export default class Home extends Component {
 
       return (
           <Animated.View style={[styles.container,cmTransform]}>
+            {this.state.showPopup && this.popupView.show()}
               <View style={{ flex: 1,}}>
                 <TouchableWithoutFeedback onPress={this._handleSboxPress}>
                   <Animated.View style={{ flex: 0.55, right: this.state.boxRight,}}>
