@@ -46,7 +46,7 @@ export default (props) => {
                             activeOpacity={0.4}
                             onPress={props.onPress}>
                 <View style={{marginRight: 10,
-                              backgroundColor: '#d8d8d8',
+                              backgroundColor: '#9b9b9b',
                               width: 22,
                               height: 22,
                               justifyContent: 'center'}}>
@@ -84,7 +84,7 @@ export default (props) => {
       return (
         <View style={styles.container}>
             <View style={{marginRight: 10,
-                          backgroundColor: '#d8d8d8',
+                          backgroundColor: '#9b9b9b',
                           width: 22,
                           height: 22,
                           justifyContent: 'center'}}>

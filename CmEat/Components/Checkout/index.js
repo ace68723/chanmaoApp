@@ -61,7 +61,7 @@ if(height == 812){
 }else{
   marginTop = 20;
   headerHeight = 64;
-  acceptButtonHeight = 40;
+  acceptButtonHeight = 50;
 }
 
 
@@ -478,13 +478,18 @@ class Confirm extends Component {
 			if (Platform.OS === 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
-	            <TouchableOpacity style={styles.acceptButton}
-	                              activeOpacity={0.4}
+	            <TouchableOpacity activeOpacity={0.4}
 	                              onPress={this._checkout}>
-										<Text style={styles.acceptText}
-													allowFontScaling={false}>
-											 {CMLabel.getCNLabel('CHECK_OUT')}
-										</Text>
+										<View style={styles.acceptButton}>
+											<Text style={styles.acceptText}
+														allowFontScaling={false}>
+												 实付: ${this.state.total}
+											</Text>
+											<Text style={styles.acceptText}
+														allowFontScaling={false}>
+												 确认下单
+											</Text>
+										</View>
 	            </TouchableOpacity>
 	        )
 	      }else if(this.state.loading){
@@ -590,15 +595,21 @@ class Confirm extends Component {
       let typeListData=[{
                           text:CMLabel.getCNLabel('DELIVER'),
 													type:'1',
-                          backgroundColor:"#fff",
-                          textColor:"#999999",
-                          borderColor:"#999999",
+                          // backgroundColor:"#fff",
+                          // textColor:"#999999",
+                          // borderColor:"#999999",
+													backgroundColor:"#ccd3db",
+                          textColor:"white",
+                          borderColor:"#ccd3db",
                         },{
                           text:CMLabel.getCNLabel('PICK_UP'),
 													type:'0',
-                          backgroundColor:"#fff",
-                          textColor:"#999999",
-                          borderColor:"#999999",
+                          // backgroundColor:"#fff",
+                          // textColor:"#999999",
+                          // borderColor:"#999999",
+													backgroundColor:"#ccd3db",
+                          textColor:"white",
+                          borderColor:"#ccd3db",
                         }]
 			if(this.state.dltype != '0'){
 				typeListData[0].backgroundColor = "#ff8b00";
@@ -648,23 +659,24 @@ class Confirm extends Component {
 		_renderChoosePayment() {
 			if (this.state.available_payment_channels && this.state.dltype != 0) {
 				if (this.state.available_payment_channels.length > 1) {
-					let payment_description = '现金到付';
+					let payment_description = '';
 					if (this.state.payment_channel == 1) {
-						payment_description = this.state.brand + ' **** **** **** ' + this.state.last4;
+						payment_description = ' **** **** **** ' + this.state.last4;
 					}
 					else if (this.state.payment_channel == 10) {
-						payment_description = '支付宝';
+						// payment_description = '支付宝';
 					}
 					else if (this.state.payment_channel == 30) {
-						payment_description = 'Apple Pay';
+						// payment_description = 'Apple Pay';
 					}
 					else {
 						payment_description = '现金到付';
 					}
 					return(
 						<TouchableOpacity onPress={this._goToChoosePayment}>
-							<CartItem rightIcon={require('./Image/right.png')}
-												title={CMLabel.getCNLabel('PAY')}
+							<CartItem title={'支付方式'}
+												rightIcon={require('./Image/right.png')}
+												paymentChannel={this.state.payment_channel}
 												value={payment_description}/>
 						</TouchableOpacity>
 					)
@@ -672,6 +684,122 @@ class Confirm extends Component {
 			}
 
 		}
+
+		_renderPriceDetail() {
+			const _priceDetail = [];
+			if (this.state.pretax) {
+				_priceDetail.push(
+					<View style={{flex: 1,
+												flexDirection: 'row',
+												justifyContent: 'space-between',
+												marginTop: 10,
+												marginHorizontal: 20}}>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							税前价格
+						</Text>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							${this.state.pretax}
+						</Text>
+					</View>
+				)
+			}
+			if (this.state.dlexp) {
+				_priceDetail.push(
+					<View style={{flex: 1,
+												flexDirection: 'row',
+												justifyContent: 'space-between',
+												marginTop: 10,
+												marginHorizontal: 20}}>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							运费
+						</Text>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							${this.state.dlexp}
+						</Text>
+					</View>
+				)
+			}
+			if (this.state.tips && this.state.tips > 0) {
+				_priceDetail.push(
+					<View style={{flex: 1,
+												flexDirection: 'row',
+												justifyContent: 'space-between',
+												marginTop: 10,
+												marginHorizontal: 20}}>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							服务费
+						</Text>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							${this.state.tips}
+						</Text>
+					</View>
+				)
+			}
+			if (this.state.tips) {
+				_priceDetail.push(
+					<View style={{flex: 1,
+												flexDirection: 'row',
+												justifyContent: 'space-between',
+												marginTop: 10,
+												marginHorizontal: 20}}>
+						<Text style={{fontSize: 15,
+													color: '#40a2e7',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							折扣
+						</Text>
+						<Text style={{fontSize: 15,
+													color: '#40a2e7',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							- ${this.state.discounts}
+						</Text>
+					</View>
+				)
+			}
+			if (this.state.tips) {
+				_priceDetail.push(
+					<View style={{flex: 1,
+												flexDirection: 'row',
+												justifyContent: 'space-between',
+												marginTop: 10,
+												marginHorizontal: 20}}>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							税
+						</Text>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							${this.state.tax}
+						</Text>
+					</View>
+				)
+			}
+			return _priceDetail;
+		}
+
 		_renderComment(){
 			return(
 				<CommentModal  style={styles.modal}
@@ -869,9 +997,11 @@ class Confirm extends Component {
 											*全场九折
 										</Text>
 								</View>
+
+
 								<View style={{marginLeft:10,
 															marginRight:10,
-															marginBottom: 20,
+															marginBottom: 50,
 															paddingBottom:20,
 															width: width - 20,
 															backgroundColor:"#ffffff",
@@ -882,43 +1012,112 @@ class Confirm extends Component {
 															shadowRadius: 3,
 															elevation: 1}}>
 											{this._renderDeliverType()}
+											<View style={{marginLeft: 10,
+																		marginRight: 10,
+																		borderColor:"#ccd3db",
+																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
+											</View>
+											<Text style={{color:'#666666',
+																		marginLeft: 30,
+																		marginTop: 20,
+																		fontSize:12,
+																		fontWeight: '800'}}>
+												送餐地址
+											</Text>
 											{this._renderAddress()}
+											<View style={{marginTop: 20,
+																		marginLeft: 10,
+																		marginRight: 10,
+																		borderColor:"#ccd3db",
+																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
+											</View>
+											<Text style={{color:'#666666',
+																		marginLeft: 25,
+																		marginTop: 20,
+																		fontSize:12,
+																		fontWeight: '800'}}>
+												优惠
+											</Text>
+											<View style={{flexDirection: 'row',
+																	  marginTop: 10,
+																	  marginLeft: 20,
+																	  marginRight: 10}}>
+												<TextInput style={{flex: 1,
+																					 marginRight: 30,
+																					 alignItems:'flex-start',
+																					 alignSelf: 'center',
+																					 padding: 5,
+																					 borderRadius: 30,
+																					 backgroundColor: '#f4f4f4'}}
+																	 placeholder={'coupon code'}>
+												</TextInput>
+												<TouchableOpacity>
+													<View style={{flex: 1,
+																				justifyContent: 'center',
+																				alignSelf: 'center',
+																				paddingHorizontal: 20,
+																				backgroundColor: "#40a2e7",
+																				borderRadius: 25}}>
+														<Text style={{color: "white",
+																					fontSize: 12}}>
+															查看
+														</Text>
+													</View>
+												</TouchableOpacity>
+											</View>
+											<Text style={{color: '#40a2e7',
+																		fontSize: 15,
+																		marginTop: 15,
+																		marginLeft: 20}}
+														allowFontScaling={false}>
+												*折扣码添加成功
+											</Text>
+											<View style={{marginTop: 20,
+																		marginLeft: 10,
+																		marginRight: 10,
+																		borderColor:"#ccd3db",
+																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
+											</View>
+											{this._renderChoosePayment()}
+											<View style={{marginTop: 0,
+																		marginLeft: 10,
+																		marginRight: 10,
+																		borderColor:"#ccd3db",
+																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
+											</View>
+											<Text style={{color:'#666666',
+																		marginLeft: 20,
+																		marginTop: 20,
+																		fontSize:12,
+																		fontWeight: '800'}}>
+												订单小计
+											</Text>
+											{this._renderPriceDetail()}
+											<View style={{marginTop: 20,
+																		marginLeft: 10,
+																		marginRight: 10,
+																		borderColor:"#ccd3db",
+																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
+											</View>
+											<View style={{flexDirection: 'row',
+																		marginTop: 20,
+																		marginHorizontal: 20,
+																		justifyContent: 'space-between'}}>
+												<Text style={{color:'#666666',
+																			fontSize:12,
+																			fontWeight: '800',}}>
+													总计
+												</Text>
+												<Text style={{color:'#666666',
+																			fontSize:12,
+																			fontFamily:'FZZhunYuan-M02S',}}>
+													${this.state.charge_total}
+												</Text>
+											</View>
 								</View>
 
 
-								<View style={{marginLeft:10,
-															marginRight:10,
-															paddingBottom:80,
-															width: width - 20,
-															backgroundColor:"#ffffff",
-															borderRadius: 5,
-															alignSelf:"center"}}>
-									{this._renderRestaurant()}
-									{this._renderAddress()}
-									{cartList}
-									{this._renderDeliverType()}
-									<TouchableWithoutFeedback onPress={()=>{this.setState({openEditComment:true})}}>
-										<View style={{alignItems:'flex-start',
-																	marginTop:10,
-																	padding:20,
-																	borderColor:"#e2e2e4",
-																	borderBottomWidth: StyleSheet.hairlineWidth,
-																  borderTopWidth: StyleSheet.hairlineWidth,}}>
-												{commentText()}
-										</View>
-									</TouchableWithoutFeedback>
-									<CartItem
-														title={CMLabel.getCNLabel('PRETAX_PRICE')}
-														value={'$'+this.state.pretax}/>
 
-									{this._renderDeliverFee()}
-									<CartItem
-														title={CMLabel.getCNLabel('TAXED_PRICE')}
-														value={'$'+this.state.total}/>
-									{this._renderChoosePayment()}
-									{this._renderVisaFee()}
-									{this._renderTipInfo()}
-								</View>
 								{this._renderAndroidCheckoutButton()}
 
 		          </ScrollView>
@@ -933,6 +1132,40 @@ class Confirm extends Component {
     }
 
 }
+
+// <View style={{marginLeft:10,
+// 							marginRight:10,
+// 							paddingBottom:80,
+// 							width: width - 20,
+// 							backgroundColor:"#ffffff",
+// 							borderRadius: 5,
+// 							alignSelf:"center"}}>
+// 	{this._renderRestaurant()}
+// 	{this._renderAddress()}
+// 	{cartList}
+// 	{this._renderDeliverType()}
+// 	<TouchableWithoutFeedback onPress={()=>{this.setState({openEditComment:true})}}>
+// 		<View style={{alignItems:'flex-start',
+// 									marginTop:10,
+// 									padding:20,
+// 									borderColor:"#e2e2e4",
+// 									borderBottomWidth: StyleSheet.hairlineWidth,
+// 									borderTopWidth: StyleSheet.hairlineWidth,}}>
+// 				{commentText()}
+// 		</View>
+// 	</TouchableWithoutFeedback>
+// 	<CartItem
+// 						title={CMLabel.getCNLabel('PRETAX_PRICE')}
+// 						value={'$'+this.state.pretax}/>
+//
+// 	{this._renderDeliverFee()}
+// 	<CartItem
+// 						title={CMLabel.getCNLabel('TAXED_PRICE')}
+// 						value={'$'+this.state.total}/>
+// 	{this._renderChoosePayment()}
+// 	{this._renderVisaFee()}
+// 	{this._renderTipInfo()}
+// </View>
 
 
 // {this.showLoading()}
@@ -975,14 +1208,15 @@ let styles = StyleSheet.create({
 		// position:Platform.OS == "ios"? null:'absolute',
 		// top:Platform.OS == "ios"? null:height-acceptButtonHeight-StatusBar.currentHeight,
     height:acceptButtonHeight,
+		paddingHorizontal: 20,
+		flexDirection: 'row',
     backgroundColor:'#ea7b21',
-		justifyContent:'center',
+		justifyContent:'space-between',
 		alignItems:'center',
   },
   acceptText: {
     textAlign: 'center',
     color: '#ffffff',
-    marginBottom: 5,
     fontSize:20,
 		fontFamily:'FZZongYi-M05S',
   },
