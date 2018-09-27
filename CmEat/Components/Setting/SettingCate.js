@@ -5,13 +5,14 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 import moment from 'moment';
 
 export default (props) => {
  // props.order.created = moment(props.order.created).format("MMM Do YYYY");
     return (
-      <TouchableHighlight onPress={props.onPress}>
+      <TouchableOpacity onPress={props.onPress}>
         <View style={styles.container}>
             <View style={[styles.col,{  flex:0.2,}]}>
                   <Image source={props.icon} style={styles.icon} />
@@ -27,7 +28,7 @@ export default (props) => {
           </View>
 
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
 }
 //右侧箭头
