@@ -13,7 +13,7 @@ import {
 	ImageBackground,
 	Image
 } from 'react-native';
-import CMLabel from '../../../Constants/AppLabel';
+import CMLabel from '../../../../App/Constants/AppLabel';
 import HomeStore from '../../../Stores/HomeStore';
 import RestaurantAction from '../../../Actions/RestaurantAction';
 const {width,height} = Dimensions.get('window');

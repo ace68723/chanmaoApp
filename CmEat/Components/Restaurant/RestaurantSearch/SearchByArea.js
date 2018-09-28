@@ -11,7 +11,7 @@ import {
 	FlatList,
     ImageBackground,
 } from 'react-native';
-import CMLabel from '../../../Constants/AppLabel';
+import CMLabel from '../../../../App/Constants/AppLabel';
 const {width,height} = Dimensions.get('window');
 export default class SearchByArea extends Component{
     constructor(props){

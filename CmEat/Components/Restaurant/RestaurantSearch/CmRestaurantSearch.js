@@ -28,7 +28,7 @@ import HomeAction from '../../../Actions/HomeAction';
 import RestaurantAction from '../../../Actions/RestaurantAction';
 import RestaurantCard from '../RestaurantCard';
 import WordProcessor from '../../WordProcess/WordProcessor';
-import CMLabel from '../../../Constants/AppLabel'
+import CMLabel from '../../../../App/Constants/AppLabel'
 import { orderBy } from 'lodash';
 import SearchByArea from './SearchByArea';
 import SearchByTag from './SearchByTag';
