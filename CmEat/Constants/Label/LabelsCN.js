@@ -5,8 +5,6 @@ module.exports={
     AREA_SEARCH:'分区&搜索',
     CITY_AREA:'城市&区域',
     RES_TAG:'餐厅分类',
-    MORE_TYPE:'更多分类',
-    RETRACT:'收起',
     //Setting
     MY_TAB:'我的',
     SETTING:'设置',
@@ -16,7 +14,8 @@ module.exports={
     CUSTOMER_SERVICE:'联系客服',
     SWEETBOX: '甜满箱 全场免运费 满$25起送',
     LOG_OUT: '退出登录',
-
+    LANGUAGE_SETTING:'选择语言',
+    SCROLL_DOWN:'下划点餐',
     //Order
     ORDER:'点餐',
     ALL_ORDER:'全部订单',
@@ -103,6 +102,4 @@ module.exports={
     //ALERT_TITLE
     ALERT_TITLE:'馋猫订餐',
     ALERT_CONTENT:'您输入的支付信息输入有误',
-    //HomeTab
-    ORDER_BELOW:'在下面点餐呦'
 }

@@ -26,7 +26,7 @@ export default class SearchByTag extends Component{
 		this.state={
 			height: new Animated.Value(defaultTagViewHeight),
 			tags:props.tags,
-			extendViewText: "更多分类",
+			extendViewText: CMLabel.getLabel('MORE_TYPE'),
 			showingMoreCategories: false
 		}
 		this._extendViewOnClick = this._extendViewOnClick.bind(this);
@@ -64,7 +64,7 @@ export default class SearchByTag extends Component{
 					toValue: this.state.showingMoreCategories ? defaultTagViewHeight : this.state.fullTagsViewHeight,
 					duration: animationDuration
 			}).start();
-			this.setState({extendViewText: this.state.showingMoreCategories  ? "更多分类" : "收起",
+			this.setState({extendViewText: this.state.showingMoreCategories  ? CMLabel.getLabel('MORE_TYPE') : CMLabel.getLabel('RETRACT'),
 										 showingMoreCategories: !this.state.showingMoreCategories});
 		}, 300);
 	}

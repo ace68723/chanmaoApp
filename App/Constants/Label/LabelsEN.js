@@ -5,6 +5,9 @@ module.exports={
     AREA_SEARCH:'Area & Search',
     CITY_AREA:'City & Region',
     RES_TAG:'Category',
+
+    MORE_TYPE:'更多分类',
+    RETRACT:'收起',
     //Setting
     MY_TAB:'Info',
     SETTING:'Setting',
@@ -14,7 +17,7 @@ module.exports={
     CUSTOMER_SERVICE:'Contact Us',
     SWEETBOX: 'SweetfulBox',
     LOG_OUT: 'Log Out',
-
+    LANGUAGE_SETTING:'Language',
     //Order
     ORDER:'Order',
     ALL_ORDER:'All Orders',
@@ -87,7 +90,7 @@ module.exports={
     TASTY:"Tasty",
     ECONOMICAL:"实惠",
     LARGE_AMOUNT:"分量足",
-
+    SCROLL_DOWN:'Scroll down to order',
 
     //Card Type
     CREDIT_CARD:'Credit Card',
@@ -97,5 +100,6 @@ module.exports={
     PAYMENT_TYPE:"支付方式",
     //About us
     ABOUT_US:'About Us',
-
+    //HomeTab
+    ORDER_BELOW:'在下面点餐呦'
 }
