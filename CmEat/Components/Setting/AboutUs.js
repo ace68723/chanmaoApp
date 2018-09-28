@@ -13,7 +13,7 @@ import {
   Clipboard,
 } from 'react-native';
 import AppConstants from '../../Constants/AppConstants';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 const {height, width} = Dimensions.get('window');
 const deviceWidth = width;
 const deviceHeight = height;

@@ -25,7 +25,7 @@ import Header from '../General/Header';
 
 import AddressAction from '../../Actions/AddressAction';
 import AddressStore from '../../Stores/AddressStore';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 
 const _getFormatAddress = () =>{
   return AddressStore.getFormatAddress()

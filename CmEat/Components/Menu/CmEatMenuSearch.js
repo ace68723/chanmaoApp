@@ -25,7 +25,7 @@ import Header from '../General/Header';
 import MenuCard from './MenuCard';
 
 import MenuStore from '../../Stores/MenuStore';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 const {width,height} = Dimensions.get('window');
 const searchViewMarginHorizontal = 30;
 const iconSearchInputSize = 35;

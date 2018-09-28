@@ -15,7 +15,7 @@ import {
 
 import Marker from './marker';
 import KeyboardView from './keyboardView';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 const {height, width} = Dimensions.get('window');
 
 // import SboxOrderAction from '../../Actions/SboxOrderAction';

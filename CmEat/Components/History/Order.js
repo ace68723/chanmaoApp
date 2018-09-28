@@ -13,7 +13,7 @@ import {
   Dimensions,
 } from 'react-native';
 import PhoneNumberVerify from './PhoneNumberVerify';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 const { width } = Dimensions.get('window');
 const deviceWidth = width;
 export default class pastOrderEN extends Component {

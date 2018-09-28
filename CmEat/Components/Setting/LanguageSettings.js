@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 
 import Header from '../General/Header';
 import LanguageSettingsCell from './LanguageSettingsCell'

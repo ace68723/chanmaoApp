@@ -37,7 +37,7 @@ import HomeAction from '../../Actions/HomeAction';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import AddressStore from '../../Stores/AddressStore';
 import Util from '../../Modules/Util';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 export default class CmEatAddress extends Component {
 
   constructor(props) {

@@ -19,7 +19,7 @@ import SecondMenuAction from '../../Actions/SecondMenuAction';
 import SecondMenuStore from '../../Stores/SecondMenuStore';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import OrderActions from '../../Actions/OrderAction';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 // import SboxHeader from '../../App/Components/General/SboxHeader';
 
 // const Icon = createIconSetFromIcoMoon(icoMoonConfig);

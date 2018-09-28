@@ -32,7 +32,7 @@ import MenuStore from '../../Stores/MenuStore';
 import RestaurantAction from '../../Actions/RestaurantAction';
 
 import findIndex from 'lodash/findIndex';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 
 
 const {width,height} = Dimensions.get('window');

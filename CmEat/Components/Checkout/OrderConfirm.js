@@ -12,7 +12,7 @@ import {
 
 } from 'react-native';
 import CMModal from 'react-native-modalbox';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 const orderUser = {
     name:"qiao",
     phone: "647-895-0624",

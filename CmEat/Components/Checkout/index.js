@@ -41,7 +41,7 @@ import SecondMenuStore from '../../Stores/SecondMenuStore';
 import MenuStore from '../../Stores/MenuStore';
 import HistoryAction from '../../Actions/HistoryAction';
 import Util from '../../Modules/Util';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
 import TabsAction from '../../Actions/TabsAction';

@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import HistoryAction from '../../Actions/HistoryAction';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 
 const {height, width} = Dimensions.get('window');
 

@@ -76,7 +76,7 @@ import {
   Dimensions,
 } from 'react-native';
 import Modal from 'react-native-modalbox';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 const {height, width} = Dimensions.get('window');
 const deviceWidth = width;
 const deviceHeight = height;

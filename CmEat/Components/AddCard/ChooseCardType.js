@@ -16,7 +16,7 @@ import {
 import CheckoutAction from '../../Actions/CheckoutAction';
 // import SboxHeader from '../../../App/Components/General/SboxHeader';
 import Header from '../General/Header';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 const { height, width } = Dimensions.get('window');
 
 export default class ChooseCardType extends Component {

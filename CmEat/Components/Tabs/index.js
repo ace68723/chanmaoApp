@@ -22,7 +22,7 @@ import SettingTab from '../Setting/SettingTab';
 import SearchTab from '../Restaurant/RestaurantSearch/CmRestaurantSearch';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TabBar from './TabBar';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 import HomeAction from '../../Actions/HomeAction';
 import TabsStore from '../../Stores/TabsStore';
 const {width,height} = Dimensions.get('window');

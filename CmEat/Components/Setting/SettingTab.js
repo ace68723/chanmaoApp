@@ -10,7 +10,7 @@ import SettingHeader from './SettingHeader';
 import Header from '../General/Header';
 
 import AuthAction from '../../../App/Actions/AuthAction';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 
 
 class SettingTab extends Component {

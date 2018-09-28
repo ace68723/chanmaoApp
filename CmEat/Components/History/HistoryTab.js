@@ -46,7 +46,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import AllOrders from './AllOrders';
 import OrdersNotReviewed from './OrdersNotReviewed';
 import BadOrders from './BadOrders';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
 import CheckoutAction from '../../Actions/CheckoutAction';

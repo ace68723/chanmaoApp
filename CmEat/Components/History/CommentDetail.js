@@ -22,7 +22,7 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 const  CmAlert = require('../../Modules/System/Alert');
 const {height, width} = Dimensions.get('window');
 const deviceHeight = height;

@@ -20,7 +20,7 @@ import {
   View,
 } from 'react-native';
 import MenuStore from '../../Stores/MenuStore';
-import CMLabel from '../../Constants/AppLabel';
+import CMLabel from '../../../App/Constants/AppLabel';
 
 const {width,height} = Dimensions.get('window');
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
