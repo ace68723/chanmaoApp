@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import CMLabel from '../../../App/Constants/AppLabel';
+import { cme_updateLanguage, cme_getLanguage } from '../../../App/Modules/Database';
 
 import Header from '../General/Header';
 import LanguageSettingsCell from './LanguageSettingsCell'
@@ -18,13 +19,16 @@ const {height, width} = Dimensions.get('window');
 const languages = [
   {
     'id': 0,
-    'language': '中文简体'
+    'language': '中文简体',
+    'realm_value': 'chinese_simple'
   }, {
     'id': 1,
-    'language': 'English'
+    'language': 'English',
+    'realm_value': 'english'
   }, {
     'id': 2,
-    'language': 'Français'
+    'language': 'Français',
+    'realm_value': 'french'
   }
 ];
 
@@ -42,12 +46,30 @@ export default class LanguageSettings extends Component {
     this.renderLanguageCells = this.renderLanguageCells.bind(this);
   }
 
+  componentDidMount() {
+    const selectedLanguage = cme_getLanguage();
+    for (let _language of languages) {
+      if (_language.realm_value == selectedLanguage) {
+        this.setState({ selected: _language.id });
+      }
+    }
+  }
+
   _goBack() {
     this.props.navigator.pop();
   }
 
   confirmLanguage() {
-    const selectedLanguage = this.state.selected;
+    cme_updateLanguage(languages[this.state.selected].realm_value);
+    // alert(cme_getLanguage());
+    // this.props.navigator.pop();
+    this.props.navigator.resetTo({
+			screen: 'cmHome',
+			animated: true,
+			animationType: 'fade',
+			navigatorStyle: {navBarHidden: true},
+			passProps:{goToCmEat: true}
+		});
   }
 
   onSelected(id) {

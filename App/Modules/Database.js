@@ -411,6 +411,11 @@ export function cme_getCommentCount() {
 export function cme_getLanguage() {
   return realm.objectForPrimaryKey('cm_system','cme_language').value;
 }
+export function cme_updateLanguage(language) {
+  realm.write(() => {
+      realm.create('cm_system',{type:"cme_language",value:language}, true );
+  });
+}
 
 export function sbox_addToCart(product){
   const amount = product.amount;
