@@ -5,26 +5,30 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 import moment from 'moment';
 
 export default (props) => {
  // props.order.created = moment(props.order.created).format("MMM Do YYYY");
     return (
-      <TouchableHighlight onPress={props.onPress}>
+      <TouchableOpacity onPress={props.onPress}>
         <View style={styles.container}>
             <View style={[styles.col,{  flex:0.2,}]}>
                   <Image source={props.icon} style={styles.icon} />
             </View>
-          <View style={styles.col}>
+          <View style={[styles.col,{  flex:0.6,}]}>
             <Text style={styles.title}
                   allowFontScaling={false}>
                 {props.title}
             </Text>
           </View>
+          <View style={[styles.col,{  flex:0.2,}]}>
+                <Image source={require('./Image/down-arrow.png')} style={styles.icon} />
+          </View>
 
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
 }
 //右侧箭头
@@ -41,7 +45,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "center",
         backgroundColor: '#fff',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+        elevation: 2,
         height:60,
+        marginTop:10,
+        marginLeft:10,
+        marginRight:10,
+        borderRadius:8,
         // borderBottomColor:'#ddd',
         // borderBottomWidth:1,
     },
