@@ -13,6 +13,8 @@ import SboxHistory from '../SboxHistory/SboxHistoryViewController';
 import SboxCart from '../SboxCart';
 import About from '../SboxAbout/index'
 import TabBar from './TabBar';
+import Label from '../../../App/Constants/AppLabel';
+
 export default class MyComponent extends Component {
   constructor() {
     super();
@@ -62,7 +64,7 @@ export default class MyComponent extends Component {
         style={{flex:1}}
         renderTabBar={() => <TabBar />}
       >
-        <SboxHome tabLabel="首页"
+        <SboxHome tabLabel={Label.getSboxLabel('MAIN_TAB')}
               activeIconImage={require("./Image/home.png")}
               inactiveIconImage={require("./Image/homegrey.png")}
               navigator={this.props.navigator}

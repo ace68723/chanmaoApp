@@ -37,7 +37,7 @@ import HomeAction from '../../Actions/HomeAction';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import AddressStore from '../../Stores/AddressStore';
 import Util from '../../Modules/Util';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 export default class CmEatAddress extends Component {
 
   constructor(props) {
@@ -160,8 +160,8 @@ export default class CmEatAddress extends Component {
 			'删除地址',
 			"addressDescription",
 			[
-				{text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-				{text: CMLabel.getLabel('CONFIRM'), onPress: password => AddressAction.deleteAddress(address)},
+				{text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+				{text: Label.getCMLabel('CONFIRM'), onPress: password => AddressAction.deleteAddress(address)},
 			]
 		)
 	}
@@ -427,7 +427,7 @@ export default class CmEatAddress extends Component {
 						autoFocus={true}
             onFocus={()=>{this.setState({showConfirmBtn:false})}}
             onBlur={()=>{this.setState({showConfirmBtn:true})}}
-            placeholder={CMLabel.getLabel('ENTER_ADDRESS')}
+            placeholder={Label.getCMLabel('ENTER_ADDRESS')}
             placeholderTextColor={'#999999'}
             selectionColor={'#ea7b21'}
             keyboardType = { 'default'}
@@ -467,7 +467,7 @@ export default class CmEatAddress extends Component {
 											fontSize: 16,
 											fontFamily:'FZZhunYuan-M02S',
 											color: '#A5A5A5',}}
-							allowFontScaling={false}>{CMLabel.getLabel('CHOOSE')}: </Text>
+							allowFontScaling={false}>{Label.getCMLabel('CHOOSE')}: </Text>
 
         {predictionList}
       </ScrollView>
@@ -544,7 +544,7 @@ export default class CmEatAddress extends Component {
                         onPress={this._handleConfirm}>
             <Text style={styles.buttonText}
 									allowFontScaling={false}>
-               {CMLabel.getLabel('CONFIRM')}
+               {Label.getCMLabel('CONFIRM')}
             </Text>
       </TouchableOpacity>
     )
@@ -562,7 +562,7 @@ export default class CmEatAddress extends Component {
                         onPress={this._handleConfirm}>
             <Text style={styles.buttonText}
 									allowFontScaling={false}>
-							{CMLabel.getLabel('CONFIRM')}
+							{Label.getCMLabel('CONFIRM')}
             </Text>
       </TouchableOpacity>
     )
@@ -571,7 +571,7 @@ export default class CmEatAddress extends Component {
     return(
       <View style={{  flex:1,
                       backgroundColor:"#ffffff"}}>
-        <Header title={CMLabel.getLabel('ADDRESS')}
+        <Header title={Label.getCMLabel('ADDRESS')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
 					{this._renderSearchInput()}

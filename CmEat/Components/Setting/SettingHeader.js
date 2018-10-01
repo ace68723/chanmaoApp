@@ -7,13 +7,13 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 export default (props) =>{
         return (
           <View style={styles.container}>
               <Text style={styles.title}
                     allowFontScaling={false}>
-                {CMLabel.getLabel('SETTING')}
+                {Label.getCMLabel('SETTING')}
               </Text>
           </View>
         )

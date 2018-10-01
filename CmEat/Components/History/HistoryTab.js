@@ -46,7 +46,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import AllOrders from './AllOrders';
 import OrdersNotReviewed from './OrdersNotReviewed';
 import BadOrders from './BadOrders';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
 import CheckoutAction from '../../Actions/CheckoutAction';
@@ -279,7 +279,7 @@ class HistoryTab extends Component {
 													color: firstFilterColor,
 													fontFamily:'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							{CMLabel.getLabel('ALL_ORDER')}
+							{Label.getCMLabel('ALL_ORDER')}
 						</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
@@ -289,7 +289,7 @@ class HistoryTab extends Component {
 													color: secondFilterColor,
 													fontFamily:'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							{CMLabel.getLabel('YET_COMMENT')}
+							{Label.getCMLabel('YET_COMMENT')}
 						</Text>
 					</TouchableOpacity>
 
@@ -331,7 +331,7 @@ class HistoryTab extends Component {
 										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
 										handlePaymentRetry={this._handlePaymentRetry}
-										tabLabel={CMLabel.getLabel('ALL_ORDER')}/>
+										tabLabel={Label.getCMLabel('ALL_ORDER')}/>
 								<OrdersNotReviewed
 										navigator={this.props.navigator}
 										orderData={this.state.orderData}
@@ -340,7 +340,7 @@ class HistoryTab extends Component {
 										goToComments={this._goToComments}
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
-										tabLabel={CMLabel.getLabel('YET_COMMENT')}/>
+										tabLabel={Label.getCMLabel('YET_COMMENT')}/>
 	 			     </ScrollableTabView>
 						 <Modal style={styles.modal}
 						 			 position={"center"}

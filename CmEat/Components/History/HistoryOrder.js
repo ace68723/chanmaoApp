@@ -76,7 +76,7 @@ import {
   Dimensions,
 } from 'react-native';
 import Modal from 'react-native-modalbox';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 const {height, width} = Dimensions.get('window');
 const deviceWidth = width;
 const deviceHeight = height;
@@ -136,27 +136,27 @@ export default class pastOrderEN extends Component {
               <View style={styles.info}>
                   <Text style={styles.infoTitle} allowFontScaling={false}>{orderInfo.statue}</Text>
                   <Text style={styles.infoText} allowFontScaling={false}>{orderInfo.time}</Text>
-                  <Text style={styles.infoText} allowFontScaling={false}>{CMLabel.getLabel('ORDER_NO')} #{orderInfo.orderID}</Text>
+                  <Text style={styles.infoText} allowFontScaling={false}>{Label.getCMLabel('ORDER_NO')} #{orderInfo.orderID}</Text>
               </View>
               <View style={styles.orderList}>
                 {this._renderFoodList()}
               </View>
               <View style={styles.orderTotal}>
-                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getLabel('PRICE')}: {orderInfo.total}</Text>
+                <Text style={{fontSize:18,marginLeft:40,fontWeight:'bold'}} allowFontScaling={false}>{Label.getCMLabel('PRICE')}: {orderInfo.total}</Text>
               </View>
               <View style={styles.buttonContainer}>
                   <View style={[styles.ButtonStyle,{borderRightWidth:0.5}]}>
                       <TouchableOpacity style={{flex:1,
                                                 justifyContent:'center',
                                                 alignItems:'center'}}>
-                        <Text style={{fontSize:12,color:'#666666',fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getLabel('RECIPT')}</Text>
+                        <Text style={{fontSize:12,color:'#666666',fontWeight:'bold'}} allowFontScaling={false}>{Label.getCMLabel('RECIPT')}</Text>
                       </TouchableOpacity>
                   </View>
                   <View style={[styles.ButtonStyle,{borderRightWidth:0.5}]}>
                       <TouchableOpacity style={{flex:1,
                                                 justifyContent:'center',
                                                 alignItems:'center'}}>
-                        <Text style={{fontSize:12,color:'#666666',fontWeight:'bold'}} allowFontScaling={false}>{CMLabel.getLabel('HELP')}</Text>
+                        <Text style={{fontSize:12,color:'#666666',fontWeight:'bold'}} allowFontScaling={false}>{Label.getCMLabel('HELP')}</Text>
                       </TouchableOpacity>
                   </View>
               </View>

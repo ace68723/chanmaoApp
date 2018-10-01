@@ -19,7 +19,7 @@ import SecondMenuAction from '../../Actions/SecondMenuAction';
 import SecondMenuStore from '../../Stores/SecondMenuStore';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import OrderActions from '../../Actions/OrderAction';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 // import SboxHeader from '../../App/Components/General/SboxHeader';
 
 // const Icon = createIconSetFromIcoMoon(icoMoonConfig);
@@ -318,7 +318,7 @@ export default class SecondMenu extends Component {
 										alignItems: 'center'}}>
 					<Text style={{flex: 0.3, fontSize: 16, fontFamily:'FZZhunYuan-M02S', color: '#a5a5a5'}}
 								allowFontScaling={false}>
-					{CMLabel.getLabel('DISH_QUANTITY')}:
+					{Label.getCMLabel('DISH_QUANTITY')}:
 					</Text>
 					<View style={{flex: 0.4}}>
 							<View style={{flexDirection: 'row',

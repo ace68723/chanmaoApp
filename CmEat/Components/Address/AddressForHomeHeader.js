@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import AddressStore from '../../Stores/AddressStore';
 import { Navigation } from 'react-native-navigation';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 import LocationModule from '../../Modules/System/LocationModule'
 
 export default class AddressForHomeHeader extends Component {
@@ -99,7 +99,7 @@ export default class AddressForHomeHeader extends Component {
                         marginBottom:10,}}
                         numberOfLines={1}
                 allowFontScaling={false}>
-              {CMLabel.getLabel('DELIVER_TO')}   {this.state.selectedAddress}
+              {Label.getCMLabel('DELIVER_TO')}   {this.state.selectedAddress}
           </Text>
 
         </View>
@@ -114,7 +114,7 @@ export default class AddressForHomeHeader extends Component {
                       marginBottom:10,}}
                       numberOfLines={1}
               allowFontScaling={false}>
-            {CMLabel.getLabel('CHOOSE_ADDRESS')}
+            {Label.getCMLabel('CHOOSE_ADDRESS')}
         </Text>
       )
     }

@@ -25,7 +25,7 @@ import Header from '../General/Header';
 
 import AddressAction from '../../Actions/AddressAction';
 import AddressStore from '../../Stores/AddressStore';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 
 const _getFormatAddress = () =>{
   return AddressStore.getFormatAddress()
@@ -218,7 +218,7 @@ export default class CmEatAddInfo extends Component {
 
         return(
           <View style={styles.mainContainer} >
-          <Header title={CMLabel.getLabel('ADDRESS')}
+          <Header title={Label.getCMLabel('ADDRESS')}
 	                goBack={this._goBack}
 	                leftButtonText={'×'}/>
             <ScrollView scrollEnabled={true}
@@ -244,7 +244,7 @@ export default class CmEatAddInfo extends Component {
 												<Animated.View style={{flexDirection:"column",flex:1,marginTop:interpolatedMarginTop}}>
 														<Text style={{marginLeft:10,marginTop:12,fontFamily:'FZZhunYuan-M02S',}}
 																	allowFontScaling={false}>
-															{CMLabel.getLabel('ADD_DEFAULT_ADDRESS')}
+															{Label.getCMLabel('ADD_DEFAULT_ADDRESS')}
 														</Text>
 														{this._renderChooseType()}
 
@@ -255,7 +255,7 @@ export default class CmEatAddInfo extends Component {
                     <View style={styles.inputBox}>
                       <Text style={styles.inputText}
 														allowFontScaling={false}>
-                        {CMLabel.getLabel('CONTACT')}:
+                        {Label.getCMLabel('CONTACT')}:
                       </Text>
                         <TextInput
                             blurOnSubmit={false}
@@ -275,7 +275,7 @@ export default class CmEatAddInfo extends Component {
                     <View style={styles.inputBox}>
                       <Text style={styles.inputText}
 														allowFontScaling={false}>
-                        {CMLabel.getLabel('PHONE')}: ＋1:
+                        {Label.getCMLabel('PHONE')}: ＋1:
                       </Text>
                       <TextInput
                           blurOnSubmit={false}
@@ -341,7 +341,7 @@ export default class CmEatAddInfo extends Component {
                                        onPress={this._submitAddress}>
                         <Text style={ styles.buttonText }
 
-															allowFontScaling={false}>{AddressStore.getState().edittingAddress ? CMLabel.getLabel('SAVE_ADDRESS') : CMLabel.getLabel('ADD_ADDRESS')}
+															allowFontScaling={false}>{AddressStore.getState().edittingAddress ? Label.getCMLabel('SAVE_ADDRESS') : Label.getCMLabel('ADD_ADDRESS')}
 												 </Text>
                     </TouchableOpacity>
                </View>

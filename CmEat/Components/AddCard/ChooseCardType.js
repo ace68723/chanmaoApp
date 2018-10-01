@@ -16,7 +16,7 @@ import {
 import CheckoutAction from '../../Actions/CheckoutAction';
 // import SboxHeader from '../../../App/Components/General/SboxHeader';
 import Header from '../General/Header';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 const { height, width } = Dimensions.get('window');
 
 export default class ChooseCardType extends Component {
@@ -71,7 +71,7 @@ export default class ChooseCardType extends Component {
         '确认刷卡支付?',
         payment_description,
         [
-          {text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
           {text: '确认', onPress: () => {
               this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
               this.props.navigator.dismissModal({
@@ -124,7 +124,7 @@ export default class ChooseCardType extends Component {
         '确认支付?',
         payment_description,
         [
-          {text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
           {text: '确认', onPress: () => {
               this.props.alipaySelected(this.props.orderInfo, visa_fee);
               this.props.navigator.dismissModal({
@@ -149,7 +149,7 @@ export default class ChooseCardType extends Component {
         '确认修改为到付?',
         '',
         [
-          {text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
           {text: '确认', onPress: () => {
               this.props.cashSelected(this.props.orderInfo);
               this.props.navigator.dismissModal({
@@ -180,7 +180,7 @@ export default class ChooseCardType extends Component {
         '确认支付?',
         payment_description,
         [
-          {text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
           {text: '确认', onPress: () => {
               this.props.applePaySelected(this.props.orderInfo, visa_fee);
               this.props.navigator.dismissModal({
@@ -211,7 +211,7 @@ export default class ChooseCardType extends Component {
         '新卡添加成功,确认支付?',
         payment_description,
         [
-          {text: CMLabel.getLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
           {text: '确认', onPress: () => {
               this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
               this.props.navigator.dismissModal({
@@ -354,7 +354,7 @@ export default class ChooseCardType extends Component {
                               marginLeft: 20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
-                          {CMLabel.getLabel('CREDIT_CARD')}
+                          {Label.getCMLabel('CREDIT_CARD')}
                 </Text>
                 <Text allowFontScaling={false}
                       style={styles.arrowText}>
@@ -386,7 +386,7 @@ export default class ChooseCardType extends Component {
                               marginLeft :20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
-                              {CMLabel.getLabel('DEBIT_CARD')}
+                              {Label.getCMLabel('DEBIT_CARD')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
                   >
@@ -418,7 +418,7 @@ export default class ChooseCardType extends Component {
                               marginLeft :20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
-                              {CMLabel.getLabel('ALIPAY')}
+                              {Label.getCMLabel('ALIPAY')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
                   >
@@ -448,7 +448,7 @@ export default class ChooseCardType extends Component {
                               marginLeft :20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
-                              {CMLabel.getLabel('CASH')}
+                              {Label.getCMLabel('CASH')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
                   >
@@ -493,7 +493,7 @@ export default class ChooseCardType extends Component {
     }
     return (
       <View style={styles.container}>
-        <Header title={CMLabel.getLabel('PAYMENT_TYPE')}
+        <Header title={Label.getCMLabel('PAYMENT_TYPE')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>

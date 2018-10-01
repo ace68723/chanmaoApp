@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 import { cme_updateLanguage, cme_getLanguage } from '../../../App/Modules/Database';
 
 import Header from '../General/Header';
@@ -86,7 +86,7 @@ export default class LanguageSettings extends Component {
 
   render() {
     return (<View style={styles.container}>
-      <Header title={CMLabel.getLabel('LANGUAGE_SETTING')} goBack={this._goBack}/>
+      <Header title={Label.getCMLabel('LANGUAGE_SETTING')} goBack={this._goBack}/>
       <View style={{
           flex: 1,
           paddingLeft: 20,

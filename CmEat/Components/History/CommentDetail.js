@@ -22,7 +22,7 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 const  CmAlert = require('../../Modules/System/Alert');
 const {height, width} = Dimensions.get('window');
 const deviceHeight = height;
@@ -224,7 +224,7 @@ export default class pastOrderEN extends Component {
 
   _showConfirmSection() {
     if (this.state.driver_score === 0 || this.state.restaurant_score === 0) {
-      alert(CMLabel.getLabel('PLEASE_COMMENT'));
+      alert(Label.getCMLabel('PLEASE_COMMENT'));
     }
     else {
       this.setState({showHistoryOrderDetail: true});
@@ -273,7 +273,7 @@ export default class pastOrderEN extends Component {
                             paddingBottom:10,
                             fontFamily:'FZZhunYuan-M02S'}}
                     allowFontScaling={false}>
-              {CMLabel.getLabel('CONFIRM_COMMENT')}</Text>
+              {Label.getCMLabel('CONFIRM_COMMENT')}</Text>
           </View>
           <View style={{flex: 1,
                         flexDirection: 'row',
@@ -290,7 +290,7 @@ export default class pastOrderEN extends Component {
                                   textAlign:'center',
                                   fontFamily:'FZZhunYuan-M02S'}}
                           allowFontScaling={false}>
-                    {CMLabel.getLabel('CANCEL')}</Text>
+                    {Label.getCMLabel('CANCEL')}</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={{flex: 1}}
@@ -300,7 +300,7 @@ export default class pastOrderEN extends Component {
                               color: '#ff8b00',
                               fontFamily:'FZZhunYuan-M02S'}}
                       allowFontScaling={false}>
-                {CMLabel.getLabel('CONFIRM')}</Text>
+                {Label.getCMLabel('CONFIRM')}</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -329,13 +329,13 @@ export default class pastOrderEN extends Component {
     };
     const commentList = () => {
       let _commentList = [];
-      let list = [CMLabel.getLabel('ON_TIME'),
-                  CMLabel.getLabel('POLITE'),
-                  CMLabel.getLabel('QUICK'),
-                  CMLabel.getLabel('WELL_SERVERED'),
-                  CMLabel.getLabel('DELIVERY_TO_DOOR'),
-                  CMLabel.getLabel('WARM_DISH'),
-                  CMLabel.getLabel('WELL_PACKAGING')];
+      let list = [Label.getCMLabel('ON_TIME'),
+                  Label.getCMLabel('POLITE'),
+                  Label.getCMLabel('QUICK'),
+                  Label.getCMLabel('WELL_SERVERED'),
+                  Label.getCMLabel('DELIVERY_TO_DOOR'),
+                  Label.getCMLabel('WARM_DISH'),
+                  Label.getCMLabel('WELL_PACKAGING')];
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleDriverQuickComments(text)}>
@@ -371,12 +371,12 @@ export default class pastOrderEN extends Component {
                   <Text style={{fontSize: 18,
                                 fontFamily:'FZZhunYuan-M02S'}}
                         allowFontScaling={false}>
-                        {CMLabel.getLabel('CM_DELIVERY')}
+                        {Label.getCMLabel('CM_DELIVERY')}
                   </Text>
                   <Text style={{fontSize: 14,
                                 fontFamily:'FZZhunYuan-M02S'}}
                         allowFontScaling={false}>
-                      {CMLabel.getLabel('COMPLETE_TIME_PREFIX')}{this.state.complete_time.toString().split(" ")[4]}{CMLabel.getLabel('COMPLETE_TIME_SUFFIX')}
+                      {Label.getCMLabel('COMPLETE_TIME_PREFIX')}{this.state.complete_time.toString().split(" ")[4]}{Label.getCMLabel('COMPLETE_TIME_SUFFIX')}
                   </Text>
               </View>
 
@@ -387,7 +387,7 @@ export default class pastOrderEN extends Component {
                             }}>
                   <Text style={{color: '#ff8b00', fontSize: 14, fontFamily:'FZZhunYuan-M02S'}}
                         allowFontScaling={false}>
-                  {CMLabel.getLabel('CHANGE_COMMENT')}</Text>
+                  {Label.getCMLabel('CHANGE_COMMENT')}</Text>
                   <Text allowFontScaling={false}
                         style={{width: 14,
                                 height: 14,
@@ -421,7 +421,7 @@ export default class pastOrderEN extends Component {
                   <Text style={{fontSize: 18,
                                 fontFamily:'FZZhunYuan-M02S'}}
                         allowFontScaling={false}>
-                        {CMLabel.getLabel('CM_DELIVERY')}
+                        {Label.getCMLabel('CM_DELIVERY')}
                   </Text>
               </View>
           </View>
@@ -437,7 +437,7 @@ export default class pastOrderEN extends Component {
           <View style={{padding: 20}}>
               <Text allowFontScaling={false}
                     style={{textAlign: 'center', marginBottom: 20, fontFamily:'FZZhunYuan-M02S'}}>
-              {CMLabel.getLabel('RATE_DELIVERY')}</Text>
+              {Label.getCMLabel('RATE_DELIVERY')}</Text>
               <View style={{flexDirection: 'row',
                             justifyContent: 'space-around',
                             marginBottom: 20,
@@ -460,7 +460,7 @@ export default class pastOrderEN extends Component {
                          ref={'driverComment'}
                          allowFontScaling={false}
                          underlineColorAndroid='transparent'
-                         placeholder={CMLabel.getLabel('COMMENT_PLACEHOLDER')}
+                         placeholder={Label.getCMLabel('COMMENT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(50)}
                          onChangeText={(text) => this._handleDriverComments(text)}
                          multiline = {true}>
@@ -493,11 +493,11 @@ export default class pastOrderEN extends Component {
     };
     const commentList = () => {
       let _commentList = [];
-      let list = [CMLabel.getLabel('NICE_PACKAGING'),
-                  CMLabel.getLabel('WORTHY'),
-                  CMLabel.getLabel('TASTY'),
-                  CMLabel.getLabel('ECONOMICAL'),
-                  CMLabel.getLabel('LARGE_AMOUNT')];
+      let list = [Label.getCMLabel('NICE_PACKAGING'),
+                  Label.getCMLabel('WORTHY'),
+                  Label.getCMLabel('TASTY'),
+                  Label.getCMLabel('ECONOMICAL'),
+                  Label.getCMLabel('LARGE_AMOUNT')];
       for (let text of list) {
         _commentList.push(
           <TouchableOpacity key={text} onPress={() => this._handleRestaurantQuickComments(text)}>
@@ -569,7 +569,7 @@ export default class pastOrderEN extends Component {
                               fontSize: 16,
                               color: thump_up_color,
                               fontFamily:'FZZhunYuan-M02S'}}>
-                      {CMLabel.getLabel('LIKE')}</Text>
+                      {Label.getCMLabel('LIKE')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{flexDirection: 'row',
                                         justifyContent: 'center',
@@ -586,7 +586,7 @@ export default class pastOrderEN extends Component {
                               fontSize: 16,
                               color: thump_down_color,
                               fontFamily:'FZZhunYuan-M02S'}}>
-                      {CMLabel.getLabel('DISLIKE')}</Text>
+                      {Label.getCMLabel('DISLIKE')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -633,7 +633,7 @@ export default class pastOrderEN extends Component {
                          ref={'restaurantComment'}
                          allowFontScaling={false}
                          underlineColorAndroid='transparent'
-                         placeholder={CMLabel.getLabel('RESTAURANT_PLACEHOLDER')}
+                         placeholder={Label.getCMLabel('RESTAURANT_PLACEHOLDER')}
                          onFocus={() => this._handleInputOnFocus(435)}
                          onChangeText={(text) => this._handleRestaurantComments(text)}
                          multiline = {true}>
@@ -674,7 +674,7 @@ export default class pastOrderEN extends Component {
                                 color: 'white',
                                 fontSize: 18,
                                 fontFamily:'FZZhunYuan-M02S'}}>
-                    {CMLabel.getLabel('CONFIRM')}
+                    {Label.getCMLabel('CONFIRM')}
                   </Text>
                 </TouchableOpacity>
             </View>
@@ -702,7 +702,7 @@ export default class pastOrderEN extends Component {
   render() {
       return(
         <View style={styles.container} >
-            <Header title={CMLabel.getLabel('COMMENT')}
+            <Header title={Label.getCMLabel('COMMENT')}
                     goBack={this.props.goBack}
                     leftButtonText={'x'}/>
                 <ScrollView ref="ScrollView"
@@ -719,7 +719,7 @@ export default class pastOrderEN extends Component {
                                 fontSize: 18,
                                 fontFamily:'FZZhunYuan-M02S'}}
                         allowFontScaling={false}>
-                    {CMLabel.getLabel('CONFIRM')}
+                    {Label.getCMLabel('CONFIRM')}
                   </Text>
                 </TouchableOpacity>
                 {this._renderTimePicker()}

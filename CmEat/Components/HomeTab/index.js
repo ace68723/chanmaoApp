@@ -18,7 +18,7 @@ import {
 import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
-import CMLabel from '../../../App/Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 // import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
 
 
@@ -120,7 +120,7 @@ export default class HomeTab extends Component {
 								style={{alignSelf: 'center',
 												fontSize: 16,
 												fontWeight: '500',
-												fontFamily:'FZZhunYuan-M02S'}}>{CMLabel.getLabel('ORDER_BELOW')}</Text>
+												fontFamily:'FZZhunYuan-M02S'}}>{Label.getCMLabel('ORDER_BELOW')}</Text>
 				</View>
 				<View style={{justifyContent: 'center'}}>
 					<Image style={{height: 12, width: 12, alignSelf: 'center'}} source={require('./Image/order_down.png')}/>

@@ -13,7 +13,7 @@ import {
 	ImageBackground,
 	Image
 } from 'react-native';
-import CMLabel from '../../../../App/Constants/AppLabel';
+import Label from '../../../../App/Constants/AppLabel';
 import HomeStore from '../../../Stores/HomeStore';
 import RestaurantAction from '../../../Actions/RestaurantAction';
 const {width,height} = Dimensions.get('window');
@@ -26,7 +26,7 @@ export default class SearchByTag extends Component{
 		this.state={
 			height: new Animated.Value(defaultTagViewHeight),
 			tags:props.tags,
-			extendViewText: CMLabel.getLabel('MORE_TYPE'),
+			extendViewText: Label.getCMLabel('MORE_TYPE'),
 			showingMoreCategories: false
 		}
 		this._extendViewOnClick = this._extendViewOnClick.bind(this);
@@ -64,7 +64,7 @@ export default class SearchByTag extends Component{
 					toValue: this.state.showingMoreCategories ? defaultTagViewHeight : this.state.fullTagsViewHeight,
 					duration: animationDuration
 			}).start();
-			this.setState({extendViewText: this.state.showingMoreCategories  ? CMLabel.getLabel('MORE_TYPE') : CMLabel.getLabel('RETRACT'),
+			this.setState({extendViewText: this.state.showingMoreCategories  ? Label.getCMLabel('MORE_TYPE') : Label.getCMLabel('RETRACT'),
 										 showingMoreCategories: !this.state.showingMoreCategories});
 		}, 300);
 	}
@@ -93,7 +93,7 @@ export default class SearchByTag extends Component{
 			<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
 				<Text style={{fontSize:18,fontFamily:"FZZhunYuan-M02S"}}
 							allowFontScaling={false}>
-					{CMLabel.getLabel('RES_TAG')}
+					{Label.getCMLabel('RES_TAG')}
 				</Text>
 			</View>
 		)
