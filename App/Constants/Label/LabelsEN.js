@@ -6,8 +6,8 @@ module.exports={
     CITY_AREA:'City & Region',
     RES_TAG:'Category',
 
-    MORE_TYPE:'更多分类',
-    RETRACT:'收起',
+    MORE_TYPE:'Show More',
+    RETRACT:'Show Less',
     //Setting
     MY_TAB:'Info',
     SETTING:'Setting',
@@ -15,9 +15,10 @@ module.exports={
     ADD_ADDRESS:'Add Address',
     SAVE_ADDRESS:'Save Address',
     CUSTOMER_SERVICE:'Contact Us',
+    LANGUAGE_SETTING:'Language',
     SWEETBOX: 'SweetfulBox',
     LOG_OUT: 'Log Out',
-    LANGUAGE_SETTING:'Language',
+
     //Order
     ORDER:'Order',
     ALL_ORDER:'All Orders',
