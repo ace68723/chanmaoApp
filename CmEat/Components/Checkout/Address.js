@@ -73,42 +73,52 @@ export default class Address extends Component {
 
   render(){
     return(
-			<View style={{flexDirection:"row",
-										marginTop: 20,
-										marginLeft: 20}}>
-        <MapView
-            region={this.state.region}
-            style={{width:120,
-                    height:120,
-                    marginRight: 10,
-                    borderRadius:15,
-                    borderColor:"#e2e2e4",
-                    borderWidth: StyleSheet.hairlineWidth}}
-          >
-          <MapView.Marker
-            coordinate={this.state.marker.latlng}
-            title={this.state.marker.title}
-            description={this.state.marker.description}
-            image={this.state.marker.image}
-          />
-        </MapView>
+			<View>
+				<Text style={{color:'#666666',
+											marginLeft: 30,
+											marginTop: 20,
+											fontSize:15,
+											fontWeight: '800'}}
+							allowFontScaling={false}>
+					送餐地址
+				</Text>
+				<View style={{flexDirection:"row",
+											marginTop: 20,
+											marginLeft: 20}}>
+	        <MapView
+	            region={this.state.region}
+	            style={{width:120,
+	                    height:120,
+	                    marginRight: 10,
+	                    borderRadius:15,
+	                    borderColor:"#e2e2e4",
+	                    borderWidth: StyleSheet.hairlineWidth}}
+	          >
+	          <MapView.Marker
+	            coordinate={this.state.marker.latlng}
+	            title={this.state.marker.title}
+	            description={this.state.marker.description}
+	            image={this.state.marker.image}
+	          />
+	        </MapView>
 
-				<TouchableWithoutFeedback onPress={this.props.goToAddressList}>
-					<View style={{flex:1,margin:10, justifyContent: 'space-around'}}>
-						<Text style={{fontFamily:'FZZhunYuan-M02S'}}
-									allowFontScaling={false}>
-								Ginny
-						</Text>
-						<Text style={{fontFamily:'FZZhunYuan-M02S'}}
-									allowFontScaling={false}>
-								{this.state.address.tel}
-						</Text>
-						<Text numberOfLines={2} style={{fontFamily:'FZZhunYuan-M02S'}}
-									allowFontScaling={false}>
-								{this.state.address.addr}
-						</Text>
-					</View>
-				</TouchableWithoutFeedback>
+					<TouchableWithoutFeedback onPress={this.props.goToAddressList}>
+						<View style={{flex:1,margin:10, justifyContent: 'space-around'}}>
+							<Text style={{fontFamily:'FZZhunYuan-M02S'}}
+										allowFontScaling={false}>
+									Ginny
+							</Text>
+							<Text style={{fontFamily:'FZZhunYuan-M02S'}}
+										allowFontScaling={false}>
+									{this.state.address.tel}
+							</Text>
+							<Text numberOfLines={2} style={{fontFamily:'FZZhunYuan-M02S'}}
+										allowFontScaling={false}>
+									{this.state.address.addr}
+							</Text>
+						</View>
+					</TouchableWithoutFeedback>
+				</View>
 			</View>
     )
   }

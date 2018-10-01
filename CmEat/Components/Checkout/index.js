@@ -110,18 +110,23 @@ class Confirm extends Component {
         this._handleSubmitComment = this._handleSubmitComment.bind(this);
 				this._handleProductOnPress = this._handleProductOnPress.bind(this);
 				this._closeOrderConfirm = this._closeOrderConfirm.bind(this);
+				this._renderRestaurantName = this._renderRestaurantName.bind(this);
+				this._renderPriceDetail = this._renderPriceDetail.bind(this);
+				this._renderPriceTotal = this._renderPriceTotal.bind(this);
     }
 
     componentDidMount(){
-			setTimeout(()=>{
-				const rid = this.state.rid;
-				const pretax = MenuStore.getCartTotals().total;
-				const navigator = this.props.navigator;
-				const startAmount = this.state.startAmount;
-				CheckoutAction.beforCheckout(rid,pretax,startAmount);
-				this.setState({renderAddress:true})
-			}, 500);
+			// setTimeout(()=>{
+			// 	const rid = this.state.rid;
+			// 	const pretax = MenuStore.getCartTotals().total;
+			// 	const navigator = this.props.navigator;
+			// 	const startAmount = this.state.startAmount;
+			// 	CheckoutAction.beforCheckout(rid,pretax,startAmount);
+			// 	this.setState({renderAddress:true})
+			// }, 500);
 			CheckoutStore.addChangeListener(this._onChange);
+			const rid = this.state.rid;
+			CheckoutAction.beforeCheckoutInit({rid});
 
     }
     componentWillUnmount() {
@@ -129,107 +134,107 @@ class Confirm extends Component {
     }
     _onChange(){
 
-				const state = Object.assign({},CheckoutStore.getState());
-				if(state.shouldAddAddress){
-					setTimeout( () => {
-						this.props.navigator.showModal({
-							screen: 'CmEatAddress',
-							animated: true,
-							passProps:{
-								updateUaid:this._updateUaid,
-								handleAddressAdded: this._handleAddressAdded},
-							navigatorStyle: {navBarHidden: true},
-						});
-					}, 500);
-				}
-				else if (!this.state.jumpToChoosePayment && state.jumpToChoosePayment && state.available_payment_channels.length != 1) {
-					setTimeout( () => {
-						this.props.navigator.showModal({
-							screen: 'CmChooseCardType',
-							animated: true,
-							passProps:{available_payment_channels: this.state.available_payment_channels,
-												 stripeCardAdded: this._stripeCardAdded,
-												 alipaySelected: this._alipaySelected,
-												 cashSelected: this._cashSelected,
-												 applePaySelected:	this._applePaySelected,
-												 previousCardSelected: this._previousCardSelected,
-												 flag: 'fromCheckout',
-												 cusid: this.state.cusid,
-												 last4: this.state.last4,
-												 brand: this.state.brand},
-							navigatorStyle: {navBarHidden: true,},
-						});
-					}, 500);
-				}
-				this.setState(state);
-				if(state.payment_channel != 0) {
-					setTimeout( () => {
-						this.setState({
-							tips: (parseFloat(state.total)*0.1).toFixed(2),
-						});
-					}, 300);
-				}
-
-
-				if(state.goToHistory) {
-					this.props.navigator.dismissModal({animationType: 'slide-down'});
-					setTimeout(() => {
-						TabsAction.tab_go_to_history(state.paymentFail);
-					}, 800);
-				}
-				else if(this.state.checkoutSuccessful){
-					this.setState({
-		        loading:true,
-						showOrderConfirm:false,
-						checkoutSuccessful: false,
-		      });
-					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
-					if (this.state.dlexp > 0 && this.state.payment_channel != 0) {
-						if (this.state.payment_channel == 1) {
-							CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total)
-																														 + parseFloat(this.state.tips)
-																														 + parseFloat(this.state.visa_fee)).toFixed(2),
-																					 					oid: state.oidFromUrl,
-																										checkoutFrom: 'checkout'});
-						}
-						else if (this.state.payment_channel == 10) {
-							this.props.navigator.dismissModal({animationType: 'slide-down'});
-							setTimeout(() => {
-								CheckoutAction.afterPayGoToHistory();
-								Alipay.constructAlipayOrder({total: (parseFloat(this.state.total)
-																										 + parseFloat(this.state.tips)
-																									 	 + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
-																						 oid: state.oidFromUrl});
-							}, 300);
-						}
-						else if(this.state.payment_channel == 30){
-							let pretax = parseFloat(this.state.pretax);
-							let shipping = Number(this.state.dlexp);
-							let tips =  Number(this.state.tips);
-							let tax = Number(this.state.total - pretax - shipping).toFixed(2);
-							let total = (parseFloat(this.state.total) + parseFloat(this.state.visa_fee) + parseFloat(this.state.tips)).toFixed(2);;
-
-							let paymentData = {
-								subtotal: (pretax + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
-								shipping: this.state.dlexp.toString(),
-								tax: tax.toString(),
-								tips: this.state.tips.toString(),
-								oid: state.oidFromUrl,
-								amount:total
-							}
-							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
-						}
-						// setTimeout(() => {
-						// 	HistoryAction.getOrderData();
-						// 	this.props.navigator.dismissModal({animationType: 'slide-down'});
-						// }, 2000);
-					}else {
-						this.props.navigator.dismissModal({animationType: 'slide-down'});
-						setTimeout(()=> {
-							TabsAction.tab_go_to_history();
-						}, 800);
-					}
-				}
+				// const state = Object.assign({},CheckoutStore.getState());
+				// if(state.shouldAddAddress){
+				// 	setTimeout( () => {
+				// 		this.props.navigator.showModal({
+				// 			screen: 'CmEatAddress',
+				// 			animated: true,
+				// 			passProps:{
+				// 				updateUaid:this._updateUaid,
+				// 				handleAddressAdded: this._handleAddressAdded},
+				// 			navigatorStyle: {navBarHidden: true},
+				// 		});
+				// 	}, 500);
+				// }
+				// else if (!this.state.jumpToChoosePayment && state.jumpToChoosePayment && state.available_payment_channels.length != 1) {
+				// 	setTimeout( () => {
+				// 		this.props.navigator.showModal({
+				// 			screen: 'CmChooseCardType',
+				// 			animated: true,
+				// 			passProps:{available_payment_channels: this.state.available_payment_channels,
+				// 								 stripeCardAdded: this._stripeCardAdded,
+				// 								 alipaySelected: this._alipaySelected,
+				// 								 cashSelected: this._cashSelected,
+				// 								 applePaySelected:	this._applePaySelected,
+				// 								 previousCardSelected: this._previousCardSelected,
+				// 								 flag: 'fromCheckout',
+				// 								 cusid: this.state.cusid,
+				// 								 last4: this.state.last4,
+				// 								 brand: this.state.brand},
+				// 			navigatorStyle: {navBarHidden: true,},
+				// 		});
+				// 	}, 500);
+				// }
+				// this.setState(state);
+				// if(state.payment_channel != 0) {
+				// 	setTimeout( () => {
+				// 		this.setState({
+				// 			tips: (parseFloat(state.total)*0.1).toFixed(2),
+				// 		});
+				// 	}, 300);
+				// }
+				//
+				//
+				// if(state.goToHistory) {
+				// 	this.props.navigator.dismissModal({animationType: 'slide-down'});
+				// 	setTimeout(() => {
+				// 		TabsAction.tab_go_to_history(state.paymentFail);
+				// 	}, 800);
+				// }
+				// else if(this.state.checkoutSuccessful){
+				// 	this.setState({
+		    //     loading:true,
+				// 		showOrderConfirm:false,
+				// 		checkoutSuccessful: false,
+		    //   });
+				// 	// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
+				// 	if (this.state.dlexp > 0 && this.state.payment_channel != 0) {
+				// 		if (this.state.payment_channel == 1) {
+				// 			CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total)
+				// 																										 + parseFloat(this.state.tips)
+				// 																										 + parseFloat(this.state.visa_fee)).toFixed(2),
+				// 																	 					oid: state.oidFromUrl,
+				// 																						checkoutFrom: 'checkout'});
+				// 		}
+				// 		else if (this.state.payment_channel == 10) {
+				// 			this.props.navigator.dismissModal({animationType: 'slide-down'});
+				// 			setTimeout(() => {
+				// 				CheckoutAction.afterPayGoToHistory();
+				// 				Alipay.constructAlipayOrder({total: (parseFloat(this.state.total)
+				// 																						 + parseFloat(this.state.tips)
+				// 																					 	 + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
+				// 																		 oid: state.oidFromUrl});
+				// 			}, 300);
+				// 		}
+				// 		else if(this.state.payment_channel == 30){
+				// 			let pretax = parseFloat(this.state.pretax);
+				// 			let shipping = Number(this.state.dlexp);
+				// 			let tips =  Number(this.state.tips);
+				// 			let tax = Number(this.state.total - pretax - shipping).toFixed(2);
+				// 			let total = (parseFloat(this.state.total) + parseFloat(this.state.visa_fee) + parseFloat(this.state.tips)).toFixed(2);;
+				//
+				// 			let paymentData = {
+				// 				subtotal: (pretax + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
+				// 				shipping: this.state.dlexp.toString(),
+				// 				tax: tax.toString(),
+				// 				tips: this.state.tips.toString(),
+				// 				oid: state.oidFromUrl,
+				// 				amount:total
+				// 			}
+				// 			CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
+				// 		}
+				// 		// setTimeout(() => {
+				// 		// 	HistoryAction.getOrderData();
+				// 		// 	this.props.navigator.dismissModal({animationType: 'slide-down'});
+				// 		// }, 2000);
+				// 	}else {
+				// 		this.props.navigator.dismissModal({animationType: 'slide-down'});
+				// 		setTimeout(()=> {
+				// 			TabsAction.tab_go_to_history();
+				// 		}, 800);
+				// 	}
+				// }
     }
 		_handleAddressAdded() {
 			CheckoutAction.updateShouldAddAddress(false);
@@ -656,6 +661,64 @@ class Confirm extends Component {
         </View>
       )
     }
+
+		_renderCoupeCode() {
+			const _couponCode = [];
+			_couponCode.push(
+				<Text style={{color:'#666666',
+											marginLeft: 25,
+											marginTop: 20,
+											fontSize:15,
+											fontWeight: '800'}}
+							allowFontScaling={false}>
+					优惠
+				</Text>
+			);
+			_couponCode.push(
+
+				<View style={{flexDirection: 'row',
+											marginTop: 10,
+											marginLeft: 20,
+											marginRight: 10}}>
+					<TextInput style={{flex: 1,
+														 marginRight: 30,
+														 alignItems:'flex-start',
+														 alignSelf: 'center',
+														 padding: 5,
+														 borderRadius: 30,
+														 backgroundColor: '#f4f4f4',
+														 paddingLeft: 15}}
+										 placeholder={'coupon code'}>
+					</TextInput>
+					<TouchableOpacity>
+						<View style={{flex: 1,
+													justifyContent: 'center',
+													alignSelf: 'center',
+													paddingHorizontal: 20,
+													backgroundColor: "#40a2e7",
+													borderRadius: 25}}>
+							<Text style={{color: "white",
+														fontSize: 15}}
+										allowFontScaling={false}>
+								查看
+							</Text>
+						</View>
+					</TouchableOpacity>
+				</View>
+			);
+			if (0 == 0) {
+				_couponCode.push(
+					<Text style={{color: '#40a2e7',
+												fontSize: 15,
+												marginTop: 15,
+												marginLeft: 20}}
+								allowFontScaling={false}>
+						*折扣码添加成功
+					</Text>
+				);
+			}
+			return _couponCode;
+		}
 		_renderChoosePayment() {
 			if (this.state.available_payment_channels && this.state.dltype != 0) {
 				if (this.state.available_payment_channels.length > 1) {
@@ -685,8 +748,40 @@ class Confirm extends Component {
 
 		}
 
+		_renderRestaurantName() {
+			return (
+				<View>
+					<Text style={{color:'#404041',
+												fontSize:21,
+												fontWeight:'500',
+												textAlign:'center',
+												marginTop:20,
+												fontFamily:'FZZongYi-M05S',
+											}}
+								allowFontScaling={false}>
+						{this.props.restaurant.name}
+					</Text>
+					<View style={{height:2,
+												marginTop:15,
+												marginBottom:10,
+												width:40,
+												backgroundColor:"#ff8b00",
+												alignSelf:"center"}}/>
+				</View>
+			);
+		}
 		_renderPriceDetail() {
 			const _priceDetail = [];
+			_priceDetail.push(
+				<Text style={{color:'#666666',
+											marginLeft: 20,
+											marginTop: 20,
+											fontSize:15,
+											fontWeight: '800'}}
+							allowFontScaling={false}>
+					订单小计
+				</Text>
+			);
 			if (this.state.pretax) {
 				_priceDetail.push(
 					<View style={{flex: 1,
@@ -798,6 +893,27 @@ class Confirm extends Component {
 				)
 			}
 			return _priceDetail;
+		}
+
+		_renderPriceTotal() {
+			return (
+				<View style={{flexDirection: 'row',
+											marginTop: 20,
+											marginHorizontal: 20,
+											justifyContent: 'space-between'}}>
+					<Text style={{color:'#666666',
+												fontSize:19,
+												fontWeight: '800',}}
+								allowFontScaling={false}>
+						总计
+					</Text>
+					<Text style={{color:'#666666',
+												fontSize:12,
+												fontFamily:'FZZhunYuan-M02S',}}>
+						${this.state.charge_total}
+					</Text>
+				</View>
+			);
 		}
 
 		_renderComment(){
@@ -959,24 +1075,7 @@ class Confirm extends Component {
 															shadowOpacity: 0.15,
 															shadowRadius: 3,
 															elevation: 1}}>
-										<View>
-											<Text style={{color:'#404041',
-																		fontSize:21,
-																		fontWeight:'500',
-																		textAlign:'center',
-																		marginTop:20,
-																		fontFamily:'FZZongYi-M05S',
-																	}}
-														allowFontScaling={false}>
-										 		{this.props.restaurant.name}
-											</Text>
-											<View style={{height:2,
-																		marginTop:15,
-																		marginBottom:10,
-																		width:40,
-																		backgroundColor:"#ff8b00",
-																		alignSelf:"center"}}/>
-										</View>
+										{this._renderRestaurantName()}
 										{cartList}
 										<TouchableWithoutFeedback onPress={()=>{this.setState({openEditComment:true})}}>
 											<View style={{alignItems:'flex-start',
@@ -1017,66 +1116,11 @@ class Confirm extends Component {
 																		borderColor:"#ccd3db",
 																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
 											</View>
-											<Text style={{color:'#666666',
-																		marginLeft: 30,
-																		marginTop: 20,
-																		fontSize:12,
-																		fontWeight: '800'}}>
-												送餐地址
-											</Text>
 											{this._renderAddress()}
-											<View style={{marginTop: 20,
-																		marginLeft: 10,
-																		marginRight: 10,
-																		borderColor:"#ccd3db",
-																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
+											<View style={styles.seperateLine}>
 											</View>
-											<Text style={{color:'#666666',
-																		marginLeft: 25,
-																		marginTop: 20,
-																		fontSize:12,
-																		fontWeight: '800'}}>
-												优惠
-											</Text>
-											<View style={{flexDirection: 'row',
-																	  marginTop: 10,
-																	  marginLeft: 20,
-																	  marginRight: 10}}>
-												<TextInput style={{flex: 1,
-																					 marginRight: 30,
-																					 alignItems:'flex-start',
-																					 alignSelf: 'center',
-																					 padding: 5,
-																					 borderRadius: 30,
-																					 backgroundColor: '#f4f4f4'}}
-																	 placeholder={'coupon code'}>
-												</TextInput>
-												<TouchableOpacity>
-													<View style={{flex: 1,
-																				justifyContent: 'center',
-																				alignSelf: 'center',
-																				paddingHorizontal: 20,
-																				backgroundColor: "#40a2e7",
-																				borderRadius: 25}}>
-														<Text style={{color: "white",
-																					fontSize: 12}}>
-															查看
-														</Text>
-													</View>
-												</TouchableOpacity>
-											</View>
-											<Text style={{color: '#40a2e7',
-																		fontSize: 15,
-																		marginTop: 15,
-																		marginLeft: 20}}
-														allowFontScaling={false}>
-												*折扣码添加成功
-											</Text>
-											<View style={{marginTop: 20,
-																		marginLeft: 10,
-																		marginRight: 10,
-																		borderColor:"#ccd3db",
-																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
+											{this._renderCoupeCode()}
+											<View style={styles.seperateLine}>
 											</View>
 											{this._renderChoosePayment()}
 											<View style={{marginTop: 0,
@@ -1085,35 +1129,10 @@ class Confirm extends Component {
 																		borderColor:"#ccd3db",
 																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
 											</View>
-											<Text style={{color:'#666666',
-																		marginLeft: 20,
-																		marginTop: 20,
-																		fontSize:12,
-																		fontWeight: '800'}}>
-												订单小计
-											</Text>
 											{this._renderPriceDetail()}
-											<View style={{marginTop: 20,
-																		marginLeft: 10,
-																		marginRight: 10,
-																		borderColor:"#ccd3db",
-																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
+											<View style={styles.seperateLine}>
 											</View>
-											<View style={{flexDirection: 'row',
-																		marginTop: 20,
-																		marginHorizontal: 20,
-																		justifyContent: 'space-between'}}>
-												<Text style={{color:'#666666',
-																			fontSize:12,
-																			fontWeight: '800',}}>
-													总计
-												</Text>
-												<Text style={{color:'#666666',
-																			fontSize:12,
-																			fontFamily:'FZZhunYuan-M02S',}}>
-													${this.state.charge_total}
-												</Text>
-											</View>
+											{this._renderPriceTotal()}
 								</View>
 
 
@@ -1247,6 +1266,13 @@ let styles = StyleSheet.create({
 	tipsFont:{
 		fontSize:15,
 		fontFamily:'FZZhunYuan-M02S',
+	},
+	seperateLine: {
+		marginTop: 20,
+		marginLeft: 10,
+		marginRight: 10,
+		borderColor:"#ccd3db",
+		borderBottomWidth: StyleSheet.hairlineWidth
 	}
 
 
