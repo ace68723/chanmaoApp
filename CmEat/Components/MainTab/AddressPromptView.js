@@ -12,7 +12,7 @@ import {
   Easing,
 } from 'react-native';
 import AddressStore from '../../Stores/AddressStore';
-
+import Label from '../../../App/Constants/AppLabel';
 const {width,height} = Dimensions.get('window');
 
 let headerHeight;
@@ -56,7 +56,7 @@ export default class AddressPromptView extends Component {
                           backgroundColor: '#ea7b21',}}
                           numberOfLines={1}
                   allowFontScaling={false}>
-                          这是正确的地址吗？距离您的位置似乎有点远。
+                          {Label.getCMLabel('COMFIRM_ADDRESS')}
             </Text>
           </Animated.View>
         </TouchableWithoutFeedback>

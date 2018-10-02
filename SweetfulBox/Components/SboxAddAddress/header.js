@@ -12,7 +12,7 @@ import {
 import Separator from "./separator";
 import Checkbox from "./checkbox";
 import SboxHeader from '../../../App/Components/General/SboxHeader';
-
+import Label from '../../../App/Constants/AppLabel';
 
 class Header extends Component {
   constructor() {
@@ -35,7 +35,7 @@ class Header extends Component {
 		return (
 			<View style={styles.container}>
 
-        <SboxHeader title={"搜索地址"}
+        <SboxHeader title={Label.getSboxLabel('ADDRESS_SEARCH')}
                 goBack={this.props.goBack}
                 leftButtonText={'x'}/>
 
@@ -53,7 +53,7 @@ class Header extends Component {
                    autoFocus={true}
                    fontSize={18}
                    style={{flex: 0.95}}
-                   placeholder={"搜索地址"}
+                   placeholder={Label.getSboxLabel('ADDRESS_SEARCH')}
                    onChangeText={(text) => this.props.onChangeTextInput(text)}
                    onSubmitEditing={this.props.onSubmitText}
                    underlineColorAndroid={"rgba(0,0,0,0)"}

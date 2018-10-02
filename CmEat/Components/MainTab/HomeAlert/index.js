@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 const { width,height } = Dimensions.get('window');
 
+import Label from '../../../../App/Constants/AppLabel';
 export default class SboxHomeAlert extends Component {
   static navigatorStyle = {
       screenBackgroundColor: 'transparent',
@@ -48,7 +49,7 @@ export default class SboxHomeAlert extends Component {
           />
           <View style={{padding:20,paddingLeft:25,paddingRight:25,}}>
             <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'FZZhunYuan-M02S',textAlign:'center'}}>
-                *通知: 即日起不支持到付刷卡，同时请勿使用Email Transfer(emt)，您可以使用Visa, Mastercard, Debit银行卡或者支付宝在线支付，或使用现金到付，谢谢~
+              {Label.getCMLabel('ALERT_PAYMENT')}
             </Text>
           </View>
 
@@ -78,7 +79,7 @@ export default class SboxHomeAlert extends Component {
                               fontSize:15,
                               fontFamily:'FZZhunYuan-M02S'}}
                       allowFontScaling={false}>
-                  确定
+                  {Label.getCMLabel('ALERT_COMFIRM')}
                 </Text>
             </View>
           </TouchableOpacity>

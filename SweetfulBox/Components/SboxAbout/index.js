@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 
+import Label from '../../../App/Constants/AppLabel';
 import SboxUserAction from '../../Actions/SboxUserAction';
 import SboxUserStore from '../../Stores/SboxUserStore';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
@@ -111,7 +112,7 @@ export default class About extends Component {
 													fontSize: 18,
 													textAlign: 'left'}}
 									allowFontScaling={false}>
-									我的订单
+									{Label.getSboxLabel('MY_ORDER')}
 						</Text>
             <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
         </TouchableOpacity>
@@ -152,7 +153,7 @@ export default class About extends Component {
           <Text style={{flex: 1,
 												fontSize: 18,
 												textAlign: 'left'}}
-								allowFontScaling={false}>联系客服</Text>
+								allowFontScaling={false}>{Label.getSboxLabel('CUSTOMER_SERVICE')}</Text>
           <Image style={{height: 20,
 												 width: 20,
 												 marginRight:20,}}
@@ -169,7 +170,7 @@ export default class About extends Component {
             style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
             <Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/exit.png')}/>
             <Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}
-									allowFontScaling={false}>登出</Text>
+									allowFontScaling={false}>{Label.getSboxLabel('LOG_OUT')}</Text>
             <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
         </TouchableOpacity>
       )
@@ -183,7 +184,7 @@ export default class About extends Component {
 					style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
 					<Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/chanmao.png')}/>
 					<Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}
-								allowFontScaling={false}>馋猫订餐</Text>
+								allowFontScaling={false}>{Label.getSboxLabel('CM_EAT')}</Text>
 					<Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
 			</TouchableOpacity>
 		)

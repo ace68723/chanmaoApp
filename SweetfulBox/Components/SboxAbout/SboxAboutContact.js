@@ -12,7 +12,7 @@ import {
 	Text,
   View,
 } from 'react-native';
-
+import Label from '../../../App/Constants/AppLabel';
 import SboxUserAction from '../../Actions/SboxUserAction';
 import SboxUserStore from '../../Stores/SboxUserStore';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
@@ -54,7 +54,7 @@ export default class About extends Component {
     // console.log(this.state);
     return(
       <View style={styles.viewController}>
-          <SboxHeader title={"联系客服"}
+          <SboxHeader title={Label.getSboxLabel('联系客服')}
                   goBack={this._goBack}
                   leftButtonText={'<'}/>
 				  <View style={{backgroundColor: '#efefef', width: width, height: height, alignItems: 'center'}}>

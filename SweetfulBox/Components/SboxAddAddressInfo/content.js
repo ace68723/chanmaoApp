@@ -10,7 +10,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-
+import Label from '../../../App/Constants/AppLabel';
 const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -78,12 +78,12 @@ export default class Content extends Component {
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/name.png')}/></View>
                     <Text style={styles.tips}
-                          allowFontScaling={false}>联系人: </Text>
+                          allowFontScaling={false}>{Label.getSboxLabel('ADD_NAME')}</Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         value={this.props.name}
                         onChangeText={this.props.onNameChange}
-                        placeholder="请以英文拼写您的姓名"
+                        placeholder={Label.getSboxLabel('FILL_NAME_IN_ENGLISH')}
                         selectionColor={'#ff7685'}
                         returnKeyType="next"
                         autoCorrect={false}
@@ -95,7 +95,7 @@ export default class Content extends Component {
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/phoneNum.png')}/></View>
                     <Text style={styles.tips}
-                          allowFontScaling={false}>电话: +1 </Text>
+                          allowFontScaling={false}>{Label.getSboxLabel('ADD_PHONE')}</Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         ref={(ref)=>{ this.telRef = ref}}
@@ -111,7 +111,7 @@ export default class Content extends Component {
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/unitNum.png')}/></View>
                     <Text style={styles.tips}
-                          allowFontScaling={false}>Unit No.: </Text>
+                          allowFontScaling={false}>{Label.getSboxLabel('ADD_UNIT')}</Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         value={this.props.unitNum}
@@ -128,19 +128,17 @@ export default class Content extends Component {
                     <View style={styles.verticalSpace}/>
                     <TouchableOpacity style={styles.submitButton} onPress={this.props.onSubmit}>
                         <Text style={styles.submitText}
-                              allowFontScaling={false}>添加地址</Text>
+                              allowFontScaling={false}>{Label.getSboxLabel('ADD_ADDRESS')}</Text>
                     </TouchableOpacity>
                     <View style={styles.verticalSpace}/>
                 </View>
                 <Text style={{padding:20,paddingBottom:0}}
                       allowFontScaling={false}>
-                  注：1. 请以英文形式拼写您的姓名，所留姓名和电话请务必与您所在的Condo
-                  前台登记的信息一致，否则包裹会被前台拒收。
+                  {Label.getSboxLabel('INFO_NOTE1')}
                 </Text>
                 <Text style={{padding:20}}
                       allowFontScaling={false}>
-                    2. 甜满箱包裹会配送到您的Condo前台。如果您所在的Condo没有前台，
-                    我们的配送员会在到达后电话联系您取包裹。请您保持电话畅通，谢谢。
+                    {Label.getSboxLabel('INFO_NOTE2')}
                 </Text>
             </View>
         );

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import Label from '../../../App/Constants/AppLabel';
 const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -48,7 +49,7 @@ export default class Header extends Component {
                       allowFontScaling={false}>{String.fromCharCode(10005)}</Text>
             </TouchableOpacity>
             <Text style={styles.headTitle}
-                  allowFontScaling={false}>添加地址</Text>
+                  allowFontScaling={false}>{Label.getSboxLabel('ADD_ADDRESS')}</Text>
             <View style={styles.right}/>
           </View>
       );

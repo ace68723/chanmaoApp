@@ -14,6 +14,7 @@ import {
 import SboxHeader from '../../../App/Components/General/SboxHeader';
 const { height, width } = Dimensions.get('window');
 
+import Label from '../../../App/Constants/AppLabel';
 export default class SboxChooseCardType extends Component {
 
   constructor(){
@@ -38,7 +39,7 @@ export default class SboxChooseCardType extends Component {
         screen: "SboxAddCard",
         navigatorStyle: {navBarHidden:true},
         passProps:{
-          title:"添加信用卡"
+          title:Label.getSboxLabel('ADD_CREDIT')
         }
       });
   }
@@ -48,7 +49,7 @@ export default class SboxChooseCardType extends Component {
         screen: "SboxAddCard",
         navigatorStyle: {navBarHidden:true},
         passProps:{
-          title:"添加 Debit Card"
+          title:Label.getSboxLabel('ADD_DEBIT')
         }
       });
   }
@@ -89,7 +90,7 @@ export default class SboxChooseCardType extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SboxHeader title={"支付方式"}
+        <SboxHeader title={Label.getSboxLabel(PAYMENT_METHOD)}
                 goBack={this._goBack}
                 leftButtonText={'x'}/>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>
@@ -106,7 +107,7 @@ export default class SboxChooseCardType extends Component {
                               marginLeft :20,
                               color:"#808080",}}
                       allowFontScaling={false}>
-                          信用卡
+                          {Label.getSboxLabel('CREDIT_CARD')}
                 </Text>
                 <Image style={{height: 20,
                               width: 20,

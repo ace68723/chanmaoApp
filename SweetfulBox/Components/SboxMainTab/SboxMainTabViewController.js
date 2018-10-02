@@ -70,13 +70,13 @@ export default class MyComponent extends Component {
               navigator={this.props.navigator}
               handleBackToHome={this.props.handleBackToHome}/>
         <SboxCart
-              tabLabel="购物车"
+              tabLabel={Label.getSboxLabel('CART')}
               activeIconImage={require("./Image/box.png")}
               inactiveIconImage={require("./Image/boxgrey.png")}
               navigator={this.props.navigator}
               tag={'fromMainTab'}
               />
-            <About tabLabel="我的"
+            <About tabLabel={Label.getSboxLabel('MY_TAB')}
           activeIconImage={require("./Image/setting.png")}
           inactiveIconImage={require("./Image/settinggrey.png")}
           navigator={this.props.navigator}

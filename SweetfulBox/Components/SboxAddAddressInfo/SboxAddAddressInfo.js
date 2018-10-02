@@ -13,6 +13,7 @@ import SboxHeader from '../../../App/Components/General/SboxHeader';
 import SboxUserAction from '../../Actions/SboxUserAction';
 import SboxUserStore from '../../Stores/SboxUserStore';
 
+import Label from '../../../App/Constants/AppLabel';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -88,11 +89,11 @@ export default class App extends Component {
 
     handleSubmit() {
         if ( !this.state.name || !this.state.phoneNum ) {
-            Alert.alert('错误', '请填写所有信息', { text: 'OK' });
+            Alert.alert(Label.getSboxLabel('ALERT_ERROR'), Label.getSboxLabel('ALERT_UNCOMPLETE'), { text: 'OK' });
             return;
         }
         if ( this.state.phoneNum.length != 10) {
-            Alert.alert('错误', '手机号码格式错误', { text: 'OK' });
+            Alert.alert(Label.getSboxLabel('ALERT_ERROR'), Label.getSboxLabel('ALERT_PHONE'), { text: 'OK' });
             return;
         }
         const addressObject = this.props.addrInfo;
@@ -109,7 +110,7 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <SboxHeader title={"添加地址"}
+                <SboxHeader title={Label.getSboxLabel('ADD_ADDRESS')}
                         goBack={this._goBack}
                         leftButtonText={'<'}/>
                 <Content

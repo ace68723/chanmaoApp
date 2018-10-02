@@ -11,6 +11,7 @@ import {
   Animated,
 } from 'react-native';
 
+import Label from '../../../App/Constants/AppLabel';
 import KeyboardView from './keyboardView'
 const {height, width} = Dimensions.get('window');
 const deviceWidth = width;
@@ -341,7 +342,7 @@ export default class CMKeyBoard extends Component {
                                   }}>
 
                                     <Text style={{fontSize:16,color:'#6d6e71'}}
-                                          allowFontScaling={false}>信用卡号</Text>
+                                          allowFontScaling={false}>{Label.getSboxLabel('CARD_NUMBER')}</Text>
                                 </Animated.Text>
 
                                 <View style={{height:25,width:36,marginTop:35}}>
@@ -370,7 +371,7 @@ export default class CMKeyBoard extends Component {
                                 top:this.state.bounceValueDateTop,
                               }}>
                                 <Text style={{fontSize:16,color:'#6d6e71'}}
-                                      allowFontScaling={false}>有效期至</Text>
+                                      allowFontScaling={false}>{Label.getSboxLabel('EXPIRE_DATE')}</Text>
                               </Animated.Text>
 
                           </View>
