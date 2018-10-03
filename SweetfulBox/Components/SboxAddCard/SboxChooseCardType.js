@@ -90,7 +90,7 @@ export default class SboxChooseCardType extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SboxHeader title={Label.getSboxLabel(PAYMENT_METHOD)}
+        <SboxHeader title={Label.getSboxLabel('PAYMENT_METHOD')}
                 goBack={this._goBack}
                 leftButtonText={'x'}/>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>

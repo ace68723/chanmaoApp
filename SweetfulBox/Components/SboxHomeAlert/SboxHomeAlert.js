@@ -10,7 +10,7 @@ import {
   StyleSheet,
 } from 'react-native';
 const { width,height } = Dimensions.get('window');
-
+import Label from '../../../App/Constants/AppLabel';
 export default class SboxHomeAlert extends Component {
   static navigatorStyle = {
       screenBackgroundColor: 'transparent',
@@ -62,7 +62,7 @@ export default class SboxHomeAlert extends Component {
                               fontSize:18,
                               fontFamily:'FZZhunYuan-M02S'}}
                       allowFontScaling={false}>
-                  确认
+                  {Label.getSboxLabel('CONFIRM')}
                 </Text>
             </View>
           </TouchableOpacity>

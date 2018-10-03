@@ -6,7 +6,7 @@ import { View, Text, Image,StyleSheet, Dimensions, TouchableWithoutFeedback } fr
 const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
 const navigationHeight = viewHeight * (212/2208) - 12;
-
+import Label from '../../../App/Constants/AppLabel';
 const styles = StyleSheet.create({
     container: {
         height: navigationHeight,
@@ -49,7 +49,7 @@ export default class SboxHistoryOrderDetailHeader extends Component {
                </TouchableWithoutFeedback>
             </View>
             <Text style={styles.headTitle}
-                  allowFontScaling={false}>订单详情</Text>
+                  allowFontScaling={false}>{Label.getSboxLabel('ORDER_DETAIL')}</Text>
             <View style={styles.right}/>
           </View>
       );

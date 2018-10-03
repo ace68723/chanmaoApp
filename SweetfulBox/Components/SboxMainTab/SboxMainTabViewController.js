@@ -41,7 +41,7 @@ export default class MyComponent extends Component {
         this.props.navigator.showModal({
            screen: "SboxHomeAlert",
            passProps: {
-             message:`我们的配送范围已扩大至图中红框区域，包括所有Condo或House均可送达~具体地址可在填写订单时确认。`
+             message:Label.getSboxLabel('ALERT_MESSAGE')
            },
            animated: false,
            navigatorStyle: {navBarHidden: true},

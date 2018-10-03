@@ -8,7 +8,7 @@ import {
   ListView
 } from 'react-native';
 import Moment from "moment";
-
+import Label from '../../../App/Constants/AppLabel';
 class BoxStatus extends Component {
 
   shouldComponentUpdate(nextProps, nextState){
@@ -23,27 +23,27 @@ class BoxStatus extends Component {
   _boxStatusChinese(status) {
     switch(status) {
       case 0:
-        res = "联系客服";
+        res = Label.getSboxLabel('CUSTOMER_SERVICE');
         color = "#e74136";
         break;
       case 10:
-        res = "已确认";
+        res = Label.getSboxLabel('CONFIRMED');
         color = "#ff7685";
         break;
       case 20:
-        res = "打包中";
+        res = Label.getSboxLabel('PACKAGE');
         color = "#c88061";
         break;
       case 30:
-        res = "配送中";
+        res = Label.getSboxLabel('DELIVERING');
         color = "#74b2e0";
         break;
       case 40:
-        res = "已送达";
+        res = Label.getSboxLabel('DELIVERED');
         color = "#7fcba2";
         break;
       case 50:
-        res = "已完成";
+        res = Label.getSboxLabel('COMPLETE');
         color = "#7fcba2";
         break;
       default:
@@ -63,7 +63,7 @@ class BoxStatus extends Component {
         <View style={styles.container}>
           <View style={{flex: 0.5, justifyContent: "center"}}>
             <Text style={[styles.text, {fontFamily:'FZZhunYuan-M02S'}]}
-                  allowFontScaling={false}>  订单号:  #{this.props.obid}</Text>
+                  allowFontScaling={false}>{Label.getSboxLabel('ORDER_NUMBER')}{this.props.obid}</Text>
           </View>
           <View style={{flex: 0.5, justifyContent: "center"}}>
             <Text style={[styles.date, {fontFamily:'FZZhunYuan-M02S'}]}

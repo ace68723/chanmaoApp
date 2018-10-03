@@ -7,7 +7,7 @@ import {
   View,
 	StyleSheet
 } from 'react-native';
-
+import Label from '../../../App/Constants/AppLabel';
 import SboxHistoryOrderDetailHeader from './SboxHistoryOrderDetailHeader';
 import SboxHistoryOrderDetailOrderView from './SboxHistoryOrderDetailOrderView';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
@@ -58,7 +58,7 @@ export default class HistoryOrderDetailViewController extends Component {
   render() {
     return(
 			<View style={styles.container}>
-				<SboxHeader title={"订单详情"}
+				<SboxHeader title={Label.getSboxLabel('ORDER_DETAIL')}
                 goBack={this._goBack}
                 leftButtonText={'<'}/>
 	      {this._renderHistoryOrderDetailView()}

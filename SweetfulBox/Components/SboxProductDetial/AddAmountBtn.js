@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import SboxProductAction from '../../Actions/SboxProductAction';
-
+import Label from '../../../App/Constants/AppLabel';
 export default class AddAmountBtn extends Component {
   // shouldComponentUpdate(nextProps, nextState){
   //   console.log("addQuantity",nextProps.selectedProduct.sku_quantity,this.props.selectedProduct.sku_quantity)
@@ -36,7 +36,7 @@ export default class AddAmountBtn extends Component {
                       marginTop:25,
                     }}
               allowFontScaling={false}>
-          数量
+          {Label.getSboxLabel('QUANTITY')}
         </Text>
         <View style={{flexDirection:'row',
                       backgroundColor:"#ffffff",
