@@ -14,7 +14,7 @@ import SboxCart from '../SboxCart';
 import About from '../SboxAbout/index'
 import TabBar from './TabBar';
 import Label from '../../../App/Constants/AppLabel';
-
+import SettingTab from '../Setting/SettingTab';
 export default class MyComponent extends Component {
   constructor() {
     super();
@@ -76,11 +76,12 @@ export default class MyComponent extends Component {
               navigator={this.props.navigator}
               tag={'fromMainTab'}
               />
-            <About tabLabel={Label.getSboxLabel('MY_TAB')}
-          activeIconImage={require("./Image/setting.png")}
-          inactiveIconImage={require("./Image/settinggrey.png")}
-          navigator={this.props.navigator}
-          handleBackToHome={this.props.handleBackToHome}/>
+              <SettingTab tabLabel={Label.getCMLabel('MY_TAB')}
+                    navigator={this.props.navigator}
+                    inactiveIconImage={require("./Image/settinggrey.png")}
+
+                    activeIconImage={require("./Image/setting.png")}
+                    handleBackToHome={this.props.handleBackToHome}/>
       </ScrollableTabView>
 
   );
