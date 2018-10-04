@@ -80,13 +80,15 @@ class Confirm extends Component {
                       viewBottom:new Animated.Value(0),
 											anim: new Animated.Value(0), //for background image
 											AnimatedImage:props.restaurant.mob_banner,
-											renderAddress:false,
-											loading: true,
+											renderAddress:true,
+											loading: false,
 											showOrderConfirm:false,
 											paymentStatus:'添加支付方式',
 											tips:0,
 											tipsPercentage:0.1,
-
+											selectedCase: {fees: {},
+							                       payment_channel: 0,
+							                       dltype: 1},
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
@@ -127,13 +129,16 @@ class Confirm extends Component {
 			CheckoutStore.addChangeListener(this._onChange);
 			const rid = this.state.rid;
 			CheckoutAction.beforeCheckoutInit({rid});
+			const state = Object.assign({},CheckoutStore.getState());
 
     }
     componentWillUnmount() {
 			CheckoutStore.removeChangeListener(this._onChange);
     }
     _onChange(){
-
+				const newState = Object.assign({},CheckoutStore.getState());
+				this.setState(Object.assign({}, newState));
+				console.log(newState);
 				// const state = Object.assign({},CheckoutStore.getState());
 				// if(state.shouldAddAddress){
 				// 	setTimeout( () => {
@@ -250,13 +255,15 @@ class Confirm extends Component {
     }
     _updateDltype(deliverType){
 			if(!this.state.loading){
-				this.setState({dltype:deliverType.type,
-											 loading:true,
-											 tips: 0,
-											 tipsPercentage: 0.1});
-				const dltype = deliverType.type;
-				CheckoutAction.updateDltype(dltype);
-				CheckoutAction.updatePaymentStatus(0);
+				CheckoutAction.updateDltype(deliverType);
+				// alert('123');
+				// this.setState({dltype:deliverType.type,
+				// 							 loading:true,
+				// 							 tips: 0,
+				// 							 tipsPercentage: 0.1});
+				// const dltype = deliverType.type;
+				// CheckoutAction.updateDltype(dltype);
+				// CheckoutAction.updatePaymentStatus(0);
 			}
     }
     _calculateDeliveryFee(){
@@ -301,11 +308,17 @@ class Confirm extends Component {
       this.props.navigator.pop();
     }
 		_goToChoosePayment(){
-			if (this.state.available_payment_channels.length != 1) {
+			if (this.state.cases.length != 1) {
+				const available_payment_channels = [];
+				for (let _case of this.state.cases) {
+					if (_case.dltype == this.state.dltype) {
+						available_payment_channels.push(_case);
+					}
+				}
 				this.props.navigator.showModal({
 					screen: 'CmChooseCardType',
 					animated: true,
-					passProps:{available_payment_channels: this.state.available_payment_channels,
+					passProps:{available_payment_channels: available_payment_channels,
 										 stripeCardAdded: this._stripeCardAdded,
 								 		 alipaySelected: this._alipaySelected,
 										 cashSelected: this._cashSelected,
@@ -488,7 +501,7 @@ class Confirm extends Component {
 										<View style={styles.acceptButton}>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
-												 实付: ${this.state.total}
+												 实付: ${this.state.selectedCase.fees.charge_total}
 											</Text>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
@@ -499,14 +512,14 @@ class Confirm extends Component {
 	        )
 	      }else if(this.state.loading){
 					return(
-						<View style={styles.acceptButton}>
+						<View style={styles.pendingButton}>
 								<Image source={require('./Image/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
 						</View>
 					)
 				}else{
 	        return(
 	          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
-	            <View style={styles.acceptButton}>
+	            <View style={styles.pendingButton}>
 	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
 											allowFontScaling={false}>
 									{CMLabel.getCNLabel('ADD_ADDRESS')}
@@ -629,7 +642,7 @@ class Confirm extends Component {
           return (
             <TouchableWithoutFeedback
                 key={index}
-                onPress={this._updateDltype.bind(null,deliverType)}>
+                onPress={this._updateDltype.bind(null,deliverType.type)}>
               <View style={{flex:1,
                             alignItems:"center",
                             backgroundColor:deliverType.backgroundColor,
@@ -720,8 +733,8 @@ class Confirm extends Component {
 			return _couponCode;
 		}
 		_renderChoosePayment() {
-			if (this.state.available_payment_channels && this.state.dltype != 0) {
-				if (this.state.available_payment_channels.length > 1) {
+			if (this.state.cases && this.state.dltype != 0) {
+				if (this.state.cases.length > 1) {
 					let payment_description = '';
 					if (this.state.payment_channel == 1) {
 						payment_description = ' **** **** **** ' + this.state.last4;
@@ -782,7 +795,7 @@ class Confirm extends Component {
 					订单小计
 				</Text>
 			);
-			if (this.state.pretax) {
+			if (this.state.selectedCase.fees.pretax) {
 				_priceDetail.push(
 					<View style={{flex: 1,
 												flexDirection: 'row',
@@ -799,12 +812,12 @@ class Confirm extends Component {
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							${this.state.pretax}
+							${this.state.selectedCase.fees.pretax}
 						</Text>
 					</View>
 				)
 			}
-			if (this.state.dlexp) {
+			if (this.state.selectedCase.fees.dlexp) {
 				_priceDetail.push(
 					<View style={{flex: 1,
 												flexDirection: 'row',
@@ -821,12 +834,12 @@ class Confirm extends Component {
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							${this.state.dlexp}
+							${this.state.selectedCase.fees.dlexp}
 						</Text>
 					</View>
 				)
 			}
-			if (this.state.tips && this.state.tips > 0) {
+			if (this.state.selectedCase.fees.ori_service_fee && this.state.selectedCase.fees.ori_service_fee > 0) {
 				_priceDetail.push(
 					<View style={{flex: 1,
 												flexDirection: 'row',
@@ -843,12 +856,12 @@ class Confirm extends Component {
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							${this.state.tips}
+							${this.state.selectedCase.fees.ori_service_fee}
 						</Text>
 					</View>
 				)
 			}
-			if (this.state.tips) {
+			if (this.state.selectedCase.fees.total_off) {
 				_priceDetail.push(
 					<View style={{flex: 1,
 												flexDirection: 'row',
@@ -865,12 +878,12 @@ class Confirm extends Component {
 													color: '#40a2e7',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							- ${this.state.discounts}
+							- ${this.state.selectedCase.fees.total_off}
 						</Text>
 					</View>
 				)
 			}
-			if (this.state.tips) {
+			if (this.state.selectedCase.fees.ori_tax) {
 				_priceDetail.push(
 					<View style={{flex: 1,
 												flexDirection: 'row',
@@ -887,7 +900,7 @@ class Confirm extends Component {
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							${this.state.tax}
+							${this.state.selectedCase.fees.ori_tax}
 						</Text>
 					</View>
 				)
@@ -910,7 +923,7 @@ class Confirm extends Component {
 					<Text style={{color:'#666666',
 												fontSize:12,
 												fontFamily:'FZZhunYuan-M02S',}}>
-						${this.state.charge_total}
+						${this.state.selectedCase.fees.charge_total}
 					</Text>
 				</View>
 			);
@@ -1233,6 +1246,16 @@ let styles = StyleSheet.create({
 		justifyContent:'space-between',
 		alignItems:'center',
   },
+	pendingButton: {
+		width:width,
+		// position:Platform.OS == "ios"? null:'absolute',
+		// top:Platform.OS == "ios"? null:height-acceptButtonHeight-StatusBar.currentHeight,
+    height:acceptButtonHeight,
+		paddingHorizontal: 20,
+    backgroundColor:'#ea7b21',
+		justifyContent:'center',
+		alignItems:'center',
+	},
   acceptText: {
     textAlign: 'center',
     color: '#ffffff',

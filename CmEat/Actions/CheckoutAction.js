@@ -5,6 +5,11 @@ import LocationModule from '../Modules/System/LocationModule';
 import RestaurantModule from '../Modules/RestaurantModule/RestaurantModule';
 import AddressModule from '../Modules/AddressModule/AddressModule';
 import CheckoutModule from '../Modules/CheckoutModule/CheckoutModule';
+import {
+  GetUserInfo,
+  cme_getSelectedAddress
+} from '../../App/Modules/Database';
+
 import {NativeModules} from 'react-native';
 export default {
     async beforCheckout(rid,pretax,startAmount){
@@ -16,6 +21,28 @@ export default {
           dispatch({
               actionType: AppConstants.BEFORE_CHECKOUT, data
           })
+      }catch (e){
+      }
+    },
+    async beforeCheckoutInit({rid}) {
+      try{
+          const selectedAddress = cme_getSelectedAddress();
+          const {uid,token,version} = GetUserInfo();
+          let uaid = 0;
+          if (selectedAddress.hasOwnProperty('uaid')) {
+            uaid = selectedAddress.uaid;
+          }
+          const reqData = {rid, uaid, version, token};
+
+          let data = {};
+          data.selectedAddress = selectedAddress;
+          const result = await CheckoutModule.beforeCheckoutInit(reqData);
+          if (result.ev_error == 0) {
+            data.result = result;
+            dispatch({
+                actionType: AppConstants.BEFORE_CHECKOUT_INIT, data
+            })
+          }
       }catch (e){
       }
     },
@@ -165,7 +192,7 @@ export default {
     },
     updateShouldAddAddress(flag) {
       try{
-        data = {shouldAddAddress: flag}
+        const data = {shouldAddAddress: flag}
         dispatch({
             actionType: AppConstants.SHOULD_ADD_ADDRESS, data,
         })
@@ -173,7 +200,8 @@ export default {
       }
     },
     updatePaymentStatus(payment_channel){
-      data = {payment_channel: payment_channel}
+      const data = {payment_channel: payment_channel}
+      console.log(data);
       dispatch({
           actionType: AppConstants.UPDATE_PAYMENT_STATUS, data,
       })

@@ -5,6 +5,33 @@ import { API_ORDER_BEFORE,
          API_CHARGE_UPDATE,
          API_ONE_TIME_CHARGE } from '../../Config/API';
 export default  {
+  beforeCheckoutInit(io_data) {
+    const url = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/before_co_init";
+
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+
+    options.headers = Object.assign(options.headers,{
+        authortoken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjE5OTk0LCJleHBpcmVkX3RpbWUiOjE1NDQ0Njk0MjUsImxhc3RfbG9naW4iOjE1Mzg0MjE0MjV9.8jfc8bTtsd1ZraMa9mDbn7xgQ53VJj9wNokrzp7re0U",
+    });
+
+    options.body = JSON.stringify({
+      rid: io_data.rid,
+      version: io_data.version,
+      channel: 1,
+      uaid: 0,//parseInt(io_data.uaid),
+    });
+    console.log(options);
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
   addCard(io_data) {
 
     const url = API_ADD_CARD;

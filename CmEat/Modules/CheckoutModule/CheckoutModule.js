@@ -4,9 +4,43 @@ import {
 } from 'react-native';
 const StripeBridge = NativeModules.StripeBridge;
 
-import {GetUserInfo} from '../../../App/Modules/Database';
+import {
+  GetUserInfo,
+} from '../../../App/Modules/Database';
+import MenuStore from '../../Stores/MenuStore';
+
 // import { sbox_getAllItemsFromCart, sbox_updateCartStock, sbox_deleteCart } from '../../Modules/Database';
 export default  {
+  async beforeCheckoutInit(io_data) {
+    try{
+      const items   = MenuStore.getCart();
+      items.forEach((item)=>{
+        item.amount = item.qty;
+        item.ds_id = item.id;
+        item.qty = null;
+        let lo_tps = [];
+        if (item.tpgs) {
+          for (let tpg_id in item.tpgs) {
+            for (let tp_id in item.tpgs[tpg_id].tps) {
+              if (item.tpgs[tpg_id].tps[tp_id].quantity > 0) {
+                lo_tps.push({tp_id: tp_id, tp_quantity: item.tpgs[tpg_id].tps[tp_id].quantity});
+              }
+            }
+          }
+          item.tps = lo_tps;
+        }
+        item.tpgs = null;
+      });
+      const reqData = {
+        ...io_data,
+        items
+      }
+      const res = await CheckoutAPI.beforeCheckoutInit(reqData);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  },
   async addCard({cardNumber,expMonth,expYear,cvv}){
     try {
        cardNumber = cardNumber.replace(/ /g,'');

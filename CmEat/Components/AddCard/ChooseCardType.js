@@ -402,7 +402,7 @@ export default class ChooseCardType extends Component {
     const payment_channel_list = () => {
       let _payment_channel_list =[];
       for(let _channel of this.props.available_payment_channels) {
-        if (_channel.channel == 1) {
+        if (_channel.payment_channel == 1) {
           _payment_channel_list.push(
             <TouchableOpacity onPress={this._goToCredit}
                 key={"creditCard"}
@@ -466,7 +466,7 @@ export default class ChooseCardType extends Component {
             </TouchableOpacity>
           )
         }
-        else if(_channel.channel == 10) {
+        else if(_channel.payment_channel == 10) {
           _payment_channel_list.push(
             <TouchableOpacity onPress={this._goToAliPay}
                 key={"alipay"}
@@ -498,7 +498,7 @@ export default class ChooseCardType extends Component {
             </TouchableOpacity>
           )
         }
-        else if(_channel.channel == 0) {
+        else if(_channel.payment_channel == 0) {
           _payment_channel_list.push(
             <TouchableOpacity onPress={this._goToCash}
                 key={"cash"}
@@ -528,7 +528,7 @@ export default class ChooseCardType extends Component {
             </TouchableOpacity>
           )
         }
-        else if(_channel.channel == 30 && Platform.OS == 'ios') {
+        else if(_channel.payment_channel == 30 && Platform.OS == 'ios') {
           _payment_channel_list.push(
             <TouchableOpacity onPress={this._goToApplePay}
                 key={"applepay"}
