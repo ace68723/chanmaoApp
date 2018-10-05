@@ -6,6 +6,7 @@ const StripeBridge = NativeModules.StripeBridge;
 
 import {
   GetUserInfo,
+  cme_getSelectedAddress
 } from '../../../App/Modules/Database';
 import MenuStore from '../../Stores/MenuStore';
 
@@ -13,11 +14,52 @@ import MenuStore from '../../Stores/MenuStore';
 export default  {
   async beforeCheckoutInit(io_data) {
     try{
-      const items   = MenuStore.getCart();
+      const {uid,token,version} = GetUserInfo();
+
+      let items   = JSON.parse(JSON.stringify(MenuStore.getCart()));
       items.forEach((item)=>{
         item.amount = item.qty;
         item.ds_id = item.id;
-        item.qty = null;
+        delete item['qty'];
+        let lo_tps = [];
+        if (item.tpgs) {
+          for (let tpg_id in item.tpgs) {
+            for (let tp_id in item.tpgs[tpg_id].tps) {
+              if (item.tpgs[tpg_id].tps[tp_id].quantity > 0) {
+                lo_tps.push({tp_id: tp_id, tp_quantity: item.tpgs[tpg_id].tps[tp_id].quantity});
+              }
+            }
+          }
+          item.tps = lo_tps;
+        }
+        delete item['tpgs'];
+      });
+      const body = {
+        ...io_data,
+        items,
+        channel: 1,
+        version,
+      };
+      const reqData = {
+        body,
+        authortoken: token
+      };
+      const res = await CheckoutAPI.beforeCheckoutInit(reqData);
+      console.log(res);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  },
+  async beforeCheckoutUpdateItems(io_data) {
+    try{
+      const {uid,token,version} = GetUserInfo();
+      const items   = JSON.parse(JSON.stringify(MenuStore.getCart()));
+      items.forEach((item)=>{
+        item.amount = item.qty;
+        item.ds_id = item.id;
+        // item.qty = null;
+        delete item['qty'];
         let lo_tps = [];
         if (item.tpgs) {
           for (let tpg_id in item.tpgs) {
@@ -30,12 +72,46 @@ export default  {
           item.tps = lo_tps;
         }
         item.tpgs = null;
+        delete item['tpgs'];
       });
-      const reqData = {
+      const body = {
         ...io_data,
         items
+      };
+      const reqData = {
+        body,
+        authortoken: token
+      };
+      const res = await CheckoutAPI.beforeCheckoutUpdate(reqData);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  },
+  async beforeCheckoutUpdateAddress(io_data) {
+    try{
+      const {uid,token,version} = GetUserInfo();
+      const body = {
+        ...io_data,
+      };
+      const reqData = {
+        body,
+        authortoken: token
       }
-      const res = await CheckoutAPI.beforeCheckoutInit(reqData);
+      const res = await CheckoutAPI.beforeCheckoutUpdate(reqData);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  },
+  async checkout(io_data) {
+    try{
+      const {uid,token,version} = GetUserInfo();
+      const reqData = {
+        body: io_data,
+        authortoken: token
+      };
+      const res = await CheckoutAPI.checkout(reqData);
       return res;
     } catch (e) {
       throw e;

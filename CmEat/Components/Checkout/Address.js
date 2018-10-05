@@ -106,7 +106,7 @@ export default class Address extends Component {
 						<View style={{flex:1,margin:10, justifyContent: 'space-around'}}>
 							<Text style={{fontFamily:'FZZhunYuan-M02S'}}
 										allowFontScaling={false}>
-									Ginny
+									{this.state.address.name}
 							</Text>
 							<Text style={{fontFamily:'FZZhunYuan-M02S'}}
 										allowFontScaling={false}>

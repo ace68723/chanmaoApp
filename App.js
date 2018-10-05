@@ -9,7 +9,7 @@ registerScreens();
 Navigation.startSingleScreenApp({
   screen: {
     // screen: 'cmHome', CmEat CmLogin// unique ID registered with Navigation.registerScreen
-    screen: 'cmHome',
+    screen: 'CmEat',
     navigatorStyle: {navBarHidden: true},
     navigatorButtons: {},
 

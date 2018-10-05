@@ -27,12 +27,11 @@ export default {
     async beforeCheckoutInit({rid}) {
       try{
           const selectedAddress = cme_getSelectedAddress();
-          const {uid,token,version} = GetUserInfo();
           let uaid = 0;
           if (selectedAddress.hasOwnProperty('uaid')) {
-            uaid = selectedAddress.uaid;
+            uaid = parseInt(selectedAddress.uaid);
           }
-          const reqData = {rid, uaid, version, token};
+          const reqData = {rid, uaid};
 
           let data = {};
           data.selectedAddress = selectedAddress;
@@ -45,6 +44,64 @@ export default {
           }
       }catch (e){
       }
+    },
+    async beforeCheckoutUpdateItems({ticket_id}) {
+      try{
+          let data = {};
+          let reqData = {
+            ticket_id,
+          };
+
+          const result = await CheckoutModule.beforeCheckoutUpdateItems(reqData);
+          if (result.ev_error == 0) {
+            data.result = result;
+            dispatch({
+                actionType: AppConstants.BEFORE_CHECKOUT_INIT, data
+            })
+          }
+      }catch (e){
+      }
+    },
+    async beforeCheckoutUpdateAddress({ticket_id, address}) {
+      try{
+          let data = {};
+          let reqData = {
+            ticket_id,
+            uaid: parseInt(address.uaid)
+          };
+          data.selectedAddress = address;
+
+          const result = await CheckoutModule.beforeCheckoutUpdateAddress(reqData);
+          if (result.ev_error == 0) {
+            data.result = result;
+            dispatch({
+                actionType: AppConstants.BEFORE_CHECKOUT_INIT, data
+            })
+          }
+      }catch (e){
+      }
+    },
+    async checkout({ticket_id, sign, dltype, payment_channel, charge_total, rid}){
+      try{
+        const reqData = {ticket_id, sign, dltype, payment_channel, charge_total, rid};
+        const data = {
+          result: 1
+        };
+        const result = await CheckoutModule.checkout(reqData);
+        if (result.ev_error == 0) {
+          data.result = 0;
+          dispatch({
+              actionType: AppConstants.CHECKOUT, data
+          })
+        }
+      }catch (e){
+      }
+    },
+    updateDltype(type){
+      const data = {type};
+      dispatch({
+          actionType: AppConstants.UPDATE_DLTYPE,data
+      })
     },
     updateDltype(type){
       const data = {type};
@@ -146,45 +203,45 @@ export default {
 
     },
     // async checkout(comment, payment_channel, tips){
-    async checkout(comment, payment_channel, tips, visa_fee){
-      try{
-        const token = await AuthModule.getToken();
-        // const reqData = {token,comment, payment_channel, tips};
-        if(payment_channel == 1) {
-          if(comment) {
-            comment = '刷卡|' + comment;
-          }
-          else{
-            comment = "刷卡|";
-          }
-        }
-        else if(payment_channel == 10) {
-          if(comment) {
-            comment = '支付宝|' + comment;
-          }
-          else{
-            comment = "支付宝|";
-          }
-        }
-        else if(payment_channel == 30) {
-
-          if(comment) {
-            comment = 'ApplePay|' + comment;
-          }
-          else{
-            comment = "ApplePay|";
-          }
-
-        }
-        const reqData = {token,comment, payment_channel, tips, visa_fee};
-        let data = await RestaurantModule.checkout(reqData);
-        data.payment_channel = payment_channel;
-        dispatch({
-            actionType: AppConstants.CHECKOUT, data,
-        })
-      }catch (e){
-      }
-    },
+    // async checkout(comment, payment_channel, tips, visa_fee){
+    //   try{
+    //     const token = await AuthModule.getToken();
+    //     // const reqData = {token,comment, payment_channel, tips};
+    //     if(payment_channel == 1) {
+    //       if(comment) {
+    //         comment = '刷卡|' + comment;
+    //       }
+    //       else{
+    //         comment = "刷卡|";
+    //       }
+    //     }
+    //     else if(payment_channel == 10) {
+    //       if(comment) {
+    //         comment = '支付宝|' + comment;
+    //       }
+    //       else{
+    //         comment = "支付宝|";
+    //       }
+    //     }
+    //     else if(payment_channel == 30) {
+    //
+    //       if(comment) {
+    //         comment = 'ApplePay|' + comment;
+    //       }
+    //       else{
+    //         comment = "ApplePay|";
+    //       }
+    //
+    //     }
+    //     const reqData = {token,comment, payment_channel, tips, visa_fee};
+    //     let data = await RestaurantModule.checkout(reqData);
+    //     data.payment_channel = payment_channel;
+    //     dispatch({
+    //         actionType: AppConstants.CHECKOUT, data,
+    //     })
+    //   }catch (e){
+    //   }
+    // },
     updateAdderss(){
       dispatch({
           actionType: AppConstants.UPDATE_ADDRESS

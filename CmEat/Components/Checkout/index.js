@@ -45,6 +45,7 @@ import CMLabel from '../../Constants/AppLabel';
 
 import Alipay from '../../../Alipay/Alipay';
 import TabsAction from '../../Actions/TabsAction';
+import CartAPI from '../../Modules/OrderModule/CartApi';
 
 
 // device(size): get device height and width
@@ -115,6 +116,7 @@ class Confirm extends Component {
 				this._renderRestaurantName = this._renderRestaurantName.bind(this);
 				this._renderPriceDetail = this._renderPriceDetail.bind(this);
 				this._renderPriceTotal = this._renderPriceTotal.bind(this);
+				this._beforeCheckoutUpdateItems = this._beforeCheckoutUpdateItems.bind(this);
     }
 
     componentDidMount(){
@@ -129,29 +131,27 @@ class Confirm extends Component {
 			CheckoutStore.addChangeListener(this._onChange);
 			const rid = this.state.rid;
 			CheckoutAction.beforeCheckoutInit({rid});
-			const state = Object.assign({},CheckoutStore.getState());
-
     }
     componentWillUnmount() {
 			CheckoutStore.removeChangeListener(this._onChange);
     }
     _onChange(){
-				const newState = Object.assign({},CheckoutStore.getState());
-				this.setState(Object.assign({}, newState));
-				console.log(newState);
+				const state = Object.assign({},CheckoutStore.getState());
+				this.setState(Object.assign({}, state));
+				console.log(state);
 				// const state = Object.assign({},CheckoutStore.getState());
-				// if(state.shouldAddAddress){
-				// 	setTimeout( () => {
-				// 		this.props.navigator.showModal({
-				// 			screen: 'CmEatAddress',
-				// 			animated: true,
-				// 			passProps:{
-				// 				updateUaid:this._updateUaid,
-				// 				handleAddressAdded: this._handleAddressAdded},
-				// 			navigatorStyle: {navBarHidden: true},
-				// 		});
-				// 	}, 500);
-				// }
+				if(!state.selectedAddress || !state.selectedAddress.hasOwnProperty('uaid')){
+					setTimeout( () => {
+						this.props.navigator.showModal({
+							screen: 'CmEatAddress',
+							animated: true,
+							passProps:{
+								updateUaid:this._updateUaid,
+								handleAddressAdded: this._handleAddressAdded},
+							navigatorStyle: {navBarHidden: true},
+						});
+					}, 500);
+				}
 				// else if (!this.state.jumpToChoosePayment && state.jumpToChoosePayment && state.available_payment_channels.length != 1) {
 				// 	setTimeout( () => {
 				// 		this.props.navigator.showModal({
@@ -181,65 +181,65 @@ class Confirm extends Component {
 				// }
 				//
 				//
-				// if(state.goToHistory) {
-				// 	this.props.navigator.dismissModal({animationType: 'slide-down'});
-				// 	setTimeout(() => {
-				// 		TabsAction.tab_go_to_history(state.paymentFail);
-				// 	}, 800);
-				// }
-				// else if(this.state.checkoutSuccessful){
-				// 	this.setState({
-		    //     loading:true,
-				// 		showOrderConfirm:false,
-				// 		checkoutSuccessful: false,
-		    //   });
-				// 	// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
-				// 	if (this.state.dlexp > 0 && this.state.payment_channel != 0) {
-				// 		if (this.state.payment_channel == 1) {
-				// 			CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(this.state.total)
-				// 																										 + parseFloat(this.state.tips)
-				// 																										 + parseFloat(this.state.visa_fee)).toFixed(2),
-				// 																	 					oid: state.oidFromUrl,
-				// 																						checkoutFrom: 'checkout'});
-				// 		}
-				// 		else if (this.state.payment_channel == 10) {
-				// 			this.props.navigator.dismissModal({animationType: 'slide-down'});
-				// 			setTimeout(() => {
-				// 				CheckoutAction.afterPayGoToHistory();
-				// 				Alipay.constructAlipayOrder({total: (parseFloat(this.state.total)
-				// 																						 + parseFloat(this.state.tips)
-				// 																					 	 + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
-				// 																		 oid: state.oidFromUrl});
-				// 			}, 300);
-				// 		}
-				// 		else if(this.state.payment_channel == 30){
-				// 			let pretax = parseFloat(this.state.pretax);
-				// 			let shipping = Number(this.state.dlexp);
-				// 			let tips =  Number(this.state.tips);
-				// 			let tax = Number(this.state.total - pretax - shipping).toFixed(2);
-				// 			let total = (parseFloat(this.state.total) + parseFloat(this.state.visa_fee) + parseFloat(this.state.tips)).toFixed(2);;
-				//
-				// 			let paymentData = {
-				// 				subtotal: (pretax + parseFloat(this.state.visa_fee)).toFixed(2).toString(),
-				// 				shipping: this.state.dlexp.toString(),
-				// 				tax: tax.toString(),
-				// 				tips: this.state.tips.toString(),
-				// 				oid: state.oidFromUrl,
-				// 				amount:total
-				// 			}
-				// 			CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
-				// 		}
-				// 		// setTimeout(() => {
-				// 		// 	HistoryAction.getOrderData();
-				// 		// 	this.props.navigator.dismissModal({animationType: 'slide-down'});
-				// 		// }, 2000);
-				// 	}else {
-				// 		this.props.navigator.dismissModal({animationType: 'slide-down'});
-				// 		setTimeout(()=> {
-				// 			TabsAction.tab_go_to_history();
-				// 		}, 800);
-				// 	}
-				// }
+				if(state.goToHistory) {
+					this.props.navigator.dismissModal({animationType: 'slide-down'});
+					setTimeout(() => {
+						TabsAction.tab_go_to_history(state.paymentFail);
+					}, 800);
+				}
+				else if(state.checkoutSuccessful){
+					this.setState({
+		        loading:true,
+						showOrderConfirm:false,
+						checkoutSuccessful: false,
+		      });
+					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
+					if (state.dlexp > 0 && state.payment_channel != 0) {
+						if (state.payment_channel == 1) {
+							CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(state.total)
+																														 + parseFloat(state.tips)
+																														 + parseFloat(state.visa_fee)).toFixed(2),
+																					 					oid: state.oidFromUrl,
+																										checkoutFrom: 'checkout'});
+						}
+						else if (state.payment_channel == 10) {
+							this.props.navigator.dismissModal({animationType: 'slide-down'});
+							setTimeout(() => {
+								CheckoutAction.afterPayGoToHistory();
+								Alipay.constructAlipayOrder({total: (parseFloat(state.total)
+																										 + parseFloat(state.tips)
+																									 	 + parseFloat(state.visa_fee)).toFixed(2).toString(),
+																						 oid: state.oidFromUrl});
+							}, 300);
+						}
+						else if(state.payment_channel == 30){
+							let pretax = parseFloat(state.pretax);
+							let shipping = Number(state.dlexp);
+							let tips =  Number(state.tips);
+							let tax = Number(state.total - pretax - shipping).toFixed(2);
+							let total = (parseFloat(state.total) + parseFloat(state.visa_fee) + parseFloat(state.tips)).toFixed(2);;
+
+							let paymentData = {
+								subtotal: (pretax + parseFloat(state.visa_fee)).toFixed(2).toString(),
+								shipping: state.dlexp.toString(),
+								tax: tax.toString(),
+								tips: state.tips.toString(),
+								oid: state.oidFromUrl,
+								amount:total
+							}
+							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
+						}
+						// setTimeout(() => {
+						// 	HistoryAction.getOrderData();
+						// 	this.props.navigator.dismissModal({animationType: 'slide-down'});
+						// }, 2000);
+					}else {
+						this.props.navigator.dismissModal({animationType: 'slide-down'});
+						setTimeout(()=> {
+							TabsAction.tab_go_to_history();
+						}, 800);
+					}
+				}
     }
 		_handleAddressAdded() {
 			CheckoutAction.updateShouldAddAddress(false);
@@ -250,13 +250,17 @@ class Confirm extends Component {
         this.setState({
           uaid:uaid,
         })
-        this._calculateDeliveryFee()
+        // this._calculateDeliveryFee();
+				const data = {
+					ticket_id: this.state.ticket_id,
+					address
+				}
+				CheckoutAction.beforeCheckoutUpdateAddress(data);
       }
     }
     _updateDltype(deliverType){
 			if(!this.state.loading){
 				CheckoutAction.updateDltype(deliverType);
-				// alert('123');
 				// this.setState({dltype:deliverType.type,
 				// 							 loading:true,
 				// 							 tips: 0,
@@ -278,10 +282,18 @@ class Confirm extends Component {
         loading:true,
 				showOrderConfirm:false,
       })
-      CheckoutAction.checkout(this.state.comment,
-															this.state.payment_channel,
-															this.state.tips,
-															this.state.visa_fee);
+      // CheckoutAction.checkout(this.state.comment,
+			// 												this.state.payment_channel,
+			// 												this.state.tips,
+			// 												this.state.visa_fee);
+			CheckoutAction.checkout({
+															 ticket_id: this.state.ticket_id,
+															 sign: this.state.selectedCase.sign,
+															 dltype: this.state.dltype,
+															 payment_channel: this.state.payment_channel,
+															 charge_total: this.state.selectedCase.fees.charge_total,
+															 rid: this.state.rid
+															});
     }
     _checkout(){
 
@@ -371,7 +383,7 @@ class Confirm extends Component {
       }
     }
 		_handleProductOnPress(dish) {
-			if (dish.tpgs) {
+			if (dish.tpgs && dish.tpgs.length > 0) {
 				if (Util.getWaitingStatus() === true){
 					return;
 				}
@@ -393,7 +405,14 @@ class Confirm extends Component {
 									   saveModificationCallback: this._saveModificationCallback},
 					navigatorStyle: {navBarHidden: true},
 				});
+			} else {
+				CartAPI.removeItem(dish);
+				this._beforeCheckoutUpdateItems();
 			}
+		}
+		_beforeCheckoutUpdateItems() {
+			const ticket_id = this.state.ticket_id;
+			CheckoutAction.beforeCheckoutUpdateItems({ticket_id});
 		}
 		_handleScroll(e) {
       if(e.nativeEvent.contentOffset.y < 300){
@@ -678,7 +697,8 @@ class Confirm extends Component {
 		_renderCoupeCode() {
 			const _couponCode = [];
 			_couponCode.push(
-				<Text style={{color:'#666666',
+				<Text key={'coupon_title'}
+							style={{color:'#666666',
 											marginLeft: 25,
 											marginTop: 20,
 											fontSize:15,
@@ -689,7 +709,8 @@ class Confirm extends Component {
 			);
 			_couponCode.push(
 
-				<View style={{flexDirection: 'row',
+				<View key={'coupon_code'}
+							style={{flexDirection: 'row',
 											marginTop: 10,
 											marginLeft: 20,
 											marginRight: 10}}>
@@ -721,7 +742,8 @@ class Confirm extends Component {
 			);
 			if (0 == 0) {
 				_couponCode.push(
-					<Text style={{color: '#40a2e7',
+					<Text key={'coupon_desc'}
+								style={{color: '#40a2e7',
 												fontSize: 15,
 												marginTop: 15,
 												marginLeft: 20}}
@@ -786,7 +808,8 @@ class Confirm extends Component {
 		_renderPriceDetail() {
 			const _priceDetail = [];
 			_priceDetail.push(
-				<Text style={{color:'#666666',
+				<Text key={'price_title'}
+							style={{color:'#666666',
 											marginLeft: 20,
 											marginTop: 20,
 											fontSize:15,
@@ -797,7 +820,8 @@ class Confirm extends Component {
 			);
 			if (this.state.selectedCase.fees.pretax) {
 				_priceDetail.push(
-					<View style={{flex: 1,
+					<View key={'price_pretax'}
+								style={{flex: 1,
 												flexDirection: 'row',
 												justifyContent: 'space-between',
 												marginTop: 10,
@@ -819,7 +843,8 @@ class Confirm extends Component {
 			}
 			if (this.state.selectedCase.fees.dlexp) {
 				_priceDetail.push(
-					<View style={{flex: 1,
+					<View key={'price_dlexp'}
+								style={{flex: 1,
 												flexDirection: 'row',
 												justifyContent: 'space-between',
 												marginTop: 10,
@@ -841,7 +866,8 @@ class Confirm extends Component {
 			}
 			if (this.state.selectedCase.fees.ori_service_fee && this.state.selectedCase.fees.ori_service_fee > 0) {
 				_priceDetail.push(
-					<View style={{flex: 1,
+					<View key={'price_service_fee'}
+								style={{flex: 1,
 												flexDirection: 'row',
 												justifyContent: 'space-between',
 												marginTop: 10,
@@ -863,7 +889,8 @@ class Confirm extends Component {
 			}
 			if (this.state.selectedCase.fees.total_off) {
 				_priceDetail.push(
-					<View style={{flex: 1,
+					<View key={'price_off'}
+								style={{flex: 1,
 												flexDirection: 'row',
 												justifyContent: 'space-between',
 												marginTop: 10,
@@ -885,7 +912,8 @@ class Confirm extends Component {
 			}
 			if (this.state.selectedCase.fees.ori_tax) {
 				_priceDetail.push(
-					<View style={{flex: 1,
+					<View key={'price_tax'}
+								style={{flex: 1,
 												flexDirection: 'row',
 												justifyContent: 'space-between',
 												marginTop: 10,

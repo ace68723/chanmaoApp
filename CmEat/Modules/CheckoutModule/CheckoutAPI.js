@@ -18,18 +18,68 @@ export default  {
     }
 
     options.headers = Object.assign(options.headers,{
-        authortoken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjE5OTk0LCJleHBpcmVkX3RpbWUiOjE1NDQ0Njk0MjUsImxhc3RfbG9naW4iOjE1Mzg0MjE0MjV9.8jfc8bTtsd1ZraMa9mDbn7xgQ53VJj9wNokrzp7re0U",
+        authortoken: io_data.authortoken
+    });
+    options.body = JSON.stringify(io_data.body);
+    console.log(options);
+    return fetch(url,options)
+            .then(
+              // (res) => res.json()
+              (res) => {
+                console.log(res);
+                return res.json();
+              }
+            )
+            .catch((error) => {throw error})
+  },
+  beforeCheckoutUpdate(io_data) {
+    const url = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/before_co_update";
+
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+
+    options.headers = Object.assign(options.headers,{
+        authortoken: io_data.authortoken,
     });
 
-    options.body = JSON.stringify({
-      rid: io_data.rid,
-      version: io_data.version,
-      channel: 1,
-      uaid: 0,//parseInt(io_data.uaid),
-    });
+    options.body = JSON.stringify(io_data.body);
     console.log(options);
     return fetch(url,options)
             .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
+  checkout(io_data){
+    const url = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/checkout";
+
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+
+    options.headers = Object.assign(options.headers,{
+        authortoken: io_data.authortoken
+    });
+    options.body = JSON.stringify(io_data.body);
+    console.log(url);
+    console.log(options);
+    return fetch(url,options)
+            .then(
+              // (res) => res.json()
+              (res) => {
+                console.log(res);
+                return res.json();
+              }
+            )
             .catch((error) => {throw error})
   },
   addCard(io_data) {

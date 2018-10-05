@@ -70,7 +70,7 @@ export default (props) => {
                   </View>
                   {_toppingGroupList}
                 </View>
-                <TouchableOpacity style={{marginLeft: 20}} onPress={() => alert('123')}>
+                <TouchableOpacity style={{marginLeft: 20}} onPress={props.onPress}>
                   <Image source={require('./Image/icon_edit.png')}
                          style={{width: 24,
                                  height: 24}}>
@@ -103,7 +103,7 @@ export default (props) => {
                   allowFontScaling={false}>
               ${props.dish.price}
             </Text>
-            <TouchableOpacity style={{marginLeft: 20}} onPress={() => alert('123')}>
+            <TouchableOpacity style={{marginLeft: 20}} onPress={props.onPress}>
               <Image source={require('./Image/icon_edit.png')}
                      style={{width: 24,
                              height: 24}}>
