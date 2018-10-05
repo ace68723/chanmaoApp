@@ -15,8 +15,7 @@ let getOptiopns = {
 
 const HistoryApi = {
   getOrderData(token){
-    // const url = AuthConstants.API_HISTORYORDER
-    const url = "https://norgta.com/api/cmapp/v3/get_history_list";
+    const url = AuthConstants.API_HISTORYORDER;
     let options = {
         method: 'GET',
         mode:'cors',
