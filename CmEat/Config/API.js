@@ -18,6 +18,7 @@ const APIConstants ={
     API_SIGN_ALIPAY_ORDER: 'https://chanmao.us/api/alipay/v2/test_sign_order',
     API_ONE_TIME_CHARGE: Server + 'one_time_charge',
     API_CHARGE_UPDATE: Server + "charge_and_update",
+    API_CHECK_COUPON: "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/coupon_info",
 
     //Product
     API_CATEGORY: Server + 'category',

@@ -274,4 +274,18 @@ export default {
         throw 'no cardToken'
       }
     },
+    async checkCouponCode(coupon) {
+      try{
+        const token = await AuthModule.getToken();
+        const reqData = {coupon: coupon, token};
+        const data = await CheckoutModule.checkCouponCode(reqData);
+        dispatch({
+             actionType: AppConstants.CHECK_COUPON_CODE,data
+         })
+      }catch(error){
+        console.log(error)
+        throw 'no cardToken'
+      }
+    },
+
 }

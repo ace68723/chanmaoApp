@@ -248,5 +248,15 @@ export default  {
       console.log(e);
       throw e
     }
+  },
+  async checkCouponCode(reqData) {
+    try {
+      const res = await CheckoutAPI.checkCouponCode(reqData);
+      console.log('gg', res);
+      return res;
+    } catch (e) {
+      console.log(e);
+      throw e
+    }
   }
 }
