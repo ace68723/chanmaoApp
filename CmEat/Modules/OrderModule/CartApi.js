@@ -9,9 +9,17 @@ const CartApi = {
     saveMenu(menu){
       this.la_menu = menu
     },
+    _removeItem(item) {
+      this.la_cartItems.splice(this.la_cartItems.findIndex(i => i === item), 1);
+    },
     removeItem(item) {
-        this.la_cartItems.splice(this.la_cartItems.findIndex(i => i === item), 1);
-        console.log(this.la_cartItems);
+        if ('qty' in item) {
+            const cartItem = this.findItem(item);
+            cartItem.qty = 0;
+            Object.assign({ qty: 0 }, cartItem);
+
+        }
+        // this.la_cartItems.splice(this.la_cartItems.findIndex(i => i === item), 1);
     },
 
     findItem(item) {
@@ -73,7 +81,7 @@ const CartApi = {
         this.la_cartItems.map(cartItem => {
 
           if (cartItem.qty === 0) {
-              this.removeItem(cartItem)
+              this._removeItem(cartItem)
               delete this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty;
           } else {
             this.la_menu.find(menuItem => menuItem.id === cartItem.id).qty = cartItem.qty;

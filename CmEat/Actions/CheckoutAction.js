@@ -90,6 +90,7 @@ export default {
         const result = await CheckoutModule.checkout(reqData);
         if (result.ev_error == 0) {
           data.result = 0;
+          data.oidFromUrl = result.oid;
           dispatch({
               actionType: AppConstants.CHECKOUT, data
           })

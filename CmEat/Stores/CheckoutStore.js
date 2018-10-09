@@ -409,7 +409,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       //     "version": "2.8.3"
       // // };
       // this.state.items = data.result.items;
-      console.log(data);
       if (data.selectedAddress) {
         this.state.selectedAddress = data.selectedAddress;
       }
@@ -480,14 +479,12 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 		this.state = Object.assign(this.state,{selectedAddress});
 	},
 	checkout(data){
-		let checkoutSuccessful;
+		let checkoutSuccessful = false;
     let oidFromUrl;
 		if(data.result == 0){
 			 checkoutSuccessful = true;
-       oidFromUrl = data.oid;
+       oidFromUrl = data.oidFromUrl;
        MenuStore.initMenu();
-		}else{
-			checkoutSuccessful = false;
 		}
 		this.state = Object.assign({},this.state,{checkoutSuccessful, oidFromUrl});
 

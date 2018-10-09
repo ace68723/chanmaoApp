@@ -139,7 +139,6 @@ class Confirm extends Component {
     _onChange(){
 				const state = Object.assign({},CheckoutStore.getState());
 				this.setState(Object.assign({}, state));
-				console.log(state);
 				// const state = Object.assign({},CheckoutStore.getState());
 				if(!state.selectedAddress || !state.selectedAddress.hasOwnProperty('uaid')){
 					setTimeout( () => {
@@ -195,11 +194,9 @@ class Confirm extends Component {
 						checkoutSuccessful: false,
 		      });
 					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
-					if (state.dlexp > 0 && state.payment_channel != 0) {
+					if (state.dltype === 1 && state.payment_channel != 0) {
 						if (state.payment_channel == 1) {
-							CheckoutAction.stripeChargeAndUpdate({amount: (parseFloat(state.total)
-																														 + parseFloat(state.tips)
-																														 + parseFloat(state.visa_fee)).toFixed(2),
+							CheckoutAction.stripeChargeAndUpdate({amount: state.selectedCase.fees.charge_total,
 																					 					oid: state.oidFromUrl,
 																										checkoutFrom: 'checkout'});
 						}
@@ -207,26 +204,30 @@ class Confirm extends Component {
 							this.props.navigator.dismissModal({animationType: 'slide-down'});
 							setTimeout(() => {
 								CheckoutAction.afterPayGoToHistory();
-								Alipay.constructAlipayOrder({total: (parseFloat(state.total)
-																										 + parseFloat(state.tips)
-																									 	 + parseFloat(state.visa_fee)).toFixed(2).toString(),
+								Alipay.constructAlipayOrder({total: state.selectedCase.fees.charge_total.toString(),
 																						 oid: state.oidFromUrl});
 							}, 300);
 						}
 						else if(state.payment_channel == 30){
-							let pretax = parseFloat(state.pretax);
-							let shipping = Number(state.dlexp);
-							let tips =  Number(state.tips);
-							let tax = Number(state.total - pretax - shipping).toFixed(2);
-							let total = (parseFloat(state.total) + parseFloat(state.visa_fee) + parseFloat(state.tips)).toFixed(2);;
+							// let pretax = parseFloat(state.pretax);
+							// let shipping = Number(state.dlexp);
+							// let tips =  Number(state.tips);
+							// let tax = Number(state.total - pretax - shipping).toFixed(2);
+							// let total = (parseFloat(state.total) + parseFloat(state.visa_fee) + parseFloat(state.tips)).toFixed(2);;
 
 							let paymentData = {
-								subtotal: (pretax + parseFloat(state.visa_fee)).toFixed(2).toString(),
-								shipping: state.dlexp.toString(),
-								tax: tax.toString(),
-								tips: state.tips.toString(),
+								// subtotal: (pretax + parseFloat(state.visa_fee)).toFixed(2).toString(),
+								// shipping: state.dlexp.toString(),
+								// tax: tax.toString(),
+								// tips: state.tips.toString(),
+								// oid: state.oidFromUrl,
+								// amount: total,
+								subtotal: state.selectedCase.fees.pretax.toString(),
+								shipping: state.selectedCase.fees.dlexp.toString(),
+								tax: state.selectedCase.fees.tax.toString(),
+								tips: state.selectedCase.fees.service_fee.toString(),
 								oid: state.oidFromUrl,
-								amount:total
+								amount: state.selectedCase.fees.charge_total
 							}
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
 						}
@@ -1053,8 +1054,8 @@ class Confirm extends Component {
 				return(<OrderConfirm doCheckout={this._doCheckout}
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
-														 total={this.state.total}
-														 tips={this.state.tips}
+														 total={this.state.selectedCase.fees.charge_total}
+														 tips={this.state.selectedCase.fees.charge_total.service_fee}
 														 visaFee={this.state.visa_fee}
 														 paymentChannel={this.state.payment_channel}
 														 dltype={this.state.dltype}/>)
