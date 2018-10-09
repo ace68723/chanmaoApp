@@ -46,6 +46,7 @@ import CMLabel from '../../Constants/AppLabel';
 import Alipay from '../../../Alipay/Alipay';
 import TabsAction from '../../Actions/TabsAction';
 import CartAPI from '../../Modules/OrderModule/CartApi';
+import OrderAction from '../../Actions/OrderAction';
 
 
 // device(size): get device height and width
@@ -383,7 +384,7 @@ class Confirm extends Component {
       }
     }
 		_handleProductOnPress(dish) {
-			if (dish.tpgs && dish.tpgs.length > 0) {
+			if (dish.tpgs) {
 				if (Util.getWaitingStatus() === true){
 					return;
 				}
@@ -406,7 +407,8 @@ class Confirm extends Component {
 					navigatorStyle: {navBarHidden: true},
 				});
 			} else {
-				CartAPI.removeItem(dish);
+				// alert('123');
+				OrderAction.removeItem(dish);
 				this._beforeCheckoutUpdateItems();
 			}
 		}

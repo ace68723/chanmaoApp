@@ -15,8 +15,8 @@ export default  {
   async beforeCheckoutInit(io_data) {
     try{
       const {uid,token,version} = GetUserInfo();
-
       let items   = JSON.parse(JSON.stringify(MenuStore.getCart()));
+      console.log(items);
       items.forEach((item)=>{
         item.amount = item.qty;
         item.ds_id = item.id;
@@ -45,7 +45,6 @@ export default  {
         authortoken: token
       };
       const res = await CheckoutAPI.beforeCheckoutInit(reqData);
-      console.log(res);
       return res;
     } catch (e) {
       throw e;

@@ -72,7 +72,7 @@ export default class SecondMenu extends Component {
 		OrderActions.addItem(Object.assign({},
 																			 this.props.dish,
 																			 {tpgs: this.state.toppingGroupList, qty: 0, price: this.state.total}));
-		this.props.saveModificationCallback();
+		// this.props.saveModificationCallback();
 		this.props.navigator.dismissModal({
 			animationType: 'slide-down'
 		});

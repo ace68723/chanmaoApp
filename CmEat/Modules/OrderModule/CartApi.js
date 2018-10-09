@@ -11,6 +11,7 @@ const CartApi = {
     },
     removeItem(item) {
         this.la_cartItems.splice(this.la_cartItems.findIndex(i => i === item), 1);
+        console.log(this.la_cartItems);
     },
 
     findItem(item) {
