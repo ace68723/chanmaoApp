@@ -3,7 +3,8 @@ import { API_ORDER_BEFORE,
          API_ADD_ORDER,
          API_SIGN_ALIPAY_ORDER,
          API_CHARGE_UPDATE,
-         API_ONE_TIME_CHARGE } from '../../Config/API';
+         API_ONE_TIME_CHARGE,
+         API_CHECK_COUPON } from '../../Config/API';
 export default  {
   beforeCheckoutInit(io_data) {
     const url = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/before_co_init";
@@ -42,7 +43,6 @@ export default  {
     });
 
     options.body = JSON.stringify(io_data.body);
-    console.log(options);
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})
@@ -164,6 +164,24 @@ export default  {
     const POST_DATA = { amount, oid }
     options.headers.authortoken = reqData.token;
     options.body =  JSON.stringify(POST_DATA)
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
+  checkCouponCode(reqData){
+    const url = API_CHECK_COUPON;
+    let options = {
+        method: 'POST',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    options.headers.Authortoken = reqData.token;
+    options.body = JSON.stringify({
+      coupon_code: reqData.coupon,
+    })
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

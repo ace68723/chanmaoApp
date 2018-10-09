@@ -102,6 +102,23 @@ export default  {
       throw e;
     }
   },
+  async beforeCheckoutUpdateCoupon(io_data) {
+    try{
+      const {uid,token,version} = GetUserInfo();
+      const body = {
+        ...io_data,
+      };
+      const reqData = {
+        body,
+        authortoken: token
+      }
+      // console.log(reqData);
+      const res = await CheckoutAPI.beforeCheckoutUpdate(reqData);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  },
   async checkout(io_data) {
     try{
       const {uid,token,version} = GetUserInfo();
@@ -242,6 +259,15 @@ export default  {
   async stripeChargeAndUpdate(reqData) {
     try {
       const res = await CheckoutAPI.stripeChargeAndUpdate(reqData);
+      return res;
+    } catch (e) {
+      console.log(e);
+      throw e
+    }
+  },
+  async checkCouponCode(reqData) {
+    try {
+      const res = await CheckoutAPI.checkCouponCode(reqData);
       return res;
     } catch (e) {
       console.log(e);

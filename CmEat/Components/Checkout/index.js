@@ -47,7 +47,7 @@ import Alipay from '../../../Alipay/Alipay';
 import TabsAction from '../../Actions/TabsAction';
 import CartAPI from '../../Modules/OrderModule/CartApi';
 import OrderAction from '../../Actions/OrderAction';
-
+import PopupView from '../Popup/PopupView'
 
 // device(size): get device height and width
 const {height, width} = Dimensions.get('window');
@@ -91,6 +91,7 @@ class Confirm extends Component {
 											selectedCase: {fees: {},
 							                       payment_channel: 0,
 							                       dltype: 1},
+											couponCode: "",
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
@@ -118,6 +119,12 @@ class Confirm extends Component {
 				this._renderPriceDetail = this._renderPriceDetail.bind(this);
 				this._renderPriceTotal = this._renderPriceTotal.bind(this);
 				this._beforeCheckoutUpdateItems = this._beforeCheckoutUpdateItems.bind(this);
+
+				this._checkCouponOnPress = this._checkCouponOnPress.bind(this);
+				this._cancelCouponOnPress = this._cancelCouponOnPress.bind(this);
+				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
+
+				this.popupView = PopupView.getInstance();
     }
 
     componentDidMount(){
@@ -152,6 +159,42 @@ class Confirm extends Component {
 						});
 					}, 500);
 				}
+
+				// Coupon state update
+				if (this.state.pendingCoupon){
+					if (this.state.pendingCoupon.valid == false || this.state.pendingCoupon.ev_error == 1){
+						this.popupView.setMessagePopup({
+					    title: "错误",
+					    subtitle: "优惠码无效，请检查重试",
+					    onDismiss: () => {
+					      this.setState({showPopup: false})
+					    }
+					  });
+					  this.setState({showPopup: true});
+					}
+					else {
+						const pendingCoupon = this.state.pendingCoupon;
+						this.popupView.setFullPopup(
+					    {
+					      title: this.props.restaurant.name,
+					      subtitle: this.state.pendingCoupon.info,
+					      detailText: '折扣码\n' + this.state.couponCode,
+					      icon: require('./Image/coupon_icon.jpg'),
+					      cancelText: "取消",
+								confirmButtonStyle: {backgroundColor: '#4397DC',},
+					      onConfirm: () => {
+									this.setState({currentCoupon: pendingCoupon});
+									this._applyCouponOnPress();
+								},
+								onCancel: () => {this.setState({couponCode: ""})},
+								onDismiss: () => {this.setState({showPopup: false})},
+					    },
+					  );
+						this.setState({showPopup: true});
+					}
+					this.setState({pendingCoupon: null});
+				}
+
 				// else if (!this.state.jumpToChoosePayment && state.jumpToChoosePayment && state.available_payment_channels.length != 1) {
 				// 	setTimeout( () => {
 				// 		this.props.navigator.showModal({
@@ -481,6 +524,46 @@ class Confirm extends Component {
 				tipsPercentage:tipsPercentage,
 			})
 		}
+
+		_checkCouponOnPress(){
+			if (!this.state.couponCode || this.state.couponCode.length == 0){
+				this.popupView.setMessagePopup({
+					subtitle: "请输入优惠码",
+					onDismiss: () => {
+						this.setState({showPopup: false})
+					}
+				});
+				this.setState({showPopup: true});
+				return;
+			}
+			CheckoutAction.checkCouponCode(this.state.couponCode);
+		}
+		_cancelCouponOnPress(){
+			this.setState({currentCoupon: null, couponCode: ""});
+
+			const data = {
+				ticket_id: this.state.ticket_id,
+				coupon_code: "",
+			}
+			CheckoutAction.beforeCheckoutUpdateCoupon(data);
+		}
+		_applyCouponOnPress(){
+			if (!this.state.currentCoupon){
+				this.popupView.setMessagePopup({
+					subtitle: "未输入优惠码",
+					onDismiss: () => {
+						this.setState({showPopup: false})
+					}
+				});
+				this.setState({showPopup: true});
+				return;
+			}
+			const data = {
+				ticket_id: this.state.ticket_id,
+				coupon_code: this.state.couponCode,
+			}
+			CheckoutAction.beforeCheckoutUpdateCoupon(data);
+		}
 		_renderAndroidCheckoutButton(){
 			if (Platform.OS !== 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
@@ -724,26 +807,52 @@ class Confirm extends Component {
 														 padding: 5,
 														 borderRadius: 30,
 														 backgroundColor: '#f4f4f4',
-														 paddingLeft: 15}}
-										 placeholder={'coupon code'}>
+														 paddingLeft: 15,
+													 }}
+										 placeholder={'coupon code'}
+										 onChangeText={(couponCode) => this.setState({couponCode})}
+										 value={this.state.couponCode}
+										 editable={this.state.currentCoupon == null}
+										 >
 					</TextInput>
-					<TouchableOpacity>
-						<View style={{flex: 1,
-													justifyContent: 'center',
-													alignSelf: 'center',
-													paddingHorizontal: 20,
-													backgroundColor: "#40a2e7",
-													borderRadius: 25}}>
-							<Text style={{color: "white",
-														fontSize: 15}}
-										allowFontScaling={false}>
-								查看
-							</Text>
-						</View>
-					</TouchableOpacity>
+					{
+						this.state.currentCoupon &&
+						<TouchableOpacity onPress={this._cancelCouponOnPress}>
+							<View style={{flex: 1,
+														justifyContent: 'center',
+														alignSelf: 'center',
+														paddingHorizontal: 20,
+														backgroundColor: "#DA4150",
+														borderRadius: 25}}>
+								<Text style={{color: "white",
+															fontSize: 15}}
+											allowFontScaling={false}>
+									取消
+								</Text>
+							</View>
+						</TouchableOpacity>
+					}
+
+					{
+						!this.state.currentCoupon &&
+						<TouchableOpacity onPress={this._checkCouponOnPress}>
+							<View style={{flex: 1,
+														justifyContent: 'center',
+														alignSelf: 'center',
+														paddingHorizontal: 20,
+														backgroundColor: "#40a2e7",
+														borderRadius: 25}}>
+								<Text style={{color: "white",
+															fontSize: 15}}
+											allowFontScaling={false}>
+									使用
+								</Text>
+							</View>
+						</TouchableOpacity>
+					}
 				</View>
 			);
-			if (0 == 0) {
+			if (this.state.currentCoupon) {
 				_couponCode.push(
 					<Text key={'coupon_desc'}
 								style={{color: '#40a2e7',
@@ -1093,6 +1202,7 @@ class Confirm extends Component {
 			}
       return(
 				<View style={styles.mainContainer} >
+					{this.state.showPopup && this.popupView.show()}
 					<Header title={'确认订单'}
 									goBack={this._goBack}
 									leftButtonText={'<'}/>

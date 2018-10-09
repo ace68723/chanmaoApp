@@ -181,8 +181,8 @@ export default class Popup extends Component {
                 alignItems: 'center'
               }}>
               <Image source={this.props.icon} style={{
-                  width: 35,
-                  height: 35,
+                  width: 43,
+                  height: 27,
                   marginTop: 18
                 }}/>
             </View>

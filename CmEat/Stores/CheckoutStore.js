@@ -53,6 +53,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         selectedCase: {fees: {},
                        payment_channel: 0,
                        dltype: 1},
+        pendingCoupon: null,
+        currentCoupon: null,
       };
   },
 	emitChange(){
@@ -415,7 +417,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       this.state.cases = Object.values(data.result.cases);
       this.state.ticket_id = data.result.ticket_id;
       this.state.last_payment = data.result.last_payment;
-      this.state.payment_channel = data.result.last_payment.payment_channel;
+      this.state.payment_channel = data.result.last_payment.payment_channel;this.state.payment_channel = data.result.last_payment.payment_channel;
+      this.state.pendingCoupon = null;
       this.state.loading = false;
       this._updateSelectedCase();
   },
@@ -507,6 +510,9 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       this.state.cardStatus = true;
     }
   },
+  updatePendingCoupon(data){
+    this.state = Object.assign({}, this.state, {pendingCoupon: data});
+  },
 	getDltype(){
 		return this.state.dltype;
 	},
@@ -557,6 +563,11 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
                 RestaurantStore.updateCardStatus(action.data);
                 RestaurantStore.emitChange();
                 break;
+        case AppConstants.CHECK_COUPON_CODE:
+                RestaurantStore.updatePendingCoupon(action.data);
+                RestaurantStore.emitChange();
+                break;
+
         default:
                 break;
 
