@@ -81,6 +81,24 @@ export default {
       }catch (e){
       }
     },
+    async beforeCheckoutUpdateCoupon({ticket_id, coupon_code}) {
+      try{
+          let data = {};
+          let reqData = {
+            ticket_id,
+            coupon_code
+          };
+          const result = await CheckoutModule.beforeCheckoutUpdateCoupon(reqData);
+
+          if (result.ev_error == 0) {
+            data.result = result;
+            dispatch({
+                actionType: AppConstants.BEFORE_CHECKOUT_INIT, data
+            })
+          }
+      }catch (e){
+      }
+    },
     async checkout({ticket_id, sign, dltype, payment_channel, charge_total, rid}){
       try{
         const reqData = {ticket_id, sign, dltype, payment_channel, charge_total, rid};

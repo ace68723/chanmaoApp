@@ -43,7 +43,6 @@ export default  {
     });
 
     options.body = JSON.stringify(io_data.body);
-    console.log(options);
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

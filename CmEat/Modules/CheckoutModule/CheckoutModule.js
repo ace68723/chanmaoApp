@@ -103,6 +103,24 @@ export default  {
       throw e;
     }
   },
+  async beforeCheckoutUpdateCoupon(io_data) {
+    try{
+      const {uid,token,version} = GetUserInfo();
+      const body = {
+        ...io_data,
+      };
+      const reqData = {
+        body,
+        authortoken: token
+      }
+      // console.log(reqData);
+      const res = await CheckoutAPI.beforeCheckoutUpdate(reqData);
+      console.log(res);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  },
   async checkout(io_data) {
     try{
       const {uid,token,version} = GetUserInfo();
@@ -252,7 +270,6 @@ export default  {
   async checkCouponCode(reqData) {
     try {
       const res = await CheckoutAPI.checkCouponCode(reqData);
-      console.log('gg', res);
       return res;
     } catch (e) {
       console.log(e);

@@ -122,6 +122,8 @@ class Confirm extends Component {
 
 				this._checkCouponOnPress = this._checkCouponOnPress.bind(this);
 				this._cancelCouponOnPress = this._cancelCouponOnPress.bind(this);
+				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
+
 				this.popupView = PopupView.getInstance();
     }
 
@@ -180,7 +182,10 @@ class Confirm extends Component {
 					      icon: require('./Image/coupon_icon.jpg'),
 					      cancelText: "取消",
 								confirmButtonStyle: {backgroundColor: '#4397DC',},
-					      onConfirm: () => {this.setState({currentCoupon: pendingCoupon})},
+					      onConfirm: () => {
+									this.setState({currentCoupon: pendingCoupon});
+									this._applyCouponOnPress();
+								},
 								onCancel: () => {this.setState({couponCode: ""})},
 								onDismiss: () => {this.setState({showPopup: false})},
 					    },
@@ -536,7 +541,7 @@ class Confirm extends Component {
 			// api call
 		}
 		_applyCouponOnPress(){
-			if (!this.currentCoupon){
+			if (!this.state.currentCoupon){
 				this.popupView.setMessagePopup({
 					subtitle: "未输入优惠码",
 					onDismiss: () => {
@@ -546,7 +551,11 @@ class Confirm extends Component {
 				this.setState({showPopup: true});
 				return;
 			}
-			CheckoutAction.checkCouponCode(this.state.couponCode);
+			const data = {
+				ticket_id: this.state.ticket_id,
+				coupon_code: this.state.couponCode,
+			}
+			CheckoutAction.beforeCheckoutUpdateCoupon(data);
 		}
 		_renderAndroidCheckoutButton(){
 			if (Platform.OS !== 'ios') {
