@@ -411,7 +411,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       //     "version": "2.8.3"
       // // };
       // this.state.items = data.result.items;
-      console.log(data);
       if (data.selectedAddress) {
         this.state.selectedAddress = data.selectedAddress;
       }
@@ -419,7 +418,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       this.state.ticket_id = data.result.ticket_id;
       this.state.last_payment = data.result.last_payment;
       this.state.payment_channel = data.result.last_payment.payment_channel;this.state.payment_channel = data.result.last_payment.payment_channel;
-      this.state.coupon_code = '';
+      this.state.pendingCoupon = null;
       this.state.loading = false;
       this._updateSelectedCase();
   },

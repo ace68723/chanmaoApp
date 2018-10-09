@@ -538,7 +538,12 @@ class Confirm extends Component {
 		}
 		_cancelCouponOnPress(){
 			this.setState({currentCoupon: null, couponCode: ""});
-			// api call
+
+			const data = {
+				ticket_id: this.state.ticket_id,
+				coupon_code: "",
+			}
+			CheckoutAction.beforeCheckoutUpdateCoupon(data);
 		}
 		_applyCouponOnPress(){
 			if (!this.state.currentCoupon){

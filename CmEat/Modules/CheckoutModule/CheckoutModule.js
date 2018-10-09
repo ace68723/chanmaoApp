@@ -115,7 +115,6 @@ export default  {
       }
       // console.log(reqData);
       const res = await CheckoutAPI.beforeCheckoutUpdate(reqData);
-      console.log(res);
       return res;
     } catch (e) {
       throw e;
