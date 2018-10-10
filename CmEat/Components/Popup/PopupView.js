@@ -20,13 +20,17 @@ const {height, width} = Dimensions.get('window');
 /*
   ========== Usage ==========
 
-  导入
+  -- 导入 --
   import PopupView from '../Popup/PopupView'
 
   在constructor init
   this.popupView = PopupView.getInstance();
 
-  触发
+  -- 简易版触发 --
+  this.popupView.showAlert(this, "错误信息");
+  this.popupView.showAlertWithTitle(this, "标题", "错误detail");
+
+  -- 定制触发 -- 
   this.popupView.setMessagePopup({
     title: "测试",
     subtitle: "测试",
@@ -36,7 +40,7 @@ const {height, width} = Dimensions.get('window');
   });
   this.setState({showPopup: true});
 
-  或是完整形式
+  -- 或是完整形式 --
   this.popupView.setFullPopup(
     {
       title: "测试",
@@ -49,7 +53,7 @@ const {height, width} = Dimensions.get('window');
     },
   );
 
-  加入render
+  -- 加入render --
   {this.state.showPopup && this.popupView.show()}
 
 */
