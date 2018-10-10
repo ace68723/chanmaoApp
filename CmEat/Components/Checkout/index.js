@@ -526,6 +526,7 @@ class Confirm extends Component {
 		}
 
 		_checkCouponOnPress(){
+			Keyboard.dismiss();
 			if (!this.state.couponCode || this.state.couponCode.length == 0){
 				this.popupView.setMessagePopup({
 					subtitle: "请输入优惠码",
