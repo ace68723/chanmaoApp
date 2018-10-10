@@ -67,6 +67,27 @@ export default class PopupView {
         return this.instance;
     }
 
+    showAlert(parent, message){
+      this.setMessagePopup({
+        subtitle: message,
+        onDismiss: () => {
+          parent.setState({showPopup: false})
+        }
+      });
+      parent.setState({showPopup: true});
+    }
+
+    showAlertWithTitle(parent, title, message){
+      this.setMessagePopup({
+        title: title,
+        subtitle: message,
+        onDismiss: () => {
+          parent.setState({showPopup: false})
+        }
+      });
+      parent.setState({showPopup: true});
+    }
+
     setMessagePopup({title = '提示', subtitle, confirmText = '确定', cancelText, onConfirm = ()=> {} , onCancel, onDismiss, confirmButtonStyle}){
       this.state = {
         title: title,
@@ -78,7 +99,6 @@ export default class PopupView {
         containerStyle: {height: 160},
         titleTextStyle: {marginTop: 12},
         confirmButtonStyle: confirmButtonStyle,
-        isShow: true,
         onDismiss: onDismiss
       }
     }
@@ -96,7 +116,6 @@ export default class PopupView {
         confirmButtonStyle: confirmButtonStyle,
         // containerStyle: {height: 160},
         // titleTextStyle: {marginTop: 12},
-        isShow: true,
         onDismiss: onDismiss
       }
     }

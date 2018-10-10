@@ -163,14 +163,7 @@ class Confirm extends Component {
 				// Coupon state update
 				if (this.state.pendingCoupon){
 					if (this.state.pendingCoupon.valid == false || this.state.pendingCoupon.ev_error == 1){
-						this.popupView.setMessagePopup({
-					    title: "错误",
-					    subtitle: "优惠码无效，请检查重试",
-					    onDismiss: () => {
-					      this.setState({showPopup: false})
-					    }
-					  });
-					  this.setState({showPopup: true});
+						this.popupView.showAlertWithTitle(this, "错误", "优惠码无效，请检查重试");
 					}
 					else {
 						const pendingCoupon = this.state.pendingCoupon;
@@ -527,14 +520,9 @@ class Confirm extends Component {
 
 		_checkCouponOnPress(){
 			Keyboard.dismiss();
+
 			if (!this.state.couponCode || this.state.couponCode.length == 0){
-				this.popupView.setMessagePopup({
-					subtitle: "请输入优惠码",
-					onDismiss: () => {
-						this.setState({showPopup: false})
-					}
-				});
-				this.setState({showPopup: true});
+				this.popupView.showAlert(this, "请输入优惠码")
 				return;
 			}
 			CheckoutAction.checkCouponCode(this.state.couponCode);
@@ -550,13 +538,7 @@ class Confirm extends Component {
 		}
 		_applyCouponOnPress(){
 			if (!this.state.currentCoupon){
-				this.popupView.setMessagePopup({
-					subtitle: "未输入优惠码",
-					onDismiss: () => {
-						this.setState({showPopup: false})
-					}
-				});
-				this.setState({showPopup: true});
+				this.popupView.showAlert(this, "请输入优惠码")
 				return;
 			}
 			const data = {
