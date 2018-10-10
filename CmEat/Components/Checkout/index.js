@@ -860,7 +860,7 @@ class Confirm extends Component {
 												marginTop: 15,
 												marginLeft: 20}}
 								allowFontScaling={false}>
-						*折扣码添加成功
+						正在使用：{this.state.currentCoupon.info}
 					</Text>
 				);
 			}
