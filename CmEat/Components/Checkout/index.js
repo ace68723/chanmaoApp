@@ -452,8 +452,22 @@ class Confirm extends Component {
 				});
 			} else {
 				// alert('123');
-				OrderAction.removeItem(dish);
-				this._beforeCheckoutUpdateItems();
+				console.log(dish);
+				this.popupView.setFullPopup(
+					{
+						title: '确定删除',
+						detailText: dish.ds_name + ' x ' + dish.qty,
+						cancelText: "取消",
+						confirmButtonStyle: {backgroundColor: '#ea7b21',},
+						onConfirm: () => {
+							OrderAction.removeItem(dish);
+							this._beforeCheckoutUpdateItems();
+						},
+						onCancel: () => {},
+						onDismiss: () => {this.setState({showPopup: false})},
+					},
+				);
+				this.setState({showPopup: true});
 			}
 		}
 		_beforeCheckoutUpdateItems() {

@@ -72,8 +72,8 @@ export default (props) => {
                 </View>
                 <TouchableOpacity style={{marginLeft: 20}} onPress={props.onPress}>
                   <Image source={require('./Image/icon_edit.png')}
-                         style={{width: 24,
-                                 height: 24}}>
+                         style={{width: 22,
+                                 height: 22}}>
                   </Image>
                 </TouchableOpacity>
            </TouchableOpacity>
@@ -104,9 +104,9 @@ export default (props) => {
               ${props.dish.price}
             </Text>
             <TouchableOpacity style={{marginLeft: 20}} onPress={props.onPress}>
-              <Image source={require('./Image/icon_edit.png')}
-                     style={{width: 24,
-                             height: 24}}>
+              <Image source={require('./Image/icon_delete.png')}
+                     style={{width: 22,
+                             height: 22}}>
               </Image>
             </TouchableOpacity>
          </View>

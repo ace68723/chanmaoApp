@@ -117,6 +117,7 @@ class HistoryTab extends Component {
     _onChange(){
 				const state = Object.assign({},this.state,HistoryStore.getState())
         this.setState(state)
+				console.log(state);
         if(this.state.verifyPhoneResult === 'FAIL'){
           HistoryStore.initVerifyPhoneResult();
 
@@ -195,10 +196,14 @@ class HistoryTab extends Component {
     }
 		_handlePaymentRetry(orderInfo) {
 			const previous_payment = HistoryStore.getLast4();
+			let paymentChannelLists = JSON.parse(JSON.stringify(orderInfo.available_payment_channels));
+			for (let _channel of paymentChannelLists) {
+				_channel.payment_channel = _channel.channel;
+			}
 			this.props.navigator.showModal({
 				screen: 'CmChooseCardType',
 				animated: true,
-				passProps:{available_payment_channels: orderInfo.available_payment_channels,
+				passProps:{available_payment_channels: paymentChannelLists,
 									 stripeCardAdded: this._stripeCardSelected,
 									 alipaySelected: this._alipaySelected,
 									 cashSelected: this._cashSelected,
