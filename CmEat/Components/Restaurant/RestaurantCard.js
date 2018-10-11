@@ -28,14 +28,10 @@ class RestaurantCard extends Component {
 						restaurant:props.restaurant,
             ref:props.restaurant.rid,
             imgUrl:{uri:props.restaurant.mob_banner},
-						isDiscount:true,
           }
           this._openMenu = this._openMenu.bind(this);
 					this._renderDesc = this._renderDesc.bind(this);
       }
-			componentDidMount(){
-				// this.setState({isDiscount:true})
-			}
 			componentWillReceiveProps(nextProps){
 				const rid = Number(nextProps.restaurant.rid);
 				this.setState({
@@ -45,10 +41,8 @@ class RestaurantCard extends Component {
 					imgUrl:{uri:nextProps.restaurant.mob_banner},
 				})
 			}
-			_renderDesc()
-			{
-				// alert(this.state.isDiscount)
-				if (!this.state.isDiscount) return(
+			_renderDesc() {
+				return(
 					<View style={{flex:2,}}>
 						<Text style={{color:'#ababb0',
 													fontSize:12,
@@ -60,23 +54,24 @@ class RestaurantCard extends Component {
 						</Text>
 					</View>
 				);
-				return(
-					<View style={{flex:2, flexDirection:'row'}}>
-						<Image
-							source={require('./Image/icon_coupon_small.png')}
-							style={{height:20,width:35,}}
-						/>
-						<Text style={{color:'#40a2e7',
-													fontSize:12,
-													marginLeft:7,
-													fontWeight:'200',
-													marginTop:5,
-													fontFamily:'FZZhunYuan-M02S'}}
-									allowFontScaling={false}>
-								税前满$66.66可享受85折
-						</Text>
-					</View>
-				)
+				// For discount info
+				// return(
+				// 	<View style={{flex:2, flexDirection:'row'}}>
+				// 		<Image
+				// 			source={require('./Image/icon_coupon_small.png')}
+				// 			style={{height:20,width:35,}}
+				// 		/>
+				// 		<Text style={{color:'#40a2e7',
+				// 									fontSize:12,
+				// 									marginLeft:7,
+				// 									fontWeight:'200',
+				// 									marginTop:5,
+				// 									fontFamily:'FZZhunYuan-M02S'}}
+				// 					allowFontScaling={false}>
+				// 				税前满$66.66可享受85折
+				// 		</Text>
+				// 	</View>
+				// );
 			}
       _renderCloseCover(){
 

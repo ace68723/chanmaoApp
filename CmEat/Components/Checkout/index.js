@@ -83,7 +83,7 @@ class Confirm extends Component {
 											anim: new Animated.Value(0), //for background image
 											AnimatedImage:props.restaurant.mob_banner,
 											renderAddress:true,
-											loading: false,
+											loading: true,
 											showOrderConfirm:false,
 											paymentStatus:'添加支付方式',
 											tips:0,
@@ -258,13 +258,13 @@ class Confirm extends Component {
 								// tips: state.tips.toString(),
 								// oid: state.oidFromUrl,
 								// amount: total,
-								subtotal: state.selectedCase.fees.pretax.toString(),
+								subtotal: (state.selectedCase.fees.pretax - state.selectedCase.fees.total_off).toString(),
 								shipping: state.selectedCase.fees.dlexp.toString(),
 								tax: state.selectedCase.fees.tax.toString(),
 								tips: state.selectedCase.fees.service_fee.toString(),
 								oid: state.oidFromUrl,
 								amount: state.selectedCase.fees.charge_total
-							}
+							};
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
 						}
 						// setTimeout(() => {
@@ -376,8 +376,8 @@ class Confirm extends Component {
 										 previousCardSelected: this._previousCardSelected,
 										 flag: 'fromCheckout',
 								 		 cusid: this.state.cusid,
-								 		 last4: this.state.last4,
-								 		 brand: this.state.brand},
+								 		 last4: this.state.last_payment.stripe_last4,
+								 		 brand: this.state.last_payment.stripe_brand},
 					navigatorStyle: {navBarHidden: true,},
 				});
       }
@@ -445,14 +445,14 @@ class Confirm extends Component {
 				});
 			} else {
 				// alert('123');
-				console.log(dish);
-				this.popupView.setFullPopup(
+				this.popupView.setMessagePopup(
 					{
 						title: '确定删除',
-						detailText: dish.ds_name + ' x ' + dish.qty,
+						subtitle: dish.ds_name + ' x ' + dish.qty,
 						cancelText: "取消",
 						confirmButtonStyle: {backgroundColor: '#ea7b21',},
 						onConfirm: () => {
+							this.setState({loading: true});
 							OrderAction.removeItem(dish);
 							this._beforeCheckoutUpdateItems();
 						},
@@ -521,8 +521,8 @@ class Confirm extends Component {
 
 		_previousCardSelected() {
 			CheckoutAction.updatePaymentStatus(1);
-			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
-										 tipsPercentage:0.1});
+			// this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+			// 							 tipsPercentage:0.1});
 		}
 
 		_setTips(tipsPercentage){
@@ -807,7 +807,7 @@ class Confirm extends Component {
 														 paddingLeft: 15,
 													 }}
 										 placeholder={'coupon code'}
-										 onChangeText={(couponCode) => this.setState({couponCode})}
+										 onChangeText={(couponCode) => this.setState({couponCode: couponCode.toUpperCase().replace(' ', '')})}
 										 value={this.state.couponCode}
 										 editable={this.state.currentCoupon == null}
 										 >
@@ -868,7 +868,7 @@ class Confirm extends Component {
 				if (this.state.cases.length > 1) {
 					let payment_description = '';
 					if (this.state.payment_channel == 1) {
-						payment_description = ' **** **** **** ' + this.state.last4;
+						payment_description = ' **** **** **** ' + this.state.last_payment.stripe_last4;
 					}
 					else if (this.state.payment_channel == 10) {
 						// payment_description = '支付宝';

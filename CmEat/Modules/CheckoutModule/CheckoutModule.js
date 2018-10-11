@@ -111,8 +111,7 @@ export default  {
       const reqData = {
         body,
         authortoken: token
-      }
-      // console.log(reqData);
+      };
       const res = await CheckoutAPI.beforeCheckoutUpdate(reqData);
       return res;
     } catch (e) {

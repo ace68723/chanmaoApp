@@ -228,7 +228,7 @@ class Menu extends Component {
 			// )
 			let loading = this.state.loading ? <Image source={require('./Image/Loading_dots_orange.gif')}  style={{width:45,height:15}}/>:null
 			return(
-				<View style={{marginTop:420,alignItems:'center'}}>
+				<View style={{marginTop:350,alignItems:'center'}}>
 						{loading}
 				</View>
 			)

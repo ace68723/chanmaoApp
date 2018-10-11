@@ -96,6 +96,23 @@ export default class MenuHeader extends Component {
       outputRange: [600, -150],
       extrapolate: 'clamp',
     });
+		const _discountInfo = () => {
+			let _discountInfo = [];
+			_discountInfo.push(
+				<View style={{marginTop:15,justifyContent:'center',alignItems:'center',height:30,width:width*0.85}}>
+					<Image source={require('./Image/icon_coupon_small.png')} style={{width:40,height:25,}} />
+				</View>
+			);
+			_discountInfo.push(
+				<Text style={{textAlign:'center',
+											color:'#40a2e7',marginTop:5,
+											fontFamily:'FZZhunYuan-M02S'}}
+							allowFontScaling={false}>
+					税前满$66.66可享受85折
+				</Text>
+			);
+			return _discountInfo;
+		}
     return(
 			<Animated.View style={{backgroundColor:'#ffffff',
 										padding:8,
@@ -160,15 +177,6 @@ export default class MenuHeader extends Component {
 												fontFamily:'FZZhunYuan-M02S'}}
 								allowFontScaling={false}>
 						{this.props.start_time} - {this.props.end_time}
-					</Text>
-					<View style={{marginTop:15,justifyContent:'center',alignItems:'center',height:30,width:width*0.85}}>
-						<Image source={require('./Image/icon_coupon_small.png')} style={{width:40,height:25,}} />
-					</View>
-					<Text style={{textAlign:'center',
-												color:'#40a2e7',marginTop:5,
-												fontFamily:'FZZhunYuan-M02S'}}
-								allowFontScaling={false}>
-						税前满$66.66可享受85折
 					</Text>
 				</Animated.View>
 

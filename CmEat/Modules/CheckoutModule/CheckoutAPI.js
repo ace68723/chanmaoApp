@@ -63,16 +63,8 @@ export default  {
         authortoken: io_data.authortoken
     });
     options.body = JSON.stringify(io_data.body);
-    console.log(url);
-    console.log(options);
     return fetch(url,options)
-            .then(
-              // (res) => res.json()
-              (res) => {
-                console.log(res);
-                return res.json();
-              }
-            )
+            .then((res) => res.json())
             .catch((error) => {throw error})
   },
   addCard(io_data) {

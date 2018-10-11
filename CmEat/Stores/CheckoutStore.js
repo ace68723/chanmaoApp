@@ -128,6 +128,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   updateDltype(data){
   		// const dltype = data.type;
       this.state.dltype = data.type;
+      this.state.payment_channel = 0;
   		// cme_updateDltype(dltype);
   		// CheckoutAction.calculateDeliveryFee()
       this._updateSelectedCase();

@@ -277,7 +277,6 @@ export default {
     },
     updatePaymentStatus(payment_channel){
       const data = {payment_channel: payment_channel}
-      console.log(data);
       dispatch({
           actionType: AppConstants.UPDATE_PAYMENT_STATUS, data,
       })
