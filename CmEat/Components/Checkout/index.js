@@ -823,16 +823,14 @@ class Confirm extends Component {
 								style={{flexDirection: 'row',
 												justifyContent: 'space-between',
 												marginTop: 10,
-												marginLeft: 20,
+												marginLeft: 25,
 												marginRight: 10}}>
 						<Text style={{flex: 1,
 													color: "#40a2e7",
 													marginRight: 10,
 													alignItems:'flex-start',
 													alignSelf: 'center',
-													padding: 5,
-													borderRadius: 30,
-													paddingLeft: 15,}}>
+													borderRadius: 30}}>
 								 正在使用：{this.state.coupon_code}
 						</Text>
 						<TouchableOpacity style={{alignSelf: 'center'}}

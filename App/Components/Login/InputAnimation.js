@@ -267,11 +267,12 @@ export default class InputAnimation extends Component {
 	                    placeholderTextColor={'#ffffff'}
 	                    selectionColor={'#ea7b21'}
 	                    autoCorrect= { false}
-	                    returnKeyType={'next'}
+	                    returnKeyType={'go'}
 	                    secureTextEntry={true}
 	                    ref={this.props.ir_PASSWORD_INPUTREF}
 	                    onChangeText={this.props.if_handlePassword}
                       underlineColorAndroid={"rgba(0,0,0,0)"}
+											onSubmitEditing={() => this._handleLogin()}
 	                />
 								<View ref={this.props.ir_SUBMIT_BUTTON} >
 									<LoginButton is_login = {this.props.is_login}
