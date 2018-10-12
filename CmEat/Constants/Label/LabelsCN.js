@@ -9,7 +9,7 @@ module.exports={
     MY_TAB:'我的',
     SETTING:'设置',
     MY_ORDER:'我的订单',
-    ADD_ADDRESS:'地址维护',
+    ADD_ADDRESS:'添加地址',
     SAVE_ADDRESS:'保存地址',
     CUSTOMER_SERVICE:'联系客服',
     LANGUAGE_SETTING:'选择语言',

@@ -117,7 +117,6 @@ class HistoryTab extends Component {
     _onChange(){
 				const state = Object.assign({},this.state,HistoryStore.getState())
         this.setState(state)
-				console.log(state);
         if(this.state.verifyPhoneResult === 'FAIL'){
           HistoryStore.initVerifyPhoneResult();
 

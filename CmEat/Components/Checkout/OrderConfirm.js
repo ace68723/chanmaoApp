@@ -27,6 +27,7 @@ export default class orderConfirm extends Component {
     this.state = {
       //  isOpen: this.props.isCheaking,
       isOpen: true,
+      dltype: props.dltype
 
     }
   }
@@ -55,7 +56,7 @@ export default class orderConfirm extends Component {
 
   render() {
       let dldec, visa_fee;
-      switch (this.props.dltype) {
+      switch (this.state.dltype) {
         case 0:
           dldec = '自取'
         break;

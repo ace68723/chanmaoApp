@@ -43,8 +43,23 @@ export default  {
     });
 
     options.body = JSON.stringify(io_data.body);
+    // return this.fetchWithTimeout(url, options, 10)
+    //             .then((result) => {
+    //               console.log(result);
+    //               return result.data;
+    //             })
+    //             .catch((error) => {
+    //               console.log(error);
+    //               throw error;
+    //             })
     return fetch(url,options)
-            .then((res) => res.json())
+            .then(
+              // (res) => res.json()
+              (res) => {
+                console.log(res);
+                return res.json();
+              }
+          )
             .catch((error) => {throw error})
   },
   checkout(io_data){
@@ -178,4 +193,32 @@ export default  {
             .then((res) => res.json())
             .catch((error) => {throw error})
   },
+  fetchWithTimeout(url, options, timeout=5000) {
+    var timeoutPromise = new Promise(function(resolve,reject){
+                            setTimeout(resolve, timeout, {status: 'error', code: 666, data: 'Verbinding met de cloud kon niet tot stand gebracht worden: Timeout.'});
+                          });
+    return Promise.race([timeoutPromise, fetch(url, options)]).then((result) => {
+                        console.log(result);
+                        var Status = result.status;
+                        if (result.status === 500 || result.status === 404) {
+                          return {status: 'error', code: 666, data: 'server failed'};
+                        }
+                        return result.json().then(function(data){
+                          if (Status === 200 || Status === 0) {
+                            return {status: 'success', code: Status, data: data};
+                          }
+                          else {
+                            return {status: 'error', code: Status, data: 'Error (' + data.status_code + '): ' + data.message};
+                          }
+                        },function (response) {
+                          return {status: 'error', code: Status, data: 'json promise failed' + response};
+                        }).catch((error) => {
+                          return {status: 'error', code: 666, data: 'no json response'};
+                        });
+                      }, function(error){
+                          return {status: 'error', code: 666, data: 'connection timed out'};
+                      }).catch((error) => {
+                          return {status: 'error', code: 666, data: 'connection timed out'};
+                      });
+  }
 }
