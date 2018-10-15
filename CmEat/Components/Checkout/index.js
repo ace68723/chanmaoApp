@@ -126,6 +126,8 @@ class Confirm extends Component {
 				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
 
 				this.popupView = PopupView.getInstance();
+
+				this._setSearchText = this._setSearchText.bind(this);
     }
 
     componentDidMount(){
@@ -414,7 +416,7 @@ class Confirm extends Component {
     _handleSubmitComment(commentInput){
       this.commentInput = commentInput;
       commentInput.blur();
-      if(this.state.comment.length>0){
+      if(this.state.comment.length > 0){
         const pid = this.state.pid;
         const comment = this.state.comment;
         const view = 'comment';
@@ -457,6 +459,9 @@ class Confirm extends Component {
 							this.setState({loading: true});
 							OrderAction.removeItem(dish);
 							this._beforeCheckoutUpdateItems();
+							if(this.state.cart.length === 0){
+								this.props.navigator.pop();
+							}
 						},
 						onCancel: () => {},
 						onDismiss: () => {this.setState({showPopup: false})},
@@ -1138,13 +1143,16 @@ class Confirm extends Component {
 				<CommentModal  style={styles.modal}
 											 position={"center"}
 											 isOpen={this.state.openEditComment}
-											 onClosed={()=>{this.setState({openEditComment:false})}}>
-					<TextInput style={styles.TextInput}
-										 placeholder={CMLabel.getCNLabel('`REMARK')}
-										 selectionColor="#ff8b00"
-										 multiline={true}
-										 onChangeText={(text) => {this.setState({comment:text})}}
-                     underlineColorAndroid={"rgba(0,0,0,0)"}>
+											 onClosed={()=>{this.setState({openEditComment:false})}}
+											 onOpened={()=>{this._commentInput.setNativeProps({ text:this.state.comment })}}>
+					<TextInput 
+										style={styles.TextInput}
+										ref={component => this._commentInput = component}
+										placeholder={CMLabel.getCNLabel('`REMARK')}
+										selectionColor="#ff8b00"
+										multiline={true}
+										onChangeText={(text)=>this.setState({comment:text})}
+										underlineColorAndroid={"rgba(0,0,0,0)"}>
 					</TextInput>
 				</CommentModal>
 			)
