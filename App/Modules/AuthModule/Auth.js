@@ -91,7 +91,35 @@ const AuthModule = {
         console.log(e)
       }
     },
+    async getVcode(io_data){
+      console.log(io_data)
+      try{
+        const res = await AuthApi.getVcode(io_data);
+        if (res.ev_error === 0) {
 
+          return res;
+        }else{
+
+          throw res;
+        }
+      }catch(e) {
+        console.log(e)
+      }
+    },
+    async resetPassword(io_data){
+      try{
+        const res = await AuthApi.resetPassword(io_data);
+        if (res.ev_error === 0) {
+
+          return res;
+        }else{
+
+          throw res;
+        }
+      }catch(e) {
+        console.log(e)
+      }
+    },
     async AppDoWechatAuth(io_data){
       var d = new Date();
       // const deviceToken = io_data.deviceToken;
