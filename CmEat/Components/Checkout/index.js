@@ -127,10 +127,6 @@ class Confirm extends Component {
 				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
 
 				this.popupView = PopupView.getInstance();
-<<<<<<< HEAD
-
-=======
->>>>>>> f5599b71673e5b24945c8b61543d20372535124f
     }
 
     componentDidMount(){
@@ -725,7 +721,7 @@ class Confirm extends Component {
 			}
 		}
 		_deliverAnimation(deliverType){
-			
+
 			if(deliverType === '0'){
 				Animated.timing(                  // Animate over time
 					this.state.tabAnim,            // The animated value to drive
@@ -733,7 +729,7 @@ class Confirm extends Component {
 						toValue: 130,                   // Animate to opacity: 1 (opaque)
 						duration: 200,              // Make it take a while
 					}
-				).start();  
+				).start();
 			}else{
 				Animated.timing(                  // Animate over time
 					this.state.tabAnim,            // The animated value to drive
@@ -741,9 +737,9 @@ class Confirm extends Component {
 						toValue: 12,                   // Animate to opacity: 1 (opaque)
 						duration: 200,              // Make it take a while
 					}
-				).start();  
+				).start();
 			}
-		
+
 		}
 		_renderDeliverType(){
       let typeListData=[{
@@ -788,12 +784,12 @@ class Confirm extends Component {
 									alignItems:'center',
 									alignSelf:'center',
 									justifyContent:'center',
-								}}>			
+								}}>
                 <Text style={{color:deliverType.textColor,fontFamily:'FZZhunYuan-M02S',}}
 											allowFontScaling={false}>
                   {deliverType.text}
                 </Text>
-							</View>												
+							</View>
             </TouchableWithoutFeedback>
           )
         })
@@ -822,7 +818,7 @@ class Confirm extends Component {
 								}}>
 						</Animated.View>
 						 {TypeList}
-					
+
         </View>
       )
     }
