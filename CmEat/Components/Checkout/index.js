@@ -568,16 +568,20 @@ class Confirm extends Component {
 			CheckoutAction.beforeCheckoutUpdateCoupon(data);
 		}
 		_renderAndroidCheckoutButton(){
-			if (Platform.OS == 'ios') {
+			if (Platform.OS !== 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
-	            <TouchableOpacity style={[styles.acceptButton, {marginBottom: 20}]}
+	            <TouchableOpacity style={{marginBottom: 20}}
 	                              activeOpacity={0.4}
 	                              onPress={this._checkout}>
-										<View style={{flex: 1}}>
+										<View style={styles.acceptButton}>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
-												 {CMLabel.getCNLabel('CHECK_OUT')}
+												 实付: ${this.state.selectedCase.fees.charge_total}
+											</Text>
+											<Text style={styles.acceptText}
+														allowFontScaling={false}>
+												 确认下单
 											</Text>
 										</View>
 	            </TouchableOpacity>
@@ -604,7 +608,7 @@ class Confirm extends Component {
 		}
 
 		renderCheckoutButton(){
-			if (Platform.OS !== 'ios') {
+			if (Platform.OS == 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
 	            <TouchableOpacity activeOpacity={0.4}
