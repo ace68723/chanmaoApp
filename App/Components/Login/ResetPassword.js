@@ -36,6 +36,10 @@ export default class ResetPassword extends Component {
       "num":num,
     }
     let res=await AuthModule.getVcode(data);
+
+    if (res.ev_noti_msg) {alert(res.ev_noti_msg)}
+    else if (res.ev_error==0) {alert('message sent')}
+    else alert(res.ev_context);
   }
   async _resetPassword(iv_verification_code,iv_password,iv_num,confirm_password)
   {
@@ -50,7 +54,9 @@ export default class ResetPassword extends Component {
       "iv_num": iv_num,
     }
     let res=await AuthModule.resetPassword(data);
-
+    if (res.ev_error==0) {alert('reset success!')}
+    else alert(res.ev_context);
+    this.props.toggleViewTypeReset();
   }
   render() {
     return (
@@ -139,26 +145,27 @@ export default class ResetPassword extends Component {
                             backgroundColor:'#ffffff',}}>
               </View>
 
-              <View style={{height:30,width:width,marginTop:10}}>
-  							<TouchableWithoutFeedback onPress={this.props.toggleViewTypeReset}>
-  								<View style={{flex:1}}>
-  									<Text allowFontScaling={false} style={{fontSize:15,color:"#ffffff",}}>
-  										 Login
-  									</Text>
-  								</View>
-  							</TouchableWithoutFeedback>
-  						</View>
+
 
               <View style={{height:70,marginTop:height*0.08,width:0.8*width,
               justifyContent:'center',alignItems:'center'}}>
                 <TouchableOpacity onPress={()=> this._resetPassword(this.state.code,this.state.password,this.state.num,this.state.confirm_password)}>
-                  <View style={{height:60,width:0.5*width,backgroundColor:'#ea7b21',borderRadius:30 ,
+                  <View style={{height:60,width:0.8*width,backgroundColor:'#ea7b21',borderRadius:30 ,
                 justifyContent:'center',alignItems:'center'}}>
                     <Text style={{fontSize:25,color:'white'}}>
                       SUBMIT
                     </Text>
                   </View>
                 </TouchableOpacity>
+              </View>
+              <View style={{height:30,width:width,marginTop:10}}>
+                <TouchableWithoutFeedback onPress={this.props.toggleViewTypeReset}>
+                  <View style={{flex:1}}>
+                    <Text allowFontScaling={false} style={{fontSize:15,color:"#ffffff",}}>
+                       Login
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
               </View>
 
 

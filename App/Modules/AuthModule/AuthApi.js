@@ -142,7 +142,7 @@ const AuthApi = {
     },
     getVcode(io_data)
     {
-      console.log('getVcode')
+
       const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_send_vcode_reset_password';
       let options = {
           method: 'GET',
@@ -164,10 +164,10 @@ const AuthApi = {
       //   username: userInfo.username,
       //   password: userInfo.password
       // })
-      console.log(options);
+
       return fetch(url,options)
-              .then((res) => {console.log(res);res.json()})
-              .catch((error) => {console.log(error);throw ERROR_NETWORK})
+              .then((res) => res.json())
+              .catch((error) => {throw ERROR_NETWORK})
     },
     resetPassword(io_data)
     {
@@ -197,7 +197,7 @@ const AuthApi = {
         "iv_num": io_data.iv_num,
       })
       return fetch(url,options)
-              .then((res) => {console.log(res);res.json()})
+              .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
     bindPhone(io_data) {

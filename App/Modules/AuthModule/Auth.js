@@ -100,7 +100,9 @@ const AuthModule = {
           return res;
         }else{
 
-          throw res;
+
+
+          return res;
         }
       }catch(e) {
         console.log(e)
