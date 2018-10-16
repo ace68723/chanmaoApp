@@ -126,8 +126,6 @@ class Confirm extends Component {
 				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
 
 				this.popupView = PopupView.getInstance();
-
-				this._setSearchText = this._setSearchText.bind(this);
     }
 
     componentDidMount(){
@@ -861,7 +859,7 @@ class Confirm extends Component {
 					<View key={'coupon_code'}
 								style={{flexDirection: 'row',
 												marginTop: 10,
-												marginLeft: 20,
+												marginLeft: 25,
 												marginRight: 10}}>
 						<TextInput style={{flex: 1,
 															 marginRight: 30,
@@ -1044,6 +1042,29 @@ class Confirm extends Component {
 					</View>
 				)
 			}
+			if (this.state.selectedCase.fees.ori_tax) {
+				_priceDetail.push(
+					<View key={'price_tax'}
+								style={{flex: 1,
+												flexDirection: 'row',
+												justifyContent: 'space-between',
+												marginTop: 10,
+												marginHorizontal: 20}}>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							税
+						</Text>
+						<Text style={{fontSize: 15,
+													color: '#9b9b9b',
+													fontFamily: 'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							${this.state.selectedCase.fees.ori_tax}
+						</Text>
+					</View>
+				)
+			}
 			if (this.state.selectedCase.fees.ori_service_fee && this.state.selectedCase.fees.ori_service_fee > 0) {
 				_priceDetail.push(
 					<View key={'price_service_fee'}
@@ -1090,29 +1111,6 @@ class Confirm extends Component {
 					</View>
 				)
 			}
-			if (this.state.selectedCase.fees.ori_tax) {
-				_priceDetail.push(
-					<View key={'price_tax'}
-								style={{flex: 1,
-												flexDirection: 'row',
-												justifyContent: 'space-between',
-												marginTop: 10,
-												marginHorizontal: 20}}>
-						<Text style={{fontSize: 15,
-													color: '#9b9b9b',
-													fontFamily: 'FZZhunYuan-M02S'}}
-									allowFontScaling={false}>
-							税
-						</Text>
-						<Text style={{fontSize: 15,
-													color: '#9b9b9b',
-													fontFamily: 'FZZhunYuan-M02S'}}
-									allowFontScaling={false}>
-							${this.state.selectedCase.fees.ori_tax}
-						</Text>
-					</View>
-				)
-			}
 			return _priceDetail;
 		}
 
@@ -1124,16 +1122,26 @@ class Confirm extends Component {
 											justifyContent: 'space-between'}}>
 					<Text style={{color:'#666666',
 												fontSize:19,
-												fontWeight: '800',}}
+												fontWeight: '800'}}
 								allowFontScaling={false}>
 						总计
 					</Text>
-					<Text style={{color:'#666666',
-												fontSize:19,
-												fontFamily:'FZZhunYuan-M02S',}}
-								allowFontScaling={false}>
-						${this.state.selectedCase.fees.charge_total}
-					</Text>
+					<View style={{flexDirection: 'row'}}>
+						<Text style={{color:'#666666',
+													fontSize:19,
+													fontFamily:'FZZhunYuan-M02S',
+													marginRight: 6}}
+									allowFontScaling={false}>
+							${this.state.selectedCase.fees.charge_total}
+						</Text>
+						<Text style={{color:'#9b9b9b',
+													fontSize:19,
+													fontFamily:'FZZhunYuan-M02S',
+													textDecorationLine: 'line-through'}}
+									allowFontScaling={false}>
+							${this.state.selectedCase.fees.total}
+						</Text>
+					</View>
 				</View>
 			);
 		}
@@ -1145,7 +1153,7 @@ class Confirm extends Component {
 											 isOpen={this.state.openEditComment}
 											 onClosed={()=>{this.setState({openEditComment:false})}}
 											 onOpened={()=>{this._commentInput.setNativeProps({ text:this.state.comment })}}>
-					<TextInput 
+					<TextInput
 										style={styles.TextInput}
 										ref={component => this._commentInput = component}
 										placeholder={CMLabel.getCNLabel('`REMARK')}
