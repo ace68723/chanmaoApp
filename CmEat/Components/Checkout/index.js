@@ -93,6 +93,7 @@ class Confirm extends Component {
 							                       dltype: 1},
 											couponCodeTextInput: "",
 											coupon_code: "",
+											tabAnim: new Animated.Value(12)
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
@@ -127,7 +128,6 @@ class Confirm extends Component {
 
 				this.popupView = PopupView.getInstance();
 
-				this._setSearchText = this._setSearchText.bind(this);
     }
 
     componentDidMount(){
@@ -718,6 +718,27 @@ class Confirm extends Component {
 				)
 			}
 		}
+		_deliverAnimation(deliverType){
+			
+			if(deliverType === '0'){
+				Animated.timing(                  // Animate over time
+					this.state.tabAnim,            // The animated value to drive
+					{
+						toValue: 130,                   // Animate to opacity: 1 (opaque)
+						duration: 200,              // Make it take a while
+					}
+				).start();  
+			}else{
+				Animated.timing(                  // Animate over time
+					this.state.tabAnim,            // The animated value to drive
+					{
+						toValue: 12,                   // Animate to opacity: 1 (opaque)
+						duration: 200,              // Make it take a while
+					}
+				).start();  
+			}
+		
+		}
 		_renderDeliverType(){
       let typeListData=[{
                           text:CMLabel.getCNLabel('DELIVER'),
@@ -750,36 +771,52 @@ class Confirm extends Component {
       let TypeList = typeListData.map((deliverType,index) => {
           return (
             <TouchableWithoutFeedback
-                key={index}
-                onPress={this._updateDltype.bind(null,deliverType.type)}>
-              <View style={{flex:1,
-                            alignItems:"center",
-                            backgroundColor:deliverType.backgroundColor,
-                            borderColor:deliverType.borderColor,
-                            borderWidth:1,
-                            borderRadius:25,
-                            marginLeft:8,
-                            marginRight:8,
-                            padding:10
-                          }}>
+								key={index}
+                onPress={()=>{
+									this._updateDltype.bind(null,deliverType.type)
+									this._deliverAnimation(deliverType.type)
+								}}
+								>
+							<View style={{
+									width:118,
+									alignItems:'center',
+									alignSelf:'center',
+									justifyContent:'center',
+								}}>			
                 <Text style={{color:deliverType.textColor,fontFamily:'FZZhunYuan-M02S',}}
 											allowFontScaling={false}>
                   {deliverType.text}
                 </Text>
-              </View>
+							</View>												
             </TouchableWithoutFeedback>
           )
         })
       return(
-        <View style={{flexDirection:"row",
+        <View style={{
+											height: 50,
+											width:260,
+											alignSelf:'center',
+											flexDirection:"row",
 											marginTop:25,
-											backgroundColor: "#ccd3db",
+											backgroundColor: '#ccd3db',
 					 						marginHorizontal: 30,
-											paddingTop: 8,
-											paddingBottom: 8,
+											paddingHorizontal:12,
 											borderRadius: 25,
 											marginBottom: 20}}>
-            {TypeList}
+						<Animated.View style={{
+									height:35,
+									width:118,
+									backgroundColor:"#ff8b00",//deliverType.backgroundColor,
+									borderColor:"#ff8b00",//deliverType.borderColor,
+									borderWidth:1,
+									borderRadius:25,
+									marginLeft: this.state.tabAnim,
+									marginTop:8,
+									position:'absolute',
+								}}>
+						</Animated.View>
+						 {TypeList}
+					
         </View>
       )
     }
