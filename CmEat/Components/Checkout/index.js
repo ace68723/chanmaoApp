@@ -567,28 +567,31 @@ class Confirm extends Component {
 			CheckoutAction.beforeCheckoutUpdateCoupon(data);
 		}
 		_renderAndroidCheckoutButton(){
-			if (Platform.OS !== 'ios') {
+			if (Platform.OS == 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
-	            <TouchableOpacity style={[styles.acceptButton, {marginBottom: 50}]}
+	            <TouchableOpacity style={[styles.acceptButton, {marginBottom: 20}]}
 	                              activeOpacity={0.4}
 	                              onPress={this._checkout}>
-										<Text style={styles.acceptText}
-													allowFontScaling={false}>
-											 {CMLabel.getCNLabel('CHECK_OUT')}
-										</Text>
+										<View style={{flex: 1}}>
+											<Text style={styles.acceptText}
+														allowFontScaling={false}>
+												 {CMLabel.getCNLabel('CHECK_OUT')}
+											</Text>
+										</View>
 	            </TouchableOpacity>
 	        )
 	      }else if(this.state.loading){
 					return(
-						<View style={styles.acceptButton}>
+						<View style={[styles.acceptButton, {justifyContent: 'center', marginBottom: 20}]}>
 								<Image source={require('./Image/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
 						</View>
 					)
 				}else{
 	        return(
-	          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
-	            <View style={styles.acceptButton}>
+	          <TouchableOpacity style={{marginBottom: 20}}
+															onPress={()=>{this._goToAddressList()}}>
+	            <View style={[styles.acceptButton, {justifyContent: 'center'}]}>
 	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
 											allowFontScaling={false}>{CMLabel.getCNLabel('ADD_ADDRESS')}</Text>
 	            </View>
@@ -600,7 +603,7 @@ class Confirm extends Component {
 		}
 
 		renderCheckoutButton(){
-			if (Platform.OS === 'ios') {
+			if (Platform.OS !== 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
 	            <TouchableOpacity activeOpacity={0.4}
@@ -874,6 +877,7 @@ class Confirm extends Component {
 											 onChangeText={(couponCode) => this.setState({couponCodeTextInput: couponCode.toUpperCase().replace(' ', '')})}
 											 value={this.state.couponCodeTextInput}
 											 editable={true}
+											 underlineColorAndroid={"rgba(0,0,0,0)"}
 											 >
 						</TextInput>
 						<TouchableOpacity onPress={this._checkCouponOnPress}>
@@ -1115,6 +1119,20 @@ class Confirm extends Component {
 		}
 
 		_renderPriceTotal() {
+			const _originTotal = () => {
+				if (this.state.selectedCase.fees.using_coupon) {
+					return (
+						<Text style={{color:'#9b9b9b',
+													fontSize:19,
+													fontFamily:'FZZhunYuan-M02S',
+													textDecorationLine: 'line-through',
+													marginLeft: 6}}
+									allowFontScaling={false}>
+							${this.state.selectedCase.fees.total}
+						</Text>
+					);
+				}
+			}
 			return (
 				<View style={{flexDirection: 'row',
 											marginTop: 20,
@@ -1129,18 +1147,11 @@ class Confirm extends Component {
 					<View style={{flexDirection: 'row'}}>
 						<Text style={{color:'#666666',
 													fontSize:19,
-													fontFamily:'FZZhunYuan-M02S',
-													marginRight: 6}}
+													fontFamily:'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
 							${this.state.selectedCase.fees.charge_total}
 						</Text>
-						<Text style={{color:'#9b9b9b',
-													fontSize:19,
-													fontFamily:'FZZhunYuan-M02S',
-													textDecorationLine: 'line-through'}}
-									allowFontScaling={false}>
-							${this.state.selectedCase.fees.total}
-						</Text>
+						{_originTotal()}
 					</View>
 				</View>
 			);

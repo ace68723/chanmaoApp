@@ -3,13 +3,13 @@ import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './screens';
 import codePush from "react-native-code-push";
 
-// codePush.sync({ installMode: codePush.InstallMode.IMMEDIATE});
+codePush.sync({ installMode: codePush.InstallMode.IMMEDIATE});
 DatabaseInit();
 registerScreens();
 Navigation.startSingleScreenApp({
   screen: {
     // screen: 'cmHome', CmEat CmLogin// unique ID registered with Navigation.registerScreen
-    screen: 'CmEat',
+    screen: 'cmHome',
     navigatorStyle: {navBarHidden: true},
     navigatorButtons: {},
 
