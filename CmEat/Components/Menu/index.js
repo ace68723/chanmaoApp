@@ -22,6 +22,9 @@ import {
 import MenuStore from '../../Stores/MenuStore';
 import CMLabel from '../../Constants/AppLabel';
 
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import RestaurantInfoTab from '../MenuTab/RestaurantInfoTab'
+
 const {width,height} = Dimensions.get('window');
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
 let marginTop,headerHeight;
@@ -56,6 +59,7 @@ class Menu extends Component {
         restaurantViewOpacity: new Animated.Value(0), // init opacity 0
         restaurantCardTop:new Animated.Value(props.py),
         restaurantCardMargin:new Animated.Value(7),
+				scrollableMarginTop: 210,
         top:props.py,
         restaurant:props.restaurant,
         renderMenuList:true,
@@ -197,14 +201,24 @@ class Menu extends Component {
 
 			}
 		}
-    _handleScroll( e: any) {
+    _handleScroll(e: any) {
+
 			return(
 	      Animated.event(
 	          [{nativeEvent: {contentOffset: {y: this.state.anim}}}],
-            // { useNativeDriver: true }
+						{
+					    useNativeDriver: false,
+					    listener: event => {
+					      const offsetY = event.nativeEvent.contentOffset.y
+								const tabBarOffset = -offsetY + 210;
+								if (tabBarOffset > -height * 0.15){
+									this.setState({scrollableMarginTop: -offsetY + 210})
+								}
+
+					    },
+					  },
 	        )
 	    )
-
     }
 
     _renderMenuList(){
@@ -216,7 +230,11 @@ class Menu extends Component {
 													handleScroll={this._handleScroll}
 													closeMenuAnimation = {this._closeMenuAnimation}
 													goToMenuSearch = {this._goToMenuSearch}
-													showMenuAnimation = {this.state.showMenuAnimation}/>)
+													showMenuAnimation = {this.state.showMenuAnimation}
+													tabLabel={'菜单'}
+													style={{marginTop: -height/2}}
+													 />
+											)
       }
     }
     _changeCartTotals(cartTotals){
@@ -403,9 +421,24 @@ class Menu extends Component {
                   end_time = {this.props.restaurant.end_time}
                   />
             </Animated.View>
-            <View style={{position:'absolute',left:0,top:0,right:0,bottom:0,}}>
-              {this._renderMenuList()}
-            </View>
+
+
+						<ScrollableTabView
+							 tabBarBackgroundColor={'#fff'}
+							 tabBarActiveTextColor={'black'}
+							 tabBarInactiveTextColor={'grey'}
+							 tabBarUnderlineColor={'#ff8b00'}
+							 tabBarUnderlineStyle={{'backgroundColor':'#ff8b00', width: 1, height: 1, marginHorizontal: '14%',}}
+							 tabBarTextStyle={{fontSize:14,color: 'black',fontWeight: '600'}}
+							 prerenderingSiblingsNumber={2}
+							 initialPage={0}
+							 style={{flex:1, marginTop: this.state.scrollableMarginTop}}
+						 >
+						 {this._renderMenuList()}
+						<RestaurantInfoTab tabLabel={'餐馆信息'}/>
+						</ScrollableTabView>
+
+
 
 
             {this._renderClose()}
