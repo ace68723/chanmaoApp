@@ -100,12 +100,14 @@ export default {
       }
     },
     async checkout({ticket_id, sign, dltype, payment_channel, charge_total, rid}){
+      console.log({ticket_id, sign, dltype, payment_channel, charge_total, rid})
       try{
         const reqData = {ticket_id, sign, dltype, payment_channel, charge_total, rid};
         const data = {
           result: 1
         };
         const result = await CheckoutModule.checkout(reqData);
+        console.log(result)
         if (result.ev_error == 0) {
           data.result = 0;
           data.oidFromUrl = result.oid;
@@ -168,22 +170,25 @@ export default {
       }
     },
 
-		async _payByApple({subtotal,shipping,tax,tips},callback){
+		async _payByApple({subtotal,shipping,tax,tips,amount, discount},callback){
+     
 			let paymentData = {
-				subtotal:'' + subtotal,
-        shipping:'' + shipping,
-				tax:'' + tax,
-				tips:'' + tips,
+				subtotal: subtotal.toString(),
+        shipping: shipping.toString(),
+				tax: tax.toString(),
+        tips: tips.toString(),
+        total: amount.toString(),
+        discount: discount.toString()
 			}
-      //Apple Pay canceled
+      //Apple Pay cancelled
       NativeModules.cmApplePay.cancelcallback(callback);
       let token = await NativeModules.cmApplePay.createPayment(paymentData);
       return token;
     },
     async _repayByApple({tips,total},callback){
       let paymentData = {
-				total:'' + total,
-				tips:'' + tips,
+				total: total.toString(),
+				tips: tips.toString(),
       }
 
       NativeModules.cmApplePay.cancelcallback(callback);
@@ -205,8 +210,8 @@ export default {
         });
       }
     },
-    async checkoutByApplepay({subtotal,shipping,tax, amount, oid,tips},callback){
-      let token = await this._payByApple({subtotal,shipping,tax,tips,oid},()=>callback());
+    async checkoutByApplepay({subtotal, shipping, tax, amount, oid, tips, discount},callback){
+      let token = await this._payByApple({subtotal, shipping, tax, tips, oid, amount, discount},()=>callback());
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
           amount:amount,
