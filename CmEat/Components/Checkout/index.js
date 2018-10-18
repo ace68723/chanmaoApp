@@ -125,6 +125,7 @@ class Confirm extends Component {
 				this._checkCouponOnPress = this._checkCouponOnPress.bind(this);
 				this._cancelCouponOnPress = this._cancelCouponOnPress.bind(this);
 				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
+				this._deliverAnimation = this._deliverAnimation.bind(this);
 
 				this.popupView = PopupView.getInstance();
     }
@@ -301,6 +302,8 @@ class Confirm extends Component {
     }
     _updateDltype(deliverType){
 			if(!this.state.loading){
+				this.setState({loading: true});
+				this._deliverAnimation(deliverType);
 				CheckoutAction.updateDltype(deliverType);
 				// this.setState({dltype:deliverType.type,
 				// 							 loading:true,
@@ -726,12 +729,12 @@ class Confirm extends Component {
 		}
 		_deliverAnimation(deliverType){
 
-			if(deliverType === '0'){
+			if(deliverType == 0){
 				Animated.timing(                  // Animate over time
 					this.state.tabAnim,            // The animated value to drive
 					{
 						toValue: 130,                   // Animate to opacity: 1 (opaque)
-						duration: 200,              // Make it take a while
+						duration: 300,              // Make it take a while
 					}
 				).start();
 			}else{
@@ -739,7 +742,7 @@ class Confirm extends Component {
 					this.state.tabAnim,            // The animated value to drive
 					{
 						toValue: 12,                   // Animate to opacity: 1 (opaque)
-						duration: 200,              // Make it take a while
+						duration: 300,              // Make it take a while
 					}
 				).start();
 			}
@@ -779,8 +782,7 @@ class Confirm extends Component {
             <TouchableWithoutFeedback
 								key={index}
                 onPress={()=>{
-									this._updateDltype.bind(null,deliverType.type)
-									this._deliverAnimation(deliverType.type)
+									this._updateDltype(deliverType.type)
 								}}
 								>
 							<View style={{
@@ -1134,7 +1136,7 @@ class Confirm extends Component {
 					</View>
 				)
 			}
-			if (this.state.selectedCase.using_coupon) {
+			if (this.state.selectedCase.fees.total_off > 0) {
 				_priceDetail.push(
 					<View key={'price_off'}
 								style={{flex: 1,
@@ -1333,6 +1335,33 @@ class Confirm extends Component {
 								 </Text>)
 				}
 			}
+			const _discountList = () => {
+				let _discountList = '';
+				if (this.state.selectedCase.active_discounts && this.state.selectedCase.active_discounts.length > 0) {
+					for (let _discount of this.state.selectedCase.active_discounts) {
+						// _discountList.push(
+						// 	<Text style={{color: '#40a2e7',
+						// 								fontSize: 15,
+						// 								marginTop: 15,
+						// 								marginLeft: 20}}
+						// 				allowFontScaling={false}>
+						// 		*{_discount.name}
+						// 	</Text>
+						// )
+						_discountList += _discount.name + ' ';
+					}
+					return (
+						<Text style={{color: '#40a2e7',
+													fontSize: 15,
+													marginTop: 15,
+													marginLeft: 20}}
+									allowFontScaling={false}>
+							*{_discountList}
+						</Text>
+					);
+				}
+				return;
+			};
       return(
 				<View style={styles.mainContainer} >
 					{this.state.showPopup && this.popupView.show()}
@@ -1375,13 +1404,7 @@ class Confirm extends Component {
 													{commentText()}
 											</View>
 										</TouchableWithoutFeedback>
-										<Text style={{color: '#40a2e7',
-																	fontSize: 15,
-																	marginTop: 15,
-																	marginLeft: 20}}
-													allowFontScaling={false}>
-											*全场九折
-										</Text>
+										{_discountList()}
 								</View>
 
 

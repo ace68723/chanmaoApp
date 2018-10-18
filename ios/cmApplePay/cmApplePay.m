@@ -70,7 +70,7 @@ RCT_EXPORT_METHOD(createPayment:(NSDictionary *)data
                                          ];
   
   if ([Stripe canSubmitPaymentRequest:paymentRequest]) {
-    // Setup payment authorization view controller
+    // Setup payment authorization view controll
     self.viewController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
     self.viewController.delegate = self;
     

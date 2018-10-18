@@ -2,7 +2,16 @@
 const TestServer = 'https://norgta.com/api/sb/v2/';
 const proructServer = 'https://chanmao.us/api/payment/v2/';
 const Server = proructServer;
+const TestLumen = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/";
+const ProductionLumen = "https://www.cmapi.ca/cm_backend/index.php/";
+const Lumen = ProductionLumen;
 const APIConstants ={
+
+    //Checkout
+    API_BEFORE_CHECKOUT_INIT: Lumen + "api/checkout/v1/before_co_init",
+    API_BEFORE_CHECKOUT_UPDATE: Lumen + "api/checkout/v1/before_co_update",
+    API_CHECKOUT: Lumen + "api/checkout/v1/checkout",
+    API_CHECK_COUPON: Lumen + "api/checkout/v1/coupon_info",
 
     //Address
     API_CONDO_LIST: Server + 'condo_list',
@@ -18,7 +27,6 @@ const APIConstants ={
     API_SIGN_ALIPAY_ORDER: 'https://chanmao.us/api/alipay/v2/test_sign_order',
     API_ONE_TIME_CHARGE: Server + 'one_time_charge',
     API_CHARGE_UPDATE: Server + "charge_and_update",
-    API_CHECK_COUPON: "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/coupon_info",
 
     //Product
     API_CATEGORY: Server + 'category',

@@ -122,12 +122,6 @@ export default {
           actionType: AppConstants.UPDATE_DLTYPE,data
       })
     },
-    updateDltype(type){
-      const data = {type};
-      dispatch({
-          actionType: AppConstants.UPDATE_DLTYPE,data
-      })
-    },
     async calculateDeliveryFee(){
       try{
         const token = await AuthModule.getToken();
