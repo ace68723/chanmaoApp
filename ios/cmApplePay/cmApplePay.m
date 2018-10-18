@@ -77,7 +77,7 @@ RCT_EXPORT_METHOD(createPayment:(NSDictionary *)data
   summaryItems = [summaryItems arrayByAddingObject:[PKPaymentSummaryItem summaryItemWithLabel:@"CHANMAO" amount:totalAmount]];
   paymentRequest.paymentSummaryItems = summaryItems;
   if ([Stripe canSubmitPaymentRequest:paymentRequest]) {
-    // Setup payment authorization view controller
+    // Setup payment authorization view controll
     self.viewController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
     self.viewController.delegate = self;
     

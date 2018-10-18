@@ -4,10 +4,13 @@ import { API_ORDER_BEFORE,
          API_SIGN_ALIPAY_ORDER,
          API_CHARGE_UPDATE,
          API_ONE_TIME_CHARGE,
+         API_BEFORE_CHECKOUT_INIT,
+         API_BEFORE_CHECKOUT_UPDATE,
+         API_CHECKOUT,
          API_CHECK_COUPON } from '../../Config/API';
 export default  {
   beforeCheckoutInit(io_data) {
-    const url = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/before_co_init";
+    const url = API_BEFORE_CHECKOUT_INIT;
 
     let options = {
         method: 'POST',
@@ -27,7 +30,7 @@ export default  {
             .catch((error) => {throw error})
   },
   beforeCheckoutUpdate(io_data) {
-    const url = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/before_co_update";
+    const url = API_BEFORE_CHECKOUT_UPDATE;
 
     let options = {
         method: 'POST',
@@ -63,7 +66,7 @@ export default  {
             .catch((error) => {throw error})
   },
   checkout(io_data){
-    const url = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/checkout/v1/checkout";
+    const url = API_CHECKOUT;
 
     let options = {
         method: 'POST',
