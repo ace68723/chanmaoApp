@@ -71,7 +71,7 @@ RCT_EXPORT_METHOD(createPayment:(NSDictionary *)data
                              [PKPaymentSummaryItem summaryItemWithLabel:@"SERVICE FEE" amount:tips]
                           ];
   if([discountAmount compare:[NSNumber numberWithFloat:0]] != NSOrderedSame){
-    discountAmount = [NSDecimalNumber decimalNumberWithMantissa:[discountAmount doubleValue] exponent:-2 isNegative:YES];
+    discountAmount = [NSDecimalNumber decimalNumberWithMantissa:[discountAmount doubleValue] exponent:0 isNegative:YES];
     summaryItems = [summaryItems arrayByAddingObject:[PKPaymentSummaryItem summaryItemWithLabel:@"DISCOUNT" amount:discountAmount]];
   }
   summaryItems = [summaryItems arrayByAddingObject:[PKPaymentSummaryItem summaryItemWithLabel:@"CHANMAO" amount:totalAmount]];

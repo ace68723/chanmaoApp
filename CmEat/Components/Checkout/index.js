@@ -131,14 +131,6 @@ class Confirm extends Component {
     }
 
     componentDidMount(){
-			// setTimeout(()=>{
-			// 	const rid = this.state.rid;
-			// 	const pretax = MenuStore.getCartTotals().total;
-			// 	const navigator = this.props.navigator;
-			// 	const startAmount = this.state.startAmount;
-			// 	CheckoutAction.beforCheckout(rid,pretax,startAmount);
-			// 	this.setState({renderAddress:true})
-			// }, 500);
 			CheckoutStore.addChangeListener(this._onChange);
 			const rid = this.state.rid;
 			CheckoutAction.beforeCheckoutInit({rid});
@@ -148,9 +140,7 @@ class Confirm extends Component {
     }
     _onChange(){
 				const state = Object.assign({},CheckoutStore.getState());
-				console.log(state)
 				this.setState(Object.assign({}, state));
-				// const state = Object.assign({},CheckoutStore.getState());
 				if(!state.selectedAddress || !state.selectedAddress.hasOwnProperty('uaid')){
 					setTimeout( () => {
 						this.props.navigator.showModal({
@@ -714,21 +704,20 @@ class Confirm extends Component {
 			}
 		}
 		_deliverAnimation(deliverType){
-
 			if(deliverType == 0){
-				Animated.timing(                  // Animate over time
-					this.state.tabAnim,            // The animated value to drive
+				Animated.timing(                 
+					this.state.tabAnim,            
 					{
-						toValue: 130,                   // Animate to opacity: 1 (opaque)
-						duration: 300,              // Make it take a while
+						toValue: 130,                 
+						duration: 200,              
 					}
 				).start();
 			}else{
-				Animated.timing(                  // Animate over time
-					this.state.tabAnim,            // The animated value to drive
+				Animated.timing(                  
+					this.state.tabAnim,           
 					{
-						toValue: 12,                   // Animate to opacity: 1 (opaque)
-						duration: 300,              // Make it take a while
+						toValue: 12,
+						duration: 200,
 					}
 				).start();
 			}
@@ -805,7 +794,7 @@ class Confirm extends Component {
 									borderWidth:1,
 									borderRadius:25,
 									marginLeft: this.state.tabAnim,
-									marginTop:8,
+									marginTop:7.5,
 									position:'absolute',
 								}}>
 						</Animated.View>
@@ -1281,7 +1270,7 @@ class Confirm extends Component {
 		}
 		_renderOrderConfirm() {
 			if(this.state.showOrderConfirm) {
-				return(<OrderConfirm doCheckout={()=>this._doCheckout()}
+				return(<OrderConfirm doCheckout={this._doCheckout}
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
 														 total={this.state.selectedCase.fees.charge_total}
