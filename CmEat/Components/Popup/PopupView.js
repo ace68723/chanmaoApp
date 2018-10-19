@@ -30,7 +30,7 @@ const {height, width} = Dimensions.get('window');
   this.popupView.showAlert(this, "错误信息");
   this.popupView.showAlertWithTitle(this, "标题", "错误detail");
 
-  -- 定制触发 -- 
+  -- 定制触发 --
   this.popupView.setMessagePopup({
     title: "测试",
     subtitle: "测试",
@@ -100,8 +100,8 @@ export default class PopupView {
         cancelText: cancelText,
         onConfirm: onConfirm,
         onCancel: onCancel,
-        containerStyle: {height: 160},
-        titleTextStyle: {marginTop: 12},
+        // containerStyle: {height: 160},
+        titleTextStyle: {marginTop: 25},
         confirmButtonStyle: confirmButtonStyle,
         onDismiss: onDismiss
       }

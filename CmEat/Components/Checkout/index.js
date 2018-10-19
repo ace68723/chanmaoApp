@@ -162,15 +162,15 @@ class Confirm extends Component {
 						});
 					}, 500);
 				}
-				if (state.coupon_code.length > 0 && !state.selectedCase.using_coupon) {
-					this.popupView.showAlertWithTitle(this, "错误", "优惠码条件不满足 无法在当前使用");
+				if (state.alertMsg.length > 0) {
+					this.popupView.showAlertWithTitle(this, "错误", state.alertMsg);
 				}
+				// if (state.coupon_code.length > 0 && !state.selectedCase.using_coupon) {
+				// 	this.popupView.showAlertWithTitle(this, "错误", "优惠码条件不满足 无法在当前使用");
+				// }
 				// Coupon state update
-				if (state.returnCoupon && state.coupon_code.length == 0){
-					if (state.returnCoupon.valid == false || state.returnCoupon.ev_error == 1){
-						this.popupView.showAlertWithTitle(this, "错误", "优惠码无效，请检查重试");
-					}
-					else {
+				if (state.returnCoupon){
+					if (state.returnCoupon.valid != false && state.returnCoupon.ev_error != 1) {
 						const returnCoupon = state.returnCoupon;
 						this.popupView.setFullPopup(
 					    {
@@ -545,10 +545,14 @@ class Confirm extends Component {
 			Keyboard.dismiss();
 
 			if (!this.state.couponCodeTextInput || this.state.couponCodeTextInput.length == 0){
-				this.popupView.showAlert(this, "请输入优惠码")
+				this.popupView.showAlert(this, "请输入优惠码");
 				return;
 			}
+			console.log(this.state.couponCodeTextInput);
 			CheckoutAction.checkCouponCode(this.state.couponCodeTextInput);
+			// setTimeout(() => {
+			// 	this.setState(Object.assign({}, this.state, {couponCodeTextInput: ''}));
+			// }, 200);
 		}
 		_cancelCouponOnPress(){
 			const data = {
@@ -1121,12 +1125,20 @@ class Confirm extends Component {
 												justifyContent: 'space-between',
 												marginTop: 10,
 												marginHorizontal: 20}}>
-						<Text style={{fontSize: 15,
-													color: '#9b9b9b',
-													fontFamily: 'FZZhunYuan-M02S'}}
-									allowFontScaling={false}>
-							服务费
-						</Text>
+						<View style={{flexDirection: 'row'}}>
+							<Text style={{fontSize: 15,
+														color: '#9b9b9b',
+														fontFamily: 'FZZhunYuan-M02S'}}
+										allowFontScaling={false}>
+								服务费
+							</Text>
+							<TouchableOpacity onPress={ () =>
+										this.popupView.showAlert(this, "服务费已包含线上支付手续费（只有使用信用卡，借记卡，Apple Pay和支付宝的时候才会产生）和司机服务费，无需再支付小费")
+									}>
+								<Image source={require('./Image/more_info.png')}
+											 style={{width:15,height:15, marginLeft: 5}}/>
+							</TouchableOpacity>
+						</View>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}

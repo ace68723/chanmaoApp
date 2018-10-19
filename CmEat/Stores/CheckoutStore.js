@@ -15,38 +15,30 @@ import {
 const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   state:{
     checkoutSuccessful:false,
-		addressList:[],
+    addressList:[],
     dltype:1,
-    pretax:0,
-    code:'',
-    dltypeList:[
-      {dltype:-1,
-       description:'请先选择地址信息'
-      }],
-		showBanner:true,
+    showBanner:true,
     shouldAddAddress:false,
     payment_channel: 0,
-    visa_fee: 0,
     goToHistory: false,
     paymentFail: false,
-    jumpToChoosePayment: false
+    jumpToChoosePayment: false,
+    selectedCase: {fees: {},
+                   payment_channel: 0,
+                   dltype: 1},
+    returnCoupon: null,
+    coupon_code: '',
+    selectedCoupon: '',
+    alertMsg: '',
   },
   initState(){
     this.state = {
         checkoutSuccessful:false,
     		addressList:[],
         dltype:1,
-        pretax:0,
-        available_payment_channels: [{channel: 0, visa_fee: 0}],
-        code:'',
-        dltypeList:[
-          {dltype:-1,
-           description:'请先选择地址信息'
-          }],
     		showBanner:true,
         shouldAddAddress:false,
         payment_channel: 0,
-        visa_fee: 0,
         goToHistory: false,
         paymentFail: false,
         jumpToChoosePayment: false,
@@ -55,7 +47,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
                        dltype: 1},
         returnCoupon: null,
         coupon_code: '',
-        selectedCoupon: ''
+        selectedCoupon: '',
+        alertMsg: '',
       };
   },
 	emitChange(){
@@ -160,6 +153,9 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         if (_case.dltype == this.state.dltype && _case.payment_channel == this.state.payment_channel) {
           this.state.selectedCase = _case;
         }
+      }
+      if (this.state.coupon_code.length > 0 && !this.state.selectedCase.using_coupon) {
+        this.state.alertMsg = "优惠码条件不满足 无法在当前使用";
       }
       this.state.showPopup = false;
   },
@@ -423,8 +419,10 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       this.state.last_payment = data.result.last_payment;
       this.state.payment_channel = data.result.last_payment.payment_channel;
       this.state.coupon_code = data.result.coupon_code;
+      this.state.alertMsg = data.result.user_message;
       this._updateSelectedCase();
       this.state.returnCoupon = null;
+      // this.state.couponCodeTextInput = "";
       this.state.loading = false;
       this.state.showPopup = false;
   },
@@ -517,7 +515,11 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     }
   },
   updatereturnCoupon(data){
-    this.state = Object.assign({}, this.state, {returnCoupon: data});
+    console.log(data);
+    if (data.valid == false || data.ev_error == 1) {
+      this.state.alertMsg = "优惠码无效，请检查重试";
+    }
+    this.state.returnCoupon = data;
   },
 	getDltype(){
 		return this.state.dltype;
@@ -525,6 +527,12 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 	initCheckoutState(){
 		this.state ={}
 	},
+  updateAlertMessage(data) {
+    this.state.alertMsg = data.ev_message;
+  },
+  initAlertMessage() {
+    this.state.alertMsg = '';
+  },
   getState(){
     return this.state
   },
@@ -541,17 +549,23 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 				case AppConstants.UPDATE_DLTYPE:
 								RestaurantStore.updateDltype(action.data);
                 RestaurantStore.emitChange();
+                setTimeout(()=>{
+									RestaurantStore.initAlertMessage();
+								},5000);
                 break;
         case AppConstants.BEFORE_CHECKOUT_INIT:
                 RestaurantStore.beforeCheckoutInit(action.data);
                 RestaurantStore.emitChange();
+                setTimeout(()=>{
+									RestaurantStore.initAlertMessage();
+								},5000);
                 break;
 				case AppConstants.CHECKOUT:
 								RestaurantStore.checkout(action.data);
 								RestaurantStore.emitChange();
 								setTimeout(()=>{
 									RestaurantStore.initState()
-								},10000)
+								},10000);
                 break;
         case AppConstants.CHECKOUT_GO_TO_HISTORY:
                 RestaurantStore.updateGoToHistory(action.data);
@@ -564,6 +578,9 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         case AppConstants.UPDATE_PAYMENT_STATUS:
                 RestaurantStore.updatePaymentStatus(action.data);
                 RestaurantStore.emitChange();
+                setTimeout(()=>{
+									RestaurantStore.initAlertMessage();
+								},5000);
                 break;
         case AppConstants.ADD_CARD:
                 RestaurantStore.updateCardStatus(action.data);
@@ -572,8 +589,17 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         case AppConstants.CHECK_COUPON_CODE:
                 RestaurantStore.updatereturnCoupon(action.data);
                 RestaurantStore.emitChange();
+                setTimeout(()=>{
+									RestaurantStore.initAlertMessage();
+								},5000);
                 break;
-
+        case AppConstants.API_ALERT:
+                RestaurantStore.updateAlertMessage(action.data);
+                RestaurantStore.emitChange();
+                setTimeout(()=>{
+									RestaurantStore.initAlertMessage();
+								},5000);
+                break;
         default:
                 break;
 

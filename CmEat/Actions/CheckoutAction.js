@@ -113,6 +113,12 @@ export default {
               actionType: AppConstants.CHECKOUT, data
           })
         }
+        else {
+          data.ev_message = "下单失败";
+          dispatch({
+              actionType: AppConstants.API_ALERT, data
+          })
+        }
       }catch (e){
       }
     },
