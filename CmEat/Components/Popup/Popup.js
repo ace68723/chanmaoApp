@@ -130,8 +130,8 @@ export default class Popup extends Component {
         <View style={{
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: 25,
-            marginBottom: 10}}>
+            paddingBottom: 10,
+            backgroundColor: 'white'}}>
           <Image source={this.props.icon} style={{
               width: 43,
               height: 27
@@ -171,7 +171,8 @@ export default class Popup extends Component {
                       lineHeight: 16,
                     },
                     this.props.cancelTextStyle
-                  ]}>
+                  ]}
+                      allowFontScaling={false}>
                   {
                     (this.props.cancelText)
                       ? this.props.cancelText
@@ -232,19 +233,20 @@ export default class Popup extends Component {
   renderText() {
     if (this.props.detailText) {
       return (
-        <View>
+        <View style={{backgroundColor: 'white'}}>
           <Text style={[
-            {
-              lineHeight: 16,
-              textAlign: 'center',
-              color: '#757575',
-              fontWeight: '700',
-              fontSize: 14,
-              marginHorizontal: 30,
-              marginBottom: 20
-            },
-            this.props.detailTextStyle
-            ]}>
+                  {
+                    lineHeight: 16,
+                    textAlign: 'center',
+                    color: '#757575',
+                    fontWeight: '700',
+                    fontSize: 14,
+                    marginHorizontal: 30,
+                    marginBottom: 20
+                  },
+                  this.props.detailTextStyle
+                  ]}
+                allowFontScaling={false}>
             {this.props.detailText}
           </Text>
         </View>
@@ -255,7 +257,7 @@ export default class Popup extends Component {
   _renderTextInput() {
     if (this.props.type === "prompt") {
       retrun (
-        <View>
+        <View style={{backgroundColor: 'white'}}>
           <TextInput style={[{alignSelf: 'stretch',
                               lineHeight: 16,},
                              this.props.textInputStyle]}
@@ -271,7 +273,7 @@ export default class Popup extends Component {
   renderSubTitle() {
     if (this.props.subTitle) {
       return (
-        <View>
+        <View style={{backgroundColor: 'white'}}>
           <Text style={[{
               fontSize: 14,
               lineHeight: 16,
@@ -308,7 +310,7 @@ export default class Popup extends Component {
       }}>
       <Animated.View style={[
           {
-            backgroundColor: 'white',
+            // backgroundColor: 'white',
             borderRadius: 8,
             width: width * 0.8,
             // height: width * 0.7,
@@ -330,9 +332,13 @@ export default class Popup extends Component {
             ]
           }
         ]}>
-
+        <View style={{backgroundColor: 'white',
+                      height: 25,
+                      borderTopLeftRadius: 8,
+                      borderTopRightRadius: 8}}>
+        </View>
         {this._renderIcon()}
-        <View>
+        <View style={{backgroundColor: 'white'}}>
           <Text style={[
               {
                 fontSize: 18,
@@ -355,7 +361,10 @@ export default class Popup extends Component {
         {this.renderText()}
         {this._renderTextInput()}
 
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row',
+                      backgroundColor: 'white',
+                      borderBottomLeftRadius: 8,
+                      borderBottomRightRadius: 8}}>
           {this._renderCancelButton()}
           {this._renderConfirmButton()}
         </View>

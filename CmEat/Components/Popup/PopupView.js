@@ -101,7 +101,7 @@ export default class PopupView {
         onConfirm: onConfirm,
         onCancel: onCancel,
         // containerStyle: {height: 160},
-        titleTextStyle: {marginTop: 25},
+        titleTextStyle: {},
         confirmButtonStyle: confirmButtonStyle,
         onDismiss: onDismiss
       }
