@@ -131,14 +131,6 @@ class Confirm extends Component {
     }
 
     componentDidMount(){
-			// setTimeout(()=>{
-			// 	const rid = this.state.rid;
-			// 	const pretax = MenuStore.getCartTotals().total;
-			// 	const navigator = this.props.navigator;
-			// 	const startAmount = this.state.startAmount;
-			// 	CheckoutAction.beforCheckout(rid,pretax,startAmount);
-			// 	this.setState({renderAddress:true})
-			// }, 500);
 			CheckoutStore.addChangeListener(this._onChange);
 			const rid = this.state.rid;
 			CheckoutAction.beforeCheckoutInit({rid});
@@ -149,7 +141,6 @@ class Confirm extends Component {
     _onChange(){
 				const state = Object.assign({},CheckoutStore.getState());
 				this.setState(Object.assign({}, state));
-				// const state = Object.assign({},CheckoutStore.getState());
 				if(!state.selectedAddress || !state.selectedAddress.hasOwnProperty('uaid')){
 					setTimeout( () => {
 						this.props.navigator.showModal({
@@ -229,7 +220,7 @@ class Confirm extends Component {
 				}
 				else if(state.checkoutSuccessful){
 					this.setState({
-		        loading:true,
+		        		loading:true,
 						showOrderConfirm:false,
 						checkoutSuccessful: false,
 		      });
@@ -249,27 +240,18 @@ class Confirm extends Component {
 							}, 300);
 						}
 						else if(state.payment_channel == 30){
-							// let pretax = parseFloat(state.pretax);
-							// let shipping = Number(state.dlexp);
-							// let tips =  Number(state.tips);
-							// let tax = Number(state.total - pretax - shipping).toFixed(2);
-							// let total = (parseFloat(state.total) + parseFloat(state.visa_fee) + parseFloat(state.tips)).toFixed(2);;
-
 							let paymentData = {
-								// subtotal: (pretax + parseFloat(state.visa_fee)).toFixed(2).toString(),
-								// shipping: state.dlexp.toString(),
-								// tax: tax.toString(),
-								// tips: state.tips.toString(),
-								// oid: state.oidFromUrl,
-								// amount: total,
 								subtotal: (state.selectedCase.fees.pretax - state.selectedCase.fees.total_off).toString(),
 								shipping: state.selectedCase.fees.dlexp.toString(),
 								tax: state.selectedCase.fees.tax.toString(),
 								tips: state.selectedCase.fees.service_fee.toString(),
 								oid: state.oidFromUrl,
-								amount: state.selectedCase.fees.charge_total
+								amount: state.selectedCase.fees.charge_total,
+								discount: state.selectedCase.fees.total_off
 							};
+							
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
+						
 						}
 						// setTimeout(() => {
 						// 	HistoryAction.getOrderData();
@@ -321,11 +303,11 @@ class Confirm extends Component {
       CheckoutAction.calculateDeliveryFee()
     }
     _doCheckout(){
-			if (this.state.payment_channel < 0) return;
-      this.setState({
-        loading:true,
-				showOrderConfirm:false,
-      })
+		if (this.state.payment_channel < 0) return;
+		this.setState({
+			loading:true,
+			showOrderConfirm:false,
+		})
       // CheckoutAction.checkout(this.state.comment,
 			// 												this.state.payment_channel,
 			// 												this.state.tips,
@@ -577,29 +559,23 @@ class Confirm extends Component {
 		_renderAndroidCheckoutButton(){
 			if (Platform.OS !== 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
-	        return(
-	            <TouchableOpacity style={{marginBottom: 20}}
-	                              activeOpacity={0.4}
-	                              onPress={this._checkout}>
-										<View style={styles.acceptButton}>
-											<Text style={styles.acceptText}
-														allowFontScaling={false}>
-												 实付: ${this.state.selectedCase.fees.charge_total}
-											</Text>
-											<Text style={styles.acceptText}
-														allowFontScaling={false}>
-												 确认下单
-											</Text>
-										</View>
-	            </TouchableOpacity>
-	        )
-	      }else if(this.state.loading){
 					return(
-						<View style={[styles.acceptButton, {justifyContent: 'center', marginBottom: 20}]}>
-								<Image source={require('./Image/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
-						</View>
+						<TouchableOpacity style={[styles.acceptButton, {marginBottom: 50}]}
+										activeOpacity={0.4}
+										onPress={this._checkout}>
+												<Text style={styles.acceptText}
+															allowFontScaling={false}>
+													{CMLabel.getCNLabel('CHECK_OUT')}
+												</Text>
+						</TouchableOpacity>
 					)
-				}else{
+	      	}else if(this.state.loading){
+				return(
+					<View style={styles.acceptButton}>
+							<Image source={require('./Image/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
+					</View>
+				)
+			}else{
 	        return(
 	          <TouchableOpacity style={{marginBottom: 20}}
 															onPress={()=>{this._goToAddressList()}}>
@@ -732,21 +708,20 @@ class Confirm extends Component {
 			}
 		}
 		_deliverAnimation(deliverType){
-
 			if(deliverType == 0){
-				Animated.timing(                  // Animate over time
-					this.state.tabAnim,            // The animated value to drive
+				Animated.timing(                 
+					this.state.tabAnim,            
 					{
-						toValue: 130,                   // Animate to opacity: 1 (opaque)
-						duration: 300,              // Make it take a while
+						toValue: 130,                 
+						duration: 200,              
 					}
 				).start();
 			}else{
-				Animated.timing(                  // Animate over time
-					this.state.tabAnim,            // The animated value to drive
+				Animated.timing(                  
+					this.state.tabAnim,           
 					{
-						toValue: 12,                   // Animate to opacity: 1 (opaque)
-						duration: 300,              // Make it take a while
+						toValue: 12,
+						duration: 200,
 					}
 				).start();
 			}
@@ -823,7 +798,7 @@ class Confirm extends Component {
 									borderWidth:1,
 									borderRadius:25,
 									marginLeft: this.state.tabAnim,
-									marginTop:8,
+									marginTop:7.5,
 									position:'absolute',
 								}}>
 						</Animated.View>

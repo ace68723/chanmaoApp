@@ -56,19 +56,26 @@ RCT_EXPORT_METHOD(createPayment:(NSDictionary *)data
   NSDecimalNumber *shipping =[NSDecimalNumber decimalNumberWithString:data[@"shipping"]];
   NSDecimalNumber *tax = [NSDecimalNumber decimalNumberWithString:data[@"tax"]];
   NSDecimalNumber *tips = [NSDecimalNumber decimalNumberWithString:data[@"tips"]];
-  NSDecimalNumber *totalAmount = [NSDecimalNumber zero];
-  totalAmount = [totalAmount decimalNumberByAdding:subtotal];
-  totalAmount = [totalAmount decimalNumberByAdding:shipping];
-  totalAmount = [totalAmount decimalNumberByAdding:tax];
-   totalAmount = [totalAmount decimalNumberByAdding:tips];
-  paymentRequest.paymentSummaryItems = @[
-                                         [PKPaymentSummaryItem summaryItemWithLabel:@"SUBTOTAL" amount:subtotal],
-                                         [PKPaymentSummaryItem summaryItemWithLabel:@"SHIPPING" amount:shipping],
-                                         [PKPaymentSummaryItem summaryItemWithLabel:@"TAX" amount:tax],
-                                         [PKPaymentSummaryItem summaryItemWithLabel:@"TIPS" amount:tips],
-                                         [PKPaymentSummaryItem summaryItemWithLabel:@"CHANMAO" amount:totalAmount]
-                                         ];
-  
+//  NSDecimalNumber *totalAmount = [NSDecimalNumber zero];
+//  totalAmount = [totalAmount decimalNumberByAdding:subtotal];
+//  totalAmount = [totalAmount decimalNumberByAdding:shipping];
+//  totalAmount = [totalAmount decimalNumberByAdding:tax];
+//   totalAmount = [totalAmount decimalNumberByAdding:tips];
+   NSDecimalNumber *totalAmount = [NSDecimalNumber decimalNumberWithString:data[@"total"]];
+  NSDecimalNumber *discountAmount = [NSDecimalNumber decimalNumberWithString:data[@"discount"]];
+ 
+   NSArray *summaryItems = @[
+                             [PKPaymentSummaryItem summaryItemWithLabel:@"SUBTOTAL" amount:subtotal],
+                             [PKPaymentSummaryItem summaryItemWithLabel:@"SHIPPING" amount:shipping],
+                             [PKPaymentSummaryItem summaryItemWithLabel:@"TAX" amount:tax],
+                             [PKPaymentSummaryItem summaryItemWithLabel:@"SERVICE FEE" amount:tips]
+                          ];
+  if([discountAmount compare:[NSNumber numberWithFloat:0]] != NSOrderedSame){
+    discountAmount = [NSDecimalNumber decimalNumberWithMantissa:[discountAmount doubleValue] exponent:0 isNegative:YES];
+    summaryItems = [summaryItems arrayByAddingObject:[PKPaymentSummaryItem summaryItemWithLabel:@"DISCOUNT" amount:discountAmount]];
+  }
+  summaryItems = [summaryItems arrayByAddingObject:[PKPaymentSummaryItem summaryItemWithLabel:@"CHANMAO" amount:totalAmount]];
+  paymentRequest.paymentSummaryItems = summaryItems;
   if ([Stripe canSubmitPaymentRequest:paymentRequest]) {
     // Setup payment authorization view controll
     self.viewController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
