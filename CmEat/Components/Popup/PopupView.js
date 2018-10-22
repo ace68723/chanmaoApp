@@ -124,6 +124,18 @@ export default class PopupView {
       }
     }
 
+    setPriceDetail({title, detailText, fees, confirmText = '确定', cancelText, onConfirm = ()=> {}, onDismiss}){
+      this.state = {
+        title: title,
+        detailText: detailText,
+        fees: fees,
+        confirmText: confirmText,
+        cancelText: cancelText,
+        onConfirm: onConfirm,
+        onDismiss: onDismiss
+      }
+    }
+
     show(){
       return (
         <Popup
@@ -131,6 +143,7 @@ export default class PopupView {
           subTitle={this.state.subTitle}
           detailText={this.state.detailText}
           icon={this.state.icon}
+          fees={this.state.fees}
           springFromBottom={true}
           containerStyle={this.state.containerStyle}
           titleTextStyle={this.state.titleTextStyle}

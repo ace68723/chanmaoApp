@@ -249,9 +249,9 @@ class Confirm extends Component {
 								amount: state.selectedCase.fees.charge_total,
 								discount: state.selectedCase.fees.total_off
 							};
-							
+
 							CheckoutAction.checkoutByApplepay(paymentData, ()=>this._goToHistory());
-						
+
 						}
 						// setTimeout(() => {
 						// 	HistoryAction.getOrderData();
@@ -679,6 +679,27 @@ class Confirm extends Component {
 				)
 			}
 		}
+		_renderAddressReminder() {
+			if (this.state.selectedCase && this.state.selectedCase.custom_dlexp) {
+				return (
+					<View>
+						<Text style={{color: '#40a2e7',
+													fontSize: 15,
+													marginTop: 15,
+													marginLeft: 20}}
+									allowFontScaling={false}>
+							*客服将稍后与您联系确认运费
+						</Text>
+						<Text style={{color: '#40a2e7',
+													fontSize: 15,
+													marginLeft: 27}}
+									allowFontScaling={false}>
+							(在线支付暂不扣费)
+						</Text>
+					</View>
+				)
+			}
+		}
 		_renderDeliverFee(){
 			//自取
 			if(this.state.dltype == '0') return;
@@ -709,16 +730,16 @@ class Confirm extends Component {
 		}
 		_deliverAnimation(deliverType){
 			if(deliverType == 0){
-				Animated.timing(                 
-					this.state.tabAnim,            
+				Animated.timing(
+					this.state.tabAnim,
 					{
-						toValue: 130,                 
-						duration: 200,              
+						toValue: 130,
+						duration: 200,
 					}
 				).start();
 			}else{
-				Animated.timing(                  
-					this.state.tabAnim,           
+				Animated.timing(
+					this.state.tabAnim,
 					{
 						toValue: 12,
 						duration: 200,
@@ -1414,6 +1435,7 @@ class Confirm extends Component {
 																		borderBottomWidth: StyleSheet.hairlineWidth,}}>
 											</View>
 											{this._renderAddress()}
+											{this._renderAddressReminder()}
 											<View style={styles.seperateLine}>
 											</View>
 											{this._renderCoupeCode()}

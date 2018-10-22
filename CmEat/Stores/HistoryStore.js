@@ -14,6 +14,11 @@ let state = {
           cusid: '',
           last4: '',
           brand: '',
+          fees: {},
+          showPriceDetail: false,
+          oid: 0,
+          payment_channel: 0,
+          doRepay: false
         };
 let HistoryDetailData;
 const HistoryStore = Object.assign({},EventEmitter.prototype,{
@@ -79,6 +84,21 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
       brand: state.brand,
     }
   },
+  showPriceDetailForRepay(data) {
+    state.oid = data.oid;
+    state.payment_channel = data.payment_channel;
+    state.fees = data.fees;
+    state.showPriceDetail = true;
+    state.doRepay = false;
+  },
+  changeOrderCase(data) {
+    state.oid = data.oid;
+    state.payment_channel = data.payment_channel;
+    state.fees = data.fees;
+    state.showPriceDetail = false;
+    state.doRepay = true;
+    state.doRefresh = false;
+  },
 	doRefresh(){
 		state = Object.assign({},state,{doRefresh:true})
 	},
@@ -107,7 +127,16 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
          case AppConstants.GET_LAST4:
              HistoryStore.updateLast4(action.data);
              break;
-
+         case AppConstants.SHOW_PRICE_DETAIL_FOR_REPAY:
+             HistoryStore.showPriceDetailForRepay(action.data);
+             HistoryStore.emitChange();
+             break;
+         case AppConstants.CHANGE_ORDER_CASE:
+             HistoryStore.changeOrderCase(action.data);
+             HistoryStore.emitChange();
+             break;
+         default:
+             break;
 		  }
 
 	})

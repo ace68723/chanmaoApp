@@ -93,5 +93,41 @@ export default {
       }
     },
 
+    async viewOrderCase({oid, dltype, payment_channel}) {
+      try{
+        const token = await AuthModule.getToken();
+        const lo_data = {oid, dltype, payment_channel,token};
+        const data = await HistoryModule.viewOrderCase(lo_data);
+        if (data.ev_error == 0) {
+          data.oid = oid;
+          data.payment_channel = payment_channel;
+          dispatch({
+              actionType: AppConstants.SHOW_PRICE_DETAIL_FOR_REPAY, data
+          })
+        }
+        // alert('123');
+      }catch (e){
+        console.log(e);
+      }
+    },
+
+    async changeOrderCase({oid, dltype, payment_channel}) {
+      try{
+        const token = await AuthModule.getToken();
+        const lo_data = {oid, dltype, payment_channel,token};
+        const data = await HistoryModule.changeOrderCase(lo_data);
+        if (data.ev_error == 0) {
+          data.oid = oid;
+          data.payment_channel = payment_channel;
+          dispatch({
+              actionType: AppConstants.CHANGE_ORDER_CASE, data
+          })
+        }
+        // alert('123');
+      }catch (e){
+        console.log(e);
+      }
+    }
+
 
 }

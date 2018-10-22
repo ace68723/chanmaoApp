@@ -1,6 +1,8 @@
 'use strict';
 
 const AuthConstants = require( '../AuthModule/AuthConstants');
+import { API_ORDER_VIEW_CASE,
+         API_ORDER_CHANGE_CASE } from '../../Config/API';
 
 const ERROR_NETWORK   = AuthConstants.ERROR_NETWORK;
 let postOptiopns = AuthConstants.postOptiopns
@@ -145,6 +147,49 @@ const HistoryApi = {
       }
       options.headers.authortoken = reqData.token;
       options.headers.oid = reqData.io_data.oid;
+      return fetch(url,options)
+              .then((res) => {
+                console.log(res);
+                return res.json();
+              })
+              .catch((error) => {throw error})
+    },
+    viewOrderCase(reqData) {
+      // const url = AuthConstants.API_CHANGE_ORDER_TO_CASH;
+      // const url = "https://www.cmapi.ca/cm_backend/index.php/api/checkout/v1/order_view_case";
+      const url = API_ORDER_VIEW_CASE;
+      let options = {
+          method: 'POST',
+          mode:'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      }
+      options.headers.authortoken = reqData.token;
+      options.body = JSON.stringify({oid: reqData.oid,
+                                     dltype: reqData.dltype,
+                                     payment_channel: reqData.payment_channel});
+      return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw error})
+    },
+    changeOrderCase(reqData) {
+      // const url = AuthConstants.API_CHANGE_ORDER_TO_CASH;
+      // const url = "https://www.cmapi.ca/cm_backend/index.php/api/checkout/v1/order_change_case";
+      const url = API_ORDER_CHANGE_CASE;
+      let options = {
+          method: 'POST',
+          mode:'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      }
+      options.headers.authortoken = reqData.token;
+      options.body = JSON.stringify({oid: reqData.oid,
+                                     dltype: reqData.dltype,
+                                     payment_channel: reqData.payment_channel});
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw error})

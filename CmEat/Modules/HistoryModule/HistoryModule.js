@@ -134,6 +134,23 @@ const  HistoryModule = {
     }
   },
 
+  async viewOrderCase(io_data){
+    try{
+      const res = await HistoryApi.viewOrderCase(io_data);
+      return res;
+    }catch(e) {
+      console.log(e)
+    }
+  },
+  async changeOrderCase(io_data){
+    try{
+      const res = await HistoryApi.changeOrderCase(io_data);
+      return res;
+    }catch(e) {
+      console.log(e)
+    }
+  },
+
       // ===================================
       // getHistoryData API INTERFACE
       // API             Module

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {
   View,
   Dimensions,
+  StyleSheet,
   Text,
   TouchableOpacity,
   Animated,
@@ -275,21 +276,164 @@ export default class Popup extends Component {
       return (
         <View style={{backgroundColor: 'white'}}>
           <Text style={[{
-              fontSize: 14,
-              lineHeight: 16,
-              marginHorizontal: 20,
-              paddingBottom: 10,
-              fontWeight: '700',
-              textAlign: 'center',
-              color: '#F58330'
-            }
-          ]}>
+                  fontSize: 14,
+                  lineHeight: 16,
+                  marginHorizontal: 20,
+                  paddingBottom: 10,
+                  fontWeight: '700',
+                  textAlign: 'center',
+                  color: '#F58330'
+                }
+              ]}
+              allowFontScaling={false}>
             {this.props.subTitle}
           </Text>
         </View>
       )
     }
   };
+
+  _renderPriceDetail() {
+    if (this.props.fees) {
+      const _discount = () => {
+        const _discount = [];
+        if (this.props.fees.total_off > 0) {
+          _discount.push(
+            <View style={styles.priceWrapper}>
+              <Text key={"discount_title"}
+                    style={{fontSize: 15,
+                            color: "#40a2e7",
+                            fontFamily: 'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
+                折扣:
+              </Text>
+              <Text key={"discount"}
+                    style={{fontSize: 15,
+                            color: "#40a2e7",
+                            fontFamily: 'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
+                -${this.props.fees.total_off}
+              </Text>
+            </View>
+          )
+        }
+        return _discount;
+      };
+      const _chargeTotal = () => {
+        const _chargeTotal = [];
+        _chargeTotal.push(
+          <Text key={"charge_total"}
+                style={{fontSize: 19,
+                        color: "#666666",
+                        fontWeight: "800",
+                        fontFamily: 'FZZhunYuan-M02S'}}
+                allowFontScaling={false}>
+            {this.props.fees.charge_total}
+          </Text>
+        );
+        if (this.props.fees.total_off > 0) {
+          _chargeTotal.push(
+            <Text key={"ori_charge_total"}
+                  style={{fontSize: 19,
+                          color: "#666666",
+                          fontWeight: "800",
+                          fontFamily: 'FZZhunYuan-M02S',
+                          textDecorationLine: 'line-through',
+  												marginLeft: 6}}
+                  allowFontScaling={false}>
+              {this.props.fees.total}
+            </Text>
+          );
+        }
+        return _chargeTotal;
+      }
+      return (
+        <View style={{backgroundColor: "white"}}>
+          <View style={styles.priceWrapper}>
+            <Text key={"pretax_title"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              税前价格:
+            </Text>
+            <Text key={"pretax"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              ${this.props.fees.ori_pretax}
+            </Text>
+          </View>
+          <View style={styles.priceWrapper}>
+            <Text key={"dlexp_title"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              运费:
+            </Text>
+            <Text key={"dlexp"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              ${this.props.fees.dlexp}
+            </Text>
+          </View>
+          <View style={styles.priceWrapper}>
+            <Text key={"tax_title"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              税:
+            </Text>
+            <Text key={"tax"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              ${this.props.fees.ori_tax}
+            </Text>
+          </View>
+          <View style={styles.priceWrapper}>
+            <Text key={"service_fee_title"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              服务费:
+            </Text>
+            <Text key={"service_fee"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              ${this.props.fees.ori_service_fee}
+            </Text>
+          </View>
+          {_discount()}
+          <View style={styles.seperateLine}>
+          </View>
+          <View style={[styles.priceWrapper,
+                        {marginTop: 15,
+                         marginBottom: 15}]}>
+            <Text style={{fontSize: 19,
+                          color: "#666666",
+                          fontWeight: "800",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              总计:
+            </Text>
+            <View style={{flexDirection: 'row'}}>
+              {_chargeTotal()}
+            </View>
+          </View>
+        </View>
+      )
+    }
+  }
 
   render() {
     if (!this.state.isShow){
@@ -358,6 +502,8 @@ export default class Popup extends Component {
 
         {this.renderSubTitle()}
 
+        {this._renderPriceDetail()}
+
         {this.renderText()}
         {this._renderTextInput()}
 
@@ -374,5 +520,21 @@ export default class Popup extends Component {
   };
 
 };
+
+const styles = StyleSheet.create({
+  priceWrapper:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+    marginHorizontal: 50
+  },
+  seperateLine: {
+		marginTop: 10,
+		marginLeft: 10,
+		marginRight: 10,
+		borderColor:"#ccd3db",
+		borderBottomWidth: StyleSheet.hairlineWidth
+	}
+});
 
 Popup.propTypes = propTypes;

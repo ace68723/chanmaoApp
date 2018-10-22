@@ -12,6 +12,8 @@ const APIConstants ={
     API_BEFORE_CHECKOUT_UPDATE: Lumen + "api/checkout/v1/before_co_update",
     API_CHECKOUT: Lumen + "api/checkout/v1/checkout",
     API_CHECK_COUPON: Lumen + "api/checkout/v1/coupon_info",
+    API_ORDER_VIEW_CASE: Lumen + "api/checkout/v1/order_view_case",
+    API_ORDER_CHANGE_CASE: Lumen + "api/checkout/v1/order_change_case",
 
     //Address
     API_CONDO_LIST: Server + 'condo_list',

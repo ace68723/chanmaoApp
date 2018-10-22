@@ -115,8 +115,31 @@ class HistoryTab extends Component {
 				 AppState.removeEventListener('change', this._handleAppStateChange);
     }
     _onChange(){
-				const state = Object.assign({},this.state,HistoryStore.getState())
-        this.setState(state)
+				const state = Object.assign({},this.state,HistoryStore.getState());
+				if (state.doRepay && !this.state.doRepay) {
+					switch (state.payment_channel) {
+						case 0:
+							this.props._cashSelected(state.oid);
+							break;
+						case 1:
+							// data.charge_total
+							this._stripeCardSelected({oid: state.oid,
+																			  charge_total: state.fees.charge_total});
+							break;
+						case 10:
+							this._alipaySelected({oid: state.oid,
+																		charge_total: state.fees.charge_total});
+							break;
+						case 30:
+							this._applePaySelected({oid: state.oid,
+																			charge_total: state.fees.charge_total,
+																			service_fee: state.fees.service_fee});
+							break;
+						default:
+							break;
+					}
+				}
+        this.setState(Object.assign({}, this.state, state, {isRefreshing: false}));
         if(this.state.verifyPhoneResult === 'FAIL'){
           HistoryStore.initVerifyPhoneResult();
 
@@ -203,13 +226,14 @@ class HistoryTab extends Component {
 				screen: 'CmChooseCardType',
 				animated: true,
 				passProps:{available_payment_channels: paymentChannelLists,
-									 stripeCardAdded: this._stripeCardSelected,
-									 alipaySelected: this._alipaySelected,
-									 cashSelected: this._cashSelected,
-									 applePaySelected:	this._applePaySelected,
-									 stripeCardSelected: this._stripeCardSelected,
+									 // stripeCardAdded: this._stripeCardSelected,
+									 // alipaySelected: this._alipaySelected,
+									 // cashSelected: this._cashSelected,
+									 // applePaySelected:	this._applePaySelected,
+									 // stripeCardSelected: this._stripeCardSelected,
 								 	 flag: 'fromHistory',
 								 	 orderInfo: orderInfo,
+									 showPriceDetail: this.state.showPriceDetail,
 									 cusid: previous_payment.cusid,
 									 last4: previous_payment.last4,
 									 brand: previous_payment.brand},
@@ -217,28 +241,28 @@ class HistoryTab extends Component {
 			});
 		}
 
-		_alipaySelected(orderInfo, visa_fee) {
-			Alipay.constructAlipayOrder({total: (parseFloat(orderInfo.order_total)).toString(),
-																	 oid: orderInfo.order_oid});
+		_alipaySelected({oid, charge_total}) {
+			Alipay.constructAlipayOrder({total: charge_total.toString(),
+																	 oid});
 			setTimeout(() => {
 				this._onRefresh();
 			}, 3000)
 		}
-		_cashSelected(orderInfo) {
-			HistoryAction.changePaymentToCash({oid: orderInfo.order_oid});
+		_cashSelected({oid}) {
+			// HistoryAction.changePaymentToCash({oid});
 			this._onRefresh();
 		}
-		_applePaySelected(orderInfo, visa_fee){
+		_applePaySelected({oid, charge_total, service_fee}){
 				CheckoutAction.recheckoutByApplepay({
-					oid: orderInfo.order_oid,
-					total: parseFloat(orderInfo.order_total),
-					tips:	parseFloat(orderInfo.order_tips)
+					oid,
+					total: parseFloat(charge_total),
+					tips:	parseFloat(service_fee)
 				},()=>this._onRefresh())
 		}
-		_stripeCardSelected(orderInfo, visa_fee) {
-				CheckoutAction.stripeChargeAndUpdate({amount: parseFloat(orderInfo.order_total),
-																						oid: orderInfo.order_oid,
-																						checkoutFrom: 'history'});
+		_stripeCardSelected({oid, charge_total}) {
+				CheckoutAction.stripeChargeAndUpdate({amount: parseFloat(charge_total),
+																							oid,
+																							checkoutFrom: 'history'});
 				this._onRefresh();
 		}
 
