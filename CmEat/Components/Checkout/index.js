@@ -697,12 +697,6 @@ class Confirm extends Component {
 									allowFontScaling={false}>
 							*此单为远距离配送，请核对餐厅地址及送餐地址是否正确(在线支付等待确认后扣款)
 						</Text>
-						<Text style={{color: '#40a2e7',
-													fontSize: 15,
-													marginLeft: 27}}
-									allowFontScaling={false}>
-
-						</Text>
 					</View>
 				)
 			}
@@ -758,7 +752,7 @@ class Confirm extends Component {
 		_renderDeliverType(){
       let typeListData=[{
                           text:CMLabel.getCNLabel('DELIVER'),
-													type:'1',
+													type: 1,
                           // backgroundColor:"#fff",
                           // textColor:"#999999",
                           // borderColor:"#999999",
@@ -767,7 +761,7 @@ class Confirm extends Component {
                           borderColor:"#ccd3db",
                         },{
                           text:CMLabel.getCNLabel('PICK_UP'),
-													type:'0',
+													type: 0,
                           // backgroundColor:"#fff",
                           // textColor:"#999999",
                           // borderColor:"#999999",
@@ -775,7 +769,7 @@ class Confirm extends Component {
                           textColor:"white",
                           borderColor:"#ccd3db",
                         }]
-			if(this.state.dltype != '0'){
+			if(this.state.dltype != 0){
 				typeListData[0].backgroundColor = "#ff8b00";
 				typeListData[0].textColor = "#FFF";
 				typeListData[0].borderColor = "#ff8b00";
@@ -1003,7 +997,8 @@ class Confirm extends Component {
 					else {
 						payment_description = '现金到付';
 					}
-					return(
+					const payment_section = [];
+					payment_section.push(
 						<TouchableOpacity onPress={this._goToChoosePayment}>
 							<CartItem title={'支付方式'}
 												rightIcon={require('./Image/right.png')}
@@ -1011,9 +1006,32 @@ class Confirm extends Component {
 												value={payment_description}/>
 						</TouchableOpacity>
 					)
+					payment_section.push(
+						<View style={{flexDirection: 'row',
+													marginHorizontal: 20,
+													marginTop: 5,
+													marginBottom: 15}}>
+							<Image source={require('./Image/warning.png')}
+										 style={{width: 15,
+										 				 height: 15,
+										 				 alignSelf: 'flex-start'}}/>
+							<Text style={{fontSize: 15,
+														color: '#ea7b21',
+														fontWeight: '800',
+														textAlign:'center',
+														fontFamily:'FZZhunYuan-M02S',
+														marginHorizontal: 10}}>
+							 使用微信代叫，刷假卡造成的订单取消平台将不予退款，可疑账户平台会配合警方调查
+							</Text>
+						</View>
+					)
+					return payment_section;
 				}
 			}
 
+		}
+
+		_renderPaymentWarning() {
 		}
 
 		_renderRestaurantName() {
@@ -1136,7 +1154,7 @@ class Confirm extends Component {
 								服务费
 							</Text>
 							<TouchableOpacity onPress={ () =>
-										this.popupView.showAlert(this, "服务费已包含线上支付手续费（只有使用信用卡，借记卡，Apple Pay和支付宝的时候才会产生）和司机服务费，无需再支付小费")
+										this.popupView.showAlert(this, "服务费已包含线上支付手续费（只有使用信用卡，借记卡，Apple Pay和支付宝的时候才会产生）和司机服务费，无需再支付小费。")
 									}>
 								<Image source={require('./Image/more_info.png')}
 											 style={{width:15,height:15, marginLeft: 5}}/>
@@ -1449,6 +1467,7 @@ class Confirm extends Component {
 											<View style={styles.seperateLine}>
 											</View>
 											{this._renderChoosePayment()}
+											{this._renderPaymentWarning()}
 											<View style={{marginTop: 0,
 																		marginLeft: 10,
 																		marginRight: 10,
