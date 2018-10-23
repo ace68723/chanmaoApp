@@ -170,6 +170,7 @@ export default class Popup extends Component {
                       fontSize: 14,
                       fontWeight: '900',
                       lineHeight: 16,
+                      fontFamily: 'FZZhunYuan-M02S',
                     },
                     this.props.cancelTextStyle
                   ]}
@@ -214,6 +215,7 @@ export default class Popup extends Component {
                       fontSize: 14,
                       fontWeight: '900',
                       lineHeight: 16,
+                      fontFamily: 'FZZhunYuan-M02S',
                     },
                     this.props.confirmTextStyle
                   ]}
@@ -243,7 +245,8 @@ export default class Popup extends Component {
                     fontWeight: '700',
                     fontSize: 14,
                     marginHorizontal: 30,
-                    marginBottom: 20
+                    marginBottom: 20,
+                    fontFamily: 'FZZhunYuan-M02S',
                   },
                   this.props.detailTextStyle
                   ]}
@@ -260,6 +263,7 @@ export default class Popup extends Component {
       retrun (
         <View style={{backgroundColor: 'white'}}>
           <TextInput style={[{alignSelf: 'stretch',
+                              fontFamily: 'FZZhunYuan-M02S',
                               lineHeight: 16,},
                              this.props.textInputStyle]}
                      value={this.state.promptValue}
@@ -282,7 +286,8 @@ export default class Popup extends Component {
                   paddingBottom: 10,
                   fontWeight: '700',
                   textAlign: 'center',
-                  color: '#F58330'
+                  color: '#F58330',
+                  fontFamily: 'FZZhunYuan-M02S',
                 }
               ]}
               allowFontScaling={false}>
@@ -299,7 +304,8 @@ export default class Popup extends Component {
         const _discount = [];
         if (this.props.fees.total_off > 0) {
           _discount.push(
-            <View style={styles.priceWrapper}>
+            <View key={"discount_wrapper"}
+                  style={styles.priceWrapper}>
               <Text key={"discount_title"}
                     style={{fontSize: 15,
                             color: "#40a2e7",
@@ -328,7 +334,7 @@ export default class Popup extends Component {
                         fontWeight: "800",
                         fontFamily: 'FZZhunYuan-M02S'}}
                 allowFontScaling={false}>
-            {this.props.fees.charge_total}
+            ${this.props.fees.charge_total}
           </Text>
         );
         if (this.props.fees.total_off > 0) {
@@ -341,7 +347,7 @@ export default class Popup extends Component {
                           textDecorationLine: 'line-through',
   												marginLeft: 6}}
                   allowFontScaling={false}>
-              {this.props.fees.total}
+              ${this.props.fees.total}
             </Text>
           );
         }
@@ -491,7 +497,8 @@ export default class Popup extends Component {
                 color: 'black',
                 marginBottom: 10,
                 lineHeight: 23,
-                height: 25
+                height: 25,
+                fontFamily: 'FZZhunYuan-M02S',
               },
               this.props.titleTextStyle
             ]}

@@ -515,7 +515,6 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     }
   },
   updatereturnCoupon(data){
-    console.log(data);
     if (data.valid == false || data.ev_error == 1) {
       this.state.alertMsg = "优惠码无效，请检查重试";
     }

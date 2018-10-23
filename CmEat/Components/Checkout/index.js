@@ -225,7 +225,7 @@ class Confirm extends Component {
 						checkoutSuccessful: false,
 		      });
 					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
-					if (state.dltype === 1 && state.payment_channel != 0) {
+					if (!state.selectedCase.custom_dlexp && state.payment_channel != 0) {
 						if (state.payment_channel == 1) {
 							CheckoutAction.stripeChargeAndUpdate({amount: state.selectedCase.fees.charge_total,
 																					 					oid: state.oidFromUrl,
@@ -468,13 +468,20 @@ class Confirm extends Component {
 
 		_saveModificationCallback() {
 			const cart = MenuStore.getCart();
-			const rid = this.state.rid;
-			const pretax = MenuStore.getCartTotals().total;
-			const startAmount = this.state.startAmount;
-			CheckoutAction.beforCheckout(rid,pretax,startAmount);
-
-			const state = Object.assign({},CheckoutStore.getState(),{cart:cart, pretax: pretax});
-			this.setState(state);
+			if(cart.length === 0){
+				this.props.navigator.pop();
+			} else {
+				const state = Object.assign({}, this.state, {cart, loading: true});
+				this.setState(state);
+				this._beforeCheckoutUpdateItems();
+			}
+			// const rid = this.state.rid;
+			// const pretax = MenuStore.getCartTotals().total;
+			// const startAmount = this.state.startAmount;
+			// CheckoutAction.beforCheckout(rid,pretax,startAmount);
+			//
+			// const state = Object.assign({},CheckoutStore.getState(),{cart:cart, pretax: pretax});
+			// this.setState(state);
 		}
 		_stripeCardAdded() {
 			const cart = MenuStore.getCart();
@@ -530,7 +537,6 @@ class Confirm extends Component {
 				this.popupView.showAlert(this, "请输入优惠码");
 				return;
 			}
-			console.log(this.state.couponCodeTextInput);
 			CheckoutAction.checkCouponCode(this.state.couponCodeTextInput);
 			// setTimeout(() => {
 			// 	this.setState(Object.assign({}, this.state, {couponCodeTextInput: ''}));
@@ -684,17 +690,18 @@ class Confirm extends Component {
 				return (
 					<View>
 						<Text style={{color: '#40a2e7',
-													fontSize: 15,
+													fontSize: 14,
 													marginTop: 15,
-													marginLeft: 20}}
+													marginLeft: 20,
+													marginRight: 20}}
 									allowFontScaling={false}>
-							*客服将稍后与您联系确认运费
+							*此单为远距离配送，请核对餐厅地址及送餐地址是否正确(在线支付等待确认后扣款)
 						</Text>
 						<Text style={{color: '#40a2e7',
 													fontSize: 15,
 													marginLeft: 27}}
 									allowFontScaling={false}>
-							(在线支付暂不扣费)
+
 						</Text>
 					</View>
 				)
@@ -1044,7 +1051,7 @@ class Confirm extends Component {
 					订单小计
 				</Text>
 			);
-			if (this.state.selectedCase.fees.pretax) {
+			if (this.state.selectedCase.fees.ori_pretax) {
 				_priceDetail.push(
 					<View key={'price_pretax'}
 								style={{flex: 1,
@@ -1062,7 +1069,7 @@ class Confirm extends Component {
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							${this.state.selectedCase.fees.pretax}
+							${this.state.selectedCase.fees.ori_pretax}
 						</Text>
 					</View>
 				)

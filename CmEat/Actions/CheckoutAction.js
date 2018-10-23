@@ -101,7 +101,12 @@ export default {
     },
     async checkout({ticket_id, sign, dltype, payment_channel, charge_total, rid}){
       try{
-        const reqData = {ticket_id, sign, dltype, payment_channel, charge_total, rid};
+        const reqData = {ticket_id,
+                         sign,
+                         dltype: parseInt(dltype),
+                         payment_channel: parseInt(payment_channel),
+                         charge_total,
+                         rid};
         const data = {
           result: 1
         };
@@ -169,7 +174,7 @@ export default {
     },
 
 		async _payByApple({subtotal,shipping,tax,tips,amount, discount},callback){
-     
+
 			let paymentData = {
 				subtotal: subtotal.toString(),
         shipping: shipping.toString(),
