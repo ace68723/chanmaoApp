@@ -566,13 +566,15 @@ class Confirm extends Component {
 			if (Platform.OS !== 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 					return(
-						<TouchableOpacity style={[styles.acceptButton, {marginBottom: 50}]}
+						<TouchableOpacity
 										activeOpacity={0.4}
 										onPress={this._checkout}>
-												<Text style={styles.acceptText}
-															allowFontScaling={false}>
-													{CMLabel.getCNLabel('CHECK_OUT')}
-												</Text>
+								<View style={[styles.acceptButton, {marginBottom: 50, justifyContent: 'center'}]}>
+									<Text style={styles.acceptText}
+												allowFontScaling={false}>
+										{CMLabel.getCNLabel('CHECK_OUT')}
+									</Text>
+								</View>
 						</TouchableOpacity>
 					)
 	      	}else if(this.state.loading){
