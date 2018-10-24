@@ -585,7 +585,8 @@ class Confirm extends Component {
 				)
 			}else{
 	        return(
-	          <TouchableOpacity style={{marginBottom: 20}}
+	          <TouchableOpacity activeOpacity={0.4}
+															style={{marginBottom: 20}}
 															onPress={()=>{this._goToAddressList()}}>
 	            <View style={[styles.acceptButton, {justifyContent: 'center'}]}>
 	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
@@ -624,7 +625,8 @@ class Confirm extends Component {
 					)
 				}else{
 	        return(
-	          <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
+	          <TouchableOpacity activeOpacity={0.4}
+															onPress={()=>{this._goToAddressList()}}>
 	            <View style={styles.pendingButton}>
 	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
 											allowFontScaling={false}>
@@ -695,7 +697,8 @@ class Confirm extends Component {
 													fontSize: 14,
 													marginTop: 15,
 													marginLeft: 20,
-													marginRight: 20}}
+													marginRight: 20,
+													fontFamily:'FZZhunYuan-M02S',}}
 									allowFontScaling={false}>
 							*此单为远距离配送，请核对餐厅地址及送餐地址是否正确(在线支付等待确认后扣款)
 						</Text>
@@ -871,6 +874,17 @@ class Confirm extends Component {
 			// 	}
 			// }
 			if (this.state.coupon_code.length > 0 && this.state.selectedCase.using_coupon) {
+				const _discountList = () => {
+					let _discountList = '';
+					if (this.state.selectedCase.active_discounts && this.state.selectedCase.active_discounts.length > 0) {
+						for (let _discount of this.state.selectedCase.active_discounts) {
+							if (_discount.rule_type == 1) {
+								_discountList += _discount.name + ' ';
+							}
+						}
+					}
+					return _discountList;
+				};
 				_couponCode.push(
 					<View key={'coupon_code'}
 								style={{flexDirection: 'row',
@@ -883,10 +897,12 @@ class Confirm extends Component {
 													marginRight: 10,
 													alignItems:'flex-start',
 													alignSelf: 'center',
-													borderRadius: 30}}>
-								 正在使用：{this.state.coupon_code}
+													borderRadius: 30}}
+									allowFontScaling={false}>
+								 正在使用：{_discountList()}
 						</Text>
-						<TouchableOpacity style={{alignSelf: 'center'}}
+						<TouchableOpacity activeOpacity={0.4}
+															style={{alignSelf: 'center'}}
 															onPress={this._cancelCouponOnPress}>
 							<View style={{height: 27,
 														justifyContent: 'center',
@@ -927,7 +943,8 @@ class Confirm extends Component {
 											 underlineColorAndroid={"rgba(0,0,0,0)"}
 											 >
 						</TextInput>
-						<TouchableOpacity onPress={this._checkCouponOnPress}>
+						<TouchableOpacity activeOpacity={0.4}
+															onPress={this._checkCouponOnPress}>
 							<View style={{flex: 1,
 														justifyContent: 'center',
 														alignSelf: 'center',
@@ -983,6 +1000,21 @@ class Confirm extends Component {
 			// }
 			return _couponCode;
 		}
+		_renderCouponReminder() {
+			if (this.state.coupon_code.length > 0 && !this.state.selectedCase.using_coupon) {
+				return (
+					<View style={{marginHorizontal: 25,
+												marginTop: 15}}>
+						<Text style={{fontSize: 14,
+													color:'#666666',
+													fontFamily:'FZZhunYuan-M02S'}}
+									allowFontScaling={false}>
+							*优惠码条件不满足 无法在当前使用
+						</Text>
+					</View>
+				)
+      }
+		}
 		_renderChoosePayment() {
 			if (this.state.cases && this.state.dltype != 0) {
 				if (this.state.cases.length > 1) {
@@ -1001,7 +1033,9 @@ class Confirm extends Component {
 					}
 					const payment_section = [];
 					payment_section.push(
-						<TouchableOpacity onPress={this._goToChoosePayment}>
+						<TouchableOpacity key={'choosePayment'}
+															activeOpacity={0.4}
+															onPress={this._goToChoosePayment}>
 							<CartItem title={'支付方式'}
 												rightIcon={require('./Image/right.png')}
 												paymentChannel={this.state.payment_channel}
@@ -1009,7 +1043,8 @@ class Confirm extends Component {
 						</TouchableOpacity>
 					)
 					payment_section.push(
-						<View style={{flexDirection: 'row',
+						<View key={'payment_warning'}
+									style={{flexDirection: 'row',
 													marginHorizontal: 20,
 													marginTop: 5,
 													marginBottom: 15}}>
@@ -1017,12 +1052,12 @@ class Confirm extends Component {
 										 style={{width: 15,
 										 				 height: 15,
 										 				 alignSelf: 'flex-start'}}/>
-							<Text style={{fontSize: 15,
+ 						  <Text style={{fontSize: 14,
 														color: '#ea7b21',
 														fontWeight: '800',
-														textAlign:'center',
 														fontFamily:'FZZhunYuan-M02S',
-														marginHorizontal: 10}}>
+														marginHorizontal: 10}}
+										allowFontScaling={false}>
 							 使用微信代叫，刷假卡造成的订单取消平台将不予退款，可疑账户平台会配合警方调查
 							</Text>
 						</View>
@@ -1155,9 +1190,10 @@ class Confirm extends Component {
 										allowFontScaling={false}>
 								服务费
 							</Text>
-							<TouchableOpacity onPress={ () =>
-										this.popupView.showAlert(this, "服务费已包含线上支付手续费（只有使用信用卡，借记卡，Apple Pay和支付宝的时候才会产生）和司机服务费，无需再支付小费。")
-									}>
+							<TouchableOpacity activeOpacity={0.4}
+																onPress={ () =>
+																	this.popupView.showAlert(this, "服务费已包含线上支付手续费（只有使用信用卡，借记卡，Apple Pay和支付宝的时候才会产生）和司机服务费，无需再支付小费。")
+																}>
 								<Image source={require('./Image/more_info.png')}
 											 style={{width:15,height:15, marginLeft: 5}}/>
 							</TouchableOpacity>
@@ -1281,7 +1317,8 @@ class Confirm extends Component {
             </Text>
 						</View>
 						<View style={{flex:0.5, flexDirection:'row', paddingHorizontal:10}}>
-							<TouchableOpacity style={[styles.tipsView,
+							<TouchableOpacity activeOpacity={0.4}
+																style={[styles.tipsView,
 												{
 													flex:0.2,
 													borderColor:this.state.tipsPercentage == 0.1 ?'#ff8b00' :'#808080',
@@ -1290,7 +1327,8 @@ class Confirm extends Component {
 								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.1 ?'#FFF': '#808080'}]}
 											allowFontScaling={false}>10%</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[styles.tipsView,{
+							<TouchableOpacity activeOpacity={0.4}
+																style={[styles.tipsView,{
 													flex:0.2,
 													borderColor:this.state.tipsPercentage == 0.15 ?'#ff8b00' :'#808080',
 													backgroundColor: this.state.tipsPercentage == 0.15 ?'#ff8b00' :'white',
@@ -1298,7 +1336,8 @@ class Confirm extends Component {
 								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.15 ?'#FFF': '#808080'}]}
 											allowFontScaling={false}>15%</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[styles.tipsView,{
+							<TouchableOpacity activeOpacity={0.4}
+																style={[styles.tipsView,{
 													flex:0.2,
 													borderColor:this.state.tipsPercentage == 0.2 ?'#ff8b00' :'#808080',
 													backgroundColor: this.state.tipsPercentage == 0.2 ?'#ff8b00' :'white',
@@ -1306,7 +1345,8 @@ class Confirm extends Component {
 								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.2 ?'#FFF': '#808080'}]}
 											allowFontScaling={false}>20%</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
+							<TouchableOpacity activeOpacity={0.4}
+																style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
 								<Text allowFontScaling={false}>$</Text>
 								<TextInput
 													style={{flex:1,height: 40, marginHorizontal:5}}
@@ -1383,17 +1423,21 @@ class Confirm extends Component {
 						// 		*{_discount.name}
 						// 	</Text>
 						// )
-						_discountList += _discount.name + ' ';
+						if (_discount.rule_type == 0) {
+							_discountList += _discount.name + ' ';
+						}
 					}
-					return (
-						<Text style={{color: '#40a2e7',
-													fontSize: 15,
-													marginTop: 15,
-													marginLeft: 20}}
-									allowFontScaling={false}>
-							*{_discountList}
-						</Text>
-					);
+					if (_discountList.length > 0) {
+						return (
+							<Text style={{color: '#40a2e7',
+														fontSize: 15,
+														marginTop: 15,
+														marginLeft: 20}}
+										allowFontScaling={false}>
+								*{_discountList}
+							</Text>
+						);
+					}
 				}
 				return;
 			};
@@ -1466,6 +1510,7 @@ class Confirm extends Component {
 											<View style={styles.seperateLine}>
 											</View>
 											{this._renderCoupeCode()}
+											{this._renderCouponReminder()}
 											<View style={styles.seperateLine}>
 											</View>
 											{this._renderChoosePayment()}
