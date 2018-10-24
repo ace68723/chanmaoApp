@@ -10,7 +10,7 @@ import {
   ListView,
   TouchableOpacity
 } from 'react-native';
-
+import Label from '../../../App/Constants/AppLabel';
 class OrderInfo extends Component {
   constructor() {
     super();
@@ -27,8 +27,8 @@ class OrderInfo extends Component {
   _handleServicesBtn(){
      Clipboard.setString('sweetfulinc');
      Alert.alert(
-            '已复制',
-            '甜满箱客服微信: sweetfulinc',
+            Label.getSboxLabel('COPYED'),
+            Label.getSboxLabel('CUSTOMER_SERVICE_WECHAT'),
             [
               {text: 'OK', onPress: () => {}},
             ]
@@ -47,7 +47,9 @@ class OrderInfo extends Component {
                           fontSize: 16,
                           fontWeight: "500",
                           fontFamily:'FZZhunYuan-M02S'}}
-                  allowFontScaling={false}>运费: ${this.props.delifee}</Text>
+                  allowFontScaling={false}>
+                  {Label.getSboxLabel('DELIVERY_FEE')}{this.props.delifee}
+              </Text>
           </View>
 
           <View style={{flex: 1, justifyContent:'center'}}>
@@ -55,7 +57,7 @@ class OrderInfo extends Component {
                           fontSize: 16,
                           fontWeight: "500",
                           fontFamily:'FZZhunYuan-M02S'}}
-                  allowFontScaling={false}>总价: ${this.props.total}</Text>
+                  allowFontScaling={false}>{Label.getSboxLabel('ORDER_TOTAL')}{this.props.total}</Text>
           </View>
         </View>
 
@@ -69,7 +71,7 @@ class OrderInfo extends Component {
                           color: "#6D6E71",
                           fontWeight: "500",
                           fontFamily:'FZZhunYuan-M02S'}}
-                  allowFontScaling={false}>详情</Text>
+                  allowFontScaling={false}>{Label.getSboxLabel('DETAIL')}</Text>
           </TouchableOpacity>
 
           <View style={{width: 1, borderWidth: 0.4,
@@ -82,7 +84,7 @@ class OrderInfo extends Component {
                           color: "#6D6E71",
                           fontWeight: "500",
                           fontFamily:'FZZhunYuan-M02S'}}
-                  allowFontScaling={false}>客服</Text>
+                  allowFontScaling={false}>{Label.getSboxLabel('SERVICE')}</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import HistoryAction from '../../Actions/HistoryAction';
-import CMLabel from '../../Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 
 const {height, width} = Dimensions.get('window');
 
@@ -73,7 +73,7 @@ class PhoneNumberVerify extends Component{
                     style={styles.button}
                     onPress={() => {this.getVerifyCode()}}>
                        <Text allowFontScaling={false}
-											 			style={ styles.buttonText }>{CMLabel.getCNLabel('VERTIFICATION_CODE')}: {this.props.phoneNumber}  </Text>
+											 			style={ styles.buttonText }>{Label.getCMLabel('VERTIFICATION_CODE')}: {this.props.phoneNumber}  </Text>
                 </TouchableOpacity>
 
             )
@@ -93,7 +93,7 @@ class PhoneNumberVerify extends Component{
                     onChangeText={(code) => this.setState({code})}
                     value={this.state.text}
                     placeholderTextColor={'#ff8b00'}
-                    placeholder={CMLabel.getCNLabel('ENTER_VERTIFICATION_CODE')}
+                    placeholder={Label.getCMLabel('ENTER_VERTIFICATION_CODE')}
                     underlineColorAndroid={"rgba(0,0,0,0)"}
                   />
                 <TouchableOpacity
@@ -101,7 +101,7 @@ class PhoneNumberVerify extends Component{
                     style={[styles.button,{marginTop:10}]}
                     onPress={() => {this.verifyPhone()}}>
                        <Text allowFontScaling={false}
-											 			style={ styles.buttonText }>{CMLabel.getCNLabel('CONFIRM')} </Text>
+											 			style={ styles.buttonText }>{Label.getCMLabel('CONFIRM')} </Text>
                 </TouchableOpacity>
               </View>
             )

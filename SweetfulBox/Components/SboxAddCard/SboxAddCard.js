@@ -13,6 +13,7 @@ import {
   Animated,
 } from 'react-native';
 
+import Label from '../../../App/Constants/AppLabel';
 import Marker from './marker';
 import KeyboardView from './keyboardView';
 
@@ -225,8 +226,8 @@ export default class MyComponent extends Component {
        screen: "Notification",
        passProps: {
          backgroundColor:'#ff768b',
-         title:'甜满箱',
-         content:'您输入的支付信息输入有误',
+         title:Label.getSboxLabel('SWEETFUL_BOX'),
+         content:Label.getSboxLabel('PAYMENT_INFO_ERROR'),
        },
        autoDismissTimerSec: 3
       });

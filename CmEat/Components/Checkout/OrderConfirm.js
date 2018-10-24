@@ -12,7 +12,7 @@ import {
 
 } from 'react-native';
 import CMModal from 'react-native-modalbox';
-import CMLabel from '../../Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 const orderUser = {
     name:"qiao",
     phone: "647-895-0624",
@@ -115,7 +115,7 @@ export default class orderConfirm extends Component {
                                                         justifyContent:'center',
                                                         alignItems:'center'}}
                                                 onPress={() => this.setState({isOpen: !this.state.isOpen})}>
-                                <Text style={styles.buttonFont} allowFontScaling={false}>{CMLabel.getCNLabel('CANCEL')}</Text>
+                                <Text style={styles.buttonFont} allowFontScaling={false}>{Label.getCMLabel('CANCEL')}</Text>
                               </TouchableOpacity>
                           </View>
                           <View style={styles.modalButton}>
@@ -123,7 +123,7 @@ export default class orderConfirm extends Component {
                                                         justifyContent:'center',
                                                         alignItems:'center'}}
                                                 onPress={this.props.doCheckout}>
-                                <Text style={{fontSize:18,color:'#ea7b21',}} allowFontScaling={false}>{CMLabel.getCNLabel('CONFIRM')}</Text>
+                                <Text style={{fontSize:18,color:'#ea7b21',}} allowFontScaling={false}>{Label.getCMLabel('CONFIRM')}</Text>
                               </TouchableOpacity>
                           </View>
                       </View>

@@ -5,7 +5,7 @@ import CmEatCheckout from '../Components/Checkout';
 import CmEatAddress from '../Components/Address';
 import CmEatAddInfo from '../Components/Address/CmEatAddInfo';
 import CmEatAboutUs from '../Components/Setting/AboutUs';
-import CmEatLanguageSettings from '../Components/Setting/LanguageSettings'
+import CmEatLanguageSettings from '../Components/Setting/LanguageSettings';
 import CmEatMenuSearch from '../Components/Menu/CmEatMenuSearch';
 import CmEatHistory from '../Components/History/HistoryTab';
 import CmSecondMenu from '../Components/CmSecondMenu/SecondMenu';

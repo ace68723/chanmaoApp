@@ -11,7 +11,7 @@ import {
 	FlatList,
     ImageBackground,
 } from 'react-native';
-import CMLabel from '../../../Constants/AppLabel';
+import Label from '../../../../App/Constants/AppLabel';
 const {width,height} = Dimensions.get('window');
 export default class SearchByArea extends Component{
     constructor(props){
@@ -27,7 +27,7 @@ export default class SearchByArea extends Component{
                 <Text style={{fontSize:18,
 															fontFamily:"FZZhunYuan-M02S"}}
                       allowFontScaling={false}>
-                    {CMLabel.getCNLabel('CITY_AREA')}
+                    {Label.getCMLabel('CITY_AREA')}
                 </Text>
             </View>
         )
@@ -37,7 +37,7 @@ export default class SearchByArea extends Component{
 		// 			<Text style={{fontSize:18,
 		// 										fontFamily:"FZZhunYuan-M02S"}}
 		// 						allowFontScaling={false}>
-		// 				{CMLabel.getCNLabel('RES_TAG')}
+		// 				{Label.getCMLabel('RES_TAG')}
 		// 			</Text>
 		// 		</View>
 		// 	)

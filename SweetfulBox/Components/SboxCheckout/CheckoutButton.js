@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-
+import Label from '../../../App/Constants/AppLabel';
 
 const { height, width } = Dimensions.get('window');
 export default class CheckoutButton extends Component {
@@ -44,7 +44,7 @@ export default class CheckoutButton extends Component {
                             fontSize:20,
                             fontFamily:'FZZhunYuan-M02S'}}
                     allowFontScaling={false}>
-                添加配送地址
+                {La}
               </Text>
           </View>
         </TouchableOpacity>
@@ -67,7 +67,7 @@ export default class CheckoutButton extends Component {
                             fontSize:20,
                             fontFamily:'FZZhunYuan-M02S'}}
                     allowFontScaling={false}>
-                添加支付方式
+                {Label.getSboxLabel('ADD_DELIVERY_ADDRESS')}
               </Text>
           </View>
         </TouchableOpacity>
@@ -90,7 +90,7 @@ export default class CheckoutButton extends Component {
                           fontSize:20,
                           fontFamily:'FZZhunYuan-M02S'}}
                   allowFontScaling={false}>
-              确认下单
+              {Label.getSboxLabel('ADD_PAYMENT_METHOD')}
             </Text>
         </View>
       </TouchableOpacity>

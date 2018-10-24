@@ -22,7 +22,7 @@ import SettingTab from '../Setting/SettingTab';
 import SearchTab from '../Restaurant/RestaurantSearch/CmRestaurantSearch';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import TabBar from './TabBar';
-import CMLabel from '../../Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 import HomeAction from '../../Actions/HomeAction';
 import TabsStore from '../../Stores/TabsStore';
 const {width,height} = Dimensions.get('window');
@@ -115,18 +115,18 @@ export default class Tabs extends Component {
 												 }}>
 
 							<MainTab
-								tabLabel= {CMLabel.getCNLabel('MAIN_TAB')}
+								tabLabel= {Label.getCMLabel('MAIN_TAB')}
 								hideTabBar = {this._hideTabBar}
 								showTabBar = {this._showTabBar}
                 navigator={this.props.navigator}/>
 
 							<SearchTab
-								tabLabel = {CMLabel.getCNLabel('AREA_SEARCH')}
+								tabLabel = {Label.getCMLabel('AREA_SEARCH')}
 								navigator={this.props.navigator}
 								hideTabBar = {this._hideTabBar}
 								showTabBar = {this._showTabBar}
                 />
-							<SettingTab tabLabel={CMLabel.getCNLabel('MY_TAB')}
+							<SettingTab tabLabel={Label.getCMLabel('MY_TAB')}
                     navigator={this.props.navigator}
                     handleBackToHome={this.props.handleBackToHome}/>
 

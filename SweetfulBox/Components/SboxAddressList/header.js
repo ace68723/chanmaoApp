@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Separator from "./separator";
 import Checkbox from "./checkbox";
+import Label from '../../../App/Constants/AppLabel';
 // import ModalDropdown from 'react-native-modal-dropdown';
 // <ModalDropdown
 //   textStyle={{fontSize: 14}}
@@ -74,7 +75,7 @@ class Header extends Component {
 			    	</View>
 			    	<View style={styles.title}>
 			       		<Text style={ {textAlign:'center', fontSize:20, fontWeight: '700'} }
-                      allowFontScaling={false}>地址</Text>
+                      allowFontScaling={false}>{Label.getSboxLabel('ADDRESS')}</Text>
 			    	</View>
 			    	<View style={{flex:1}}>
             </View>
@@ -92,7 +93,7 @@ class Header extends Component {
                    source={require('./search-01.png')}/>
                  <TextInput
                    style={{flex: 0.95}}
-                   placeholder={"搜索地址"}
+                   placeholder={Label.getSboxLabel('ADDRESS_SEARCH')}
                    onChangeText={(text) => this.props.onChangeTextInput(text)}
                    onSubmitEditing={this.props.onSubmitText}
                    underlineColorAndroid={"rgba(0,0,0,0)"}
@@ -106,7 +107,7 @@ class Header extends Component {
 
         <View style={[styles.announcement, {height: searchBarHeight}]}>
           <Text style={{textAlign:'center'}}
-                allowFontScaling={false}>我们只配送以下范围， 请选择您收货的Condo地址</Text>
+                allowFontScaling={false}>{Label.getSboxLabel('DELIVERY_RANGE')}</Text>
         </View>
 
         <Separator/>

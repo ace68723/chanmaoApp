@@ -53,7 +53,7 @@ export default class SboxCategoryHeader extends Component {
             ref={this.props.handleSearchInputRef}
             style={styles.input}
             onSubmitEditing={this.props.submitSearch}
-            placeholder='搜索'
+            placeholder={Label.getSboxLabel('SEARCH')}
             onChangeText={this.props.handleSeacrchChange}
             autoCorrect={false}
             returnKeyType={'search'}
@@ -64,7 +64,7 @@ export default class SboxCategoryHeader extends Component {
         </View>
         <TouchableOpacity>
           <Text style={styles.cancle}
-                allowFontScaling={false}>取消</Text>
+                allowFontScaling={false}>{Label.getSboxLabel('CANCEL')}</Text>
         </TouchableOpacity>
       </View>
     );

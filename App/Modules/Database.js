@@ -118,7 +118,7 @@ const sbox_cache_scheam = {
 let realm
 export function DatabaseInit() {
   realm = new Realm({
-      path: 'cm_2.8.1.realm',
+      path: 'cm_2.8.4.realm',
       schema: [
                 cme_address_schema,
                 cme_cart_schema,
@@ -163,6 +163,10 @@ export function DatabaseInit() {
     if(!realm.objectForPrimaryKey('cm_system','cme_comment_count')){
         realm.create('cm_system',{type:"cme_comment_count",value:"0"}, true );
     }
+    if(!realm.objectForPrimaryKey('cm_system','cme_language')){
+        realm.create('cm_system',{type:"cme_language",value:"chinese_simple"}, true );
+    }
+    realm.create('cm_system',{type: 'version', value: '2.8.3'}, true );
     realm.create('cm_system',{type: 'version', value: '2.8.4'}, true );
   })
   console.log(realm.path)
@@ -404,6 +408,14 @@ export function cme_updateCommentCount() {
 }
 export function cme_getCommentCount() {
   return realm.objectForPrimaryKey('cm_system','cme_comment_count').value;
+}
+export function cme_getLanguage() {
+  return realm.objectForPrimaryKey('cm_system','cme_language').value;
+}
+export function cme_updateLanguage(language) {
+  realm.write(() => {
+      realm.create('cm_system',{type:"cme_language",value:language}, true );
+  });
 }
 
 export function sbox_addToCart(product){

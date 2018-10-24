@@ -24,9 +24,8 @@ import Header from '../General/Header';
 import MenuCard from './MenuCard';
 
 import MenuStore from '../../Stores/MenuStore';
-import CMLabel from '../../Constants/AppLabel';
-import PopupView from '../Popup/PopupView'
-
+import Label from '../../../App/Constants/AppLabel';
+import PopupView from '../Popup/PopupView';
 const {width,height} = Dimensions.get('window');
 const searchViewMarginHorizontal = 30;
 const iconSearchInputSize = 35;
@@ -90,7 +89,7 @@ export default class CmEatMenuSearch extends Component {
 				  title: "馋猫订餐提醒您",
 				  subtitle: '不足' + this.state.restaurant.start_amount + '只能自取哦～',
 					confirmText: '好哒',
-					cancelText: "取消",
+					cancelText: Label.getCMLabel('CANCEL'),
 				  onDismiss: () => {
 				    this.setState({showPopup: false})
 				  },
@@ -293,7 +292,7 @@ export default class CmEatMenuSearch extends Component {
 													fontSize:13,
 													fontFamily:'FZZongYi-M05S',}}
 									allowFontScaling={false}>
-									{CMLabel.getCNLabel('GO_CHECKOUT')}
+									{Label.getCMLabel('GO_CHECKOUT')}
 						</Text>
 					</View>
 

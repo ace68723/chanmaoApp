@@ -41,7 +41,7 @@ import SboxBox from '../SboxBox/SboxBox';
 import SboxProductAction from '../../Actions/SboxProductAction';
 import SboxProductStore from '../../Stores/SboxProductStore';
 import SboxCartAction from '../../Actions/SboxCartAction';
-
+import Label from '../../../App/Constants/AppLabel';
 import Util from '../../Modules/Util';
 
 
@@ -98,7 +98,7 @@ export default class SweetProductDetial extends Component {
     this.props.navigator.showLightBox({
        screen: "SboxCartAlert",
        passProps: {
-         message:`库存不足`},
+         message:Label.getSboxLabel('OUT_OF_STOCK')},
        style: {
          flex: 1,
          tapBackgroundToDismiss: true,
@@ -233,7 +233,7 @@ export default class SweetProductDetial extends Component {
                         fontFamily:'FZZhunYuan-M02S',
                       }}
                       allowFontScaling={false}>
-                    加入购物箱
+                    {Label.getSboxLabel('ADD_TO_CART')}
                 </Text>
           </View>
         </TouchableOpacity>
@@ -306,10 +306,10 @@ export default class SweetProductDetial extends Component {
                           tabBarActiveTextColor={"#ff768b"}
                           tabBarTextStyle={{ fontSize: 15} }
                   >
-                  <View tabLabel="服务明细">
+                  <View tabLabel={Label.getSboxLabel('SERVICE_DETAIL')}>
                     {this._renderServiceImage()}
                   </View>
-                  <View tabLabel="产品详情">
+                  <View tabLabel={Label.getSboxLabel('ORDER_DETAIL')}>
                     {this._renderProductFacts()}
                   </View>
                </ScrollableTabView>

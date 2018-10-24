@@ -13,6 +13,8 @@ import SboxHistory from '../SboxHistory/SboxHistoryViewController';
 import SboxCart from '../SboxCart';
 import About from '../SboxAbout/index'
 import TabBar from './TabBar';
+import Label from '../../../App/Constants/AppLabel';
+import SettingTab from '../Setting/SettingTab';
 export default class MyComponent extends Component {
   constructor() {
     super();
@@ -39,7 +41,7 @@ export default class MyComponent extends Component {
         this.props.navigator.showModal({
            screen: "SboxHomeAlert",
            passProps: {
-             message:`我们的配送范围已扩大至图中红框区域，包括所有Condo或House均可送达~具体地址可在填写订单时确认。`
+             message:Label.getSboxLabel('ALERT_MESSAGE')
            },
            animated: false,
            navigatorStyle: {navBarHidden: true},
@@ -62,23 +64,24 @@ export default class MyComponent extends Component {
         style={{flex:1}}
         renderTabBar={() => <TabBar />}
       >
-        <SboxHome tabLabel="首页"
+        <SboxHome tabLabel={Label.getSboxLabel('MAIN_TAB')}
               activeIconImage={require("./Image/home.png")}
               inactiveIconImage={require("./Image/homegrey.png")}
               navigator={this.props.navigator}
               handleBackToHome={this.props.handleBackToHome}/>
         <SboxCart
-              tabLabel="购物车"
+              tabLabel={Label.getSboxLabel('CART')}
               activeIconImage={require("./Image/box.png")}
               inactiveIconImage={require("./Image/boxgrey.png")}
               navigator={this.props.navigator}
               tag={'fromMainTab'}
               />
-            <About tabLabel="我的"
-          activeIconImage={require("./Image/setting.png")}
-          inactiveIconImage={require("./Image/settinggrey.png")}
-          navigator={this.props.navigator}
-          handleBackToHome={this.props.handleBackToHome}/>
+              <SettingTab tabLabel={Label.getCMLabel('MY_TAB')}
+                    navigator={this.props.navigator}
+                    inactiveIconImage={require("./Image/settinggrey.png")}
+
+                    activeIconImage={require("./Image/setting.png")}
+                    handleBackToHome={this.props.handleBackToHome}/>
       </ScrollableTabView>
 
   );

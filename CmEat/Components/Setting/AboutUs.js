@@ -13,7 +13,7 @@ import {
   Clipboard,
 } from 'react-native';
 import AppConstants from '../../Constants/AppConstants';
-import CMLabel from '../../Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 const {height, width} = Dimensions.get('window');
 const deviceWidth = width;
 const deviceHeight = height;
@@ -99,7 +99,7 @@ export default class InfoPage extends Component {
     return (
       <View style={styles.container}>
         {this.state.showPopup && this.popupView.show()}
-        <Header title={CMLabel.getCNLabel('ABOUT_US')} goBack={this._goBack}/>
+        <Header title={Label.getCNLabel('ABOUT_US')} goBack={this._goBack}/>
         <ScrollView style={{flex:1, paddingTop:64,paddingLeft:20,paddingRight:20, paddingBottom: 20}}>
 
             <View style={styles.fontContainer}>

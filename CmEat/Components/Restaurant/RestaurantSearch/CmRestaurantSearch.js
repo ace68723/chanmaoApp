@@ -28,7 +28,7 @@ import HomeAction from '../../../Actions/HomeAction';
 import RestaurantAction from '../../../Actions/RestaurantAction';
 import RestaurantCard from '../RestaurantCard';
 import WordProcessor from '../../WordProcess/WordProcessor';
-import CMLabel from '../../../Constants/AppLabel'
+import Label from '../../../../App/Constants/AppLabel'
 import { orderBy } from 'lodash';
 import SearchByArea from './SearchByArea';
 import SearchByTag from './SearchByTag';
@@ -351,7 +351,7 @@ export default class CmRestaurantSearch extends Component {
 					<Text style={{fontSize:18,
 												fontFamily:"FZZhunYuan-M02S"}}
 								allowFontScaling={false}>
-						{CMLabel.getCNLabel('CITY_AREA')}
+						{Label.getCMLabel('CITY_AREA')}
 					</Text>
 				</View>
 			)
@@ -361,7 +361,7 @@ export default class CmRestaurantSearch extends Component {
 					<Text style={{fontSize:18,
 												fontFamily:"FZZhunYuan-M02S"}}
 								allowFontScaling={false}>
-						{CMLabel.getCNLabel('RES_TAG')}
+						{Label.getCMLabel('RES_TAG')}
 					</Text>
 				</View>
 			)

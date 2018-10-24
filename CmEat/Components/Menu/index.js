@@ -20,7 +20,7 @@ import {
   View,
 } from 'react-native';
 import MenuStore from '../../Stores/MenuStore';
-import CMLabel from '../../Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 
 const {width,height} = Dimensions.get('window');
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
@@ -183,8 +183,8 @@ class Menu extends Component {
 						'馋猫订餐提醒您',
 						'不足'+this.state.restaurant.start_amount+'只能自取哦～',
 						[
-							{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
-							{text: CMLabel.getCNLabel('CONFIRM'), onPress: () => {
+							{text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+							{text: Label.getCMLabel('CONFIRM'), onPress: () => {
 									 this.props.navigator.push({
 											id: 'Checkout',
 											restaurant:this.state.restaurant,

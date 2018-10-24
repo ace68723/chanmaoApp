@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, FlatList, Dimensions, Image, ScrollView, Toucha
 import SboxProductAction from '../../Actions/SboxProductAction';
 
 const { height, width } = Dimensions.get('window');
-
+import Label from '../../../App/Constants/AppLabel';
 const styles = StyleSheet.create({
   content: {
     flex: 1 - (212 / 2208),
@@ -213,7 +213,7 @@ _renderUserInfo() {
         <View style={styles.content}>
           <View style={styles.orderDetails}>
             <Text style={styles.orderFont}
-                  allowFontScaling={false}>订单号：#{this.props.orderDetail.obid}</Text>
+                  allowFontScaling={false}>{Label.getSboxLabel('ORDER_NUMBER')}{this.props.orderDetail.obid}</Text>
             <Text style={styles.orderFont}
                   allowFontScaling={false}>{this.props.orderDetail.created_date}</Text>
           </View>

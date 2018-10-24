@@ -17,6 +17,7 @@ import { findIndex } from 'lodash';
 import SboxCartAction from '../../Actions/SboxCartAction';
 import SboxCartStore from '../../Stores/SboxCartStore';
 
+import Label from '../../../App/Constants/AppLabel';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
 
 const { height, width } = Dimensions.get('window');
@@ -52,14 +53,14 @@ export default class SboxCart extends Component {
       if(item.sku_quantity > item.sku_amount) {
         this.setState({
           canCheckout: false,
-          checkoutFont: '库存不足'
+          checkoutFont: Label.getSboxLabel('OUT_OF_STOCK')
         })
       }
     });
     if (cartState.total < 25) {
       this.setState({
         canCheckout: false,
-        checkoutFont: '税前满$25起送'
+        checkoutFont: Label.getSboxLabel('MINIMUM_BEFORE_TAX')
       })
     }
     if(cartState.outOfStock){
@@ -70,7 +71,7 @@ export default class SboxCart extends Component {
     this.props.navigator.showLightBox({
        screen: "SboxCartAlert",
        passProps: {
-         message:`库存不足`},
+         message:Label.getSboxLabel('OUT_OF_STOCK')},
        style: {
          flex: 1,
          tapBackgroundToDismiss: true,
@@ -86,11 +87,11 @@ export default class SboxCart extends Component {
   }
   _deleteItem(item){
     Alert.alert(
-      '删除',
+      Label.getSboxLabel('DELETE'),
       item.spu_name + " " + item.sku_name,
       [
-        {text: '取消', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {text: '确认', onPress: () => {SboxCartAction.deleteItem(item);}},
+        {text: Label.getSboxLabel('CANCEL'), onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: Label.getSboxLabel('CONFIRM'), onPress: () => {SboxCartAction.deleteItem(item);}},
       ],
       { cancelable: false }
     )
@@ -108,7 +109,7 @@ export default class SboxCart extends Component {
       this.props.navigator.showLightBox({
          screen: "SboxCartAlert",
          passProps: {
-           message:`甜满箱税前满$20起送哦~`},
+           message:Label.getSboxLabel('MINIMUM_BEFORE_TAX')},
          style: {
            flex: 1,
            tapBackgroundToDismiss: true,
@@ -316,7 +317,7 @@ export default class SboxCart extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SboxHeader title={"购物箱"}
+        <SboxHeader title={Label.getSboxLabel('CART_BOX')}
                 goBack={this._renderGoBackBtn}
                 leftButtonText={this.props.backButton}/>
         {this._renderContent()}

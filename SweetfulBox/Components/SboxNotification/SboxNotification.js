@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import Label from '../../../App/Constants/AppLabel';
 import Setting from '../../Config/Setting'
 import SboxHeader from '../../../App/Components/General/SboxHeader';
 export default class SboxNotification extends Component {
@@ -40,7 +41,7 @@ export default class SboxNotification extends Component {
     if (this.props.checkoutSuccessful) {
         return (
         <View style={styles.container}>
-          <SboxHeader title={"订单成功"}
+          <SboxHeader title={Label.getSboxLabel('ORDER_SUCCESS')}
                   goBack={this._goBack}
                   leftButtonText={'x'}/>
 
@@ -54,12 +55,12 @@ export default class SboxNotification extends Component {
             </View>
             <Text style={{marginTop:Setting.getY(150),fontSize:20,fontWeight:'bold',}}
                   allowFontScaling={false}>
-              恭喜您
+              {Label.getSboxLabel('CONGRATS')}
             </Text>
             <View style={{marginTop:Setting.getY(100),width:Setting.getX(1000),height:Setting.getY(200)}}>
               <Text style={{fontSize:16, }}
                     allowFontScaling={false}>
-                订单支付成功！您可以在两个工作日内收到您的箱子~
+                {Label.getSboxLabel('PAYMENT_SUCCESS')}
               </Text>
             </View>
             <TouchableOpacity onPress={this._goBack}
@@ -67,7 +68,7 @@ export default class SboxNotification extends Component {
               <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#ff768b',width:Setting.getX(600),height:Setting.getY(150)}}>
                 <Text style={{fontSize:16,color:'white'}}
                       allowFontScaling={false}>
-                  查看历史订单
+                  {Label.getSboxLabel('HISTORY_ORDER')}
                 </Text>
               </View>
 
@@ -80,7 +81,7 @@ export default class SboxNotification extends Component {
     else {
       return (
         <View style={styles.container}>
-          <SboxHeader title={"订单失败"}
+          <SboxHeader title={Label.getSboxLabel('ORDER_FAILED')}
                   goBack={this._goBackCart}
                   leftButtonText={'x'}/>
           <View style={{
@@ -93,12 +94,12 @@ export default class SboxNotification extends Component {
             </View>
             <Text style={{marginTop:Setting.getY(150),fontSize:20,fontWeight:'bold',}}
                   allowFontScaling={false}>
-              很抱歉
+              {Label.getSboxLabel('SORRY_MESSAGE')}
             </Text>
             <View style={{marginTop:Setting.getY(100),width:Setting.getX(1100),height:Setting.getY(200)}}>
               <Text style={{fontSize:16, }}
                     allowFontScaling={false}>
-                订单支付失败了！请仔细核对您的地址或银行卡信息是否准确，如需人工帮助，请您联系客服，谢谢！
+                {Label.getSboxLabel('PAYMENT_FAILED')}
               </Text>
             </View>
             <TouchableOpacity onPress={this._goBackCart}
@@ -106,7 +107,7 @@ export default class SboxNotification extends Component {
               <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#ff768b',width:Setting.getX(600),height:Setting.getY(150)}}>
                 <Text style={{fontSize:16,color:'white'}}
                       allowFontScaling={false}>
-                  返回购物箱
+                  {Label.getSboxLabel('RETURN_TO_CART')}
                 </Text>
               </View>
 

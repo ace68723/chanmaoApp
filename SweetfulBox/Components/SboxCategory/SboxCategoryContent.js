@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
-
+import Label from '../../../App/Constants/AppLabel';
 const styles = StyleSheet.create({
   category: {
     alignItems: 'center',
@@ -129,7 +129,7 @@ export default class SboxCategoryContent extends Component {
       <ScrollView style={styles.content}>
         <View style={styles.title}>
           <Text style={styles.text}
-                allowFontScaling={false}>产品分类</Text>
+                allowFontScaling={false}>{Label.getSboxLabel('PRODUCT_CATEGORY')}</Text>
         </View>
 
         <View style={styles.categoryList}>
@@ -138,10 +138,10 @@ export default class SboxCategoryContent extends Component {
 
         <View style={[styles.title, styles.flexRow]}>
           <Text style={styles.text}
-                allowFontScaling={false}>搜索记录</Text>
+                allowFontScaling={false}>{Label.getSboxLabel('SEARCH_RECORD')}</Text>
           <TouchableOpacity onPress={this.props.clearSearchHistory}>
             <Text style={styles.erase}
-                  allowFontScaling={false}>清空</Text>
+                  allowFontScaling={false}>{Label.getSboxLabel('CLEAN')}</Text>
           </TouchableOpacity>
         </View>
 

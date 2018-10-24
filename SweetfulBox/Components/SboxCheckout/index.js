@@ -24,6 +24,7 @@ import CheckoutButton from './CheckoutButton';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
 import CommentModal from 'react-native-modalbox';
 
+import Label from '../../../App/Constants/AppLabel';
 import SboxOrderAction from '../../Actions/SboxOrderAction';
 import SboxProductAction from '../../Actions/SboxProductAction';
 import SboxOrderStore from '../../Stores/SboxOrderStore';
@@ -319,7 +320,7 @@ export default class MyComponent extends Component {
                           fontFamily:'FZZhunYuan-M02S',
                           marginLeft:20,}}
                   allowFontScaling={false}>
-              请选择您的配送地址
+              {Label.getSboxLabel('SELECT_DELIVERY_ADDRESS')}
             </Text>
           </View>
           </TouchableOpacity>

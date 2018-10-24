@@ -1,10 +1,12 @@
 module.exports={
-    MAIN_TAB:'主页',
+    MAIN_TAB:'法语',
     DELIVER_TO: '配送至',
     //Searching
     AREA_SEARCH:'分区&搜索',
     CITY_AREA:'城市&区域',
     RES_TAG:'餐厅分类',
+    MORE_TYPE:'更多分类',
+    RETRACT:'收起',
     //Setting
     MY_TAB:'我的',
     SETTING:'设置',
@@ -98,5 +100,15 @@ module.exports={
     PAYMENT_TYPE:"支付方式",
     //About us
     ABOUT_US:'关于我们',
+
+    //ALERT_TITLE
+    ALERT_TITLE:'馋猫订餐',
+    ALERT_CONTENT:'您输入的支付信息输入有误',
+    //HomeTab
+    ORDER_BELOW:'在下面点餐呦',
+    //MAIN_TAB
+    ALERT_PAYMENT:'*通知: 即日起不支持到付刷卡，同时请勿使用Email Transfer(emt)，您可以使用Visa, Mastercard, Debit银行卡或者支付宝在线支付，或使用现金到付，谢谢~',
+    ALERT_COMFIRM:'确定',
+    COMFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。'
 
 }

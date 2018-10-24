@@ -18,7 +18,7 @@ import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
 
 import Header from '../General/Header';
-import CMLabel from '../../Constants/AppLabel';
+import Label from '../../../App/Constants/AppLabel';
 const { height, width } = Dimensions.get('window');
 
 import PopupView from '../Popup/PopupView'
@@ -200,6 +200,26 @@ export default class ChooseCardType extends Component {
       //   }
       // });
       // this.setState({showPopup: true});
+      const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 10);
+      let payment_description = '';
+      // let payment_description = '支付宝将会有'+ visa_fee +'加币的手续费哦亲~';
+      // if (visa_fee == 0) {
+      //   payment_description = '';
+      // }
+      Alert.alert(
+        '确认支付?',
+        payment_description,
+        [
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: '确认', onPress: () => {
+              this.props.alipaySelected(this.props.orderInfo, visa_fee);
+              this.props.navigator.dismissModal({
+                animationType: 'slide-down'
+              });
+            }
+          },
+       ]
+      );
     }
   }
 
@@ -235,6 +255,21 @@ export default class ChooseCardType extends Component {
         payment_channel: 0
       }
       HistoryAction.viewOrderCase(data);
+      Alert.alert(
+        '确认修改为到付?',
+        '',
+        [
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: '确认', onPress: () => {
+              this.props.cashSelected(this.props.orderInfo);
+              this.props.navigator.dismissModal({
+                animationType: 'slide-down'
+              });
+              alert("已成功修改");
+            }
+          },
+       ]
+      );
     }
   }
   _goToApplePay(){
@@ -282,6 +317,26 @@ export default class ChooseCardType extends Component {
       //     },
       //  ]
       // );
+      const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 30);
+      let payment_description = '';
+      // let payment_description = '刷卡将会有'+ visa_fee +'加币的手续费哦亲~';
+      // if (visa_fee == 0) {
+      //   payment_description = '';
+      // }
+      Alert.alert(
+        '确认支付?',
+        payment_description,
+        [
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: '确认', onPress: () => {
+              this.props.applePaySelected(this.props.orderInfo, visa_fee);
+              this.props.navigator.dismissModal({
+                animationType: 'slide-down'
+              });
+            }
+          },
+       ]
+      );
     }
   }
 
@@ -337,6 +392,20 @@ export default class ChooseCardType extends Component {
       //     },
       //  ]
       // );
+      Alert.alert(
+        '新卡添加成功,确认支付?',
+        payment_description,
+        [
+          {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},
+          {text: '确认', onPress: () => {
+              this.props.stripeCardSelected(this.props.orderInfo, visa_fee);
+              this.props.navigator.dismissModal({
+                animationType: 'slide-down'
+              });
+            }
+          },
+       ]
+      );
     }
   }
   _renderGoBackBtn() {
@@ -470,7 +539,7 @@ export default class ChooseCardType extends Component {
                               marginLeft: 20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
-                          {CMLabel.getCNLabel('CREDIT_CARD')}
+                          {Label.getCMLabel('CREDIT_CARD')}
                 </Text>
                 <Text allowFontScaling={false}
                       style={styles.arrowText}>
@@ -502,7 +571,7 @@ export default class ChooseCardType extends Component {
                               marginLeft :20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
-                              {CMLabel.getCNLabel('DEBIT_CARD')}
+                              {Label.getCMLabel('DEBIT_CARD')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
                   >
@@ -534,7 +603,7 @@ export default class ChooseCardType extends Component {
                               marginLeft :20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
-                              {CMLabel.getCNLabel('ALIPAY')}
+                              {Label.getCMLabel('ALIPAY')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
                   >
@@ -564,7 +633,7 @@ export default class ChooseCardType extends Component {
                               marginLeft :20,
                               color:"#808080",
                               fontFamily:'FZZhunYuan-M02S'}}>
-                              {CMLabel.getCNLabel('CASH')}
+                              {Label.getCMLabel('CASH')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
                   >
@@ -610,7 +679,7 @@ export default class ChooseCardType extends Component {
     return (
       <View style={styles.container}>
         {this.state.showPopup && this.popupView.show()}
-        <Header title={CMLabel.getCNLabel('PAYMENT_TYPE')}
+        <Header title={Label.getCMLabel('PAYMENT_TYPE')}
                 goBack={this._goBack}
                 leftButtonText={'×'}/>
         <ScrollView style={{backgroundColor: '#f4f4f4'}}>

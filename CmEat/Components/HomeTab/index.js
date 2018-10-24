@@ -18,7 +18,7 @@ import {
 import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
-
+import Label from '../../../App/Constants/AppLabel';
 // import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
 
 
@@ -120,7 +120,7 @@ export default class HomeTab extends Component {
 								style={{alignSelf: 'center',
 												fontSize: 16,
 												fontWeight: '500',
-												fontFamily:'FZZhunYuan-M02S'}}>在下面点餐呦</Text>
+												fontFamily:'FZZhunYuan-M02S'}}>{Label.getCMLabel('ORDER_BELOW')}</Text>
 				</View>
 				<View style={{justifyContent: 'center'}}>
 					<Image style={{height: 12, width: 12, alignSelf: 'center'}} source={require('./Image/order_down.png')}/>
@@ -183,7 +183,7 @@ export default class HomeTab extends Component {
 															color: 'white',
 															fontFamily:'FZZongYi-M05S'}}
 											allowFontScaling={false}>
-											下划点餐哦~
+											下划点餐~
 								</Text>
 								<Image source={require('./Image/arrow-100x100.gif')}
 											 style={{height: 40, width: 40}}/>
