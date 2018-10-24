@@ -13,6 +13,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import Modal from 'react-native-modalbox';
+
 import CheckoutAction from '../../Actions/CheckoutAction';
 import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
@@ -27,7 +29,8 @@ export default class ChooseCardType extends Component {
 
   constructor(){
     super()
-    this.state = {showPopup: false};
+    this.state = {showPopup: false,
+                  showPriceDetail: false};
     this._onChange = this._onChange.bind(this);
     this._goBack = this._goBack.bind(this);
     this._goToPreviousCard = this._goToPreviousCard.bind(this);
@@ -54,44 +57,25 @@ export default class ChooseCardType extends Component {
   _onChange() {
     const state = Object.assign({},this.state,HistoryStore.getState());
     if (state.showPriceDetail) {
-      this.popupView.setPriceDetail({
-        title: state.payment_channel === 0 ? '确认改为现金到付' : "确认支付",
-        subtitle: "确认支付?",
-        fees: state.fees,
-        confirmText: "确认",
-        cancelText: "取消",
-        onConfirm: () => {
-          const data = {oid: state.oid,
-                        dltype: 1,
-                        payment_channel: state.payment_channel};
-          HistoryAction.changeOrderCase(data);
-          // switch (state.payment_channel) {
-          //   case 0:
-          //     this.props.cashSelected(data);
-          //     break;
-          //   case 1:
-          //     data.charge_total
-          //     this.props.stripeCardSelected({...data,
-          //                                charge_total: state.fees.charge_total});
-          //     break;
-          //   case 10:
-          //     this.props.alipaySelected({...data,
-          //                                charge_total: state.fees.charge_total});
-          //     break;
-          //   case 30:
-          //     this.props.alipaySelected({...data,
-          //                                charge_total: state.fees.charge_total});
-          //       break;
-          //   default:
-          //     break;
-          // }
-          this.props.navigator.dismissModal({animationType: 'slide-down'});
-        },
-        onDismiss: () => {
-          this.setState({showPopup: false});
-        }
-      });
-      this.setState({showPopup: true});
+      this.setState(state);
+      // this.popupView.setPriceDetail({
+      //   title: state.payment_channel === 0 ? '确认改为现金到付' : "确认支付",
+      //   subtitle: "确认支付?",
+      //   fees: state.fees,
+      //   confirmText: "确认",
+      //   cancelText: "取消",
+      //   onConfirm: () => {
+      //     const data = {oid: state.oid,
+      //                   dltype: 1,
+      //                   payment_channel: state.payment_channel};
+      //     HistoryAction.changeOrderCase(data);
+      //     this.props.navigator.dismissModal({animationType: 'slide-down'});
+      //   },
+      //   onDismiss: () => {
+      //     this.setState({showPopup: false});
+      //   }
+      // });
+      // this.setState({showPopup: true});
     }
   }
 
@@ -369,6 +353,15 @@ export default class ChooseCardType extends Component {
     }
     return buttonList
   }
+  _renderPriceDetailModal() {
+    return (
+      <View>
+        <Text>
+        123</Text>
+      </View>
+    )
+  }
+
   render() {
     const previousVisa = () => {
       let _previousVisa = [];
@@ -617,6 +610,13 @@ export default class ChooseCardType extends Component {
             {previousVisa()}
             {payment_channel_list()}
         </ScrollView>
+        <Modal style={styles.modal}
+              position={"center"}
+              isOpen={this.state.showPriceDetail}
+              onClosed={() => {this.setState({showPriceDetail: !this.state.showPriceDetail})}}
+              swipeToClose={false}>
+            {this._renderPriceDetailModal()}
+        </Modal>
       </View>
     );
   }
@@ -654,5 +654,10 @@ const styles = StyleSheet.create({
     textAlign:"right",
     fontFamily:'FZZhunYuan-M02S',
     marginRight: 20
-  }
+  },
+  modal: {
+		justifyContent: 'center',
+		height: 400,
+		width: 300,
+	},
 });
