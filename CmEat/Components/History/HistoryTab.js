@@ -85,22 +85,22 @@ class HistoryTab extends Component {
 				const _doAutoRefresh = this._doAutoRefresh;
 				if(this.props.paymentFail) {
 
-					this.popupView.setMessagePopup({
-					  title: "在线支付失败",
-					  subtitle: "请再次尝试支付",
-					  onDismiss: () => {
-					    this.setState({showPopup: false})
-					  }
-					});
-					this.setState({showPopup: true});
+					// this.popupView.setMessagePopup({
+					//   title: "在线支付失败",
+					//   subtitle: "请再次尝试支付",
+					//   onDismiss: () => {
+					//     this.setState({showPopup: false})
+					//   }
+					// });
+					// this.setState({showPopup: true});
 
-					// Alert.alert(
-          //   '在线支付失败',
-          //   '请再次尝试支付',
-          //   [
-          //     {text: '确认', onPress: () => {}},
-          //   ],
-          // );
+					Alert.alert(
+            '在线支付失败',
+            '请再次尝试支付',
+            [
+              {text: '确认', onPress: () => {}},
+            ],
+          );
 				}
 	      HistoryStore.addChangeListener(this._onChange);
 	      this._doAutoRefresh();
@@ -143,22 +143,22 @@ class HistoryTab extends Component {
         if(this.state.verifyPhoneResult === 'FAIL'){
           HistoryStore.initVerifyPhoneResult();
 
-					this.popupView.setMessagePopup({
-						title: "验证码错误",
-						subtitle: "请检查您输入的验证码",
-						onDismiss: () => {
-							this.setState({showPopup: false})
-						}
-					});
-					this.setState({showPopup: true});
+					// this.popupView.setMessagePopup({
+					// 	title: "验证码错误",
+					// 	subtitle: "请检查您输入的验证码",
+					// 	onDismiss: () => {
+					// 		this.setState({showPopup: false})
+					// 	}
+					// });
+					// this.setState({showPopup: true});
 
-          // Alert.alert(
-          //   '验证码错误',
-          //   '请检查您输入的验证码',
-          //   [
-          //     {text: '确认', onPress: () => {}},
-          //   ],
-          // );
+          Alert.alert(
+            '验证码错误',
+            '请检查您输入的验证码',
+            [
+              {text: '确认', onPress: () => {}},
+            ],
+          );
         }else if(this.state.verifyPhoneResult === 'SUCCESS'){
             HistoryStore.initVerifyPhoneResult();
             this._doAutoRefresh();

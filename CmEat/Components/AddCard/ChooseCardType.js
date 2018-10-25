@@ -13,6 +13,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import Modal from 'react-native-modalbox';
+
 import CheckoutAction from '../../Actions/CheckoutAction';
 import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
@@ -27,7 +29,8 @@ export default class ChooseCardType extends Component {
 
   constructor(){
     super()
-    this.state = {showPopup: false};
+    this.state = {showPopup: false,
+                  showPriceDetail: false};
     this._onChange = this._onChange.bind(this);
     this._goBack = this._goBack.bind(this);
     this._goToPreviousCard = this._goToPreviousCard.bind(this);
@@ -54,44 +57,25 @@ export default class ChooseCardType extends Component {
   _onChange() {
     const state = Object.assign({},this.state,HistoryStore.getState());
     if (state.showPriceDetail) {
-      this.popupView.setPriceDetail({
-        title: state.payment_channel === 0 ? '确认改为现金到付' : "确认支付",
-        subtitle: "确认支付?",
-        fees: state.fees,
-        confirmText: "确认",
-        cancelText: "取消",
-        onConfirm: () => {
-          const data = {oid: state.oid,
-                        dltype: 1,
-                        payment_channel: state.payment_channel};
-          HistoryAction.changeOrderCase(data);
-          // switch (state.payment_channel) {
-          //   case 0:
-          //     this.props.cashSelected(data);
-          //     break;
-          //   case 1:
-          //     data.charge_total
-          //     this.props.stripeCardSelected({...data,
-          //                                charge_total: state.fees.charge_total});
-          //     break;
-          //   case 10:
-          //     this.props.alipaySelected({...data,
-          //                                charge_total: state.fees.charge_total});
-          //     break;
-          //   case 30:
-          //     this.props.alipaySelected({...data,
-          //                                charge_total: state.fees.charge_total});
-          //       break;
-          //   default:
-          //     break;
-          // }
-          this.props.navigator.dismissModal({animationType: 'slide-down'});
-        },
-        onDismiss: () => {
-          this.setState({showPopup: false});
-        }
-      });
-      this.setState({showPopup: true});
+      this.setState(state);
+      // this.popupView.setPriceDetail({
+      //   title: state.payment_channel === 0 ? '确认改为现金到付' : "确认支付",
+      //   subtitle: "确认支付?",
+      //   fees: state.fees,
+      //   confirmText: "确认",
+      //   cancelText: "取消",
+      //   onConfirm: () => {
+      //     const data = {oid: state.oid,
+      //                   dltype: 1,
+      //                   payment_channel: state.payment_channel};
+      //     HistoryAction.changeOrderCase(data);
+      //     this.props.navigator.dismissModal({animationType: 'slide-down'});
+      //   },
+      //   onDismiss: () => {
+      //     this.setState({showPopup: false});
+      //   }
+      // });
+      // this.setState({showPopup: true});
     }
   }
 
@@ -438,6 +422,217 @@ export default class ChooseCardType extends Component {
     }
     return buttonList
   }
+  // _renderPriceDetailModal() {
+  //   return (
+  //     <View>
+  //       <Text>
+  //       123</Text>
+  //     </View>
+  //   )
+  // }
+
+  _renderPriceDetailModal() {
+    if (this.state.fees) {
+      const _discount = () => {
+        const _discount = [];
+        if (this.state.fees.total_off > 0) {
+          _discount.push(
+            <View key={"discount_wrapper"}
+                  style={styles.priceWrapper}>
+              <Text key={"discount_title"}
+                    style={{fontSize: 15,
+                            color: "#40a2e7",
+                            fontFamily: 'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
+                折扣:
+              </Text>
+              <Text key={"discount"}
+                    style={{fontSize: 15,
+                            color: "#40a2e7",
+                            fontFamily: 'FZZhunYuan-M02S'}}
+                    allowFontScaling={false}>
+                -${this.state.fees.total_off}
+              </Text>
+            </View>
+          )
+        }
+        return _discount;
+      };
+      const _chargeTotal = () => {
+        const _chargeTotal = [];
+        _chargeTotal.push(
+          <Text key={"charge_total"}
+                style={{fontSize: 19,
+                        color: "#666666",
+                        fontWeight: "800",
+                        fontFamily: 'FZZhunYuan-M02S'}}
+                allowFontScaling={false}>
+            ${this.state.fees.charge_total}
+          </Text>
+        );
+        if (this.state.fees.total_off > 0) {
+          _chargeTotal.push(
+            <Text key={"ori_charge_total"}
+                  style={{fontSize: 19,
+                          color: "#666666",
+                          fontWeight: "800",
+                          fontFamily: 'FZZhunYuan-M02S',
+                          textDecorationLine: 'line-through',
+  												marginLeft: 6}}
+                  allowFontScaling={false}>
+              ${this.state.fees.total}
+            </Text>
+          );
+        }
+        return _chargeTotal;
+      }
+      return (
+        <View style={{backgroundColor: "white", flex: 1, borderRadius: 8}}>
+          <View style={{justifyContent: 'center', flex: 1}}>
+            <Text style={{textAlign: 'center',
+                          marginTop: 10,
+                          fontSize: 15,
+                          fontFamily: 'FZZhunYuan-M02S'}}>
+              确认支付
+            </Text>
+          </View>
+          <View style={styles.priceWrapper}>
+            <Text key={"pretax_title"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              税前价格:
+            </Text>
+            <Text key={"pretax"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              ${this.state.fees.ori_pretax}
+            </Text>
+          </View>
+          <View style={styles.priceWrapper}>
+            <Text key={"dlexp_title"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              运费:
+            </Text>
+            <Text key={"dlexp"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              ${this.state.fees.dlexp}
+            </Text>
+          </View>
+          <View style={styles.priceWrapper}>
+            <Text key={"tax_title"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              税:
+            </Text>
+            <Text key={"tax"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              ${this.state.fees.ori_tax}
+            </Text>
+          </View>
+          <View style={styles.priceWrapper}>
+            <Text key={"service_fee_title"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              服务费:
+            </Text>
+            <Text key={"service_fee"}
+                  style={{fontSize: 15,
+                          color: "#9b9b9b",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              ${this.state.fees.ori_service_fee}
+            </Text>
+          </View>
+          {_discount()}
+          <View style={styles.seperateLine}>
+          </View>
+          <View style={[styles.priceWrapper,
+                        {marginTop: 15,
+                         marginBottom: 15}]}>
+            <Text style={{fontSize: 19,
+                          color: "#666666",
+                          fontWeight: "800",
+                          fontFamily: 'FZZhunYuan-M02S'}}
+                  allowFontScaling={false}>
+              总计:
+            </Text>
+            <View style={{flexDirection: 'row'}}>
+              {_chargeTotal()}
+            </View>
+          </View>
+          <View style={{flexDirection: 'row',
+                        backgroundColor: 'white',
+                        borderBottomLeftRadius: 8,
+                        borderBottomRightRadius: 8}}>
+              <View style={{flex: 1}}>
+                  <TouchableOpacity onPress={() => {this.setState({showPriceDetail: false})}}>
+                    <View style={{
+                          height: 42.5,
+                          justifyContent: 'center',
+                          backgroundColor: '#C5C5C5',
+                          alignItems: 'center',
+                          borderBottomLeftRadius: 8,}}>
+                      <Text style={{color: '#666',
+                                     fontSize: 14,
+                                     fontWeight: '900',
+                                     lineHeight: 16,
+                                     fontFamily: 'FZZhunYuan-M02S'}}
+                            allowFontScaling={false}>
+                            取消
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+              </View>
+              <View style={{flex: 1}}>
+                  <TouchableOpacity onPress={() => this._confirmToPay()}>
+                    <View style={{
+                          height: 42.5,
+                          justifyContent: 'center',
+                          backgroundColor: '#ea7b21',
+                          alignItems: 'center',
+                          borderBottomRightRadius: 8}}>
+                      <Text style={{color: 'white',
+                                     fontSize: 14,
+                                     fontWeight: '900',
+                                     lineHeight: 16,
+                                     fontFamily: 'FZZhunYuan-M02S'}}
+                            allowFontScaling={false}>
+                            确认
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+              </View>
+          </View>
+        </View>
+      )
+    }
+  }
+
+  _confirmToPay() {
+    const data = {oid: this.state.oid,
+                  dltype: 1,
+                  payment_channel: this.state.payment_channel};
+    this.setState({showPriceDetail: !this.state.showPriceDetail});
+    HistoryAction.changeOrderCase(data);
+  }
+
   render() {
     const previousVisa = () => {
       let _previousVisa = [];
@@ -686,6 +881,13 @@ export default class ChooseCardType extends Component {
             {previousVisa()}
             {payment_channel_list()}
         </ScrollView>
+        <Modal style={styles.modal}
+              position={"center"}
+              isOpen={this.state.showPriceDetail}
+              onClosed={() => {this.setState({showPriceDetail: false})}}
+              swipeToClose={false}>
+            {this._renderPriceDetailModal()}
+        </Modal>
       </View>
     );
   }
@@ -723,5 +925,24 @@ const styles = StyleSheet.create({
     textAlign:"right",
     fontFamily:'FZZhunYuan-M02S',
     marginRight: 20
-  }
+  },
+  priceWrapper:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+    marginHorizontal: 50
+  },
+  seperateLine: {
+		marginTop: 10,
+		marginLeft: 10,
+		marginRight: 10,
+		borderColor:"#ccd3db",
+		borderBottomWidth: StyleSheet.hairlineWidth
+	},
+  modal: {
+		justifyContent: 'center',
+		height: 300,
+		width: width * 0.8,
+    borderRadius: 8
+	},
 });
