@@ -513,7 +513,7 @@ export default class ChooseCardType extends Component {
                         borderBottomLeftRadius: 8,
                         borderBottomRightRadius: 8}}>
               <View style={{flex: 1}}>
-                  <TouchableOpacity onPress={() => {this.setState({showPriceDetail: !this.state.showPriceDetail})}}>
+                  <TouchableOpacity onPress={() => {this.setState({showPriceDetail: false})}}>
                     <View style={{
                           height: 42.5,
                           justifyContent: 'center',
@@ -815,7 +815,7 @@ export default class ChooseCardType extends Component {
         <Modal style={styles.modal}
               position={"center"}
               isOpen={this.state.showPriceDetail}
-              onClosed={() => {this.setState({showPriceDetail: !this.state.showPriceDetail})}}
+              onClosed={() => {this.setState({showPriceDetail: false})}}
               swipeToClose={false}>
             {this._renderPriceDetailModal()}
         </Modal>
