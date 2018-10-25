@@ -38,6 +38,8 @@ import CheckoutAction from '../../Actions/CheckoutAction';
 import AddressStore from '../../Stores/AddressStore';
 import Util from '../../Modules/Util';
 import Label from '../../../App/Constants/AppLabel';
+import PopupView from '../Popup/PopupView';
+
 export default class CmEatAddress extends Component {
 
   constructor(props) {
