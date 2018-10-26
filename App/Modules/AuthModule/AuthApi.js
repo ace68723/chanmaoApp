@@ -140,6 +140,70 @@ const AuthApi = {
               .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
+    getVcode(io_data)
+    {
+
+      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_send_vcode_reset_password';
+      let options = {
+          method: 'GET',
+          mode:'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              cty:1,
+              num:io_data.num,
+          }
+      }
+      // options.headers = Object.assign(options.headers,{
+      //     devicetoken:userInfo.deviceToken,
+      //     Cmos:userInfo.os,
+      //     Cmuuid:userInfo.uuid,
+      //     Cmversion:userInfo.version
+      // })
+      // options.body = JSON.stringify({
+      //   username: userInfo.username,
+      //   password: userInfo.password
+      // })
+
+      return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw ERROR_NETWORK})
+    },
+    resetPassword(io_data)
+    {
+      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/reset_password';
+      let options = {
+          method: 'POST',
+          mode:'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          }
+      }
+      // options.headers = Object.assign(options.headers,{
+      //     devicetoken:userInfo.deviceToken,
+      //     Cmos:userInfo.os,
+      //     Cmuuid:userInfo.uuid,
+      //     Cmversion:userInfo.version
+      // })
+      // options.body = JSON.stringify({
+      //   username: userInfo.username,
+      //   password: userInfo.password
+      // })
+      options.body = JSON.stringify({
+        "iv_verification_code": io_data.iv_verification_code,
+        "iv_password": io_data.iv_password,
+        "iv_cty": "1",
+        "iv_num": io_data.iv_num,
+      })
+      return fetch(url,options)
+              .then((res) => {
+                console.log(res);
+                console.log(res.json());
+                return res.json();
+              })
+              .catch((error) => {throw ERROR_NETWORK})
+    },
     bindPhone(io_data) {
       const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_register_addphone';
       let options = {

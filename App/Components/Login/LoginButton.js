@@ -112,15 +112,26 @@ export default class LoginButton extends Component {
     return(
       <View style={styles.container} ref={"LOGIN"}>
 						{this._renderLoginButton()}
-          <View style={styles.registerView}>
-						<TouchableWithoutFeedback onPress={this.props.toggleViewType}>
-							<View style={{flex:1}}>
-								<Text allowFontScaling={false} style={styles.registerText}>
-		               {this.props.is_register}
-		            </Text>
-							</View>
-						</TouchableWithoutFeedback>
-          </View>
+					<View style={styles.registerView}>
+						<View style={{flex:1,}}>
+							<TouchableWithoutFeedback onPress={this.props.toggleViewType}>
+								<View style={{flex:1}}>
+									<Text allowFontScaling={false} style={styles.registerText}>
+			               {this.props.is_register}
+			            </Text>
+								</View>
+							</TouchableWithoutFeedback>
+	          </View>
+						<View style={{flex:1,}}>
+							<TouchableWithoutFeedback onPress={this.props.toggleViewTypeReset}>
+								<View style={{flex:1}}>
+									<Text allowFontScaling={false} style={styles.registerText}>
+										 Forgot password
+									</Text>
+								</View>
+							</TouchableWithoutFeedback>
+						</View>
+					</View>
 
       </View>
     )

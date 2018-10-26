@@ -19,8 +19,8 @@ import AuthAction from '../../Actions/AuthAction';
 import Alert from '../General/Alert';
 import InputAnimation from './InputAnimation';
 import RegisterInputAnimation from './register/InputAnimation';
-
-import PopupView from '../../../CmEat/Components/Popup/PopupView'
+import ResetPassword from './ResetPassword';
+import PopupView from '../../../CmEat/Components/Popup/PopupView';
 
 const {width,height} = Dimensions.get('window');
 let marginTop;
@@ -51,6 +51,7 @@ const VIEW_TYPE_LOGIN = 'view_type_login';
 const VIEW_TYPE_REGISTER = 'view_type_register';
 const VIEW_TYPE_BINDPHONE = 'view_type_bindphone';
 
+const VIEW_TYPE_RESET = 'view_type_reset';
 export default class LogoAnimationView extends Component {
   constructor(){
     super()
@@ -86,6 +87,7 @@ export default class LogoAnimationView extends Component {
 		this._toggleViewType	= this._toggleViewType.bind(this);
 		this._handleBindSuccessful = this._handleBindSuccessful.bind(this);
 		this._getVerification = this._getVerification.bind(this);
+		this._toggleViewTypeReset = this._toggleViewTypeReset.bind(this);
 
 		this.popupView = PopupView.getInstance();
   }
@@ -409,6 +411,14 @@ export default class LogoAnimationView extends Component {
 			this.setState({viewType: VIEW_TYPE_LOGIN})
 		}
 	}
+	_toggleViewTypeReset(){
+		if (this.state.viewType == VIEW_TYPE_LOGIN){
+			this.setState({viewType: VIEW_TYPE_RESET})
+		}
+		else if (this.state.viewType == VIEW_TYPE_RESET){
+			this.setState({viewType: VIEW_TYPE_LOGIN})
+		}
+	}
   render(){
     return(
       <View style={styles.container}>
@@ -439,6 +449,7 @@ export default class LogoAnimationView extends Component {
 													if_openAdView = {this._openAdView}
 													viewType = {this.state.viewType}
 													toggleViewType = {this._toggleViewType}
+													toggleViewTypeReset = {this._toggleViewTypeReset}
 													/>
 				}
 
@@ -476,6 +487,11 @@ export default class LogoAnimationView extends Component {
 													secondLeft = {this.state.secondLeft}
 													isVerificationSent = {this.state.isVerificationSent}
 													/>
+				}
+				{this.state.viewType == VIEW_TYPE_RESET &&
+					<ResetPassword
+						toggleViewTypeReset = {this._toggleViewTypeReset}
+					/>
 				}
 
           {this._renderGoBackBtn()}
