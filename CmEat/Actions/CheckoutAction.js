@@ -12,18 +12,18 @@ import {
 
 import {NativeModules} from 'react-native';
 export default {
-    async beforCheckout(rid,pretax,startAmount){
-      try{
-          const token = await AuthModule.getToken();
-          const reqData = {rid,pretax,token,startAmount}
-          const result = await RestaurantModule.beforCheckout(reqData)
-          const data = {result,rid}
-          dispatch({
-              actionType: AppConstants.BEFORE_CHECKOUT, data
-          })
-      }catch (e){
-      }
-    },
+    // async beforCheckout(rid,pretax,startAmount){
+    //   try{
+    //       const token = await AuthModule.getToken();
+    //       const reqData = {rid,pretax,token,startAmount}
+    //       const result = await RestaurantModule.beforCheckout(reqData)
+    //       const data = {result,rid}
+    //       dispatch({
+    //           actionType: AppConstants.BEFORE_CHECKOUT, data
+    //       })
+    //   }catch (e){
+    //   }
+    // },
     async beforeCheckoutInit({rid}) {
       try{
           const selectedAddress = cme_getSelectedAddress();
@@ -72,6 +72,43 @@ export default {
           data.selectedAddress = address;
 
           const result = await CheckoutModule.beforeCheckoutUpdateAddress(reqData);
+          if (result.ev_error == 0) {
+            data.result = result;
+            dispatch({
+                actionType: AppConstants.BEFORE_CHECKOUT_INIT, data
+            })
+          }
+      }catch (e){
+      }
+    },
+    async beforeCheckoutUpdateCard({ticket_id, update_field}) {
+      try{
+          let data = {};
+          const reqData = {
+            ticket_id,
+            update_field
+          };
+          data.selectedPaymentChannel = 1;
+
+          const result = await CheckoutModule.beforeCheckoutUpdateCard(reqData);
+          if (result.ev_error == 0) {
+            data.result = result;
+            dispatch({
+                actionType: AppConstants.BEFORE_CHECKOUT_INIT, data
+            })
+          }
+      }catch (e){
+      }
+    },
+    async beforeCheckoutUpdateComment({ticket_id, comment}) {
+      try{
+          let data = {};
+          let reqData = {
+            ticket_id,
+            comment
+          };
+          const result = await CheckoutModule.beforeCheckoutUpdateCard(reqData);
+
           if (result.ev_error == 0) {
             data.result = result;
             dispatch({
@@ -133,17 +170,17 @@ export default {
           actionType: AppConstants.UPDATE_DLTYPE,data
       })
     },
-    async calculateDeliveryFee(){
-      try{
-        const token = await AuthModule.getToken();
-        const reqData = {token};
-        const data = await RestaurantModule.calculateDeliveryFee(reqData);
-        dispatch({
-            actionType: AppConstants.CALCULATE_DELIVERY_FEE, data
-        })
-      }catch (e){
-      }
-    },
+    // async calculateDeliveryFee(){
+    //   try{
+    //     const token = await AuthModule.getToken();
+    //     const reqData = {token};
+    //     const data = await RestaurantModule.calculateDeliveryFee(reqData);
+    //     dispatch({
+    //         actionType: AppConstants.CALCULATE_DELIVERY_FEE, data
+    //     })
+    //   }catch (e){
+    //   }
+    // },
     async stripeChargeAndUpdate({amount, oid, checkoutFrom}){
       try{
           const token = await AuthModule.getToken();

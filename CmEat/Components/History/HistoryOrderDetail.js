@@ -122,7 +122,7 @@ export default class orderHistory extends Component {
                         fontWeight:'bold',
                         color:'#ea7b21'}}
                 allowFontScaling={false}>
-            小费:
+            服务费:
           </Text>
           <Text style={{fontSize:15,
                         fontWeight:'bold',

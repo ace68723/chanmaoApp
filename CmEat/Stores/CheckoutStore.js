@@ -163,12 +163,18 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       if (data.selectedAddress) {
         this.state.selectedAddress = data.selectedAddress;
       }
+      if (data.selectedPaymentChannel) {
+        this.state.payment_channel = data.selectedPaymentChannel;
+      }
+      else {
+        this.state.payment_channel = data.result.last_payment.payment_channel;
+      }
       this.state.cases = Object.values(data.result.cases);
       this.state.ticket_id = data.result.ticket_id;
       this.state.last_payment = data.result.last_payment;
-      this.state.payment_channel = data.result.last_payment.payment_channel;
       this.state.coupon_code = data.result.coupon_code;
       this.state.alertMsg = data.result.user_message;
+      this.state.comment = data.result.comment;
       this._updateSelectedCase();
       this.state.returnCoupon = null;
       // this.state.couponCodeTextInput = "";
