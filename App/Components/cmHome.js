@@ -20,8 +20,8 @@ import {
 import AuthAction from '../Actions/AuthAction';
 import VersionAction from '../Actions/VersionAction';
 import {GetUserInfo} from '../Modules/Database';
-import PopupView from '../../CmEat/Components/Popup/PopupView'
-
+import PopupView from '../../CmEat/Components/Popup/PopupView';
+import StartupAnimation from './startupAnimation';
 const { height, width } = Dimensions.get('window');
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -131,18 +131,6 @@ export default class Home extends Component {
         }
       });
       this.setState({showPopup: true});
-
-      // Alert.alert(
-      //   '软件更新',
-      //   '有新版本可下载,请前往更新',
-      //   [
-      //     {text:'立即更新', onPress:()=>{
-      //       Linking.canOpenURL(url).then(supported => {
-      //         supported && Linking.openURL(url);
-      //       }, (err) => console.log(err));
-      //     }}
-      //   ]
-      // )
     }else{
 
       this.popupView.setMessagePopup({
@@ -160,25 +148,9 @@ export default class Home extends Component {
         }
       });
       this.setState({showPopup: true});
-
-      // Alert.alert(
-      //   '软件更新',
-      //   '有新版本可下载，要前往App Store?',
-      //   [
-      //     {text: '以后再说', onPress:()=>{} ,style: 'cancel'},
-      //     {text:'立即更新', onPress:()=>{
-      //       Linking.canOpenURL(url).then(supported => {
-      //         supported && Linking.openURL(url);
-      //       }, (err) => console.log(err));
-      //     }}
-      //   ]
-      // )
     }
   }
   _startUp(){
-    // AuthAction.doAuth();
-
-
       if(this.props.goToCmEat){
 
         setTimeout(() => {
@@ -262,7 +234,6 @@ export default class Home extends Component {
               }
           ),
       ]).start();
-      // const isAuthed =  AuthAction.isAuthed();
       const res =  await AuthAction.isAuthed();
       if(res.ev_error !== 0) {
         setTimeout(() => {
@@ -288,20 +259,6 @@ export default class Home extends Component {
         },1000)
       }
       else{
-        // setTimeout(() => {
-        //   InteractionManager.runAfterInteractions(() => {
-        //     this.props.navigator.showLightBox({
-        //       screen: 'CmLoading',
-        //       animated: false,
-        //       navigatorStyle: {navBarHidden: true},
-        //       style: {
-        //         flex:1,
-        //        backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        //       //  backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
-        //      }
-        //     })
-        //   })
-        // }, 500);
         setTimeout(() => {
           InteractionManager.runAfterInteractions(() => {
             this.props.navigator.showModal({
@@ -330,7 +287,6 @@ export default class Home extends Component {
       }
   }
   _handleSboxPress() {
-                  // if (Platform.OS === 'ios') {
       if(this._openStarted) return;
       if(!this.state.entryFlag) return;
       this._openStarted = true;
@@ -379,26 +335,6 @@ export default class Home extends Component {
           })
         })
       }, 2500);
-                  // } else if (Platform.OS === 'android') {
-                  //   setTimeout(() => {
-                  //     InteractionManager.runAfterInteractions(() => {
-                  //       this.props.navigator.push({
-                  //         screen: 'SboxHome',
-                  //         passProps: {handleBackToHome: this._handleBackToHome},
-                  //         animated: true,
-                  //         animationType: 'slide-horizontal',
-                  //         navigatorStyle: {
-                  //           navBarHidden: true,
-                  //           disabledBackGesture: true,
-                  //         },
-                  //         style: {
-                  //          backgroundBlur: "none",
-                  //          backgroundColor: "rgba(0,0,0,0)"
-                  //        }
-                  //       })
-                  //     })
-                  //   }, 1000);
-                  // }
     }
   _handleBackToHome(tag) {
     if(tag === 'fromChanmao') {
@@ -424,21 +360,6 @@ export default class Home extends Component {
     }
   }
   _handleLoginSuccessful() {
-    // InteractionManager.runAfterInteractions(() => {
-    //   //   this.props.navigator.push({
-    //   //     screen: 'CmEat',
-    //   //     passProps: {handleBackToHome: this._handleBackToHome},
-    //   //     animated: false,
-    //   //     navigatorStyle: {
-    //   //       navBarHidden: true,
-    //   //       disabledBackGesture: true,
-    //   //     },
-    //   //
-    //   //     style: {
-    //   //      backgroundBlur: "none",
-    //   //      backgroundColor: "rgba(0,0,0,0)"
-    //   //    }
-    //   // })
     setTimeout(() => {
       InteractionManager.runAfterInteractions(() => {
         this.props.navigator.showModal({
@@ -500,73 +421,10 @@ export default class Home extends Component {
       const cmHomeHeightRatio = this._isiPhoneX() ? 2.2 : 1.88;
 
       return (
-          <Animated.View style={[styles.container,cmTransform]}>
-            {this.state.showPopup && this.popupView.show()}
-              <View style={{ flex: 1,}}>
-                <TouchableWithoutFeedback onPress={this._handleSboxPress}>
-                  <Animated.View style={{ flex: 0.55, right: this.state.boxRight,}}>
-
-                      <Image source={ this._getSBoxHomePage() }
-                          style={{ width: width * 0.3674,
-                                    height: width * 0.3674 * sboxHomeHeightRatio,
-                                    bottom: 10,
-                                    position: 'absolute',
-                                    left: width * 0.0612,
-                          }}
-                      />
-                  </Animated.View>
-                </TouchableWithoutFeedback>
-
-                  <Animated.View style={{ flex: 0.45, top: this.state.orderTop,  }}>
-
-                  </Animated.View>
-              </View>
-              <View style={{ flex: 1, }}>
-                  <Animated.View style={{ flex: 0.45, bottom: this.state.settingBottom,  }}>
-                    <Image source={require('./Img/HOME-PAGE-SBOX-RIGHT.png')}
-                         style={{ width: width * 0.4,
-                                   height: width * 0.4 * 1.1462,
-                                   top: height*0.18,
-                                   position: 'absolute',
-                                   right: width * 0.16,
-                         }}
-                     />
-                  </Animated.View>
-
-                  <TouchableWithoutFeedback onPress={this._handleChanmaoPress} >
-                    <Animated.View style={{ flex: 0.55,overflow: 'visible', left: this.state.cmLeft, }}>
-
-                        <Image source={ this._getCMHomePage() }
-
-                            style={[{ width: width * 0.4315,
-                                      height: width * 0.4315 * cmHomeHeightRatio,
-                                      top: 20,
-                                      position: 'absolute',
-                                      left: 0,overflow: 'visible',
-                            },]}
-                        >
-
-                        </Image>
-
-
-                    </Animated.View>
-                  </TouchableWithoutFeedback>
-              </View>
-          </Animated.View>
-
+        <StartupAnimation
+            onPressCMFoodDelivery={this._handleChanmaoPress}
+            onPressCMECommerce={this._handleSboxPress}
+        />
       );
   }
 }
-// <View style={{
-//   position:'absolute',
-//   right:0,
-//   left:0,
-//   bottom:height*0.025,
-//   height: 10,
-//   alignItems:'center',
-// }}>
-//   <Text style={{
-//     fontSize:12,
-//     color:'#000000'
-//   }}>Chanmao Inc. All Copyrights Reserved</Text>
-// </View>
