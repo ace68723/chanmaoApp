@@ -1,6 +1,7 @@
 import CheckoutAPI from './CheckoutAPI';
 import {
   NativeModules,
+  Platform,
 } from 'react-native';
 const StripeBridge = NativeModules.StripeBridge;
 
@@ -36,7 +37,7 @@ export default  {
       const body = {
         ...io_data,
         items,
-        channel: 1,
+        channel: Platform.OS == 'ios' ? 1 : 2,
         version,
       };
       const reqData = {
@@ -87,6 +88,22 @@ export default  {
     }
   },
   async beforeCheckoutUpdateAddress(io_data) {
+    try{
+      const {uid,token,version} = GetUserInfo();
+      const body = {
+        ...io_data,
+      };
+      const reqData = {
+        body,
+        authortoken: token
+      }
+      const res = await CheckoutAPI.beforeCheckoutUpdate(reqData);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  },
+  async beforeCheckoutUpdateCard(io_data) {
     try{
       const {uid,token,version} = GetUserInfo();
       const body = {

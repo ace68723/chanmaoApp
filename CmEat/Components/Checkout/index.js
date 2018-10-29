@@ -126,6 +126,7 @@ class Confirm extends Component {
 				this._cancelCouponOnPress = this._cancelCouponOnPress.bind(this);
 				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
 				this._deliverAnimation = this._deliverAnimation.bind(this);
+				this._updateComment = this._updateComment.bind(this);
 
 				this.popupView = PopupView.getInstance();
     }
@@ -484,18 +485,20 @@ class Confirm extends Component {
 			// this.setState(state);
 		}
 		_stripeCardAdded() {
-			const cart = MenuStore.getCart();
-			const rid = this.state.rid;
-			const pretax = MenuStore.getCartTotals().total;
-			const startAmount = this.state.startAmount;
-			CheckoutAction.beforCheckout(rid,pretax,startAmount);
-			const newState = CheckoutStore.getState();
-			const state = Object.assign({},newState,
-																	{cart:cart,
-																	 pretax: pretax,
-																	 tips: parseFloat(newState.total*0.1).toFixed(2),
-																 	 tipsPercentage:0.1});
-			this.setState(state);
+			// const cart = MenuStore.getCart();
+			// const rid = this.state.rid;
+			// const pretax = MenuStore.getCartTotals().total;
+			// const startAmount = this.state.startAmount;
+			// CheckoutAction.beforCheckout(rid,pretax,startAmount);
+			// const newState = CheckoutStore.getState();
+			// const state = Object.assign({},newState,
+			// 														{cart:cart,
+			// 														 pretax: pretax,
+			// 														 tips: parseFloat(newState.total*0.1).toFixed(2),
+			// 													 	 tipsPercentage:0.1});
+			const ticket_id = this.state.ticket_id;
+			CheckoutAction.beforeCheckoutUpdateCard({ticket_id, update_field: 'card'});
+			// this.setState(state);
 			setTimeout( () => {
 				CheckoutAction.updatePaymentStatus(1);
 			}, 500);
@@ -521,6 +524,13 @@ class Confirm extends Component {
 			CheckoutAction.updatePaymentStatus(1);
 			// this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
 			// 							 tipsPercentage:0.1});
+		}
+
+		_updateComment() {
+			this.setState({openEditComment:false});
+			const ticket_id = this.state.ticket_id;
+			CheckoutAction.beforeCheckoutUpdateComment({ticket_id,
+																									comment: this.state.comment});
 		}
 
 		_setTips(tipsPercentage){
@@ -1277,7 +1287,7 @@ class Confirm extends Component {
 				<CommentModal  style={styles.modal}
 											 position={"center"}
 											 isOpen={this.state.openEditComment}
-											 onClosed={()=>{this.setState({openEditComment:false})}}
+											 onClosed={()=>{this._updateComment()}}
 											 onOpened={()=>{this._commentInput.setNativeProps({ text:this.state.comment })}}>
 					<TextInput
 										style={styles.TextInput}

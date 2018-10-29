@@ -145,8 +145,6 @@ export default class ChooseCardType extends Component {
         payment_channel: 10
       }
       HistoryAction.viewOrderCase(data);
-      const visa_fee = this._getVisaFee(this.props.orderInfo.available_payment_channels, 10);
-      let payment_description = '';
     }
   }
 
