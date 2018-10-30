@@ -15,7 +15,11 @@ import {
 
 import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
+
+import Label from '../../../App/Constants/AppLabel';
+
 const {height, width} = Dimensions.get('window');
+
 export default class orderHistory extends Component {
 
   constructor(props) {
@@ -102,7 +106,7 @@ export default class orderHistory extends Component {
           <View style={{marginRight:10, marginLeft:10}}>
             <Text style={{fontSize:15,lineHeight:16}} allowFontScaling={false}>
               <Text style={{fontWeight:'bold',color:'#ea7b21'}} allowFontScaling={false}>
-                备注：
+                {Label.getCMLabel('REMARK')}：
               </Text>
               {this.state.comment}
             </Text>
@@ -122,7 +126,7 @@ export default class orderHistory extends Component {
                         fontWeight:'bold',
                         color:'#ea7b21'}}
                 allowFontScaling={false}>
-            服务费:
+            {Label.getCMLabel('SERVICE_FEE')}:
           </Text>
           <Text style={{fontSize:15,
                         fontWeight:'bold',

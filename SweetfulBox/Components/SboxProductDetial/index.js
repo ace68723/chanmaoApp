@@ -205,7 +205,7 @@ export default class SweetProductDetial extends Component {
                         fontFamily:'FZZhunYuan-M02S',
                       }}
                       allowFontScaling={false}>
-                    加入购物箱
+                    {Label.getSboxLabel('ADD_TO_CART')}
                 </Text>
           </View>
         </TouchableOpacity>

@@ -284,7 +284,7 @@ export default class SboxCart extends Component {
                             fontFamily:'FZZhunYuan-M02S',
                             textAlign:'right'}}
                     allowFontScaling={false}>
-                   {this.state.totalQuantity}件
+                   {this.state.totalQuantity}{Label.getCMLabel('UNIT')}
               </Text>
             </View>
 

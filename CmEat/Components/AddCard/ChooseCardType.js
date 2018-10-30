@@ -21,6 +21,7 @@ import HistoryStore from '../../Stores/HistoryStore';
 
 import Header from '../General/Header';
 import Label from '../../../App/Constants/AppLabel';
+
 const { height, width } = Dimensions.get('window');
 
 export default class ChooseCardType extends Component {
@@ -114,7 +115,7 @@ export default class ChooseCardType extends Component {
         screen: "CmAddCard",
         navigatorStyle: {navBarHidden:true},
         passProps:{
-          title:"添加信用卡",
+          title: Label.getCMLabel('ADD_CREDIT_CARD'),
           stripeCardAdded: this._stripeCardAdded
         }
       });
@@ -125,7 +126,7 @@ export default class ChooseCardType extends Component {
         screen: "CmAddCard",
         navigatorStyle: {navBarHidden:true},
         passProps:{
-          title:"添加 Debit Card",
+          title: Label.getCMLabel('ADD_DEBIT_CARD'),
           stripeCardAdded: this._stripeCardAdded
         }
       });
@@ -243,7 +244,7 @@ export default class ChooseCardType extends Component {
                             color: "#40a2e7",
                             fontFamily: 'FZZhunYuan-M02S'}}
                     allowFontScaling={false}>
-                折扣:
+                {Label.getCMLabel('DISCOUNT')}:
               </Text>
               <Text key={"discount"}
                     style={{fontSize: 15,
@@ -295,7 +296,7 @@ export default class ChooseCardType extends Component {
                           marginTop: 20,
                           fontSize: 18,
                           fontFamily: 'FZZhunYuan-M02S'}}>
-              确认支付
+              {Label.getCMLabel('CONFIRM_PAY')}
             </Text>
           </View>
           <View style={styles.priceWrapper}>
@@ -304,7 +305,7 @@ export default class ChooseCardType extends Component {
                           color: "#9b9b9b",
                           fontFamily: 'FZZhunYuan-M02S'}}
                   allowFontScaling={false}>
-              税前价格:
+              {Label.getCMLabel('PRETAX_PRICE')}:
             </Text>
             <Text key={"pretax"}
                   style={{fontSize: 15,
@@ -320,7 +321,7 @@ export default class ChooseCardType extends Component {
                           color: "#9b9b9b",
                           fontFamily: 'FZZhunYuan-M02S'}}
                   allowFontScaling={false}>
-              运费:
+              {Label.getCMLabel('DELIVER_FEE')}:
             </Text>
             <Text key={"dlexp"}
                   style={{fontSize: 15,
@@ -336,7 +337,7 @@ export default class ChooseCardType extends Component {
                           color: "#9b9b9b",
                           fontFamily: 'FZZhunYuan-M02S'}}
                   allowFontScaling={false}>
-              税:
+              {Label.getCMLabel('TAX')}:
             </Text>
             <Text key={"tax"}
                   style={{fontSize: 15,
@@ -352,7 +353,7 @@ export default class ChooseCardType extends Component {
                           color: "#9b9b9b",
                           fontFamily: 'FZZhunYuan-M02S'}}
                   allowFontScaling={false}>
-              服务费:
+              {Label.getCMLabel('SERVICE_FEE')}:
             </Text>
             <Text key={"service_fee"}
                   style={{fontSize: 15,
@@ -371,7 +372,7 @@ export default class ChooseCardType extends Component {
                           fontWeight: "800",
                           fontFamily: 'FZZhunYuan-M02S'}}
                   allowFontScaling={false}>
-              总计:
+              {Label.getCMLabel('CHARGE_TOTAL')}:
             </Text>
             <View style={{flexDirection: 'row'}}>
               {_chargeTotal()}
@@ -395,7 +396,7 @@ export default class ChooseCardType extends Component {
                                      lineHeight: 16,
                                      fontFamily: 'FZZhunYuan-M02S'}}
                             allowFontScaling={false}>
-                            取消
+                            {Label.getCMLabel('CANCEL')}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -414,7 +415,7 @@ export default class ChooseCardType extends Component {
                                      lineHeight: 16,
                                      fontFamily: 'FZZhunYuan-M02S'}}
                             allowFontScaling={false}>
-                            确认
+                            {Label.getCMLabel('CONFIRM')}
                       </Text>
                     </View>
                   </TouchableOpacity>
@@ -472,7 +473,7 @@ export default class ChooseCardType extends Component {
                         fontSize: 16,
                         color: "#808080",
                         fontFamily:'FZZhunYuan-M02S'}}
-                allowFontScaling={false}>最近使用</Text>
+                allowFontScaling={false}>{Label.getCMLabel('RECENTLY_USE')}</Text>
         )
         _previousVisa.push(
           <TouchableOpacity onPress={this._goToPreviousCard}
@@ -502,7 +503,7 @@ export default class ChooseCardType extends Component {
                         fontSize: 16,
                         color: "#808080",
                         fontFamily:'FZZhunYuan-M02S'}}
-                allowFontScaling={false}>更多方式</Text>
+                allowFontScaling={false}>{Label.getCMLabel('MORE_PAYMENT_WAY')}</Text>
         )
       }
       return _previousVisa;

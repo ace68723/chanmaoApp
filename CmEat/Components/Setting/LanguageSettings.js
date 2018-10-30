@@ -37,7 +37,7 @@ export default class LanguageSettings extends Component {
     super(props);
 
     this.state = {
-      selected: languages[0].id
+      selected: languages[0].id,
     }
 
     this._goBack = this._goBack.bind(this);
@@ -85,8 +85,20 @@ export default class LanguageSettings extends Component {
   }
 
   render() {
+    let title = "选择语言";
+    switch(languages[this.state.selected].id) {
+      case 0:
+        title = "选择语言";
+        break;
+      case 1:
+        title = "Languages";
+        break;
+      case 2:
+        title = "les langues";
+        break;
+    }
     return (<View style={styles.container}>
-      <Header title={Label.getCMLabel('LANGUAGE_SETTING')} goBack={this._goBack}/>
+      <Header title={title} goBack={this._goBack}/>
       <View style={{
           flex: 1,
           paddingLeft: 20,

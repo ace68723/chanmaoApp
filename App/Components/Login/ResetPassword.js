@@ -14,6 +14,7 @@ import {
 const {width,height} = Dimensions.get('window');
 import AuthModule from '../../Modules/AuthModule/Auth';
 import PopupView from '../../../CmEat/Components/Popup/PopupView';
+import Label from '../../Constants/AppLabel';
 
 export default class ResetPassword extends Component {
   constructor()
@@ -49,11 +50,11 @@ export default class ResetPassword extends Component {
         iv_password.length == 0 ||
         iv_num.length == 0 ||
         confirm_password.length == 0) {
-      this.popupView.showAlertWithTitle(this, "错误", "请填写以上信息");
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PLZ_ENTER_PASSWORD'));
       return;
     }
     if (iv_password!=confirm_password){
-      this.popupView.showAlertWithTitle(this, "错误", "两次密码不一样");
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PASSWORD_NOT_THE_SAME'));
       return;
     }
     let data={
@@ -63,10 +64,11 @@ export default class ResetPassword extends Component {
     }
     let res = await AuthModule.resetPassword(data);
     if (res.ev_error == 0) {
-      this.popupView.showAlertWithTitle(this, "恭喜", "密码重设成功");
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_CONGRA_TITLE'), Label.getCMLabel('PASSWORD_RESET_SUCCESS'));
     }
     else {
-      alert(res.ev_context);
+      // alert(res.ev_context);
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), res.ev_context);
     }
     this.props.toggleViewTypeReset();
   }

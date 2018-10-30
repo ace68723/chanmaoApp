@@ -51,7 +51,6 @@ module.exports={
 
 
     //Check out
-    GO_CHECKOUT:'Go To Checkout',
     ADD_PAYMENT:'Change Payment',
     PICK_UP:'现金自取',
     DELIVER:'送餐',
@@ -64,6 +63,7 @@ module.exports={
     TIPS:'Tips',
     TAXED_PRICE:'税后价格',
     PRETAX_PRICE:'税前价格',
+
 
     //Comment
     CONFIRM_COMMENT:'Confirm',

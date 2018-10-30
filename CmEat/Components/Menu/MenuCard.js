@@ -11,6 +11,9 @@ import {
 import { Navigation } from 'react-native-navigation';
 import OrderActions from '../../Actions/OrderAction';
 import SecondMenuStore from '../../Stores/SecondMenuStore';
+
+import Label from '../../../App/Constants/AppLabel';
+
 class MenuCard extends Component {
   constructor(props) {
       super(props);
@@ -63,7 +66,7 @@ class MenuCard extends Component {
 								    							backgroundColor:'#ff8b00',
 																  color: 'white'}}
 													allowFontScaling={false}>
-													选项
+													{Label.getCMLabel('OPTION')}
 										</Text>
 		              </View>
             </View>

@@ -85,7 +85,7 @@ class Confirm extends Component {
 											renderAddress:true,
 											loading: true,
 											showOrderConfirm:false,
-											paymentStatus:'添加支付方式',
+											paymentStatus: Label.getCMLabel('ADD_PAYMENT'),
 											tips:0,
 											tipsPercentage:0.1,
 											selectedCase: {fees: {},
@@ -113,8 +113,8 @@ class Confirm extends Component {
         this._goToAddressList = this._goToAddressList.bind(this);
         this._goToHistory = this._goToHistory.bind(this);
         this._doCheckout = this._doCheckout.bind(this);
-        this._handleCommentChange = this._handleCommentChange.bind(this);
-        this._handleSubmitComment = this._handleSubmitComment.bind(this);
+        // this._handleCommentChange = this._handleCommentChange.bind(this);
+        // this._handleSubmitComment = this._handleSubmitComment.bind(this);
 				this._handleProductOnPress = this._handleProductOnPress.bind(this);
 				this._closeOrderConfirm = this._closeOrderConfirm.bind(this);
 				this._renderRestaurantName = this._renderRestaurantName.bind(this);
@@ -155,11 +155,8 @@ class Confirm extends Component {
 					}, 500);
 				}
 				if (state.alertMsg.length > 0) {
-					this.popupView.showAlertWithTitle(this, "错误", state.alertMsg);
+					this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), state.alertMsg);
 				}
-				// if (state.coupon_code.length > 0 && !state.selectedCase.using_coupon) {
-				// 	this.popupView.showAlertWithTitle(this, "错误", "优惠码条件不满足 无法在当前使用");
-				// }
 				// Coupon state update
 				if (state.returnCoupon){
 					if (state.returnCoupon.valid != false && state.returnCoupon.ev_error != 1) {
@@ -168,9 +165,9 @@ class Confirm extends Component {
 					    {
 					      title: this.props.restaurant.name,
 					      subtitle: state.returnCoupon.info,
-					      detailText: '折扣码\n' + this.state.couponCodeTextInput,
+					      detailText: Label.getCMLabel('COUPON_CODE') + '\n' + this.state.couponCodeTextInput,
 					      icon: require('./Image/coupon_icon.jpg'),
-					      cancelText: "取消",
+					      cancelText: Label.getCMLabel('CANCEL'),
 								confirmButtonStyle: {backgroundColor: '#4397DC',},
 					      onConfirm: () => {
 									this._applyCouponOnPress();
@@ -389,26 +386,26 @@ class Confirm extends Component {
     _goToHistory(){
 			CheckoutAction.afterPayGoToHistory();
     }
-    showLoading(){
-      if(this.state.isLoading)
-        return(<Loading />)
-    }
-    _handleCommentChange(comment){
-      this.setState({
-        comment:comment,
-      });
-    }
-    _handleSubmitComment(commentInput){
-      this.commentInput = commentInput;
-      commentInput.blur();
-      if(this.state.comment.length > 0){
-        const pid = this.state.pid;
-        const comment = this.state.comment;
-        const view = 'comment';
-        const data = {pid,comment,view};
-        TheSixAction.submitComment(data);
-      }
-    }
+    // showLoading(){
+    //   if(this.state.isLoading)
+    //     return(<Loading />)
+    // }
+    // _handleCommentChange(comment){
+    //   this.setState({
+    //     comment:comment,
+    //   });
+    // }
+    // _handleSubmitComment(commentInput){
+    //   this.commentInput = commentInput;
+    //   commentInput.blur();
+    //   if(this.state.comment.length > 0){
+    //     const pid = this.state.pid;
+    //     const comment = this.state.comment;
+    //     const view = 'comment';
+    //     const data = {pid,comment,view};
+    //     TheSixAction.submitComment(data);
+    //   }
+    // }
 		_handleProductOnPress(dish) {
 			if (dish.tpgs) {
 				if (Util.getWaitingStatus() === true){
@@ -436,9 +433,9 @@ class Confirm extends Component {
 				// alert('123');
 				this.popupView.setMessagePopup(
 					{
-						title: '确定删除',
+						title: Label.getCMLabel('CONFIRM_DELETE'),
 						subtitle: dish.ds_name + ' x ' + dish.qty,
-						cancelText: "取消",
+						cancelText: Label.getCMLabel('CANCEL'),
 						confirmButtonStyle: {backgroundColor: '#ea7b21',},
 						onConfirm: () => {
 							this.setState({loading: true});
@@ -533,18 +530,11 @@ class Confirm extends Component {
 																									comment: this.state.comment});
 		}
 
-		_setTips(tipsPercentage){
-			this.setState({
-				tips:(this.state.total * tipsPercentage).toFixed(2),
-				tipsPercentage:tipsPercentage,
-			})
-		}
-
 		_checkCouponOnPress(){
 			Keyboard.dismiss();
 
 			if (!this.state.couponCodeTextInput || this.state.couponCodeTextInput.length == 0){
-				this.popupView.showAlert(this, "请输入优惠码");
+				this.popupView.showAlert(this, Label.getCMLabel('PLZ_ENTER_COUPON'));
 				return;
 			}
 			CheckoutAction.checkCouponCode(this.state.couponCodeTextInput);
@@ -562,7 +552,7 @@ class Confirm extends Component {
 		}
 		_applyCouponOnPress(){
 			if (!this.state.couponCodeTextInput || this.state.couponCodeTextInput.length == 0){
-				this.popupView.showAlert(this, "请输入优惠码")
+				this.popupView.showAlert(this, Label.getCMLabel('PLZ_ENTER_COUPON'))
 				return;
 			}
 			const data = {
@@ -618,7 +608,7 @@ class Confirm extends Component {
 										<View style={styles.acceptButton}>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
-												 实付: ${this.state.selectedCase.fees.charge_total}
+												 {Label.getCMLabel('ACTUAL_PAYING')}: ${this.state.selectedCase.fees.charge_total}
 											</Text>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
@@ -649,37 +639,6 @@ class Confirm extends Component {
 	      }
 			}
     }
-		_renderRestaurant(){
-			return(
-				<View>
-					<Text style={{color:'#363646',
-												fontSize:25,
-												fontWeight:'500',
-												textAlign:'center',
-												marginTop:20,
-												fontFamily:'FZZongYi-M05S',
-											}}
-								allowFontScaling={false}>
-				 		{this.props.restaurant.name}
-					</Text>
-					<Text style={{color:'#ababb0',
-												fontSize:13,
-												fontWeight:'400',
-												marginTop:10,
-												textAlign:'center',
-												fontFamily:'FZZhunYuan-M02S',}}
-								allowFontScaling={false}>
-						{this.props.restaurant.desc}
-					</Text>
-					<View style={{height:2,
-												marginTop:10,
-												marginBottom:10,
-												width:40,
-												backgroundColor:"#ff8b00",
-												alignSelf:"center"}}/>
-				</View>
-			)
-		}
 		_renderAddress(){
 			if(this.state.renderAddress && this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid")){
 				return(
@@ -691,11 +650,6 @@ class Confirm extends Component {
           <View style={{height:100,width:width,alignItems:'center',justifyContent:'center'}} >
 
           </View>
-					// <TouchableOpacity onPress={()=>{this._goToAddressList()}}>
-					// 		<View style={{height:100,width:width,alignItems:'center',justifyContent:'center'}} >
-          //       <Text style={{color:'#ea7b21',fontFamily:'FZZhunYuan-M02S',}}>请选择您的地址</Text>
-          //     </View>
-					// </TouchableOpacity>
 				)
 			}
 		}
@@ -710,37 +664,9 @@ class Confirm extends Component {
 													marginRight: 20,
 													fontFamily:'FZZhunYuan-M02S',}}
 									allowFontScaling={false}>
-							*此单为远距离配送，请核对餐厅地址及送餐地址是否正确(在线支付等待确认后扣款)
+							{Label.getCMLabel('LONG_D_ORDER_REMINDER')}
 						</Text>
 					</View>
-				)
-			}
-		}
-		_renderDeliverFee(){
-			//自取
-			if(this.state.dltype == '0') return;
-			//送餐
-			if(this.state.dlexp > 0){
-				return(
-					<CartItem icon={require('./Image/delivery-2.png')}
-										title={Label.getCMLabel('DELIVER_FEE')}
-										value={'$'+this.state.dlexp}/>
-				)
-			}else if(this.state.dltype == '2'){
-				return(
-					<CartItem icon={require('./Image/delivery-2.png')}
-										title={Label.getCMLabel('DELIVER_FEE')}
-										value={'客服将稍后与您联系确认运费'}/>
-				)
-			}
-
-		}
-		_renderVisaFee(){
-			if(this.state.visa_fee > 0) {
-				return(
-					<CartItem icon={require('./Image/delivery-2.png')}
-										title={"手续费"}
-										value={'$'+this.state.visa_fee}/>
 				)
 			}
 		}
@@ -768,18 +694,12 @@ class Confirm extends Component {
       let typeListData=[{
                           text:Label.getCMLabel('DELIVER'),
 													type: 1,
-                          // backgroundColor:"#fff",
-                          // textColor:"#999999",
-                          // borderColor:"#999999",
 													backgroundColor:"#ccd3db",
                           textColor:"white",
                           borderColor:"#ccd3db",
                         },{
                           text:Label.getCMLabel('PICK_UP'),
 													type: 0,
-                          // backgroundColor:"#fff",
-                          // textColor:"#999999",
-                          // borderColor:"#999999",
 													backgroundColor:"#ccd3db",
                           textColor:"white",
                           borderColor:"#ccd3db",
@@ -855,34 +775,9 @@ class Confirm extends Component {
 											fontSize:15,
 											fontWeight: '800'}}
 							allowFontScaling={false}>
-					优惠
+					{Label.getCMLabel('PROMOTION')}
 				</Text>
 			);
-			// const _couponCodeTextInput = () => {
-			// 	if (this.state.coupon_code.length == 0) {
-			// 		return (
-			//
-			// 		);
-			// 	}
-			// 	else {
-			// 		return (
-			// 			<TouchableOpacity onPress={this._checkCouponOnPress}>
-			// 				<View style={{flex: 1,
-			// 											justifyContent: 'center',
-			// 											alignSelf: 'center',
-			// 											paddingHorizontal: 20,
-			// 											backgroundColor: "#40a2e7",
-			// 											borderRadius: 25}}>
-			// 					<Text style={{color: "white",
-			// 												fontSize: 15}}
-			// 								allowFontScaling={false}>
-			// 						使用
-			// 					</Text>
-			// 				</View>
-			// 			</TouchableOpacity>
-			// 		);
-			// 	}
-			// }
 			if (this.state.coupon_code.length > 0 && this.state.selectedCase.using_coupon) {
 				const _discountList = () => {
 					let _discountList = '';
@@ -909,7 +804,7 @@ class Confirm extends Component {
 													alignSelf: 'center',
 													borderRadius: 30}}
 									allowFontScaling={false}>
-								 正在使用：{_discountList()}
+								 {Label.getCMLabel('CURRENT_USING')}：{_discountList()}
 						</Text>
 						<TouchableOpacity activeOpacity={0.4}
 															style={{alignSelf: 'center'}}
@@ -923,7 +818,7 @@ class Confirm extends Component {
 								<Text style={{color: "white",
 															fontSize: 15}}
 											allowFontScaling={false}>
-									取消
+									{Label.getCMLabel('CANCEL')}
 								</Text>
 							</View>
 						</TouchableOpacity>
@@ -964,50 +859,13 @@ class Confirm extends Component {
 								<Text style={{color: "white",
 															fontSize: 15}}
 											allowFontScaling={false}>
-									使用
+									{Label.getCMLabel('USE')}
 								</Text>
 							</View>
 						</TouchableOpacity>
 					</View>
 				);
 			}
-			// _couponCode.push(
-			//
-			// 	<View key={'coupon_code'}
-			// 				style={{flexDirection: 'row',
-			// 								marginTop: 10,
-			// 								marginLeft: 20,
-			// 								marginRight: 10}}>
-			// 		<TextInput style={{flex: 1,
-			// 											 marginRight: 30,
-			// 											 alignItems:'flex-start',
-			// 											 alignSelf: 'center',
-			// 											 padding: 5,
-			// 											 borderRadius: 30,
-			// 											 backgroundColor: '#f4f4f4',
-			// 											 paddingLeft: 15,
-			// 										 }}
-			// 							 placeholder={'coupon code'}
-			// 							 onChangeText={(couponCode) => this.setState({couponCodeTextInput: couponCode.toUpperCase().replace(' ', '')})}
-			// 							 value={this.state.couponCodeTextInput}
-			// 							 editable={this.state.coupon_code.length !== 0}
-			// 							 >
-			// 		</TextInput>
-			// 		{_couponCodeTextInput()}
-			// 	</View>
-			// );
-			// if (this.state.coupon_code.length > 0) {
-			// 	_couponCode.push(
-			// 		<Text key={'coupon_desc'}
-			// 					style={{color: '#40a2e7',
-			// 									fontSize: 15,
-			// 									marginTop: 15,
-			// 									marginLeft: 20}}
-			// 					allowFontScaling={false}>
-			// 			正在使用：{this.state.coupon_code}
-			// 		</Text>
-			// 	);
-			// }
 			return _couponCode;
 		}
 		_renderCouponReminder() {
@@ -1019,7 +877,7 @@ class Confirm extends Component {
 													color:'#666666',
 													fontFamily:'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							*优惠码条件不满足 无法在当前使用
+							{Label.getCMLabel('COUPON_CODE_INVALID_REMINDER')}
 						</Text>
 					</View>
 				)
@@ -1039,7 +897,7 @@ class Confirm extends Component {
 						// payment_description = 'Apple Pay';
 					}
 					else {
-						payment_description = '现金到付';
+						payment_description = Label.getCMLabel('CASH');
 					}
 					const payment_section = [];
 					payment_section.push(
@@ -1068,7 +926,7 @@ class Confirm extends Component {
 														fontFamily:'FZZhunYuan-M02S',
 														marginHorizontal: 10}}
 										allowFontScaling={false}>
-							 使用微信代叫，刷假卡造成的订单取消平台将不予退款，可疑账户平台会配合警方调查
+							 {Label.getCMLabel('ONLINE_PAYMENT_WARNING')}
 							</Text>
 						</View>
 					)
@@ -1076,9 +934,6 @@ class Confirm extends Component {
 				}
 			}
 
-		}
-
-		_renderPaymentWarning() {
 		}
 
 		_renderRestaurantName() {
@@ -1113,7 +968,7 @@ class Confirm extends Component {
 											fontSize:15,
 											fontWeight: '800'}}
 							allowFontScaling={false}>
-					订单小计
+					{Label.getCMLabel('PRICE_SUBTOTAL')}
 				</Text>
 			);
 			if (this.state.selectedCase.fees.ori_pretax) {
@@ -1128,7 +983,7 @@ class Confirm extends Component {
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							税前价格
+							{Label.getCMLabel('PRETAX_PRICE')}
 						</Text>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
@@ -1151,7 +1006,7 @@ class Confirm extends Component {
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							运费
+							{Label.getCMLabel('DELIVER_FEE')}
 						</Text>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
@@ -1174,7 +1029,7 @@ class Confirm extends Component {
 													color: '#9b9b9b',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							税
+							{Label.getCMLabel('TAX')}
 						</Text>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
@@ -1198,11 +1053,11 @@ class Confirm extends Component {
 														color: '#9b9b9b',
 														fontFamily: 'FZZhunYuan-M02S'}}
 										allowFontScaling={false}>
-								服务费
+								{Label.getCMLabel('SERVICE_FEE')} ({Label.getCMLabel('SERVICE_FEE_REMINDER')})
 							</Text>
 							<TouchableOpacity activeOpacity={0.4}
 																onPress={ () =>
-																	this.popupView.showAlert(this, "服务费已包含线上支付手续费（只有使用信用卡，借记卡，Apple Pay和支付宝的时候才会产生）和司机服务费，无需再支付小费。")
+																	this.popupView.showAlert(this, Label.getCMLabel('ALERT_SERVICE_FEE_REMINDER'))
 																}>
 								<Image source={require('./Image/more_info.png')}
 											 style={{width:15,height:15, marginLeft: 5}}/>
@@ -1229,7 +1084,7 @@ class Confirm extends Component {
 													color: '#40a2e7',
 													fontFamily: 'FZZhunYuan-M02S'}}
 									allowFontScaling={false}>
-							折扣
+							{Label.getCMLabel('DISCOUNT')}
 						</Text>
 						<Text style={{fontSize: 15,
 													color: '#40a2e7',
@@ -1267,7 +1122,7 @@ class Confirm extends Component {
 												fontSize:19,
 												fontWeight: '800'}}
 								allowFontScaling={false}>
-						总计
+						{Label.getCMLabel('CHARGE_TOTAL')}
 					</Text>
 					<View style={{flexDirection: 'row'}}>
 						<Text style={{color:'#666666',
@@ -1302,82 +1157,82 @@ class Confirm extends Component {
 			)
 
 		}
-		_renderTipInfo(){
-			if (this.state.payment_channel && this.state.payment_channel != 0) {
-				return(
-					<View style={{
-						height:100,
-					}}>
-					<View style={{flex:0.5, flexDirection:'row',alignItems:'center',}}>
-					 <Text style={{marginLeft:20,
-												 fontSize:15,
-												 color:'#808080',
-												 fontFamily:'FZZhunYuan-M02S',
-											}}
-									allowFontScaling={false}>
-	              {Label.getCMLabel('TIPS')}:
-	            </Text>
-	            <Text style={{marginLeft:5,
-													  fontSize:15,
-													  color:'#ff8b00',
-													  fontFamily:'FZZhunYuan-M02S',
-													}}
-										allowFontScaling={false}>
-              {this.state.tips}
-            </Text>
-						</View>
-						<View style={{flex:0.5, flexDirection:'row', paddingHorizontal:10}}>
-							<TouchableOpacity activeOpacity={0.4}
-																style={[styles.tipsView,
-												{
-													flex:0.2,
-													borderColor:this.state.tipsPercentage == 0.1 ?'#ff8b00' :'#808080',
-													backgroundColor: this.state.tipsPercentage == 0.1 ?'#ff8b00' :'white',
-												}]} onPress={()=>this._setTips(0.1)}>
-								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.1 ?'#FFF': '#808080'}]}
-											allowFontScaling={false}>10%</Text>
-							</TouchableOpacity>
-							<TouchableOpacity activeOpacity={0.4}
-																style={[styles.tipsView,{
-													flex:0.2,
-													borderColor:this.state.tipsPercentage == 0.15 ?'#ff8b00' :'#808080',
-													backgroundColor: this.state.tipsPercentage == 0.15 ?'#ff8b00' :'white',
-												}]} onPress={()=>this._setTips(0.15)}>
-								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.15 ?'#FFF': '#808080'}]}
-											allowFontScaling={false}>15%</Text>
-							</TouchableOpacity>
-							<TouchableOpacity activeOpacity={0.4}
-																style={[styles.tipsView,{
-													flex:0.2,
-													borderColor:this.state.tipsPercentage == 0.2 ?'#ff8b00' :'#808080',
-													backgroundColor: this.state.tipsPercentage == 0.2 ?'#ff8b00' :'white',
-												}]}  onPress={()=>this._setTips(0.2)}>
-								<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.2 ?'#FFF': '#808080'}]}
-											allowFontScaling={false}>20%</Text>
-							</TouchableOpacity>
-							<TouchableOpacity activeOpacity={0.4}
-																style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
-								<Text allowFontScaling={false}>$</Text>
-								<TextInput
-													style={{flex:1,height: 40, marginHorizontal:5}}
-													underlineColorAndroid={"rgba(0,0,0,0)"}
-													placeholder={'Customized'}
-													keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
-													returnKeyType={'done'}
-													value={this.state.tips.toString()}
-													onChangeText={(text)=>{
-														this.setState({
-															tips:text.length == 0 ? 0 : parseFloat(text),
-															tipsPercentage:this.state.tips/this.state.total,
-														})
-												}}
-													/>
-							</TouchableOpacity>
-						</View>
-					</View>
-				)
-			}
-		}
+		// _renderTipInfo(){
+		// 	if (this.state.payment_channel && this.state.payment_channel != 0) {
+		// 		return(
+		// 			<View style={{
+		// 				height:100,
+		// 			}}>
+		// 			<View style={{flex:0.5, flexDirection:'row',alignItems:'center',}}>
+		// 			 <Text style={{marginLeft:20,
+		// 										 fontSize:15,
+		// 										 color:'#808080',
+		// 										 fontFamily:'FZZhunYuan-M02S',
+		// 									}}
+		// 							allowFontScaling={false}>
+	  //             {Label.getCMLabel('TIPS')}:
+	  //           </Text>
+	  //           <Text style={{marginLeft:5,
+		// 											  fontSize:15,
+		// 											  color:'#ff8b00',
+		// 											  fontFamily:'FZZhunYuan-M02S',
+		// 											}}
+		// 								allowFontScaling={false}>
+    //           {this.state.tips}
+    //         </Text>
+		// 				</View>
+		// 				<View style={{flex:0.5, flexDirection:'row', paddingHorizontal:10}}>
+		// 					<TouchableOpacity activeOpacity={0.4}
+		// 														style={[styles.tipsView,
+		// 										{
+		// 											flex:0.2,
+		// 											borderColor:this.state.tipsPercentage == 0.1 ?'#ff8b00' :'#808080',
+		// 											backgroundColor: this.state.tipsPercentage == 0.1 ?'#ff8b00' :'white',
+		// 										}]} onPress={()=>this._setTips(0.1)}>
+		// 						<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.1 ?'#FFF': '#808080'}]}
+		// 									allowFontScaling={false}>10%</Text>
+		// 					</TouchableOpacity>
+		// 					<TouchableOpacity activeOpacity={0.4}
+		// 														style={[styles.tipsView,{
+		// 											flex:0.2,
+		// 											borderColor:this.state.tipsPercentage == 0.15 ?'#ff8b00' :'#808080',
+		// 											backgroundColor: this.state.tipsPercentage == 0.15 ?'#ff8b00' :'white',
+		// 										}]} onPress={()=>this._setTips(0.15)}>
+		// 						<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.15 ?'#FFF': '#808080'}]}
+		// 									allowFontScaling={false}>15%</Text>
+		// 					</TouchableOpacity>
+		// 					<TouchableOpacity activeOpacity={0.4}
+		// 														style={[styles.tipsView,{
+		// 											flex:0.2,
+		// 											borderColor:this.state.tipsPercentage == 0.2 ?'#ff8b00' :'#808080',
+		// 											backgroundColor: this.state.tipsPercentage == 0.2 ?'#ff8b00' :'white',
+		// 										}]}  onPress={()=>this._setTips(0.2)}>
+		// 						<Text style={[styles.tipsFont,{color:this.state.tipsPercentage == 0.2 ?'#FFF': '#808080'}]}
+		// 									allowFontScaling={false}>20%</Text>
+		// 					</TouchableOpacity>
+		// 					<TouchableOpacity activeOpacity={0.4}
+		// 														style={[styles.tipsView,{flex:0.4,flexDirection:'row',paddingLeft:10}]}>
+		// 						<Text allowFontScaling={false}>$</Text>
+		// 						<TextInput
+		// 											style={{flex:1,height: 40, marginHorizontal:5}}
+		// 											underlineColorAndroid={"rgba(0,0,0,0)"}
+		// 											placeholder={'Customized'}
+		// 											keyboardType={Platform.OS === 'ios' ?'decimal-pad':'numeric'}
+		// 											returnKeyType={'done'}
+		// 											value={this.state.tips.toString()}
+		// 											onChangeText={(text)=>{
+		// 												this.setState({
+		// 													tips:text.length == 0 ? 0 : parseFloat(text),
+		// 													tipsPercentage:this.state.tips/this.state.total,
+		// 												})
+		// 										}}
+		// 											/>
+		// 					</TouchableOpacity>
+		// 				</View>
+		// 			</View>
+		// 		)
+		// 	}
+		// }
 		_renderOrderConfirm() {
 			if(this.state.showOrderConfirm) {
 				return(<OrderConfirm doCheckout={this._doCheckout}
@@ -1454,7 +1309,7 @@ class Confirm extends Component {
       return(
 				<View style={styles.mainContainer} >
 					{this.state.showPopup && this.popupView.show()}
-					<Header title={'确认订单'}
+					<Header title={Label.getCMLabel('CONFIRM_ORDER')}
 									goBack={this._goBack}
 									leftButtonText={'<'}/>
 					<KeyboardAvoidingView style={{flex: 1,
@@ -1524,7 +1379,6 @@ class Confirm extends Component {
 											<View style={styles.seperateLine}>
 											</View>
 											{this._renderChoosePayment()}
-											{this._renderPaymentWarning()}
 											<View style={{marginTop: 0,
 																		marginLeft: 10,
 																		marginRight: 10,

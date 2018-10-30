@@ -307,7 +307,7 @@ export default class MyComponent extends Component {
                 }}
                 allowFontScaling={false}
                 >
-                  卡号
+                  {Label.getCMLabel('CARD_NUMBER')}
               </Animated.Text>
 
               <View style={{position:'absolute',
@@ -364,7 +364,7 @@ export default class MyComponent extends Component {
             }}
             allowFontScaling={false}
             >
-            有效期至
+            {Label.getCMLabel('EXPIRED_AT')}
           </Animated.Text>
 
           <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"date")} >

@@ -3,6 +3,8 @@ import {dispatch, register} from '../Dispatchers/AppDispatcher';
 import {EventEmitter} from 'events';
 import CheckoutAction from '../Actions/CheckoutAction';
 import MenuStore from './MenuStore';
+import Label from '../../App/Constants/AppLabel';
+
 const CHANGE_EVENT = 'change';
 import {
   cme_getRestaurantData,
@@ -80,45 +82,45 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       // }
       this.initState();
 	},
-  calculateDeliveryFee(data){
-  		const dlexp = data.dlexp;
-  		const dltype = data.dltype;
-  		const message = data.message;
-  		const pretax = data.pretax;
-  		const pretax_ori = data.pretax_ori;
-  		const result = data.result;
-  		const total = data.total;
-  		const startAmount = data.startAmount;
-  		let dltypeList;
-  		if(pretax<startAmount){
-  				dltypeList=[
-  					{dltype:0,
-  					 description:'自取'
-  					}
-  				]
-  		}else if(dltype != 2){
-  				dltypeList=[
-  						{dltype:1,
-  						 description:'送餐'
-  						},
-  						{dltype:0,
-  						 description:'自取'
-  						}
-  					]
-  		}else if(dltype == 2){
-  					dltypeList=[
-  							{dltype:2,
-  							 description:'定制运费'
-  						 },
-  							{dltype:0,
-  							 description:'自取'
-  							}
-  					]
-  		}
-  		const selectedAddress = cme_getSelectedAddress();
-  		this.state = Object.assign({},this.state,
-  										{dlexp,dltype,message,pretax,pretax_ori,result,total,dltypeList,selectedAddress});
-  	},
+  // calculateDeliveryFee(data){
+  // 		const dlexp = data.dlexp;
+  // 		const dltype = data.dltype;
+  // 		const message = data.message;
+  // 		const pretax = data.pretax;
+  // 		const pretax_ori = data.pretax_ori;
+  // 		const result = data.result;
+  // 		const total = data.total;
+  // 		const startAmount = data.startAmount;
+  // 		let dltypeList;
+  // 		if(pretax<startAmount){
+  // 				dltypeList=[
+  // 					{dltype:0,
+  // 					 description:'自取'
+  // 					}
+  // 				]
+  // 		}else if(dltype != 2){
+  // 				dltypeList=[
+  // 						{dltype:1,
+  // 						 description:'送餐'
+  // 						},
+  // 						{dltype:0,
+  // 						 description:'自取'
+  // 						}
+  // 					]
+  // 		}else if(dltype == 2){
+  // 					dltypeList=[
+  // 							{dltype:2,
+  // 							 description:'定制运费'
+  // 						 },
+  // 							{dltype:0,
+  // 							 description:'自取'
+  // 							}
+  // 					]
+  // 		}
+  // 		const selectedAddress = cme_getSelectedAddress();
+  // 		this.state = Object.assign({},this.state,
+  // 										{dlexp,dltype,message,pretax,pretax_ori,result,total,dltypeList,selectedAddress});
+  // 	},
   updateDltype(data){
   		// const dltype = data.type;
       this.state.dltype = data.type;
@@ -181,61 +183,61 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       this.state.loading = false;
       this.state.showPopup = false;
   },
-  beforCheckout(data){
-  		const pretax = parseFloat(data.result.pretax);
-  		const pretax_ori = parseFloat(data.result.pretax_ori);
-  		const promoted = data.result.promoted;
-  		const total = parseFloat(data.result.total);
-      const available_payment_channels = data.result.available_payment_channels;
-      const last_payment_channel = data.result.last_payment_channel;
-      let jumpToChoosePayment = false;
-      if(last_payment_channel == 0) {
-        jumpToChoosePayment = true;
-      }
-      let payment_channel;
-      let visa_fee = 0;
-      if (last_payment_channel != 0) {
-        payment_channel = last_payment_channel;
-      }
-      else{
-        payment_channel = this.state.payment_channel;
-      }
-      for (let _channel of available_payment_channels) {
-        if (_channel.channel == payment_channel) {
-          visa_fee = _channel.visa_fee;
-        }
-      }
-      let cusid = data.result.cusid;
-      let last4 = data.result.last4;
-      let brand = data.result.brand;
-
-  		const loading = false;
-  		const selectedAddress = cme_getSelectedAddress();
-  		if(selectedAddress){
-  			const dltype = "1";
-  			const rid = data.rid;
-  			const uaid = selectedAddress.uaid;
-  			cme_updateCheckoutDltype({dltype,uaid})
-  			CheckoutAction.calculateDeliveryFee()
-  		}else{
-        this.state.shouldAddAddress = true;
-      }
-  		this.state = Object.assign({},this.state,
-  																		{pretax,
-  																			pretax_ori,
-  																			promoted,
-  																			total,
-  																			loading,
-                                        selectedAddress,
-                                        available_payment_channels,
-                                        cusid,
-                                        last4,
-                                        brand,
-                                        jumpToChoosePayment,
-                                        payment_channel,
-                                        visa_fee
-  																		 });
-	},
+  // beforCheckout(data){
+  // 		const pretax = parseFloat(data.result.pretax);
+  // 		const pretax_ori = parseFloat(data.result.pretax_ori);
+  // 		const promoted = data.result.promoted;
+  // 		const total = parseFloat(data.result.total);
+  //     const available_payment_channels = data.result.available_payment_channels;
+  //     const last_payment_channel = data.result.last_payment_channel;
+  //     let jumpToChoosePayment = false;
+  //     if(last_payment_channel == 0) {
+  //       jumpToChoosePayment = true;
+  //     }
+  //     let payment_channel;
+  //     let visa_fee = 0;
+  //     if (last_payment_channel != 0) {
+  //       payment_channel = last_payment_channel;
+  //     }
+  //     else{
+  //       payment_channel = this.state.payment_channel;
+  //     }
+  //     for (let _channel of available_payment_channels) {
+  //       if (_channel.channel == payment_channel) {
+  //         visa_fee = _channel.visa_fee;
+  //       }
+  //     }
+  //     let cusid = data.result.cusid;
+  //     let last4 = data.result.last4;
+  //     let brand = data.result.brand;
+  //
+  // 		const loading = false;
+  // 		const selectedAddress = cme_getSelectedAddress();
+  // 		if(selectedAddress){
+  // 			const dltype = "1";
+  // 			const rid = data.rid;
+  // 			const uaid = selectedAddress.uaid;
+  // 			cme_updateCheckoutDltype({dltype,uaid})
+  // 			CheckoutAction.calculateDeliveryFee()
+  // 		}else{
+  //       this.state.shouldAddAddress = true;
+  //     }
+  // 		this.state = Object.assign({},this.state,
+  // 																		{pretax,
+  // 																			pretax_ori,
+  // 																			promoted,
+  // 																			total,
+  // 																			loading,
+  //                                       selectedAddress,
+  //                                       available_payment_channels,
+  //                                       cusid,
+  //                                       last4,
+  //                                       brand,
+  //                                       jumpToChoosePayment,
+  //                                       payment_channel,
+  //                                       visa_fee
+  // 																		 });
+	// },
 	updateAddress(){
 		const selectedAddress = cme_getSelectedAddress();
 		this.state = Object.assign(this.state,{selectedAddress});
@@ -271,7 +273,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   },
   updatereturnCoupon(data){
     if (data.valid == false || data.ev_error == 1) {
-      this.state.alertMsg = "优惠码无效，请检查重试";
+      this.state.alertMsg = Label.getCMLabel('INVALID_COUPON_CODE');
     }
     this.state.returnCoupon = data;
   },
@@ -292,10 +294,10 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
-				case AppConstants.CALCULATE_DELIVERY_FEE:
-								RestaurantStore.calculateDeliveryFee(action.data);
-								RestaurantStore.emitChange();
-                break;
+				// case AppConstants.CALCULATE_DELIVERY_FEE:
+				// 				RestaurantStore.calculateDeliveryFee(action.data);
+				// 				RestaurantStore.emitChange();
+        //         break;
 				case AppConstants.UPDATE_ADDRESS:
 								RestaurantStore.updateAddress();
 								RestaurantStore.emitChange();

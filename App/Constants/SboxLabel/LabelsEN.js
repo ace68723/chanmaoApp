@@ -76,4 +76,6 @@ module.exports={
   QUANTITY:'数量',
   ADD_TO_CART:'加入购物箱',
   SERVICE_DETAIL:'服务明细',
+  UNIT:'UNIT',
+  GO_CHECKOUT:'GO_CHECKOUT',
 }

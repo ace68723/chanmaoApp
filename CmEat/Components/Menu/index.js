@@ -294,7 +294,7 @@ class Menu extends Component {
 																 fontSize:13,
 																 fontFamily:'FZZongYi-M05S',}}
 												 allowFontScaling={false}>
-												 去结账
+												 {Label.getCMLabel('GO_CHECKOUT')}
 									</Text>
 								</View>
 
@@ -303,10 +303,10 @@ class Menu extends Component {
             </Animated.View>
           )
         }else if(this.state.renderHeader){
-          const _rightButtonText = '商家休息了';
+          const _rightButtonText = Label.getCMLabel('RESTAURANT_CLOSED');
           return(
             <View style={{position:'absolute',left:0,right:0}}>
-              <Header title={'商家休息啦'}
+              <Header title={Label.getCMLabel('RESTAURANT_CLOSED_LAH')}
                       goBack={this._closeMenuAnimation}
                       leftButtonText={'×'}/>
             </View>

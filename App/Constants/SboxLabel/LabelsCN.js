@@ -49,6 +49,7 @@ module.exports={
   ADD_DELIVERY_ADDRESS:'添加配送地址',
   ADD_PAYMENT_METHOD:'添加支付方式',
   SELECT_DELIVERY_ADDRESS:'请选择您的配送地址',
+  CARD_NUMBER:'卡号',
   //SbooxHistory
   CONFIRMED:'已确认',
   PACKAGE:'打包中',
@@ -77,4 +78,6 @@ module.exports={
   QUANTITY:'数量',
   ADD_TO_CART:'加入购物箱',
   SERVICE_DETAIL:'服务明细',
+  UNIT:'件',
+  GO_CHECKOUT:'去结账',
 }

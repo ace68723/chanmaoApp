@@ -203,7 +203,14 @@ export default class pastOrderEN extends Component {
                             onPress={
                               this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}
                             disabled={this.props.isRefreshing}>
-            <Text style={{marginLeft:5,fontSize:13,color:'white',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>支付</Text>
+            <Text style={{marginLeft:5,
+                          fontSize:13,
+                          color:'white',
+                          fontWeight:'bold',
+                          fontFamily:'FZZhunYuan-M02S',}}
+                  allowFontScaling={false}>
+              {Label.getCMLabel('PAY')}
+            </Text>
 
           </TouchableOpacity>
       )
@@ -255,112 +262,112 @@ export default class pastOrderEN extends Component {
     if (this.state.orderInfo.payment_channel == 0) {
       //自取
       if (this.state.orderInfo.dltype == 0) {
-        statusReminder = "支付方式: 现金自取";
+        statusReminder = Label.getCMLabel('PAYMENT_TYPE') + ":" + Label.getCMLabel('CASH_SELF_PICKUP');
       }
       else {
-        statusReminder = "支付方式: 现金到付";
+        statusReminder = Label.getCMLabel('PAYMENT_TYPE') + ":" + Label.getCMLabel('CASH');
       }
     }
     else if (this.state.orderInfo.payment_channel == 1) {
-      statusReminder = "支付方式: 刷卡";
+      statusReminder = Label.getCMLabel('PAYMENT_TYPE') + ":" + Label.getCMLabel('CARD');
     }
     else if (this.state.orderInfo.payment_channel == 10) {
-      statusReminder = "支付方式: 支付宝";
+      statusReminder = Label.getCMLabel('PAYMENT_TYPE') + ":" + Label.getCMLabel('ALIPAY');
     }
     else if (this.state.orderInfo.payment_channel == 30) {
-      statusReminder = "支付方式: Apple Pay";
+      statusReminder = Label.getCMLabel('PAYMENT_TYPE') + ":" + Label.getCMLabel('APPLE_PAY');
     }
     switch (this.state.orderInfo.order_status) {
         case 0:
             if (this.state.orderInfo.payment_channel > 0) {
                 if (this.state.orderInfo.payment_status == 20) {
                   statusColor = {color:'#b2b2b2'};
-                  statusMessage = '已支付, 等待商家确认';
+                  statusMessage = Label.getCMLabel('PAID') + ', ' + Label.getCMLabel('WAIT_FOR_RR_CONFIRM');
                 }
                 else if(this.state.orderInfo.payment_status == 30) {
                   statusColor = {color:'#11c1f3'};
-                  statusMessage = '已退款';
+                  statusMessage = Label.getCMLabel('REFUNDED');
                 }
                 else if(this.state.orderInfo.payment_status == 40) {
                   statusColor = {color:'#ef473a'};
-                  statusMessage = '在线支付失败';
-                  statusReminder = "请重新下单";
+                  statusMessage = Label.getCMLabel('ONLINE_PAYMENT_FAILED');
+                  statusReminder = Label.getCMLabel('PLZ_REORDER');
                 }
                 else {
                   statusColor = {color:'#ef473a'};
-                  statusMessage = '等待支付';
-                  statusReminder = "若状态没有及时更改, 请手动下拉刷新";
+                  statusMessage = Label.getCMLabel('WAIT_FOR_PAYMENT');
+                  statusReminder = Label.getCMLabel('WAIT_FOR_PAYMENT_REMINDER');
                 }
             }
             else {
               statusColor = {color:'#b2b2b2'};
-              statusMessage = '等待商家确认';
+              statusMessage = Label.getCMLabel('WAIT_FOR_RR_CONFIRM');
             }
             break;
         case 10:
             statusColor = {color:'#33cd5f'};
-            statusMessage = '商家已确认, 准备中';
+            statusMessage = Label.getCMLabel('RESTAURANT_CONFIRMED') + ', ' + Label.getCMLabel('GETTING_RDY');
             break;
         case 20:
             statusColor = {color:'#33cd5f'};
             //自取
             if(this.state.dltype == 0) {
-              statusMessage = '商家已确认, 请取餐';
+              statusMessage = Label.getCMLabel('RESTAURANT_CONFIRMED') + ', ' + Label.getCMLabel('PLZ_PICKUP');
             }
             else {
-              statusMessage = '商家已确认, 准备中';
+              statusMessage = Label.getCMLabel('RESTAURANT_CONFIRMED') + ', ' + Label.getCMLabel('GETTING_RDY');
             }
             break;
         case 30:
             statusColor = {color:'#9bc8df'};
-            statusMessage = '送餐员已开始送餐';
+            statusMessage = Label.getCMLabel('DRIVER_IS_OTW');
             break;
         case 40:
             statusColor = {color:'#11c1f3'};
-            statusMessage = '已送到, 满意吗？';
+            statusMessage = Label.getCMLabel('DELIVERED');
             break;
         case 55:
             if (this.state.orderInfo.payment_channel > 0) {
                 if (this.state.orderInfo.payment_status == 20) {
                   statusColor = {color:'#886aea'};
-                  statusMessage = '新用户订单确认中';
+                  statusMessage = Label.getCMLabel('NEW_USER_CONFIRMING');
                 }
                 else if(this.state.orderInfo.payment_status == 30) {
                   statusColor = {color:'#11c1f3'};
-                  statusMessage = '已退款';
+                  statusMessage = Label.getCMLabel('REFUNDED');
                 }
                 else if(this.state.orderInfo.payment_status == 40) {
                   statusColor = {color:'#ef473a'};
-                  statusMessage = '在线支付失败';
-                  statusReminder = "请重新下单";
+                  statusMessage = Label.getCMLabel('ONLINE_PAYMENT_FAILED');
+                  statusReminder = Label.getCMLabel('PLZ_REORDER');
                 }
                 else {
                   statusColor = {color:'#ef473a'};
-                  statusMessage = '等待支付';
-                  statusReminder = "若状态没有及时更改, 请手动下拉刷新";
+                  statusMessage = Label.getCMLabel('WAIT_FOR_PAYMENT');
+                  statusReminder = Label.getCMLabel('WAIT_FOR_PAYMENT_REMINDER');
                 }
             }
             else {
               statusColor = {color:'#886aea'};
-              statusMessage = '新用户订单确认中';
+              statusMessage = Label.getCMLabel('NEW_USER_CONFIRMING');
             }
             break;
         case 60:
             statusColor = {color:'#11c1f3'};
-            statusMessage = '客服稍后联系您改运费';
+            statusMessage = Label.getCMLabel('CS_WILL_CONTACT');
             break;
         case 5:
             statusColor = {color:'#ef473a'};
-            statusMessage = '糟糕, 有的菜没了';
+            statusMessage = Label.getCMLabel('DISH_OUT_OF_ORDER');;
             break;
         case 90:
             statusColor = {color:'#ef473a'};
-            statusMessage = '订单已取消';
+            statusMessage = Label.getCMLabel('ORDER_CANCELED');
             break;
     }
     if(this.state.orderInfo.payment_status == 30) {
       statusColor = {color:'#11c1f3'};
-      statusMessage = '已退款';
+      statusMessage = Label.getCMLabel('REFUNDED');
     }
     let _paymentStatusMessage = () => {
       if (this.state.orderInfo.payment_channel == 10) {

@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import Popup from './Popup.js';
+import Label from '../../../App/Constants/AppLabel';
 
 const {height, width} = Dimensions.get('window');
 
@@ -92,7 +93,7 @@ export default class PopupView {
       parent.setState({showPopup: true});
     }
 
-    setMessagePopup({title = '提示', subtitle, confirmText = '确定', cancelText, onConfirm = ()=> {} , onCancel, onDismiss, confirmButtonStyle}){
+    setMessagePopup({title = Label.getCMLabel('REMINDING'), subtitle, confirmText = Label.getCMLabel('CONFIRM'), cancelText, onConfirm = ()=> {} , onCancel, onDismiss, confirmButtonStyle}){
       this.state = {
         title: title,
         detailText: subtitle,
@@ -107,7 +108,7 @@ export default class PopupView {
       }
     }
 
-    setFullPopup({title, subtitle, icon, detailText, confirmText = '确定', cancelText, onConfirm = ()=> {} , onCancel = ()=> {} , onDismiss, confirmButtonStyle}){
+    setFullPopup({title, subtitle, icon, detailText, confirmText = Label.getCMLabel('CONFIRM'), cancelText, onConfirm = ()=> {} , onCancel = ()=> {} , onDismiss, confirmButtonStyle}){
       this.state = {
         icon: icon,
         title: title,
@@ -124,17 +125,17 @@ export default class PopupView {
       }
     }
 
-    setPriceDetail({title, detailText, fees, confirmText = '确定', cancelText, onConfirm = ()=> {}, onDismiss}){
-      this.state = {
-        title: title,
-        detailText: detailText,
-        fees: fees,
-        confirmText: confirmText,
-        cancelText: cancelText,
-        onConfirm: onConfirm,
-        onDismiss: onDismiss
-      }
-    }
+    // setPriceDetail({title, detailText, fees, confirmText = '确定', cancelText, onConfirm = ()=> {}, onDismiss}){
+    //   this.state = {
+    //     title: title,
+    //     detailText: detailText,
+    //     fees: fees,
+    //     confirmText: confirmText,
+    //     cancelText: cancelText,
+    //     onConfirm: onConfirm,
+    //     onDismiss: onDismiss
+    //   }
+    // }
 
     show(){
       return (

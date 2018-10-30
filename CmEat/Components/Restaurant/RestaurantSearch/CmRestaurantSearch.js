@@ -291,7 +291,7 @@ export default class CmRestaurantSearch extends Component {
 									returnKeyType={'next'}
 									onChangeText={this._setSearchText}
 									underlineColorAndroid={"rgba(0,0,0,0)"}
-									placeholder={"搜索你想要的餐馆"}
+									placeholder={Label.getCMLabel('SEARCH_RESTAURANTS_PLACEHOLDER')}
 								/>
 							</View>
 					</View>
@@ -308,7 +308,7 @@ export default class CmRestaurantSearch extends Component {
 					style={{flex:0.15,height: headerHeight, justifyContent:'center'}}
 					onPress={()=>this._cleanInput()}>
 					<Text style={{fontSize: 16, marginTop:marginTop}}
-								allowFontScaling={false}>取消</Text>
+								allowFontScaling={false}>{Label.getCMLabel('CANCEL')}</Text>
 				</TouchableOpacity>
 			)
 		}
@@ -385,7 +385,7 @@ export default class CmRestaurantSearch extends Component {
 												margin:3,
 												fontFamily:'FZZongYi-M05S'}}
 								allowFontScaling={false}>
-								找不到关于 "{this.state.searchText}" 的东西哦
+								{Label.getCMLabel('CANNOT_FIND_ABOUT')} "{this.state.searchText}" {Label.getCMLabel('ABOUT_XX_ITEMS')}
 					</Text>
 				</View>
 			)

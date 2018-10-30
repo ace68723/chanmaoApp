@@ -99,7 +99,7 @@ export default class InfoPage extends Component {
     return (
       <View style={styles.container}>
         {this.state.showPopup && this.popupView.show()}
-        <Header title={Label.getCNLabel('ABOUT_US')} goBack={this._goBack}/>
+        <Header title={Label.getCMLabel('ABOUT_US')} goBack={this._goBack}/>
         <ScrollView style={{flex:1, paddingTop:64,paddingLeft:20,paddingRight:20, paddingBottom: 20}}>
 
             <View style={styles.fontContainer}>
@@ -131,7 +131,7 @@ export default class InfoPage extends Component {
 
             </Text>
             <Text style={styles.footerFont} allowFontScaling={false}>
-              版本号：V {AppConstants.CM_VERSION}
+              版本号：v{AppConstants.CM_VERSION}
             </Text>
         </View>
 

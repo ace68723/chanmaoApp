@@ -1,6 +1,9 @@
 import SboxConstants from '../Constants/SboxConstants';
 import {dispatch, register} from '../Dispatchers/SboxDispatcher';
 import {EventEmitter} from 'events';
+
+import Label from '../../App/Constants/AppLabel';
+
 const CHANGE_EVENT = 'change4422';
 
 import { SBOX_REALM_PATH } from '../Config/API';

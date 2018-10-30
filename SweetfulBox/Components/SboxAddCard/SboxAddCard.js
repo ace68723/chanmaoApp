@@ -302,7 +302,7 @@ export default class MyComponent extends Component {
                 }}
                 allowFontScaling={false}
                 >
-                  卡号
+                  {Label.getSboxLabel('CARD_NUMBER')}
               </Animated.Text>
 
               <View style={{position:'absolute',

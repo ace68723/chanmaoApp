@@ -373,7 +373,7 @@ export default class SecondMenu extends Component {
   _renderConfirmBtn() {
 		let confirmMsg = ''
 		if (this.props.action === 'add') {
-			confirmMsg = "添加" + this.state.qty + "份";
+			confirmMsg = Label.getCMLabel('ADD') + this.state.qty + Label.getCMLabel('UNIT');
 		}
 		else {
 			confirmMsg = "确认修改";
