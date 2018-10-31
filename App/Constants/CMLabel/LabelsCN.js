@@ -101,6 +101,7 @@ module.exports={
     SEARCH_RESTAURANTS_PLACEHOLDER:'搜索你想要的餐馆',
     CANNOT_FIND_ABOUT:'找不到关于',
     ABOUT_XX_ITEMS:'的东西哦',
+    SEARCH:'搜索',
 
     //Login & Register & ResetPassword
     PLZ_ENTER_ACC_INFO: '请填写账户信息',

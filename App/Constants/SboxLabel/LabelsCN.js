@@ -80,4 +80,8 @@ module.exports={
   SERVICE_DETAIL:'服务明细',
   UNIT:'件',
   GO_CHECKOUT:'去结账',
+  DERLIVER_TIME:'配送时间',
+  COMMENT:'备注',
+  ADD_COMMENT:'添加备注',
+  WITHIN_TWO_DAY:'两个工作日内',
 }
