@@ -10,7 +10,8 @@ import {
   StyleSheet,
   WebView,
   Text,
-  View
+  View,
+	Dimensions
 } from 'react-native';
 import Header from '../General/Header';
 
@@ -20,9 +21,11 @@ class ArticleDetail extends Component {
   constructor(props){
     super(props);
     this.state={
-      url:this.props.url,
-      showLoading:true,
+      url: this.props.url,
       showWebView:new Animated.Value(0),
+			loading:true,
+			progress:0,
+			progressBar:true
     }
     this._startShowWebView = this._startShowWebView.bind(this);
     this._goBack = this._goBack.bind(this);
@@ -32,14 +35,6 @@ class ArticleDetail extends Component {
       toValue: 1,
       duration: 300,
     }).start();
-    const hideLoading = () => {
-      this.setState({
-        showLoading:false,
-      })
-    }
-    setTimeout(function () {
-      hideLoading()
-    }, 400);
   }
 
   _goBack(){
@@ -60,32 +55,40 @@ class ArticleDetail extends Component {
       })
     }
   }
-  render() {
-    let loading = () =>{
-      if(this.state.showLoading){
-        return(
-          <Animated.View style={{position:'absolute',
-                                 top:150,
-                                 left:0,
-                                 right:0,
-                                 opacity:this.state.showWebView.interpolate({
-                                                             inputRange: [0, 1],
-                                                             outputRange: [1,0],
-                                                           }),}}>
-            <Image style={{flex:1,
-                           width:100,
-                           height:100,
-                           alignSelf:'center'}}
-                   source={require('./Image/theSixS200.gif')} />
-          </Animated.View>
+	showLoading() {
+		this.setState({ loading: true, progress: 0 });
+		this.timer = setInterval(()=>{
+				const maxProgress = 0.95;
+				if(this.state.progress >= maxProgress){
+						clearInterval(this.timer);
+				}else {
+						let random = 0.01;
+						let progress = this.state.progress + random;
+						if(progress > maxProgress){
+								progress = maxProgress;
+						}
+						this.setState({progress});
+				}
+		}, 1);
+	}
+	hideLoading() {
+		this.setState({ progress: 1});
+		let timer = setTimeout(() => {
+      this.setState({ loading: false});
+			clearInterval(this.timer);
+    }, 500);
+	}
 
-        )
-      }
-    }
+  render() {
+		let progressWidth = Dimensions.get('window').width * this.state.progress;
     return (
       <View style={styles.container} >
         <Header goBack={this._goBack}
 								leftButtonText={'x'}/>
+				{
+					this.state.loading &&
+					<View style={{backgroundColor: '#F46A2C', height: 3, width: progressWidth, }}/>
+				}
         <View style={{flex:1,}}>
           <AnimatedWebView style={[
                       styles.WebView,
@@ -95,8 +98,18 @@ class ArticleDetail extends Component {
                                                 }),},
                     ]}
                     source={{uri:this.state.url}}
-                    onLoadEnd={()=>{this._startShowWebView()}}/>
-            {loading()}
+                    onLoadEnd={()=>{this._startShowWebView()}}
+										onShouldStartLoadWithRequest= {(e) => {
+										    var scheme = e.url.split('://')[0]
+										    if(scheme === 'http' || scheme === 'https'){
+										    return true
+										    }
+										    return false
+										}}
+										onLoadStart={() => (this.showLoading())}
+                    onLoad={() => (this.hideLoading())}
+										/>
+
         </View>
 
      </View>
@@ -112,7 +125,10 @@ const styles = StyleSheet.create({
   },
   WebView:{
     flex:1,
-  }
+  },
+	progress:{
+			backgroundColor: 'transparent',
+	},
 });
 
 module.exports = ArticleDetail;
