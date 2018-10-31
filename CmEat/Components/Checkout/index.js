@@ -563,7 +563,7 @@ class Confirm extends Component {
 			CheckoutAction.beforeCheckoutUpdateCoupon(data);
 		}
 		_renderAndroidCheckoutButton(){
-			if (Platform.OS == 'ios') {
+			if (Platform.OS != 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading && false) {
 					return(
 						<TouchableOpacity
@@ -602,7 +602,7 @@ class Confirm extends Component {
 		}
 
 		renderCheckoutButton(){
-			if (Platform.OS !== 'ios') {
+			if (Platform.OS == 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
 	            <TouchableOpacity activeOpacity={0.4}
