@@ -27,6 +27,8 @@ import AddressAction from '../../Actions/AddressAction';
 import AddressStore from '../../Stores/AddressStore';
 import Label from '../../../App/Constants/AppLabel';
 
+import PopupView from '../Popup/PopupView'
+
 const _getFormatAddress = () =>{
   return AddressStore.getFormatAddress()
 }
@@ -230,7 +232,7 @@ export default class CmEatAddInfo extends Component {
         return(
           <View style={styles.mainContainer} >
 					{this.state.showPopup && this.popupView.show()}
-          <Header title={CMLabel.getCNLabel('ADDRESS')}
+          <Header title={Label.getCMLabel('ADDRESS')}
 	                goBack={this._goBack}
 	                leftButtonText={'×'}/>
             <ScrollView scrollEnabled={true}
