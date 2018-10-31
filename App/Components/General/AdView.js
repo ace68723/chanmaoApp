@@ -11,7 +11,8 @@ import {
   WebView,
   Text,
   View,
-	Dimensions
+	Dimensions,
+	Linking
 } from 'react-native';
 import Header from '../General/Header';
 
@@ -102,8 +103,12 @@ class ArticleDetail extends Component {
 										onShouldStartLoadWithRequest= {(e) => {
 										    var scheme = e.url.split('://')[0]
 										    if(scheme === 'http' || scheme === 'https'){
-										    return true
+										    	return true
 										    }
+												// whitelist for tmall 11.11
+												if (scheme == 'tbopen'){
+													Linking.openURL(e.url);
+												}
 										    return false
 										}}
 										onLoadStart={() => (this.showLoading())}
