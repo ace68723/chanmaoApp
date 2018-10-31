@@ -79,7 +79,13 @@ export default class LanguageSettings extends Component {
   renderLanguageCells() {
     let cells = [];
     for (let i of languages) {
-      cells.push(<LanguageSettingsCell selected={this.state.selected} onSelected={this.onSelected} id={i.id} language={i.language}/>)
+      cells.push(
+        <LanguageSettingsCell selected={this.state.selected}
+                              onSelected={this.onSelected}
+                              id={i.id}
+                              key={i.realm_value}
+                              language={i.language}/>
+       )
     }
     return cells;
   }

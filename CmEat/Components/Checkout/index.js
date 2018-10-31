@@ -563,13 +563,13 @@ class Confirm extends Component {
 			CheckoutAction.beforeCheckoutUpdateCoupon(data);
 		}
 		_renderAndroidCheckoutButton(){
-			if (Platform.OS !== 'ios') {
-				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
+			if (Platform.OS == 'ios') {
+				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading && false) {
 					return(
 						<TouchableOpacity
 										activeOpacity={0.4}
 										onPress={this._checkout}>
-								<View style={[styles.acceptButton, {marginBottom: 50, justifyContent: 'center'}]}>
+								<View style={[styles.acceptButton, {marginBottom: 60, justifyContent: 'center'}]}>
 									<Text style={styles.acceptText}
 												allowFontScaling={false}>
 										{Label.getCMLabel('CHECK_OUT')}
@@ -577,16 +577,18 @@ class Confirm extends Component {
 								</View>
 						</TouchableOpacity>
 					)
-	      	}else if(this.state.loading){
-				return(
-					<View style={styles.acceptButton}>
-							<Image source={require('./Image/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
-					</View>
-				)
-			}else{
+      	}
+				else if(this.state.loading) {
+					return(
+						<View style={[styles.acceptButton, {marginBottom: 60, justifyContent: 'center'}]}>
+								<Image source={require('./Image/Loading_dots_white.gif')}
+											 style={{width:45,height:15}}/>
+						</View>
+					);
+				} else{
 	        return(
 	          <TouchableOpacity activeOpacity={0.4}
-															style={{marginBottom: 20}}
+															style={{marginBottom: 60}}
 															onPress={()=>{this._goToAddressList()}}>
 	            <View style={[styles.acceptButton, {justifyContent: 'center'}]}>
 	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'FZZhunYuan-M02S',}}
@@ -600,7 +602,7 @@ class Confirm extends Component {
 		}
 
 		renderCheckoutButton(){
-			if (Platform.OS == 'ios') {
+			if (Platform.OS !== 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
 	            <TouchableOpacity activeOpacity={0.4}
