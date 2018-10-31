@@ -15,7 +15,6 @@ const SboxCartStore = Object.assign({},EventEmitter.prototype,{
   state:{
     totalQuantity:0,
     canCheckout:true,
-    checkoutFont: '去结账',
     cartList:[],
     total:0,
     totalQuantity:0,

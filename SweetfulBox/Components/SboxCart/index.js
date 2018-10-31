@@ -48,7 +48,7 @@ export default class SboxCart extends Component {
   }
   _onChange() {
     const cartState = SboxCartStore.getState();
-    this.setState(Object.assign({},cartState));
+    this.setState(Object.assign({},cartState, {checkoutFont: Label.getSboxLabel('GO_CHECKOUT')}));
     this.state.cartList.some(item => {
       if(item.sku_quantity > item.sku_amount) {
         this.setState({

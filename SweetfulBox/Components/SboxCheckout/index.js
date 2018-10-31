@@ -418,9 +418,11 @@ export default class MyComponent extends Component {
     // console.log(this.state);
     let commentText = ()=>{
       if(this.state.comment){
-        return(	<Text allowFontScaling={false}>备注： {this.state.comment}</Text>)
+        return(	<Text allowFontScaling={false}>{Label.getSboxLabel('COMMENT')}： {this.state.comment}</Text>)
       }else{
-        return(<Text style={{color:'#ababb0'}} allowFontScaling={false}>添加备注</Text>)
+        return(<Text style={{color:'#ababb0'}} allowFontScaling={false}>
+                {Label.getSboxLabel('ADD_COMMENT')}
+               </Text>)
       }
     }
     return(
@@ -432,20 +434,20 @@ export default class MyComponent extends Component {
                         flexDirection:'row',
                         borderBottomWidth: 1,
                         borderColor: '#DCDCDC',}}>
-            <View style={{flex:0.3,}}>
+            <View style={{flex:0.35,}}>
               <Text style={{fontSize:16,
                             fontFamily:'FZZhunYuan-M02S',}}
                     allowFontScaling={false}>
-                    配送时间：
+                    {Label.getSboxLabel('DERLIVER_TIME')}：
               </Text>
             </View>
-            <View style={{flex:0.7,alignItems:'flex-end'}}>
+            <View style={{flex:0.65,alignItems:'flex-end'}}>
               <Text style={{fontSize:16,
                             // color:'#ff7685',
                             color: 'black',
                             fontFamily:'FZZhunYuan-M02S',}}
                     allowFontScaling={false}>
-                      两个工作日内{this.state.deliTime}
+                      {Label.getSboxLabel('WITHIN_TWO_DAY')}{this.state.deliTime}
               </Text>
             </View>
 
@@ -488,7 +490,7 @@ export default class MyComponent extends Component {
               <Text style={{fontSize:16,
                             fontFamily:'FZZhunYuan-M02S',}}
                     allowFontScaling={false}>
-                      支付方式  {this.state.cardBrand}
+                      {Label.getSboxLabel('PAYMENT_METHOD')}  {this.state.cardBrand}
               </Text>
             </View>
             <View style={{flex:0.5, alignItems:'flex-end'}}>
