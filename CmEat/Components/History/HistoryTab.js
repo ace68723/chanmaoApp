@@ -132,8 +132,12 @@ class HistoryTab extends Component {
 							break;
 						case 30:
 							this._applePaySelected({oid: state.oid,
+																			subtotal: state.fees.ori_pretax.toString(),
+																			shipping: state.fees.dlexp.toString(),
+																			tax: state.fees.tax.toString(),
+																			service_fee: state.fees.service_fee.toString(),
 																			charge_total: state.fees.charge_total,
-																			service_fee: state.fees.service_fee});
+																			discount: state.fees.total_off});
 							break;
 						default:
 							break;
@@ -252,10 +256,14 @@ class HistoryTab extends Component {
 			// HistoryAction.changePaymentToCash({oid});
 			this._onRefresh();
 		}
-		_applePaySelected({oid, charge_total, service_fee}){
+		_applePaySelected({oid, subtotal, shipping, tax, service_fee, charge_total, discount}){
 				CheckoutAction.recheckoutByApplepay({
 					oid,
-					total: parseFloat(charge_total),
+					subtotal,
+					shipping,
+					tax,
+					discount,
+					amount: parseFloat(charge_total),
 					tips:	parseFloat(service_fee)
 				},()=>this._onRefresh())
 		}

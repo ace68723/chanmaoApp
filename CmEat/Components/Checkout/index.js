@@ -239,10 +239,10 @@ class Confirm extends Component {
 						}
 						else if(state.payment_channel == 30){
 							let paymentData = {
-								subtotal: (state.selectedCase.fees.pretax - state.selectedCase.fees.total_off).toString(),
+								subtotal: state.selectedCase.fees.ori_pretax.toString(),
 								shipping: state.selectedCase.fees.dlexp.toString(),
-								tax: state.selectedCase.fees.tax.toString(),
-								tips: state.selectedCase.fees.service_fee.toString(),
+								tax: state.selectedCase.fees.ori_tax.toString(),
+								tips: state.selectedCase.fees.ori_service_fee.toString(),
 								oid: state.oidFromUrl,
 								amount: state.selectedCase.fees.charge_total,
 								discount: state.selectedCase.fees.total_off
