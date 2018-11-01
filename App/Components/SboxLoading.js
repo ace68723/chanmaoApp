@@ -26,7 +26,7 @@ export default class loading extends Component {
           Animated.timing(
           this.state.viewOpacity,
               {
-                  delay: 500,
+                  //delay: 500,
                   toValue: 1,
                   duration: 1000,
               }
@@ -34,7 +34,7 @@ export default class loading extends Component {
           Animated.timing(
           this.state.loadingOpacity,
               {
-                  delay: 1500,
+                  delay: 1000, //1500
                   toValue: 1,
                   duration: 1000,
               }
