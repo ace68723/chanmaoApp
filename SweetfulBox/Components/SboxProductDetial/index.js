@@ -202,7 +202,7 @@ export default class SweetProductDetial extends Component {
                 <Text style={{
                         color:'white',
                         fontSize:17,
-                        fontFamily:'FZZhunYuan-M02S',
+                        fontFamily:'NotoSansCJKsc-Regular',
                       }}
                       allowFontScaling={false}>
                     {Label.getSboxLabel('ADD_TO_CART')}
@@ -230,7 +230,7 @@ export default class SweetProductDetial extends Component {
                 <Text style={{
                         color:'white',
                         fontSize:17,
-                        fontFamily:'FZZhunYuan-M02S',
+                        fontFamily:'NotoSansCJKsc-Regular',
                       }}
                       allowFontScaling={false}>
                     {Label.getSboxLabel('ADD_TO_CART')}

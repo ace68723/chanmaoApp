@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
       textAlign: "left",
       color:'#666666',
       fontWeight:'600',
-      fontFamily:'FZZhunYuan-M02S',
+      fontFamily:'NotoSansCJKsc-Regular',
     },
     arrow:{
       flex:0.3,
@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
       fontSize:30,
       color:"#ff8b00",
       textAlign:"right",
-      fontFamily:'FZZhunYuan-M02S',
+      fontFamily:'NotoSansCJKsc-Regular',
     }
 });

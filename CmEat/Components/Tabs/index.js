@@ -103,7 +103,7 @@ export default class Tabs extends Component {
 		 <ScrollableTabView  ref={(tabView) => { this.tabView = tabView; }}
 												 tabBarBackgroundColor={'#fff'}
 												 tabBarActiveTextColor={'#ff8b00'}
-												 tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',top:5}}
+												 tabBarTextStyle={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',top:5}}
 												 tabBarInactiveTextColor={'#666666'}
 												 initialPage={0}
 												 prerenderingSiblingsNumber={3}

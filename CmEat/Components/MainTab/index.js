@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
 					// 								top: -4,
 					// 								fontWeight:'bold',
 					// 								textAlignVertical: "center",
-          //                 fontFamily:"FZZhunYuan-M02S",
+          //                 fontFamily:"NotoSansCJKsc-Regular",
 					// 								backgroundColor: '#ea7b21',}}
 					// 								numberOfLines={1}>
 					// 								这是正确的地址吗？距离您的位置似乎有点远。

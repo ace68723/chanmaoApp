@@ -72,7 +72,7 @@ const createdTime = moment(props.created).format('h:mm:ss a');
                   allowFontScaling={false}>
                微信客服公众号
              </Text>
-             <Text style={[styles.title,{fontWeight:"700",fontFamily:'FZZhunYuan-M02S',}]}
+             <Text style={[styles.title,{fontWeight:"700",fontFamily:'NotoSansCJKsc-Regular',}]}
                    allowFontScaling={false}>
                 chanmao_kefu
               </Text>
@@ -94,7 +94,7 @@ const createdTime = moment(props.created).format('h:mm:ss a');
 
 
 
-          <Text style={[styles.title,{textAlign:'center',marginTop:10,fontSize:11,fontFamily:'FZZhunYuan-M02S',}]}
+          <Text style={[styles.title,{textAlign:'center',marginTop:10,fontSize:11,fontFamily:'NotoSansCJKsc-Regular',}]}
                 allowFontScaling={false}>
            *订单配送时长会因商家、交通和天气原因造成部分延迟,请您见谅
           </Text>
@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
       color:"#666",
       textAlign:"left",
       fontSize:12,
-      fontFamily:'FZZhunYuan-M02S',
+      fontFamily:'NotoSansCJKsc-Regular',
     },
     description:{
       textAlign:"left",
       fontSize:17,
-      fontFamily:'FZZhunYuan-M02S',
+      fontFamily:'NotoSansCJKsc-Regular',
     },
     order:{
       marginLeft:10,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 15,
         color:'#ff8b00',
-        fontFamily:'FZZhunYuan-M02S',
+        fontFamily:'NotoSansCJKsc-Regular',
     },
 
 });

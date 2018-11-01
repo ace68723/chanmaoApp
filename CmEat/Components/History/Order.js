@@ -42,7 +42,7 @@ export default class pastOrderEN extends Component {
                     style={{ flex: 1,
                               fontSize: 16,
                               paddingLeft: 20,
-                              fontFamily: 'FZZhunYuan-M02S',
+                              fontFamily: 'NotoSansCJKsc-Regular',
                               textAlign: 'center',
                               color: soldoutColor }}
                 >
@@ -63,7 +63,7 @@ export default class pastOrderEN extends Component {
                     <View style={{flex:1,justifyContent:'center'}}>
                         <Text style={{color:'#ababb0',
                                       fontSize:16,
-                                      fontFamily:'FZZhunYuan-M02S'}}
+                                      fontFamily:'NotoSansCJKsc-Regular'}}
                               allowFontScaling={false}>
                           {tp.tp_name}
                         </Text>
@@ -71,7 +71,7 @@ export default class pastOrderEN extends Component {
                     <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
                       <Text style={{color:'#ababb0',
                                     fontSize:16,
-                                    fontFamily:'FZZhunYuan-M02S',
+                                    fontFamily:'NotoSansCJKsc-Regular',
                                     textAlign: 'left'}}
                             allowFontScaling={false}>
                         ${tp.price} × {tp.amount}
@@ -87,14 +87,14 @@ export default class pastOrderEN extends Component {
       return(
         <View key={index} style={{flexDirection:'column',alignItems:'center',paddingTop:10,paddingBottom:10}}>
             <View style={{flexDirection:'row'}}>
-                <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'FZZhunYuan-M02S',}}>{item.amount}</Text></View>
-                <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}
+                <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'NotoSansCJKsc-Regular',}}>{item.amount}</Text></View>
+                <Text style={{fontSize:16,paddingLeft:20,fontFamily:'NotoSansCJKsc-Regular',color:soldoutColor}}
                       allowFontScaling={false}>
                         {item.ds_name}
                 </Text>
                 {soldoutText()}
                 <View style={{flex:1,alignItems:'flex-end'}}>
-                  <Text style={{fontSize:16,paddingLeft:20,fontFamily:'FZZhunYuan-M02S',color:soldoutColor}}
+                  <Text style={{fontSize:16,paddingLeft:20,fontFamily:'NotoSansCJKsc-Regular',color:soldoutColor}}
                         allowFontScaling={false}>
                           ${(item.amount*item.price).toFixed(2)}
                   </Text>
@@ -137,7 +137,7 @@ export default class pastOrderEN extends Component {
                                         justifyContent:'center',
                                         alignItems:'center'}}
                                  onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
-                <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
+                <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'NotoSansCJKsc-Regular',}}
                       allowFontScaling={false}>
                       {Label.getCMLabel('REORDER')}
                 </Text>
@@ -151,7 +151,7 @@ export default class pastOrderEN extends Component {
                                         justifyContent:'center',
                                         alignItems:'center'}}
                                  onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
-                <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
+                <Text style={{fontSize:15,color:'#666666',fontFamily:'NotoSansCJKsc-Regular',}}
                         allowFontScaling={false}>{Label.getCMLabel('DETAIL')}</Text>
               </TouchableOpacity>
           </View>
@@ -165,7 +165,7 @@ export default class pastOrderEN extends Component {
                                       justifyContent:'center',
                                       alignItems:'center'}}
                                onPress={this.props.orderOnClick.bind(null,this.state.orderInfo)}>
-              <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
+              <Text style={{fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'NotoSansCJKsc-Regular',}}
                       allowFontScaling={false}>{Label.getCMLabel('COMMENT')}</Text>
             </TouchableOpacity>
         </View>
@@ -178,7 +178,7 @@ export default class pastOrderEN extends Component {
                                       justifyContent:'center',
                                       alignItems:'center'}}
                                onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
-              <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}}
+              <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'NotoSansCJKsc-Regular',}}
                     allowFontScaling={false}>
                     {Label.getCMLabel('REORDER')}
               </Text>
@@ -204,10 +204,9 @@ export default class pastOrderEN extends Component {
                               this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}
                             disabled={this.props.isRefreshing}>
             <Text style={{marginLeft:5,
-                          fontSize:13,
+                          fontSize:15,
                           color:'white',
-                          fontWeight:'bold',
-                          fontFamily:'FZZhunYuan-M02S',}}
+                          fontFamily:'NotoSansCJKsc-Regular',}}
                   allowFontScaling={false}>
               {Label.getCMLabel('PAY')}
             </Text>
@@ -224,7 +223,7 @@ export default class pastOrderEN extends Component {
                                       alignItems:'center'}}
                               onPress={this._handleWechatBtn}>
               <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
-              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>chanmao_kefu</Text>
+              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontFamily:'NotoSansCJKsc-Regular',}} allowFontScaling={false}>chanmao_kefu</Text>
 
             </TouchableOpacity>
         </View>
@@ -236,7 +235,7 @@ export default class pastOrderEN extends Component {
     if (this.state.orderInfo.payment_channel == 0) {
       return(
         <View style={styles.orderTotal}>
-          <Text style={{fontSize:18,marginLeft: 40,fontWeight:'bold',fontFamily:'FZZhunYuan-M02S',}} allowFontScaling={false}>{Label.getCMLabel('PRICE')}: ${this.state.orderInfo.order_total}</Text>
+          <Text style={{fontSize:18,marginLeft: 40,fontWeight:'bold',fontFamily:'NotoSansCJKsc-Regular',}} allowFontScaling={false}>{Label.getCMLabel('PRICE')}: ${this.state.orderInfo.order_total}</Text>
         </View>
       )
     }
@@ -246,7 +245,7 @@ export default class pastOrderEN extends Component {
           <Text style={{fontSize:18,
                         marginLeft: 40,
                         fontWeight:'bold',
-                        fontFamily:'FZZhunYuan-M02S'}}
+                        fontFamily:'NotoSansCJKsc-Regular'}}
                 allowFontScaling={false}>
                 {Label.getCMLabel('ACTUAL_PICE')}: ${this.state.orderInfo.order_total}
           </Text>
@@ -380,8 +379,8 @@ export default class pastOrderEN extends Component {
       return(
         <Text style={{paddingBottom:5,
                       fontWeight:'600',
-                      fontSize:12,
-                      fontFamily:'FZZhunYuan-M02S',
+                      fontSize:14,
+                      fontFamily:'NotoSansCJKsc-Regular',
                       color:'#b2b2b2'}}
               allowFontScaling={false}>{statusReminder}</Text>
       )
@@ -404,8 +403,14 @@ export default class pastOrderEN extends Component {
                   <Text style={[styles.infoTitle,statusColor]} allowFontScaling={false}>{statusMessage}</Text>
                   {_statusReminder()}
                   <View style={{flexDirection:'row'}}>
-                    <Text style={styles.infoText} allowFontScaling={false}>{Label.getCMLabel('ORDER_NO')} #{this.state.orderInfo.order_oid}</Text>
-                    <Text style={[styles.infoText,{textAlign:'right'}]} allowFontScaling={false}>{this.state.orderInfo.order_created}</Text>
+                    <Text style={[styles.infoText,{fontFamily:'NotoSansCJKsc-Bold'}]}
+                          allowFontScaling={false}>
+                        {Label.getCMLabel('ORDER_NO')} #{this.state.orderInfo.order_oid}
+                    </Text>
+                    <Text style={[styles.infoText,{textAlign:'right', flex: 1.5}]}
+                          allowFontScaling={false}>
+                        {this.state.orderInfo.order_created}
+                    </Text>
                   </View>
               </View>
               <View style={styles.orderList}>
@@ -471,7 +476,7 @@ const styles = StyleSheet.create({
    fontSize: 20,
    color:'white',
    alignSelf:'center',
-   fontFamily:'FZZongYi-M05S',
+   fontFamily:'NotoSansCJKsc-Black',
   },
   info:{
     flex:1,
@@ -485,14 +490,13 @@ const styles = StyleSheet.create({
     // marginLeft:40,
     fontWeight:'bold',
     fontSize:17,
-    fontFamily:'FZZhunYuan-M02S',
+    fontFamily:'NotoSansCJKsc-Regular',
   },
   infoText:{
     flex:1,
     paddingBottom:5,
     // marginLeft:40,
-    color:'#666666',
-    fontFamily:'FZZhunYuan-M02S',
+    fontFamily:'NotoSansCJKsc-Regular',
   },
   orderList:{
     flex:1,

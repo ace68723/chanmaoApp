@@ -95,7 +95,7 @@ export default class AddressForHomeHeader extends Component {
           <Text style={{color:"#000000",
                         fontSize:15,
                         fontWeight:'bold',
-                        fontFamily:'FZZongYi-M05S',
+                        fontFamily:'NotoSansCJKsc-Black',
                         marginBottom:10,}}
                         numberOfLines={1}
                 allowFontScaling={false}>
@@ -110,7 +110,7 @@ export default class AddressForHomeHeader extends Component {
         <Text style={{color:"#000000",
                       fontSize:15,
                       fontWeight:'bold',
-                      fontFamily:'FZZongYi-M05S',
+                      fontFamily:'NotoSansCJKsc-Black',
                       marginBottom:10,}}
                       numberOfLines={1}
               allowFontScaling={false}>

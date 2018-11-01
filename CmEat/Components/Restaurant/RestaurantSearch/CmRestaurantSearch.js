@@ -279,8 +279,7 @@ export default class CmRestaurantSearch extends Component {
 									style={{flex: 1,
 													marginLeft: 10,
 													marginRight: 10,
-													fontFamily:"FZZhunYuan-M02S",
-													fontSize: 16,
+													fontFamily:"NotoSansCJKsc-Regular",
 													paddingTop: 10,
 													paddingBottom: 10,
 													marginTop: marginTop}}
@@ -349,7 +348,7 @@ export default class CmRestaurantSearch extends Component {
 			return(
 				<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
 					<Text style={{fontSize:18,
-												fontFamily:"FZZhunYuan-M02S"}}
+												fontFamily:"NotoSansCJKsc-Regular"}}
 								allowFontScaling={false}>
 						{Label.getCMLabel('CITY_AREA')}
 					</Text>
@@ -359,7 +358,7 @@ export default class CmRestaurantSearch extends Component {
 			return(
 				<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
 					<Text style={{fontSize:18,
-												fontFamily:"FZZhunYuan-M02S"}}
+												fontFamily:"NotoSansCJKsc-Regular"}}
 								allowFontScaling={false}>
 						{Label.getCMLabel('RES_TAG')}
 					</Text>
@@ -383,7 +382,7 @@ export default class CmRestaurantSearch extends Component {
 							}}>
 					<Text style={{fontSize:16,
 												margin:3,
-												fontFamily:'FZZongYi-M05S'}}
+												fontFamily:'NotoSansCJKsc-Black'}}
 								allowFontScaling={false}>
 								{Label.getCMLabel('CANNOT_FIND_ABOUT')} "{this.state.searchText}" {Label.getCMLabel('ABOUT_XX_ITEMS')}
 					</Text>
@@ -448,7 +447,7 @@ const styles = StyleSheet.create({
 	fontSize: 20,
 	color:'white',
 	alignSelf:'center',
-	fontFamily:'FZZongYi-M05S',
+	fontFamily:'NotoSansCJKsc-Black',
 	},
 	tagView: {
 		height:24,

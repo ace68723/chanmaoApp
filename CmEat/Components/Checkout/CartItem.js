@@ -65,7 +65,7 @@ export default (props) =>{
             <Text style={{width: 70,
                           fontSize: 15,
                           color: '#666666',
-                          fontWeight: '800'}}
+                          fontFamily: 'NotoSansCJKsc-Black'}}
                   allowFontScaling={false}>
               {props.title}:
             </Text>
@@ -113,13 +113,13 @@ const styles = StyleSheet.create({
     marginLeft:10,
     fontSize:15,
     color:'#808080',
-    fontFamily:'FZZhunYuan-M02S',
+    fontFamily:'NotoSansCJKsc-Regular',
   },
   value:{
     flex: 1,
     marginLeft:5,
     fontSize:15,
     color:'#9b9b9b',
-    fontFamily:'FZZhunYuan-M02S',
+    fontFamily:'NotoSansCJKsc-Regular',
   },
 })

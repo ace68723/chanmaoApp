@@ -93,7 +93,7 @@ export default class SboxHomeHeader extends Component {
 //   <Image source={require('./Image/box.png')}
 //          style={{height: width * 0.091,
 //                  width: width * 0.091,}}/>
-//    <Text style={{fontSize:10, backgroundColor:'rgba(0,0,0,0)', position:'absolute', fontFamily:'FZZhunYuan-M02S'}}>
+//    <Text style={{fontSize:10, backgroundColor:'rgba(0,0,0,0)', position:'absolute', fontFamily:'NotoSansCJKsc-Regular'}}>
 //     0/99
 //    </Text>
 // </View>
@@ -109,7 +109,7 @@ export default class SboxHomeHeader extends Component {
 //     <Image source={require('./Image/search.png')}
 //            style={{height:height*0.032,
 //                    width:height*0.032,}}/>
-//     <Animated.Text style={{paddingLeft:10,color:fontColor,fontFamily:'FZZhunYuan-M02S'}}>
+//     <Animated.Text style={{paddingLeft:10,color:fontColor,fontFamily:'NotoSansCJKsc-Regular'}}>
 //       搜索你想找的零食
 //     </Animated.Text>
 // </Animated.View>

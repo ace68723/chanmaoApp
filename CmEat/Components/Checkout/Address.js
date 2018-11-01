@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
+import Label from '../../../App/Constants/AppLabel';
+
 const {width,height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.01;
@@ -78,9 +80,9 @@ export default class Address extends Component {
 											marginLeft: 30,
 											marginTop: 20,
 											fontSize:15,
-											fontWeight: '800'}}
+											fontFamily: 'NotoSansCJKsc-Black'}}
 							allowFontScaling={false}>
-					送餐地址
+					{Label.getCMLabel('DELIVER_ADDRESS')}
 				</Text>
 				<View style={{flexDirection:"row",
 											marginTop: 20,
@@ -104,15 +106,15 @@ export default class Address extends Component {
 
 					<TouchableWithoutFeedback onPress={this.props.goToAddressList}>
 						<View style={{flex:1,margin:10, justifyContent: 'space-around'}}>
-							<Text style={{fontFamily:'FZZhunYuan-M02S'}}
+							<Text style={{fontFamily:'NotoSansCJKsc-Regular'}}
 										allowFontScaling={false}>
 									{this.state.address.name}
 							</Text>
-							<Text style={{fontFamily:'FZZhunYuan-M02S'}}
+							<Text style={{fontFamily:'NotoSansCJKsc-Regular'}}
 										allowFontScaling={false}>
 									{this.state.address.tel}
 							</Text>
-							<Text numberOfLines={2} style={{fontFamily:'FZZhunYuan-M02S'}}
+							<Text numberOfLines={2} style={{fontFamily:'NotoSansCJKsc-Regular'}}
 										allowFontScaling={false}>
 									{this.state.address.addr}
 							</Text>

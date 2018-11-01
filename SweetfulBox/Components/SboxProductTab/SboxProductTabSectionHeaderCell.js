@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   container: {},
   text: {
     color: '#a5a5a5',
-    fontFamily: 'FZZhunYuan-M02S',
+    fontFamily: 'NotoSansCJKsc-Regular',
     marginLeft: 6,
     fontSize: 12
   },

@@ -76,10 +76,9 @@ export default class MenuHeader extends Component {
 		if(Number(this.props.restaurant.start_amount)!=0){
 			return(
 				<Text style={{textAlign:'center',
-															 marginTop:7,
-															 fontSize:13,
-															 color:'#3a3b47',
-															 fontFamily:'FZZhunYuan-M02S'}}
+										  marginTop:7,
+											color:'#3a3b47',
+											fontFamily:'NotoSansCJKsc-Regular'}}
 							 allowFontScaling={false}>
 						最低起送价: {this.props.restaurant.start_amount}
 				</Text>
@@ -105,8 +104,9 @@ export default class MenuHeader extends Component {
 			);
 			_discountInfo.push(
 				<Text style={{textAlign:'center',
-											color:'#40a2e7',marginTop:5,
-											fontFamily:'FZZhunYuan-M02S'}}
+											color:'#40a2e7',
+											marginTop:5,
+											fontFamily:'NotoSansCJKsc-Regular'}}
 							allowFontScaling={false}>
 					税前满$66.66可享受85折
 				</Text>
@@ -136,7 +136,7 @@ export default class MenuHeader extends Component {
 					<Text style={{color:'#363646',
 												fontSize:15,
 												fontWeight:'500',
-												fontFamily:'FZZongYi-M05S',}}
+												fontFamily:'NotoSansCJKsc-Black',}}
 								allowFontScaling={false}>
 							{this.props.restaurant.name}
 					</Text>
@@ -146,7 +146,7 @@ export default class MenuHeader extends Component {
 														fontSize:12,
 														fontWeight:'200',
 														marginTop:5,
-														fontFamily:'FZZhunYuan-M02S'}}
+														fontFamily:'NotoSansCJKsc-Regular'}}
 										allowFontScaling={false}>
 									{this.props.restaurant.desc}
 							</Text>
@@ -155,17 +155,15 @@ export default class MenuHeader extends Component {
 				</Animated.View>
 				<Animated.View style={{opacity:this.state.rrOpacity,marginTop:-25,}}>
 					<Text style={{color:'#363646',
-												fontSize:25,
-												fontWeight:'500',
-												fontFamily:'FZZongYi-M05S',
+												fontSize:24,
+												fontFamily:'NotoSansCJKsc-Bold',
 												textAlign:'center',}}
 								allowFontScaling={false}>
 							{this.props.restaurant.name}
 					</Text>
-					<Text style={{color:'#ababb0',
-												fontSize:13,
-												fontWeight:'400',
-												fontFamily:'FZZhunYuan-M02S',
+					<Text style={{color: '#666666',
+												// color:'#ababb0',
+												fontFamily:'NotoSansCJKsc-Regular',
 												marginTop:10,
 												textAlign:'center',}}
 								allowFontScaling={false}>
@@ -174,7 +172,7 @@ export default class MenuHeader extends Component {
 					{this._renderStartMount()}
 					<Text style={{textAlign:'center',
 												color:'#84828d',
-												fontFamily:'FZZhunYuan-M02S'}}
+												fontFamily:'NotoSansCJKsc-Regular'}}
 								allowFontScaling={false}>
 						{this.props.start_time} - {this.props.end_time}
 					</Text>

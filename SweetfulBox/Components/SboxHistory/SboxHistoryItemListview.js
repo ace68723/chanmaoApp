@@ -38,14 +38,14 @@ class itemList extends Component {
               onPress={() => this.props.onSelected(index, sku_id)}>
               <Text style={[{fontSize: 13,
                             fontWeight: "400",
-                            fontFamily:'FZZhunYuan-M02S'},
+                            fontFamily:'NotoSansCJKsc-Regular'},
                             focus && {color: "#FF7583"}]}
                     allowFontScaling={false}>
                     {sku_fullname} x {sku_quantity}
               </Text>
               <Text style={[{fontSize: 13,
                             fontWeight: "400",
-                            fontFamily:'FZZhunYuan-M02S'},
+                            fontFamily:'NotoSansCJKsc-Regular'},
                             focus && {color: "#FF7583"}]}
                     allowFontScaling={false}>
                     ${parseFloat(sku_price * sku_quantity).toFixed(2)}

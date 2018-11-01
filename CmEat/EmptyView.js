@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
 
 
 
-// fontFamily:'FZZongYi-M05S',
+// fontFamily:'NotoSansCJKsc-Black',
 //
 //
 //
-// fontFamily:'FZZhunYuan-M02S',
+// fontFamily:'NotoSansCJKsc-Regular',
