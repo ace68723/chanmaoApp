@@ -114,18 +114,6 @@ export default class Home extends Component {
         }
       });
       this.setState({showPopup: true});
-
-      // Alert.alert(
-      //   '软件更新',
-      //   '有新版本可下载,请前往更新',
-      //   [
-      //     {text:'立即更新', onPress:()=>{
-      //       Linking.canOpenURL(url).then(supported => {
-      //         supported && Linking.openURL(url);
-      //       }, (err) => console.log(err));
-      //     }}
-      //   ]
-      // )
     }else{
 
       this.popupView.setMessagePopup({
@@ -143,19 +131,6 @@ export default class Home extends Component {
         }
       });
       this.setState({showPopup: true});
-
-      // Alert.alert(
-      //   '软件更新',
-      //   '有新版本可下载，要前往App Store?',
-      //   [
-      //     {text: '以后再说', onPress:()=>{} ,style: 'cancel'},
-      //     {text:'立即更新', onPress:()=>{
-      //       Linking.canOpenURL(url).then(supported => {
-      //         supported && Linking.openURL(url);
-      //       }, (err) => console.log(err));
-      //     }}
-      //   ]
-      // )
     }
   }
 
@@ -194,20 +169,6 @@ export default class Home extends Component {
         },1000)
       }
       else{
-        // setTimeout(() => {
-        //   InteractionManager.runAfterInteractions(() => {
-        //     this.props.navigator.showLightBox({
-        //       screen: 'CmLoading',
-        //       animated: false,
-        //       navigatorStyle: {navBarHidden: true},
-        //       style: {
-        //         flex:1,
-        //        backgroundBlur: "none", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-        //       //  backgroundColor: "rgba(0,0,0,0)" // tint color for the background, you can specify alpha here (optional)
-        //      }
-        //     })
-        //   })
-        // }, 500);
         setTimeout(() => {
           // InteractionManager.runAfterInteractions(() => {
             this.props.navigator.showModal({
@@ -236,7 +197,6 @@ export default class Home extends Component {
       }
   }
   _handleSboxPress() {
-                  // if (Platform.OS === 'ios') {
       if(this._openStarted) return;
       if(!this.state.entryFlag) return;
       this._openStarted = true;
