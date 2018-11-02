@@ -79,10 +79,13 @@ class SettingTab extends Component {
   }
   _goToLanguageSettings() {
     this.props.navigator.push({
-      screen: 'CmEatLanguageSettings',
+      screen: 'LanguagesAndRegions',
       animated: true,
       navigatorStyle: {
         navBarHidden: true
+      },
+      passProps: {
+        firstSelection: false
       }
     });
   }
@@ -98,14 +101,14 @@ class SettingTab extends Component {
         <SettingCate title={Label.getCMLabel('MY_ORDER')} onPress={this._goToHistory.bind(this)} icon={require('./Image/icon_setting-01.png')}/>
         <SettingCate title={Label.getCMLabel('ADD_ADDRESS')} onPress={this._goToAddress.bind(this)} icon={require('./Image/icon_setting_icon_setting_address-management.png')}/>
         <SettingCate title={Label.getCMLabel('CUSTOMER_SERVICE')} icon={require('./Image/icon_setting_icon_setting_customer-service.png')} onPress={this._goToAboutUs}/>
-
+        <SettingCate title={Label.getCMLabel('LANGUAGE_SETTING')} icon={require('./Image/icon_language.png')} onPress={this._goToLanguageSettings}/>
         <SettingCate title={Label.getCMLabel('SWEETBOX')} icon={require('./Image/icon_setting_icon_setting_sweetful-box.png')} onPress={this._goToSbox}/>
         <SettingCate title={Label.getCMLabel('LOG_OUT')} icon={require('./Image/icon_setting_icon_setting_log-out.png')} onPress={this._cmeLogOut}/>
       </ScrollView>
     </View>)
   }
 }
-//<SettingCate title={Label.getCMLabel('LANGUAGE_SETTING')} icon={require('./Image/icon_language.png')} onPress={this._goToLanguageSettings}/>
+
 
 let styles = StyleSheet.create({
   mainContainer: {

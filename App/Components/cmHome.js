@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 import AuthAction from '../Actions/AuthAction';
 import VersionAction from '../Actions/VersionAction';
-import {GetUserInfo} from '../Modules/Database';
+import { GetUserInfo, cme_getRegion } from '../Modules/Database';
 import PopupView from '../../CmEat/Components/Popup/PopupView'
 import StartUpAnimation from './startupAnimation';
 const { height, width } = Dimensions.get('window');
@@ -46,8 +46,9 @@ export default class Home extends Component {
       super();
       this.state = {
           entryFlag: true,
+          showPopup: false
       };
-      
+
       this._versionCheck = this._versionCheck.bind(this);
       this._handleAppStateChange = this._handleAppStateChange.bind(this);
       this._handleChanmaoPress = this._handleChanmaoPress.bind(this);
@@ -64,7 +65,7 @@ export default class Home extends Component {
   _openStarted = false
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
-  
+
     setTimeout( () => {
       this._versionCheck();
     }, 500);
@@ -78,7 +79,7 @@ export default class Home extends Component {
       if (versionObject && versionObject.need_update) {
         this._updateAlert(versionObject);
       }
-   
+
   })
   .catch((err)=>console.log(err));
   }
@@ -141,7 +142,7 @@ export default class Home extends Component {
       setTimeout(() => {
         this._openStarted = false
       }, 5000);
-     
+      this.startUpAnimation._fadeOut();
       const res =  await AuthAction.isAuthed();
       if(res.ev_error !== 0) {
         setTimeout(() => {
@@ -298,15 +299,36 @@ export default class Home extends Component {
     }
   }
 
-  render() {
-      return(
-        <StartUpAnimation 
+  _renderBody() {
+    const region = cme_getRegion();
+    if (region.length > 0) {
+      return (
+        <StartUpAnimation
           ref={(startup)=>this.startUpAnimation = startup}
           onPressCMFoodDelivery={this._handleChanmaoPress}
           onPressCMECommerce={this._handleSboxPress}
         />
+      )
+    } else {
+      this.props.navigator.showModal({
+        screen: 'LanguagesAndRegions',
+        animated: true,
+        navigatorStyle: {navBarHidden: true},
+        passProps: {
+          firstSelection: true
+        }
+      })
+    }
+  }
+
+  render() {
+      return(
+        <View style={{flex: 1}}>
+          {this.state.showPopup && this.popupView.show()}
+          {this._renderBody()}
+        </View>
       );
-      
+
   }
 }
 

@@ -12,6 +12,7 @@ import SboxHome from './SweetfulBox/Config/Screens';
 import SboxLoading from './screens/SboxLoading';
 import SboxNotification from './SweetfulBox/Components/SboxNotification/SboxNotification';
 import CmPasswordReset from './App/Components/Login/ResetPassword';
+import LanguagesAndRegions from './App/Components/LanguagesAndRegions';
 
 import CmEat from './CmEat/Config/Screens';
 
@@ -31,6 +32,7 @@ export function registerScreens() {
   Navigation.registerComponent('SboxHome', () => SboxHome);
   Navigation.registerComponent('SboxLoading', () => SboxLoading);
   Navigation.registerComponent('SboxNotification', () => SboxNotification);
+  Navigation.registerComponent('LanguagesAndRegions', () => LanguagesAndRegions);
 
   Navigation.registerComponent('CmEat', () => CmEat);
   Navigation.registerComponent('CmPasswordReset', () => CmPasswordReset);

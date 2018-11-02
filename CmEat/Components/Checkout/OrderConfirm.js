@@ -110,25 +110,46 @@ export default class orderConfirm extends Component {
                           {this._renderPaymentChannel()}
 
                       </View>
-                      <View style={styles.modalFooter}>
-                          <View style={styles.modalButton}>
-                              <TouchableOpacity style={{flex:1,
-                                                        justifyContent:'center',
-                                                        alignItems:'center'}}
-                                                onPress={() => this.setState({isOpen: !this.state.isOpen})}>
-                                <Text style={styles.buttonFont}
-                                      allowFontScaling={false}>{Label.getCMLabel('CANCEL')}</Text>
+                      <View style={{flexDirection: 'row',
+                                    backgroundColor: 'white',
+                                    borderBottomLeftRadius: 8,
+                                    borderBottomRightRadius: 8}}>
+                          <View style={{flex: 1}}>
+                              <TouchableOpacity onPress={() => this.setState({isOpen: !this.state.isOpen})}>
+                                <View style={{
+                                      height: 50,
+                                      justifyContent: 'center',
+                                      backgroundColor: '#C5C5C5',
+                                      alignItems: 'center',
+                                      borderBottomLeftRadius: 8,}}>
+                                  <Text style={{color: '#666',
+                                                 fontSize: 15,
+                                                 fontWeight: '900',
+                                                 lineHeight: 16,
+                                                 fontFamily: 'NotoSansCJKsc-Regular'}}
+                                        allowFontScaling={false}>
+                                        {Label.getCMLabel('CANCEL')}
+                                  </Text>
+                                </View>
                               </TouchableOpacity>
                           </View>
-                          <View style={styles.modalButton}>
-                              <TouchableOpacity style={{flex:1,
-                                                        justifyContent:'center',
-                                                        alignItems:'center'}}
-                                                onPress={this.props.doCheckout}>
-                                <Text style={{fontSize:18,
-                                              color:'#ea7b21',
-                                              fontFamily: 'NotoSansCJKsc-Regular'}}
-                                      allowFontScaling={false}>{Label.getCMLabel('CONFIRM')}</Text>
+                          <View style={{flex: 1}}>
+                              <TouchableOpacity onPress={this.props.doCheckout}>
+                                <View style={{
+                                      height: 50,
+                                      justifyContent: 'center',
+                                      backgroundColor: '#ea7b21',
+                                      alignItems: 'center',
+                                      borderBottomRightRadius: 8}}>
+                                  <Text style={{color: 'white',
+                                                 fontSize: 15,
+                                                 fontWeight: '900',
+                                                 lineHeight: 16,
+                                                 fontFamily: 'NotoSansCJKsc-Regular'}}
+                                        allowFontScaling={false}>
+                                        {Label.getCMLabel('CONFIRM')}
+                                  </Text>
+                                </View>
                               </TouchableOpacity>
                           </View>
                       </View>
@@ -169,7 +190,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 400,
     width: 300,
-
+    borderRadius: 8
   },
   modalHearder:{
     flex:1,

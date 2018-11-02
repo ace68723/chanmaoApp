@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {
-  Platform, 
-  StyleSheet, 
-  Text, 
-  View, 
-  Image, 
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Image,
   Dimensions,
   TouchableWithoutFeedback,
   Animated
@@ -47,7 +47,7 @@ export default class StartupAnimation extends Component {
       const currentTime = new Date();
       if(currentTime.getHours() >= 18 || currentTime.getHours() <= 6)
         isDaytime = false;
-      
+
     }
     componentDidMount() {
       Animated.sequence([
@@ -100,7 +100,7 @@ export default class StartupAnimation extends Component {
           ),
         ])
       ]).start();
-     
+
       setTimeout(()=>{this.setState({isAnimationRunning:false})},3300)
 
       this.intervalIndicator = setInterval(()=>{
@@ -147,7 +147,7 @@ export default class StartupAnimation extends Component {
               position:'absolute',
               width:width,
               height:height,
-            }} 
+            }}
             source={isDaytime ? require('./image/背景/启动页-多伦多-白天背景.png') : require('./image/背景/启动页-多伦多-夜晚背景.png')} />
           {this.renderDayIndicator()}
           {this.renderTopLeftIcon()}
@@ -183,19 +183,19 @@ export default class StartupAnimation extends Component {
           marginTop:iconMargin,
         }}>
           <Animated.Image style={{
-            height:this.state.dayIndicatorSize, 
+            height:this.state.dayIndicatorSize,
             width:this.state.dayIndicatorSize,
             transform:[{rotate: spin}],
             top: moveUp,
             right:this.state.dayIndicatorHorizontalMove
             }} source={ isDaytime ? require('./image/天气/sun.png') : require('./image/天气/moon.png')}/>
-          <View style={{ 
+          <View style={{
             position:'absolute',
             top:30 * sizeScale,
             right:20* sizeScale}} >
             <Image style={{height: 70*0.619*sizeScale, width: 70*sizeScale}}  source={isDaytime?require('./image/天气/cloud-day.png') : require('./image/天气/cloud-night.png')} />
           </View>
-          
+
         </View>
       )
     }
@@ -208,14 +208,14 @@ export default class StartupAnimation extends Component {
       let pressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中-按下.png') : require('./image/建筑-英文/启动页-施工中-按下.png');
       let unpressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中.png') : require('./image/建筑-英文/启动页-施工中.png');
       return(
-        <Animated.View style={{ 
-          backgroundColor:'transparent', 
+        <Animated.View style={{
+          backgroundColor:'transparent',
           position:'absolute',
           marginTop:iconMargin,
           top: jump,
           left:-35* sizeScale}}>
           <Image style={{
-            height:310 * sizeScale, 
+            height:310 * sizeScale,
             width:310 * sizeScale,
             }}
             source={this.state.isTopLeftButtonPressed ? pressedIcon : unpressedIcon} />
@@ -223,18 +223,18 @@ export default class StartupAnimation extends Component {
       );
     }
     renderTopLeftButton(){
-      
+
       return (
-          <TouchableWithoutFeedback 
+          <TouchableWithoutFeedback
             onPressIn={()=>this.setState({isTopLeftButtonPressed:true})}
             onPressOut={()=>this.setState({isTopLeftButtonPressed:false})}
             disabled={this.state.isAnimationRunning}
           >
-            <View style={{ 
+            <View style={{
               transform:[{rotate:'55deg'}],
-              backgroundColor:'transparent', 
-              position:'absolute', 
-              height:300 * sizeScale, 
+              backgroundColor:'transparent',
+              position:'absolute',
+              height:300 * sizeScale,
               width:250 * sizeScale,
               marginTop:iconMargin,
               top:-50* sizeScale,
@@ -260,7 +260,7 @@ export default class StartupAnimation extends Component {
           marginTop:iconMargin,
           right:-40* sizeScale}}>
             <Image style={{
-              height:310 * sizeScale, 
+              height:310 * sizeScale,
               width:310 * sizeScale,
               }}
               source={this.state.isTopRightButtonPressed ? pressedIcon : unpressedIcon} />
@@ -269,21 +269,21 @@ export default class StartupAnimation extends Component {
     }
     renderTopRightButton(){
       return (
-        <TouchableWithoutFeedback 
+        <TouchableWithoutFeedback
           onPressIn={()=>this.setState({isTopRightButtonPressed:true})}
           onPressOut={()=>this.setState({isTopRightButtonPressed:false})}
           onPress={()=>{
-            this._fadeOut();
+            // this._fadeOut();
             clearInterval(this.intervalIndicator)
             this.props.onPressCMFoodDelivery();
           }}
           disabled={this.state.isAnimationRunning}
-        > 
-          <View style={{ 
+        >
+          <View style={{
               transform:[{rotate:'58deg'}],
-              backgroundColor:'transparent', 
-              position:'absolute', 
-              height:310 * sizeScale, 
+              backgroundColor:'transparent',
+              position:'absolute',
+              height:310 * sizeScale,
               width:210 * sizeScale,
               top:120 * sizeScale,
               marginTop:iconMargin,
@@ -309,17 +309,17 @@ export default class StartupAnimation extends Component {
             marginBottom:iconMargin,
             left:-90 * sizeScale}}>
             <Image style={{
-                height:310 * sizeScale, 
+                height:310 * sizeScale,
                 width:310 * sizeScale,
               }}
                 source={this.state.isBottomLeftButtonPressed ? pressedIcon : unpressedIcon} />
           </Animated.View>
-       
+
       );
     }
     renderBottomLeftButton(){
       return(
-        <TouchableWithoutFeedback 
+        <TouchableWithoutFeedback
           onPressIn={()=>this.setState({isBottomLeftButtonPressed:true})}
           onPressOut={()=>this.setState({isBottomLeftButtonPressed:false})}
           onPress={()=>{
@@ -331,8 +331,8 @@ export default class StartupAnimation extends Component {
           <View style={{
             position:'absolute',
             transform:[{rotate:'58deg'}],
-            backgroundColor:'transparent', 
-            height:310* sizeScale, 
+            backgroundColor:'transparent',
+            height:310* sizeScale,
             width:220* sizeScale,
             bottom:37* sizeScale,
             marginBottom:iconMargin,
@@ -353,13 +353,13 @@ export default class StartupAnimation extends Component {
       let unpressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫生活.png') : require('./image/建筑-英文/启动页-馋猫生活.png');
       return (
           <Animated.View style={{
-            backgroundColor:'transparent', 
-            position:'absolute', 
+            backgroundColor:'transparent',
+            position:'absolute',
             bottom:jump,
             marginBottom:iconMargin,
             right:-120 * sizeScale}}>
             <Image style={{
-                height:310* sizeScale, 
+                height:310* sizeScale,
                 width:310* sizeScale,
               }}
                 source={this.state.isBottomRightButtonPressed ? pressedIcon : unpressedIcon} />
@@ -374,10 +374,10 @@ export default class StartupAnimation extends Component {
           disabled={this.state.isAnimationRunning}
         >
           <View style={{
-              height:220* sizeScale, 
+              height:220* sizeScale,
               width:180* sizeScale,
               position:'absolute',
-              backgroundColor:'transparent', 
+              backgroundColor:'transparent',
               bottom:0 * sizeScale,
               marginBottom:iconMargin,
               right:0 * sizeScale}}>
@@ -386,7 +386,7 @@ export default class StartupAnimation extends Component {
       );
     }
   }
-  
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -394,4 +394,3 @@ export default class StartupAnimation extends Component {
       alignItems: 'center',
     },
   });
-  

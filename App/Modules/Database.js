@@ -417,6 +417,17 @@ export function cme_updateLanguage(language) {
       realm.create('cm_system',{type:"cme_language",value:language}, true );
   });
 }
+export function cme_getRegion() {
+  if (realm.objectForPrimaryKey('cm_system','cme_region')) {
+    return realm.objectForPrimaryKey('cm_system','cme_region').value;
+  }
+  return '';
+}
+export function cme_updateRegion(region) {
+  realm.write(() => {
+      realm.create('cm_system',{type:"cme_region",value:region}, true );
+  });
+}
 
 export function sbox_addToCart(product){
   const amount = product.amount;
