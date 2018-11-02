@@ -131,7 +131,7 @@ let styles = StyleSheet.create({
   orderTitle:{
     color: "#fff",
     fontSize:20,
-		fontFamily:'FZZongYi-M05S',
+		fontFamily:'NotoSansCJKsc-Black',
   },
 	modal: {
 		justifyContent: 'center',

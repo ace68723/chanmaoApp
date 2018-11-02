@@ -235,8 +235,8 @@ export default {
       let token = await NativeModules.cmApplePay.reCreatePayment(paymentData);
       return token;
     },
-    async recheckoutByApplepay({total,tips,oid},callback){
-      let token = await this._repayByApple({total,tips,oid},()=>callback());
+    async recheckoutByApplepay({subtotal, shipping, tax, amount, oid, tips, discount},callback){
+      let token = await this._payByApple({subtotal, shipping, tax, amount, oid, tips, discount},()=>callback());
       if(token){
         let payResult = await CheckoutModule.oneTimeCharge({
           amount:total,

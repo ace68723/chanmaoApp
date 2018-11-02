@@ -278,13 +278,13 @@ export default class MyComponent extends Component {
           <View style={{flex:0.7,paddingRight:10,}}>
             <Text numberOfLines={2}
                   style={{fontSize:15,
-                          fontFamily:'FZZhunYuan-M02S'}}
+                          fontFamily:'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
                 {spu_name}
             </Text>
             <Text numberOfLines={1}
                   style={{fontSize:12,
-                          fontFamily:'FZZhunYuan-M02S',
+                          fontFamily:'NotoSansCJKsc-Regular',
                           marginTop:10,
                           color:"#6d6e71"}}
                   allowFontScaling={false}>
@@ -292,7 +292,7 @@ export default class MyComponent extends Component {
             </Text>
           </View>
           <View style={{flex:0.3, justifyContent: 'space-between', flexDirection: 'column'}}>
-            <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign: 'right'}}
+            <Text style={{fontSize:16,fontFamily:'NotoSansCJKsc-Regular',textAlign: 'right'}}
                   allowFontScaling={false}>
             ${sku_price} x {sku_quantity}
             </Text>
@@ -317,7 +317,7 @@ export default class MyComponent extends Component {
                    style={{height:25*1.2264,width:25}}
             />
             <Text style={{fontSize:20,
-                          fontFamily:'FZZhunYuan-M02S',
+                          fontFamily:'NotoSansCJKsc-Regular',
                           marginLeft:20,}}
                   allowFontScaling={false}>
               {Label.getSboxLabel('SELECT_DELIVERY_ADDRESS')}
@@ -382,7 +382,7 @@ export default class MyComponent extends Component {
     if (this.state.deliFee>0) return (
       <View style={{flex:0.5,}}>
         <Text style={{fontSize:16,
-                      fontFamily:'FZZhunYuan-M02S',}}
+                      fontFamily:'NotoSansCJKsc-Regular',}}
               allowFontScaling={false}>
                 Delivery Fee: ${this.state.deliFee}
         </Text>
@@ -393,7 +393,7 @@ export default class MyComponent extends Component {
   {
     if (this.state.ev_original_total) return (
       <Text style={{fontSize:16,
-                    fontFamily:'FZZhunYuan-M02S',
+                    fontFamily:'NotoSansCJKsc-Regular',
                     color:'grey',
                     textDecorationLine:'line-through'}}
             allowFontScaling={false}>
@@ -436,7 +436,7 @@ export default class MyComponent extends Component {
                         borderColor: '#DCDCDC',}}>
             <View style={{flex:0.35,}}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}
+                            fontFamily:'NotoSansCJKsc-Regular',}}
                     allowFontScaling={false}>
                     {Label.getSboxLabel('DERLIVER_TIME')}：
               </Text>
@@ -445,7 +445,7 @@ export default class MyComponent extends Component {
               <Text style={{fontSize:16,
                             // color:'#ff7685',
                             color: 'black',
-                            fontFamily:'FZZhunYuan-M02S',}}
+                            fontFamily:'NotoSansCJKsc-Regular',}}
                     allowFontScaling={false}>
                       {Label.getSboxLabel('WITHIN_TWO_DAY')}{this.state.deliTime}
               </Text>
@@ -460,15 +460,15 @@ export default class MyComponent extends Component {
             {this._renderDeliveryFee()}
             <View style={{flex:0.5, }}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}
+                            fontFamily:'NotoSansCJKsc-Regular',}}
                     allowFontScaling={false}>
                       Total:
                       <Text style={{fontSize:16,
-                                    fontFamily:'FZZhunYuan-M02S',color:'#ff7685'}}
+                                    fontFamily:'NotoSansCJKsc-Regular',color:'#ff7685'}}
                             allowFontScaling={false}>
                           ${this.state.total}
                           <Text style={{fontSize:16,
-                                        fontFamily:'FZZhunYuan-M02S',
+                                        fontFamily:'NotoSansCJKsc-Regular',
                                         color:'grey',
                                         textDecorationLine:'line-through'}}
                                 allowFontScaling={false}>
@@ -488,14 +488,14 @@ export default class MyComponent extends Component {
                         borderColor: '#DCDCDC',}}>
             <View style={{flex:0.5,}}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}
+                            fontFamily:'NotoSansCJKsc-Regular',}}
                     allowFontScaling={false}>
                       {Label.getSboxLabel('PAYMENT_METHOD')}  {this.state.cardBrand}
               </Text>
             </View>
             <View style={{flex:0.5, alignItems:'flex-end'}}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}
+                            fontFamily:'NotoSansCJKsc-Regular',}}
                     allowFontScaling={false}>
                       xxxx xxxx xxxx {this.state.last4}
               </Text>
@@ -512,7 +512,7 @@ export default class MyComponent extends Component {
                         borderColor: '#DCDCDC',}}>
             <View style={{flex:1,}}>
               <Text style={{fontSize:16,
-                            fontFamily:'FZZhunYuan-M02S',}}
+                            fontFamily:'NotoSansCJKsc-Regular',}}
                     allowFontScaling={false}>
                       {commentText()}
               </Text>

@@ -90,6 +90,7 @@ module.exports={
     ADD_DEBIT_CARD:'添加银行卡',
     CARD_NUMBER:'卡号',
     EXPIRED_AT:'有效期至',
+    DELIVER_ADDRESS:'送餐地址',
 
     //Menu
     GO_CHECKOUT:'去结账',

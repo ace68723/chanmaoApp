@@ -44,11 +44,12 @@ class RestaurantCard extends Component {
 			_renderDesc() {
 				return(
 					<View style={{flex:2,}}>
-						<Text style={{color:'#ababb0',
-													fontSize:12,
+						<Text style={{color: '#666666',
+													// color:'#ababb0',
+													fontSize:14,
 													fontWeight:'200',
-													marginTop:5,
-													fontFamily:'FZZhunYuan-M02S'}}
+													marginTop:2,
+													fontFamily:'NotoSansCJKsc-Regular'}}
 									allowFontScaling={false}>
 								{this.state.restaurant.desc}
 						</Text>
@@ -56,21 +57,20 @@ class RestaurantCard extends Component {
 				);
 				// For discount info
 				// return(
-				// 	<View style={{flex:2, flexDirection:'row'}}>
-				// 		<Image
-				// 			source={require('./Image/icon_coupon_small.png')}
-				// 			style={{height:20,width:35,}}
-				// 		/>
-				// 		<Text style={{color:'#40a2e7',
-				// 									fontSize:12,
-				// 									marginLeft:7,
-				// 									fontWeight:'200',
-				// 									marginTop:5,
-				// 									fontFamily:'FZZhunYuan-M02S'}}
-				// 					allowFontScaling={false}>
-				// 				税前满$66.66可享受85折
-				// 		</Text>
-				// 	</View>
+				// <View style={{flex:2, flexDirection:'row'}}>
+				// 	<Image
+				// 		source={require('./Image/icon_coupon_small.png')}
+				// 		style={{height:18,width:30,alignSelf: 'center'}}
+				// 	/>
+				// 	<Text style={{color:'#40a2e7',
+				// 								marginLeft:7,
+				// 								fontWeight:'200',
+				// 								alignSelf: 'center',
+				// 								fontFamily:'NotoSansCJKsc-Regular'}}
+				// 				allowFontScaling={false}>
+				// 			税前满$66.66可享受85折
+				// 	</Text>
+				// </View>
 				// );
 			}
       _renderCloseCover(){
@@ -146,7 +146,7 @@ class RestaurantCard extends Component {
               <Text style={{color:'#ababb0',
 														fontSize:12,
 														fontWeight:'400',
-														fontFamily:'FZZhunYuan-M02S',
+														fontFamily:'NotoSansCJKsc-Regular',
 														marginLeft:3,
 														textAlign:'right'}}
 										allowFontScaling={false}>
@@ -205,8 +205,7 @@ class RestaurantCard extends Component {
                               borderRightWidth:StyleSheet.hairlineWidth,}}>
                   <Text style={{color:'#363646',
 																fontSize:15,
-																fontWeight:'500',
-																fontFamily:'FZZongYi-M05S',}}
+																fontFamily:'NotoSansCJKsc-Black',}}
 												allowFontScaling={false}>
                       {this.state.restaurant.name}
                   </Text>

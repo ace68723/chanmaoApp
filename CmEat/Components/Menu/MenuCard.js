@@ -131,19 +131,19 @@ const styles = StyleSheet.create({
   itemTitle:{
     color:'#4d4d4d',
     fontSize:16,
-		fontFamily:'FZZhunYuan-M02S',
+		fontFamily:'NotoSansCJKsc-Regular',
   },
   price:{
     marginTop:10,
     color:'#ff8b00',
     fontSize:15,
     fontWeight:'500',
-		fontFamily:'FZZhunYuan-M02S',
+		fontFamily:'NotoSansCJKsc-Regular',
   },
   quantity:{
     color:'#4d4d4d',
     fontSize:18,
-		fontFamily:'FZZhunYuan-M02S',
+		fontFamily:'NotoSansCJKsc-Regular',
   },
   decreaseButton:{
     width:50,

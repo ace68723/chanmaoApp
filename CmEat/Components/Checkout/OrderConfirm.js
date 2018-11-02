@@ -84,7 +84,8 @@ export default class orderConfirm extends Component {
                      onClosed={this.props.closeOrderConfirm}>
                 <View style={{flex:1}}>
                       <View style={styles.modalHearder}>
-                          <Text style={{fontSize:20, fontWeight:'bold'}} allowFontScaling={false}>{dldec}</Text>
+                          <Text style={{fontSize:20, fontFamily: 'NotoSansCJKsc-Bold'}}
+                                allowFontScaling={false}>{dldec}</Text>
                       </View>
                       <View style={styles.modalContent}>
                           <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',}}>
@@ -115,7 +116,8 @@ export default class orderConfirm extends Component {
                                                         justifyContent:'center',
                                                         alignItems:'center'}}
                                                 onPress={() => this.setState({isOpen: !this.state.isOpen})}>
-                                <Text style={styles.buttonFont} allowFontScaling={false}>{Label.getCMLabel('CANCEL')}</Text>
+                                <Text style={styles.buttonFont}
+                                      allowFontScaling={false}>{Label.getCMLabel('CANCEL')}</Text>
                               </TouchableOpacity>
                           </View>
                           <View style={styles.modalButton}>
@@ -123,7 +125,10 @@ export default class orderConfirm extends Component {
                                                         justifyContent:'center',
                                                         alignItems:'center'}}
                                                 onPress={this.props.doCheckout}>
-                                <Text style={{fontSize:18,color:'#ea7b21',}} allowFontScaling={false}>{Label.getCMLabel('CONFIRM')}</Text>
+                                <Text style={{fontSize:18,
+                                              color:'#ea7b21',
+                                              fontFamily: 'NotoSansCJKsc-Regular'}}
+                                      allowFontScaling={false}>{Label.getCMLabel('CONFIRM')}</Text>
                               </TouchableOpacity>
                           </View>
                       </View>
@@ -180,8 +185,9 @@ const styles = StyleSheet.create({
   },
   contentFont:{
     color:'#ea7b21',
-    fontSize:20,
+    fontSize:18,
     flex:1,
+    fontFamily: 'NotoSansCJKsc-Regular'
   },
   modalButton:{
     flex:1,
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
   },
   buttonFont:{
     fontSize:18,
-
+    fontFamily: 'NotoSansCJKsc-Regular'
   },
   modalFooter:{
     flex:1,

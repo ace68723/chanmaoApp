@@ -132,8 +132,12 @@ class HistoryTab extends Component {
 							break;
 						case 30:
 							this._applePaySelected({oid: state.oid,
+																			subtotal: state.fees.ori_pretax.toString(),
+																			shipping: state.fees.dlexp.toString(),
+																			tax: state.fees.tax.toString(),
+																			service_fee: state.fees.service_fee.toString(),
 																			charge_total: state.fees.charge_total,
-																			service_fee: state.fees.service_fee});
+																			discount: state.fees.total_off});
 							break;
 						default:
 							break;
@@ -252,10 +256,14 @@ class HistoryTab extends Component {
 			// HistoryAction.changePaymentToCash({oid});
 			this._onRefresh();
 		}
-		_applePaySelected({oid, charge_total, service_fee}){
+		_applePaySelected({oid, subtotal, shipping, tax, service_fee, charge_total, discount}){
 				CheckoutAction.recheckoutByApplepay({
 					oid,
-					total: parseFloat(charge_total),
+					subtotal,
+					shipping,
+					tax,
+					discount,
+					amount: parseFloat(charge_total),
 					tips:	parseFloat(service_fee)
 				},()=>this._onRefresh())
 		}
@@ -328,7 +336,7 @@ class HistoryTab extends Component {
 						onPress={() => this.setState({renderingPage: 0})}>
 						<Text style={{textAlign: 'center',
 													color: firstFilterColor,
-													fontFamily:'FZZhunYuan-M02S'}}
+													fontFamily:'NotoSansCJKsc-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('ALL_ORDER')}
 						</Text>
@@ -338,7 +346,7 @@ class HistoryTab extends Component {
 						onPress={() => this.setState({renderingPage: 1})}>
 						<Text style={{textAlign: 'center',
 													color: secondFilterColor,
-													fontFamily:'FZZhunYuan-M02S'}}
+													fontFamily:'NotoSansCJKsc-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('YET_COMMENT')}
 						</Text>
@@ -363,7 +371,7 @@ class HistoryTab extends Component {
 	 			        tabBarActiveTextColor={'#ff8b00'}
 	 			        tabBarUnderlineColor={'#ff8b00'}
 	 			        tabBarUnderlineStyle={{'backgroundColor':'#ff8b00'}}
-	 			        tabBarTextStyle={{fontSize:12,fontFamily:'FZZhunYuan-M02S',}}
+	 			        tabBarTextStyle={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',}}
 	 			        tabBarInactiveTextColor={'#666666'}
 	 			        prerenderingSiblingsNumber={3}
 	 			        tabBarPosition = "top"
@@ -434,7 +442,7 @@ class HistoryTab extends Component {
 //  <TextInput
 // 		 style={{height: 40,
 // 						 borderColor: '#d9d9d9',
-// 						 fontFamily:'FZZhunYuan-M02S',
+// 						 fontFamily:'NotoSansCJKsc-Regular',
 // 						 fontSize:13,
 // 						 borderWidth: 1,
 // 						 paddingLeft:10,
@@ -467,7 +475,7 @@ let styles = StyleSheet.create({
   orderTitle:{
     color: "#fff",
     fontSize:20,
-		fontFamily:'FZZongYi-M05S',
+		fontFamily:'NotoSansCJKsc-Black',
   },
 	modal: {
 		justifyContent: 'center',

@@ -69,7 +69,7 @@ class DefaultTabBar extends Component {
                        resizeMode={'contain'}/>
                      <Text style={[{color: textColor,
                                     fontWeight,
-                                    fontFamily:'FZZhunYuan-M02S',
+                                    fontFamily:'NotoSansCJKsc-Regular',
                                     arginTop:8,
                                     textAlign: 'center'},
                                     textStyle, ]}

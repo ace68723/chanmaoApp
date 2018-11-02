@@ -20,7 +20,7 @@ export default (props) => {
                 <View style={{flex:1,justifyContent:'center'}}>
                     <Text style={{color:'#ababb0',
                                   fontSize:14,
-                                  fontFamily:'FZZhunYuan-M02S'}}
+                                  fontFamily:'NotoSansCJKsc-Regular'}}
                           allowFontScaling={false}>
                       {props.dish.tpgs[tpg_id].tps[tp_id].tp_name} × {props.dish.tpgs[tpg_id].tps[tp_id].quantity}
                     </Text>
@@ -28,7 +28,7 @@ export default (props) => {
                 <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
                   <Text style={{color:'#ababb0',
                                 fontSize:16,
-                                fontFamily:'FZZhunYuan-M02S',
+                                fontFamily:'NotoSansCJKsc-Regular',
                                 textAlign: 'left'}}
                         allowFontScaling={false}>
                     ${props.dish.tpgs[tpg_id].tps[tp_id].tp_price}
@@ -49,6 +49,7 @@ export default (props) => {
                               backgroundColor: '#9b9b9b',
                               width: 22,
                               height: 22,
+                              marginTop: 2,
                               justifyContent: 'center'}}>
                   <Text style={{color: 'white',
                                 fontSize: 12,
@@ -57,7 +58,7 @@ export default (props) => {
                     {props.dish.qty}
                   </Text>
                 </View>
-                <View style={{flex: 1, marginTop: 2}}>
+                <View style={{flex: 1,}}>
                   <View style={{flexDirection: 'row'}}>
                     <Text style={styles.itemTitle}
                           allowFontScaling={false}>
@@ -70,7 +71,7 @@ export default (props) => {
                   </View>
                   {_toppingGroupList}
                 </View>
-                <TouchableOpacity style={{marginLeft: 20}} onPress={props.onPress}>
+                <TouchableOpacity style={{marginLeft: 20, marginTop: 2}} onPress={props.onPress}>
                   <Image source={require('./Image/icon_edit.png')}
                          style={{width: 22,
                                  height: 22}}>
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color:'#4d4d4d',
     fontSize:16,
-    fontFamily:'FZZhunYuan-M02S',
+    fontFamily:'NotoSansCJKsc-Regular',
     alignSelf: 'center',
   },
   price:{
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
   quantity:{
     color:'#4d4d4d',
     fontSize:16,
-    fontFamily:'FZZhunYuan-M02S',
+    fontFamily:'NotoSansCJKsc-Regular',
     flex:1,
     textAlign: 'right',
     alignSelf: 'center',

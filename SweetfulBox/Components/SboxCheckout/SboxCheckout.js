@@ -214,7 +214,7 @@
 //             />
 //             <Text style={{
 //                     fontSize:20,
-//                     fontFamily:'FZZhunYuan-M02S',
+//                     fontFamily:'NotoSansCJKsc-Regular',
 //                     marginLeft:20,
 //                   }}>
 //               请选择您的配送地址
@@ -258,11 +258,11 @@
 //             </View>
 //             <View style={{flex:1,flexDirection:'row',}}>
 //               <View style={{flex:0.8,paddingRight:10,}}>
-//                 <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>{fullname}</Text>
-//                 <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>${sku_price} <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S', textDecorationLine: 'line-through'}}> ${original_price}</Text></Text>
+//                 <Text style={{fontSize:16,fontFamily:'NotoSansCJKsc-Regular',}}>{fullname}</Text>
+//                 <Text style={{fontSize:16,fontFamily:'NotoSansCJKsc-Regular',}}>${sku_price} <Text style={{fontSize:16,fontFamily:'NotoSansCJKsc-Regular', textDecorationLine: 'line-through'}}> ${original_price}</Text></Text>
 //               </View>
 //               <View style={{flex:0.2}}>
-//                 <Text style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',}}>x{selectedAmount}</Text>
+//                 <Text style={{fontSize:16,fontFamily:'NotoSansCJKsc-Regular',}}>x{selectedAmount}</Text>
 //               </View>
 //             </View>
 //             <TouchableOpacity   style={{position:'absolute',right:0,bottom:10}}
@@ -290,14 +290,14 @@
 //                         borderColor: '#DCDCDC',}}>
 //             <View style={{flex:0.3,}}>
 //               <Text style={{fontSize:16,
-//                             fontFamily:'FZZhunYuan-M02S',}}>
+//                             fontFamily:'NotoSansCJKsc-Regular',}}>
 //                     配送时间：
 //               </Text>
 //             </View>
 //             <View style={{flex:0.7,alignItems:'flex-end'}}>
 //               <Text style={{fontSize:16,
 //                             color:'#ff7685',
-//                             fontFamily:'FZZhunYuan-M02S',}}>
+//                             fontFamily:'NotoSansCJKsc-Regular',}}>
 //                       {this.state.deliTime}
 //               </Text>
 //             </View>
@@ -310,13 +310,13 @@
 //                         borderColor: '#DCDCDC',}}>
 //             <View style={{flex:0.5,}}>
 //               <Text style={{fontSize:16,
-//                             fontFamily:'FZZhunYuan-M02S',}}>
+//                             fontFamily:'NotoSansCJKsc-Regular',}}>
 //                       Delivery Fee: ${this.state.deliFee}
 //               </Text>
 //             </View>
 //             <View style={{flex:0.5, alignItems:'flex-end'}}>
 //               <Text style={{fontSize:16,
-//                             fontFamily:'FZZhunYuan-M02S',}}>
+//                             fontFamily:'NotoSansCJKsc-Regular',}}>
 //                       Total: ${this.state.total}
 //               </Text>
 //             </View>
@@ -330,13 +330,13 @@
 //                         borderColor: '#DCDCDC',}}>
 //             <View style={{flex:0.5,}}>
 //               <Text style={{fontSize:16,
-//                             fontFamily:'FZZhunYuan-M02S',}}>
+//                             fontFamily:'NotoSansCJKsc-Regular',}}>
 //                       支付方式
 //               </Text>
 //             </View>
 //             <View style={{flex:0.5, alignItems:'flex-end'}}>
 //               <Text style={{fontSize:16,
-//                             fontFamily:'FZZhunYuan-M02S',}}>
+//                             fontFamily:'NotoSansCJKsc-Regular',}}>
 //                       xxxx xxxx xxxx {this.state.last4}
 //               </Text>
 //             </View>
@@ -348,13 +348,13 @@
 //                         borderColor: '#DCDCDC',}}>
 //             <View style={{flex:0.5,}}>
 //               <Text style={{fontSize:16,
-//                             fontFamily:'FZZhunYuan-M02S',}}>
+//                             fontFamily:'NotoSansCJKsc-Regular',}}>
 //                       箱子空间
 //               </Text>
 //             </View>
 //             <View style={{flex:0.5, alignItems:'flex-end'}}>
 //               <Text style={{fontSize:16,
-//                             fontFamily:'FZZhunYuan-M02S',}}>
+//                             fontFamily:'NotoSansCJKsc-Regular',}}>
 //                       {this.state.box.boxWeights}/99
 //               </Text>
 //             </View>
@@ -403,7 +403,7 @@
 //             <Text style={{
 //               color:'#ffffff',
 //               fontSize:20,
-//               fontFamily:'FZZhunYuan-M02S',
+//               fontFamily:'NotoSansCJKsc-Regular',
 //             }}>
 //               确认下单
 //             </Text>
@@ -427,7 +427,7 @@
 //               <Text style={{
 //                 color:'#ffffff',
 //                 fontSize:20,
-//                 fontFamily:'FZZhunYuan-M02S',
+//                 fontFamily:'NotoSansCJKsc-Regular',
 //               }}>
 //                 去结账
 //               </Text>
@@ -459,7 +459,7 @@
 //               <Text style={{
 //                 color:'#ffffff',
 //                 fontSize:20,
-//                 fontFamily:'FZZhunYuan-M02S',
+//                 fontFamily:'NotoSansCJKsc-Regular',
 //               }}>
 //                 添加配送地址
 //               </Text>
@@ -490,7 +490,7 @@
 //               <Text style={{
 //                 color:'#ffffff',
 //                 fontSize:20,
-//                 fontFamily:'FZZhunYuan-M02S',
+//                 fontFamily:'NotoSansCJKsc-Regular',
 //               }}>
 //                 添加支付方式
 //               </Text>
@@ -528,7 +528,7 @@
 //   //     <Text style={{
 //   //                   color:'#ff7685',
 //   //                   fontSize:20,
-//   //                   fontFamily:'FZZhunYuan-M02S',}}>
+//   //                   fontFamily:'NotoSansCJKsc-Regular',}}>
 //   //           Total: $52.25
 //   //     </Text>
 //   //     <View
@@ -542,7 +542,7 @@
 //   //
 //   //     >
 //   //       <Text style={{fontSize:16,
-//   //                     fontFamily:'FZZhunYuan-M02S',
+//   //                     fontFamily:'NotoSansCJKsc-Regular',
 //   //                     color:'#FFF',
 //   //                   }}>
 //   //             提交订单

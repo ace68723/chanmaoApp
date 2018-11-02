@@ -38,7 +38,7 @@ export default class TabBar extends Component {
   // <Text style={{textAlign: 'center',
   //               color: textColor,
   //               fontWeight: fontWeight,
-  //               fontFamily:'FZZhunYuan-M02S',
+  //               fontFamily:'NotoSansCJKsc-Regular',
   //               marginRight: 5}}
   //       allowFontScaling={false}>
   //       {this.props.orderData.length}
@@ -61,11 +61,11 @@ export default class TabBar extends Component {
       return (
         <TouchableOpacity
           key={page}
-          style={{flex: 1, padding: 15, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
+          style={{flex: 1, padding: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}
           onPress={() => this.props.goToPage(page)}>
           <View style={{width:24,
                         height:24,
-                        padding: 5,
+                        padding: 1,
                         borderRadius:15,
                         backgroundColor:iconColor,
                         marginRight: 5,
@@ -73,15 +73,14 @@ export default class TabBar extends Component {
             <Text style={{fontSize:15,
                           textAlign:"center",
                           color:"#ffffff",
-                          fontFamily:'FZZhunYuan-M02S'}}
+                          fontFamily:'NotoSansCJKsc-Medium'}}
                   allowFontScaling={false}>
               {numOfOrderNotReviewed}
             </Text>
           </View>
           <Text style={{textAlign: 'center',
                         color: textColor,
-                        fontWeight: fontWeight,
-                        fontFamily:'FZZhunYuan-M02S'}}
+                        fontFamily:'NotoSansCJKsc-Medium'}}
                 allowFontScaling={false}>
             {name}
           </Text>
@@ -91,12 +90,11 @@ export default class TabBar extends Component {
     return (
       <TouchableOpacity
         key={page}
-        style={{flex: 1, padding: 15}}
+        style={{flex: 1, padding: 10}}
         onPress={() => this.props.goToPage(page)}>
         <Text style={{textAlign: 'center',
                       color: textColor,
-                      fontWeight: fontWeight,
-                      fontFamily:'FZZhunYuan-M02S'}}
+                      fontFamily:'NotoSansCJKsc-Medium'}}
               allowFontScaling={false}>
           {name}
         </Text>

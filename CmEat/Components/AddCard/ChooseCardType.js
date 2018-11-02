@@ -242,14 +242,14 @@ export default class ChooseCardType extends Component {
               <Text key={"discount_title"}
                     style={{fontSize: 15,
                             color: "#40a2e7",
-                            fontFamily: 'FZZhunYuan-M02S'}}
+                            fontFamily: 'NotoSansCJKsc-Regular'}}
                     allowFontScaling={false}>
                 {Label.getCMLabel('DISCOUNT')}:
               </Text>
               <Text key={"discount"}
                     style={{fontSize: 15,
                             color: "#40a2e7",
-                            fontFamily: 'FZZhunYuan-M02S'}}
+                            fontFamily: 'NotoSansCJKsc-Regular'}}
                     allowFontScaling={false}>
                 -${this.state.fees.total_off}
               </Text>
@@ -265,7 +265,7 @@ export default class ChooseCardType extends Component {
                 style={{fontSize: 19,
                         color: "#666666",
                         fontWeight: "800",
-                        fontFamily: 'FZZhunYuan-M02S'}}
+                        fontFamily: 'NotoSansCJKsc-Regular'}}
                 allowFontScaling={false}>
             ${this.state.fees.charge_total}
           </Text>
@@ -276,7 +276,7 @@ export default class ChooseCardType extends Component {
                   style={{fontSize: 19,
                           color: "#666666",
                           fontWeight: "800",
-                          fontFamily: 'FZZhunYuan-M02S',
+                          fontFamily: 'NotoSansCJKsc-Regular',
                           textDecorationLine: 'line-through',
   												marginLeft: 6}}
                   allowFontScaling={false}>
@@ -295,7 +295,7 @@ export default class ChooseCardType extends Component {
             <Text style={{textAlign: 'center',
                           marginTop: 20,
                           fontSize: 18,
-                          fontFamily: 'FZZhunYuan-M02S'}}>
+                          fontFamily: 'NotoSansCJKsc-Regular'}}>
               {Label.getCMLabel('CONFIRM_PAY')}
             </Text>
           </View>
@@ -303,14 +303,14 @@ export default class ChooseCardType extends Component {
             <Text key={"pretax_title"}
                   style={{fontSize: 15,
                           color: "#9b9b9b",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               {Label.getCMLabel('PRETAX_PRICE')}:
             </Text>
             <Text key={"pretax"}
                   style={{fontSize: 15,
                           color: "#9b9b9b",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               ${this.state.fees.ori_pretax}
             </Text>
@@ -319,14 +319,14 @@ export default class ChooseCardType extends Component {
             <Text key={"dlexp_title"}
                   style={{fontSize: 15,
                           color: "#9b9b9b",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               {Label.getCMLabel('DELIVER_FEE')}:
             </Text>
             <Text key={"dlexp"}
                   style={{fontSize: 15,
                           color: "#9b9b9b",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               ${this.state.fees.dlexp}
             </Text>
@@ -335,14 +335,14 @@ export default class ChooseCardType extends Component {
             <Text key={"tax_title"}
                   style={{fontSize: 15,
                           color: "#9b9b9b",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               {Label.getCMLabel('TAX')}:
             </Text>
             <Text key={"tax"}
                   style={{fontSize: 15,
                           color: "#9b9b9b",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               ${this.state.fees.ori_tax}
             </Text>
@@ -351,14 +351,14 @@ export default class ChooseCardType extends Component {
             <Text key={"service_fee_title"}
                   style={{fontSize: 15,
                           color: "#9b9b9b",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               {Label.getCMLabel('SERVICE_FEE')}:
             </Text>
             <Text key={"service_fee"}
                   style={{fontSize: 15,
                           color: "#9b9b9b",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               ${this.state.fees.ori_service_fee}
             </Text>
@@ -370,7 +370,7 @@ export default class ChooseCardType extends Component {
             <Text style={{fontSize: 19,
                           color: "#666666",
                           fontWeight: "800",
-                          fontFamily: 'FZZhunYuan-M02S'}}
+                          fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
               {Label.getCMLabel('CHARGE_TOTAL')}:
             </Text>
@@ -394,7 +394,7 @@ export default class ChooseCardType extends Component {
                                      fontSize: 15,
                                      fontWeight: '900',
                                      lineHeight: 16,
-                                     fontFamily: 'FZZhunYuan-M02S'}}
+                                     fontFamily: 'NotoSansCJKsc-Regular'}}
                             allowFontScaling={false}>
                             {Label.getCMLabel('CANCEL')}
                       </Text>
@@ -413,7 +413,7 @@ export default class ChooseCardType extends Component {
                                      fontSize: 15,
                                      fontWeight: '900',
                                      lineHeight: 16,
-                                     fontFamily: 'FZZhunYuan-M02S'}}
+                                     fontFamily: 'NotoSansCJKsc-Regular'}}
                             allowFontScaling={false}>
                             {Label.getCMLabel('CONFIRM')}
                       </Text>
@@ -472,7 +472,7 @@ export default class ChooseCardType extends Component {
                 style={{padding: 10,
                         fontSize: 16,
                         color: "#808080",
-                        fontFamily:'FZZhunYuan-M02S'}}
+                        fontFamily:'NotoSansCJKsc-Regular'}}
                 allowFontScaling={false}>{Label.getCMLabel('RECENTLY_USE')}</Text>
         )
         _previousVisa.push(
@@ -492,7 +492,7 @@ export default class ChooseCardType extends Component {
                             textAlign: 'left',
                             marginLeft: 20,
                             color:"#808080",
-                            fontFamily:'FZZhunYuan-M02S'}}>
+                            fontFamily:'NotoSansCJKsc-Regular'}}>
                         {this.props.brand} **** **** **** {this.props.last4}
               </Text>
           </TouchableOpacity>
@@ -502,7 +502,7 @@ export default class ChooseCardType extends Component {
                 style={{padding: 10,
                         fontSize: 16,
                         color: "#808080",
-                        fontFamily:'FZZhunYuan-M02S'}}
+                        fontFamily:'NotoSansCJKsc-Regular'}}
                 allowFontScaling={false}>{Label.getCMLabel('MORE_PAYMENT_WAY')}</Text>
         )
       }
@@ -534,7 +534,7 @@ export default class ChooseCardType extends Component {
                               textAlign: 'left',
                               marginLeft: 20,
                               color:"#808080",
-                              fontFamily:'FZZhunYuan-M02S'}}>
+                              fontFamily:'NotoSansCJKsc-Regular'}}>
                           {Label.getCMLabel('CREDIT_CARD')}
                 </Text>
                 <Text allowFontScaling={false}
@@ -566,7 +566,7 @@ export default class ChooseCardType extends Component {
                               textAlign: 'left',
                               marginLeft :20,
                               color:"#808080",
-                              fontFamily:'FZZhunYuan-M02S'}}>
+                              fontFamily:'NotoSansCJKsc-Regular'}}>
                               {Label.getCMLabel('DEBIT_CARD')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
@@ -598,7 +598,7 @@ export default class ChooseCardType extends Component {
                               textAlign: 'left',
                               marginLeft :20,
                               color:"#808080",
-                              fontFamily:'FZZhunYuan-M02S'}}>
+                              fontFamily:'NotoSansCJKsc-Regular'}}>
                               {Label.getCMLabel('ALIPAY')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
@@ -628,7 +628,7 @@ export default class ChooseCardType extends Component {
                               textAlign: 'left',
                               marginLeft :20,
                               color:"#808080",
-                              fontFamily:'FZZhunYuan-M02S'}}>
+                              fontFamily:'NotoSansCJKsc-Regular'}}>
                               {Label.getCMLabel('CASH')}
                 </Text>
                 <Text allowFontScaling={false} style={styles.arrowText}>
@@ -723,7 +723,7 @@ const styles = StyleSheet.create({
     fontSize:30,
     color:"#ff8b00",
     textAlign:"right",
-    fontFamily:'FZZhunYuan-M02S',
+    fontFamily:'NotoSansCJKsc-Regular',
     marginRight: 20
   },
   priceWrapper:{

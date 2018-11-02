@@ -170,7 +170,7 @@ export default class SboxHome extends Component {
                           tabBarBackgroundColor={'#fff'}
                           tabBarActiveTextColor={'#ff7685'}
                           tabBarUnderlineColor={'#ff7685'}
-                          tabBarTextStyle={{fontSize:15,fontFamily:'FZZhunYuan-M02S',}}
+                          tabBarTextStyle={{fontSize:15,fontFamily:'NotoSansCJKsc-Regular',}}
                           tabBarInactiveTextColor={'#666666'}
                           initialPage={0}
                           prerenderingSiblingsNumber={3}

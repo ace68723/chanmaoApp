@@ -24,7 +24,7 @@ export default class SboxCartAlert extends Component {
     if (Platform.OS==='ios') return (
       <TouchableOpacity style={styles.container} onPress={this._closeSboHomeAlert}>
         <View style={{padding:20,paddingLeft:25,paddingRight:25}}>
-          <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'FZZhunYuan-M02S',textAlign:'left',color:'white'}}>
+          <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',textAlign:'left',color:'white'}}>
               {this.props.message}
           </Text>
         </View>
@@ -40,7 +40,7 @@ export default class SboxCartAlert extends Component {
             backgroundColor:'#rgba(0,0,0,0.6)',
           }} onPress={this._closeSboHomeAlert}>
           <View style={{padding:20,paddingLeft:25,paddingRight:25,alignItems:'center',justifyContent:'center'}}>
-            <Text allowFontScaling={false} style={{fontSize:16,fontFamily:'FZZhunYuan-M02S',textAlign:'left',color:'white'}}>
+            <Text allowFontScaling={false} style={{fontSize:16,fontFamily:'NotoSansCJKsc-Regular',textAlign:'left',color:'white'}}>
                 {this.props.message}
             </Text>
           </View>

@@ -151,7 +151,7 @@ class Menu extends Component {
                 <View style={{alignSelf:'center',marginTop:30,marginBottom:10}}>
                     <Text style={{fontSize:18,
 																	color:'#3a3b47',
-																	fontFamily:'FZZongYi-M05S',}}
+																	fontFamily:'NotoSansCJKsc-Black',}}
 													allowFontScaling={false}>
                       {item.category_name}
                     </Text>

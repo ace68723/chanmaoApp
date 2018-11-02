@@ -108,6 +108,18 @@ export default class LoginButton extends Component {
 			)
 		}
 	}
+	_renderResetPasswork() {
+		// return (
+		// 	<TouchableWithoutFeedback onPress={this.props.toggleViewTypeReset}>
+		// 		<View style={{flex:1}}>
+		// 			<Text allowFontScaling={false} style={styles.registerText}>
+		// 				 Forgot password
+		// 			</Text>
+		// 		</View>
+		// 	</TouchableWithoutFeedback>
+		// )
+		return;
+	}
   render(){
     return(
       <View style={styles.container} ref={"LOGIN"}>
@@ -123,13 +135,7 @@ export default class LoginButton extends Component {
 							</TouchableWithoutFeedback>
 	          </View>
 						<View style={{flex:1,}}>
-							<TouchableWithoutFeedback onPress={this.props.toggleViewTypeReset}>
-								<View style={{flex:1}}>
-									<Text allowFontScaling={false} style={styles.registerText}>
-										 Forgot password
-									</Text>
-								</View>
-							</TouchableWithoutFeedback>
+							{this._renderResetPasswork()}
 						</View>
 					</View>
 

@@ -41,7 +41,7 @@ export default class SboxCart extends Component {
                       }}>
             <Text style={{color:'white',
                           marginLeft:10,
-                          fontFamily:'FZZhunYuan-M02S',
+                          fontFamily:'NotoSansCJKsc-Regular',
                           }}
                   allowFontScaling={false}>
               购物箱 NO.{box.boxId}

@@ -172,7 +172,7 @@ export default class Popup extends Component {
                       fontSize: 14,
                       fontWeight: '900',
                       lineHeight: 16,
-                      fontFamily: 'FZZhunYuan-M02S',
+                      fontFamily: 'NotoSansCJKsc-Regular',
                     },
                     this.props.cancelTextStyle
                   ]}
@@ -217,7 +217,7 @@ export default class Popup extends Component {
                       fontSize: 14,
                       fontWeight: '900',
                       lineHeight: 16,
-                      fontFamily: 'FZZhunYuan-M02S',
+                      fontFamily: 'NotoSansCJKsc-Regular',
                     },
                     this.props.confirmTextStyle
                   ]}
@@ -248,7 +248,7 @@ export default class Popup extends Component {
                     fontSize: 14,
                     marginHorizontal: 30,
                     marginBottom: 20,
-                    fontFamily: 'FZZhunYuan-M02S',
+                    fontFamily: 'NotoSansCJKsc-Regular',
                   },
                   this.props.detailTextStyle
                   ]}
@@ -265,7 +265,7 @@ export default class Popup extends Component {
       retrun (
         <View style={{backgroundColor: 'white'}}>
           <TextInput style={[{alignSelf: 'stretch',
-                              fontFamily: 'FZZhunYuan-M02S',
+                              fontFamily: 'NotoSansCJKsc-Regular',
                               lineHeight: 16,},
                              this.props.textInputStyle]}
                      value={this.state.promptValue}
@@ -289,7 +289,7 @@ export default class Popup extends Component {
                   fontWeight: '700',
                   textAlign: 'center',
                   color: '#F58330',
-                  fontFamily: 'FZZhunYuan-M02S',
+                  fontFamily: 'NotoSansCJKsc-Regular',
                 }
               ]}
               allowFontScaling={false}>
@@ -311,14 +311,14 @@ export default class Popup extends Component {
   //             <Text key={"discount_title"}
   //                   style={{fontSize: 15,
   //                           color: "#40a2e7",
-  //                           fontFamily: 'FZZhunYuan-M02S'}}
+  //                           fontFamily: 'NotoSansCJKsc-Regular'}}
   //                   allowFontScaling={false}>
   //               折扣:
   //             </Text>
   //             <Text key={"discount"}
   //                   style={{fontSize: 15,
   //                           color: "#40a2e7",
-  //                           fontFamily: 'FZZhunYuan-M02S'}}
+  //                           fontFamily: 'NotoSansCJKsc-Regular'}}
   //                   allowFontScaling={false}>
   //               -${this.props.fees.total_off}
   //             </Text>
@@ -334,7 +334,7 @@ export default class Popup extends Component {
   //               style={{fontSize: 19,
   //                       color: "#666666",
   //                       fontWeight: "800",
-  //                       fontFamily: 'FZZhunYuan-M02S'}}
+  //                       fontFamily: 'NotoSansCJKsc-Regular'}}
   //               allowFontScaling={false}>
   //           ${this.props.fees.charge_total}
   //         </Text>
@@ -345,7 +345,7 @@ export default class Popup extends Component {
   //                 style={{fontSize: 19,
   //                         color: "#666666",
   //                         fontWeight: "800",
-  //                         fontFamily: 'FZZhunYuan-M02S',
+  //                         fontFamily: 'NotoSansCJKsc-Regular',
   //                         textDecorationLine: 'line-through',
   // 												marginLeft: 6}}
   //                 allowFontScaling={false}>
@@ -361,14 +361,14 @@ export default class Popup extends Component {
   //           <Text key={"pretax_title"}
   //                 style={{fontSize: 15,
   //                         color: "#9b9b9b",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             税前价格:
   //           </Text>
   //           <Text key={"pretax"}
   //                 style={{fontSize: 15,
   //                         color: "#9b9b9b",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             ${this.props.fees.ori_pretax}
   //           </Text>
@@ -377,14 +377,14 @@ export default class Popup extends Component {
   //           <Text key={"dlexp_title"}
   //                 style={{fontSize: 15,
   //                         color: "#9b9b9b",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             运费:
   //           </Text>
   //           <Text key={"dlexp"}
   //                 style={{fontSize: 15,
   //                         color: "#9b9b9b",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             ${this.props.fees.dlexp}
   //           </Text>
@@ -393,14 +393,14 @@ export default class Popup extends Component {
   //           <Text key={"tax_title"}
   //                 style={{fontSize: 15,
   //                         color: "#9b9b9b",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             税:
   //           </Text>
   //           <Text key={"tax"}
   //                 style={{fontSize: 15,
   //                         color: "#9b9b9b",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             ${this.props.fees.ori_tax}
   //           </Text>
@@ -409,14 +409,14 @@ export default class Popup extends Component {
   //           <Text key={"service_fee_title"}
   //                 style={{fontSize: 15,
   //                         color: "#9b9b9b",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             服务费:
   //           </Text>
   //           <Text key={"service_fee"}
   //                 style={{fontSize: 15,
   //                         color: "#9b9b9b",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             ${this.props.fees.ori_service_fee}
   //           </Text>
@@ -430,7 +430,7 @@ export default class Popup extends Component {
   //           <Text style={{fontSize: 19,
   //                         color: "#666666",
   //                         fontWeight: "800",
-  //                         fontFamily: 'FZZhunYuan-M02S'}}
+  //                         fontFamily: 'NotoSansCJKsc-Regular'}}
   //                 allowFontScaling={false}>
   //             总计:
   //           </Text>
@@ -500,7 +500,7 @@ export default class Popup extends Component {
                 marginBottom: 10,
                 lineHeight: 23,
                 height: 25,
-                fontFamily: 'FZZhunYuan-M02S',
+                fontFamily: 'NotoSansCJKsc-Regular',
               },
               this.props.titleTextStyle
             ]}

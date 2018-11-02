@@ -48,7 +48,7 @@ export default class SboxHomeAlert extends Component {
                  style={{width:width*0.7,height:width*0.5}}
           />
           <View style={{padding:20,paddingLeft:25,paddingRight:25,}}>
-            <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'FZZhunYuan-M02S',textAlign:'center'}}>
+            <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',textAlign:'center'}}>
               {Label.getCMLabel('ALERT_PAYMENT')}
             </Text>
           </View>
@@ -77,7 +77,7 @@ export default class SboxHomeAlert extends Component {
                           }}>
                 <Text style={{color:'black',
                               fontSize:15,
-                              fontFamily:'FZZhunYuan-M02S'}}
+                              fontFamily:'NotoSansCJKsc-Regular'}}
                       allowFontScaling={false}>
                   {Label.getCMLabel('ALERT_COMFIRM')}
                 </Text>

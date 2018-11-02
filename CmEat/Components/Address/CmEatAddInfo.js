@@ -27,6 +27,8 @@ import AddressAction from '../../Actions/AddressAction';
 import AddressStore from '../../Stores/AddressStore';
 import Label from '../../../App/Constants/AppLabel';
 
+import PopupView from '../Popup/PopupView'
+
 const _getFormatAddress = () =>{
   return AddressStore.getFormatAddress()
 }
@@ -202,7 +204,7 @@ export default class CmEatAddInfo extends Component {
                             marginRight:5,
                             padding:5
                           }}>
-                <Text style={{color:type.textColor,fontFamily:'FZZhunYuan-M02S',}}
+                <Text style={{color:type.textColor,fontFamily:'NotoSansCJKsc-Regular',}}
 											allowFontScaling={false}>
                   {type.text}
                 </Text>
@@ -211,7 +213,7 @@ export default class CmEatAddInfo extends Component {
           )
         })
       return(
-        <View style={{flexDirection:"row",marginTop:25}}>
+        <View style={{flexDirection:"row",marginTop:18}}>
             {TypeList}
         </View>
       )
@@ -230,7 +232,7 @@ export default class CmEatAddInfo extends Component {
         return(
           <View style={styles.mainContainer} >
 					{this.state.showPopup && this.popupView.show()}
-          <Header title={CMLabel.getCNLabel('ADDRESS')}
+          <Header title={Label.getCMLabel('ADDRESS')}
 	                goBack={this._goBack}
 	                leftButtonText={'×'}/>
             <ScrollView scrollEnabled={true}
@@ -247,14 +249,14 @@ export default class CmEatAddInfo extends Component {
                     </View>
 										<View style= {styles.separator}/>
 										<TouchableWithoutFeedback onPress={this._chooseType}>
-											<View style={[styles.inputBox,{overflow:"hidden",height:40}]}>
+											<View style={[styles.inputBox,{overflow:"hidden",height:50}]}>
 												<Animated.Image source={require("./Image/button_enter.png")}
 																				style={{marginLeft:16,
 																								width:25,
 																								height:28,
 																								transform: [{rotate: interpolatedRotateAnimation}]}}/>
 												<Animated.View style={{flexDirection:"column",flex:1,marginTop:interpolatedMarginTop}}>
-														<Text style={{marginLeft:10,marginTop:12,fontFamily:'FZZhunYuan-M02S',}}
+														<Text style={{marginLeft:10,marginTop:12,fontFamily:'NotoSansCJKsc-Regular',}}
 																	allowFontScaling={false}>
 															{Label.getCMLabel('ADD_DEFAULT_ADDRESS')}
 														</Text>
@@ -402,17 +404,16 @@ let styles = StyleSheet.create({
     fontSize:18,
     marginLeft:20,
     marginRight:10,
-		fontFamily:'FZZhunYuan-M02S',
+		fontFamily:'NotoSansCJKsc-Regular',
   },
   fistInput:{
     // marginLeft:10,
     // flexDirection: 'row',
     flex: 1,
     height:50,
-    fontSize: 18,
     borderRadius: 8,
     color: '#000',
-		fontFamily:'FZZhunYuan-M02S',
+		fontFamily:'NotoSansCJKsc-Regular',
   },
   secondInput:{
     marginLeft:10,
@@ -431,7 +432,7 @@ let styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: '#fff',
-		fontFamily:'FZZongYi-M05S',
+		fontFamily:'NotoSansCJKsc-Bold',
   },
   button: {
     flex:1,

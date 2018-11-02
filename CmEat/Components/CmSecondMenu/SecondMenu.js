@@ -158,7 +158,7 @@ export default class SecondMenu extends Component {
 						<Text style={{textAlign:'center',
 													fontSize:15,
 													fontWeight: '300',
-													fontFamily:'FZZhunYuan-M02S'}}
+													fontFamily:'NotoSansCJKsc-Regular'}}
 									 numberOfLines={1}
 									 allowFontScaling={false}>
 													删除
@@ -198,7 +198,7 @@ export default class SecondMenu extends Component {
 											onPress={this._handleToppingOnPress.bind(null,{tpg_id, 'tp_id': key})}>
 											<Text style={{fontSize: 15,
 																		marginRight: 8,
-																		fontFamily:'FZZhunYuan-M02S'}}
+																		fontFamily:'NotoSansCJKsc-Regular'}}
 														allowFontScaling={false}>
 													{tps[key].tp_name} ${tps[key].tp_price}
 											</Text>
@@ -208,7 +208,7 @@ export default class SecondMenu extends Component {
 																		width: 18,
 																		backgroundColor: '#D4D4D4',
 																		borderRadius: 9,
-																		fontFamily:'FZZhunYuan-M02S'}}
+																		fontFamily:'NotoSansCJKsc-Regular'}}
 														allowFontScaling={false}>
 													{tps[key].quantity}
 											</Text>
@@ -226,7 +226,7 @@ export default class SecondMenu extends Component {
 																borderRadius:6,}}>
 										<Text style={{fontSize: 15,
 																	color:'#ff8b00',
-																	fontFamily:'FZZhunYuan-M02S'}}
+																	fontFamily:'NotoSansCJKsc-Regular'}}
 													allowFontScaling={false}> - </Text>
 									</View>
 								</TouchableOpacity>
@@ -252,7 +252,7 @@ export default class SecondMenu extends Component {
 											onPress={this._handleToppingOnPress.bind(null,{tpg_id, 'tp_id': key})}>
 											<Text style={{fontSize: 15,
 																		marginRight: 8,
-																		fontFamily:'FZZhunYuan-M02S'}}
+																		fontFamily:'NotoSansCJKsc-Regular'}}
 														allowFontScaling={false}>
 													{tps[key].tp_name} ${tps[key].tp_price}
 											</Text>
@@ -287,13 +287,13 @@ export default class SecondMenu extends Component {
 													paddingBottom: 5}}>
 								<Text style={{marginLeft: 20,
 															fontSize: 16,
-															fontFamily:'FZZhunYuan-M02S'}}
+															fontFamily:'NotoSansCJKsc-Regular'}}
 											allowFontScaling={false}>
 											{toppingGroupList[key].tpg_name}
 								</Text>
 								<Text style={{fontSize: 16,
 															color: '#a5a5a5',
-															fontFamily:'FZZhunYuan-M02S'}}
+															fontFamily:'NotoSansCJKsc-Regular'}}
 											allowFontScaling={false}>
 											{optionReminder}
 								</Text>
@@ -316,7 +316,7 @@ export default class SecondMenu extends Component {
 										marginLeft: 20,
 										marginRight: 20,
 										alignItems: 'center'}}>
-					<Text style={{flex: 0.3, fontSize: 16, fontFamily:'FZZhunYuan-M02S', color: '#a5a5a5'}}
+					<Text style={{flex: 0.3, fontSize: 16, fontFamily:'NotoSansCJKsc-Regular', color: '#a5a5a5'}}
 								allowFontScaling={false}>
 					{Label.getCMLabel('DISH_QUANTITY')}:
 					</Text>
@@ -338,14 +338,14 @@ export default class SecondMenu extends Component {
 																		paddingBottom: 5,
 																		width: 30,
 																		textAlign: 'center',
-																		fontFamily:'FZZhunYuan-M02S'}}
+																		fontFamily:'NotoSansCJKsc-Regular'}}
 														allowFontScaling={false}>
 														-
 											</Text>
 									</TouchableOpacity>
 									<Text style={{paddingTop: 5,
 																paddingBottom: 5,
-																fontFamily:'FZZhunYuan-M02S'}}
+																fontFamily:'NotoSansCJKsc-Regular'}}
 												allowFontScaling={false}>
 											{this.state.qty}
 									</Text>
@@ -357,7 +357,7 @@ export default class SecondMenu extends Component {
 																		paddingBottom: 5,
 																		width: 30,
 																		textAlign: 'center',
-																		fontFamily:'FZZhunYuan-M02S'}}
+																		fontFamily:'NotoSansCJKsc-Regular'}}
 														allowFontScaling={false}>
 														+
 											</Text>
@@ -395,7 +395,7 @@ export default class SecondMenu extends Component {
                         color: 'white',
                         fontSize: 16,
                         fontWeight: '700',
-												fontFamily:'FZZhunYuan-M02S',
+												fontFamily:'NotoSansCJKsc-Regular',
 												alignSelf: 'center'}}
 								allowFontScaling={false}>
               {confirmMsg}
@@ -405,7 +405,7 @@ export default class SecondMenu extends Component {
                         marginRight: 20,
                         color: 'white',
                         fontSize: 16,
-												fontFamily:'FZZhunYuan-M02S',
+												fontFamily:'NotoSansCJKsc-Regular',
 												alignSelf: 'center'}}
 								allowFontScaling={false}>
               ${(this.state.total * this.state.qty).toFixed(2)}
@@ -421,7 +421,7 @@ export default class SecondMenu extends Component {
 	// 				<Text style={{textAlign:'center',
 	// 											fontSize:20,
 	// 											fontWeight: '700',
-	// 											fontFamily:'FZZhunYuan-M02S'}}
+	// 											fontFamily:'NotoSansCJKsc-Regular'}}
 	// 							 numberOfLines={1}>
 	// 											{this.props.dish.ds_name}
 	// 				</Text>

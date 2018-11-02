@@ -60,7 +60,7 @@ export default class SboxCheckout extends Component {
             }}>
               <Text style={{color:'#ffffff',
                             fontSize:20,
-                            fontFamily:'FZZhunYuan-M02S'}}
+                            fontFamily:'NotoSansCJKsc-Regular'}}
                     allowFontScaling={false}>
                 支付 $52.36
               </Text>
@@ -83,7 +83,7 @@ export default class SboxCheckout extends Component {
       }}>
         <Text style={{color:'#000000',
                       fontSize:20,
-                      fontFamily:'FZZhunYuan-M02S'}}
+                      fontFamily:'NotoSansCJKsc-Regular'}}
               allowFontScaling={false}>
            SELECT CARD TO PAY
         </Text>
