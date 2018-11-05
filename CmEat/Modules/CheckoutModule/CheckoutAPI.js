@@ -22,7 +22,8 @@ export default  {
     }
 
     options.headers = Object.assign(options.headers,{
-        authortoken: io_data.authortoken
+        authortoken: io_data.authortoken,
+        region: 2
     });
     options.body = JSON.stringify(io_data.body);
     return fetch(url,options)

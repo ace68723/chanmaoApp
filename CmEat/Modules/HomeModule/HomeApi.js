@@ -25,6 +25,7 @@ const HomeApi = {
           }
       }
       options.headers.authortoken = token;
+      options.headers.region = 2;
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw error})
@@ -60,6 +61,7 @@ const HomeApi = {
           }
       }
       options.headers.authortoken = reqData.token;
+      options.headers.region = 2;
       if(reqData.userloc){
           options.headers.userloc = reqData.userloc
       }else{
