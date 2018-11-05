@@ -246,22 +246,7 @@ export default class InputAnimation extends Component {
 				)
 
 		}
-		_renderWechat(){
-			if(this.props.ib_isWXAppInstalled){
-				return(
-					<TouchableOpacity
-						style={styles.wechatView}
-						onPress = { this.props.if_handleWechatLogin }>
-						<ImageBackground source={require('../Image/wechat.png')} style={styles.wechatButton} >
-							<Text style={styles.wechatButtonText}
-										allowFontScaling={false}>
-								 {this.props.is_wechat}
-							</Text>
-						</ImageBackground>
-				 </TouchableOpacity>
-				)
-			}
-		}
+
 	  render(){
 
 	    return(
@@ -375,7 +360,7 @@ export default class InputAnimation extends Component {
 															 toggleViewType = {this.props.toggleViewType}
 															 />
 								</View>
-								{this._renderWechat()}
+
 
 							 <View style={{position:Platform.OS == 'ios'?'absolute':'relative',
                              bottom:5,

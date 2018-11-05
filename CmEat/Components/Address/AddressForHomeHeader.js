@@ -28,7 +28,7 @@ export default class AddressForHomeHeader extends Component {
     }
 
     this._onChange = this._onChange.bind(this);
-    this._getCurrentGeolocation = this._getCurrentGeolocation.bind(this);
+
   }
   componentDidMount() {
     AddressStore.addChangeListener(this._onChange);
@@ -45,49 +45,9 @@ export default class AddressForHomeHeader extends Component {
       selectedAddress:selectedAddress,
     })
 
-    this._getCurrentGeolocation();
+
   }
 
-  _getCurrentGeolocation(){
-		navigator.geolocation.getCurrentPosition (
-      (position) => {
-				const url = "https://maps.googleapis.com/maps/api/distancematrix/json?" +
-         "origins= " + position.coords.latitude + ',' + position.coords.longitude +
-         "&destinations=" + this.state.selectedAddress + "&key=AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8"
-		    let options = {
-		        method: 'GET',
-		        mode:'cors',
-		        headers: {
-		            'Accept': 'application/json',
-		            'Content-Type': 'application/json'
-		        }
-		    }
-		    fetch(url,options)
-		      .then((res) => res.json())
-		      .then((res)=>{
-            if (res.rows.length > 0) {
-              const distance = res.rows[0].elements[0].distance.value;
-              const promoptDistance = 500;
-              if (distance && distance >= promoptDistance){
-                this.props.showAddressPrompt();
-              }
-              else{
-                console.log('not show');
-              }
-            }
-		      })
-		      .catch((error) => {throw error});
-			},
-      (error)    => {
-				console.log(error)
-			},
-      {
-        enableHighAccuracy: true,
-        timeout:            20000,
-        maximumAge:         10000
-      }
-    )
-	}
   _renderAddress() {
     if(this.state.selectedAddress) {
       return(
