@@ -37,18 +37,8 @@ export default class SboxHomeHeader extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={this.props.handleBackToHome}>
-          <View style={{flex:0.17, }}>
-            <Image source={require('./Images/icon_back.png')}
-                   style={{
-                           position:'absolute',
-                           left:10,
-                           bottom:15,
-                           height:20,
-                           width:20,}}/>
-
-          </View>
-        </TouchableWithoutFeedback>
+        <View style={{flex:0.17, }}>
+        </View>
         <View style={{flex:0.66,justifyContent:'center',alignItems:'center', marginBottom: 5}}>
           <AddressForHomeHeader
             handleBackToHome={this.props.handleBackToHome}

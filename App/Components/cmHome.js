@@ -74,7 +74,7 @@ export default class Home extends Component {
   _openStarted = false
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
-    this._startUp();
+    // this._startUp();
     setTimeout( () => {
       this._versionCheck();
     }, 500);
@@ -90,6 +90,7 @@ export default class Home extends Component {
       }
       else {
         // this._startUp();
+        this._handleChanmaoPress();
       }
       // if(curVersion != versionObject.version){
       //   this._updateAlert(versionObject)
@@ -491,68 +492,15 @@ export default class Home extends Component {
   }
 
   render() {
-      const cmScale = this.state.open.interpolate({inputRange: [0, 1], outputRange: [1, this.state.scale]}) //3.8215  275 320
-      const cmtranslateX = this.state.open.interpolate({inputRange: [0, 1], outputRange: [0, this.state.translateX]})
-      const cmtranslateY = this.state.open.interpolate({inputRange: [0, 1], outputRange: [0, this.state.translateY]})
-      const cmTransform = {transform:[{translateX:cmtranslateX},{translateY:cmtranslateY},{scale:cmScale}]}
-
-      const sboxHomeHeightRatio = this._isiPhoneX() ? 2.2 : 1.971;
-      const cmHomeHeightRatio = this._isiPhoneX() ? 2.2 : 1.88;
 
       return (
-          <Animated.View style={[styles.container,cmTransform]}>
-            {this.state.showPopup && this.popupView.show()}
-              <View style={{ flex: 1,}}>
-                <TouchableWithoutFeedback onPress={this._handleSboxPress}>
-                  <Animated.View style={{ flex: 0.55, right: this.state.boxRight,}}>
-
-                      <Image source={ this._getSBoxHomePage() }
-                          style={{ width: width * 0.3674,
-                                    height: width * 0.3674 * sboxHomeHeightRatio,
-                                    bottom: 10,
-                                    position: 'absolute',
-                                    left: width * 0.0612,
-                          }}
-                      />
-                  </Animated.View>
-                </TouchableWithoutFeedback>
-
-                  <Animated.View style={{ flex: 0.45, top: this.state.orderTop,  }}>
-
-                  </Animated.View>
-              </View>
-              <View style={{ flex: 1, }}>
-                  <Animated.View style={{ flex: 0.45, bottom: this.state.settingBottom,  }}>
-                    <Image source={require('./Img/HOME-PAGE-SBOX-RIGHT.png')}
-                         style={{ width: width * 0.4,
-                                   height: width * 0.4 * 1.1462,
-                                   top: height*0.18,
-                                   position: 'absolute',
-                                   right: width * 0.16,
-                         }}
-                     />
-                  </Animated.View>
-
-                  <TouchableWithoutFeedback onPress={this._handleChanmaoPress} >
-                    <Animated.View style={{ flex: 0.55,overflow: 'visible', left: this.state.cmLeft, }}>
-
-                        <Image source={ this._getCMHomePage() }
-
-                            style={[{ width: width * 0.4315,
-                                      height: width * 0.4315 * cmHomeHeightRatio,
-                                      top: 20,
-                                      position: 'absolute',
-                                      left: 0,overflow: 'visible',
-                            },]}
-                        >
-
-                        </Image>
-
-
-                    </Animated.View>
-                  </TouchableWithoutFeedback>
-              </View>
-          </Animated.View>
+          <View style={{flex: 1,
+                        justifyContent: 'center'}}>
+            <Image source={require('./Img/Loading_dots_orange.gif')}
+                   style={{alignSelf: 'center',
+                           width: 60,
+                           height: 20}}/>
+          </View>
 
       );
   }

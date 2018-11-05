@@ -438,7 +438,7 @@ export default class LogoAnimationView extends Component {
 					/>
 				}
 
-          {this._renderGoBackBtn()}
+
 
       </View>
     )
