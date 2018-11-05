@@ -1057,6 +1057,7 @@ class Confirm extends Component {
 								{Label.getCMLabel('SERVICE_FEE')} ({Label.getCMLabel('SERVICE_FEE_REMINDER')})
 							</Text>
 							<TouchableOpacity activeOpacity={0.4}
+																style={{justifyContent: 'center'}}
 																onPress={ () =>
 																	this.popupView.showAlert(this, Label.getCMLabel('ALERT_SERVICE_FEE_REMINDER'))
 																}>

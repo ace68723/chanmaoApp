@@ -125,7 +125,6 @@ export default class orderConfirm extends Component {
                                   <Text style={{color: '#666',
                                                  fontSize: 15,
                                                  fontWeight: '900',
-                                                 lineHeight: 16,
                                                  fontFamily: 'NotoSansCJKsc-Regular'}}
                                         allowFontScaling={false}>
                                         {Label.getCMLabel('CANCEL')}
@@ -144,7 +143,6 @@ export default class orderConfirm extends Component {
                                   <Text style={{color: 'white',
                                                  fontSize: 15,
                                                  fontWeight: '900',
-                                                 lineHeight: 16,
                                                  fontFamily: 'NotoSansCJKsc-Regular'}}
                                         allowFontScaling={false}>
                                         {Label.getCMLabel('CONFIRM')}
