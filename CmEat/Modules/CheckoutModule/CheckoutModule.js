@@ -7,7 +7,8 @@ const StripeBridge = NativeModules.StripeBridge;
 
 import {
   GetUserInfo,
-  cme_getSelectedAddress
+  cme_getSelectedAddress,
+  cme_getRegion
 } from '../../../App/Modules/Database';
 import MenuStore from '../../Stores/MenuStore';
 
@@ -16,6 +17,7 @@ export default  {
   async beforeCheckoutInit(io_data) {
     try{
       const {uid,token,version} = GetUserInfo();
+      const region = cme_getRegion();
       let items   = JSON.parse(JSON.stringify(MenuStore.getCart()));
       items.forEach((item)=>{
         item.amount = item.qty;
@@ -39,6 +41,7 @@ export default  {
         items,
         channel: Platform.OS == 'ios' ? 1 : 2,
         version,
+        region: parseInt(region)
       };
       const reqData = {
         body,

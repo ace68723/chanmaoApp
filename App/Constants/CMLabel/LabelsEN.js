@@ -56,6 +56,7 @@ module.exports={
     DELIVER:'送餐',
     SET_DELIVER_FEE:'定制运费',
     CHECK_OUT:'Checkout',
+    GO_CHECKOUT:'去结账',
     DELIVER_FEE:'Delivery Fee',
     PAY:'Pay',
     REMARK:'Remark',

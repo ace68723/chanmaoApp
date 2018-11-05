@@ -1,6 +1,9 @@
 'use strict';
 const   HomeApi        = require( './HomeApi');
 import orderBy from 'lodash/orderBy';
+import  {  
+  cme_getRegion
+} from '../../../App/Modules/Database';
 const  HomeMoule = {
 
 // ===================================================
@@ -19,7 +22,9 @@ const  HomeMoule = {
 // ===================================================
 
   async getHomeData(token){
-        const HomeData = await HomeApi.getHomeData(token);
+        const region = cme_getRegion();
+        const HomeData = await HomeApi.getHomeData({token,region: parseInt(region)});
+        
         if(HomeData.result === 0){
             HomeData.zone1.forEach((banner) => {
                 const naviparam = banner.naviparam;
@@ -58,9 +63,7 @@ const  HomeMoule = {
           areaList = res.area;
           areaList.map(area=>{
             let newRestaurantList;
-
             area.restaurantList = orderBy(area.restaurantList, ['open', 'rank', 'distance'], ['desc', 'desc', 'asc']);
-            // console.log(newRestaurantList)
           })
         }
         return areaList
@@ -71,7 +74,8 @@ const  HomeMoule = {
     },
     async getRestaurantList(reqData){
         try {
-          const res = await HomeApi.getRestaurantList(reqData);
+          const region = cme_getRegion();
+          const res = await HomeApi.getRestaurantList({...reqData, region: parseInt(region)});
           let restaurantList = [];
           let zones = [];
           let categories  = [];

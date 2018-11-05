@@ -14,7 +14,7 @@ let getOptiopns = {
 }
 
 const HomeApi = {
-    getHomeData(token){
+    getHomeData(reqData){
       const url = AuthConstants.API_HOME;
       let options = {
           method: 'GET',
@@ -24,7 +24,8 @@ const HomeApi = {
               'Content-Type': 'application/json'
           }
       }
-      options.headers.authortoken = token;
+      options.headers.authortoken = reqData.token;
+      options.headers.region = reqData.region;
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw error})
@@ -60,6 +61,7 @@ const HomeApi = {
           }
       }
       options.headers.authortoken = reqData.token;
+      options.headers.region = reqData.region;
       if(reqData.userloc){
           options.headers.userloc = reqData.userloc
       }else{

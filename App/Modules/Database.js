@@ -425,7 +425,7 @@ export function cme_getRegion() {
 }
 export function cme_updateRegion(region) {
   realm.write(() => {
-      realm.create('cm_system',{type:"cme_region",value:region}, true );
+      realm.create('cm_system',{type:"cme_region", value: region.value }, true );
   });
 }
 
