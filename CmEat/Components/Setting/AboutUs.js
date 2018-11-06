@@ -104,7 +104,7 @@ export default class InfoPage extends Component {
 
             <View style={styles.fontContainer}>
                 <Text style={styles.headerFont} allowFontScaling={false} >
-                  这是一个致力于打造多伦多最佳订餐平台，为自己理想奋斗的热血团队。我们愿真诚的接纳您的意见，也邀请志同道合的你加入我们。
+                  {Label.getCMLabel('CHANMAO_INFO')}
                 </Text>
             </View>
                 <View style={styles.centerContent}>
@@ -115,23 +115,25 @@ export default class InfoPage extends Component {
                               <Text style={styles.centerFontWEIXIN}
                                     selectable={true}
                                     allowFontScaling={false}>
-                                    微信客服：chanmao_kefu
+                                    {Label.getCMLabel('CHANMAO_KEFU')}
                               </Text>
-                              <Text style={styles.centerFont} onPress={()=>{
-                                this.contact("marketing@chanmao.ca","email");
-                              }} allowFontScaling={false}>商务合作：marketing@chanmao.ca</Text>
+                              <Text style={styles.centerFont}
+                                    onPress={()=>{this.contact("marketing@chanmao.ca","email");}}
+                                    allowFontScaling={false}>
+                                  {Label.getCMLabel('CHANMAO_BUSINESE')}
+                              </Text>
                           </View>
                 </View>
         </ScrollView>
         <View style={styles.footer}>
             <Text style={styles.footerFont} allowFontScaling={false}>
-              Chanmao Inc. 版权所有
+              {Label.getCMLabel('CHANMAO_COPYRIGHT')}
             </Text>
             <Text style={styles.footerFont} allowFontScaling={false}>
 
             </Text>
             <Text style={styles.footerFont} allowFontScaling={false}>
-              版本号：v{AppConstants.CM_VERSION}
+              {Label.getCMLabel('APP_VERSION')}：v{AppConstants.CM_VERSION}
             </Text>
         </View>
 

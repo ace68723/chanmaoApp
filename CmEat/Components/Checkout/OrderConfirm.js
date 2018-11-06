@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
   contentFont:{
     color:'#ea7b21',
     fontSize:18,
+    lineHeight: 22,
     flex:1,
     fontFamily: 'NotoSansCJKsc-Regular'
   },

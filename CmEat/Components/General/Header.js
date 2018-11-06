@@ -35,7 +35,7 @@ export default (props) =>{
   const leftButton = () => {
     if(props.goBack){
       return (
-        <TouchableOpacity style={{flex:0.2,}}
+        <TouchableOpacity style={{flex:0.3,}}
                           onPress={props.goBack}>
           <View style={styles.backButton}>
             <Icon name="cm-close" size={30} color="#000000" />
@@ -44,7 +44,7 @@ export default (props) =>{
       )
     }else{
       return(
-        <View style={{flex:0.2}}>
+        <View style={{flex:0.3}}>
         </View>
       )
 
@@ -53,10 +53,11 @@ export default (props) =>{
   const rightButton = () => {
     if(props.rightButton && props.rightButtonText){
       return (
-          <TouchableOpacity style={{flex:0.2,flexDirection:"column-reverse",}}
+          <TouchableOpacity style={{flex:0.3,flexDirection:"column-reverse",}}
                             onPress={props.rightButton}>
             <View style={{marginBottom: 12}}>
               <Text style={{fontSize:16,
+                            textAlign: 'center',
                             color:'#363646',
                             fontFamily:'NotoSansCJKsc-Regular'}}
                     allowFontScaling={false}>
@@ -75,7 +76,7 @@ export default (props) =>{
       //
       // }
       return(
-        <TouchableOpacity style={{flex:0.2,}}
+        <TouchableOpacity style={{flex:0.3,}}
                           onPress={props.rightButton}>
           <View style={styles.rightImage}>
           <Image style={{width:18,height: 20,}}
@@ -86,7 +87,7 @@ export default (props) =>{
 
     }else{
       return(
-        <View style={{flex:0.2}}>
+        <View style={{flex:0.3}}>
         </View>
       )
 

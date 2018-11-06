@@ -661,6 +661,7 @@ class Confirm extends Component {
 					<View>
 						<Text style={{color: '#40a2e7',
 													fontSize: 14,
+													lineHeight: 17,
 													marginTop: 15,
 													marginLeft: 20,
 													marginRight: 20,
@@ -923,6 +924,7 @@ class Confirm extends Component {
 										 				 height: 15,
 										 				 alignSelf: 'flex-start'}}/>
  						  <Text style={{fontSize: 14,
+														lineHeight: 17,
 														color: '#ea7b21',
 														fontFamily:'NotoSansCJKsc-Regular',
 														marginHorizontal: 10}}
@@ -1057,7 +1059,7 @@ class Confirm extends Component {
 								{Label.getCMLabel('SERVICE_FEE')} ({Label.getCMLabel('SERVICE_FEE_REMINDER')})
 							</Text>
 							<TouchableOpacity activeOpacity={0.4}
-																style={{justifyContent: 'center'}}
+																style={{alignSelf: 'center'}}
 																onPress={ () =>
 																	this.popupView.showAlert(this, Label.getCMLabel('ALERT_SERVICE_FEE_REMINDER'))
 																}>
