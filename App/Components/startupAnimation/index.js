@@ -19,6 +19,7 @@ if(height == 812){
 const sizeScale = width / 375;
 let isDaytime = true;
 let intervalIndicator;
+let language; 
 export default class StartupAnimation extends Component {
     constructor(props){
       super(props);
@@ -41,8 +42,9 @@ export default class StartupAnimation extends Component {
         opacity: new Animated.Value(0),
 
       }
-      const language = cme_getLanguage();
+      language = cme_getLanguage();
       this._fadeOut = this._fadeOut.bind(this);
+      this.startDayIndicatorAnim = this.startDayIndicatorAnim.bind(this);
 
       const currentTime = new Date();
       if(currentTime.getHours() >= 18 || currentTime.getHours() <= 6)
@@ -102,8 +104,10 @@ export default class StartupAnimation extends Component {
       ]).start();
 
       setTimeout(()=>{this.setState({isAnimationRunning:false})},3300)
-
-      this.intervalIndicator = setInterval(()=>{
+      this.startDayIndicatorAnim();
+    }
+    startDayIndicatorAnim(){
+      intervalIndicator = setInterval(()=>{
         Animated.sequence([
           Animated.timing(
             this.state.dayIndicatorHorizontalMove,
@@ -139,6 +143,7 @@ export default class StartupAnimation extends Component {
             duration: 500
           }
         ).start();
+        this.startDayIndicatorAnim();
     }
     render() {
       return (
@@ -205,8 +210,8 @@ export default class StartupAnimation extends Component {
         outputRange: [ -300*sizeScale, -30*sizeScale, -40*sizeScale, -30*sizeScale, -35*sizeScale , -30*sizeScale]
       })
 
-      let pressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中-按下.png') : require('./image/建筑-英文/启动页-施工中-按下.png');
-      let unpressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中.png') : require('./image/建筑-英文/启动页-施工中.png');
+      let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中-按下.png') : require('./image/建筑-英文/启动页-施工中-按下.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中.png') : require('./image/建筑-英文/启动页-施工中.png');
       return(
         <Animated.View style={{
           backgroundColor:'transparent',
@@ -250,8 +255,8 @@ export default class StartupAnimation extends Component {
         outputRange: [ -300*sizeScale, 155*sizeScale, 145*sizeScale, 155*sizeScale, 150*sizeScale , 155*sizeScale]
       })
 
-      let pressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫订餐-按下.png') : require('./image/建筑-英文/启动页-馋猫订餐-按下.png');
-      let unpressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫订餐.png') : require('./image/建筑-英文/启动页-馋猫订餐.png');
+      let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫订餐-按下.png') : require('./image/建筑-英文/启动页-馋猫订餐-按下.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫订餐.png') : require('./image/建筑-英文/启动页-馋猫订餐.png');
       return(
         <Animated.View style={{
           backgroundColor:'transparent',
@@ -274,7 +279,7 @@ export default class StartupAnimation extends Component {
           onPressOut={()=>this.setState({isTopRightButtonPressed:false})}
           onPress={()=>{
             // this._fadeOut();
-            clearInterval(this.intervalIndicator)
+            clearInterval(intervalIndicator)
             this.props.onPressCMFoodDelivery();
           }}
           disabled={this.state.isAnimationRunning}
@@ -299,8 +304,8 @@ export default class StartupAnimation extends Component {
         outputRange: [(height +100) * sizeScale, 50*sizeScale, 60*sizeScale, 50*sizeScale, 55*sizeScale , 50*sizeScale]
       })
 
-      let pressedIcon = this.language === 'chinese_simple' ?  require('./image/建筑-中文/启动页-馋猫电商-按下.png') : require('./image/建筑-英文/启动页-馋猫电商-按下.png');
-      let unpressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫电商.png') : require('./image/建筑-英文/启动页-馋猫电商.png');
+      let pressedIcon = language === 'chinese_simple' ?  require('./image/建筑-中文/启动页-馋猫电商-按下.png') : require('./image/建筑-英文/启动页-馋猫电商-按下.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫电商.png') : require('./image/建筑-英文/启动页-馋猫电商.png');
       return (
           <Animated.View style={{
             position:'absolute',
@@ -323,7 +328,7 @@ export default class StartupAnimation extends Component {
           onPressIn={()=>this.setState({isBottomLeftButtonPressed:true})}
           onPressOut={()=>this.setState({isBottomLeftButtonPressed:false})}
           onPress={()=>{
-            clearInterval(this.intervalIndicator)
+            clearInterval(intervalIndicator)
             this.props.onPressCMECommerce();
           }}
           disabled={this.state.isAnimationRunning}
@@ -349,8 +354,8 @@ export default class StartupAnimation extends Component {
         inputRange:[0, 80, 90, 95 , 97.5 ,100],
         outputRange: [((height+100)* sizeScale), -40*sizeScale, -30*sizeScale, -40*sizeScale, -35*sizeScale ,-40*sizeScale]
       })
-      let pressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫生活-按下.png') : require('./image/建筑-英文/启动页-馋猫生活-按下.png');
-      let unpressedIcon = this.language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫生活.png') : require('./image/建筑-英文/启动页-馋猫生活.png');
+      let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫生活-按下.png') : require('./image/建筑-英文/启动页-馋猫生活-按下.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫生活.png') : require('./image/建筑-英文/启动页-馋猫生活.png');
       return (
           <Animated.View style={{
             backgroundColor:'transparent',
