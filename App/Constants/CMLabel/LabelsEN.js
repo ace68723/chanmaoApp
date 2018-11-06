@@ -57,8 +57,7 @@ module.exports={
     CHECK_OUT:'Check out',
     DELIVER_FEE:'Delivery Fee',
     PAY:'Payment',
-    ONLINE_PAYMENT_WARNING:
-    'There will be no refund for customer using credit cards that do not belong to themselves. Suspicious actions will be recorded. And if needed, it will be provided to the police for investigation',
+    ONLINE_PAYMENT_WARNING: 'No refunds will be processed for customers that place orders through 3rd party WeChat services. Suspicious activities will be submitted to the police for investigation.',
     REMARK:'Remark',
     ADD_REMARK:'Add Remark(extra sauce, allergic)',
     TIPS:'Tips',
@@ -81,7 +80,7 @@ module.exports={
     CONFIRM_PAY:'Confirm to Pay',
     RECENTLY_USE:'Recently Use',
     MORE_PAYMENT_WAY:'More Payment Methods',
-    LONG_D_ORDER_REMINDER:"*This order has a long distance delivery, please check the restaurant and delivery address.(online payment order will be charged after customer service's confirmation)",
+    LONG_D_ORDER_REMINDER:"*Long Distance Delivery Order. Please check the restaurant and delivery address.(Online payment order will be charged later.)",
     ALERT_ERROR_TITLE:'Something Wrong',
     CONFIRM_DELETE:'Confirm to Delete',
     PLZ_ENTER_COUPON:'Enter Promotion Coupon',

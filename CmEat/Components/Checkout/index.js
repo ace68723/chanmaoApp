@@ -661,6 +661,7 @@ class Confirm extends Component {
 					<View>
 						<Text style={{color: '#40a2e7',
 													fontSize: 14,
+													lineHeight: 17,
 													marginTop: 15,
 													marginLeft: 20,
 													marginRight: 20,
@@ -923,6 +924,7 @@ class Confirm extends Component {
 										 				 height: 15,
 										 				 alignSelf: 'flex-start'}}/>
  						  <Text style={{fontSize: 14,
+														lineHeight: 17,
 														color: '#ea7b21',
 														fontFamily:'NotoSansCJKsc-Regular',
 														marginHorizontal: 10}}
