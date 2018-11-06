@@ -14,7 +14,7 @@ module.exports={
     ADD_ADDRESS:'添加地址',
     SAVE_ADDRESS:'保存地址',
     CUSTOMER_SERVICE:'联系客服',
-    LANGUAGE_SETTING: '选择语言',
+    LANGUAGE_SETTING: '选择语言和地区',
     SWEETBOX: '甜满箱 全场免运费 满$25起送',
     LOG_OUT: '退出登录',
 

@@ -91,16 +91,16 @@ export default class LanguageSettings extends Component {
   }
 
   render() {
-    let title = "选择语言";
+    let title = "选择语言和地区";
     switch(languages[this.state.selected].id) {
       case 0:
-        title = "选择语言";
+        title = "选择语言和地区";
         break;
       case 1:
-        title = "Languages";
+        title = "Languages and Regions";
         break;
       case 2:
-        title = "les langues";
+        title = "Langues et Régions";
         break;
     }
     return (<View style={styles.container}>

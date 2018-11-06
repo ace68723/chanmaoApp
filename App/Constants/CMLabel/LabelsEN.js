@@ -15,7 +15,7 @@ module.exports={
     ADD_ADDRESS:'Add Address',
     SAVE_ADDRESS:'Save Address',
     CUSTOMER_SERVICE:'Contact Us',
-    LANGUAGE_SETTING:'Language',
+    LANGUAGE_SETTING:'Language and Region',
     SWEETBOX: 'SweetfulBox',
     LOG_OUT: 'Log Out',
 

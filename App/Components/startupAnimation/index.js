@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   Animated
 } from 'react-native';
-import { cme_getLanguage } from '../../Modules/Database';
+import { cme_getLanguage, cme_getRegion } from '../../Modules/Database';
 const {width,height} = Dimensions.get('window');
 if(height == 812){
   iconMargin = 50
@@ -20,6 +20,7 @@ const sizeScale = width / 375;
 let isDaytime = true;
 let intervalIndicator;
 let language; 
+let region;
 export default class StartupAnimation extends Component {
     constructor(props){
       super(props);
@@ -43,6 +44,7 @@ export default class StartupAnimation extends Component {
 
       }
       language = cme_getLanguage();
+      region = cme_getRegion();
       this._fadeOut = this._fadeOut.bind(this);
       this.startDayIndicatorAnim = this.startDayIndicatorAnim.bind(this);
 
@@ -57,7 +59,7 @@ export default class StartupAnimation extends Component {
           this.state.opacity,
           {
             toValue:1,
-            duration:1800
+            duration:2000
           }
         ),
         Animated.parallel([
@@ -146,26 +148,49 @@ export default class StartupAnimation extends Component {
         this.startDayIndicatorAnim();
     }
     render() {
-      return (
-        <Animated.View style={[styles.container,{opacity: this.state.opacity}]}>
-          <Image style={{
-              position:'absolute',
-              width:width,
-              height:height,
-            }}
-            source={isDaytime ? require('./image/背景/启动页-多伦多-白天背景.png') : require('./image/背景/启动页-多伦多-夜晚背景.png')} />
-          {this.renderDayIndicator()}
-          {this.renderTopLeftIcon()}
-          {this.renderTopRightIcon()}
-          {this.renderBottomLeftIcon()}
-          {this.renderBottomRightIcon()}
+      const region = cme_getRegion();
+      if(region === '1'){
+        return (
+          <Animated.View style={[styles.container,{opacity: this.state.opacity}]}>
+            <Image style={{
+                position:'absolute',
+                width:width,
+                height:height,
+              }}
+              source={isDaytime ? require('./image/背景/启动页-多伦多-白天背景.png') : require('./image/背景/启动页-多伦多-夜晚背景.png')} />
+            {this.renderDayIndicator()}
+            {this.renderTopLeftIcon()}
+            {this.renderTopRightIcon()}
+            {this.renderBottomLeftIcon()}
+            {this.renderBottomRightIcon()}
+  
+            {this.renderTopLeftButton()}
+            {this.renderTopRightButton()}
+            {this.renderBottomLeftButton()}
+            {this.renderBottomRightButton()}
+          </Animated.View>
+        );
+      }else{
+        return (
+          <Animated.View style={[styles.container,{opacity: this.state.opacity}]}>
+            <Image style={{
+                position:'absolute',
+                width:width,
+                height:height,
+              }}
+              source={isDaytime ? require('./image/背景/启动页-其他分区-白天背景.png') : require('./image/背景/启动页-其他分区-夜晚背景.png')} />
+            {this.renderDayIndicator()}
 
-          {this.renderTopLeftButton()}
-          {this.renderTopRightButton()}
-          {this.renderBottomLeftButton()}
-          {this.renderBottomRightButton()}
-        </Animated.View>
-      );
+            {this.renderTopLeftIcon()}
+            {this.renderTopRightIcon()}
+       
+            {this.renderTopLeftButton()}
+            {this.renderTopRightButton()}
+           
+          </Animated.View>
+        );
+      }
+     
     }
     renderDayIndicator(){
       const spin = this.state.dayIndicatorHorizontalMove.interpolate(
@@ -205,10 +230,23 @@ export default class StartupAnimation extends Component {
       )
     }
     renderTopLeftIcon(){
-      let jump = this.state.topRightIconTop.interpolate({
-        inputRange:[0, 80, 90, 95 , 97.5 ,100],
-        outputRange: [ -300*sizeScale, -30*sizeScale, -40*sizeScale, -30*sizeScale, -35*sizeScale , -30*sizeScale]
-      })
+      let jump,picSize,left;
+      if(region === '1'){
+        left = -35* sizeScale;
+        picSize = 310 * sizeScale;
+        jump = this.state.topRightIconTop.interpolate({
+          inputRange:[0, 80, 90, 95 , 97.5 ,100],
+          outputRange: [ -300*sizeScale, -30*sizeScale, -40*sizeScale, -30*sizeScale, -35*sizeScale , -30*sizeScale]
+        })
+      }else{
+        left = -50* sizeScale
+        picSize = 310 * sizeScale
+        jump = this.state.topRightIconTop.interpolate({
+          inputRange:[0, 80, 90, 95 , 97.5 ,100],
+          outputRange: [ -300*sizeScale, 20*sizeScale, 10 *sizeScale, 20*sizeScale, 15*sizeScale , 20*sizeScale]
+        })
+      }
+     
 
       let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中-按下.png') : require('./image/建筑-英文/启动页-施工中-按下.png');
       let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中.png') : require('./image/建筑-英文/启动页-施工中.png');
@@ -218,17 +256,17 @@ export default class StartupAnimation extends Component {
           position:'absolute',
           marginTop:iconMargin,
           top: jump,
-          left:-35* sizeScale}}>
+          left: left}}>
           <Image style={{
-            height:310 * sizeScale,
-            width:310 * sizeScale,
+            height:picSize,
+            width:picSize,
             }}
-            source={this.state.isTopLeftButtonPressed ? pressedIcon : unpressedIcon} />
+            source={pressedIcon} />
         </Animated.View>
       );
     }
     renderTopLeftButton(){
-
+      let top = region === '1' ? -50*sizeScale : -15*sizeScale;
       return (
           <TouchableWithoutFeedback
             onPressIn={()=>this.setState({isTopLeftButtonPressed:true})}
@@ -242,7 +280,7 @@ export default class StartupAnimation extends Component {
               height:300 * sizeScale,
               width:250 * sizeScale,
               marginTop:iconMargin,
-              top:-50* sizeScale,
+              top: top,
               left:-20* sizeScale}}>
             </View>
           </TouchableWithoutFeedback>
@@ -250,10 +288,25 @@ export default class StartupAnimation extends Component {
     }
 
     renderTopRightIcon(){
-      let jump = this.state.topRightIconTop.interpolate({
-        inputRange:[0, 80, 90, 95 , 97.5 ,100],
-        outputRange: [ -300*sizeScale, 155*sizeScale, 145*sizeScale, 155*sizeScale, 150*sizeScale , 155*sizeScale]
-      })
+     
+      let jump;
+      let picSize;
+      let right;
+      if(region === '1'){
+        picSize = 310 * sizeScale;
+        right = -40* sizeScale;
+        jump = this.state.topRightIconTop.interpolate({
+          inputRange:[0, 80, 90, 95 , 97.5 ,100],
+          outputRange: [ -300*sizeScale, 155*sizeScale, 145*sizeScale, 155*sizeScale, 150*sizeScale , 155*sizeScale]
+        })
+      }else{
+        picSize = 330 * sizeScale;
+        right = -50* sizeScale
+        jump = this.state.topRightIconTop.interpolate({
+          inputRange:[0, 80, 90, 95 , 97.5 ,100],
+          outputRange: [ -300*sizeScale, 275*sizeScale, 265*sizeScale, 275*sizeScale, 270*sizeScale , 275*sizeScale]
+        })
+      }
 
       let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫订餐-按下.png') : require('./image/建筑-英文/启动页-馋猫订餐-按下.png');
       let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫订餐.png') : require('./image/建筑-英文/启动页-馋猫订餐.png');
@@ -263,16 +316,24 @@ export default class StartupAnimation extends Component {
           position:'absolute',
           top: jump,
           marginTop:iconMargin,
-          right:-40* sizeScale}}>
+          right: right }}>
             <Image style={{
-              height:310 * sizeScale,
-              width:310 * sizeScale,
+              height: picSize,
+              width: picSize,
               }}
               source={this.state.isTopRightButtonPressed ? pressedIcon : unpressedIcon} />
         </Animated.View>
       );
     }
     renderTopRightButton(){
+      let buttonWidth,top;
+      if(region === '1'){
+        buttonWidth = 210 * sizeScale;
+        top = 120 * sizeScale;
+      }else{
+        buttonWidth = 260 * sizeScale;
+        top = 250 * sizeScale
+      }
       return (
         <TouchableWithoutFeedback
           onPressIn={()=>this.setState({isTopRightButtonPressed:true})}
@@ -289,8 +350,8 @@ export default class StartupAnimation extends Component {
               backgroundColor:'transparent',
               position:'absolute',
               height:310 * sizeScale,
-              width:210 * sizeScale,
-              top:120 * sizeScale,
+              width:buttonWidth,
+              top:top,
               marginTop:iconMargin,
               right:-5 * sizeScale}}>
             </View>

@@ -62,7 +62,7 @@ export default class SelectRegionAndLanguage extends Component {
       super(props);
       this.state = {
         chosenLanguage: cme_getLanguage().length > 0 ? cme_getLanguage() : 'chinese_simple',
-        chosenRegion: cme_getRegion().length > 0 ? cme_getRegion() : regions[0],
+        chosenRegion: cme_getRegion().length > 0 ? cme_getRegion() : regions[0].value,
         regionIndicatorLeft: cme_getRegion() === '2' ? new Animated.Value(width/2) : new Animated.Value(0)
       }
      
@@ -81,7 +81,7 @@ export default class SelectRegionAndLanguage extends Component {
             Animated.timing(
                 this.state.regionIndicatorLeft,
                 {
-                    toValue: this.state.chosenRegion.value === '1' ? 0 : width/2,
+                    toValue: this.state.chosenRegion === '1' ? 0 : width/2,
                     duration: 200
                 }
             ).start();
@@ -129,10 +129,11 @@ export default class SelectRegionAndLanguage extends Component {
             return(
                 <TouchableOpacity
                     key={index}
-                    onPress={()=>this.chooseRegion(region)}
+                    onPress={()=>this.chooseRegion(region.value)}
                     style={{flex:0.5,alignItems:'center',marginTop:30}}>
                     <Text style={{fontSize:24,
-                                fontFamily: 'NotoSansCJKsc-Regular'}}
+                                fontFamily: this.state.chosenRegion === region.value ? 'NotoSansCJKsc-Bold' : 'NotoSansCJKsc-Regular',
+                                color: this.state.chosenRegion === region.value ? '#ea7b21' : 'grey'}}
                         allowFontScaling={false}>{region.title}</Text>
                 </TouchableOpacity>
             )
@@ -146,11 +147,15 @@ export default class SelectRegionAndLanguage extends Component {
                     onPress={()=>this.setState({chosenLanguage: lang.value})}
                     style={styles.languageButtonStyle}>
                     <View style={styles.languageOption}>
-                        <View style={[styles.selectedLanguage,{backgroundColor: this.state.chosenLanguage == lang.value ? 'orange': 'transparent'}]} >
+                        <View style={[styles.selectedLanguage,{backgroundColor: this.state.chosenLanguage == lang.value ? '#ea7b21': 'transparent'}]} >
                         </View>
                     </View>
                     <View style={{width:120, alignItems:'center'}}>
-                    <Text style={{fontFamily:'NotoSansCJKsc-Regular',fontSize:20}}
+                    <Text style={{
+                            fontFamily:this.state.chosenLanguage == lang.value ? 'NotoSansCJKsc-Bold' : 'NotoSansCJKsc-Regular',
+                            fontSize:20,
+                            color:'grey'
+                        }}
                             allowFontScaling={false}>
                         {lang.title}
                     </Text>
@@ -165,20 +170,20 @@ export default class SelectRegionAndLanguage extends Component {
                 <View style={{flex:0.2, flexDirection:'row'}}>
                    {this.renderRegionButton()}
                 </View>
-                <View style={{flex:0.6, justifyContent:'center', alignItems:'center'}}>
+                <View style={{flex:0.7, justifyContent:'center', alignItems:'center'}}>
                     <Animated.View style={{
                         position:'absolute',
                         height:50,
                         width:width/2,
                         borderTopWidth:4,
-                        borderTopColor:'orange',
+                        borderTopColor:'#ea7b21',
                         top:5,
                         left: this.state.regionIndicatorLeft
                     }}>
                     </Animated.View>
                     {this.renderLanguageButton()}
                 </View>
-                <View style={{flex:0.2,alignItems:'center'}}>
+                <View style={{flex:0.1,alignItems:'center'}}>
                     <TouchableOpacity onPress={this._confirm}>
                         <Image style ={{width:220, height:220*0.198}} source={require('./image/语言选择-素材-按钮.png')} />
                     </TouchableOpacity>
@@ -188,16 +193,16 @@ export default class SelectRegionAndLanguage extends Component {
     }
 
     render() {
-      let title = "选择语言";
+      let title = "选择语言和地区";
       switch(this.state.chosenLanguage) {
         case 'chinese_simple':
-          title = "选择语言";
+          title = "选择语言和地区";
           break;
         case 'english':
-          title = "Languages";
+          title = "Languages and Regions";
           break;
         case 'french':
-          title = "les langues";
+          title = "Langues et Régions";
           break;
       };
       return (
@@ -227,7 +232,7 @@ export default class SelectRegionAndLanguage extends Component {
     },
     languageOption: {
         borderWidth:2,
-        borderColor:'orange',
+        borderColor:'#ea7b21',
         borderRadius: 10,
         width:20,
         height:20,
