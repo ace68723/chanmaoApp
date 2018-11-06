@@ -62,7 +62,7 @@ export default (props) =>{
     return (
 
         <View style={styles.container}>
-            <Text style={{width: 70,
+            <Text style={{width: 75,
                           fontSize: 15,
                           color: '#666666',
                           fontFamily: 'NotoSansCJKsc-Black'}}

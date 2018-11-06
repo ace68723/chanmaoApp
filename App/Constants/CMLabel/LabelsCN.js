@@ -172,6 +172,11 @@ module.exports={
     PAYMENT_TYPE:"支付方式",
     //About us
     ABOUT_US:'关于我们',
+    CHANMAO_INFO:'这是一个致力于打造多伦多最佳订餐平台，为自己理想奋斗的热血团队。我们愿真诚的接纳您的意见，也邀请志同道合的你加入我们。',
+    CHANMAO_KEFU:'微信客服：chanmao_kefu',
+    CHANMAO_BUSINESE:'商务合作：marketing@chanmao.ca',
+    CHANMAO_COPYRIGHT:'Chanmao Inc. 版权所有',
+    APP_VERSION:'版本号',
 
     //ALERT_TITLE
     ALERT_TITLE:'馋猫订餐',
