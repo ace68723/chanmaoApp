@@ -9,7 +9,7 @@ export default  {
       partner: "2088031360615403",
       seller_id: "api@rotating.ca",
       out_trade_no: data.oid,
-      subject: "馋猫订餐",
+      subject: "小明配送",
       body: "订单号：#" + data.oid,
       total_fee: data.total,
       currency: "CAD",
@@ -29,7 +29,7 @@ export default  {
       let sign_str = signed_data.sign_str + '&sign="' + signed_data.sign + '"&sign_type="RSA"'
       // use native method to redirect alipay
       let response = await Alipay.pay(sign_str)
-    
+
     }
     else{
       alert("该订单已成功支付, 请刷新页面");

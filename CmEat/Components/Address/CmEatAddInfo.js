@@ -115,7 +115,7 @@ export default class CmEatAddInfo extends Component {
       const  phoneNumber = this.state.phoneNumber.toString().trim().replace(/[()-]/g , '');
       if(phoneNumber.length != 10){
 				this.popupView.setMessagePopup({
-					title: "馋猫订餐提醒您",
+					title: "小明配送提醒您",
 					subtitle: "请输入10位电话号码",
 					onDismiss: () => {
 						this.setState({showPopup: false})
@@ -124,7 +124,7 @@ export default class CmEatAddInfo extends Component {
 				this.setState({showPopup: true});
 
         // Alert.alert(
-        //   '馋猫订餐提请您',
+        //   '小明配送提请您',
         //   '请输入10位电话号码'
         // )
       }else{

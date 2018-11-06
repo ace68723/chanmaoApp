@@ -86,7 +86,7 @@ export default class CmEatMenuSearch extends Component {
         });
 			}else{
 				this.popupView.setMessagePopup({
-				  title: "馋猫订餐提醒您",
+				  title: "小明配送提醒您",
 				  subtitle: '不足' + this.state.restaurant.start_amount + '只能自取哦～',
 					confirmText: '好哒',
 					cancelText: Label.getCMLabel('CANCEL'),
@@ -107,7 +107,7 @@ export default class CmEatMenuSearch extends Component {
 				this.setState({showPopup: true});
 
 				// Alert.alert(
-				// 	'馋猫订餐提醒您',
+				// 	'小明配送提醒您',
 				// 	'不足'+this.state.restaurant.start_amount+'只能自取哦～',
 				// 	[
 				// 		{text: CMLabel.getCNLabel('CANCEL'), onPress: () => {}, style: 'cancel'},

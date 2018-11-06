@@ -6,7 +6,7 @@ module.exports={
 
   MY_ORDER:'我的订单',
   CUSTOMER_SERVICE:'联系客服',
-  CM_EAT:'馋猫订餐',
+  CM_EAT:'小明配送',
   LOG_OUT:'登出',
   //SboxAddAddress
   ADDRESS_SEARCH:'搜索地址',

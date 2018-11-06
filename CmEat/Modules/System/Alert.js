@@ -18,7 +18,7 @@ const Alert = {
 				_message = message;
 			}
       AlertIOS.alert(
-        '馋猫订餐提醒您',
+        '小明配送提醒您',
         _message,
         [
           {text: 'OK', onPress: () =>{ showAlert = !showAlert}},

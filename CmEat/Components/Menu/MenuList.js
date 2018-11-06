@@ -126,7 +126,7 @@ class Menu extends Component {
           })
         }else{
           Alert.alert(
-            '馋猫订餐提醒您',
+            '小明配送提醒您',
             '不足'+this.state.startAmount+'只能自取哦～',
             [
               {text: Label.getCMLabel('CANCEL'), onPress: () => {}, style: 'cancel'},

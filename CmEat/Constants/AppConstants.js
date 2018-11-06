@@ -61,7 +61,7 @@ module.exports ={
     RESET_EDITTING_ADDRESS:'RESET_EDITTING_ADDRESS',
 
     //alert
-    ALERT_TITLE:'馋猫订餐',
+    ALERT_TITLE:'小明配送',
     STARTED:'正在执行中',
 
     // order

@@ -50,7 +50,7 @@ module.exports ={
     UPDATA_ADDRESSLIST: 'UPDATA_ADDRESSLIST',
 
     //alert
-    ALERT_TITLE:'馋猫订餐',
+    ALERT_TITLE:'小明配送',
     STARTED:'正在执行中',
 
     // order

@@ -110,7 +110,7 @@ export default class pastOrderEN extends Component {
      Clipboard.setString('chanmao_kefu');
      Alert.alert(
             '已复制',
-            '馋猫公众号: chanmao_kefu',
+            '小明公众号: chanmao_kefu',
             [
               {text: 'OK', onPress: () => {}},
             ]

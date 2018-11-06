@@ -5,7 +5,7 @@ module.exports={
   ALERT_MESSAGE:'我们的配送范围已扩大至图中红框区域，包括所有Condo或House均可送达~具体地址可在填写订单时确认。',
   MY_ORDER:'我的订单',
   CUSTOMER_SERVICE:'联系客服',
-  CM_EAT:'馋猫订餐',
+  CM_EAT:'小明配送',
   LOG_OUT:'登出',
   //SboxAddAddress
   ADDRESS_SEARCH:'搜索地址',

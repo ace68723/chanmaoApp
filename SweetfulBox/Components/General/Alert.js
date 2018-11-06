@@ -5,7 +5,7 @@ import {
 const AlertModule = {
   errorAlert(message){
     Alert.alert(
-      '馋猫订餐提醒您',
+      '小明配送提醒您',
       message.toString(),
       [
         {text: 'OK', onPress: () => {}},

@@ -12,7 +12,7 @@ const cm_system_scheam = {
   }
 }
 
-//馋猫订餐
+//小明配送
 const cme_address_schema = {
   name: 'cme_address',
   primaryKey: 'type',

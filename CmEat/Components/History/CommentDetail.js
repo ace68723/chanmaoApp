@@ -107,7 +107,7 @@ export default class pastOrderEN extends Component {
 
         this.popupView.setMessagePopup({
           title: "已成功评价",
-          subtitle: "觉得馋猫棒棒哒?去评分吧!",
+          subtitle: "觉得小明棒棒哒?去评分吧!",
           confirmText: '前往',
           cancelText: '取消',
           onConfirm: ()=>{

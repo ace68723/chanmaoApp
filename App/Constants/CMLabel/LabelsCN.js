@@ -144,7 +144,7 @@ module.exports={
     LIKE:'赞',
     DISLIKE:'踩',
     COMMENT:"评价",
-    CM_DELIVERY: '馋猫专送',
+    CM_DELIVERY: '小明配送',
     COMPLETE_TIME_PREFIX:'当日',
     COMPLETE_TIME_SUFFIX:'左右送达',
     ON_TIME:'准时',
@@ -174,7 +174,7 @@ module.exports={
     ABOUT_US:'关于我们',
 
     //ALERT_TITLE
-    ALERT_TITLE:'馋猫订餐',
+    ALERT_TITLE:'小明配送',
     ALERT_CONTENT:'您输入的支付信息输入有误',
     //HomeTab
     ORDER_BELOW:'在下面点餐呦',

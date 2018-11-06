@@ -76,7 +76,7 @@ module.exports={
     LIKE:'Like',
     DISLIKE:'DisLike',
     COMMENT:"Comment",
-    CM_DELIVERY: '馋猫专送',
+    CM_DELIVERY: '小明配送',
     COMPLETE_TIME_PREFIX:'Today',
     COMPLETE_TIME_SUFFIX:'delivered',
     ON_TIME:'On Time',
