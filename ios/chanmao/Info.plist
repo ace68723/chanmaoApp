@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>馋猫生活</string>
+	<string>小明配送</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -44,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>1</string>
 	<key>CodePushDeploymentKey</key>
 	<string>kLv4Z3Oj1Qc9Nb6o5OCN6gWg89XU842cf145-347a-42da-b8ba-6819059e5be5</string>
 	<key>LSApplicationQueriesSchemes</key>

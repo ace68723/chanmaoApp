@@ -1525,7 +1525,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.orderapp;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.xiaoming;
 				PRODUCT_NAME = chanmao;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1559,7 +1559,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.orderapp;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.chanmao.xiaoming;
 				PRODUCT_NAME = chanmao;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
