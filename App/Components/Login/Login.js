@@ -41,7 +41,9 @@ const RE_PASSWORD_INPUTREF = 'Re_Password_Input';
 const EMAIL_INPUTREF = 'Email_Input';
 const SUBMIT_BUTTON = 'Submit_Button';
 
-
+var WeChat = require('react-native-wechat');
+const scope = 'snsapi_userinfo';
+const state = 'wechat_sdk_demos';
 
 // const appid = 'wx20fd1aeb9b6fcf82';
 const appid = 'wx447c419e84aa1496';
@@ -79,7 +81,7 @@ export default class LogoAnimationView extends Component {
 		this._handleEmail = this._handleEmail.bind(this);
 	  this._handlePassword 	= this._handlePassword.bind(this);
 		this._handleRePassword = this._handleRePassword.bind(this);
-
+		this._handleWechatLogin = this._handleWechatLogin.bind(this);
 		this._sendVerification = this._sendVerification.bind(this);
     this._handleBackToHome = this._handleBackToHome.bind(this);
     this._openAdView = this._openAdView.bind(this);
@@ -91,7 +93,11 @@ export default class LogoAnimationView extends Component {
 		this.popupView = PopupView.getInstance();
   }
 	async componentDidMount() {
-
+		const registerResult = await WeChat.registerApp(appid);
+		const isWXAppInstalled = await WeChat.isWXAppInstalled()
+		this.setState({
+			isWXAppInstalled:isWXAppInstalled
+		})
 	}
 	_handleUsername(username){
   	this.setState({
@@ -313,6 +319,62 @@ export default class LogoAnimationView extends Component {
       })
     }
 	}
+	async _handleWechatLogin(event){
+		try {
+		 const version = await WeChat.getApiVersion();
+
+		 const result = await WeChat.sendAuthRequest(scope, state);
+		 const resCode = result.code;
+		 // const deviceToken = this.state.deviceToken;
+		 // const data = {resCode,deviceToken};
+		 const data = {resCode};
+		 const res = await AuthAction.doWechatAuth(data);
+		 if (res.ev_openid) {
+			 this.props.navigator.showModal({
+				 screen: 'CmBindPhone',
+				 animationType: 'slide-up',
+				 navigatorStyle: {navBarHidden: true},
+				 passProps: {handleBackToHome: this._handleBackToHome,
+										 handleBindSuccessful: this._handleBindSuccessful,
+										 openid: res.ev_openid,
+										 unionid: res.ev_unionid,
+										 refresh_token: res.ev_refresh_token,
+				 },
+			 })
+		 } else if (res.ev_error === 0) {
+			 this.setState({
+	       showLoading:false,
+	       loginSuccess:true,
+	     })
+	     this.props.navigator.dismissModal({
+	        animationType: 'slide-down'
+	     })
+	     this.props.handleLoginSuccessful();
+		 }
+
+     // this.setState({
+     //   showLoading:false,
+     //   loginSuccess:true,
+     // })
+     // this.props.navigator.dismissModal({
+     //    animationType: 'slide-down'
+     // })
+     // this.props.handleLoginSuccessful();
+	 } catch (e) {
+		 if(e == '-2'){
+			 console.log(e)
+		 }else{
+			 console.log(e);
+		 }
+     console.log(e)
+     this.setState({
+       showLoading:false,
+       loginSuccess:false,
+     });
+     this._loginStarted = false;
+
+	 }
+  }
 
   _handleBackToHome() {
     this.props.navigator.dismissModal({
@@ -389,7 +451,7 @@ export default class LogoAnimationView extends Component {
 													ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
 													if_handleUsername = {this._handleUsername}
 													if_handlePassword = {this._handlePassword}
-
+													if_handleWechatLogin = {this._handleWechatLogin}
 													if_openAdView = {this._openAdView}
 													viewType = {this.state.viewType}
 													toggleViewType = {this._toggleViewType}
@@ -423,7 +485,7 @@ export default class LogoAnimationView extends Component {
 													if_handleEmail = {this._handleEmail}
 													if_handlePassword = {this._handlePassword}
 													if_handleRePassword = {this._handleRePassword}
-
+													if_handleWechatLogin = {this._handleWechatLogin}
 													if_getVerification = {this._getVerification}
 													if_openAdView = {this._openAdView}
 													viewType = {this.state.viewType}

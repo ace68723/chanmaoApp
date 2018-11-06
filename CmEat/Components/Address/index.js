@@ -54,7 +54,7 @@ export default class CmEatAddress extends Component {
       this._deleteAddress = this._deleteAddress.bind(this);
 			this._editAddress = this._editAddress.bind(this);
       this._selectAddress = this._selectAddress.bind(this);
-
+			this._getCurrentGeolocation = this._getCurrentGeolocation.bind(this);
 			this._handleConfirm = this._handleConfirm.bind(this);
 			this._updateAddressStatus = this._updateAddressStatus.bind(this);
       this._goToAddAddressInfo = this._goToAddAddressInfo.bind(this);
@@ -63,7 +63,37 @@ export default class CmEatAddress extends Component {
   }
 	componentDidMount() {
 		AddressStore.addChangeListener(this._onChange);
-
+		navigator.geolocation.getCurrentPosition (
+      (position) => {
+				const url = "https://maps.googleapis.com/maps/api/geocode/" +
+		    "json?latlng="+ position.coords.latitude + ',' + position.coords.longitude +
+		    "&types=address" +
+		    "&key=AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8"
+		    let options = {
+		        method: 'GET',
+		        mode:'cors',
+		        headers: {
+		            'Accept': 'application/json',
+		            'Content-Type': 'application/json'
+		        }
+		    }
+		    fetch(url,options)
+		      .then((res) => res.json())
+		      .then((res)=>{
+						let _addr = res.results[0].formatted_address.split(',');
+						AddressAction.updateCurrentLocation(_addr[0] + ', ' + _addr[1]);
+		      })
+		      .catch((error) => {throw error});
+			},
+      (error) => {
+				console.log(error)
+			},
+      {
+        enableHighAccuracy: true,
+        timeout:            20000,
+        maximumAge:         10000
+      }
+    )
 	}
   componentWillUnmount() {
       AddressStore.removeChangeListener(this._onChange);
@@ -159,6 +189,39 @@ export default class CmEatAddress extends Component {
 	_selectAddress(address){
     Keyboard.dismiss();
 		AddressAction.updateSelectedUaid(address.uaid);
+	}
+	_getCurrentGeolocation(){
+		navigator.geolocation.getCurrentPosition (
+      (position) => {
+				const url = "https://maps.googleapis.com/maps/api/geocode/" +
+		    "json?latlng="+ position.coords.latitude + ',' + position.coords.longitude +
+		    "&types=address" +
+		    "&key=AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8"
+		    let options = {
+		        method: 'GET',
+		        mode:'cors',
+		        headers: {
+		            'Accept': 'application/json',
+		            'Content-Type': 'application/json'
+		        }
+		    }
+		    fetch(url,options)
+		      .then((res) => res.json())
+		      .then((res)=>{
+						let _addr = res.results[0].formatted_address.split(',');
+						this._handleSearchChange(_addr[0] + ', ' + _addr[1]);
+		      })
+		      .catch((error) => {throw error});
+			},
+      (error)    => {
+				console.log(error)
+			},
+      {
+        enableHighAccuracy: true,
+        timeout:            20000,
+        maximumAge:         10000
+      }
+    )
 	}
 
 	_clearAddressInput() {
@@ -366,6 +429,12 @@ export default class CmEatAddress extends Component {
                       borderBottomColor:"#bdc8d9",
                       borderBottomWidth:StyleSheet.hairlineWidth,
                     }}>
+				<TouchableOpacity
+						activeOpacity={0.4}
+						onPress={this._getCurrentGeolocation.bind(null)}>
+					<Image style={{width:22.68,height:30}}
+	              source={require('./Image/icon_address.png')}/>
+				</TouchableOpacity>
         <TextInput
             style={[styles.input]}
 						value={this.state.searchAddress}
@@ -422,11 +491,52 @@ export default class CmEatAddress extends Component {
     let addressList = this.state.addressList.map((address,index) => {
       return this._renderAddress(address)
     })
+		const currentLocationButton = () => {
+			return(
+				<TouchableOpacity
+							style={{backgroundColor:"#ffffff",
+											marginTop:10,
+											height:90,
+											padding:15,
+											paddingLeft:30,
+											paddingRight:30,
+											shadowColor: "#000000",
+											shadowOpacity: 0.1,
+											shadowOffset: {
+												 height: 0.5,
+												 width: 0.5,
+											},
+										}}
+							activeOpacity={0.4}
+							onPress={this._getCurrentGeolocation.bind(null)}>
+						<View style={{borderColor:"#e2e2e4",
+													borderBottomWidth: StyleSheet.hairlineWidth,
+													flexDirection:"row",
+													paddingBottom:5,
+												}}>
+								<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
+										<Image style={{width:22.5,height:30, marginLeft: 3.75, marginRight: 3.75}}
+													source={require('./Image/icon_address.png')}/>
+												<Text style={{fontSize:18,marginLeft:15,fontFamily:'NotoSansCJKsc-Black',}}
+													allowFontScaling={false}>
+											Current Location
+										</Text>
+								</View>
+								<View style={{flex:0.1,flexDirection:"row",alignItems:"flex-end",justifyContent:"flex-end"}}>
+								</View>
+						</View>
+						<Text style={{fontFamily:'NotoSansCJKsc-Regular',marginLeft: 3.75,}}
+									allowFontScaling={false}>
+							{this.state.currentLocation}
+						</Text>
+				</TouchableOpacity>
+			)
+		}
     return(
       <ScrollView style={{padding:10,}}
                   keyboardShouldPersistTaps={'always'}
 									keyboardDismissMode={'on-drag'}>
-
+				{currentLocationButton()}
         {addressList}
         {this._renderAndroidConfirmBtn()}
       </ScrollView>
