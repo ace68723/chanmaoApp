@@ -53,6 +53,7 @@ export default class Home extends Component {
       this._handleAppStateChange = this._handleAppStateChange.bind(this);
       this._handleChanmaoPress = this._handleChanmaoPress.bind(this);
       this._handleSboxPress = this._handleSboxPress.bind(this);
+      this._handleCmLifePress = this._handleCmLifePress.bind(this);
       this._handleBackToHome = this._handleBackToHome.bind(this);
       this._handleLoginSuccessful = this._handleLoginSuccessful.bind(this);
 
@@ -233,6 +234,41 @@ export default class Home extends Component {
         // })
       }, 2500);
     }
+  _handleCmLifePress(){
+    if(this._openStarted) return;
+    if(!this.state.entryFlag) return;
+    this._openStarted = true;
+
+    setTimeout(() => {
+      this._openStarted = false
+    }, 5000);
+
+    // setTimeout(() => {
+    //   // InteractionManager.runAfterInteractions(() => {
+    //     this.props.navigator.showLightBox({
+    //       screen: 'SboxLoading',
+    //       animationType: 'none',
+    //       navigatorStyle: {navBarHidden: true},
+    //     })
+    //   // })
+    // }, 500);
+
+    setTimeout(() => {
+        this.props.navigator.resetTo({
+          screen: 'CmLifeHome',
+          passProps: {handleBackToHome: this._handleBackToHome},
+          animated: false,
+          navigatorStyle: {
+            navBarHidden: true,
+            disabledBackGesture: true,
+          },
+          style: {
+           backgroundBlur: "none",
+           backgroundColor: "rgba(0,0,0,0)"
+         }
+        })
+    }, 0);
+  }
   _handleBackToHome(tag) {
     if(tag === 'fromChanmao') {
         this.props.navigator.pop({
@@ -307,6 +343,7 @@ export default class Home extends Component {
           ref={(startup)=>this.startUpAnimation = startup}
           onPressCMFoodDelivery={this._handleChanmaoPress}
           onPressCMECommerce={this._handleSboxPress}
+          onPressCMLife={this._handleCmLifePress}
         />
       )
     } else {

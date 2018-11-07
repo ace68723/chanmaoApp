@@ -19,7 +19,7 @@ if(height == 812){
 const sizeScale = width / 375;
 let isDaytime = true;
 let intervalIndicator;
-let language; 
+let language;
 let region;
 export default class StartupAnimation extends Component {
     constructor(props){
@@ -163,7 +163,7 @@ export default class StartupAnimation extends Component {
             {this.renderTopRightIcon()}
             {this.renderBottomLeftIcon()}
             {this.renderBottomRightIcon()}
-  
+
             {this.renderTopLeftButton()}
             {this.renderTopRightButton()}
             {this.renderBottomLeftButton()}
@@ -183,14 +183,14 @@ export default class StartupAnimation extends Component {
 
             {this.renderTopLeftIcon()}
             {this.renderTopRightIcon()}
-       
+
             {this.renderTopLeftButton()}
             {this.renderTopRightButton()}
-           
+
           </Animated.View>
         );
       }
-     
+
     }
     renderDayIndicator(){
       const spin = this.state.dayIndicatorHorizontalMove.interpolate(
@@ -246,7 +246,7 @@ export default class StartupAnimation extends Component {
           outputRange: [ -300*sizeScale, 20*sizeScale, 10 *sizeScale, 20*sizeScale, 15*sizeScale , 20*sizeScale]
         })
       }
-     
+
 
       let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中-按下.png') : require('./image/建筑-英文/启动页-施工中-按下.png');
       let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中.png') : require('./image/建筑-英文/启动页-施工中.png');
@@ -288,7 +288,7 @@ export default class StartupAnimation extends Component {
     }
 
     renderTopRightIcon(){
-     
+
       let jump;
       let picSize;
       let right;
@@ -438,6 +438,10 @@ export default class StartupAnimation extends Component {
           onPressIn={()=>this.setState({isBottomRightButtonPressed:true})}
           onPressOut={()=>this.setState({isBottomRightButtonPressed:false})}
           disabled={this.state.isAnimationRunning}
+          onPress={()=>{
+            clearInterval(intervalIndicator)
+            this.props.onPressCMLife();
+          }}
         >
           <View style={{
               height:220* sizeScale,
