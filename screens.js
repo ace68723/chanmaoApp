@@ -16,8 +16,7 @@ import LanguagesAndRegions from './App/Components/LanguagesAndRegions';
 
 import CmEat from './CmEat/Config/Screens';
 
-
-
+import CmLifeHome from './CmLife/CmLifeHome/Home'
 
 export function registerScreens() {
   Navigation.registerComponent('cmHome', () => cmHome);
@@ -37,4 +36,5 @@ export function registerScreens() {
   Navigation.registerComponent('CmEat', () => CmEat);
   Navigation.registerComponent('CmPasswordReset', () => CmPasswordReset);
 
+  Navigation.registerComponent('CmLifeHome', () => CmLifeHome);
 }
