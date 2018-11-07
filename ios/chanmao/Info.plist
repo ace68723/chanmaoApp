@@ -69,7 +69,9 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>You location will help us to determine the closeest restaurants that are available to you.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>You location will help us to determine the closeest restaurants that are available to you.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NotoSansMonoCJKsc-Regular.otf</string>
