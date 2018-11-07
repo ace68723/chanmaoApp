@@ -41,11 +41,6 @@
 		31E09C9920A3A62B007902C5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E09C9820A3A62A007902C5 /* CoreTelephony.framework */; };
 		31E09C9B20A3A640007902C5 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E09C9A20A3A640007902C5 /* libsqlite3.0.tbd */; };
 		31E09C9D20A3A650007902C5 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E09C9C20A3A650007902C5 /* libc++.tbd */; };
-		31E63B0A218B8A0B00A68E03 /* NotoSansCJKsc-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31E63AD7218B8A0900A68E03 /* NotoSansCJKsc-Bold.otf */; };
-		31E63B0B218B8A0B00A68E03 /* NotoSansMonoCJKsc-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31E63B06218B8A0900A68E03 /* NotoSansMonoCJKsc-Regular.otf */; };
-		31E63B0C218B8A0B00A68E03 /* NotoSansCJKsc-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31E63B07218B8A0A00A68E03 /* NotoSansCJKsc-Black.otf */; };
-		31E63B0D218B8A0B00A68E03 /* NotoSansCJKsc-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31E63B08218B8A0A00A68E03 /* NotoSansCJKsc-Regular.otf */; };
-		31E63B0E218B8A0B00A68E03 /* NotoSansCJKsc-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31E63B09218B8A0B00A68E03 /* NotoSansCJKsc-Medium.otf */; };
 		31FBA814825B46C882C60909 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F818D55E0F54CFCA85FF0E0 /* MaterialCommunityIcons.ttf */; };
 		49395AB8A86F02BBB27553DC /* libPods-chanmao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C843E76EAF8BC6E9ACD532CA /* libPods-chanmao.a */; };
 		4E235BA18DCE402EA0F6F657 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC7726EDFA4D25B39958D1 /* SimpleLineIcons.ttf */; };
@@ -65,6 +60,11 @@
 		D01E587654124B71AC8501D4 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE911AA013FF4B98910487D1 /* Feather.ttf */; };
 		D7067B9C9D904789ABDE3188 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8F54AE4BDD44159B23D420 /* libCodePush.a */; };
 		D9ECDA9D5595465B9B858F7C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DF937DD84A748DB8ED1D5CD /* Entypo.ttf */; };
+		DF5515822193901000F46A3D /* NotoSansCJKsc-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF55157D2193900B00F46A3D /* NotoSansCJKsc-Black.otf */; };
+		DF5515832193901000F46A3D /* NotoSansCJKsc-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF55157E2193900D00F46A3D /* NotoSansCJKsc-Medium.otf */; };
+		DF5515842193901000F46A3D /* NotoSansCJKsc-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF55157F2193900E00F46A3D /* NotoSansCJKsc-Bold.otf */; };
+		DF5515852193901000F46A3D /* NotoSansCJKsc-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF5515802193900F00F46A3D /* NotoSansCJKsc-Regular.otf */; };
+		DF5515862193901000F46A3D /* NotoSansMonoCJKsc-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF5515812193901000F46A3D /* NotoSansMonoCJKsc-Regular.otf */; };
 		E3ACE0070FC5416AA3CC6F1A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 153D270FD29641D5BB5BCDB8 /* libz.tbd */; };
 		EBE8C3DF20C5E563002EE5C3 /* cmApplePay.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE8C3AF20C5E563002EE5C3 /* cmApplePay.m */; };
 		F963FD1A20B4B86300C1C422 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F963FCE520B4B86200C1C422 /* AlipaySDK.bundle */; };
@@ -452,11 +452,6 @@
 		31E09C9820A3A62A007902C5 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		31E09C9A20A3A640007902C5 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		31E09C9C20A3A650007902C5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		31E63AD7218B8A0900A68E03 /* NotoSansCJKsc-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Bold.otf"; sourceTree = "<group>"; };
-		31E63B06218B8A0900A68E03 /* NotoSansMonoCJKsc-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMonoCJKsc-Regular.otf"; sourceTree = "<group>"; };
-		31E63B07218B8A0A00A68E03 /* NotoSansCJKsc-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Black.otf"; sourceTree = "<group>"; };
-		31E63B08218B8A0A00A68E03 /* NotoSansCJKsc-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Regular.otf"; sourceTree = "<group>"; };
-		31E63B09218B8A0B00A68E03 /* NotoSansCJKsc-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Medium.otf"; sourceTree = "<group>"; };
 		36B8F1D6F4B24FA28F835C5E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		4DF937DD84A748DB8ED1D5CD /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		53E04BF58A064BD39FA4F765 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -478,6 +473,11 @@
 		CE911AA013FF4B98910487D1 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		D3EE8E983E40E5E7D59B9634 /* Pods-chanmao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chanmao.release.xcconfig"; path = "Pods/Target Support Files/Pods-chanmao/Pods-chanmao.release.xcconfig"; sourceTree = "<group>"; };
 		D8AB24399EE942769B9531AD /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		DF55157D2193900B00F46A3D /* NotoSansCJKsc-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Black.otf"; sourceTree = "<group>"; };
+		DF55157E2193900D00F46A3D /* NotoSansCJKsc-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Medium.otf"; sourceTree = "<group>"; };
+		DF55157F2193900E00F46A3D /* NotoSansCJKsc-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Bold.otf"; sourceTree = "<group>"; };
+		DF5515802193900F00F46A3D /* NotoSansCJKsc-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Regular.otf"; sourceTree = "<group>"; };
+		DF5515812193901000F46A3D /* NotoSansMonoCJKsc-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMonoCJKsc-Regular.otf"; sourceTree = "<group>"; };
 		E1C568599B7346BA95206564 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		EBE8C3AF20C5E563002EE5C3 /* cmApplePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cmApplePay.m; sourceTree = "<group>"; };
 		EBE8C3B020C5E563002EE5C3 /* cmApplePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmApplePay.h; sourceTree = "<group>"; };
@@ -767,15 +767,15 @@
 			isa = PBXGroup;
 			children = (
 				31E09C4220A3A29C007902C5 /* Octicons.ttf */,
-				31E63B07218B8A0A00A68E03 /* NotoSansCJKsc-Black.otf */,
-				31E63AD7218B8A0900A68E03 /* NotoSansCJKsc-Bold.otf */,
-				31E63B09218B8A0B00A68E03 /* NotoSansCJKsc-Medium.otf */,
-				31E63B08218B8A0A00A68E03 /* NotoSansCJKsc-Regular.otf */,
-				31E63B06218B8A0900A68E03 /* NotoSansMonoCJKsc-Regular.otf */,
 				31E09C4320A3A29C007902C5 /* Feather.ttf */,
 				31E09C4420A3A29C007902C5 /* Entypo.ttf */,
 				31E09C4520A3A29C007902C5 /* MaterialCommunityIcons.ttf */,
 				31E09C4620A3A29C007902C5 /* Foundation.ttf */,
+				DF55157D2193900B00F46A3D /* NotoSansCJKsc-Black.otf */,
+				DF55157F2193900E00F46A3D /* NotoSansCJKsc-Bold.otf */,
+				DF55157E2193900D00F46A3D /* NotoSansCJKsc-Medium.otf */,
+				DF5515802193900F00F46A3D /* NotoSansCJKsc-Regular.otf */,
+				DF5515812193901000F46A3D /* NotoSansMonoCJKsc-Regular.otf */,
 				31E09C4720A3A29C007902C5 /* Ionicons.ttf */,
 				31E09C4820A3A29C007902C5 /* FontAwesome.ttf */,
 				31E09C4920A3A29C007902C5 /* Zocial.ttf */,
@@ -1379,14 +1379,13 @@
 			files = (
 				31CC7B8520A4DAE7001561DB /* chanmao.ttf in Resources */,
 				31CC7B8420A4DAE2001561DB /* fzzyjt.TTF in Resources */,
-				31E63B0C218B8A0B00A68E03 /* NotoSansCJKsc-Black.otf in Resources */,
 				F963FD1A20B4B86300C1C422 /* AlipaySDK.bundle in Resources */,
 				31CC7B5520A4DADD001561DB /* 方正准圆简体.TTF in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				31E09C5520A3A29C007902C5 /* EvilIcons.ttf in Resources */,
+				DF5515862193901000F46A3D /* NotoSansMonoCJKsc-Regular.otf in Resources */,
 				31E09C5120A3A29C007902C5 /* Foundation.ttf in Resources */,
 				31E09C5420A3A29C007902C5 /* Zocial.ttf in Resources */,
-				31E63B0A218B8A0B00A68E03 /* NotoSansCJKsc-Bold.otf in Resources */,
 				31E09C5720A3A29C007902C5 /* MaterialIcons.ttf in Resources */,
 				31E09C5220A3A29C007902C5 /* Ionicons.ttf in Resources */,
 				31E09C5620A3A29C007902C5 /* SimpleLineIcons.ttf in Resources */,
@@ -1395,11 +1394,13 @@
 				31E09C5320A3A29C007902C5 /* FontAwesome.ttf in Resources */,
 				31E09C4F20A3A29C007902C5 /* Entypo.ttf in Resources */,
 				31E09C5020A3A29C007902C5 /* MaterialCommunityIcons.ttf in Resources */,
-				31E63B0D218B8A0B00A68E03 /* NotoSansCJKsc-Regular.otf in Resources */,
-				31E63B0E218B8A0B00A68E03 /* NotoSansCJKsc-Medium.otf in Resources */,
+				DF5515832193901000F46A3D /* NotoSansCJKsc-Medium.otf in Resources */,
+				DF5515842193901000F46A3D /* NotoSansCJKsc-Bold.otf in Resources */,
+				DF5515852193901000F46A3D /* NotoSansCJKsc-Regular.otf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				D9ECDA9D5595465B9B858F7C /* Entypo.ttf in Resources */,
 				82622CC64D8E4488B5270DBA /* EvilIcons.ttf in Resources */,
+				DF5515822193901000F46A3D /* NotoSansCJKsc-Black.otf in Resources */,
 				D01E587654124B71AC8501D4 /* Feather.ttf in Resources */,
 				9DB5A231B7EA4762967057A8 /* FontAwesome.ttf in Resources */,
 				B7E5875FACA040BAA04330CA /* Foundation.ttf in Resources */,
@@ -1407,7 +1408,6 @@
 				31FBA814825B46C882C60909 /* MaterialCommunityIcons.ttf in Resources */,
 				A4414E5DC8004D079E507AE4 /* MaterialIcons.ttf in Resources */,
 				6F96AA76E1D64B8DA0CF4E5F /* Octicons.ttf in Resources */,
-				31E63B0B218B8A0B00A68E03 /* NotoSansMonoCJKsc-Regular.otf in Resources */,
 				4E235BA18DCE402EA0F6F657 /* SimpleLineIcons.ttf in Resources */,
 				73BAAFB974544FB7927E3977 /* Zocial.ttf in Resources */,
 			);
