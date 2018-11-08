@@ -44,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4</string>
 	<key>CodePushDeploymentKey</key>
 	<string>kLv4Z3Oj1Qc9Nb6o5OCN6gWg89XU842cf145-347a-42da-b8ba-6819059e5be5</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -68,10 +68,12 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>You location will help us to determine the closeest restaurants that are available to you.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>You location will help us to determine the closeest restaurants that are available to you.</string>
+	<string>You location will help us to determine the available restaurants that near you.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>You location will help us to determine the available restaurants that near you.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>You location will help us to determine the available restaurants that near you.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NotoSansMonoCJKsc-Regular.otf</string>

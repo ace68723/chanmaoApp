@@ -102,7 +102,7 @@ android {
         applicationId "ca.chanmao.app"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 6
+        versionCode 7
         versionName "2.9.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -169,9 +169,9 @@ dependencies {
     // From node_modules
     compile project(':react-native-navigation')
     compile files('libs/alipaySdk-20180403.jar')
-   compile 'com.google.android.gms:play-services-base:11.+'
-    compile 'com.google.android.gms:play-services-maps:11.+'
-    compile 'com.google.android.gms:play-services-location:11.+'
+   compile 'com.google.android.gms:play-services-base:11.0.4'
+    compile 'com.google.android.gms:play-services-maps:11.0.4'
+    compile 'com.google.android.gms:play-services-location:11.0.4'
     compile project(':react-native-code-push')
     compile 'com.stripe:stripe-android:3.0.1'
 }
