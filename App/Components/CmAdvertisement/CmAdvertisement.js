@@ -39,9 +39,10 @@ export default class CmAdvertisement extends Component {
   }
   _closeAd() {
     this.setState({showingAd: false});
-    InteractionManager.runAfterInteractions(() => {
-      this.props.navigator.dismissModal();
-    })
+    this.props.navigator.dismissModal({animationType: 'slide-down'});
+    // InteractionManager.runAfterInteractions(() => {
+      // this.props.navigator.dismissModal();
+    // })
   }
   _getAd() {
   		const url = "https://chanmao.ca/index.php?r=MobAd10/AdLaunch";

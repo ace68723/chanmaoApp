@@ -93,13 +93,22 @@ export default class SelectRegionAndLanguage extends Component {
     _confirm() {
       cme_updateLanguage(this.state.chosenLanguage);
       cme_updateRegion(this.state.chosenRegion);
-      this.props.navigator.resetTo({
-  			screen: 'cmHome',
-  			animated: true,
-  			animationType: 'fade',
-  			navigatorStyle: {navBarHidden: true},
-  			passProps:{goToCmEat: true}
-  		});
+      if (this.props.firstSelection) {
+        this.props.navigator.resetTo({
+    			screen: 'cmHome',
+    			animated: true,
+    			animationType: 'fade',
+    			navigatorStyle: {navBarHidden: true},
+    		});
+      } else {
+        this.props.navigator.resetTo({
+    			screen: 'cmHome',
+    			animated: true,
+    			animationType: 'fade',
+    			navigatorStyle: {navBarHidden: true},
+    			passProps:{goToCmEat: true}
+    		});
+      }
     }
     _goBack() {
       // this.props.navigator.dismissModal({

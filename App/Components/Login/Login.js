@@ -197,7 +197,9 @@ export default class LogoAnimationView extends Component {
 				 this.props.navigator.dismissModal({
 					 animationType: 'slide-down'
 				 });
-	 			 this.props.handleLoginSuccessful();
+				 setTimeout( () => {
+		 			this.props.handleLoginSuccessful();
+		 		}, 800);
 			 }
 			 else{
 				 // this.popupView.setMessagePopup({
@@ -301,8 +303,10 @@ export default class LogoAnimationView extends Component {
 	    		});
 	        this.props.navigator.dismissModal({
 	           animationType: 'slide-down'
-	        })
-	        this.props.handleLoginSuccessful();
+	        });
+					setTimeout( () => {
+						this.props.handleLoginSuccessful();
+					}, 800);
 				} else {
 					this.setState({
 	    			showLoading:false,
@@ -348,8 +352,10 @@ export default class LogoAnimationView extends Component {
 	     })
 	     this.props.navigator.dismissModal({
 	        animationType: 'slide-down'
-	     })
-	     this.props.handleLoginSuccessful();
+	     });
+			 setTimeout( () => {
+	 			this.props.handleLoginSuccessful();
+	 		}, 800);
 		 }
 
      // this.setState({
