@@ -16,7 +16,7 @@ import LanguagesAndRegions from './App/Components/LanguagesAndRegions';
 
 import CmEat from './CmEat/Config/Screens';
 
-import CmLifeHome from './CmLife/CmLifeHome/Home'
+import CmLifeHome from './CmLife/Config/Screens';
 
 export function registerScreens() {
   Navigation.registerComponent('cmHome', () => cmHome);

@@ -16,6 +16,7 @@ import java.util.List;
 //import ca.chanmao.app.AlipayReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.theweflex.react.WeChatPackage;
 
@@ -40,6 +41,7 @@ public class MainApplication extends NavigationApplication implements ReactInsta
                 new VectorIconsPackage(),
                 new AlipayReactPackage(),
                 new MainReactPackage(),
+            new SvgPackage(),
                 new NativePackage(),
             new MapsPackage(),
                 new WeChatPackage(),

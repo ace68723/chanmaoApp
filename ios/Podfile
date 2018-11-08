@@ -36,6 +36,8 @@ target 'chanmao' do
 
   # react-native-maps dependencies
   pod 'react-native-maps', path: rn_maps_path
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end
 
 post_install do |installer|

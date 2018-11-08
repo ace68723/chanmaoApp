@@ -24,34 +24,45 @@ export default class Home extends BaseComponent {
       {
         icon: null,
         title: "",
-        key: null,
+        key: '1',
         backgroundImage: require("./Image/coming_soon.png"),
       },
       {
         icon: null,
         title: "",
-        key: "washing",
+        key: "1",
         backgroundImage: require("./Image/coming_soon.png"),
       },
     ]
     this.state = {
       cells: cellsData
     };
+    this.renderCells=this.renderCells.bind(this);
+    this.onPressedCell=this.onPressedCell.bind(this);
   }
   onPressedCell(key){
     console.log(key);
+    if (key=='washing') {
+      console.log('111');
+      this.props.navigator.push({
+        screen: 'CmLifeMainTab',
+        navigatorStyle: {navBarHidden: true},
+      })
+    }
   }
   renderCells(item) {
+    console.log(item.key);
     return (<HomeCell
+      keyNum={item.key}
       cardStyle={styles.card}
       title={item.title}
-      key={item.key}
       icon={item.icon}
       backgroundImage={item.backgroundImage}
       onPressedCell={this.onPressedCell}
     />)
   }
   render() {
+    console.log(this.state.cells)
     return (
       <View style={styles.container}>
         <FlatList style={{marginTop: 6}} data={this.state.cells} renderItem={({item}) => (this.renderCells(item))}/>
