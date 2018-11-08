@@ -35,10 +35,10 @@ export default class orderConfirm extends Component {
   _renderPaymentChannel() {
     let payment_channel = "";
     if(this.props.paymentChannel == 1) {
-      payment_channel = "刷卡";
+      payment_channel = Label.getCMLabel('CREDIT_CARD') + '/' + Label.getCMLabel('DEBIT_CARD');
     }
     else if(this.props.paymentChannel == 10) {
-      payment_channel = "支付宝";
+      payment_channel = Label.getCMLabel('ALIPAY');
     }
     else if(this.props.paymentChannel == 30) {
       payment_channel = "Apple Pay";
@@ -58,14 +58,14 @@ export default class orderConfirm extends Component {
       let dldec, visa_fee;
       switch (this.state.dltype) {
         case 0:
-          dldec = '自取'
+          dldec = Label.getCMLabel('PICK_UP');
         break;
         case 1:
-          dldec = '送餐'
+          dldec = Label.getCMLabel('DELIVER');
         break;
-        case 2:
-          dldec = '定制运费'
-        break;
+        // case 2:
+        //   dldec = '定制运费'
+        // break;
       }
       if (this.props.visaFee >= 0) {
         visa_fee = parseFloat(this.props.visaFee);

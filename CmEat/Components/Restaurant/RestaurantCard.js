@@ -16,7 +16,8 @@ import {
 import { YellowBox } from 'react-native'
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated']);
 
-import {cme_GetRestaurantWithRid} from '../../../App/Modules/Database'
+import {cme_GetRestaurantWithRid,
+				cme_getLanguage} from '../../../App/Modules/Database'
 
 const {width,height} = Dimensions.get('window');
 class RestaurantCard extends Component {
@@ -131,12 +132,23 @@ class RestaurantCard extends Component {
       }
       recommend(){
         if(this.state.restaurant.rank > 0){
-          return(
-            <Image
-              source={require('./Image/recommend.png')}
-              style={[{height:50,width:50,top:7,right:7,position:'absolute'}]}
-            />
-          )
+					const language = cme_getLanguage();
+					if (language == 'chinese_simple') {
+						return(
+	            <Image
+	              source={require('./Image/recommend.png')}
+	              style={[{height:50,width:50,top:7,right:7,position:'absolute'}]}
+	            />
+	          )
+					}
+					else if (language == 'english') {
+						return(
+	            <Image
+	              source={require('./Image/recommend_english.png')}
+	              style={[{height:40,width:30,top:7,right:7,position:'absolute'}]}
+	            />
+	          )
+					}
         }
       }
       _openMenu(){

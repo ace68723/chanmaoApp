@@ -270,13 +270,13 @@ export default class SecondMenu extends Component {
 		let optionReminder = "";
 		for (let key in toppingGroupList) {
 			if (toppingGroupList[key].tpg_max_limit === toppingGroupList[key].tpg_min_limit) {
-				optionReminder = "[必选" + toppingGroupList[key].tpg_max_limit + "项]"
+				optionReminder = "[" + Label.getCMLabel('MUST_SELECT') + toppingGroupList[key].tpg_max_limit + "]"
 			}
 			else if (toppingGroupList[key].tpg_min_limit) {
-				optionReminder = "[必选" + toppingGroupList[key].tpg_min_limit + "~" + toppingGroupList[key].tpg_max_limit + "项]";
+				optionReminder = "[" + Label.getCMLabel('MUST_SELECT') + toppingGroupList[key].tpg_min_limit + "~" + toppingGroupList[key].tpg_max_limit + "]";
 			}
 			else {
-				optionReminder = "[可选" + toppingGroupList[key].tpg_min_limit + "~" + toppingGroupList[key].tpg_max_limit + "项]";
+				optionReminder = "[" + Label.getCMLabel('OPTIONAL_SELECT') + toppingGroupList[key].tpg_min_limit + "~" + toppingGroupList[key].tpg_max_limit + "]";
 			}
 			_toppingGroupList.push(
 				<View key={key}>
@@ -376,7 +376,7 @@ export default class SecondMenu extends Component {
 			confirmMsg = Label.getCMLabel('ADD') + this.state.qty + Label.getCMLabel('UNIT');
 		}
 		else {
-			confirmMsg = "确认修改";
+			confirmMsg = Label.getCMLabel('CONFIRM_MODIFICATION');
 		}
     return (
       <TouchableOpacity
@@ -390,7 +390,7 @@ export default class SecondMenu extends Component {
                   height: acceptButtonHeight,
                   flexDirection: 'row'}}>
           <View style={{flex: 1, marginLeft: 20}}></View>
-          <Text style={{flex: 1,
+          <Text style={{flex: 2,
                         textAlign: 'center',
                         color: 'white',
                         fontSize: 16,
@@ -440,7 +440,7 @@ export default class SecondMenu extends Component {
 					<Header title={this.props.dish.ds_name}
 									goBack={this._goBack}
 									leftButtonText={'x'}
-									rightButtonText={'删除'}
+									rightButtonText={Label.getCMLabel('DELETE')}
 									rightButton={shouldRenderRightButton}
 									/>
           <ScrollView style={{paddingBottom: 50}}>

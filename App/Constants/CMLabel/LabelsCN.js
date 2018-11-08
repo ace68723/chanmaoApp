@@ -1,6 +1,7 @@
 module.exports={
     MAIN_TAB:'主页',
-    DELIVER_TO: '配送至',
+    DELIVER_TO:'配送至',
+    SKIP:'跳过',
     //Searching
     AREA_SEARCH:'分区&搜索',
     CITY_AREA:'城市&区域',
@@ -51,7 +52,7 @@ module.exports={
 
     //Check out
     ADD_PAYMENT:'添加支付方式',
-    PICK_UP:'现金自取',
+    PICK_UP:'自取',
     DELIVER:'送餐',
     SET_DELIVER_FEE:'定制运费',
     CHECK_OUT:'结账',
@@ -103,6 +104,10 @@ module.exports={
     CANNOT_FIND_ABOUT:'找不到关于',
     ABOUT_XX_ITEMS:'的东西哦',
     SEARCH:'搜索',
+    MUST_SELECT:'必选',
+    OPTIONAL_SELECT:'可选',
+    DELETE:'删除',
+    CONFIRM_MODIFICATION:'确认修改',
 
     //Login & Register & ResetPassword
     PLZ_ENTER_ACC_INFO: '请填写账户信息',
@@ -186,5 +191,5 @@ module.exports={
     //MAIN_TAB
     ALERT_PAYMENT:'*通知: 即日起不支持到付刷卡，同时请勿使用Email Transfer(emt)，您可以使用Visa, Mastercard, Debit银行卡或者支付宝在线支付，或使用现金到付，谢谢~',
     ALERT_COMFIRM:'确定',
-    COMFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。'
+    CONFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。'
 }
