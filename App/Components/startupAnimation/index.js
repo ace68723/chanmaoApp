@@ -157,7 +157,7 @@ export default class StartupAnimation extends Component {
                 width:width,
                 height:height,
               }}
-              source={isDaytime ? require('./image/背景/启动页-多伦多-白天背景.png') : require('./image/背景/启动页-多伦多-夜晚背景.png')} />
+              source={isDaytime ? require('./image/background/trtDaytime.png') : require('./image/background/trtNighttime.png')} />
             {this.renderDayIndicator()}
             {this.renderTopLeftIcon()}
             {this.renderTopRightIcon()}
@@ -178,7 +178,7 @@ export default class StartupAnimation extends Component {
                 width:width,
                 height:height,
               }}
-              source={isDaytime ? require('./image/背景/启动页-其他分区-白天背景.png') : require('./image/背景/启动页-其他分区-夜晚背景.png')} />
+              source={isDaytime ? require('./image/background/otherDaytime.png') : require('./image/background/otherNighttime.png')} />
             {this.renderDayIndicator()}
 
             {this.renderTopLeftIcon()}
@@ -218,12 +218,12 @@ export default class StartupAnimation extends Component {
             transform:[{rotate: spin}],
             top: moveUp,
             right:this.state.dayIndicatorHorizontalMove
-            }} source={ isDaytime ? require('./image/天气/sun.png') : require('./image/天气/moon.png')}/>
+            }} source={ isDaytime ? require('./image/weather/sun.png') : require('./image/weather/moon.png')}/>
           <View style={{
             position:'absolute',
             top:30 * sizeScale,
             right:20* sizeScale}} >
-            <Image style={{height: 70*0.619*sizeScale, width: 70*sizeScale}}  source={isDaytime?require('./image/天气/cloud-day.png') : require('./image/天气/cloud-night.png')} />
+            <Image style={{height: 70*0.619*sizeScale, width: 70*sizeScale}}  source={isDaytime?require('./image/weather/cloud-day.png') : require('./image/weather/cloud-night.png')} />
           </View>
 
         </View>
@@ -248,8 +248,8 @@ export default class StartupAnimation extends Component {
       }
 
 
-      let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中-按下.png') : require('./image/建筑-英文/启动页-施工中-按下.png');
-      let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-施工中.png') : require('./image/建筑-英文/启动页-施工中.png');
+      let pressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/constructingPressed.png') : require('./image/houseEnglish/constructingPressed.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/constructingUnpressed.png') : require('./image/houseEnglish/constructingUnpressed.png');
       return(
         <Animated.View style={{
           backgroundColor:'transparent',
@@ -308,8 +308,8 @@ export default class StartupAnimation extends Component {
         })
       }
 
-      let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫订餐-按下.png') : require('./image/建筑-英文/启动页-馋猫订餐-按下.png');
-      let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫订餐.png') : require('./image/建筑-英文/启动页-馋猫订餐.png');
+      let pressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/chanmaoPressed.png') : require('./image/houseEnglish/chanmaoPressed.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/chanmaoUnpressed.png') : require('./image/houseEnglish/chanmaoUnpressed.png');
       return(
         <Animated.View style={{
           backgroundColor:'transparent',
@@ -365,8 +365,8 @@ export default class StartupAnimation extends Component {
         outputRange: [(height +100) * sizeScale, 50*sizeScale, 60*sizeScale, 50*sizeScale, 55*sizeScale , 50*sizeScale]
       })
 
-      let pressedIcon = language === 'chinese_simple' ?  require('./image/建筑-中文/启动页-馋猫电商-按下.png') : require('./image/建筑-英文/启动页-馋猫电商-按下.png');
-      let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫电商.png') : require('./image/建筑-英文/启动页-馋猫电商.png');
+      let pressedIcon = language === 'chinese_simple' ?  require('./image/houseChinese/eCommercePressed.png') : require('./image/houseEnglish/eCommercePressed.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/eCommerceUnpressed.png') : require('./image/houseEnglish/eCommerceUnpressed.png');
       return (
           <Animated.View style={{
             position:'absolute',
@@ -415,8 +415,8 @@ export default class StartupAnimation extends Component {
         inputRange:[0, 80, 90, 95 , 97.5 ,100],
         outputRange: [((height+100)* sizeScale), -40*sizeScale, -30*sizeScale, -40*sizeScale, -35*sizeScale ,-40*sizeScale]
       })
-      let pressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫生活-按下.png') : require('./image/建筑-英文/启动页-馋猫生活-按下.png');
-      let unpressedIcon = language === 'chinese_simple' ? require('./image/建筑-中文/启动页-馋猫生活.png') : require('./image/建筑-英文/启动页-馋猫生活.png');
+      let pressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/lifePressed.png') : require('./image/houseEnglish/lifePressed.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/lifeUnpressed.png') : require('./image/houseEnglish/lifeUnpressed.png');
       return (
           <Animated.View style={{
             backgroundColor:'transparent',
