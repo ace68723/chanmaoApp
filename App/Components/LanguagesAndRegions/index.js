@@ -65,7 +65,7 @@ export default class SelectRegionAndLanguage extends Component {
         chosenRegion: cme_getRegion().length > 0 ? cme_getRegion() : regions[0].value,
         regionIndicatorLeft: cme_getRegion() === '2' ? new Animated.Value(width/2) : new Animated.Value(0)
       }
-     
+
       this.chooseRegion = this.chooseRegion.bind(this);
       this._confirm = this._confirm.bind(this);
       this._goBack = this._goBack.bind(this);
@@ -120,7 +120,7 @@ export default class SelectRegionAndLanguage extends Component {
     renderImage(){
         return(
             <View style={{flex:0.4, justifyContent:'center', marginTop:20}}>
-                <Image style={{height:300*0.716, width: 300}} source={require('./image/语言选择-素材-猫.png')}/>
+                <Image style={{height:300*0.716, width: 300}} source={require('./image/languages_miao.png')}/>
             </View>
         )
     }
@@ -185,7 +185,7 @@ export default class SelectRegionAndLanguage extends Component {
                 </View>
                 <View style={{flex:0.1,alignItems:'center'}}>
                     <TouchableOpacity onPress={this._confirm}>
-                        <Image style ={{width:220, height:220*0.198}} source={require('./image/语言选择-素材-按钮.png')} />
+                        <Image style ={{width:220, height:220*0.198}} source={require('./image/languages_confirm.png')} />
                     </TouchableOpacity>
                 </View>
             </View>

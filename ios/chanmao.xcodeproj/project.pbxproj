@@ -21,6 +21,11 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		3122F7F920B76AA900C388FF /* StripeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3122F7CC20B76AA700C388FF /* StripeBridge.m */; };
 		3154E57120A39BED000F4758 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3154E57020A39BA0000F4758 /* libReactNativeNavigation.a */; };
+		319D28F22193AA75005DFB30 /* NotoSansCJKsc-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 319D28ED2193AA73005DFB30 /* NotoSansCJKsc-Bold.otf */; };
+		319D28F32193AA75005DFB30 /* NotoSansMonoCJKsc-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 319D28EE2193AA73005DFB30 /* NotoSansMonoCJKsc-Regular.otf */; };
+		319D28F42193AA75005DFB30 /* NotoSansCJKsc-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 319D28EF2193AA74005DFB30 /* NotoSansCJKsc-Black.otf */; };
+		319D28F52193AA75005DFB30 /* NotoSansCJKsc-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 319D28F02193AA74005DFB30 /* NotoSansCJKsc-Regular.otf */; };
+		319D28F62193AA75005DFB30 /* NotoSansCJKsc-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 319D28F12193AA75005DFB30 /* NotoSansCJKsc-Medium.otf */; };
 		31CC7ABF20A4CEF9001561DB /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CC7AA720A4CE75001561DB /* libRCTWeChat.a */; };
 		31CC7B5520A4DADD001561DB /* 方正准圆简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 31CC7AFC20A4D401001561DB /* 方正准圆简体.TTF */; };
 		31CC7B8420A4DAE2001561DB /* fzzyjt.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 31CC7B2B20A4D401001561DB /* fzzyjt.TTF */; };
@@ -437,6 +442,11 @@
 		3122F7FA20B76ABC00C388FF /* StripeBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StripeBridge.h; sourceTree = "<group>"; };
 		3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		3154E56B20A39BA0000F4758 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
+		319D28ED2193AA73005DFB30 /* NotoSansCJKsc-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Bold.otf"; sourceTree = "<group>"; };
+		319D28EE2193AA73005DFB30 /* NotoSansMonoCJKsc-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMonoCJKsc-Regular.otf"; sourceTree = "<group>"; };
+		319D28EF2193AA74005DFB30 /* NotoSansCJKsc-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Black.otf"; sourceTree = "<group>"; };
+		319D28F02193AA74005DFB30 /* NotoSansCJKsc-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Regular.otf"; sourceTree = "<group>"; };
+		319D28F12193AA75005DFB30 /* NotoSansCJKsc-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Medium.otf"; sourceTree = "<group>"; };
 		31CC7A8920A4CE74001561DB /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
 		31CC7AFC20A4D401001561DB /* 方正准圆简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "方正准圆简体.TTF"; path = "Fonts/方正准圆简体.TTF"; sourceTree = SOURCE_ROOT; };
 		31CC7B2B20A4D401001561DB /* fzzyjt.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = fzzyjt.TTF; path = Fonts/fzzyjt.TTF; sourceTree = SOURCE_ROOT; };
@@ -782,6 +792,11 @@
 			children = (
 				31E09C4220A3A29C007902C5 /* Octicons.ttf */,
 				31E09C4320A3A29C007902C5 /* Feather.ttf */,
+				319D28EF2193AA74005DFB30 /* NotoSansCJKsc-Black.otf */,
+				319D28ED2193AA73005DFB30 /* NotoSansCJKsc-Bold.otf */,
+				319D28F12193AA75005DFB30 /* NotoSansCJKsc-Medium.otf */,
+				319D28F02193AA74005DFB30 /* NotoSansCJKsc-Regular.otf */,
+				319D28EE2193AA73005DFB30 /* NotoSansMonoCJKsc-Regular.otf */,
 				31E09C4420A3A29C007902C5 /* Entypo.ttf */,
 				31E09C4520A3A29C007902C5 /* MaterialCommunityIcons.ttf */,
 				31E09C4620A3A29C007902C5 /* Foundation.ttf */,
@@ -1393,6 +1408,7 @@
 			files = (
 				31CC7B8520A4DAE7001561DB /* chanmao.ttf in Resources */,
 				31CC7B8420A4DAE2001561DB /* fzzyjt.TTF in Resources */,
+				319D28F42193AA75005DFB30 /* NotoSansCJKsc-Black.otf in Resources */,
 				F963FD1A20B4B86300C1C422 /* AlipaySDK.bundle in Resources */,
 				31CC7B5520A4DADD001561DB /* 方正准圆简体.TTF in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
@@ -1401,6 +1417,7 @@
 				DF55158E2193A81A00F46A3D /* NotoSansCJKsc-Medium.otf in Resources */,
 				31E09C5120A3A29C007902C5 /* Foundation.ttf in Resources */,
 				31E09C5420A3A29C007902C5 /* Zocial.ttf in Resources */,
+				319D28F22193AA75005DFB30 /* NotoSansCJKsc-Bold.otf in Resources */,
 				31E09C5720A3A29C007902C5 /* MaterialIcons.ttf in Resources */,
 				31E09C5220A3A29C007902C5 /* Ionicons.ttf in Resources */,
 				31E09C5620A3A29C007902C5 /* SimpleLineIcons.ttf in Resources */,
@@ -1410,6 +1427,8 @@
 				31E09C5320A3A29C007902C5 /* FontAwesome.ttf in Resources */,
 				31E09C4F20A3A29C007902C5 /* Entypo.ttf in Resources */,
 				31E09C5020A3A29C007902C5 /* MaterialCommunityIcons.ttf in Resources */,
+				319D28F52193AA75005DFB30 /* NotoSansCJKsc-Regular.otf in Resources */,
+				319D28F62193AA75005DFB30 /* NotoSansCJKsc-Medium.otf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				DF5515902193A81A00F46A3D /* NotoSansCJKsc-Regular.otf in Resources */,
 				D9ECDA9D5595465B9B858F7C /* Entypo.ttf in Resources */,
@@ -1421,6 +1440,7 @@
 				31FBA814825B46C882C60909 /* MaterialCommunityIcons.ttf in Resources */,
 				A4414E5DC8004D079E507AE4 /* MaterialIcons.ttf in Resources */,
 				6F96AA76E1D64B8DA0CF4E5F /* Octicons.ttf in Resources */,
+				319D28F32193AA75005DFB30 /* NotoSansMonoCJKsc-Regular.otf in Resources */,
 				4E235BA18DCE402EA0F6F657 /* SimpleLineIcons.ttf in Resources */,
 				DF55158F2193A81A00F46A3D /* NotoSansCJKsc-Bold.otf in Resources */,
 				73BAAFB974544FB7927E3977 /* Zocial.ttf in Resources */,
