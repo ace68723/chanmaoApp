@@ -13,7 +13,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import {cme_getSelectedAddress} from '../../Modules/Database';
+import Label from '../../Constants/AppLabel';
+
 const {width,height} = Dimensions.get('window')
+
 export default class CmAdvertisement extends Component {
   constructor(){
     super();
@@ -39,9 +42,10 @@ export default class CmAdvertisement extends Component {
   }
   _closeAd() {
     this.setState({showingAd: false});
-    InteractionManager.runAfterInteractions(() => {
-      this.props.navigator.dismissModal();
-    })
+    this.props.navigator.dismissModal({animationType: 'slide-down'});
+    // InteractionManager.runAfterInteractions(() => {
+      // this.props.navigator.dismissModal();
+    // })
   }
   _getAd() {
   		const url = "https://chanmao.ca/index.php?r=MobAd10/AdLaunch";
@@ -118,12 +122,12 @@ export default class CmAdvertisement extends Component {
   _renderAddress(){
     if(this.state.addr){
       return(
-        <View style={{alignItems:'center',justifyContent:'center',padding:10,marginBottom:0}}>
+        <View style={{alignItems:'center',justifyContent:'center',padding:5,marginBottom:0}}>
           <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600'}}
                 allowFontScaling={false}>
-            配送至
+            {Label.getCMLabel('DELIVER_TO')}
           </Text>
-          <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600',marginTop:10,}}
+          <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600',marginTop:5,}}
                 allowFontScaling={false}>
             {this.state.addr}
           </Text>
@@ -145,7 +149,7 @@ export default class CmAdvertisement extends Component {
                             onPress={this._closeAd}>
             <Text style={{color:'#ffffff',fontSize:16,fontWeight:'600'}}
                   allowFontScaling={false}>
-              跳过
+              {Label.getCMLabel('SKIP')}
             </Text>
           </TouchableOpacity>
           {this._renderAddress()}
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
   },
   logoBox: {
       flexDirection: 'row',
-      height: 70,
+      height: 60,
       alignSelf: 'center',
   },
   logo:{

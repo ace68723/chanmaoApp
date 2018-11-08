@@ -56,7 +56,7 @@ export default class AddressPromptView extends Component {
                           backgroundColor: '#ea7b21',}}
                           numberOfLines={1}
                   allowFontScaling={false}>
-                          {Label.getCMLabel('COMFIRM_ADDRESS')}
+                          {Label.getCMLabel('CONFIRM_ADDRESS')}
             </Text>
           </Animated.View>
         </TouchableWithoutFeedback>

@@ -304,9 +304,9 @@ export default class CmRestaurantSearch extends Component {
 			return (
 				<TouchableOpacity
 					activeOpacity={0.4}
-					style={{flex:0.15,height: headerHeight, justifyContent:'center'}}
+					style={{flex:0.2,height: headerHeight, justifyContent:'center'}}
 					onPress={()=>this._cleanInput()}>
-					<Text style={{fontSize: 16, marginTop:marginTop}}
+					<Text style={{fontSize: 16, marginTop:marginTop, textAlign: 'center'}}
 								allowFontScaling={false}>{Label.getCMLabel('CANCEL')}</Text>
 				</TouchableOpacity>
 			)

@@ -76,9 +76,27 @@ export default class Home extends Component {
   }
   _versionCheck(){
     let curVersion = GetUserInfo().version;
+    const region = cme_getRegion();
     VersionAction.getLatestVersion(curVersion).then((versionObject)=>{
       if (versionObject && versionObject.need_update) {
         this._updateAlert(versionObject);
+      } else if (!region) {
+        this.props.navigator.showModal({
+          screen: 'LanguagesAndRegions',
+          animated: true,
+          navigatorStyle: {navBarHidden: true},
+          passProps: {
+            firstSelection: true
+          }
+        })
+      } else if (this.props.goToCmEat) {
+        setTimeout( () => {
+          this._handleChanmaoPress();
+        }, 2000);
+      } else if (this.props.goToSweetfulBox) {
+        setTimeout( () => {
+          this._handleSboxPress();
+        }, 2000);
       }
 
   })
@@ -155,7 +173,6 @@ export default class Home extends Component {
                         handleLoginSuccessful: this._handleLoginSuccessful,
             },
           })
-          this.startUpAnimation.fadeIn();
         },1000)
       } else if (res.ev_error === 0 && res.ev_missing_phone && res.ev_missing_phone === 1) {
         setTimeout(() => {
@@ -167,7 +184,6 @@ export default class Home extends Component {
                         handleBindSuccessful: this._handleLoginSuccessful,
             },
           })
-          this.startUpAnimation.fadeIn();
         },1000)
       }
       else{
@@ -275,12 +291,14 @@ export default class Home extends Component {
           animated: true,
           animationType: 'fade',
         });
+        this.startUpAnimation.fadeIn();
         this._handleChanmaoPress();
     }else{
       this.props.navigator.pop({
         animated: true,
         animationType: 'slide-horizontal',
       });
+      this.startUpAnimation.fadeIn();
     }
   }
   _handleLoginSuccessful() {
@@ -337,7 +355,7 @@ export default class Home extends Component {
 
   _renderBody() {
     const region = cme_getRegion();
-    if (region.length > 0) {
+    if (region && region.length > 0) {
       return (
         <StartUpAnimation
           ref={(startup)=>this.startUpAnimation = startup}
@@ -346,15 +364,6 @@ export default class Home extends Component {
           onPressCMLife={this._handleCmLifePress}
         />
       )
-    } else {
-      this.props.navigator.showModal({
-        screen: 'LanguagesAndRegions',
-        animated: true,
-        navigatorStyle: {navBarHidden: true},
-        passProps: {
-          firstSelection: true
-        }
-      })
     }
   }
 

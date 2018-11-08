@@ -1,6 +1,7 @@
 module.exports={
     MAIN_TAB:'Home',
     DELIVER_TO: 'Deliver to',
+    SKIP:'Skip',
     //Searching
     AREA_SEARCH:'Category&Search',
     CITY_AREA:'City&Area',
@@ -34,7 +35,7 @@ module.exports={
     SOLD_OUT:'Sold Out',
     REORDER:'Reorder',
     DETAIL:'Detail',
-    DISH_QUANTITY:'Dish Quantity',
+    DISH_QUANTITY:'Quantity',
     //Address
     ADDRESS:'Address',
     CONFIRM:'Comfirm',
@@ -52,7 +53,7 @@ module.exports={
     //Check out
     ADD_PAYMENT:'Add Payment Method',
     PICK_UP:'Pick up',
-    DELIVER:'Deliver',
+    DELIVER:'Delivery',
     SET_DELIVER_FEE:'Set Delivery Fee',
     CHECK_OUT:'Check out',
     DELIVER_FEE:'Delivery Fee',
@@ -74,8 +75,8 @@ module.exports={
     TAX:'Tax',
     SERVICE_FEE:'Service Fee',
     SERVICE_FEE_REMINDER:'No Extra Tips',
-    CHARGE_TOTAL:'Charge',
-    ACTUAL_PAYING:'Final Price',
+    CHARGE_TOTAL:'Final Price',
+    ACTUAL_PAYING:'Charge',
     CONFIRM_ORDER:'Confirm Order',
     CONFIRM_PAY:'Confirm to Pay',
     RECENTLY_USE:'Recently Use',
@@ -96,12 +97,16 @@ module.exports={
     OPTION:'Option',
     RESTAURANT_CLOSED:'Restaurant Closed',
     RESTAURANT_CLOSED_LAH:'Restaurant Closed',
-    ADD:'Add',
-    UNIT:'item(s)',
+    ADD:'Add ',
+    UNIT:' item(s)',
     SEARCH_RESTAURANTS_PLACEHOLDER:'Search Restaurants',
     CANNOT_FIND_ABOUT:'Cannot Find anything about',
     ABOUT_XX_ITEMS:'',
     SEARCH:'Search',
+    MUST_SELECT:'Required ',
+    OPTIONAL_SELECT:'Optional ',
+    DELETE:'Delete',
+    CONFIRM_MODIFICATION:'Confirm Changes',
 
     //Login & Register & ResetPassword
     PLZ_ENTER_ACC_INFO: 'Please Enter Account Information',
@@ -181,9 +186,9 @@ module.exports={
     ALERT_TITLE:'Chanmao',
     ALERT_CONTENT:'The Information You Entered is not Correct',
     //HomeTab
-    ORDER_BELOW:'Push to Order',
+    ORDER_BELOW:'Scroll Down to Order',
     //MAIN_TAB
     ALERT_PAYMENT:"*Notice: From now on we don't accept payment by card with drivers, and don't use Email Transfer as well. You can use online payment, including Visa, Mastercard, Debit Card, Apple Pay and Alipay, or cash. Thanks.",
     ALERT_COMFIRM:'Confirm',
-    COMFIRM_ADDRESS:'Is this the correct address？Seems far from your current location.'
+    CONFIRM_ADDRESS:'Address Correct？Seems far from your current location.'
 }
