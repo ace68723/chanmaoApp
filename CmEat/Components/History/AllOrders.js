@@ -17,6 +17,8 @@ import {
 
 } from 'react-native';
 
+import {cme_getLanguage} from '../../../App/Modules/Database';
+
 import Order from './Order';
 import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
@@ -57,9 +59,17 @@ class AllOrders extends Component {
 				)
 			}else {
 				const { height, width } = Dimensions.get('window');
-				return(
-					<Image style={{height: height, width: width}} source={require('./Image/cm_no_order.png')}></Image>
-				)
+				const language = cme_getLanguage();
+				if (language == 'chinese_simple') {
+					return(
+						<Image style={{height: height, width: width}} source={require('./Image/cm_no_order.png')}></Image>
+					)
+				}
+				else {
+					return(
+						<Image style={{height: height, width: width}} source={require('./Image/cm_no_order.png')}></Image>
+					)
+				}
 			}
 		}
     render(){
