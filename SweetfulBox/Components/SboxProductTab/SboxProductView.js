@@ -8,11 +8,13 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import { cme_getLanguage } from '../../../App/Modules/Database';
 const { width,height } = Dimensions.get('window');
 import Settings from '../../Config/Setting';
 
 export default class SboxProductView extends Component {
   _renderProductPic(){
+    let language = cme_getLanguage();
     if (this.props.product.spu_status === 0 || this.props.product.sku_status === 0) {
       return(
         <Image source={{uri:this.props.product.image}}
@@ -22,6 +24,7 @@ export default class SboxProductView extends Component {
         />
       )
     }else {
+      let soldoutPic = language === 'chinese_simple' ? require('./Image/soldout.png') : require('./Image/soldout_eng.png');
       return(
         <View>
           <Image source={{uri:this.props.product.image}}
@@ -29,7 +32,7 @@ export default class SboxProductView extends Component {
                           height:((width / 3) - 35) * 1.4,
                          alignSelf:'center'}}
           />
-          <Image source={require('./Image/soldout.png')}
+          <Image source={soldoutPic}
                  style={{width: (width / 3) - 35,
                           height:((width / 3) - 35) * 1.4,
                          alignSelf:'center',
