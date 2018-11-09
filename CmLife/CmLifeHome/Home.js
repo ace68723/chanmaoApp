@@ -75,7 +75,7 @@ export default class Home extends BaseComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: '#F0F0F0',marginTop:20,
   },
   card: {
     flex: 1,

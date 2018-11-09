@@ -34,10 +34,12 @@ RCT_EXPORT_METHOD(pay:(NSString *)cardNumber
     cardParams.expMonth = (NSUInteger)expMonth;
     cardParams.expYear =(NSUInteger)expYear;
     cardParams.cvc = cvc;
+
     
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
       if (token == nil || error != nil) {
         // Present error to user...
+//        printf((NSString *)error);
         reject(@"no_token", @"There were no token",error);
       } else {
         NSString *tokenId = [token valueForKey:@"_tokenId"];

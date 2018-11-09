@@ -20,7 +20,7 @@ export default class CheckoutUserInfo extends Component{
   render() {
     if (this.props.userInfo) return (
       <View style={this.props.cardStyle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.props.gotoAddress}>
           <View style={styles.content}>
             <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>地址</Text>
             <View style={{flexDirection: 'row', marginBottom: 10,}}>
@@ -80,7 +80,7 @@ export default class CheckoutUserInfo extends Component{
     );
     return (
       <View style={this.props.cardStyle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.props.gotoAddress}>
           <View style={styles.content}>
             <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>地址</Text>
             <View style={{flexDirection: 'row', marginBottom: 10,}}>
