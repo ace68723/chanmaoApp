@@ -44,7 +44,7 @@
   [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
   //for stripe configure pk_live_XQlHKvkQ8N9yPEHlslQvaS7U   pk_test_MsgqDWzRTfpOKl5mBwX0J0u2
   [[STPPaymentConfiguration sharedConfiguration] setAppleMerchantIdentifier:@"merchant.ca.chanmao.applypay"];
-  [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_live_XQlHKvkQ8N9yPEHlslQvaS7U"];
+  [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_test_NWk8oCkywSEOXPVTprM9fVy3"];
   return YES;
 }
 

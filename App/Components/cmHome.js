@@ -62,6 +62,7 @@ export default class Home extends Component {
       this._getCMHomePage = this._getCMHomePage.bind(this);
 
       this.popupView = PopupView.getInstance();
+      this._handleLoginSuccessfulToCmLife = this._handleLoginSuccessfulToCmLife.bind(this);
   }
   _openStarted = false
   componentDidMount() {
@@ -250,7 +251,7 @@ export default class Home extends Component {
         // })
       }, 2500);
     }
-  _handleCmLifePress(){
+  async _handleCmLifePress(){
     if(this._openStarted) return;
     if(!this.state.entryFlag) return;
     this._openStarted = true;
@@ -268,22 +269,62 @@ export default class Home extends Component {
     //     })
     //   // })
     // }, 500);
+    this.startUpAnimation._fadeOut();
 
-    setTimeout(() => {
-        this.props.navigator.resetTo({
-          screen: 'CmLifeHome',
-          passProps: {handleBackToHome: this._handleBackToHome},
-          animated: false,
-          navigatorStyle: {
-            navBarHidden: true,
-            disabledBackGesture: true,
+    const res =  await AuthAction.isAuthed();
+    if(res.ev_error !== 0) {
+      setTimeout(() => {
+        this.props.navigator.showModal({
+          screen: 'CmLogin',
+          animationType: 'slide-up',
+          navigatorStyle: {navBarHidden: true},
+          passProps: {handleBackToHome: this._handleBackToHome,
+                      handleLoginSuccessful: this._handleLoginSuccessfulToCmLife,
           },
-          style: {
-           backgroundBlur: "none",
-           backgroundColor: "rgba(0,0,0,0)"
-         }
         })
-    }, 0);
+      },1000)
+    } else if (res.ev_error === 0 && res.ev_missing_phone && res.ev_missing_phone === 1) {
+      setTimeout(() => {
+        this.props.navigator.showModal({
+          screen: 'CmBindPhone',
+          animationType: 'slide-up',
+          navigatorStyle: {navBarHidden: true},
+          passProps: {handleBackToHome: this._handleBackToHome,
+                      handleBindSuccessful: this._handleLoginSuccessfulToCmLife,
+          },
+        })
+      },1000)
+    }
+    else{
+      // setTimeout(() => {
+      //   // InteractionManager.runAfterInteractions(() => {
+      //     this.props.navigator.showModal({
+      //       screen: 'CmAdvertisement',
+      //       animationType: 'none',
+      //       navigatorStyle: {navBarHidden: true},
+      //     })
+      //   // })
+      // }, 500);
+      setTimeout(() => {
+          this.props.navigator.resetTo({
+            screen: 'CmLifeHome',
+            passProps: {handleBackToHome: this._handleBackToHome},
+            animated: false,
+            navigatorStyle: {
+              navBarHidden: true,
+              disabledBackGesture: true,
+            },
+            style: {
+             backgroundBlur: "none",
+             backgroundColor: "rgba(0,0,0,0)"
+           }
+          })
+      }, 0);
+    }
+
+
+
+
   }
   _handleBackToHome(tag) {
     if(tag === 'fromChanmao') {
@@ -315,6 +356,33 @@ export default class Home extends Component {
       // InteractionManager.runAfterInteractions(() => {
           this.props.navigator.resetTo({
             screen: 'CmEat',
+            animated: false,
+            navigatorStyle: {
+              navBarHidden: true,
+              disabledBackGesture: true,
+            },
+            style: {
+             backgroundBlur: "none",
+             backgroundColor: "rgba(0,0,0,0)"
+           }
+        })
+      // })
+    }, 600);
+  }
+  _handleLoginSuccessfulToCmLife() {
+    // setTimeout(() => {
+    //   // InteractionManager.runAfterInteractions(() => {
+    //     this.props.navigator.showModal({
+    //       screen: 'CmAdvertisement',
+    //       animationType: 'none',
+    //       navigatorStyle: {navBarHidden: true},
+    //     })
+    //   // })
+    // }, 500);
+    setTimeout(() => {
+      // InteractionManager.runAfterInteractions(() => {
+          this.props.navigator.resetTo({
+            screen: 'CmLifeHome',
             animated: false,
             navigatorStyle: {
               navBarHidden: true,
