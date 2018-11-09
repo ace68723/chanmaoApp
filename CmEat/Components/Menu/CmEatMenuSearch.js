@@ -250,7 +250,7 @@ export default class CmEatMenuSearch extends Component {
 												margin:3,
 												fontFamily:'NotoSansCJKsc-Black'}}
 								allowFontScaling={false}>
-								找不到关于 "{this.state.searchText}" 的东西哦
+								{Label.getCMLabel('CANNOT_FIND_ABOUT')} "{this.state.searchText}" {Label.getCMLabel('ABOUT_XX_ITEMS')}
 					</Text>
 				</View>
 			)

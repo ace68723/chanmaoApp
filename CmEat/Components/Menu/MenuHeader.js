@@ -99,7 +99,8 @@ export default class MenuHeader extends Component {
 			let _discountInfo = [];
 			if (this.props.restaurant.discount_message && this.props.restaurant.discount_message.length > 0) {
 				_discountInfo.push(
-					<View style={{flexDirection: 'row',
+					<View key={'discount_message'}
+								style={{flexDirection: 'row',
 												marginTop: 3,
 												marginHorizontal: 50,
 												justifyContent: 'center'}}>

@@ -115,18 +115,14 @@ export default class CmEatAddInfo extends Component {
       const  phoneNumber = this.state.phoneNumber.toString().trim().replace(/[()-]/g , '');
       if(phoneNumber.length != 10){
 				this.popupView.setMessagePopup({
-					title: "馋猫订餐提醒您",
-					subtitle: "请输入10位电话号码",
+					title: Label.getCMLabel('CHANMAO_REMINDING'),
+					subtitle: Label.getCMLabel('PLZ_ENTER_PHONE_10'),
 					onDismiss: () => {
 						this.setState({showPopup: false})
 					}
 				});
 				this.setState({showPopup: true});
 
-        // Alert.alert(
-        //   '馋猫订餐提请您',
-        //   '请输入10位电话号码'
-        // )
       }else{
         this.setState({
           isLoading: true,

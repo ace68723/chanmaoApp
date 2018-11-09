@@ -17,6 +17,8 @@ import {
 
 } from 'react-native';
 
+import {cme_getLanguage} from '../../../App/Modules/Database';
+
 import Order from './Order';
 import HistoryAction from '../../Actions/HistoryAction';
 import HistoryStore from '../../Stores/HistoryStore';
@@ -46,6 +48,7 @@ class OrdersNotReviewed extends Component {
     //   });
 		// }
 		_renderContent(){
+			const language = cme_getLanguage();
 			if (this.props.orderData.length > 0) {
 				let _orderList = [];
 				for (let order of this.props.orderData) {
@@ -69,15 +72,29 @@ class OrdersNotReviewed extends Component {
 				}
 				else {
 					const { height, width } = Dimensions.get('window');
+					if (language == 'chinese_simple') {
+						return(
+							<Image style={{height: height, width: width}} source={require('./Image/cm_no_order_for_review.png')}></Image>
+						)
+					}
+					else {
+						return(
+							<Image style={{height: height, width: width}} source={require('./Image/cm_no_order_for_review_english.png')}></Image>
+						)
+					}
+				}
+			}else {
+				const { height, width } = Dimensions.get('window');
+				if (language == 'chinese_simple') {
 					return(
 						<Image style={{height: height, width: width}} source={require('./Image/cm_no_order_for_review.png')}></Image>
 					)
 				}
-			}else {
-				const { height, width } = Dimensions.get('window');
-				return(
-					<Image style={{height: height, width: width}} source={require('./Image/cm_no_order_for_review.png')}></Image>
-				)
+				else {
+					return(
+						<Image style={{height: height, width: width}} source={require('./Image/cm_no_order_for_review_english.png')}></Image>
+					)
+				}
 			}
 		}
     render(){

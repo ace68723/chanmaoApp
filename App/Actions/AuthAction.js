@@ -7,6 +7,7 @@ import AppConstants from '../Constants/AppConstants';
 import Auth from '../Modules/AuthModule/Auth';
 import Alert from '../Components/General/Alert';
 
+import Label from '../Constants/AppLabel';
 
 export default {
     async doLogin(io_data){
@@ -35,12 +36,12 @@ export default {
           return 'success'
         } else {
           if (res.ev_message === 10019) {
-            Alert.errorAlert('Phone is already registered');
+            Alert.errorAlert(Label.getCMLabel('PHONE_IS_TAKEN'));
           }
         }
       }catch(error){
         setTimeout( () => {
-           Alert.errorAlert('注册失败, 请重新尝试')
+           Alert.errorAlert(Label.getCMLabel('REGISTER_FAIL'));
         }, 1000);
       }
     },
@@ -52,7 +53,7 @@ export default {
               //     actionType: AppConstants.LOGIN_SUCCESS, res
               // })
             }else{
-              const errorMessage = res.message  || '验证失效,未知错误'
+              const errorMessage = res.message  || Label.getCMLabel('AUTH_FAIL')
               throw errorMessage
             }
           }catch(error){
@@ -75,15 +76,15 @@ export default {
       try{
         const res = await Auth.sendVerification(io_data);
         if (res.ev_error == 0) {
-          Alert.errorAlert('验证码已发送');
+          Alert.errorAlert(Label.getCMLabel('VCODE_SENT'));
           return res;
         } else {
           if (res.ev_message == 10019) {
-            Alert.errorAlert('手机号码已被注册');
+            Alert.errorAlert(Label.getCMLabel('PHONE_IS_TAKEN'));
           } else if (res.ev_message == 10020) {
-            Alert.errorAlert('每天最多只能发送3次验证码');
+            Alert.errorAlert(Label.getCMLabel('REACH_VCODE_MAX'));
           } else {
-            Alert.errorAlert('验证码发送失败');
+            Alert.errorAlert(Label.getCMLabel('SEND_VCODE_FAIL'));
           }
         }
       }catch(error){

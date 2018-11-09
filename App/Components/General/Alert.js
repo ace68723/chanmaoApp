@@ -2,10 +2,12 @@
 import {
   Alert
 } from 'react-native';
+import Label from '../../Constants/AppLabel';
+
 const AlertModule = {
   errorAlert(message){
     Alert.alert(
-      '馋猫订餐提醒您',
+      Label.getCMLabel('CHANMAO_REMINDING'),
       message.toString(),
       [
         {text: 'OK', onPress: () => {}},

@@ -109,8 +109,8 @@ export default class pastOrderEN extends Component {
   _handleWechatBtn(){
      Clipboard.setString('chanmao_kefu');
      Alert.alert(
-            '已复制',
-            '馋猫公众号: chanmao_kefu',
+            Label.getCMLabel('COPY_TO_CLIPBOARD'),
+            Label.getCMLabel('CHANMAO_KEFU'),
             [
               {text: 'OK', onPress: () => {}},
             ]
@@ -208,7 +208,7 @@ export default class pastOrderEN extends Component {
                           color:'white',
                           fontFamily:'NotoSansCJKsc-Regular',}}
                   allowFontScaling={false}>
-              {Label.getCMLabel('PAY')}
+              {Label.getCMLabel('REPAY')}
             </Text>
 
           </TouchableOpacity>

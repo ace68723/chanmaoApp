@@ -23,6 +23,9 @@ import {
 import {
     filter,
 } from 'lodash';
+
+import {cme_getLanguage} from '../../../../App/Modules/Database';
+
 import HomeStore from '../../../Stores/HomeStore';
 import HomeAction from '../../../Actions/HomeAction';
 import RestaurantAction from '../../../Actions/RestaurantAction';
@@ -304,9 +307,9 @@ export default class CmRestaurantSearch extends Component {
 			return (
 				<TouchableOpacity
 					activeOpacity={0.4}
-					style={{flex:0.15,height: headerHeight, justifyContent:'center'}}
+					style={{flex:0.2,height: headerHeight, justifyContent:'center'}}
 					onPress={()=>this._cleanInput()}>
-					<Text style={{fontSize: 16, marginTop:marginTop}}
+					<Text style={{fontSize: 16, marginTop:marginTop, textAlign: 'center'}}
 								allowFontScaling={false}>{Label.getCMLabel('CANCEL')}</Text>
 				</TouchableOpacity>
 			)
@@ -410,7 +413,13 @@ export default class CmRestaurantSearch extends Component {
 	}
 	render() {
 		if (this.state.allRestaurants.length == 0) {
-			return <Image  style={{height: height, width: width}} source={require('../Image/no_restaurants_area.png')}/>
+			const language = cme_getLanguage();
+			if (language == 'chinese_simple') {
+				return <Image  style={{height: height, width: width}} source={require('../Image/no_restaurants_area.png')}/>
+			}
+			else {
+				return <Image  style={{height: height, width: width}} source={require('../Image/no_restaurants_area_english.png')}/>
+			}
 		}
 		return(
 			<KeyboardAvoidingView

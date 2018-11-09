@@ -95,16 +95,16 @@ class HistoryTab extends Component {
 					// this.setState({showPopup: true});
 
 					Alert.alert(
-            '在线支付失败',
-            '请再次尝试支付',
+						Label.getCMLabel('ONLINE_PAYMENT_FAILED'),
+						Label.getCMLabel('PLZ_REPAY_AGAIN'),
             [
-              {text: '确认', onPress: () => {}},
+              {text: Label.getCMLabel('CONFIRM'), onPress: () => {}},
             ],
           );
 				}
 	      HistoryStore.addChangeListener(this._onChange);
 	      this._doAutoRefresh();
-				HistoryStore.autoRefresh();
+				// HistoryStore.autoRefresh();
         console.log('need rebuild currentRoutes')
 	      // const currentRoutes = this.props.navigator.getCurrentRoutes();
 				AppState.addEventListener('change', this._handleAppStateChange);
@@ -119,7 +119,8 @@ class HistoryTab extends Component {
 				if (state.doRepay && !this.state.doRepay) {
 					switch (state.payment_channel) {
 						case 0:
-							this.props._cashSelected(state.oid);
+							// this.props._cashSelected(state.oid);
+							this._doAutoRefresh();
 							break;
 						case 1:
 							// data.charge_total
@@ -131,13 +132,15 @@ class HistoryTab extends Component {
 																		charge_total: state.fees.charge_total});
 							break;
 						case 30:
-							this._applePaySelected({oid: state.oid,
-																			subtotal: state.fees.ori_pretax.toString(),
-																			shipping: state.fees.dlexp.toString(),
-																			tax: state.fees.tax.toString(),
-																			service_fee: state.fees.service_fee.toString(),
-																			charge_total: state.fees.charge_total,
-																			discount: state.fees.total_off});
+							setTimeout(() => {
+								this._applePaySelected({oid: state.oid,
+																				subtotal: state.fees.ori_pretax.toString(),
+																				shipping: state.fees.dlexp.toString(),
+																				tax: state.fees.tax.toString(),
+																				service_fee: state.fees.service_fee.toString(),
+																				charge_total: state.fees.charge_total,
+																				discount: state.fees.total_off});
+							}, 300);
 							break;
 						default:
 							break;
@@ -147,20 +150,11 @@ class HistoryTab extends Component {
         if(this.state.verifyPhoneResult === 'FAIL'){
           HistoryStore.initVerifyPhoneResult();
 
-					// this.popupView.setMessagePopup({
-					// 	title: "验证码错误",
-					// 	subtitle: "请检查您输入的验证码",
-					// 	onDismiss: () => {
-					// 		this.setState({showPopup: false})
-					// 	}
-					// });
-					// this.setState({showPopup: true});
-
           Alert.alert(
-            '验证码错误',
-            '请检查您输入的验证码',
+            Label.getCMLabel('VERTIFICATION_FAIL_TITLE'),
+            Label.getCMLabel('VERTIFICATION_FAIL_CONTENT'),
             [
-              {text: '确认', onPress: () => {}},
+              {text: Label.getCMLabel('CONFIRM'), onPress: () => {}},
             ],
           );
         }else if(this.state.verifyPhoneResult === 'SUCCESS'){
@@ -249,12 +243,12 @@ class HistoryTab extends Component {
 			Alipay.constructAlipayOrder({total: charge_total.toString(),
 																	 oid});
 			setTimeout(() => {
-				this._onRefresh();
+				this._doAutoRefresh();
 			}, 3000)
 		}
 		_cashSelected({oid}) {
 			// HistoryAction.changePaymentToCash({oid});
-			this._onRefresh();
+			this._doAutoRefresh();
 		}
 		_applePaySelected({oid, subtotal, shipping, tax, service_fee, charge_total, discount}){
 				CheckoutAction.recheckoutByApplepay({
@@ -265,13 +259,13 @@ class HistoryTab extends Component {
 					discount,
 					amount: parseFloat(charge_total),
 					tips:	parseFloat(service_fee)
-				},()=>this._onRefresh())
+				},()=>this._doAutoRefresh())
 		}
 		_stripeCardSelected({oid, charge_total}) {
 				CheckoutAction.stripeChargeAndUpdate({amount: parseFloat(charge_total),
 																							oid,
 																							checkoutFrom: 'history'});
-				this._onRefresh();
+				this._doAutoRefresh();
 		}
 
 		_handleOnChangeTab(tabRef) {
@@ -286,7 +280,7 @@ class HistoryTab extends Component {
 		      passProps: {
 						goBack: this._goBackToHistory,
 						orderInfo: orderInfo,
-						onRefresh: this._onRefresh,
+						onRefresh: this._doAutoRefresh,
 						setOnRefresh: this._setOnRefresh,
 		      },
 		    });
@@ -386,7 +380,7 @@ class HistoryTab extends Component {
 										navigator={this.props.navigator}
 										orderData={this.state.orderData}
 										isRefreshing={this.state.isRefreshing}
-										onRefresh={this._onRefresh}
+										onRefresh={this._doAutoRefresh}
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
@@ -396,7 +390,7 @@ class HistoryTab extends Component {
 										navigator={this.props.navigator}
 										orderData={this.state.orderData}
 										isRefreshing={this.state.isRefreshing}
-										onRefresh={this._onRefresh}
+										onRefresh={this._doAutoRefresh}
 										goToComments={this._goToComments}
 										goToRestaurant={this._goToRestaurant}
 										reorder={this._reorder}

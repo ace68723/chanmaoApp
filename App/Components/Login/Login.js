@@ -132,14 +132,6 @@ export default class LogoAnimationView extends Component {
 	_getVerification() {
 		if (this.state.phone.length < 10 || this.state.phone.match(/^[0-9]+$/) == null) {
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PLZ_ENTER_PHONE_NUM'));
-			// this.popupView.setMessagePopup({
-			//   subtitle: "请填写正确手机号码",
-			//   onDismiss: () => {
-			//     this.setState({showPopup: false})
-			//   }
-			// });
-			// this.setState({showPopup: true});
-
 			return;
 		}
 		this._sendVerification();
@@ -202,25 +194,11 @@ export default class LogoAnimationView extends Component {
 		 		}, 800);
 			 }
 			 else{
-				 // this.popupView.setMessagePopup({
-				 //   subtitle: "登录失败，请检查信息",
-				 //   onDismiss: () => {
-				 //     this.setState({showPopup: false})
-				 //   }
-				 // });
-				 // this.setState({showPopup: true});
 				 this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('LOGIN_FAILED'));
 			 }
 		} catch (e) {
 
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('LOGIN_FAILED'));
-		 // this.popupView.setMessagePopup({
-			//  subtitle: "登录失败，请检查信息",
-			//  onDismiss: () => {
-			// 	 this.setState({showPopup: false})
-			//  }
-		 // });
-		 // this.setState({showPopup: true});
 
 		 this.setState({
 			 showLoading:false,
@@ -244,15 +222,6 @@ export default class LogoAnimationView extends Component {
 			});
 
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PLZ_ENTER_ACC_INFO'));
-			// this.popupView.setMessagePopup({
-			// 	subtitle: "请填写账户信息",
-			// 	onDismiss: () => {
-			// 		this.setState({showPopup: false})
-			// 	}
-			// });
-			// this.setState({showPopup: true});
-
-			// Alert.errorAlert('请填写账户信息');
 			return;
 		}
 		else if (this.state.password != this.state.re_password) {
@@ -263,15 +232,6 @@ export default class LogoAnimationView extends Component {
 			});
 
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PASSWORD_NOT_MATCHING'));
-			// this.popupView.setMessagePopup({
-			// 	subtitle: "密码配对不上 请重新输入",
-			// 	onDismiss: () => {
-			// 		this.setState({showPopup: false})
-			// 	}
-			// });
-			// this.setState({showPopup: true});
-
-			// Alert.errorAlert('密码配对不上 请重新输入');
 			return;
 		} else if (this.state.password.length < 8 || this.state.password.length > 32) {
 			this.setState({

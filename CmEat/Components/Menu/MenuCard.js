@@ -53,7 +53,7 @@ class MenuCard extends Component {
             <View style={{flex:1,alignItems:'flex-end'}}>
             </View>
 						<View style={{flex:1,}}>
-									<View style={{width:50,
+									<View style={{width:54,
 														    height:32,
 														    alignSelf:'center',
 														    alignItems:'center',
