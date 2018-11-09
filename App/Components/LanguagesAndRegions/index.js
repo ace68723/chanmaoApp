@@ -6,7 +6,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  Animated
+  Animated,
+  Platform
 } from 'react-native';
 import {cme_updateLanguage,
         cme_getLanguage,
@@ -14,7 +15,7 @@ import {cme_updateLanguage,
         cme_updateRegion,
         cme_getRegion} from '../../Modules/Database';
 import Header from '../../../CmEat/Components/General/Header';
-
+let langPadding = Platform.OS == 'ios' ? 10:0;
 const {width,height} = Dimensions.get('window');
 // let marginTop,headerHeight;
 // if(height == 812){
@@ -26,7 +27,7 @@ const {width,height} = Dimensions.get('window');
 //   marginTop = 20;
 //   headerHeight = 64
 // }
-// const sizeScale = width / 375;
+const sizeScale = width / 375;
 let isDaytime = true;
 let languages = [
     {
@@ -128,8 +129,8 @@ export default class SelectRegionAndLanguage extends Component {
     }
     renderImage(){
         return(
-            <View style={{flex:0.4, justifyContent:'center', marginTop:20}}>
-                <Image style={{height:300*0.716, width: 300}} source={require('./image/languages_miao.png')}/>
+            <View style={{flex:0.4, justifyContent:'center', marginVertical:10}}>
+                <Image style={{height:height*0.25*sizeScale, width: height*0.25*1.4*sizeScale}} source={require('./image/languages_miao.png')}/>
             </View>
         )
     }
@@ -139,7 +140,7 @@ export default class SelectRegionAndLanguage extends Component {
                 <TouchableOpacity
                     key={index}
                     onPress={()=>this.chooseRegion(region.value)}
-                    style={{flex:0.5,alignItems:'center',marginTop:30}}>
+                    style={{flex:0.5,alignItems:'center'}}>
                     <Text style={{fontSize:24,
                                 fontFamily: this.state.chosenRegion === region.value ? 'NotoSansCJKsc-Bold' : 'NotoSansCJKsc-Regular',
                                 color: this.state.chosenRegion === region.value ? '#ea7b21' : 'grey'}}
@@ -149,12 +150,13 @@ export default class SelectRegionAndLanguage extends Component {
         })
     }
     renderLanguageButton(){
+        
         return languages.map((lang, index)=>{
             return(
                 <TouchableOpacity
                     key={index}
                     onPress={()=>this.setState({chosenLanguage: lang.value})}
-                    style={styles.languageButtonStyle}>
+                    style={[styles.languageButtonStyle,{paddingVertical: langPadding}]}>
                     <View style={styles.languageOption}>
                         <View style={[styles.selectedLanguage,{backgroundColor: this.state.chosenLanguage == lang.value ? '#ea7b21': 'transparent'}]} >
                         </View>
@@ -179,7 +181,7 @@ export default class SelectRegionAndLanguage extends Component {
                 <View style={{flex:0.2, flexDirection:'row'}}>
                    {this.renderRegionButton()}
                 </View>
-                <View style={{flex:0.7, justifyContent:'center', alignItems:'center'}}>
+                <View style={{flex:0.7, justifyContent:'center', alignItems:'center', paddingVertical:20}}>
                     <Animated.View style={{
                         position:'absolute',
                         height:50,
@@ -237,7 +239,7 @@ export default class SelectRegionAndLanguage extends Component {
         alignItems:'center',
         flexDirection:'row',
         paddingHorizontal:30,
-        marginVertical: 10
+       
     },
     languageOption: {
         borderWidth:2,
