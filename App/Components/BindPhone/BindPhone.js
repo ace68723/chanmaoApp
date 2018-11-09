@@ -18,9 +18,11 @@ import AuthAction from '../../Actions/AuthAction';
 // import AuthStore from '../../Stores/AuthStore';
 import Alert from '../General/Alert';
 
+import Label from '../../../App/Constants/AppLabel';
 import PopupView from '../../../CmEat/Components/Popup/PopupView'
 
 import BindPhoneInputAnimation from './BindPhoneInputAnimation';
+
 
 const {width,height} = Dimensions.get('window');
 let marginTop;
@@ -86,7 +88,7 @@ export default class LogoAnimationView extends Component {
 		if (this.state.phone.length < 10 || this.state.phone.match(/^[0-9]+$/) == null) {
 
 			this.popupView.setMessagePopup({
-			  subtitle: "请填写正确手机号码",
+			  subtitle: Label.getCMLabel('PLZ_ENTER_PHONE_NUM'),
 			  onDismiss: () => {
 			    this.setState({showPopup: false})
 			  }

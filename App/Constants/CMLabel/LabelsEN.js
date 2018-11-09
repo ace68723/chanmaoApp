@@ -1,7 +1,13 @@
 module.exports={
+    //Starting
     MAIN_TAB:'Home',
     DELIVER_TO: 'Deliver to',
     SKIP:'Skip',
+    APP_UPDATE_TITLE:'Update App',
+    APP_UPDATE_CONTENT:'There is a new versiosn for the app, please update.',
+    APP_UPDATE_CONFIRM:'Go',
+    APP_UPDATE_CANCEL:'Later',
+
     //Searching
     AREA_SEARCH:'Category&Search',
     CITY_AREA:'City&Area',
@@ -91,6 +97,7 @@ module.exports={
     ADD_DEBIT_CARD:'Add Debit Card',
     CARD_NUMBER:'Card No.',
     EXPIRED_AT:'Expire Date',
+    DELIVER_ADDRESS:'Delivery Address',
 
     //Menu
     GO_CHECKOUT:'Check Out',
@@ -117,13 +124,14 @@ module.exports={
     ALERT_CONGRA_TITLE:'Congratulation!',
     PASSWORD_RESET_SUCCESS:'Password Reset Success',
     PLZ_ENTER_PASSWORD:'Please Enter Password',
-    PASSWORD_NOT_THE_SAME:'Password not Matching',
 
     //History
+    REPAY:'Repay',
     PAID:'Paid',
     WAIT_FOR_RR_CONFIRM:'Waiting Restaurant to Confirm',
     REFUNDED:'Refunded',
     ONLINE_PAYMENT_FAILED:'Online Payment Failed',
+    PLZ_REPAY_AGAIN:'Please try again',
     PLZ_REORDER:'Please Reorder',
     WAIT_FOR_PAYMENT:'Wait for Payment',
     WAIT_FOR_PAYMENT_REMINDER:'If the Status not Change in Time, Pull Down to Refresh',
@@ -182,13 +190,27 @@ module.exports={
     CHANMAO_COPYRIGHT:'Chanmao Inc. 版权所有',
     APP_VERSION:'版本号',
 
-    //ALERT_TITLE
+    //Alert title
+    CHANMAO_REMINDING:'Chanmao Reminding You',
     ALERT_TITLE:'Chanmao',
     ALERT_CONTENT:'The Information You Entered is not Correct',
+    COPY_TO_CLIPBOARD:'Copied to clipboard',
     //HomeTab
     ORDER_BELOW:'Scroll Down to Order',
     //MAIN_TAB
     ALERT_PAYMENT:"*Notice: From now on we don't accept payment by card with drivers, and don't use Email Transfer as well. You can use online payment, including Visa, Mastercard, Debit Card, Apple Pay and Alipay, or cash. Thanks.",
     ALERT_COMFIRM:'Confirm',
-    CONFIRM_ADDRESS:'Address Correct？Seems far from your current location.'
+    CONFIRM_ADDRESS:'Address Correct？Seems far from your current location.',
+
+    //Popup title
+    REGISTER_FAIL:'Registration failed, please try again',
+    PHONE_IS_TAKEN:'Phone number is registered',
+    AUTH_FAIL:'Authorize failed, unknown mistake',
+    VCODE_SENT:'Verification Code Sent',
+    REACH_VCODE_MAX:'Sending Verification Code No More Than 3 Times a Day',
+    SEND_VCODE_FAIL:'Sending Verification Code Failed',
+    PLZ_ENTER_PHONE_10:'Please enter 10-digit phone number',
+    PLZ_SELECT_REQUIRED_OPTION:'Please Choose the required options',
+    VERTIFICATION_FAIL_TITLE:'Wrong Validation Code',//(新用户用的)
+    VERTIFICATION_FAIL_CONTENT:'Please check the code you entered',//(新用户用的)
 }

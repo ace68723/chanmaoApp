@@ -54,7 +54,7 @@ export default class ResetPassword extends Component {
       return;
     }
     if (iv_password!=confirm_password){
-      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PASSWORD_NOT_THE_SAME'));
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PASSWORD_NOT_MATCHING'));
       return;
     }
     let data={

@@ -18,7 +18,8 @@ let state = {
           showPriceDetail: false,
           oid: 0,
           payment_channel: 0,
-          doRepay: false
+          doRepay: false,
+          goToHistory: false,
         };
 let HistoryDetailData;
 const HistoryStore = Object.assign({},EventEmitter.prototype,{
@@ -90,6 +91,7 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
     state.fees = data.fees;
     state.showPriceDetail = true;
     state.doRepay = false;
+    state.goToHistory = false;
   },
   changeOrderCase(data) {
     state.oid = data.oid;
@@ -98,6 +100,7 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
     state.showPriceDetail = false;
     state.doRepay = true;
     state.doRefresh = false;
+    state.goToHistory = data.goToHistory;
   },
 	doRefresh(){
 		state = Object.assign({},state,{doRefresh:true})

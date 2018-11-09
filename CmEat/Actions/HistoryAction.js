@@ -119,6 +119,7 @@ export default {
         if (data.ev_error == 0) {
           data.oid = oid;
           data.payment_channel = payment_channel;
+          data.goToHistory = true;
           dispatch({
               actionType: AppConstants.CHANGE_ORDER_CASE, data
           })

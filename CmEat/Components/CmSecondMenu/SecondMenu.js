@@ -101,7 +101,7 @@ export default class SecondMenu extends Component {
 					}
 				}
 				if (counter < this.state.toppingGroupList[tpg_id].tpg_min_limit) {
-					alert("请选择必填选项");
+					alert(Label.getCMLabel('PLZ_SELECT_REQUIRED_OPTION'));
 					return;
 				}
 			}

@@ -1,7 +1,13 @@
 module.exports={
+    //Starting
     MAIN_TAB:'主页',
     DELIVER_TO:'配送至',
     SKIP:'跳过',
+    APP_UPDATE_TITLE:'软件更新',
+    APP_UPDATE_CONTENT:'有新版本可下载,请前往更新',
+    APP_UPDATE_CONFIRM:'立即更新',
+    APP_UPDATE_CANCEL:'以后再说',
+
     //Searching
     AREA_SEARCH:'分区&搜索',
     CITY_AREA:'城市&区域',
@@ -118,13 +124,14 @@ module.exports={
     ALERT_CONGRA_TITLE:'恭喜',
     PASSWORD_RESET_SUCCESS:'密码重设成功',
     PLZ_ENTER_PASSWORD:'请填写密码',
-    PASSWORD_NOT_THE_SAME:'两次密码不一样',
 
     //History
+    REPAY:'支付',
     PAID:'已支付',
     WAIT_FOR_RR_CONFIRM:'等待商家确认',
     REFUNDED:'已退款',
     ONLINE_PAYMENT_FAILED:'在线支付失败',
+    PLZ_REPAY_AGAIN:'请再次尝试支付',
     PLZ_REORDER:'请重新下单',
     WAIT_FOR_PAYMENT:'等待支付',
     WAIT_FOR_PAYMENT_REMINDER:'若状态没有及时更改, 请手动下拉刷新',
@@ -183,13 +190,27 @@ module.exports={
     CHANMAO_COPYRIGHT:'Chanmao Inc. 版权所有',
     APP_VERSION:'版本号',
 
-    //ALERT_TITLE
+    //Alert title
+    CHANMAO_REMINDING:'馋猫订餐提醒您',
     ALERT_TITLE:'馋猫订餐',
     ALERT_CONTENT:'您输入的支付信息输入有误',
+    COPY_TO_CLIPBOARD:'已复制',
     //HomeTab
     ORDER_BELOW:'在下面点餐呦',
     //MAIN_TAB
     ALERT_PAYMENT:'*通知: 即日起不支持到付刷卡，同时请勿使用Email Transfer(emt)，您可以使用Visa, Mastercard, Debit银行卡或者支付宝在线支付，或使用现金到付，谢谢~',
     ALERT_COMFIRM:'确定',
-    CONFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。'
+    CONFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。',
+
+    //Popup title
+    REGISTER_FAIL:'注册失败, 请重新尝试',
+    PHONE_IS_TAKEN:'该手机号码已注册',
+    AUTH_FAIL:'验证失效,未知错误',
+    VCODE_SENT:'验证码已发送',
+    REACH_VCODE_MAX:'每天最多只能发送3次验证码',
+    SEND_VCODE_FAIL:'验证码发送失败',
+    PLZ_ENTER_PHONE_10:'请输入10位电话号码',
+    PLZ_SELECT_REQUIRED_OPTION:'请选择必填选项',
+    VERTIFICATION_FAIL_TITLE:'验证码错误',
+    VERTIFICATION_FAIL_CONTENT:'请检查您输入的验证码',
 }

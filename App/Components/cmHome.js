@@ -22,6 +22,8 @@ import VersionAction from '../Actions/VersionAction';
 import { GetUserInfo, cme_getRegion } from '../Modules/Database';
 import PopupView from '../../CmEat/Components/Popup/PopupView'
 import StartUpAnimation from './startupAnimation';
+import Label from '../Constants/AppLabel';
+
 const { height, width } = Dimensions.get('window');
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -121,9 +123,9 @@ export default class Home extends Component {
       this.setState(Object.assign({}, this.state, {entryFlag: false}));
 
       this.popupView.setMessagePopup({
-        title: "软件更新",
-        subtitle: "有新版本可下载,请前往更新",
-        confirmText: "立即更新",
+        title: Label.getCMLabel('APP_UPDATE_TITLE'),
+        subtitle: Label.getCMLabel('APP_UPDATE_CONTENT'),
+        confirmText: Label.getCMLabel('APP_UPDATE_CONFIRM'),
         onConfirm: ()=>{
           Linking.canOpenURL(url).then(supported => {
             supported && Linking.openURL(url);
@@ -137,10 +139,10 @@ export default class Home extends Component {
     }else{
 
       this.popupView.setMessagePopup({
-        title: "软件更新",
-        subtitle: "有新版本可下载,请前往更新",
-        confirmText: "立即更新",
-        cancelText: '以后再说',
+        title: Label.getCMLabel('APP_UPDATE_TITLE'),
+        subtitle: Label.getCMLabel('APP_UPDATE_CONTENT'),
+        confirmText: Label.getCMLabel('APP_UPDATE_CONFIRM'),
+        cancelText: Label.getCMLabel('APP_UPDATE_CANCEL'),
         onConfirm: ()=>{
           Linking.canOpenURL(url).then(supported => {
             supported && Linking.openURL(url);
