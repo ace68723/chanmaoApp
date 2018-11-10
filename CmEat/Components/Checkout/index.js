@@ -564,7 +564,7 @@ class Confirm extends Component {
 		}
 		_renderAndroidCheckoutButton(){
 			if (Platform.OS != 'ios') {
-				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading && false) {
+				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading) {
 					return(
 						<TouchableOpacity
 										activeOpacity={0.4}
