@@ -72,6 +72,9 @@ const CheckoutStore = Object.assign({},EventEmitter.prototype,{
     this.state = Object.assign({},this.state,data);
     console.log(this.state);
   },
+  updateUserInfo(data){
+    this.state.eo_user_info=data.eo_user;
+  },
   updateCard(data)
   {
     this.state = Object.assign({},this.state,data);
@@ -103,6 +106,10 @@ const CheckoutStore = Object.assign({},EventEmitter.prototype,{
                 CheckoutStore.updateDeliveryTime(action.data);
                 CheckoutStore.emitChange();
                 break;
+        case AppConstants.PUT_USER_ADDR:
+            CheckoutStore.updateUserInfo(action.data);
+            CheckoutStore.emitChange();
+          	break;
         default:
                 break;
 

@@ -33,7 +33,7 @@ export default class CheckoutUserInfo extends Component{
     }
     if (this.props.cardInfo.last4) return (
       <View style={this.props.cardStyle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.props.gotoCard}>
           <View style={styles.content}>
             <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>支付方式</Text>
             <View style={{flexDirection: 'row', marginBottom: 10,}}>
@@ -57,7 +57,7 @@ export default class CheckoutUserInfo extends Component{
       </View>
     ); else return(
       <View style={this.props.cardStyle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.props.gotoCard}>
           <View style={styles.content}>
             <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>支付方式</Text>
             <View style={{flexDirection: 'row', marginBottom: 10,}}>

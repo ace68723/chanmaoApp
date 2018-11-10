@@ -3,9 +3,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import SboxProductAction from '../../Actions/SboxProductAction';
-
+import { cme_getLanguage } from '../../../App/Modules/Database';
 const { height, width } = Dimensions.get('window');
 import Label from '../../../App/Constants/AppLabel';
+import { lang } from 'moment';
 const styles = StyleSheet.create({
   content: {
     flex: 1 - (212 / 2208),
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     fontSize: (50 / 0.75) / 2208 * height,
   },
 });
-
+let language;
 export default class SboxHistoryOrderDetailOrderView extends Component {
   constructor(props) {
     super(props);
@@ -100,6 +101,7 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
     this._handleOnPressIn = this._handleOnPressIn.bind(this);
     this._renderProductImage = this._renderProductImage.bind(this);
 
+    language = cme_getLanguage();
     // this._goToSboxProductDetial = this._goToSboxProductDetial.bind(this);
   }
   _handleOnPressIn(item) {
@@ -114,12 +116,13 @@ export default class SboxHistoryOrderDetailOrderView extends Component {
         />
       )
     }else {
+      let soldoutPic = language === 'chinese-simple' ? require('./img/soldout.png') : require('./img/soldout_eng.png');
       return(
         <View>
           <Image source={{uri:product.sku_image}}
                  style={styles.image}
           />
-        <Image source={require('./img/soldout.png')}
+        <Image source={soldoutPic}
                  style={[styles.image,{position: 'absolute'}]}
           />
         </View>

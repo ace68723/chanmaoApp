@@ -32,15 +32,20 @@ export default class Checkout extends Component {
     this.onConfirmDeliveryTime = this.onConfirmDeliveryTime.bind(this);
     this._placeOrder=this._placeOrder.bind(this);
     this.onChangeComment=this.onChangeComment.bind(this);
+    this._goToAddress=this._goToAddress.bind(this);
+    this._goToCard=this._goToCard.bind(this);
   }
   componentDidMount() {
     CheckoutStore.addChangeListener(this._onChange);
     CheckoutAction.getCard()
   }
   _onChange() {
+    console.log(this.state);
+    console.log('11111111');
     const state = Object.assign({}, CheckoutStore.getState());
     this.setState(state);
-
+    console.log(state)
+    console.log(this.state);
     // 同步delivery picker的data source
     this.PickerDelivery.forceReloadDataSource();
     if (this.state.placeOrderStatus==0) {alert('下单成功')}
@@ -49,6 +54,7 @@ export default class Checkout extends Component {
     CheckoutStore.removeChangeListener(this._onChange);
   }
   onPressedPickupTime(){
+     // console.log(this.PickerDelivery)
     this.Picker.show();
   }
   onPressedDeliveryTime(){
@@ -108,10 +114,10 @@ export default class Checkout extends Component {
         )
         break;
       case "userInfo":
-        return (<CheckoutUserInfo userInfo={this.state.eo_user_info} cardStyle={styles.card}/>)
+        return (<CheckoutUserInfo userInfo={this.state.eo_user_info} gotoAddress={this._goToAddress} cardStyle={styles.card}/>)
         break;
       case "payment":
-        return (<CheckoutPayment cardInfo={this.state.eo_last4} cardStyle={styles.card}/>)
+        return (<CheckoutPayment gotoCard={this._goToCard} cardInfo={this.state.eo_last4} cardStyle={styles.card}/>)
         break;
       case "orderInfo":
         return (
@@ -128,7 +134,22 @@ export default class Checkout extends Component {
       default:
     }
   }
+  _goToAddress()
+  {
+    this.props.navigator.showModal({
+      screen: 'CmWashAddAddress',
+      navigatorStyle: {navBarHidden: true},
+    })
+  }
+  _goToCard()
+  {
+    this.props.navigator.showModal({
+      screen: 'CmWashChooseCardType',
+      navigatorStyle: {navBarHidden: true},
+    })
+  }
   render() {
+    console.log(this.state.ea_pickup_time.length);
     return (
       <View style={styles.container}>
         <View style={{height:0.7*height,width:width,}}>
