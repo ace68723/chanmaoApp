@@ -2,6 +2,7 @@ import CardAPI from './CardAPI';
 import {
   NativeModules,
 } from 'react-native';
+import { GetUserInfo} from '../../../../App/Modules/Database';
 const StripeBridge = NativeModules.StripeBridge;
 
 // import {GetUserInfo} from '../../../App/Modules/Database';
@@ -27,9 +28,9 @@ export default  {
       if(!cardToken) {throw 'no cardToken'}
       // console.log(cardToken);
       // alert(cardToken);
-      // const {uid,token,version} = GetUserInfo();
+      const {uid,token,version} = GetUserInfo();
       const lo_data = {
-        authortoken:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NDA3ODU5NDUsImV4cCI6MTU3MjMyMTk0NSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsInVpZCI6IjEifQ.RIk_KgD_Oq31NkB6FSL0_PsRhmRWA3DwOLz2Fj4bjhI',
+        authortoken:token,
         iv_token: cardToken
       }
       const res = await CardAPI.addCard(lo_data);

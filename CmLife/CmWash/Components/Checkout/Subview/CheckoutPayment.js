@@ -31,7 +31,7 @@ export default class CheckoutUserInfo extends Component{
         }
       }
     }
-    if (this.props.cardInfo.last4) return (
+    if (this.props.cardInfo && this.props.cardInfo.last4) return (
       <View style={this.props.cardStyle}>
         <TouchableOpacity onPress={this.props.gotoCard}>
           <View style={styles.content}>

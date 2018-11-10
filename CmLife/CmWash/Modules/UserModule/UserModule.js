@@ -1,13 +1,13 @@
 import UserAPI from './UserAPI';
-// import {GetUserInfo, InitUserInfo} from '../../../App/Modules/Database';
+import {GetUserInfo} from '../../../../App/Modules/Database';
 export default  {
 
 
   async putUserAddr(io_data){
-    // const {uid,token,version} = GetUserInfo();
+    const {uid,token,version} = GetUserInfo();
     try {
       const lo_data ={
-        authortoken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NDA3ODU5NDUsImV4cCI6MTU3MjMyMTk0NSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsInVpZCI6IjEifQ.RIk_KgD_Oq31NkB6FSL0_PsRhmRWA3DwOLz2Fj4bjhI',
+        authortoken: token,
         iv_addr: io_data.addressObject.addr,
         iv_province: io_data.addressObject.province,
         iv_lat: io_data.addressObject.lat.toString(),

@@ -3,14 +3,16 @@ import {
   NativeModules,
 } from 'react-native';
 
-
+import { GetUserInfo} from '../../../../App/Modules/Database';
 
 export default  {
   async getHistoryOrder(authortoken){
     try {
-
+      const {uid,token,version} = GetUserInfo();
+      console.log(token);
+      console.log('OrderModule')
       const lo_data = {
-        authortoken:authortoken,
+        authortoken:token,
       }
       const res = await OrderAPI.getHistoryOrder(lo_data);
       if(res.ev_error === 1) { throw 'add card fail'}

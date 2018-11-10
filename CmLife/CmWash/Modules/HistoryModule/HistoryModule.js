@@ -2,15 +2,15 @@ import HistoryAPI from './HistoryAPI';
 import {
   NativeModules,
 } from 'react-native';
-
+import { GetUserInfo} from '../../../../App/Modules/Database';
 
 
 export default  {
   async HistoryOrder(io_data){
     try {
-
+      const {uid,token,version} = GetUserInfo();
       const lo_data = {
-        token:io_data.token,
+        token:token,
       }
       const res = await HistoryAPI.HistoryOrder(lo_data);
       const eo_data ={

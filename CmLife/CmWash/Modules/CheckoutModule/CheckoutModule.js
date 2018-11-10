@@ -2,15 +2,15 @@ import CheckoutAPI from './CheckoutAPI';
 import {
   NativeModules,
 } from 'react-native';
-
+import { GetUserInfo} from '../../../../App/Modules/Database';
 
 
 export default  {
   async beforeOrder(io_data){
     try {
-
+      const {uid,token,version} = GetUserInfo();
       const lo_data = {
-        token:io_data.token,
+        token:token,
         products:io_data.products,
       }
       const res = await CheckoutAPI.beforeOrder(lo_data);
@@ -38,8 +38,10 @@ export default  {
     console.log('moduleeeee')
     try {
 
+      const {uid,token,version} = GetUserInfo();
+
       const lo_data = {
-        token:io_data.token,
+        token:token,
       }
       // console.log(lo_data);
       const res = await CheckoutAPI.getCard(lo_data);
@@ -56,7 +58,9 @@ export default  {
   async getDeliveryTime(io_data){
     try {
 
+        const {uid,token,version} = GetUserInfo();
       const lo_data = {
+        token:token,
         date:io_data.date,
         wash_time:io_data.wash_time,
       }
@@ -74,7 +78,9 @@ export default  {
   async placeOrder(io_data){
     try {
 
+      const {uid,token,version} = GetUserInfo();
       const lo_data = {
+        token:token,
         'iv_method':0,
         'iv_location_id':io_data.location_id,
         'iv_pickup_date':io_data.pickup_date,
