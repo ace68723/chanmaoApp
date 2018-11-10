@@ -13,7 +13,7 @@ import {
   Platform,
 } from 'react-native';
 import { findIndex } from 'lodash';
-
+import { cme_getLanguage } from '../../../App/Modules/Database';
 import SboxCartAction from '../../Actions/SboxCartAction';
 import SboxCartStore from '../../Stores/SboxCartStore';
 
@@ -21,7 +21,7 @@ import Label from '../../../App/Constants/AppLabel';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
 
 const { height, width } = Dimensions.get('window');
-
+let language;
 export default class SboxCart extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +36,7 @@ export default class SboxCart extends Component {
     this._goToCheckout = this._goToCheckout.bind(this);
     this._renderGoBackBtn = this._renderGoBackBtn.bind(this);
     this._renderDiscount=this._renderDiscount.bind(this);
+    language = cme_getLanguage();
   }
   componentDidMount(){
     setTimeout(() => {
@@ -188,6 +189,7 @@ export default class SboxCart extends Component {
   }
 
   _renderContent() {
+    
     let headerHeight = 64;
     if (Platform.OS === 'ios' && ((height === 812 && width === 375) || (height === 375 && width === 812))){
       // if iPhone x
@@ -204,8 +206,10 @@ export default class SboxCart extends Component {
         />
       )
     }else {
+      let noItemPic = language === 'chinese_simple' ? require('./Image/no_item.png') : require('./Image/no_item_eng.png') 
+     
       return(
-        <Image  style={{height: height, width: width}} source={require('./Image/no_item.png')}></Image>
+        <Image  style={{height: height, width: width}} source={noItemPic}></Image>
       )
     }
   }

@@ -15,7 +15,7 @@ import SboxHistoryAction from '../../Actions/SboxHistoryAction';
 import SboxHistoryStore from '../../Stores/SboxHistoryStore';
 import SboxHistoryFlatlist from './SboxHistoryFlatlist';
 import SboxHeader from '../../../App/Components/General/SboxHeader';
-
+import { cme_getLanguage } from '../../../App/Modules/Database';
 const { height, width } = Dimensions.get('window');
 const viewHeight = Dimensions.get('window').height;
 const viewWidth = Dimensions.get('window').width;
@@ -94,8 +94,10 @@ export default class HistoryViewController extends Component {
 				/>
 	    )
 		}else {
+      let language = cme_getLanguage();
+      let noOrderPic = language === 'chinese_simple' ? require('./Image/no_order.png') : require('./Image/no_order_eng.png');
 			return(
-				<Image style={{height: height, width: width}} source={require('./Image/no_order.png')}></Image>
+				<Image style={{height: height, width: width}} source={noOrderPic}></Image>
 			)
 		}
   }

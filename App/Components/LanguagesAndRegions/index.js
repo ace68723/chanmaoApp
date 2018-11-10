@@ -102,12 +102,19 @@ export default class SelectRegionAndLanguage extends Component {
     			navigatorStyle: {navBarHidden: true},
     		});
       } else {
+        let data;
+        if (this.props.goToSbox) {
+          data = {goToSweetfulBox: true};
+        }
+        else {
+          data = {goToCmEat: true};
+        }
         this.props.navigator.resetTo({
     			screen: 'cmHome',
     			animated: true,
     			animationType: 'fade',
     			navigatorStyle: {navBarHidden: true},
-    			passProps:{goToCmEat: true}
+    			passProps:data
     		});
       }
     }
