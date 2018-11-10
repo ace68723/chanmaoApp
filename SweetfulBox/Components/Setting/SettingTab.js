@@ -63,10 +63,14 @@ class SettingTab extends Component {
   }
   _goToLanguageSettings() {
     this.props.navigator.push({
-      screen: 'CmEatLanguageSettings',
+      screen: 'LanguagesAndRegions',
       animated: true,
       navigatorStyle: {
         navBarHidden: true
+      },
+      passProps: {
+        firstSelection: false,
+        goToSbox: true
       }
     });
   }

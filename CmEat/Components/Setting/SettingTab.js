@@ -85,7 +85,8 @@ class SettingTab extends Component {
         navBarHidden: true
       },
       passProps: {
-        firstSelection: false
+        firstSelection: false,
+        goToCmEat: true
       }
     });
   }

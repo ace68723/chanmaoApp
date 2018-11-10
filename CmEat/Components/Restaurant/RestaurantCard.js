@@ -53,6 +53,7 @@ class RestaurantCard extends Component {
 								/>
 								<Text style={{color:'#40a2e7',
 															marginLeft:7,
+															marginRight: 20,
 															fontWeight:'200',
 															alignSelf: 'center',
 															fontFamily:'NotoSansCJKsc-Regular'}}
