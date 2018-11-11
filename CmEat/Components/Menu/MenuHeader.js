@@ -170,7 +170,7 @@ export default class MenuHeader extends Component {
 					<Text style={{color: '#666666',
 												// color:'#ababb0',
 												fontFamily:'NotoSansCJKsc-Regular',
-												marginTop:10,
+												marginTop:0,
 												textAlign:'center',}}
 								allowFontScaling={false}>
 						{this.props.restaurant.desc}
