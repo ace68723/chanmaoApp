@@ -64,7 +64,7 @@ export default class ChooseCardType extends Component {
       //   cancelText: "取消",
       //   onConfirm: () => {
       //     const data = {oid: state.oid,
-      //                   dltype: 1,
+      //                   dltype: this.props.orderInfo.order_dltype,
       //                   payment_channel: state.payment_channel};
       //     HistoryAction.changeOrderCase(data);
       //     this.props.navigator.dismissModal({animationType: 'slide-down'});
@@ -103,7 +103,7 @@ export default class ChooseCardType extends Component {
     else if (this.props.flag == 'fromHistory') {
       const data = {
         oid: this.props.orderInfo.order_oid,
-        dltype: 1,
+        dltype: this.props.orderInfo.order_dltype,
         payment_channel: 1
       }
       HistoryAction.viewOrderCase(data);
@@ -142,7 +142,7 @@ export default class ChooseCardType extends Component {
     else if (this.props.flag == 'fromHistory') {
       const data = {
         oid: this.props.orderInfo.order_oid,
-        dltype: 1,
+        dltype: this.props.orderInfo.order_dltype,
         payment_channel: 10
       }
       HistoryAction.viewOrderCase(data);
@@ -159,7 +159,7 @@ export default class ChooseCardType extends Component {
     else if (this.props.flag == 'fromHistory') {
       const data = {
         oid: this.props.orderInfo.order_oid,
-        dltype: 1,
+        dltype: this.props.orderInfo.order_dltype,
         payment_channel: 0
       }
       HistoryAction.viewOrderCase(data);
@@ -175,7 +175,7 @@ export default class ChooseCardType extends Component {
     else if (this.props.flag == 'fromHistory') {
       const data = {
         oid: this.props.orderInfo.order_oid,
-        dltype: 1,
+        dltype: this.props.orderInfo.order_dltype,
         payment_channel: 30
       }
       HistoryAction.viewOrderCase(data);
@@ -194,7 +194,7 @@ export default class ChooseCardType extends Component {
     else if (this.props.flag == 'fromHistory') {
       const data = {
         oid: this.props.orderInfo.order_oid,
-        dltype: 1,
+        dltype: this.props.orderInfo.order_dltype,
         payment_channel: 1
       }
       HistoryAction.viewOrderCase(data);
@@ -428,7 +428,7 @@ export default class ChooseCardType extends Component {
 
   _confirmToPay() {
     const data = {oid: this.state.oid,
-                  dltype: 1,
+                  dltype: this.props.orderInfo.order_dltype,
                   payment_channel: this.state.payment_channel};
     this.setState({showPriceDetail: !this.state.showPriceDetail});
     HistoryAction.changeOrderCase(data);
