@@ -51,7 +51,7 @@ module.exports={
 
     //Check out
     ADD_PAYMENT:'添加支付方式',
-    PICK_UP:'现金自取',
+    PICK_UP:'自取',
     DELIVER:'送餐',
     SET_DELIVER_FEE:'定制运费',
     CHECK_OUT:'结账',
@@ -166,7 +166,7 @@ module.exports={
     DEBIT_CARD:'借记卡',
     ALIPAY:'支付宝',
     CASH:'现金到付',
-    CASH_SELF_PICKUP:'现金自取',
+    CASH_SELF_PICKUP:'自取',
     CARD:'刷卡',
     APPLE_PAY:'Apple Pay',
     PAYMENT_TYPE:"支付方式",
