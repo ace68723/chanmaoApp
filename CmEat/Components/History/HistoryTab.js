@@ -119,7 +119,8 @@ class HistoryTab extends Component {
 				if (state.doRepay && !this.state.doRepay) {
 					switch (state.payment_channel) {
 						case 0:
-							this.props._cashSelected(state.oid);
+							// this.props._cashSelected(state.oid);
+							this._doAutoRefresh();
 							break;
 						case 1:
 							// data.charge_total
@@ -131,13 +132,15 @@ class HistoryTab extends Component {
 																		charge_total: state.fees.charge_total});
 							break;
 						case 30:
-							this._applePaySelected({oid: state.oid,
-																			subtotal: state.fees.ori_pretax.toString(),
-																			shipping: state.fees.dlexp.toString(),
-																			tax: state.fees.tax.toString(),
-																			service_fee: state.fees.service_fee.toString(),
-																			charge_total: state.fees.charge_total,
-																			discount: state.fees.total_off});
+							setTimeout(() => {
+								this._applePaySelected({oid: state.oid,
+																				subtotal: state.fees.ori_pretax.toString(),
+																				shipping: state.fees.dlexp.toString(),
+																				tax: state.fees.tax.toString(),
+																				service_fee: state.fees.service_fee.toString(),
+																				charge_total: state.fees.charge_total,
+																				discount: state.fees.total_off});
+							}, 300);
 							break;
 						default:
 							break;

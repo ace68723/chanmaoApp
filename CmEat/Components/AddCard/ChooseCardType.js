@@ -54,7 +54,12 @@ export default class ChooseCardType extends Component {
 
   _onChange() {
     const state = Object.assign({},this.state,HistoryStore.getState());
-    if (state.showPriceDetail) {
+    if (state.goToHistory) {
+      this.props.navigator.dismissModal({
+          animationType: 'slide-down'
+        });
+    }
+    else if (state.showPriceDetail) {
       this.setState(state);
       // this.popupView.setPriceDetail({
       //   title: state.payment_channel === 0 ? '确认改为现金到付' : "确认支付",
