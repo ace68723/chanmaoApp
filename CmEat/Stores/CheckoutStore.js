@@ -32,6 +32,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     coupon_code: '',
     selectedCoupon: '',
     alertMsg: '',
+    ticket_id: '',
+
   },
   initState(){
     this.state = {
@@ -51,6 +53,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         coupon_code: '',
         selectedCoupon: '',
         alertMsg: '',
+        ticket_id: '',
       };
   },
 	emitChange(){
@@ -124,7 +127,21 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
   updateDltype(data){
   		// const dltype = data.type;
       this.state.dltype = data.type;
-      this.state.payment_channel = 0;
+      if (data.type == 1) {
+        this.state.payment_channel = 0;
+      } else if (data.type == 0) {
+        let paymentLength = 0;
+        for (let _case of this.state.cases) {
+          if (_case.dltype == 0) {
+            paymentLength++;
+          }
+        }
+        if (paymentLength > 1) {
+          this.state.payment_channel = 10;
+        } else {
+          this.state.payment_channel = 0;
+        }
+      }
   		// cme_updateDltype(dltype);
   		// CheckoutAction.calculateDeliveryFee()
       this._updateSelectedCase();

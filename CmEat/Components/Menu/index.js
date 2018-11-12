@@ -403,7 +403,7 @@ class Menu extends Component {
                   end_time = {this.props.restaurant.end_time}
                   />
             </Animated.View>
-            <View style={{position:'absolute',left:0,top:0,right:0,bottom:0,}}>
+            <View style={{position:'absolute',left:0,top:10,right:0,bottom:0,}}>
               {this._renderMenuList()}
             </View>
 

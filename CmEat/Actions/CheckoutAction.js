@@ -156,7 +156,11 @@ export default {
           })
         }
         else {
-          data.ev_message = "下单失败";
+          if (result.ev_context && result.ev_context.length > 0) {
+            data.ev_message = result.ev_context;
+          } else {
+            data.ev_message = "下单失败";  
+          }
           dispatch({
               actionType: AppConstants.API_ALERT, data
           })
