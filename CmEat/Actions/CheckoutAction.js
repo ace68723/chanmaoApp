@@ -156,7 +156,8 @@ export default {
           })
         }
         else {
-          data.ev_message = "下单失败";
+          // data.ev_message = "下单失败";
+          data.ev_message = result.ev_context;
           dispatch({
               actionType: AppConstants.API_ALERT, data
           })

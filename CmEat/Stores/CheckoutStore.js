@@ -32,6 +32,8 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     coupon_code: '',
     selectedCoupon: '',
     alertMsg: '',
+    ticket_id: '',
+
   },
   initState(){
     this.state = {
@@ -51,6 +53,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         coupon_code: '',
         selectedCoupon: '',
         alertMsg: '',
+        ticket_id: '',
       };
   },
 	emitChange(){
