@@ -8,7 +8,7 @@ import {
   FlatList,
   Dimensions
 } from 'react-native';
-
+import AuthAction from '../../../../App/Actions/AuthAction';
 import SettingsCell from './SettingsCell.js'
 
 const {width,height} = Dimensions.get('window');
@@ -48,6 +48,17 @@ export default class Home extends Component {
     this._goToCmEat=this._goToCmEat.bind(this);
     this.renderCells=this.renderCells.bind(this);
     this.onPressedCell=this.onPressedCell.bind(this);
+    this._logout=this._logout.bind(this);
+  }
+  _logout() {
+    AuthAction.logout();
+    this.props.navigator.resetTo({
+        screen: 'cmHome',
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+        // passProps:{goToCmEat: true}
+      });
   }
   _goToCmEat() {
     this.props.navigator.resetTo({
@@ -60,7 +71,9 @@ export default class Home extends Component {
   }
   onPressedCell(key){
     console.log(key);
-    if (key=='cmeat') {this._goToCmEat();console.log('goto cm')}
+    if (key=='cmeat') {this._goToCmEat();}
+
+    if (key=='logout') {this._logout();}
   }
   renderCells(item) {
     return (<SettingsCell cardStyle={styles.card} title={item.title} type={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />)
