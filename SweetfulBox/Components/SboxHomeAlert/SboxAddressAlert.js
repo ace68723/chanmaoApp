@@ -23,7 +23,7 @@ export default class SboxAddressAlert extends Component {
     return (
       <TouchableOpacity style={styles.container} onPress={this._closeSboHomeAlert}>
         <View style={{padding:20,paddingLeft:25,paddingRight:25,}}>
-          <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',textAlign:'left', color:'white'}}>
+          <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'NotoSans-Regular',textAlign:'left', color:'white'}}>
               {this.props.message}
           </Text>
         </View>

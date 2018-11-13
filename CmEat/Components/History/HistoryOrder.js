@@ -12,13 +12,13 @@
 //     return (
 //       <TouchableOpacity onPress={props.HistoryOrderDetailVisible.bind(null,props.order.oid)}>
 //         <View style={styles.container}>
-//           <Text style={[styles.order,{flex:0.2,fontFamily:'NotoSansCJKsc-Regular',}]}>
+//           <Text style={[styles.order,{flex:0.2,fontFamily:'NotoSans-Regular',}]}>
 //             # {props.order.oid}
 //           </Text>
-//           <Text style={[styles.order,{flex:0.5,fontFamily:'NotoSansCJKsc-Regular',}]} numberOfLines={2}>
+//           <Text style={[styles.order,{flex:0.5,fontFamily:'NotoSans-Regular',}]} numberOfLines={2}>
 //             {props.order.rrname}
 //           </Text>
-//           <Text style={[styles.time,{flex:0.3,fontFamily:'NotoSansCJKsc-Regular',}]}>
+//           <Text style={[styles.time,{flex:0.3,fontFamily:'NotoSans-Regular',}]}>
 //             {props.order.created}
 //           </Text>
 //         </View>

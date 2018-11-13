@@ -56,7 +56,7 @@ class RestaurantCard extends Component {
 			                        marginRight: 20,
 			                        fontWeight:'200',
 			                        alignSelf: 'center',
-			                        fontFamily:'NotoSansCJKsc-Regular'}}
+			                        fontFamily:'NotoSans-Regular'}}
 			                allowFontScaling={false}>
 			              {this.state.restaurant.discount_message}
 			          </Text>
@@ -71,7 +71,7 @@ class RestaurantCard extends Component {
 													fontSize:14,
 													fontWeight:'200',
 													marginTop:2,
-													fontFamily:'NotoSansCJKsc-Regular'}}
+													fontFamily:'NotoSans-Regular'}}
 									allowFontScaling={false}>
 								{this.state.restaurant.desc}
 						</Text>
@@ -89,7 +89,7 @@ class RestaurantCard extends Component {
 				// 								marginLeft:7,
 				// 								fontWeight:'200',
 				// 								alignSelf: 'center',
-				// 								fontFamily:'NotoSansCJKsc-Regular'}}
+				// 								fontFamily:'NotoSans-Regular'}}
 				// 				allowFontScaling={false}>
 				// 			税前满$66.66可享受85折
 				// 	</Text>
@@ -180,7 +180,7 @@ class RestaurantCard extends Component {
               <Text style={{color:'#ababb0',
 														fontSize:12,
 														fontWeight:'400',
-														fontFamily:'NotoSansCJKsc-Regular',
+														fontFamily:'NotoSans-Regular',
 														marginLeft:3,
 														textAlign:'right'}}
 										allowFontScaling={false}>
@@ -239,8 +239,7 @@ class RestaurantCard extends Component {
                               borderRightWidth:StyleSheet.hairlineWidth,}}>
                   <Text style={{color:'#363646',
 																fontSize:15,
-																fontWeight: '800',
-																fontFamily:'NotoSansCJKsc-Black',}}
+																fontFamily: 'NotoSans-Black',}}
 												allowFontScaling={false}>
                       {this.state.restaurant.name}
                   </Text>

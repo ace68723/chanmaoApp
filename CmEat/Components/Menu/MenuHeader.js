@@ -78,7 +78,7 @@ export default class MenuHeader extends Component {
 				<Text style={{textAlign:'center',
 										  marginTop:7,
 											color:'#3a3b47',
-											fontFamily:'NotoSansCJKsc-Regular'}}
+											fontFamily:'NotoSans-Regular'}}
 							 allowFontScaling={false}>
 						最低起送价: {this.props.restaurant.start_amount}
 				</Text>
@@ -110,7 +110,7 @@ export default class MenuHeader extends Component {
 													color:'#40a2e7',
 													lineHeight: 16,
 													marginLeft: 10,
-													fontFamily:'NotoSansCJKsc-Regular'}}
+													fontFamily:'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{this.props.restaurant.discount_message}
 						</Text>
@@ -141,8 +141,7 @@ export default class MenuHeader extends Component {
 				<Animated.View style={{opacity:this.state.intrOpacity}}>
 					<Text style={{color:'#363646',
 												fontSize:15,
-												fontWeight:'500',
-												fontFamily:'NotoSansCJKsc-Black',}}
+												fontFamily:'NotoSans-Black',}}
 								allowFontScaling={false}>
 							{this.props.restaurant.name}
 					</Text>
@@ -150,9 +149,8 @@ export default class MenuHeader extends Component {
 						<View style={{flex:1,}}>
 							<Text style={{color:'#ababb0',
 														fontSize:12,
-														fontWeight:'200',
 														marginTop:5,
-														fontFamily:'NotoSansCJKsc-Regular'}}
+														fontFamily:'NotoSans-Regular'}}
 										allowFontScaling={false}>
 									{this.props.restaurant.desc}
 							</Text>
@@ -161,15 +159,16 @@ export default class MenuHeader extends Component {
 				</Animated.View>
 				<Animated.View style={{opacity:this.state.rrOpacity,marginTop:-25,}}>
 					<Text style={{color:'#363646',
-												fontSize:22,
-												fontFamily:'NotoSansCJKsc-Bold',
+												fontSize:21,
+												fontFamily:'NotoSans-Black',
 												textAlign:'center',}}
 								allowFontScaling={false}>
 							{this.props.restaurant.name}
 					</Text>
 					<Text style={{color: '#666666',
 												// color:'#ababb0',
-												fontFamily:'NotoSansCJKsc-Regular',
+												fontSize: 15,
+												fontFamily:'NotoSans-Regular',
 												marginTop:0,
 												textAlign:'center',}}
 								allowFontScaling={false}>
@@ -178,7 +177,7 @@ export default class MenuHeader extends Component {
 					{this._renderStartMount()}
 					<Text style={{textAlign:'center',
 												color:'#84828d',
-												fontFamily:'NotoSansCJKsc-Regular'}}
+												fontFamily:'NotoSans-Regular'}}
 								allowFontScaling={false}>
 						{this.props.start_time} - {this.props.end_time}
 					</Text>

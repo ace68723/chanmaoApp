@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     resturantName:{
       textAlign:"center",
       fontSize:17,
-      fontFamily:'NotoSansCJKsc-Regular',
+      fontFamily:'NotoSans-Regular',
     },
     resturantAddress:{
       textAlign:"center",

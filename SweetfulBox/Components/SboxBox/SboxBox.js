@@ -70,7 +70,10 @@ export default class MyComponent extends Component {
 
                     source={require('./Image/box.png')}>
                 <Text style={{backgroundColor:'rgba(0,0,0,0)',
-                              fontFamily:'NotoSansCJKsc-Regular',}}
+                              alignSelf: 'center',
+                              fontSize: 14,
+                              height: 15,
+                              fontFamily:'NotoSans-Regular',}}
                       allowFontScaling={false}>
                    {this.state.totalQuantity}
                 </Text>
@@ -108,7 +111,7 @@ export default class MyComponent extends Component {
                     }}
                     source={require('./Image/box.png')}>
                 <Text style={{backgroundColor:'rgba(0,0,0,0)',
-                              fontFamily:'NotoSansCJKsc-Regular'}}
+                              fontFamily:'NotoSans-Regular'}}
                       allowFontScaling={false}>
                    {this.state.totalQuantity}
                 </Text>

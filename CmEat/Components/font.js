@@ -235,7 +235,7 @@ name Cochin-BoldItalic
 family Hiragino Mincho ProN
 name HiraMinProN-W6
 name HiraMinProN-W3
-family NotoSansCJKsc-Black
+family NotoSans-Regular
 name FZZYJW--GB1-0
 family Devanagari Sangam MN
 name DevanagariSangamMN

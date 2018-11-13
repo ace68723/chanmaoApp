@@ -58,7 +58,7 @@ export default (props) =>{
             <View style={{marginBottom: 12}}>
               <Text style={{fontSize:16,
                             color:'#363646',
-                            fontFamily:'NotoSansCJKsc-Regular'}}
+                            fontFamily:'NotoSans-Regular'}}
                     allowFontScaling={false}>
                   {props.rightButtonText}
               </Text>
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:'bold',
     textAlign:'center',
-    fontFamily:'NotoSansCJKsc-Black',
+    fontFamily:'NotoSans-Regular',
     marginBottom:10,
   },
 })

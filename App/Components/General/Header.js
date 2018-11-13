@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:'bold',
     textAlign:'center',
-    fontFamily:'NotoSansCJKsc-Black',
+    fontFamily:'NotoSans-Regular',
     marginBottom:10,
   },
 })

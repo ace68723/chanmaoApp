@@ -25,7 +25,7 @@ export default class SearchByArea extends Component{
         return(
             <View style={{padding:10,paddingTop:20,paddingBottom:0}}>
                 <Text style={{fontSize:18,
-															fontFamily:"NotoSansCJKsc-Regular"}}
+															fontFamily:"NotoSans-Regular"}}
                       allowFontScaling={false}>
                     {Label.getCMLabel('CITY_AREA')}
                 </Text>
@@ -35,7 +35,7 @@ export default class SearchByArea extends Component{
 		// 	return(
 		// 		<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
 		// 			<Text style={{fontSize:18,
-		// 										fontFamily:"NotoSansCJKsc-Regular"}}
+		// 										fontFamily:"NotoSans-Regular"}}
 		// 						allowFontScaling={false}>
 		// 				{Label.getCMLabel('RES_TAG')}
 		// 			</Text>
@@ -67,7 +67,7 @@ export default class SearchByArea extends Component{
   						<Text style={{backgroundColor:"rgba(0,0,0,0)",
 					    							color:"#ffffff",
 					                  fontSize:18,
-					                  fontFamily:'NotoSansCJKsc-Black'}}
+					                  fontFamily:'NotoSans-Regular'}}
 										allowFontScaling={false}>
                             {area.name}
                         </Text>

@@ -84,7 +84,7 @@ export default class orderConfirm extends Component {
                      onClosed={this.props.closeOrderConfirm}>
                 <View style={{flex:1}}>
                       <View style={styles.modalHearder}>
-                          <Text style={{fontSize:20, fontFamily: 'NotoSansCJKsc-Bold'}}
+                          <Text style={{fontSize:20, fontFamily: 'NotoSans-Regular'}}
                                 allowFontScaling={false}>{dldec}</Text>
                       </View>
                       <View style={styles.modalContent}>
@@ -125,7 +125,7 @@ export default class orderConfirm extends Component {
                                   <Text style={{color: '#666',
                                                  fontSize: 15,
                                                  fontWeight: '900',
-                                                 fontFamily: 'NotoSansCJKsc-Regular'}}
+                                                 fontFamily: 'NotoSans-Regular'}}
                                         allowFontScaling={false}>
                                         {Label.getCMLabel('CANCEL')}
                                   </Text>
@@ -143,7 +143,7 @@ export default class orderConfirm extends Component {
                                   <Text style={{color: 'white',
                                                  fontSize: 15,
                                                  fontWeight: '900',
-                                                 fontFamily: 'NotoSansCJKsc-Regular'}}
+                                                 fontFamily: 'NotoSans-Regular'}}
                                         allowFontScaling={false}>
                                         {Label.getCMLabel('CONFIRM')}
                                   </Text>
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     fontSize:18,
     lineHeight: 22,
     flex:1,
-    fontFamily: 'NotoSansCJKsc-Regular'
+    fontFamily: 'NotoSans-Regular'
   },
   modalButton:{
     flex:1,
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   },
   buttonFont:{
     fontSize:18,
-    fontFamily: 'NotoSansCJKsc-Regular'
+    fontFamily: 'NotoSans-Regular'
   },
   modalFooter:{
     flex:1,

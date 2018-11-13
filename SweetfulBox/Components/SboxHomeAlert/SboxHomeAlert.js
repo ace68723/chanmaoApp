@@ -42,7 +42,7 @@ export default class SboxHomeAlert extends Component {
             />
           </View>
           <View style={{padding:20,paddingLeft:25,paddingRight:25,}}>
-            <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',textAlign:'left'}}>
+            <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'NotoSans-Regular',textAlign:'left'}}>
                 {this.props.message}
             </Text>
           </View>
@@ -60,7 +60,7 @@ export default class SboxHomeAlert extends Component {
                           }}>
                 <Text style={{color:'#ffffff',
                               fontSize:18,
-                              fontFamily:'NotoSansCJKsc-Regular'}}
+                              fontFamily:'NotoSans-Regular'}}
                       allowFontScaling={false}>
                   {Label.getSboxLabel('CONFIRM')}
                 </Text>

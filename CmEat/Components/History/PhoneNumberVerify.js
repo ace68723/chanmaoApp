@@ -84,7 +84,7 @@ class PhoneNumberVerify extends Component{
                 <TextInput
                     style={{height: 40,
 														borderColor: '#d9d9d9',
-														fontFamily:'NotoSansCJKsc-Regular',
+														fontFamily:'NotoSans-Regular',
 														fontSize:13,
 														borderWidth: 1,
 														paddingLeft:10,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
 			padding:8,
       fontSize: 17,
       color: '#fff',
-			fontFamily:'NotoSansCJKsc-Regular',
+			fontFamily:'NotoSans-Regular',
     },
     button: {
       // flex:1,
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
       textAlign:"center",
       fontSize:17,
       color:'#000000',
-			fontFamily:'NotoSansCJKsc-Regular',
+			fontFamily:'NotoSans-Regular',
     },
 
 });

@@ -200,7 +200,7 @@ export default class CmEatAddInfo extends Component {
                             marginRight:5,
                             padding:5
                           }}>
-                <Text style={{color:type.textColor,fontFamily:'NotoSansCJKsc-Regular',}}
+                <Text style={{color:type.textColor,fontFamily:'NotoSans-Regular',}}
 											allowFontScaling={false}>
                   {type.text}
                 </Text>
@@ -252,7 +252,7 @@ export default class CmEatAddInfo extends Component {
 																								height:28,
 																								transform: [{rotate: interpolatedRotateAnimation}]}}/>
 												<Animated.View style={{flexDirection:"column",flex:1,marginTop:interpolatedMarginTop}}>
-														<Text style={{marginLeft:10,marginTop:12,fontFamily:'NotoSansCJKsc-Regular',}}
+														<Text style={{marginLeft:10,marginTop:12,fontFamily:'NotoSans-Regular',}}
 																	allowFontScaling={false}>
 															{Label.getCMLabel('ADD_DEFAULT_ADDRESS')}
 														</Text>
@@ -400,7 +400,7 @@ let styles = StyleSheet.create({
     fontSize:18,
     marginLeft:20,
     marginRight:10,
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
   },
   fistInput:{
     // marginLeft:10,
@@ -409,7 +409,7 @@ let styles = StyleSheet.create({
     height:50,
     borderRadius: 8,
     color: '#000',
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
   },
   secondInput:{
     marginLeft:10,
@@ -428,7 +428,7 @@ let styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: '#fff',
-		fontFamily:'NotoSansCJKsc-Bold',
+		fontFamily:'NotoSans-Regular',
   },
   button: {
     flex:1,

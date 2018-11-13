@@ -152,7 +152,7 @@ export default class SelectRegionAndLanguage extends Component {
                     onPress={()=>this.chooseRegion(region.value)}
                     style={{flex:0.5,alignItems:'center'}}>
                     <Text style={{fontSize:24,
-                                fontFamily: this.state.chosenRegion === region.value ? 'NotoSansCJKsc-Bold' : 'NotoSansCJKsc-Regular',
+                                fontFamily: this.state.chosenRegion === region.value ? 'NotoSans-Regular' : 'NotoSans-Regular',
                                 color: this.state.chosenRegion === region.value ? '#ea7b21' : 'grey'}}
                         allowFontScaling={false}>{region.title}</Text>
                 </TouchableOpacity>
@@ -173,7 +173,7 @@ export default class SelectRegionAndLanguage extends Component {
                     </View>
                     <View style={{width:120, alignItems:'center'}}>
                     <Text style={{
-                            fontFamily:this.state.chosenLanguage == lang.value ? 'NotoSansCJKsc-Bold' : 'NotoSansCJKsc-Regular',
+                            fontFamily:this.state.chosenLanguage == lang.value ? 'NotoSans-Regular' : 'NotoSans-Regular',
                             fontSize:20,
                             color:'grey'
                         }}

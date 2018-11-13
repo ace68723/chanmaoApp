@@ -293,7 +293,7 @@ export default class pastOrderEN extends Component {
               <Text style={{fontSize:20,
                             textAlign:'center',
                             paddingBottom:10,
-                            fontFamily:'NotoSansCJKsc-Regular'}}
+                            fontFamily:'NotoSans-Regular'}}
                     allowFontScaling={false}>
               {Label.getCMLabel('CONFIRM_COMMENT')}</Text>
           </View>
@@ -310,7 +310,7 @@ export default class pastOrderEN extends Component {
                     <Text style={{alignSelf: 'center',
                                   fontSize:18,
                                   textAlign:'center',
-                                  fontFamily:'NotoSansCJKsc-Regular'}}
+                                  fontFamily:'NotoSans-Regular'}}
                           allowFontScaling={false}>
                     {Label.getCMLabel('CANCEL')}</Text>
                 </TouchableOpacity>
@@ -320,7 +320,7 @@ export default class pastOrderEN extends Component {
                 <Text style={{fontSize:18,
                               textAlign:'center',
                               color: '#ff8b00',
-                              fontFamily:'NotoSansCJKsc-Regular'}}
+                              fontFamily:'NotoSans-Regular'}}
                       allowFontScaling={false}>
                 {Label.getCMLabel('CONFIRM')}</Text>
             </TouchableOpacity>
@@ -367,7 +367,7 @@ export default class pastOrderEN extends Component {
                             borderWidth: StyleSheet.hairlineWidth,
                             borderColor: '#bdc8d9',
                             marginBottom: 5,
-                            fontFamily:'NotoSansCJKsc-Regular'}}
+                            fontFamily:'NotoSans-Regular'}}
                     allowFontScaling={false}>
                     {text}
               </Text>
@@ -391,12 +391,12 @@ export default class pastOrderEN extends Component {
                             flexDirection: 'column',
                             marginLeft: 10}}>
                   <Text style={{fontSize: 18,
-                                fontFamily:'NotoSansCJKsc-Regular'}}
+                                fontFamily:'NotoSans-Regular'}}
                         allowFontScaling={false}>
                         {Label.getCMLabel('CM_DELIVERY')}
                   </Text>
                   <Text style={{fontSize: 14,
-                                fontFamily:'NotoSansCJKsc-Regular'}}
+                                fontFamily:'NotoSans-Regular'}}
                         allowFontScaling={false}>
                       {Label.getCMLabel('COMPLETE_TIME_PREFIX')}{this.state.complete_time.toString().split(" ")[4]}{Label.getCMLabel('COMPLETE_TIME_SUFFIX')}
                   </Text>
@@ -407,7 +407,7 @@ export default class pastOrderEN extends Component {
                               alignItems: 'center',
                               marginRight:10,
                             }}>
-                  <Text style={{color: '#ff8b00', fontSize: 14, fontFamily:'NotoSansCJKsc-Regular'}}
+                  <Text style={{color: '#ff8b00', fontSize: 14, fontFamily:'NotoSans-Regular'}}
                         allowFontScaling={false}>
                   {Label.getCMLabel('CHANGE_COMMENT')}</Text>
                   <Text allowFontScaling={false}
@@ -419,7 +419,7 @@ export default class pastOrderEN extends Component {
                                 borderWidth: StyleSheet.hairlineWidth,
                                 borderColor: '#ff8b00',
                                 borderRadius: 7,
-                                fontFamily:'NotoSansCJKsc-Regular'}}>
+                                fontFamily:'NotoSans-Regular'}}>
                                 >
                   </Text>
                 </View>
@@ -441,7 +441,7 @@ export default class pastOrderEN extends Component {
                             flexDirection: 'column',
                             marginLeft: 10}}>
                   <Text style={{fontSize: 18,
-                                fontFamily:'NotoSansCJKsc-Regular'}}
+                                fontFamily:'NotoSans-Regular'}}
                         allowFontScaling={false}>
                         {Label.getCMLabel('CM_DELIVERY')}
                   </Text>
@@ -458,7 +458,7 @@ export default class pastOrderEN extends Component {
           {driverHeader()}
           <View style={{padding: 20}}>
               <Text allowFontScaling={false}
-                    style={{textAlign: 'center', marginBottom: 20, fontFamily:'NotoSansCJKsc-Regular'}}>
+                    style={{textAlign: 'center', marginBottom: 20, fontFamily:'NotoSans-Regular'}}>
               {Label.getCMLabel('RATE_DELIVERY')}</Text>
               <View style={{flexDirection: 'row',
                             justifyContent: 'space-around',
@@ -478,7 +478,7 @@ export default class pastOrderEN extends Component {
                                  borderColor: '#bdc8d9',
                                  textAlignVertical: 'top',
                                  padding: 10,
-                                 fontFamily:'NotoSansCJKsc-Regular'}}
+                                 fontFamily:'NotoSans-Regular'}}
                          ref={'driverComment'}
                          allowFontScaling={false}
                          underlineColorAndroid='transparent'
@@ -530,7 +530,7 @@ export default class pastOrderEN extends Component {
                             borderWidth: StyleSheet.hairlineWidth,
                             borderColor: '#bdc8d9',
                             marginBottom: 5,
-                            fontFamily:'NotoSansCJKsc-Regular'}}>
+                            fontFamily:'NotoSans-Regular'}}>
                     {text}
               </Text>
           </TouchableOpacity>
@@ -573,7 +573,7 @@ export default class pastOrderEN extends Component {
         _dishList.push(
           <View key={dish.otid} style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12}}>
             <Text allowFontScaling={false}
-                  style={{color: '#a5a5a5', fontFamily:'NotoSansCJKsc-Regular'}}>{dish.name}</Text>
+                  style={{color: '#a5a5a5', fontFamily:'NotoSans-Regular'}}>{dish.name}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity style={{flexDirection: 'row',
                                         justifyContent: 'center',
@@ -590,7 +590,7 @@ export default class pastOrderEN extends Component {
                               marginRight: 5,
                               fontSize: 16,
                               color: thump_up_color,
-                              fontFamily:'NotoSansCJKsc-Regular'}}>
+                              fontFamily:'NotoSans-Regular'}}>
                       {Label.getCMLabel('LIKE')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{flexDirection: 'row',
@@ -607,7 +607,7 @@ export default class pastOrderEN extends Component {
                               marginRight: 5,
                               fontSize: 16,
                               color: thump_down_color,
-                              fontFamily:'NotoSansCJKsc-Regular'}}>
+                              fontFamily:'NotoSans-Regular'}}>
                       {Label.getCMLabel('DISLIKE')}</Text>
               </TouchableOpacity>
             </View>
@@ -651,7 +651,7 @@ export default class pastOrderEN extends Component {
                                  borderColor: '#bdc8d9',
                                  textAlignVertical: 'top',
                                  padding: 10,
-                                 fontFamily:'NotoSansCJKsc-Regular'}}
+                                 fontFamily:'NotoSans-Regular'}}
                          ref={'restaurantComment'}
                          allowFontScaling={false}
                          underlineColorAndroid='transparent'
@@ -695,7 +695,7 @@ export default class pastOrderEN extends Component {
                         style={{textAlign: 'center',
                                 color: 'white',
                                 fontSize: 18,
-                                fontFamily:'NotoSansCJKsc-Regular'}}>
+                                fontFamily:'NotoSans-Regular'}}>
                     {Label.getCMLabel('CONFIRM')}
                   </Text>
                 </TouchableOpacity>
@@ -740,7 +740,7 @@ export default class pastOrderEN extends Component {
                   <Text style={{textAlign: 'center',
                                 color: 'white',
                                 fontSize: 18,
-                                fontFamily:'NotoSansCJKsc-Regular'}}
+                                fontFamily:'NotoSans-Regular'}}
                         allowFontScaling={false}>
                     {Label.getCMLabel('CONFIRM')}
                   </Text>
@@ -789,6 +789,6 @@ const styles = StyleSheet.create({
    fontSize: 20,
    color:'white',
    alignSelf:'center',
-   fontFamily:'NotoSansCJKsc-Black',
+   fontFamily:'NotoSans-Regular',
   },
 });

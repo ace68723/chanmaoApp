@@ -15,7 +15,7 @@ export default class SboxProductDetialDesc extends Component {
       return (
         <View style={{alignItems:'center',}}>
           <Text style={{fontSize:19,
-                        fontFamily:'NotoSansCJKsc-Regular',
+                        fontFamily:'NotoSans-Regular',
                       }}
                 allowFontScaling={false}>
               {this.props.productName} | {this.props.selectedProduct.sku_name}
@@ -27,7 +27,7 @@ export default class SboxProductDetialDesc extends Component {
                         width:150,
                         marginTop:10,}}>
             <Text style={{color:'#ff768b',
-                          fontFamily:'NotoSansCJKsc-Regular',
+                          fontFamily:'NotoSans-Regular',
                           fontSize:15,
                           textAlign: 'center',
                           flex:1,
@@ -43,7 +43,7 @@ export default class SboxProductDetialDesc extends Component {
       return (
         <View style={{alignItems:'center',}}>
           <Text style={{fontSize:19,
-                        fontFamily:'NotoSansCJKsc-Regular',
+                        fontFamily:'NotoSans-Regular',
                       }}
                 allowFontScaling={false}>
               {this.props.productName} | {this.props.selectedProduct.sku_name}
@@ -52,7 +52,7 @@ export default class SboxProductDetialDesc extends Component {
                         width:150,
                         marginTop:10,}}>
             <Text style={{color:'#ff768b',
-                          fontFamily:'NotoSansCJKsc-Regular',
+                          fontFamily:'NotoSans-Regular',
                           fontSize:15,
                           textAlign: 'center',
                           flex:1,
@@ -73,7 +73,7 @@ export default class SboxProductDetialDesc extends Component {
   }
 }
 // <Text style={{color:'#848689',
-//               fontFamily:'NotoSansCJKsc-Regular',
+//               fontFamily:'NotoSans-Regular',
 //               fontSize:15,
 //               marginTop:10,
 //             }}>

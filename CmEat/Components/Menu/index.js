@@ -278,7 +278,8 @@ class Menu extends Component {
 								<Text style={{color:"#ffffff",
 															fontSize:16,
 															margin:3,
-															fontFamily:'NotoSansCJKsc-Black',}}
+															fontWeight: '600',
+															fontFamily:'NotoSans-Regular',}}
 											allowFontScaling={false}>
 										${this.state.cartTotals.total}
 								</Text>
@@ -291,8 +292,9 @@ class Menu extends Component {
 															paddingBottom:2,
 															borderColor:"#ffffff"}}>
 									<Text  style={{color:"#ffffff",
-																 fontSize:13,
-																 fontFamily:'NotoSansCJKsc-Black',}}
+																 fontSize:14,
+																 fontWeight: '700',
+																 fontFamily:'NotoSans-Regular',}}
 												 allowFontScaling={false}>
 												 {Label.getCMLabel('GO_CHECKOUT')}
 									</Text>

@@ -80,7 +80,7 @@ export default class SearchByTag extends Component{
 									flexDirection:'row' ,
 									justifyContent:'center',
 									alignItems:'center',}}>
-					<Text style={{color:'#ff8b00',fontFamily:"NotoSansCJKsc-Regular"}}
+					<Text style={{color:'#ff8b00',fontFamily:"NotoSans-Regular"}}
 								allowFontScaling={false}>{this.state.extendViewText}</Text>
 					<Image source={this.state.showingMoreCategories ? require('../Image/up-arrow.png') : require('../Image/down-arrow.png')}
 						style={{marginLeft:5,width:10,height:10}}/>
@@ -91,7 +91,7 @@ export default class SearchByTag extends Component{
     _renderHeader() {
 		return(
 			<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
-				<Text style={{fontSize:18,fontFamily:"NotoSansCJKsc-Regular"}}
+				<Text style={{fontSize:18,fontFamily:"NotoSans-Regular"}}
 							allowFontScaling={false}>
 					{Label.getCMLabel('RES_TAG')}
 				</Text>
@@ -113,7 +113,7 @@ export default class SearchByTag extends Component{
 						<Text style={{backgroundColor:"rgba(0,0,0,0)",
 													color:"#ffffff",
 										fontSize:18,
-										fontFamily:'NotoSansCJKsc-Black'}}
+										fontFamily:'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{tag.name}
 						</Text>

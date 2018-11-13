@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
 
 
 
-// fontFamily:'NotoSansCJKsc-Black',
+// fontFamily:'NotoSans-Regular',
 //
 //
 //
-// fontFamily:'NotoSansCJKsc-Regular',
+// fontFamily:'NotoSans-Regular',

@@ -95,11 +95,11 @@ export default class AddressForHomeHeader extends Component {
           <Text style={{color:"#000000",
                         fontSize:15,
                         fontWeight:'bold',
-                        fontFamily:'NotoSansCJKsc-Black',
+                        fontFamily:'NotoSans-Black',
                         marginBottom:10,}}
                         numberOfLines={1}
                 allowFontScaling={false}>
-              {Label.getCMLabel('DELIVER_TO')}   {this.state.selectedAddress}
+              {Label.getCMLabel('DELIVER_TO')}  {this.state.selectedAddress}
           </Text>
 
         </View>
@@ -110,7 +110,7 @@ export default class AddressForHomeHeader extends Component {
         <Text style={{color:"#000000",
                       fontSize:15,
                       fontWeight:'bold',
-                      fontFamily:'NotoSansCJKsc-Black',
+                      fontFamily:'NotoSans-Regular',
                       marginBottom:10,}}
                       numberOfLines={1}
               allowFontScaling={false}>

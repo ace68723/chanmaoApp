@@ -59,7 +59,7 @@ export default (props) =>{
               <Text style={{fontSize:16,
                             textAlign: 'center',
                             color:'#363646',
-                            fontFamily:'NotoSansCJKsc-Regular'}}
+                            fontFamily:'NotoSans-Regular'}}
                     allowFontScaling={false}>
                   {props.rightButtonText}
               </Text>
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:'bold',
     textAlign:'center',
-    fontFamily:'NotoSansCJKsc-Black',
+    fontFamily:'NotoSans-Regular',
     marginBottom:10,
   },
 })
