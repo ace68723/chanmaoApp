@@ -239,6 +239,7 @@ class RestaurantCard extends Component {
                               borderRightWidth:StyleSheet.hairlineWidth,}}>
                   <Text style={{color:'#363646',
 																fontSize:15,
+																fontWeight: '800',
 																fontFamily:'NotoSansCJKsc-Black',}}
 												allowFontScaling={false}>
                       {this.state.restaurant.name}
