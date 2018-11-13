@@ -27,7 +27,7 @@ export default class HomeHeader extends Component {
           </View>
         </TouchableWithoutFeedback>
         <Text style={{ flex: 1, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
-          馋猫干洗
+          馋猫生活
         </Text>
         <View style={{flex: 1}}>
         </View>
