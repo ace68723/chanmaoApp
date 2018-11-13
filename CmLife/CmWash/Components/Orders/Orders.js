@@ -5,8 +5,11 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  Dimensions
 } from 'react-native';
+
+const {height, width} = Dimensions.get('window');
 import OrderAction from '../../Actions/OrderAction';
 import OrderStore from '../../Stores/OrderStore';
 import OrderCell from './OrderCell.js'
@@ -44,10 +47,20 @@ export default class Order extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList style={{marginTop: 6}} data={this.state.historyOrder} renderItem={({item}) => (this.renderCells(item))}/>
-      </View>
+      <View style={{flex:1,backgroundColor:'white',}}>
+        <View style={{ width: width, backgroundColor:'white',marginTop:0.02*height,height: 48, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
 
+
+
+          <Text style={{ flex: 1, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
+            订单
+          </Text>
+        </View>
+        <View style={styles.container}>
+
+          <FlatList style={{marginTop: 6}} data={this.state.historyOrder} renderItem={({item}) => (this.renderCells(item))}/>
+        </View>
+      </View>
     )
   }
 }

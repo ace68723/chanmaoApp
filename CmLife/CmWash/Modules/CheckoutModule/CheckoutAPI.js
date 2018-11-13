@@ -87,7 +87,7 @@ export default  {
         'authortoken':io_data.token,
     })
     options.body = JSON.stringify({
-      'iv_method':0,
+      'iv_method':1,
       'iv_location_id':io_data.iv_location_id,
       'iv_pickup_date':io_data.iv_pickup_date,
       'iv_pickup_time':io_data.iv_pickup_time,

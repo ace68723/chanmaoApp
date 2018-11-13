@@ -43,7 +43,7 @@ export default class OrderItemList extends Component{
           <Text style={[styles.text, styles.quantityText]}>{item.amount}</Text>
         </View>
         <View style={{flex: 8,justifyContent: 'center', marginLeft: -4}}>
-          <Text style={[styles.text, {marginLeft: 20,}]}>item1</Text>
+          <Text style={[styles.text, {marginLeft: 20,}]}>{item.name_zh}</Text>
         </View>
         <View style={{flex: 3,justifyContent: 'center',}}>
           <Text style={[styles.text, {marginLeft: 10, textAlign: 'right'}]}>$ {item.price}</Text>

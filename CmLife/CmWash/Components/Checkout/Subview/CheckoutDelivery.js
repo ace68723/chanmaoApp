@@ -37,8 +37,8 @@ export default class CheckoutUserInfo extends Component{
                 <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
                   <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
                   <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text style={{fontWeight: '700', fontSize: 15, marginBottom: 6}}>13:30-14:30</Text>
-                    <Text style={{fontWeight: '600', fontSize: 12,}}>2018-10-12</Text>
+                    <Text style={{fontWeight: '700', fontSize: 15, marginBottom: 6}}>{this.props.selectedDeliveryDate}</Text>
+                    <Text style={{fontWeight: '600', fontSize: 12,}}>{this.props.selectedDeliveryTime}</Text>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -74,13 +74,13 @@ export default class CheckoutUserInfo extends Component{
                   </View>
                 </TouchableOpacity>
                 <View style={{height: 60, width: 1, backgroundColor: '#999999', opacity: 0.4}}></View>
-                <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
+                <View >
                   <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
                   <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
                     <Text style={{fontWeight: '700', fontSize: 15, marginBottom: 6}}>请先选择取件时间</Text>
 
                   </View>
-                </TouchableOpacity>
+                </View>
               </View>
             </View>
           )

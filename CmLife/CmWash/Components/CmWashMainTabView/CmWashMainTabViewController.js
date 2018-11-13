@@ -19,40 +19,44 @@ export default class MyComponent extends Component {
     }
   }
   componentDidMount() {
+    console.log('tabview');
+    this.setState({
+      initialPage:this.props.fromPage
+    })
+    if (this.props.fromPage==1) alert('下单成功');
   }
   render() {
     return (
       <ScrollableTabView
         tabBarBackgroundColor={'#fff'}
-        tabBarActiveTextColor={'#ff7685'}
-        tabBarUnderlineColor={'#ff7685'}
-        tabBarUnderlineStyle={{'backgroundColor':'#ff7685'}}
+        tabBarActiveTextColor={'#2ad3be'}
+        tabBarUnderlineColor={'rgba(0,0,0,0)'}
+        tabBarUnderlineStyle={{'backgroundColor':'rgba(0,0,0,0)'}}
         tabBarTextStyle={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',}}
         tabBarInactiveTextColor={'#666666'}
         prerenderingSiblingsNumber={3}
         tabBarPosition = "bottom"
         initialPage={this.state.initialPage}
+        page={this.state.initialPage}
         style={{flex:1}}
-
       >
         <Home tabLabel='主页'
-              activeIconImage={require("./Image/home.png")}
-              inactiveIconImage={require("./Image/homegrey.png")}
+          activeIconImage={require("./Image/mainpage_green.png")}
+          inactiveIconImage={require("./Image/mainpage_grey.png")}
               navigator={this.props.navigator}
               />
         <Orders
               tabLabel='订单'
-              activeIconImage={require("./Image/box.png")}
-              inactiveIconImage={require("./Image/boxgrey.png")}
+              activeIconImage={require("./Image/order_green.png")}
+              inactiveIconImage={require("./Image/order_grey.png")}
               navigator={this.props.navigator}
 
               />
-              <Settings tabLabel='设置'
-                    navigator={this.props.navigator}
-                    inactiveIconImage={require("./Image/settinggrey.png")}
-
-                    activeIconImage={require("./Image/setting.png")}
-                    handleBackToHome={this.props.handleBackToHome}/>
+        <Settings tabLabel='设置'
+          activeIconImage={require("./Image/setting_green.png")}
+          inactiveIconImage={require("./Image/setting_grey.png")}
+              navigator={this.props.navigator}
+            />
       </ScrollableTabView>
 
   );

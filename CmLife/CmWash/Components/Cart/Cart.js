@@ -100,7 +100,9 @@ export default class Cart extends BaseDialog {
           }
           { !this.state.allowedShipping &&
             <View style={{flexDirection: 'row'}}>
-            <Image style={styles.shippingIcon} source={require('./Image/no.png')}/>
+            {(!this.shouldAllowedCheckout()) && <Image style={styles.shippingIcon} source={require('./Image/no.png')}/>}
+
+            {(this.shouldAllowedCheckout()) && <Image style={styles.shippingIcon} source={require('./Image/yes.png')}/>}
             <Text style={styles.shippingText}>满$30起送</Text>
             </View>
           }
@@ -118,7 +120,7 @@ export default class Cart extends BaseDialog {
           }
         </View>
         <View style={{flex: 1, marginTop: -4}}>
-          <Text style={styles.taxText}>税: ${this.getCartTax()}</Text>
+          <Text style={styles.taxText}> </Text>
           <Text style={styles.totalText}>总计: ${this.getCartTotal()}</Text>
         </View>
       </View>

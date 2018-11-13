@@ -81,7 +81,7 @@ export default  {
       const {uid,token,version} = GetUserInfo();
       const lo_data = {
         token:token,
-        'iv_method':0,
+        'iv_method':1,
         'iv_location_id':io_data.location_id,
         'iv_pickup_date':io_data.pickup_date,
         'iv_pickup_time':io_data.pickup_time,

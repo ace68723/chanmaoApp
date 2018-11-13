@@ -5,12 +5,13 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  Dimensions
 } from 'react-native';
-
+import HomeHeader from './HomeHeader'
 import HomeCell from './HomeCell'
 import BaseComponent from '../Common/BaseComponent'
-
+const {width,height} = Dimensions.get('window');
 export default class Home extends BaseComponent {
   constructor(props) {
     super(props);
@@ -39,6 +40,15 @@ export default class Home extends BaseComponent {
     };
     this.renderCells=this.renderCells.bind(this);
     this.onPressedCell=this.onPressedCell.bind(this);
+    this._backToHome=this._backToHome.bind(this);
+  }
+  _backToHome() {
+    this.props.navigator.resetTo({
+        screen: 'cmHome',
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+      });
   }
   onPressedCell(key){
     console.log(key);
@@ -47,6 +57,9 @@ export default class Home extends BaseComponent {
       this.props.navigator.push({
         screen: 'CmLifeMainTab',
         navigatorStyle: {navBarHidden: true},
+        passProps:{
+          fromPage:0,
+        }
       })
     }
   }
@@ -64,8 +77,12 @@ export default class Home extends BaseComponent {
   render() {
     console.log(this.state.cells)
     return (
-      <View style={styles.container}>
-        <FlatList style={{marginTop: 6}} data={this.state.cells} renderItem={({item}) => (this.renderCells(item))}/>
+      <View style={{backgroundColor:'white',flex:1}}>
+        <HomeHeader backToHome={this._backToHome}
+                      />
+        <View style={styles.container}>
+          <FlatList style={{marginTop: 6}} data={this.state.cells} renderItem={({item}) => (this.renderCells(item))}/>
+        </View>
       </View>
 
     )
@@ -75,7 +92,7 @@ export default class Home extends BaseComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F0F0',marginTop:20,
+    backgroundColor: '#F0F0F0',
   },
   card: {
     flex: 1,
@@ -90,7 +107,7 @@ const styles = StyleSheet.create({
     shadowColor: 'grey',
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    height: 160,
+    height: 0.27*height,
     width: this.mScreenWidth,
     overflow: 'hidden'
   },

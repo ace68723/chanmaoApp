@@ -34,6 +34,7 @@ export default class Checkout extends Component {
     this.onChangeComment=this.onChangeComment.bind(this);
     this._goToAddress=this._goToAddress.bind(this);
     this._goToCard=this._goToCard.bind(this);
+    this._canPlaceOrder=this._canPlaceOrder.bind(this);
   }
   componentDidMount() {
     CheckoutStore.addChangeListener(this._onChange);
@@ -48,7 +49,18 @@ export default class Checkout extends Component {
     console.log(this.state);
     // 同步delivery picker的data source
     this.PickerDelivery.forceReloadDataSource();
-    if (this.state.placeOrderStatus==0) {alert('下单成功')}
+    if (this.state.placeOrderStatus==0) {
+      // alert('下单成功');
+      this.props.navigator.resetTo({
+          screen: 'CmLifeMainTab',
+          animated: true,
+          animationType: 'fade',
+          navigatorStyle: {navBarHidden: true},
+          passProps:{
+            fromPage:1,
+          }
+        });
+    }
   }
   componentWillUnmount() {
     CheckoutStore.removeChangeListener(this._onChange);
@@ -61,6 +73,7 @@ export default class Checkout extends Component {
     this.PickerDelivery.show();
   }
   onConfirmPickupTime(pickedData){
+    // CheckoutAction.resetDeliveryTime();
     CheckoutAction.getDeliveryTime(
       pickedData.selectedPrimaryOptions,
       pickedData.selectedSecondaryOptions,
@@ -94,6 +107,35 @@ export default class Checkout extends Component {
     console.log(data);
     CheckoutAction.placeOrder(data);
   }
+  _canPlaceOrder()
+  {
+    console.log(this.state.selectedPickUpDate);
+    console.log(this.state.selectedDeliveryDate);
+    console.log(this.state.eo_user_info);
+    console.log(this.state.eo_last4);
+    if (this.state.selectedPickUpDate && this.state.selectedDeliveryDate && this.state.eo_user_info && this.state.eo_last4) {
+      return (
+        <TouchableOpacity style={{position:'absolute',bottom:0,backgroundColor:'#2ad3be'}} onPress={this._placeOrder}>
+          <View style={{width:width,height:0.1*height,alignItems:'center',justifyContent:'center'}}>
+            <Text style={{fontSize:20,color:'white'}}>
+              下单
+            </Text>
+          </View>
+
+        </TouchableOpacity>
+      )
+    }
+    return (
+
+        <View style={{position:'absolute',bottom:0,backgroundColor:'grey',width:width,height:0.1*height,alignItems:'center',justifyContent:'center'}}>
+          <Text style={{fontSize:20,color:'white'}}>
+            下单
+          </Text>
+        </View>
+
+
+    )
+  }
   onChangeComment(comment){
     this.setState({comment:comment})
   }
@@ -109,7 +151,7 @@ export default class Checkout extends Component {
           selectedPickUpDate={this.state.selectedPickUpDate}
           selectedPickUpTime={this.state.selectedPickUpTime}
           selectedDeliveryDate={this.state.selectedDeliveryDate}
-          selectDeliveryTime={this.state.selectDeliveryTime}
+          selectedDeliveryTime={this.state.selectedDeliveryTime}
           />
         )
         break;
@@ -152,18 +194,11 @@ export default class Checkout extends Component {
     console.log(this.state.ea_pickup_time.length);
     return (
       <View style={styles.container}>
-        <View style={{height:0.7*height,width:width,}}>
+        <View style={{height:0.8*height,width:width,}}>
         <FlatList data={['delivery', 'userInfo', 'payment', 'orderInfo']} renderItem={({item}) => (this.renderItemCells(item))}/>
 
         </View>
-        <TouchableOpacity style={{position:'absolute',bottom:0,backgroundColor:'#2ad3be'}} onPress={this._placeOrder}>
-          <View style={{width:width,height:0.1*height,alignItems:'center',justifyContent:'center'}}>
-            <Text style={{fontSize:20,color:'white'}}>
-              下单
-            </Text>
-          </View>
-
-        </TouchableOpacity>
+        {this._canPlaceOrder()}
         {
           this.state.ea_pickup_time.length != 0 &&
           <DateTimePicker

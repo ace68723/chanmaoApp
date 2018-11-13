@@ -5,25 +5,17 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  Dimensions
 } from 'react-native';
 
 import SettingsCell from './SettingsCell.js'
 
+const {width,height} = Dimensions.get('window');
 export default class Home extends Component {
   constructor(props) {
     super(props);
     const cellsData = [
-      {
-        icon: require("./Image/1.png"),
-        title: "我的订单",
-        key: "orders"
-      },
-      {
-        icon: require("./Image/1.png"),
-        title: "地址维护",
-        key: "address"
-      },
       {
         icon: require("./Image/1.png"),
         title: "联系客服",
@@ -38,11 +30,6 @@ export default class Home extends Component {
         icon: require("./Image/1.png"),
         title: "馋猫订餐",
         key: "cmeat"
-      },
-      {
-        icon: require("./Image/1.png"),
-        title: "馋猫生活",
-        key: "cmlife"
       },
       {
         icon: require("./Image/1.png"),
@@ -67,10 +54,20 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList style={{marginTop: 6}} data={this.state.cells} renderItem={({item}) => (this.renderCells(item))}/>
-      </View>
+      <View style={{flex:1,backgroundColor:'white'}}>
+        <View style={{ width: width, backgroundColor:'white',marginTop:0.02*height,height: 48, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
 
+
+
+          <Text style={{ flex: 1, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
+            设置
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <FlatList style={{marginTop: 6}} data={this.state.cells} renderItem={({item}) => (this.renderCells(item))}/>
+        </View>
+
+      </View>
     )
   }
 }

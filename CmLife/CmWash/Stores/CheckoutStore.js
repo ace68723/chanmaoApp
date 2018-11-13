@@ -67,10 +67,19 @@ const CheckoutStore = Object.assign({},EventEmitter.prototype,{
     this.state = Object.assign({},this.state,data);
 
   },
+  updateDeliveryTimeList(data){
+    // console.log(data);
+    this.state = Object.assign({},this.state,data);
+    this.state.selectedDeliveryDate='';
+    this.state.selectedDeliveryTime='';
+    // console.log(this.state);
+  },
   updateDeliveryTime(data){
     // console.log(data);
     this.state = Object.assign({},this.state,data);
-    console.log(this.state);
+    // this.state.selectedDeliveryDate='';
+    // this.state.selectedDeliveryTime='';
+    // console.log(this.state);
   },
   updateUserInfo(data){
     this.state.eo_user_info=data.eo_user;
@@ -93,7 +102,7 @@ const CheckoutStore = Object.assign({},EventEmitter.prototype,{
                 break;
         case AppConstants.DELIVERY_TIME:
                 console.log(action.data);
-                CheckoutStore.updateDeliveryTime(action.data);
+                CheckoutStore.updateDeliveryTimeList(action.data);
                 CheckoutStore.emitChange();
                 break;
         case AppConstants.SELECTED_DELIVERY_TIME:

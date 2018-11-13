@@ -17,6 +17,7 @@ import OrderItemList from './OrderItemList'
 export default class OrderCell extends Component{
   constructor(props) {
     super(props);
+    this.renderDeliverTime=this.renderDeliverTime.bind(this);
   }
   renderHeader(){
     let date = new Date(this.props.orderInfo.created*1000);
@@ -24,13 +25,14 @@ export default class OrderCell extends Component{
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <Text style={styles.headerText}>No.{this.props.orderInfo.oid}</Text>
-          <Text style={styles.headerText}>{date.getFullYear() + '-' + (date.getMonth()+1) + "-" + date.getDate() + "  " +  
+          <Text style={styles.headerText}>{date.getFullYear() + '-' + (date.getMonth()+1) + "-" + date.getDate() + "  " +
 date.getHours() + ":" + date.getMinutes()}</Text>
         </View>
       </View>
     )
   }
   renderDeliverInfo(){
+    // console.log(this.props.orderInfo);
     return (
       <View style={styles.deliverInfo}>
         <View style={styles.deliverInfoContent}>
@@ -62,11 +64,11 @@ date.getHours() + ":" + date.getMinutes()}</Text>
       <View style={styles.deliverTime}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.deliverTimeText}>取件时间</Text>
-          <Text style={styles.deliverTimeText}>2018-10-12  13:40-14:30</Text>
+          <Text style={styles.deliverTimeText}>{this.props.orderInfo.pickup_time}</Text>
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.deliverTimeText}>取件时间</Text>
-          <Text style={styles.deliverTimeText}>2018-10-12  13:40-14:30</Text>
+          <Text style={styles.deliverTimeText}>送达时间</Text>
+          <Text style={styles.deliverTimeText}>{this.props.orderInfo.delivery_time}</Text>
         </View>
       </View>
     )
@@ -82,7 +84,7 @@ date.getHours() + ":" + date.getMinutes()}</Text>
     return (
       <View style={styles.orderSummary}>
         <Text style={[styles.orderSummaryText, {}]}>运费: ${this.props.orderInfo.delifee}</Text>
-        <Text style={[styles.orderSummaryText, {}]}>税: $4.99</Text>
+        <Text style={[styles.orderSummaryText, {}]}>税: ${this.props.orderInfo.tax}</Text>
         <Text style={[styles.orderSummaryText, {fontSize: 14, color: Common.MAIN_COLOR, marginBottom: 0}]}>总计: ${this.props.orderInfo.total}</Text>
       </View>
     )

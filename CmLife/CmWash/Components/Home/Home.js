@@ -16,7 +16,8 @@ import {
   Image,
   Animated,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableWithoutFeedback
 } from 'react-native';
 const {height, width} = Dimensions.get('window');
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -37,6 +38,8 @@ export default class Home extends Component<Props> {
     this._removeItem = this._removeItem.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
     this._goToCheckout=this._goToCheckout.bind(this);
+    this.renderNavigationBar=this.renderNavigationBar.bind(this);
+    this._goBack=this._goBack.bind(this);
   }
   componentDidMount() {
     HomeStore.addChangeListener(this._onChange);
@@ -127,13 +130,16 @@ export default class Home extends Component<Props> {
               </Text>
             </View>
           <View style={{ flex: 1, flexDirection: 'row', marginRight: 8}}>
-            <View style={{ flex: 1, flexDirection: 'row' }}>
+            <View style={{ flex: 3, flexDirection: 'row' }}>
               <Text style={{ marginLeft: 8, fontSize: 14, color: '#2ad3be', fontWeight: '700'}}>
                 ${parseFloat(item.display_price).toFixed(0) == parseFloat(item.display_price) ? parseFloat(item.display_price).toFixed(0) : item.display_price}
               </Text>
               {_display_price()}
+              <Text style={{fontSize:14,marginLeft:2}}>
+                {item.unit}
+              </Text>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row' }}>
+            <View style={{ flex: 2, flexDirection: 'row' }}>
               {_display_remove()}
               <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ color: '#404041', fontSize: 14, marginBottom: 5, fontWeight: '700'}}>
@@ -175,12 +181,25 @@ export default class Home extends Component<Props> {
       </View>
     )
   }
+  _goBack()
+  {
+    // console.log(this.navigator);
+    this.props.navigator.resetTo({
+      screen: 'CmLifeHome',
+              navigatorStyle: {navBarHidden: true},
+      animationType: 'slide-down'
+    });
+  }
   renderNavigationBar(){
     return (
       <View style={{ width: width, height: 48, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center'}}>
-          <Image source={require('./image/Cart.png')} style={{ width: 30, height: 30 }}/>
-        </View>
+
+        <TouchableWithoutFeedback onPress={this._goBack}>
+          <View style={{ flex: 1, justifyContent: 'flex-start', }}>
+            <Image source={require('./image/icon_back_green.png')} style={{ marginLeft:0.05*width,width: 30, height: 30 }}/>
+          </View>
+        </TouchableWithoutFeedback>
+
         <Text style={{ flex: 2, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
           馋猫干洗
         </Text>
