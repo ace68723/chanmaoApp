@@ -416,7 +416,7 @@ export default class StartupAnimation extends Component {
         outputRange: [((height+100)* sizeScale), -40*sizeScale, -30*sizeScale, -40*sizeScale, -35*sizeScale ,-40*sizeScale]
       })
       let pressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/lifePressed.png') : require('./image/houseEnglish/lifePressed.png');
-      let unpressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/lifeConstruction.png') : require('./image/houseEnglish/lifeConstruction.png');
+      let unpressedIcon = language === 'chinese_simple' ? require('./image/houseChinese/lifeUnpressed.png') : require('./image/houseEnglish/lifeUnpressed.png');
       return (
           <Animated.View style={{
             backgroundColor:'transparent',
@@ -437,7 +437,7 @@ export default class StartupAnimation extends Component {
         <TouchableWithoutFeedback
           onPressIn={()=>this.setState({isBottomRightButtonPressed:true})}
           onPressOut={()=>this.setState({isBottomRightButtonPressed:false})}
-          disabled={true}
+          disabled={this.state.isAnimationRunning}
           onPress={()=>{
             clearInterval(intervalIndicator)
             this.props.onPressCMLife();
