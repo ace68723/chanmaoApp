@@ -208,8 +208,8 @@ export default class StartupAnimation extends Component {
       return(
         <View style={{
           position:'absolute',
-          top:20 * sizeScale,
-          right:20 * sizeScale,
+          top:parseInt(20 * sizeScale),
+          right:parseInt(20 * sizeScale),
           marginTop:iconMargin,
         }}>
           <Animated.Image style={{
@@ -221,8 +221,8 @@ export default class StartupAnimation extends Component {
             }} source={ isDaytime ? require('./image/weather/sun.png') : require('./image/weather/moon.png')}/>
           <View style={{
             position:'absolute',
-            top:30 * sizeScale,
-            right:20* sizeScale}} >
+            top:parseInt(30 * sizeScale),
+            right:parseInt(20* sizeScale)}} >
             <Image style={{height: 70*0.619*sizeScale, width: 70*sizeScale}}  source={isDaytime?require('./image/weather/cloud-day.png') : require('./image/weather/cloud-night.png')} />
           </View>
 
@@ -232,15 +232,15 @@ export default class StartupAnimation extends Component {
     renderTopLeftIcon(){
       let jump,picSize,left;
       if(region === '1'){
-        left = -35* sizeScale;
-        picSize = 310 * sizeScale;
+        left = parseInt(-35* sizeScale);
+        picSize = parseInt(310 * sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
           outputRange: [ -300*sizeScale, -30*sizeScale, -40*sizeScale, -30*sizeScale, -35*sizeScale , -30*sizeScale]
         })
       }else{
-        left = -50* sizeScale
-        picSize = 310 * sizeScale
+        left = parseInt(-50* sizeScale);
+        picSize = parseInt(310 * sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
           outputRange: [ -300*sizeScale, 20*sizeScale, 10 *sizeScale, 20*sizeScale, 15*sizeScale , 20*sizeScale]
@@ -266,7 +266,7 @@ export default class StartupAnimation extends Component {
       );
     }
     renderTopLeftButton(){
-      let top = region === '1' ? -50*sizeScale : -15*sizeScale;
+      let top = region === '1' ? parseInt(-50*sizeScale) : parseInt(-15*sizeScale);
       return (
           <TouchableWithoutFeedback
             onPressIn={()=>this.setState({isTopLeftButtonPressed:true})}
@@ -277,11 +277,11 @@ export default class StartupAnimation extends Component {
               transform:[{rotate:'55deg'}],
               backgroundColor:'transparent',
               position:'absolute',
-              height:300 * sizeScale,
-              width:250 * sizeScale,
+              height:parseInt(300 * sizeScale),
+              width:parseInt(250 * sizeScale),
               marginTop:iconMargin,
               top: top,
-              left:-20* sizeScale}}>
+              left:parseInt(-20* sizeScale)}}>
             </View>
           </TouchableWithoutFeedback>
       );
@@ -293,15 +293,15 @@ export default class StartupAnimation extends Component {
       let picSize;
       let right;
       if(region === '1'){
-        picSize = 310 * sizeScale;
-        right = -40* sizeScale;
+        picSize = parseInt(310 * sizeScale);
+        right = parseInt(-40* sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
           outputRange: [ -300*sizeScale, 155*sizeScale, 145*sizeScale, 155*sizeScale, 150*sizeScale , 155*sizeScale]
         })
       }else{
-        picSize = 330 * sizeScale;
-        right = -50* sizeScale
+        picSize = parseInt(330 * sizeScale);
+        right = parseInt(-50* sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
           outputRange: [ -300*sizeScale, 275*sizeScale, 265*sizeScale, 275*sizeScale, 270*sizeScale , 275*sizeScale]
@@ -328,11 +328,11 @@ export default class StartupAnimation extends Component {
     renderTopRightButton(){
       let buttonWidth,top;
       if(region === '1'){
-        buttonWidth = 210 * sizeScale;
-        top = 120 * sizeScale;
+        buttonWidth = parseInt(210 * sizeScale);
+        top = parseInt(120 * sizeScale);
       }else{
-        buttonWidth = 260 * sizeScale;
-        top = 250 * sizeScale
+        buttonWidth = parseInt(260 * sizeScale);
+        top = parseInt(250 * sizeScale);
       }
       return (
         <TouchableWithoutFeedback
@@ -349,11 +349,11 @@ export default class StartupAnimation extends Component {
               transform:[{rotate:'58deg'}],
               backgroundColor:'transparent',
               position:'absolute',
-              height:310 * sizeScale,
+              height:parseInt(310 * sizeScale),
               width:buttonWidth,
               top:top,
               marginTop:iconMargin,
-              right:-5 * sizeScale}}>
+              right:parseInt(-5 * sizeScale)}}>
             </View>
         </TouchableWithoutFeedback>
       );
@@ -373,10 +373,10 @@ export default class StartupAnimation extends Component {
             backgroundColor:'transparent',
             bottom: jump,
             marginBottom:iconMargin,
-            left:-90 * sizeScale}}>
+            left:parseInt(-90 * sizeScale)}}>
             <Image style={{
-                height:310 * sizeScale,
-                width:310 * sizeScale,
+                height:parseInt(310 * sizeScale),
+                width:parseInt(310 * sizeScale),
               }}
                 source={this.state.isBottomLeftButtonPressed ? pressedIcon : unpressedIcon} />
           </Animated.View>
@@ -398,11 +398,11 @@ export default class StartupAnimation extends Component {
             position:'absolute',
             transform:[{rotate:'58deg'}],
             backgroundColor:'transparent',
-            height:310* sizeScale,
-            width:220* sizeScale,
-            bottom:37* sizeScale,
+            height:parseInt(310* sizeScale),
+            width:parseInt(220* sizeScale),
+            bottom:parseInt(37* sizeScale),
             marginBottom:iconMargin,
-            left:-100 * sizeScale
+            left:parseInt(-100 * sizeScale),
           }}>
           </View>
         </TouchableWithoutFeedback>
@@ -423,10 +423,10 @@ export default class StartupAnimation extends Component {
             position:'absolute',
             bottom:jump,
             marginBottom:iconMargin,
-            right:-120 * sizeScale}}>
+            right:parseInt(-120 * sizeScale)}}>
             <Image style={{
-                height:310* sizeScale,
-                width:310* sizeScale,
+                height:parseInt(310* sizeScale),
+                width:parseInt(310* sizeScale),
               }}
                 source={this.state.isBottomRightButtonPressed ? pressedIcon : unpressedIcon} />
           </Animated.View>
@@ -444,8 +444,8 @@ export default class StartupAnimation extends Component {
           }}
         >
           <View style={{
-              height:220* sizeScale,
-              width:180* sizeScale,
+              height:parseInt(220* sizeScale),
+              width:parseInt(180* sizeScale),
               position:'absolute',
               backgroundColor:'transparent',
               bottom:0 * sizeScale,
