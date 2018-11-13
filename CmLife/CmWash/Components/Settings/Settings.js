@@ -17,27 +17,27 @@ export default class Home extends Component {
     super(props);
     const cellsData = [
       {
-        icon: require("./Image/1.png"),
+        icon: require("./Image/customer_service.png"),
         title: "联系客服",
         key: "contact"
       },
       {
-        icon: require("./Image/1.png"),
+        icon: require("./Image/sweetfulBox.png"),
         title: "甜满箱 全场免运费 满$25起送",
         key: "sbox"
       },
       {
-        icon: require("./Image/1.png"),
+        icon: require("./Image/chanmao.png"),
         title: "馋猫订餐",
         key: "cmeat"
       },
       {
-        icon: require("./Image/1.png"),
+        icon: require("./Image/language.png"),
         title: "选择语言&地区",
         key: "language"
       },
       {
-        icon: require("./Image/1.png"),
+        icon: require("./Image/log-out.png"),
         title: "退出登录",
         key: "logout"
       },
@@ -45,12 +45,25 @@ export default class Home extends Component {
     this.state = {
       cells: cellsData
     };
+    this._goToCmEat=this._goToCmEat.bind(this);
+    this.renderCells=this.renderCells.bind(this);
+    this.onPressedCell=this.onPressedCell.bind(this);
+  }
+  _goToCmEat() {
+    this.props.navigator.resetTo({
+        screen: 'cmHome',
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+        passProps:{goToCmEat: true}
+      });
   }
   onPressedCell(key){
     console.log(key);
+    if (key=='cmeat') {this._goToCmEat();console.log('goto cm')}
   }
   renderCells(item) {
-    return (<SettingsCell cardStyle={styles.card} title={item.title} key={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />)
+    return (<SettingsCell cardStyle={styles.card} title={item.title} type={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />)
   }
   render() {
     return (

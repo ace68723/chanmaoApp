@@ -16,11 +16,12 @@ export default class SettingsCell extends Component{
   }
 
   render() {
+    // console.log(this.props)
     return (
       <View>
         <View style={this.props.cardStyle}>
           <View style={styles.content}>
-            <TouchableOpacity onPress={() => this.props.onPressedCell(this.props.key)} style={{flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity onPress={() => this.props.onPressedCell(this.props.type)} style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image style={styles.icon} source={this.props.icon} />
               <Text style={{fontWeight: '700', fontSize: 14, marginLeft: 10, color: "#4D4D4D"}}> {this.props.title} </Text>
             </TouchableOpacity>
