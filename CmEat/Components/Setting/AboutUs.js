@@ -102,11 +102,11 @@ export default class InfoPage extends Component {
         <Header title={Label.getCMLabel('ABOUT_US')} goBack={this._goBack}/>
         <ScrollView style={{flex:1, paddingTop:64,paddingLeft:20,paddingRight:20, paddingBottom: 20}}>
 
-            <View style={styles.fontContainer}>
+            {(!this.props.fromCmWash) && <View style={styles.fontContainer}>
                 <Text style={styles.headerFont} allowFontScaling={false} >
                   {Label.getCMLabel('CHANMAO_INFO')}
                 </Text>
-            </View>
+            </View>}
                 <View style={styles.centerContent}>
                           <View style={styles.imgContainer} >
                             <Image source={require('./Image/cmQRcode.jpg')} style={{width: 140, height: 140}} />

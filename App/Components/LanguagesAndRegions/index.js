@@ -106,6 +106,9 @@ export default class SelectRegionAndLanguage extends Component {
         if (this.props.goToSbox) {
           data = {goToSweetfulBox: true};
         }
+        else if (this.props.goToCmWash){
+          data={goToCmWash:true};
+        }
         else {
           data = {goToCmEat: true};
         }
@@ -157,7 +160,7 @@ export default class SelectRegionAndLanguage extends Component {
         })
     }
     renderLanguageButton(){
-        
+
         return languages.map((lang, index)=>{
             return(
                 <TouchableOpacity
@@ -246,7 +249,7 @@ export default class SelectRegionAndLanguage extends Component {
         alignItems:'center',
         flexDirection:'row',
         paddingHorizontal:30,
-       
+
     },
     languageOption: {
         borderWidth:2,

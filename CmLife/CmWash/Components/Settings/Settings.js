@@ -49,6 +49,9 @@ export default class Home extends Component {
     this.renderCells=this.renderCells.bind(this);
     this.onPressedCell=this.onPressedCell.bind(this);
     this._logout=this._logout.bind(this);
+    this._goToLanguageSettings=this._goToLanguageSettings.bind(this);
+    this._goToSbox=this._goToSbox.bind(this);
+    this._goToAboutUs=this._goToAboutUs.bind(this);
   }
   _logout() {
     AuthAction.logout();
@@ -60,6 +63,19 @@ export default class Home extends Component {
         // passProps:{goToCmEat: true}
       });
   }
+  _goToLanguageSettings() {
+    this.props.navigator.push({
+      screen: 'LanguagesAndRegions',
+      animated: true,
+      navigatorStyle: {
+        navBarHidden: true
+      },
+      passProps: {
+        firstSelection: false,
+        goToCmWash: true
+      }
+    });
+  }
   _goToCmEat() {
     this.props.navigator.resetTo({
         screen: 'cmHome',
@@ -69,11 +85,39 @@ export default class Home extends Component {
         passProps:{goToCmEat: true}
       });
   }
+  _goToSbox() {
+    this.props.navigator.resetTo({
+      screen: 'cmHome',
+      animated: true,
+      animationType: 'fade',
+      navigatorStyle: {
+        navBarHidden: true
+      },
+      passProps: {
+        goToSweetfulBox: true
+      }
+    });
+  }
+  _goToAboutUs() {
+    this.props.navigator.push({
+      screen: 'CmEatAboutUs',
+      animated: true,
+      navigatorStyle: {
+        navBarHidden: true
+      },
+      passProps: {
+        fromCmWash:true
+      }
+    });
+  }
   onPressedCell(key){
     console.log(key);
     if (key=='cmeat') {this._goToCmEat();}
 
     if (key=='logout') {this._logout();}
+    if (key=='language') {this._goToLanguageSettings();}
+    if (key=='sbox') {this._goToSbox();}
+    if (key=='contact'){this._goToAboutUs();}
   }
   renderCells(item) {
     return (<SettingsCell cardStyle={styles.card} title={item.title} type={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />)
