@@ -1168,7 +1168,7 @@ class Confirm extends Component {
 													textDecorationLine: 'line-through',
 													marginLeft: 6}}
 									allowFontScaling={false}>
-							${this.state.selectedCase.fees.total}
+							${this.state.selectedCase.fees.charge_total}
 						</Text>
 					);
 				}
@@ -1299,7 +1299,7 @@ class Confirm extends Component {
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
 														 total={this.state.selectedCase.fees.charge_total}
-														 tips={this.state.selectedCase.fees.charge_total.service_fee}
+														 tips={this.state.selectedCase.fees.service_fee}
 														 visaFee={this.state.visa_fee}
 														 paymentChannel={this.state.payment_channel}
 														 dltype={this.state.dltype}/>)
