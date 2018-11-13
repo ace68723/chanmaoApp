@@ -48,7 +48,7 @@ class OrderInfo extends Component {
                           fontWeight: "500",
                           fontFamily:'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
-                  {Label.getSboxLabel('DELIVERY_FEE')}{this.props.delifee}
+                  {Label.getSboxLabel('DELIVERY_FEE')}: ${this.props.delifee}
               </Text>
           </View>
 

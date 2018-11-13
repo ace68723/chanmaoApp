@@ -53,7 +53,15 @@ class SettingTab extends Component {
 
   _logout() {
     AuthAction.logout();
-    this.props.handleBackToHome();
+    // this.props.handleBackToHome();
+    this.props.navigator.resetTo({
+      screen: 'cmHome',
+      animated: true,
+      animationType: 'fade',
+      navigatorStyle: {
+        navBarHidden: true
+      }
+    });
   }
   _goToHistory() {
     this.props.navigator.push({
@@ -85,13 +93,14 @@ class SettingTab extends Component {
           }}/>
         <SettingCate title={Label.getSboxLabel('MY_ORDER')} onPress={this._goToHistory.bind(this)} icon={require('./Image/icon_setting-01.png')}/>
         <SettingCate title={Label.getSboxLabel('CUSTOMER_SERVICE')} icon={require('./Image/icon_setting_icon_setting_customer-service.png')} onPress={this._contact}/>
-        <SettingCate title={Label.getCMLabel('LANGUAGE_SETTING')} icon={require('./Image/icon_language.png')} onPress={this._goToLanguageSettings}/>
+
         <SettingCate title={Label.getSboxLabel('CM_EAT')} icon={require('./Image/icon_setting_icon_setting_sweetful-box.png')} onPress={this._goToCmEat}/>
         <SettingCate title={Label.getSboxLabel('LOG_OUT')} icon={require('./Image/icon_setting_icon_setting_log-out.png')} onPress={this._logout}/>
       </ScrollView>
     </View>)
   }
 }
+//<SettingCate title={Label.getCMLabel('LANGUAGE_SETTING')} icon={require('./Image/icon_language.png')} onPress={this._goToLanguageSettings}/>
 
 let styles = StyleSheet.create({
   mainContainer: {

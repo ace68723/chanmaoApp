@@ -97,7 +97,7 @@ export default class Home extends Component {
       } else if (this.props.goToSweetfulBox) {
         setTimeout( () => {
           this._handleSboxPress();
-        }, 2000);
+        }, 1000);
       }
 
   })
@@ -219,10 +219,10 @@ export default class Home extends Component {
       if(this._openStarted) return;
       if(!this.state.entryFlag) return;
       this._openStarted = true;
-
+      this.startUpAnimation._fadeOut();
       setTimeout(() => {
         this._openStarted = false
-      }, 5000);
+      }, 6000);
 
       setTimeout(() => {
         // InteractionManager.runAfterInteractions(() => {
@@ -249,7 +249,7 @@ export default class Home extends Component {
            }
           })
         // })
-      }, 2500);
+      }, 4500);
     }
   async _handleCmLifePress(){
     if(this._openStarted) return;

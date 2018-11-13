@@ -44,26 +44,26 @@ class RestaurantCard extends Component {
 			}
 			_renderDesc() {
 				const _discountInfo = () => {
-					if (this.state.restaurant.discount_message && this.state.restaurant.discount_message.length > 0) {
-						return (
-							<View style={{flex:2, flexDirection:'row'}}>
-								<Image
-									source={require('./Image/icon_coupon_small.png')}
-									style={{height:14,width:23,alignSelf: 'center'}}
-								/>
-								<Text style={{color:'#40a2e7',
-															marginLeft:7,
-															marginRight: 20,
-															fontWeight:'200',
-															alignSelf: 'center',
-															fontFamily:'NotoSansCJKsc-Regular'}}
-											allowFontScaling={false}>
-										{this.state.restaurant.discount_message}
-								</Text>
-							</View>
-						)
-					}
-				};
+			    if (this.state.restaurant.discount_message && this.state.restaurant.discount_message.length > 0) {
+			      return (
+			        <View style={{flex:2, flexDirection:'row', marginTop: 3}}>
+			          <Image
+			            source={require('./Image/icon_coupon_small.png')}
+			            style={{height:14,width:23,alignSelf: 'center'}}
+			          />
+			          <Text style={{color:'#40a2e7',
+			                        marginLeft:7,
+			                        marginRight: 20,
+			                        fontWeight:'200',
+			                        alignSelf: 'center',
+			                        fontFamily:'NotoSansCJKsc-Regular'}}
+			                allowFontScaling={false}>
+			              {this.state.restaurant.discount_message}
+			          </Text>
+			        </View>
+			      )
+			    }
+			  };
 				return(
 					<View style={{flex:2,}}>
 						<Text style={{color: '#666666',
@@ -239,6 +239,7 @@ class RestaurantCard extends Component {
                               borderRightWidth:StyleSheet.hairlineWidth,}}>
                   <Text style={{color:'#363646',
 																fontSize:15,
+																fontWeight: '800',
 																fontFamily:'NotoSansCJKsc-Black',}}
 												allowFontScaling={false}>
                       {this.state.restaurant.name}

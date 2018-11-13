@@ -178,7 +178,7 @@ module.exports={
     DEBIT_CARD:'借记卡',
     ALIPAY:'支付宝',
     CASH:'现金到付',
-    CASH_SELF_PICKUP:'现金自取',
+    CASH_SELF_PICKUP:'自取',
     CARD:'刷卡',
     APPLE_PAY:'Apple Pay',
     PAYMENT_TYPE:"支付方式",

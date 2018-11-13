@@ -564,7 +564,7 @@ class Confirm extends Component {
 		}
 		_renderAndroidCheckoutButton(){
 			if (Platform.OS != 'ios') {
-				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading && false) {
+				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading) {
 					return(
 						<TouchableOpacity
 										activeOpacity={0.4}
@@ -887,53 +887,109 @@ class Confirm extends Component {
       }
 		}
 		_renderChoosePayment() {
-			if (this.state.cases && this.state.dltype != 0) {
-				if (this.state.cases.length > 1) {
-					let payment_description = '';
-					if (this.state.payment_channel == 1) {
-						payment_description = ' **** **** **** ' + this.state.last_payment.stripe_last4;
+			if (this.state.cases) {
+				let payment_description = '';
+				if (this.state.payment_channel == 1) {
+					payment_description = ' **** **** **** ' + this.state.last_payment.stripe_last4;
+				}
+				else if (this.state.payment_channel == 10) {
+					// payment_description = '支付宝';
+				}
+				else if (this.state.payment_channel == 30) {
+					// payment_description = 'Apple Pay';
+				}
+				else {
+					payment_description = Label.getCMLabel('CASH');
+				}
+				if (this.state.dltype == 1) {
+					// 送餐
+					if (this.state.cases.length > 1) {
+						const payment_section = [];
+						payment_section.push(
+							<TouchableOpacity key={'choosePayment'}
+																activeOpacity={0.4}
+																onPress={this._goToChoosePayment}>
+								<CartItem title={Label.getCMLabel('PAY')}
+													rightIcon={require('./Image/right.png')}
+													paymentChannel={this.state.payment_channel}
+													value={payment_description}/>
+							</TouchableOpacity>
+						)
+						payment_section.push(
+							<View key={'payment_warning'}
+										style={{flexDirection: 'row',
+														marginHorizontal: 20,
+														marginTop: 5,
+														marginBottom: 15}}>
+								<Image source={require('./Image/warning.png')}
+											 style={{width: 15,
+											 				 height: 15,
+											 				 alignSelf: 'flex-start'}}/>
+	 						  <Text style={{fontSize: 14,
+															lineHeight: 17,
+															color: '#ea7b21',
+															fontFamily:'NotoSansCJKsc-Regular',
+															marginHorizontal: 10}}
+											allowFontScaling={false}>
+								 {Label.getCMLabel('ONLINE_PAYMENT_WARNING')}
+								</Text>
+							</View>
+						)
+						return payment_section;
 					}
-					else if (this.state.payment_channel == 10) {
-						// payment_description = '支付宝';
+				}
+				else {
+					let paymentLength = 0;
+					for (let _payment of this.state.cases) {
+						if (_payment.dltype == 0) {
+							paymentLength ++;
+						}
 					}
-					else if (this.state.payment_channel == 30) {
-						// payment_description = 'Apple Pay';
+					if (paymentLength == 1) {
+						const payment_section = [];
+						payment_section.push(
+							<View key={'showPayment'}>
+								<CartItem title={Label.getCMLabel('PAY')}
+													paymentChannel={this.state.payment_channel}
+													value={Label.getCMLabel('CASH')}/>
+							</View>
+						)
+						return payment_section;
 					}
 					else {
-						payment_description = Label.getCMLabel('CASH');
+						const payment_section = [];
+						payment_section.push(
+							<TouchableOpacity key={'choosePayment'}
+																activeOpacity={0.4}
+																onPress={this._goToChoosePayment}>
+								<CartItem title={Label.getCMLabel('PAY')}
+													rightIcon={require('./Image/right.png')}
+													paymentChannel={this.state.payment_channel}
+													value={payment_description}/>
+							</TouchableOpacity>
+						)
+						payment_section.push(
+							<View key={'payment_warning'}
+										style={{flexDirection: 'row',
+														marginHorizontal: 20,
+														marginTop: 5,
+														marginBottom: 15}}>
+								<Image source={require('./Image/warning.png')}
+											 style={{width: 15,
+											 				 height: 15,
+											 				 alignSelf: 'flex-start'}}/>
+	 						  <Text style={{fontSize: 14,
+															lineHeight: 17,
+															color: '#ea7b21',
+															fontFamily:'NotoSansCJKsc-Regular',
+															marginHorizontal: 10}}
+											allowFontScaling={false}>
+								 {Label.getCMLabel('ONLINE_PAYMENT_WARNING')}
+								</Text>
+							</View>
+						)
+						return payment_section;
 					}
-					const payment_section = [];
-					payment_section.push(
-						<TouchableOpacity key={'choosePayment'}
-															activeOpacity={0.4}
-															onPress={this._goToChoosePayment}>
-							<CartItem title={Label.getCMLabel('PAY')}
-												rightIcon={require('./Image/right.png')}
-												paymentChannel={this.state.payment_channel}
-												value={payment_description}/>
-						</TouchableOpacity>
-					)
-					payment_section.push(
-						<View key={'payment_warning'}
-									style={{flexDirection: 'row',
-													marginHorizontal: 20,
-													marginTop: 5,
-													marginBottom: 15}}>
-							<Image source={require('./Image/warning.png')}
-										 style={{width: 15,
-										 				 height: 15,
-										 				 alignSelf: 'flex-start'}}/>
- 						  <Text style={{fontSize: 14,
-														lineHeight: 17,
-														color: '#ea7b21',
-														fontFamily:'NotoSansCJKsc-Regular',
-														marginHorizontal: 10}}
-										allowFontScaling={false}>
-							 {Label.getCMLabel('ONLINE_PAYMENT_WARNING')}
-							</Text>
-						</View>
-					)
-					return payment_section;
 				}
 			}
 
@@ -1112,7 +1168,7 @@ class Confirm extends Component {
 													textDecorationLine: 'line-through',
 													marginLeft: 6}}
 									allowFontScaling={false}>
-							${this.state.selectedCase.fees.total}
+							${this.state.selectedCase.fees.charge_total}
 						</Text>
 					);
 				}
@@ -1243,7 +1299,7 @@ class Confirm extends Component {
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
 														 total={this.state.selectedCase.fees.charge_total}
-														 tips={this.state.selectedCase.fees.charge_total.service_fee}
+														 tips={this.state.selectedCase.fees.service_fee}
 														 visaFee={this.state.visa_fee}
 														 paymentChannel={this.state.payment_channel}
 														 dltype={this.state.dltype}/>)
