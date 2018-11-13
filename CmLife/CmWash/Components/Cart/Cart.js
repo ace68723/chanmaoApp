@@ -34,12 +34,10 @@ export default class Cart extends BaseDialog {
   }
 
   clearCart(){
-
+    for (i of this.props.currentCart){
+      this.props.onPressedQuantity(i.sku_id, -i.amount);
+    }
     this.dismiss();
-  }
-
-  onPressedCheckout(){
-
   }
 
   shouldAllowedCheckout(){
@@ -155,8 +153,7 @@ export default class Cart extends BaseDialog {
       <TouchableOpacity
         onPress={this._goToCheckout}
         style={[styles.checkoutButton, !this.shouldAllowedCheckout() ? {backgroundColor: '#999999'}: {}]}>
-        <View style={{flex:1,justifyContent: 'center',
-            alignItems: 'center',}} onPress={this.onPressedCheckout}>
+        <View style={{flex:1,justifyContent: 'center', alignItems: 'center', }} >
           <Text style={{color: 'white', fontSize: 15, fontWeight: '700',}}>结算</Text>
         </View>
       </TouchableOpacity>

@@ -17,7 +17,6 @@ export default class CartItemList extends Component {
   }
   renderItemCells(){
     let cells = [];
-    console.log();
     if (!this.props.items){
       return cells;
     }

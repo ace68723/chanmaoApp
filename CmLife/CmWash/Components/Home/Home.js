@@ -86,6 +86,10 @@ export default class Home extends Component<Props> {
     HomeStore.updateCartItem(sku_id, delta);
     const state = Object.assign({}, HomeStore.getState());
     this.setState(state);
+
+    if (this.state.cartProducts.length == 0){
+      this.Cart.dismiss()
+    }
   }
   _renderProduct({item}) {
     const _display_price = () => {
@@ -100,7 +104,7 @@ export default class Home extends Component<Props> {
     const _display_remove = () => {
       if (HomeStore.getItemAmount(item.sku_id) != 0)
         return (<TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
-          <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center', }}>
             <Text style={{ marginBottom: 5, fontSize: 15, color: 'white' }}>
               -
             </Text>
@@ -165,7 +169,7 @@ export default class Home extends Component<Props> {
       itemCount += i.amount;
     }
     return(
-      <View style={{flexDirection: 'row', flex: 1}}>
+      <View style={{flexDirection: 'row', flex: 1, marginRight: -8}}>
         <View style={{flex: 1}}></View>
         <View style={{flex: 1, alignItems: 'center'}}>
           <TouchableOpacity onPress={() => this.Cart.show()}>
@@ -183,11 +187,8 @@ export default class Home extends Component<Props> {
   }
   _goBack()
   {
-    // console.log(this.navigator);
-    this.props.navigator.resetTo({
-      screen: 'CmLifeHome',
-              navigatorStyle: {navBarHidden: true},
-      animationType: 'slide-down'
+    this.props.navigator.pop({
+      animated: true, // does the pop have transition animation or does it happen immediately (optional)
     });
   }
   renderNavigationBar(){
@@ -196,7 +197,7 @@ export default class Home extends Component<Props> {
 
         <TouchableWithoutFeedback onPress={this._goBack}>
           <View style={{ flex: 1, justifyContent: 'flex-start', }}>
-            <Image source={require('./image/icon_back_green.png')} style={{ marginLeft:0.05*width,width: 30, height: 30 }}/>
+            <Image source={require('./image/icon_back_green.png')} style={{ marginLeft: 12, width: 26, height: 26 }}/>
           </View>
         </TouchableWithoutFeedback>
 

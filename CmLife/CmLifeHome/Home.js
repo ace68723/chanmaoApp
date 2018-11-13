@@ -51,20 +51,21 @@ export default class Home extends BaseComponent {
       });
   }
   onPressedCell(key){
-    console.log(key);
-    if (key=='washing') {
-      console.log('111');
-      this.props.navigator.push({
-        screen: 'CmLifeMainTab',
-        navigatorStyle: {navBarHidden: true},
-        passProps:{
-          fromPage:0,
-        }
-      })
+    switch (key) {
+      case "washing":
+        this.props.navigator.push({
+          screen: 'CmLifeMainTab',
+          navigatorStyle: {navBarHidden: true},
+          passProps:{
+            fromPage:0,
+          }
+        })
+        break;
+      default:
+
     }
   }
   renderCells(item) {
-    console.log(item.key);
     return (<HomeCell
       keyNum={item.key}
       cardStyle={styles.card}
@@ -78,8 +79,7 @@ export default class Home extends BaseComponent {
     console.log(this.state.cells)
     return (
       <View style={{backgroundColor:'white',flex:1}}>
-        <HomeHeader backToHome={this._backToHome}
-                      />
+        <HomeHeader goBack={this._backToHome} />
         <View style={styles.container}>
           <FlatList style={{marginTop: 6}} data={this.state.cells} renderItem={({item}) => (this.renderCells(item))}/>
         </View>

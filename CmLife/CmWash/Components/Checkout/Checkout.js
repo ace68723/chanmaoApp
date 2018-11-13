@@ -34,19 +34,15 @@ export default class Checkout extends Component {
     this.onChangeComment=this.onChangeComment.bind(this);
     this._goToAddress=this._goToAddress.bind(this);
     this._goToCard=this._goToCard.bind(this);
-    this._canPlaceOrder=this._canPlaceOrder.bind(this);
+    this.renderPlaceOrderButton=this.renderPlaceOrderButton.bind(this);
   }
   componentDidMount() {
     CheckoutStore.addChangeListener(this._onChange);
     CheckoutAction.getCard()
   }
   _onChange() {
-    console.log(this.state);
-    console.log('11111111');
     const state = Object.assign({}, CheckoutStore.getState());
     this.setState(state);
-    console.log(state)
-    console.log(this.state);
     // 同步delivery picker的data source
     this.PickerDelivery.forceReloadDataSource();
     if (this.state.placeOrderStatus==0) {
@@ -66,7 +62,6 @@ export default class Checkout extends Component {
     CheckoutStore.removeChangeListener(this._onChange);
   }
   onPressedPickupTime(){
-     // console.log(this.PickerDelivery)
     this.Picker.show();
   }
   onPressedDeliveryTime(){
@@ -81,7 +76,6 @@ export default class Checkout extends Component {
     );
   }
   onConfirmDeliveryTime(deliveryData){
-    console.log(deliveryData);
     CheckoutAction.selectDeliveryTime(deliveryData.selectedPrimaryOptions,deliveryData.selectedSecondaryOptions);
   }
   _placeOrder()
@@ -104,36 +98,27 @@ export default class Checkout extends Component {
       'comment':this.state.comment,
       'products':productsList,
     };
-    console.log(data);
     CheckoutAction.placeOrder(data);
   }
-  _canPlaceOrder()
+  renderPlaceOrderButton()
   {
-    console.log(this.state.selectedPickUpDate);
-    console.log(this.state.selectedDeliveryDate);
-    console.log(this.state.eo_user_info);
-    console.log(this.state.eo_last4);
     if (this.state.selectedPickUpDate && this.state.selectedDeliveryDate && this.state.eo_user_info && this.state.eo_last4) {
       return (
-        <TouchableOpacity style={{position:'absolute',bottom:0,backgroundColor:'#2ad3be'}} onPress={this._placeOrder}>
-          <View style={{width:width,height:0.1*height,alignItems:'center',justifyContent:'center'}}>
-            <Text style={{fontSize:20,color:'white'}}>
+        <TouchableOpacity style={{position:'absolute', bottom:0, backgroundColor:'#2ad3be'}} onPress={this._placeOrder}>
+          <View style={{width:width,height: 56,alignItems:'center',justifyContent:'center'}}>
+            <Text style={{fontSize: 16, color:'white', fontWeight: '800'}}>
               下单
             </Text>
           </View>
-
         </TouchableOpacity>
       )
     }
     return (
-
-        <View style={{position:'absolute',bottom:0,backgroundColor:'grey',width:width,height:0.1*height,alignItems:'center',justifyContent:'center'}}>
-          <Text style={{fontSize:20,color:'white'}}>
+        <View style={{position:'absolute', bottom:0, backgroundColor:'grey', width:width, height: 56, alignItems:'center', justifyContent:'center'}}>
+          <Text style={{fontSize: 16, color:'white', fontWeight: '900'}}>
             下单
           </Text>
         </View>
-
-
     )
   }
   onChangeComment(comment){
@@ -142,7 +127,6 @@ export default class Checkout extends Component {
   renderItemCells(item) {
     switch (item) {
       case "delivery":
-        // console.log(this.state);
         return (
           <CheckoutDelivery
           cardStyle={styles.card}
@@ -191,14 +175,17 @@ export default class Checkout extends Component {
     })
   }
   render() {
-    console.log(this.state.ea_pickup_time.length);
     return (
       <View style={styles.container}>
         <View style={{height:0.8*height,width:width,}}>
-        <FlatList data={['delivery', 'userInfo', 'payment', 'orderInfo']} renderItem={({item}) => (this.renderItemCells(item))}/>
-
+          <FlatList
+            data={['delivery', 'userInfo', 'payment', 'orderInfo']}
+            renderItem={({item}) => (this.renderItemCells(item))}
+          />
         </View>
-        {this._canPlaceOrder()}
+
+        {this.renderPlaceOrderButton()}
+
         {
           this.state.ea_pickup_time.length != 0 &&
           <DateTimePicker

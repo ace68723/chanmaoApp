@@ -19,34 +19,18 @@ const HEADER_MIN_HEIGHT = 20;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 export default class HomeHeader extends Component {
   render() {
-
-    // <Animated.View style={{ backgroundColor:'white',
-    //                position:'absolute',
-    //                top:0,
-    //                left:0,
-    //                right:0,
-    //                bottom:0,
-    //                opacity:headerBackgroud
-    //              }}/>
     return (
-      <View style={[styles.container,{backgroundColor:'white'}]}>
-        <TouchableWithoutFeedback onPress={this.props.backToHome}>
-          <View style={{flex:0.17, top:10,justifyContent:'center'}}>
-
-             <Image source={require('./Image/icon_back_green.png')}
-                    style={{
-                            marginLeft:10,
-                            height:height*0.04,
-                            width:height*0.04,
-                          }}/>
+      <View style={{ top: 10, width: width, height: 68, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+        <TouchableWithoutFeedback onPress={this.props.goBack}>
+          <View style={{ flex: 1, justifyContent: 'flex-start', }}>
+            <Image source={require('./Image/icon_back_green.png')} style={{ marginLeft: 12, width: 26, height: 26 }}/>
           </View>
         </TouchableWithoutFeedback>
-        <View style={{flex:0.66,top:10,justifyContent:'center'}}>
-          <Text style={{marginLeft:0.23*width,fontSize:20,}}>
-            馋猫生活
-          </Text>
+        <Text style={{ flex: 1, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
+          馋猫干洗
+        </Text>
+        <View style={{flex: 1}}>
         </View>
-
       </View>
     );
   }
