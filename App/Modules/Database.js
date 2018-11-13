@@ -167,6 +167,9 @@ export function DatabaseInit() {
         realm.create('cm_system',{type:"cme_language",value:"chinese_simple"}, true );
     }
     // realm.create('cm_system',{type: 'version', value: '2.8.3'}, true );
+    if(!realm.objectForPrimaryKey('cm_system','cme_region')){
+        realm.create('cm_system',{type:"cme_region", value: '1' }, true );
+    }
     realm.create('cm_system',{type: 'version', value: '2.9.3'}, true );
   })
   console.log(realm.path)
