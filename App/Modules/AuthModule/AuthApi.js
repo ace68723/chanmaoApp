@@ -23,6 +23,7 @@ const AuthApi = {
         options.headers = Object.assign(options.headers,{
             cmos:userInfo.os,
             cmuuid:userInfo.uuid,
+            appid: 2,
         })
         options.body = JSON.stringify({
           iv_username: userInfo.username,
@@ -73,6 +74,7 @@ const AuthApi = {
       }
       options.headers = Object.assign(options.headers,{
           cmos:io_data.cmos,
+          appid:2
       })
       return fetch(url,options)
               .then((res) => res.json())
@@ -90,7 +92,8 @@ const AuthApi = {
       }
       options.headers = Object.assign(options.headers,{
           cty:1,
-          num:io_data.phone
+          num:io_data.phone,
+          appid:2
       })
       return fetch(url,options)
               .then((res) => res.json())
@@ -110,7 +113,8 @@ const AuthApi = {
       if(userInfo.authortoken){
 
           options.headers = Object.assign(options.headers,{
-              authortoken:userInfo.authortoken
+              authortoken:userInfo.authortoken,
+              appid:2
           })
 
       }else if (userInfo.resCode){
@@ -152,6 +156,7 @@ const AuthApi = {
               'Content-Type': 'application/json',
               cty:1,
               num:io_data.num,
+              appid:2
           }
       }
       // options.headers = Object.assign(options.headers,{
@@ -186,6 +191,9 @@ const AuthApi = {
       //     Cmuuid:userInfo.uuid,
       //     Cmversion:userInfo.version
       // })
+      options.headers = Object.assign({}, {
+          appid:2
+      })
       // options.body = JSON.stringify({
       //   username: userInfo.username,
       //   password: userInfo.password
@@ -215,7 +223,8 @@ const AuthApi = {
         }
       }
       options.headers = Object.assign(options.headers,{
-          authortoken:io_data.authortoken
+          authortoken:io_data.authortoken,
+          appid:2
       })
       options.body = JSON.stringify({
         iv_num: io_data.phone,
