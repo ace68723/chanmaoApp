@@ -93,7 +93,7 @@ export default class KeyboardView extends Component{
 
 KeyboardView.defaultProps = {
   submitButtonDefaultColor: '#d9d9d9',
-  submitButtonFinishedColor: '#ff768b',
+  submitButtonFinishedColor: '#2ad3be',
   backDrop:false,
   isOpenL:true,
   swipeToClose:false,

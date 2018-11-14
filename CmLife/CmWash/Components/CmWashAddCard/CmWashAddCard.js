@@ -225,7 +225,7 @@ export default class MyComponent extends Component {
       this.props.navigator.showInAppNotification({
        screen: "Notification",
        passProps: {
-         backgroundColor:'#ff768b',
+         backgroundColor:'#2ad3be',
          title:'馋猫干洗',
          content:'支付信息错误',
        },
@@ -261,7 +261,7 @@ export default class MyComponent extends Component {
                     deleteNumber={()=>{this.state.isNumOpen?this._deleteNumber():this._deleteCVV()}}
                     isInfoFilled={this.state.infoFilled}
                     submitButtonDefaultColor='#d9d9d9'
-                    submitButtonFinishedColor='#ff768b'
+                    submitButtonFinishedColor='#2ad3be'
                     handleSubmitPress={this._handleSubmitPress}
                     showLoading={this.state.showLoading}
         />

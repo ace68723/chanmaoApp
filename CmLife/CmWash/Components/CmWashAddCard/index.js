@@ -259,7 +259,7 @@ export default class CMKeyBoard extends Component {
                       deleteNumber={()=>{this.state.isNumOpen?this.deleteNumber():this.deleteCVV()}}
                       isInfoFilled={this.state.infoFilled}
                       submitButtonDefaultColor='#d9d9d9'
-                      submitButtonFinishedColor='#ff768b'
+                      submitButtonFinishedColor='#2ad3be'
           />
         )
       }

@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import {
   Platform,
@@ -26,9 +18,10 @@ import HomeStore from '../../Stores/HomeStore';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import CheckoutStore from '../../Stores/CheckoutStore';
 import Cart from '../Cart/Cart'
+import BaseComponent from '../Common/BaseComponent'
 
 type Props = {};
-export default class Home extends Component<Props> {
+export default class Home extends BaseComponent<Props> {
   constructor() {
     super();
     this.state = HomeStore.getState();
@@ -61,7 +54,6 @@ export default class Home extends Component<Props> {
   }
   _goToCheckout(){
     this.Cart.dismiss();
-    console.log('1');
     this.props.navigator.push({
       screen: 'checkout',
       title: '结算'
@@ -105,7 +97,7 @@ export default class Home extends Component<Props> {
       if (HomeStore.getItemAmount(item.sku_id) != 0)
         return (<TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
           <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center', }}>
-            <Text style={{ marginBottom: 5, fontSize: 15, color: 'white' }}>
+            <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
               -
             </Text>
           </View>
@@ -114,7 +106,7 @@ export default class Home extends Component<Props> {
       return (
         <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
           <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#b3b3b3', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ marginBottom: 5, fontSize: 15, color: 'white' }}>
+            <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
               -
             </Text>
           </View>
@@ -123,13 +115,13 @@ export default class Home extends Component<Props> {
     }
     return (
       <View style={styles.card}>
-        <View style={{ width: 0.45 * width, height: 0.23 * height, backgroundColor: 'white', borderRadius: 10, overflow: 'hidden', }}>
-          <View style={{ flex: 2}}>
+        <View style={{ width: 0.45 * width, height: 0.225 * height, backgroundColor: 'white', borderRadius: 10, overflow: 'hidden', }}>
+          <View style={{ flex: 3}}>
             <Image source={{ uri: item.image }} style={{ flex: 1 }}/>
           </View>
           <View style={{ flex: 1, marginTop: 4}}>
             <View style={{ flex: 1, justifyContent: 'center' }}>
-              <Text style={{ marginLeft: 8, fontSize: 12, fontWeight: '800'}}>
+              <Text style={{ marginLeft: 8, fontSize: 13, fontWeight: '800'}}>
                 {item.name_zh}
               </Text>
             </View>
@@ -151,8 +143,8 @@ export default class Home extends Component<Props> {
                 </Text>
               </View>
               <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 1 }}>
-                <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
-                  <Text style={{ marginBottom: 5, fontSize: 15, color: 'white' }}>
+                <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
                     +
                   </Text>
                 </View>
@@ -193,14 +185,12 @@ export default class Home extends Component<Props> {
   }
   renderNavigationBar(){
     return (
-      <View style={{ width: width, height: 48, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-
+      <View style={{ width: width, height: 48 + this.mSafeZoneHeight, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
         <TouchableWithoutFeedback onPress={this._goBack}>
           <View style={{ flex: 1, justifyContent: 'flex-start', }}>
             <Image source={require('./image/icon_back_green.png')} style={{ marginLeft: 12, width: 26, height: 26 }}/>
           </View>
         </TouchableWithoutFeedback>
-
         <Text style={{ flex: 2, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
           馋猫干洗
         </Text>
@@ -263,7 +253,8 @@ export default class Home extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,marginTop:20,
+    flex: 1,
+    marginTop:20,
     backgroundColor: 'white'
   },
   card: {
@@ -273,7 +264,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     marginBottom: 5,
     marginTop: 5,
-    borderRadius: 6,
+    borderRadius: 10,
     elevation: 5,
     shadowOffset: {width: 0, height: 0},
     shadowColor: 'grey',

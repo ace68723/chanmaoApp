@@ -51,21 +51,21 @@ export default class DateKey extends Component {
                   <TouchableHighlight style={{alignItems:'center',
                                               justifyContent:'center',
                                               padding: 10}}
-                                      underlayColor='#ff768b'
+                                      underlayColor='#2ad3be'
                                       onPress={()=>{this._onPressMonth(values[0])}}>
                     <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[0]}</Text>
                   </TouchableHighlight>
                   <TouchableHighlight style={{alignItems:'center',
                                               justifyContent:'center',
                                               padding: 10}}
-                                      underlayColor='#ff768b'
+                                      underlayColor='#2ad3be'
                                       onPress={()=>{this._onPressMonth(values[1])}}>
                     <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[1]}</Text>
                   </TouchableHighlight>
                   <TouchableHighlight style={{alignItems:'center',
                                               justifyContent:'center',
                                               padding: 10}}
-                                      underlayColor='#ff768b'
+                                      underlayColor='#2ad3be'
                                       onPress={()=>{this._onPressMonth(values[2])}}>
                     <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[2]}</Text>
                   </TouchableHighlight>
@@ -96,7 +96,7 @@ export default class DateKey extends Component {
                                           padding: 10,
                                           paddingLeft: 5,
                                           paddingRight: 5}}
-                                  underlayColor='#ff768b'
+                                  underlayColor='#2ad3be'
                                   onPress={()=>{this._onPressYear(values[0])}}>
                 <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[0]}</Text>
               </TouchableHighlight>
@@ -105,7 +105,7 @@ export default class DateKey extends Component {
                                           padding: 10,
                                           paddingLeft: 5,
                                           paddingRight: 5}}
-                                  underlayColor='#ff768b'
+                                  underlayColor='#2ad3be'
                                   onPress={()=>{this._onPressYear(values[1])}}>
                 <Text style={[styles.DateKeyFont,{color:this.state.fontColor}]} allowFontScaling={false}>{values[1]}</Text>
               </TouchableHighlight>
@@ -120,7 +120,7 @@ export default class DateKey extends Component {
         <View style={{flex:1,flexDirection:'row'}}>
             <View style={{flex: 0.5, marginBottom:20}}>
                 <View style={{marginTop: 10,marginBottom: 5,justifyContent:'center'}}>
-                    <Text style={{color:'#ff768b', textAlign: 'center'}}
+                    <Text style={{color:'#2ad3be', textAlign: 'center'}}
                           allowFontScaling={false}>
                       MONTH
                     </Text>
@@ -133,7 +133,7 @@ export default class DateKey extends Component {
             </View>
             <View style={{flex: 0.5, marginBottom:20}}>
                 <View style={{marginTop: 10,marginBottom: 5,justifyContent:'center'}}>
-                    <Text style={{color:'#ff768b', textAlign: 'center'}}
+                    <Text style={{color:'#2ad3be', textAlign: 'center'}}
                           allowFontScaling={false}>
                       YEAR
                     </Text>
