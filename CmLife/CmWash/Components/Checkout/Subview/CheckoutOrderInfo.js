@@ -16,9 +16,14 @@ import Separator from '../../Common/Separator'
 export default class CheckoutUserInfo extends Component{
   constructor(props) {
     super(props);
-    this.renderOrderItems=this.renderOrderItems.bind(this);
+    this.renderOrderItems = this.renderOrderItems.bind(this);
+    this.state = {
+      height: 50
+    }
   }
-
+  updateSize(height){
+    this.setState({ height });
+  }
   renderOrderItems(){
     return (
       <View style={styles.order}>
@@ -38,9 +43,18 @@ export default class CheckoutUserInfo extends Component{
   }
 
   renderOrderComment(){
+    const {newValue, height} = this.state;
+
+    let newStyle = { height };
     return (
       <View style={{borderRadius: 4, backgroundColor: '#F0F0F0', marginTop: 6, }}>
-        <TextInput placeholder={'添加备注'} style={styles.orderCommentText} onChangeText={(text) => this.props.onChangeComment(text)}></TextInput>
+        <TextInput
+          placeholder={'添加备注'}
+          style={[styles.orderCommentText, newStyle]}
+          onChangeText={(text) => this.props.onChangeComment(text)}
+          multiline={true}
+          onContentSizeChange={(e) => this.updateSize(e.nativeEvent.contentSize.height + 14)}
+        />
       </View>
     )
   }
