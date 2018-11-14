@@ -933,6 +933,16 @@ class Confirm extends Component {
 					)
 					return payment_section;
 				}
+			} else if (this.state.dltype == 0) {
+				const payment_section = [];
+				payment_section.push(
+					<View key={'showPayment'}>
+						<CartItem title={Label.getCMLabel('PAY')}
+											paymentChannel={this.state.payment_channel}
+											value={Label.getCMLabel('CASH')}/>
+					</View>
+				)
+				return payment_section;
 			}
 
 		}

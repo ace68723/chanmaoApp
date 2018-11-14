@@ -389,19 +389,37 @@ export default class CmRestaurantSearch extends Component {
 				</View>
 			)
 		}else{
+			let _searchByTag = () => {
+				if (this.state.tags.length > 0) {
+					return (
+						<SearchByTag
+							onPressTag={(tag)=>this._clickTag(tag)}
+							scrollToTop={this._scrollToTop}
+							tags={this.state.tags}/>
+					);
+				} else {
+					return;
+				}
+			}
+			let _searchByArea = () => {
+				if (this.state.zones.length > 0) {
+					return (
+						<SearchByArea
+							onPressArea={(area)=>this._clickArea(area)}
+							areas={this.state.zones} />
+					);
+				} else {
+					return;
+				}
+			}
 			return(
 				<ScrollView
 					keyboardDismissMode={"on-drag"}
 					keyboardShouldPersistTaps={'always'}
 					style={{flex:1}}
 					ref={'searchPage'}>
-					<SearchByTag
-						onPressTag={(tag)=>this._clickTag(tag)}
-						scrollToTop={this._scrollToTop}
-						tags={this.state.tags}/>
-					<SearchByArea
-						onPressArea={(area)=>this._clickArea(area)}
-						areas={this.state.zones} />
+					{_searchByTag()}
+					{_searchByArea()}
 					<View style={{height: 10}}>
 					</View>
 				</ScrollView>
