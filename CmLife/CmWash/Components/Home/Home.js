@@ -26,9 +26,10 @@ import HomeStore from '../../Stores/HomeStore';
 import CheckoutAction from '../../Actions/CheckoutAction';
 import CheckoutStore from '../../Stores/CheckoutStore';
 import Cart from '../Cart/Cart'
+import BaseComponent from '../Common/BaseComponent'
 
 type Props = {};
-export default class Home extends Component<Props> {
+export default class Home extends BaseComponent<Props> {
   constructor() {
     super();
     this.state = HomeStore.getState();
@@ -193,14 +194,12 @@ export default class Home extends Component<Props> {
   }
   renderNavigationBar(){
     return (
-      <View style={{ width: width, height: 48, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-
+      <View style={{ width: width, height: 48 + this.mSafeZoneHeight, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
         <TouchableWithoutFeedback onPress={this._goBack}>
           <View style={{ flex: 1, justifyContent: 'flex-start', }}>
             <Image source={require('./image/icon_back_green.png')} style={{ marginLeft: 12, width: 26, height: 26 }}/>
           </View>
         </TouchableWithoutFeedback>
-
         <Text style={{ flex: 2, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
           馋猫干洗
         </Text>
@@ -263,7 +262,8 @@ export default class Home extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,marginTop:20,
+    flex: 1,
+    marginTop:20,
     backgroundColor: 'white'
   },
   card: {
