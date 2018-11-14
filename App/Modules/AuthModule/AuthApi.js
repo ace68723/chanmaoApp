@@ -198,8 +198,8 @@ const AuthApi = {
       })
       return fetch(url,options)
               .then((res) => {
-                console.log(res);
-                console.log(res.json());
+                // console.log(res);
+                // console.log(res.json());
                 return res.json();
               })
               .catch((error) => {throw ERROR_NETWORK})

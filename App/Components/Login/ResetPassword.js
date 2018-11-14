@@ -9,7 +9,9 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Keyboard,
+  Animated,
 } from 'react-native';
 const {width,height} = Dimensions.get('window');
 import AuthModule from '../../Modules/AuthModule/Auth';
@@ -26,13 +28,89 @@ export default class ResetPassword extends Component {
       num:'',
       password:'',
       confirm_password:'',
+      viewBottom:new Animated.Value(0),
     };
     this.popupView = PopupView.getInstance();
+    this._keyboardDidShow = this._keyboardDidShow.bind(this);
+    this._keyboardDidHide = this._keyboardDidHide.bind(this);
+  }
+  componentWillMount(){
+    //System(Gesture):  handle view Gesture Response
+
+     //Event(Keybaord): hanlde keybord event, add keyabord event listener
+     this._keyboardDidShowSubscription = Keyboard.addListener('keyboardDidShow', (e) => this._keyboardDidShow(e));
+     this._keyboardDidHideSubscription = Keyboard.addListener('keyboardDidHide', (e) => this._keyboardDidHide(e));
+
   }
   componentDidMount()
   {
     this._getVcode=this._getVcode.bind(this);
     this._resetPassword=this._resetPassword.bind(this);
+
+  }
+  componentWillUnmount() {
+    // Event(Keybaord): remove keybaord event
+    this._keyboardDidShowSubscription.remove();
+    this._keyboardDidHideSubscription.remove();
+    // AuthStore.removeChangeListener(this._onChange);
+  }
+  _keyboardDidShow(e) {
+      // keyboard(e.endCoordinates.height): get keyboard height
+      const keyboardHeight = e.endCoordinates.height;
+            Animated.timing(this.state.viewBottom, {
+                toValue: keyboardHeight-0.1*height,
+                // easing: Easing.out(Easing.quad),
+                duration: 300,
+            }).start()
+      // submitButton(position): get submitButton position
+      // this.refs[this.props.ir_SUBMIT_BUTTON].measure((ox, oy, width, objectHeight, px, py) =>{
+      //     // submitButton(marginBottom)
+      //     const submitButton = height - py - objectHeight;
+      //     // if true, submitButton has covered by keyboard
+      //     if(keyboardHeight>submitButton ){
+      //       //View(bottom): add enough space for keyboard appear
+      //
+      //       Animated.timing(this.state.viewBottom, {
+      //           toValue: keyboardHeight-submitButton + 60,
+      //           easing: Easing.out(Easing.quad),
+      //           duration: 300,
+      //       }).start()
+      //       // View(logo): logo fadeout;
+      //       Animated.timing(this.state.logoOpacity, {
+      //           toValue: 0,
+      //           easing: Easing.out(Easing.quad),
+      //           duration: 300,
+      //       }).start()
+      //
+      //     }
+      //  });
+      //  if (Platform.OS == 'ios') {
+      //    this._onFocus();
+      //  }
+      console.log('show');
+
+  }
+  _keyboardDidHide(e) {
+    console.log('hide');
+    //View(bottom): init viewBottom to default
+    // Animated.timing(this.state.viewBottom, {
+    //     toValue: 0,
+    //     easing: Easing.out(Easing.quad),
+    //     duration: 300,
+    //   }).start()
+    //   Animated.timing(this.state.logoOpacity, {
+    //       toValue: 1,
+    //       easing: Easing.out(Easing.quad),
+    //       duration: 300,
+    //   }).start()
+    //   // view(inputLine)
+    //   Animated.sequence([
+    //       Animated.delay(100),
+    //       Animated.timing(this.state.lineWidth, {
+    //           toValue: 0,
+    //           duration: 300,
+    //         })
+    //   ]).start()
   }
   async _getVcode(num)
   {
@@ -74,7 +152,7 @@ export default class ResetPassword extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <Animated.View style={{flex:1,bottom:this.state.viewBottom}}>
         {this.state.showPopup && this.popupView.show()}
         <View style={styles.bgImageWrapper}>
 						 <Image source={require('./Image/background.png')}
@@ -190,7 +268,7 @@ export default class ResetPassword extends Component {
 
         </View>
 
-      </View>
+      </Animated.View>
     );
   }
 }
