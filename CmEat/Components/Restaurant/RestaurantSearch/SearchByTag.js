@@ -113,6 +113,7 @@ export default class SearchByTag extends Component{
 						<Text style={{backgroundColor:"rgba(0,0,0,0)",
 													color:"#ffffff",
 										fontSize:18,
+										fontWeight: '600',
 										fontFamily:'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{tag.name}

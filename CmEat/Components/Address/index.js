@@ -308,6 +308,7 @@ export default class CmEatAddress extends Component {
 										source={require('./Image/icon_address_home.png')}/>
 							<Text style={{fontSize:18,
 														marginLeft:15,
+														fontWeight: '700',
 														fontFamily:'NotoSans-Regular',}}
 										allowFontScaling={false}>
 								Home
@@ -325,6 +326,7 @@ export default class CmEatAddress extends Component {
 							</TouchableOpacity>
 							<Text style={{fontSize:18,
 														marginLeft:15,
+														fontWeight: '700',
 														fontFamily:'NotoSans-Regular',}}
 										allowFontScaling={false}>
 								Work
@@ -343,6 +345,7 @@ export default class CmEatAddress extends Component {
 							</TouchableOpacity>
 							<Text style={{fontSize:20,
 														marginLeft:15,
+														fontWeight: '700',
 														fontFamily:'NotoSans-Regular',}}
 										allowFontScaling={false}>
 								Other
@@ -517,7 +520,10 @@ export default class CmEatAddress extends Component {
 								<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
 										<Image style={{width:22.5,height:30, marginLeft: 3.75, marginRight: 3.75}}
 													source={require('./Image/icon_address.png')}/>
-												<Text style={{fontSize:18,marginLeft:15,fontFamily:'NotoSans-Regular',}}
+												<Text style={{fontSize:18,
+																			marginLeft:15,
+																			fontFamily:'NotoSans-Regular',
+																			fontWeight: '700'}}
 													allowFontScaling={false}>
 											Current Location
 										</Text>
@@ -627,6 +633,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     marginBottom: 5,
     fontSize:20,
+		fontWeight: '700',
     fontFamily:'NotoSans-Regular',
   },
 });

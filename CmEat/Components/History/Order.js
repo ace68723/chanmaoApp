@@ -403,7 +403,7 @@ export default class pastOrderEN extends Component {
                   <Text style={[styles.infoTitle,statusColor]} allowFontScaling={false}>{statusMessage}</Text>
                   {_statusReminder()}
                   <View style={{flexDirection:'row'}}>
-                    <Text style={[styles.infoText,{fontFamily:'NotoSans-Regular'}]}
+                    <Text style={[styles.infoText,{fontFamily:'NotoSans-Regular', fontWeight: 'bold'}]}
                           allowFontScaling={false}>
                         {Label.getCMLabel('ORDER_NO')} #{this.state.orderInfo.order_oid}
                     </Text>
@@ -476,7 +476,7 @@ const styles = StyleSheet.create({
    fontSize: 20,
    color:'white',
    alignSelf:'center',
-   fontFamily:'NotoSans-Regular',
+   fontFamily:'NotoSans-Bold',
   },
   info:{
     flex:1,

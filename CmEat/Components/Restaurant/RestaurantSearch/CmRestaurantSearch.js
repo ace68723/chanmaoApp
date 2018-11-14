@@ -385,6 +385,7 @@ export default class CmRestaurantSearch extends Component {
 							}}>
 					<Text style={{fontSize:16,
 												margin:3,
+												fontWeight: '700',
 												fontFamily:'NotoSans-Regular'}}
 								allowFontScaling={false}>
 								{Label.getCMLabel('CANNOT_FIND_ABOUT')} "{this.state.searchText}" {Label.getCMLabel('ABOUT_XX_ITEMS')}
