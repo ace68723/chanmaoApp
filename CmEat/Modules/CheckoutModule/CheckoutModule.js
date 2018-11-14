@@ -39,6 +39,7 @@ export default  {
         items,
         channel: Platform.OS == 'ios' ? 1 : 2,
         version,
+        region: 2
       };
       const reqData = {
         body,
