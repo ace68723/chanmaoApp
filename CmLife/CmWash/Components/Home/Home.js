@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import {
   Platform,
@@ -62,7 +54,6 @@ export default class Home extends BaseComponent<Props> {
   }
   _goToCheckout(){
     this.Cart.dismiss();
-    console.log('1');
     this.props.navigator.push({
       screen: 'checkout',
       title: '结算'
@@ -106,7 +97,7 @@ export default class Home extends BaseComponent<Props> {
       if (HomeStore.getItemAmount(item.sku_id) != 0)
         return (<TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
           <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center', }}>
-            <Text style={{ marginBottom: 5, fontSize: 15, color: 'white' }}>
+            <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
               -
             </Text>
           </View>
@@ -115,7 +106,7 @@ export default class Home extends BaseComponent<Props> {
       return (
         <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
           <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#b3b3b3', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ marginBottom: 5, fontSize: 15, color: 'white' }}>
+            <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
               -
             </Text>
           </View>
@@ -124,13 +115,13 @@ export default class Home extends BaseComponent<Props> {
     }
     return (
       <View style={styles.card}>
-        <View style={{ width: 0.45 * width, height: 0.23 * height, backgroundColor: 'white', borderRadius: 10, overflow: 'hidden', }}>
-          <View style={{ flex: 2}}>
+        <View style={{ width: 0.45 * width, height: 0.225 * height, backgroundColor: 'white', borderRadius: 10, overflow: 'hidden', }}>
+          <View style={{ flex: 3}}>
             <Image source={{ uri: item.image }} style={{ flex: 1 }}/>
           </View>
           <View style={{ flex: 1, marginTop: 4}}>
             <View style={{ flex: 1, justifyContent: 'center' }}>
-              <Text style={{ marginLeft: 8, fontSize: 12, fontWeight: '800'}}>
+              <Text style={{ marginLeft: 8, fontSize: 13, fontWeight: '800'}}>
                 {item.name_zh}
               </Text>
             </View>
@@ -152,8 +143,8 @@ export default class Home extends BaseComponent<Props> {
                 </Text>
               </View>
               <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 1 }}>
-                <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
-                  <Text style={{ marginBottom: 5, fontSize: 15, color: 'white' }}>
+                <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
                     +
                   </Text>
                 </View>
@@ -273,7 +264,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     marginBottom: 5,
     marginTop: 5,
-    borderRadius: 6,
+    borderRadius: 10,
     elevation: 5,
     shadowOffset: {width: 0, height: 0},
     shadowColor: 'grey',
