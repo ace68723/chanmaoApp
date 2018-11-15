@@ -8,6 +8,7 @@ const VersionApi = {
       }
       options.headers = Object.assign({
           current_version: curVersion,
+          appid: 2
       });
       return fetch(url,options)
               .then((res) => res.json())
