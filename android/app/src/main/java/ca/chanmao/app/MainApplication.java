@@ -43,7 +43,7 @@ public class MainApplication extends NavigationApplication implements ReactInsta
                 new NativePackage(),
             new MapsPackage(),
                 new WeChatPackage(),
-                new CodePush("wxAMv-nMqU-Z_07d7hJUUGbhQflU842cf145-347a-42da-b8ba-6819059e5be5", MainApplication.this, BuildConfig.DEBUG)
+                new CodePush("EwW4HdViJExx3mTBVx7-VSL7DRpD842cf145-347a-42da-b8ba-6819059e5be5", MainApplication.this, BuildConfig.DEBUG)
 
         );
     }
