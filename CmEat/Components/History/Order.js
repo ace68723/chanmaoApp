@@ -107,10 +107,10 @@ export default class pastOrderEN extends Component {
   }
 
   _handleWechatBtn(){
-     Clipboard.setString('chanmao_kefu');
+     Clipboard.setString('xiaomingpeisong_ca');
      Alert.alert(
             '已复制',
-            '小明公众号: chanmao_kefu',
+            '小明公众号: xiaomingpeisong_ca',
             [
               {text: 'OK', onPress: () => {}},
             ]
@@ -223,7 +223,7 @@ export default class pastOrderEN extends Component {
                                       alignItems:'center'}}
                               onPress={this._handleWechatBtn}>
               <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
-              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontFamily:'NotoSansCJKsc-Regular',}} allowFontScaling={false}>chanmao_kefu</Text>
+              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontFamily:'NotoSansCJKsc-Regular',}} allowFontScaling={false}>xiaomingpeisong_ca</Text>
 
             </TouchableOpacity>
         </View>

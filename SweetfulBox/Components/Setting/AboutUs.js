@@ -77,7 +77,7 @@ export default class InfoPage extends Component {
                               <Text style={styles.centerFontWEIXIN}
                                     selectable={true}
                                     allowFontScaling={false}>
-                                    微信客服：chanmao_kefu
+                                    微信客服：xiaomingpeisong_ca
                               </Text>
                               <Text style={styles.centerFont} onPress={()=>{
                                 this.contact("marketing@chanmao.ca","email");
