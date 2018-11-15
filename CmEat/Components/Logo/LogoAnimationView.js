@@ -123,6 +123,8 @@ export default class LogoAnimationView extends Component {
 						'Content-Type': 'application/json'
 				}
 		}
+		options.headers.appid = 2;
+		options.headers.region = 2;
 		fetch(url,options)
 			.then((res) => res.json())
 			.then((res)=>{
