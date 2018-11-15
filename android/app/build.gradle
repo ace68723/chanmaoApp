@@ -102,7 +102,7 @@ android {
         applicationId "ca.xiaoming.app"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 6
+        versionCode 1
         versionName "2.9.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
