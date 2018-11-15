@@ -49,6 +49,7 @@ module.exports={
   ADD_DELIVERY_ADDRESS:'Add Address',
   ADD_PAYMENT_METHOD:'Add Payment Method',
   SELECT_DELIVERY_ADDRESS:'Select Delivery Address',
+  CONFIRM_CHECKOUT:'Pay Now',
   CARD_NUMBER:'Card Number',
   //SbooxHistory
   CONFIRMED:'Confirmed',
