@@ -90,7 +90,7 @@ export default class CheckoutButton extends Component {
                           fontSize:20,
                           fontFamily:'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
-              {Label.getSboxLabel('ADD_PAYMENT_METHOD')}
+              {Label.getSboxLabel('GO_CHECKOUT')}
             </Text>
         </View>
       </TouchableOpacity>
