@@ -151,7 +151,7 @@ export default  {
       throw e;
     }
   },
-  async addCard({cardNumber,expMonth,expYear,cvv}){
+  async addCard({cardNumber,expMonth,expYear,cvv,name,postal}){
     try {
        cardNumber = cardNumber.replace(/ /g,'');
        expMonth = Number(expMonth);
