@@ -436,7 +436,12 @@ export default class pastOrderEN extends Component {
                         alignItems: 'center',
                         justifyContent:'center',
                       }}>
-              <Image style={{width:100,height:100, marginLeft: 20}}source={require('./Image/chanmao_logo.png')}/>
+              <Image style={{width:60,
+                             height:60,
+                             marginLeft: 30,
+                             marginRight: 5,
+                             marginVertical: 12}}
+                     source={require('./Image/chanmao_logo.png')}/>
               <View style={{flex: 1,
                             flexDirection: 'column',
                             marginLeft: 10}}>
