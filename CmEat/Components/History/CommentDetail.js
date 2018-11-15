@@ -725,7 +725,7 @@ export default class pastOrderEN extends Component {
       return(
         <View style={styles.container} >
           {this.state.showPopup && this.popupView.show()}
-            <Header title={Label.getCNLabel('COMMENT')}
+            <Header title={Label.getCMLabel('COMMENT')}
                     goBack={this.props.goBack}
                     leftButtonText={'x'}/>
                 <ScrollView ref="ScrollView"

@@ -120,6 +120,7 @@ const AuthApi = {
       }else if (userInfo.resCode){
           options.headers = Object.assign(options.headers,{
               rescode:userInfo.resCode,
+              appid:2
           })
       }
       // if(userInfo.token){
@@ -205,11 +206,7 @@ const AuthApi = {
         "iv_num": io_data.iv_num,
       })
       return fetch(url,options)
-              .then((res) => {
-                console.log(res);
-                console.log(res.json());
-                return res.json();
-              })
+              .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
     bindPhone(io_data) {

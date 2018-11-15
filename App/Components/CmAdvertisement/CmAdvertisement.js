@@ -53,11 +53,12 @@ export default class CmAdvertisement extends Component {
   						'Content-Type': 'application/json'
   				}
   		}
+      options.headers.appid = 2;
+  		options.headers.region = 2;
   		fetch(url,options)
   			.then((res) => res.json())
   			.then((res)=>{
   				if(res.result == 0 ){
-
   					if(res.image){
               Image.getSize(res.image, (width, height) => {
                 const ratio = height/width;
