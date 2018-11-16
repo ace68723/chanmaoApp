@@ -96,7 +96,7 @@ export default class Home extends BaseComponent<Props> {
     const _display_remove = () => {
       if (HomeStore.getItemAmount(item.sku_id) != 0)
         return (<TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
-          <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center', }}>
+          <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center', }}>
             <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
               -
             </Text>
@@ -105,7 +105,7 @@ export default class Home extends BaseComponent<Props> {
       );
       return (
         <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
-          <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#b3b3b3', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#b3b3b3', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
               -
             </Text>
@@ -143,7 +143,7 @@ export default class Home extends BaseComponent<Props> {
                 </Text>
               </View>
               <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 1 }}>
-                <View style={{ flex: 1, marginBottom: 5, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center'}}>
                   <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
                     +
                   </Text>
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   card: {
-    flex: 1,
+    width: 0.45 * width,
     backgroundColor: 'white',
     marginLeft: 12,
     marginRight: 12,
