@@ -44,7 +44,7 @@ export default class CheckoutButton extends Component {
                             fontSize:20,
                             fontFamily:'NotoSansCJKsc-Regular'}}
                     allowFontScaling={false}>
-                {La}
+                {Label.getSboxLabel('ADD_DELIVERY_ADDRESS')}
               </Text>
           </View>
         </TouchableOpacity>
@@ -67,7 +67,7 @@ export default class CheckoutButton extends Component {
                             fontSize:20,
                             fontFamily:'NotoSansCJKsc-Regular'}}
                     allowFontScaling={false}>
-                {Label.getSboxLabel('ADD_DELIVERY_ADDRESS')}
+                {Label.getSboxLabel('ADD_PAYMENT_METHOD')}
               </Text>
           </View>
         </TouchableOpacity>
@@ -90,7 +90,7 @@ export default class CheckoutButton extends Component {
                           fontSize:20,
                           fontFamily:'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
-              {Label.getSboxLabel('GO_CHECKOUT')}
+              {Label.getSboxLabel('CONFIRM_CHECKOUT')}
             </Text>
         </View>
       </TouchableOpacity>
