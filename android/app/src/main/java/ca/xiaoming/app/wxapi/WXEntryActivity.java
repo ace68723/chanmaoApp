@@ -1,4 +1,4 @@
-package ca.chanmao.app.wxapi;
+package ca.xiaoming.app.wxapi;
 
 /**
  * Created by Franky on 2018-05-16.

@@ -1,11 +1,11 @@
-package ca.chanmao.app.cmAlipay;
+package ca.xiaoming.app.cmAlipay;
 
 
 import android.app.Activity;
 import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
-import ca.chanmao.app.MainActivity;
+import ca.xiaoming.app.MainActivity;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;

@@ -1,4 +1,4 @@
-package ca.chanmao.app;
+package ca.xiaoming.app;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -8,7 +8,7 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import ca.chanmao.app.cmAlipay.Alipay;
+import ca.xiaoming.app.cmAlipay.Alipay;
 
 public class AlipayReactPackage implements ReactPackage {
 

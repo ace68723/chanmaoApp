@@ -1,4 +1,4 @@
-package ca.chanmao.app;
+package ca.xiaoming.app;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

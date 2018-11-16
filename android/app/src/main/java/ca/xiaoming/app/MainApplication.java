@@ -1,4 +1,4 @@
-package ca.chanmao.app;
+package ca.xiaoming.app;
 
 
 
@@ -13,11 +13,9 @@ import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
 import java.util.List;
-//import ca.chanmao.app.AlipayReactPackage;
+//import ca.xiaoming.app.AlipayReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.facebook.react.ReactApplication;
 import com.airbnb.android.react.maps.MapsPackage;
-import com.theweflex.react.WeChatPackage;
 
 import com.facebook.react.ReactInstanceManager;
 

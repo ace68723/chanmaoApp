@@ -1,4 +1,4 @@
-package ca.chanmao.app;
+package ca.xiaoming.app;
 
 import com.reactnativenavigation.controllers.SplashActivity;
 

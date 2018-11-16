@@ -1,4 +1,4 @@
-package ca.chanmao.app.cmAlipay;
+package ca.xiaoming.app.cmAlipay;
 
 import android.text.TextUtils;
 
