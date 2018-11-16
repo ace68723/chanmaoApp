@@ -235,7 +235,7 @@ export default class StartupAnimation extends Component {
         picSize = parseInt(310 * sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
-          outputRange: [ -300*sizeScale, -30*sizeScale, -40*sizeScale, -30*sizeScale, -35*sizeScale , -30*sizeScale]
+          outputRange: [ -300*sizeScale, -picSize/5, (-picSize/5)-10, -picSize/5, (-picSize/5)-5 , -picSize/5]
         })
       }else{
         left = parseInt(-50* sizeScale);
@@ -288,15 +288,14 @@ export default class StartupAnimation extends Component {
 
     renderTopRightIcon(){
 
-      let jump;
-      let picSize;
-      let right;
+      let jump,picSize,right;
+      const iconHeight = parseInt(height/5);
       if(region === '1'){
         picSize = parseInt(310 * sizeScale);
         right = parseInt(-40* sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
-          outputRange: [ -300*sizeScale, 155*sizeScale, 145*sizeScale, 155*sizeScale, 150*sizeScale , 155*sizeScale]
+          outputRange: [ -300*sizeScale, iconHeight , iconHeight-10 , iconHeight, iconHeight-5 , iconHeight]
         })
       }else{
         picSize = parseInt(330 * sizeScale);
@@ -328,10 +327,10 @@ export default class StartupAnimation extends Component {
       let buttonWidth,top;
       if(region === '1'){
         buttonWidth = parseInt(210 * sizeScale);
-        top = parseInt(120 * sizeScale);
+        top = -35;
       }else{
         buttonWidth = parseInt(260 * sizeScale);
-        top = parseInt(250 * sizeScale);
+        top = parseInt(275 * sizeScale);
       }
       return (
         <TouchableWithoutFeedback
@@ -345,15 +344,14 @@ export default class StartupAnimation extends Component {
           disabled={this.state.isAnimationRunning}
         >
           <View style={{
-              transform:[{rotate:'58deg'}],
-              backgroundColor:'transparent',
-              position:'absolute',
-              height:parseInt(310 * sizeScale),
-              width:buttonWidth,
+              transform:[{rotate:'45deg'}],
+              backgroundColor:'pink',
+              height:parseInt(270 * sizeScale),
+              width:buttonWidth + 20,
               top:top,
               marginTop:iconMargin,
-              right:parseInt(-5 * sizeScale)}}>
-            </View>
+              right: parseInt(-70* sizeScale)}}>
+          </View>
         </TouchableWithoutFeedback>
       );
     }
