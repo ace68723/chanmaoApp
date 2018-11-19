@@ -2,7 +2,7 @@
 export default  {
 
   checkCanDeliver(lat,lng){
-    const url = 'https://norgta.com/api/cmclean/v1/can_deliver';
+    const url = 'https://chanmao.us/api/cmclean/v1/can_deliver';
 
     let options = {
         method: 'POST',

@@ -2,7 +2,7 @@
 export default  {
 
   putUserAddr(io_data){
-    const url = 'https://norgta.com/api/cmclean/v1/user';
+    const url = 'https://chanmao.us/api/cmclean/v1/user';
     let options = {
         method: 'POST',
         mode:'cors',

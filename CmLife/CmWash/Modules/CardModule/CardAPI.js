@@ -3,7 +3,7 @@ export default  {
 
   addCard(io_data) {
 
-    const url = 'https://norgta.com/api/cmclean/v1/card';
+    const url = 'https://chanmao.us/api/cmclean/v1/card';
 
     let options = {
         method: 'POST',
