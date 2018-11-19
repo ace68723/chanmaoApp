@@ -267,7 +267,7 @@ export default class Home extends Component {
       const res =  await AuthAction.isAuthed();
       if(res.ev_error !== 0) {
         setTimeout(() => {
-          this.props.navigator.showModal({
+          this.props.navigator.resetTo({
             screen: 'CmLogin',
             animationType: 'slide-up',
             navigatorStyle: {navBarHidden: true},
