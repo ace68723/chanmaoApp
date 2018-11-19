@@ -99,10 +99,10 @@ export default class pastOrderEN extends Component {
       if (newState.toStoreReview) {
         let url;
         if (Platform.OS == 'ios') {
-          url = 'https://itunes.apple.com/ca/app/%E9%A6%8B%E7%8C%AB%E7%94%9F%E6%B4%BB/id888553991?mt=8';
+          url = 'https://itunes.apple.com/ca/app/%E5%B0%8F%E6%98%8E%E9%85%8D%E9%80%81/id1291537726';
         }
         else {
-          url = 'https://play.google.com/store/apps/details?id=ca.chanmao.app';
+          url = 'https://play.google.com/store/apps/details?id=ca.xiaoming.app';
         }
 
         this.popupView.setMessagePopup({

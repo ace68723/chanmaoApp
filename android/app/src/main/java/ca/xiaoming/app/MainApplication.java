@@ -29,6 +29,10 @@ public class MainApplication extends NavigationApplication implements ReactInsta
         return BuildConfig.DEBUG;
     }
 
+    public boolean getUseDeveloperSupport() {
+        return true;
+    }
+
 
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
