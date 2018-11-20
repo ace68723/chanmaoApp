@@ -34,9 +34,14 @@ export default class Cart extends BaseDialog {
   }
 
   clearCart(){
+    let removing = [];
     for (i of this.props.currentCart){
-      this.props.onPressedQuantity(i.sku_id, -i.amount);
+      removing.push({id: i.sku_id, amount: i.amount})
     }
+    for (i of removing){
+      this.props.onPressedQuantity(i.id, -i.amount);
+    }
+    console.log(this.props.currentCart);
     this.dismiss();
   }
 
@@ -88,7 +93,7 @@ export default class Cart extends BaseDialog {
   }
   renderCartFooter(){
     return (
-      <View style={{height: 20, marginTop: 20, flexDirection: 'row'}}>
+      <View style={{height: 22, marginTop: 20, flexDirection: 'row'}}>
         <View style={{flex: 1, flexDirection: 'column'}}>
           { this.state.allowedShipping &&
             <View style={{flexDirection: 'row'}}>

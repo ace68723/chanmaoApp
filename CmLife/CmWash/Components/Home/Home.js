@@ -103,7 +103,7 @@ export default class Home extends BaseComponent<Props> {
       if (HomeStore.getItemAmount(item.sku_id) != 0)
         return (<TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
           <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center', }}>
-            <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
+            <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 14, color: 'white' }}>
               -
             </Text>
           </View>
@@ -112,7 +112,7 @@ export default class Home extends BaseComponent<Props> {
       return (
         <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
           <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#b3b3b3', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
-            <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
+            <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 14, color: 'white' }}>
               -
             </Text>
           </View>
@@ -121,7 +121,7 @@ export default class Home extends BaseComponent<Props> {
     }
     return (
       <View style={styles.card}>
-        <View style={{ width: 0.45 * width, height: 0.225 * height, backgroundColor: 'white', borderRadius: 10, overflow: 'hidden', }}>
+        <View style={{ width: 0.45 * width, height: 190, backgroundColor: 'white', borderRadius: 10, overflow: 'hidden', }}>
           <View style={{ flex: 3}}>
             <Image source={{ uri: item.image }} style={{ flex: 1 }}/>
           </View>
@@ -131,7 +131,7 @@ export default class Home extends BaseComponent<Props> {
                 {item.name_zh}
               </Text>
             </View>
-          <View style={{ flex: 1, flexDirection: 'row', marginRight: 8}}>
+          <View style={{ flex: 1, flexDirection: 'row', marginRight: 8, marginBottom: 6}}>
             <View style={{ flex: 3, flexDirection: 'row' }}>
               <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',marginLeft: 8, fontSize: 14, color: '#2ad3be', fontWeight: '700'}}>
                 ${parseFloat(item.display_price).toFixed(0) == parseFloat(item.display_price) ? parseFloat(item.display_price).toFixed(0) : item.display_price}
@@ -150,7 +150,7 @@ export default class Home extends BaseComponent<Props> {
               </View>
               <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 1 }}>
                 <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center'}}>
-                  <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
+                  <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 14, color: 'white' }}>
                     +
                   </Text>
                 </View>
