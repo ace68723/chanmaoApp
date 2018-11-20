@@ -203,14 +203,17 @@ module.exports={
     CONFIRM_ADDRESS:'Address correct？Seems far from your current location.',
 
     //Popup title
-    REGISTER_FAIL:'Registration failed, please try again',
-    PHONE_IS_TAKEN:'Phone number is registered',
-    AUTH_FAIL:'Authorize failed, unknown mistake',
-    VCODE_SENT:'Verification Code Sent',
-    REACH_VCODE_MAX:'Sending Verification Code No More Than 3 Times a Day',
-    SEND_VCODE_FAIL:'Sending Verification Code Failed',
-    PLZ_ENTER_PHONE_10:'Please enter 10-digit phone number',
-    PLZ_SELECT_REQUIRED_OPTION:'Please choose the required options',
+    REGISTER_FAIL:'Registration failed, please try again.',
+    PHONE_IS_TAKEN:'Phone number is registered.',
+    AUTH_FAIL:'Authorize failed, unknown mistake.',
+    VCODE_SENT:'Verification Code Sent.',
+    REACH_VCODE_MAX:'Sending Verification Code No More Than 3 Times a Day.',
+    SEND_VCODE_FAIL:'Sending Verification Code Failed.',
+    PLZ_ENTER_PHONE_10:'Please enter 10-digit phone number.',
+    PLZ_SELECT_REQUIRED_OPTION:'Please choose the required options.',
     VERTIFICATION_FAIL_TITLE:'Wrong Validation Code',//(新用户用的)
-    VERTIFICATION_FAIL_CONTENT:'Please check the code you entered',//(新用户用的)
+    VERTIFICATION_FAIL_CONTENT:'Please check the code you entered.',//(新用户用的)
+    WECHAT_NO_PASSWORD:'No passwords for WeChat account, please login with WeChat.',
+    UNKNOW_ERROR:'There is something wrong, please contact customer service.',
+    VCODE_SENT_TO_THIS_NUMBER:'Verification code sent to phone, Last 4 number is: '
 }
