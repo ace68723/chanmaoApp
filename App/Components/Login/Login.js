@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import AuthModule from '../../Modules/AuthModule/Auth';
 import AppConstants from '../../Constants/AppConstants';
 import AppString from '../../Constants/AppString';
 import AuthAction from '../../Actions/AuthAction';
@@ -19,7 +20,7 @@ import AuthAction from '../../Actions/AuthAction';
 import Alert from '../General/Alert';
 import InputAnimation from './InputAnimation';
 import RegisterInputAnimation from './register/InputAnimation';
-import ResetPassword from './ResetPassword';
+import ResetPassword from './reset/InputAnimation';
 import PopupView from '../../../CmEat/Components/Popup/PopupView';
 import Label from '../../Constants/AppLabel';
 
@@ -89,6 +90,8 @@ export default class LogoAnimationView extends Component {
 		this._handleBindSuccessful = this._handleBindSuccessful.bind(this);
 		this._getVerification = this._getVerification.bind(this);
 		this._toggleViewTypeReset = this._toggleViewTypeReset.bind(this);
+		this._getVcode = this._getVcode.bind(this);
+		this._resetPassword = this._resetPassword.bind(this);
 
 		this.popupView = PopupView.getInstance();
   }
@@ -120,6 +123,55 @@ export default class LogoAnimationView extends Component {
 			password:password
 		});
   }
+	async _getVcode() {
+    let data = {"num": this.state.phone};
+    let res=await AuthModule.getVcode(data);
+    if (res.ev_noti_msg) {
+			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), res.ev_noti_msg);
+			// alert(res.ev_noti_msg);
+		}
+    else if (res.ev_error==0) {
+			this.popupView.showAlertWithTitle(this, Label.getCMLabel('REMINDING'), Label.getCMLabel('VCODE_SENT'));
+			// alert('message sent');
+		}
+    else {
+			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), res.ev_context);
+			// alert(res.ev_context);
+		}
+  }
+
+	async _resetPassword() {
+		let iv_verification_code=this.state.verification;
+		let iv_num=this.state.phone;
+		let iv_password=this.state.password;
+		let confirm_password=this.state.password;
+    if (iv_verification_code.length == 0 ||
+        iv_password.length == 0 ||
+        iv_num.length == 0 ||
+        confirm_password.length == 0) {
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PLZ_ENTER_PASSWORD'));
+      return;
+    }
+    if (iv_password!=confirm_password){
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PASSWORD_NOT_MATCHING'));
+      return;
+    }
+    let data={
+      "iv_verification_code": iv_verification_code,
+      "iv_password": iv_password,
+      "iv_num": iv_num,
+    }
+    let res = await AuthModule.resetPassword(data);
+    if (res.ev_error == 0) {
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_CONGRA_TITLE'), Label.getCMLabel('PASSWORD_RESET_SUCCESS'));
+    }
+    else {
+      // alert(res.ev_context);
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), res.ev_context);
+    }
+    this.props.toggleViewTypeReset();
+  }
+
 	_handleRePassword(password){
 		this.setState({
 			re_password:password
@@ -401,7 +453,33 @@ export default class LogoAnimationView extends Component {
 				}
 				{this.state.viewType == VIEW_TYPE_RESET &&
 					<ResetPassword
-						toggleViewTypeReset = {this._toggleViewTypeReset}
+						is_username = {AppString('username')}
+						is_password = {AppString('password')}
+						is_login = {AppString('login')}
+						is_submit = {'Submit'}
+
+						is_copyright = {AppString('copyright')}
+						is_version = {AppConstants.CM_VERSION}
+
+						ib_showLoading = {this.state.showLoading}
+						if_handleLogin = {this._handleLogin}
+						if_handleRegister = {this._resetPassword}
+						ir_VERIFICATION_INPUTREF = {VERIFICATION_INPUTREF}
+						ir_PHONE_INPUTREF = {PHONE_INPUTREF}
+						ir_EMAIL_INPUTREF = {EMAIL_INPUTREF}
+						ir_PASSWORD_INPUTREF = {PASSWORD_INPUTREF}
+						ir_RE_PASSWORD_INPUTREF = {RE_PASSWORD_INPUTREF}
+						ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
+						if_handlePhone = {this._handlePhone}
+						if_handleVerification = {this._handleVerification}
+						if_handlePassword = {this._handlePassword}
+						if_handleRePassword = {this._handleRePassword}
+						if_getVerification = {this._getVcode}
+						if_openAdView = {this._openAdView}
+						viewType = {this.state.viewType}
+						toggleViewType = {this._toggleViewTypeReset}
+						secondLeft = {this.state.secondLeft}
+						isVerificationSent = {this.state.isVerificationSent}
 					/>
 				}
 
