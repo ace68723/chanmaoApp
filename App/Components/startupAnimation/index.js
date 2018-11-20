@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
   Platform,
   StyleSheet,
-  Text,
   View,
   Image,
   Dimensions,
@@ -147,51 +146,7 @@ export default class StartupAnimation extends Component {
         ).start();
         this.startDayIndicatorAnim();
     }
-    render() {
-      const region = cme_getRegion();
-      if(region === '1'){
-        return (
-          <Animated.View style={[styles.container,{opacity: this.state.opacity}]}>
-            <Image style={{
-                position:'absolute',
-                width:width,
-                height:height,
-              }}
-              source={isDaytime ? require('./image/background/trtDaytime.png') : require('./image/background/trtNighttime.png')} />
-            {this.renderDayIndicator()}
-            {this.renderTopLeftIcon()}
-            {this.renderTopRightIcon()}
-            {this.renderBottomLeftIcon()}
-            {this.renderBottomRightIcon()}
 
-            {this.renderTopLeftButton()}
-            {this.renderTopRightButton()}
-            {this.renderBottomLeftButton()}
-            {this.renderBottomRightButton()}
-          </Animated.View>
-        );
-      }else{
-        return (
-          <Animated.View style={[styles.container,{opacity: this.state.opacity}]}>
-            <Image style={{
-                position:'absolute',
-                width:width,
-                height:height,
-              }}
-              source={isDaytime ? require('./image/background/otherDaytime.png') : require('./image/background/otherNighttime.png')} />
-            {this.renderDayIndicator()}
-
-            {this.renderTopLeftIcon()}
-            {this.renderTopRightIcon()}
-
-            {this.renderTopLeftButton()}
-            {this.renderTopRightButton()}
-
-          </Animated.View>
-        );
-      }
-
-    }
     renderDayIndicator(){
       const spin = this.state.dayIndicatorHorizontalMove.interpolate(
         {
@@ -236,14 +191,14 @@ export default class StartupAnimation extends Component {
         picSize = parseInt(310 * sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
-          outputRange: [ -300*sizeScale, -30*sizeScale, -40*sizeScale, -30*sizeScale, -35*sizeScale , -30*sizeScale]
+          outputRange: [  parseInt(-300*sizeScale),  parseInt(-picSize/5),  parseInt(-picSize/5)-10,  parseInt(-picSize/5),  parseInt(-picSize/5)-5 ,  parseInt(-picSize/5)]
         })
       }else{
         left = parseInt(-50* sizeScale);
         picSize = parseInt(310 * sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
-          outputRange: [ -300*sizeScale, 20*sizeScale, 10 *sizeScale, 20*sizeScale, 15*sizeScale , 20*sizeScale]
+          outputRange: [  parseInt(-300*sizeScale),  parseInt(20*sizeScale),  parseInt(10*sizeScale),  parseInt(20*sizeScale),  parseInt(15*sizeScale) ,  parseInt(20*sizeScale)]
         })
       }
 
@@ -289,15 +244,14 @@ export default class StartupAnimation extends Component {
 
     renderTopRightIcon(){
 
-      let jump;
-      let picSize;
-      let right;
+      let jump,picSize,right;
+      const iconHeight = parseInt(height/5);
       if(region === '1'){
         picSize = parseInt(310 * sizeScale);
         right = parseInt(-40* sizeScale);
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
-          outputRange: [ -300*sizeScale, 155*sizeScale, 145*sizeScale, 155*sizeScale, 150*sizeScale , 155*sizeScale]
+          outputRange: [ -300*sizeScale, iconHeight , iconHeight-10 , iconHeight, iconHeight-5 , iconHeight]
         })
       }else{
         picSize = parseInt(330 * sizeScale);
@@ -326,13 +280,13 @@ export default class StartupAnimation extends Component {
       );
     }
     renderTopRightButton(){
-      let buttonWidth,top;
+      let buttonHeight,top;
       if(region === '1'){
-        buttonWidth = parseInt(210 * sizeScale);
-        top = parseInt(120 * sizeScale);
+        buttonHeight = parseInt(245 * sizeScale);
+        top = parseInt(150);
       }else{
-        buttonWidth = parseInt(260 * sizeScale);
-        top = parseInt(250 * sizeScale);
+        buttonHeight = parseInt(260 * sizeScale);
+        top = parseInt(275 * sizeScale);
       }
       return (
         <TouchableWithoutFeedback
@@ -346,15 +300,15 @@ export default class StartupAnimation extends Component {
           disabled={this.state.isAnimationRunning}
         >
           <View style={{
-              transform:[{rotate:'58deg'}],
-              backgroundColor:'transparent',
-              position:'absolute',
-              height:parseInt(310 * sizeScale),
-              width:buttonWidth,
-              top:top,
-              marginTop:iconMargin,
-              right:parseInt(-5 * sizeScale)}}>
-            </View>
+            backgroundColor:'transparent',
+            height:buttonHeight,
+            width:buttonHeight+20,
+            right: 0,//parseInt(-70* sizeScale)
+            top:top,
+            marginTop:iconMargin,
+            position:'absolute'
+            }}
+          ></View>
         </TouchableWithoutFeedback>
       );
     }
@@ -454,6 +408,51 @@ export default class StartupAnimation extends Component {
           </View>
         </TouchableWithoutFeedback>
       );
+    }
+    render() {
+      const region = cme_getRegion();
+      if(region === '1'){
+        return (
+          <Animated.View style={[styles.container,{opacity: this.state.opacity}]}>
+            <Image style={{
+                position:'absolute',
+                width:width,
+                height:height,
+              }}
+              source={isDaytime ? require('./image/background/trtDaytime.png') : require('./image/background/trtNighttime.png')} />
+            {this.renderDayIndicator()}
+            {this.renderTopLeftIcon()}
+            {this.renderTopRightIcon()}
+            {this.renderBottomLeftIcon()}
+            {this.renderBottomRightIcon()}
+
+            {this.renderTopRightButton()}
+            {this.renderTopLeftButton()}
+            {this.renderBottomLeftButton()}
+            {this.renderBottomRightButton()}
+          </Animated.View>
+        );
+      }else{
+        return (
+          <Animated.View style={[styles.container,{opacity: this.state.opacity}]}>
+            <Image style={{
+                position:'absolute',
+                width:width,
+                height:height,
+              }}
+              source={isDaytime ? require('./image/background/otherDaytime.png') : require('./image/background/otherNighttime.png')} />
+            {this.renderDayIndicator()}
+
+            {this.renderTopLeftIcon()}
+            {this.renderTopRightIcon()}
+
+            {this.renderTopLeftButton()}
+            {this.renderTopRightButton()}
+
+          </Animated.View>
+        );
+      }
+
     }
   }
 
