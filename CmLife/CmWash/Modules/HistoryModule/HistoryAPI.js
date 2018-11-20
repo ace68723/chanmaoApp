@@ -1,7 +1,7 @@
 // import { API_ORDER_BEFORE, API_ADD_CARD, API_ADD_ORDER } from '../../Config/API';
 export default  {
   HistoryOrder(io_data){
-    const url = 'https://norgta.com/api/cmclean/v1/order_history';
+    const url = 'https://chanmao.us/api/cmclean/v1/order_history';
 
     let options = {
         method: 'GET',

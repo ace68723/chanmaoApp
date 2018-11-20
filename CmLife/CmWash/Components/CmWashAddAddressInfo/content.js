@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         height: height * (150 / 2209),
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ff768b',
+        backgroundColor: '#2ad3be',
     },
     submitText: {
         fontSize: 16,

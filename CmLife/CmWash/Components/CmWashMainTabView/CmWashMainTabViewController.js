@@ -32,7 +32,7 @@ export default class MyComponent extends Component {
         tabBarActiveTextColor={'#2ad3be'}
         tabBarUnderlineColor={'rgba(0,0,0,0)'}
         tabBarUnderlineStyle={{'backgroundColor':'rgba(0,0,0,0)'}}
-        tabBarTextStyle={{fontSize:12,fontFamily:'NotoSans-Regular',}}
+        tabBarTextStyle={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',}}
         tabBarInactiveTextColor={'#666666'}
         prerenderingSiblingsNumber={3}
         tabBarPosition = "bottom"

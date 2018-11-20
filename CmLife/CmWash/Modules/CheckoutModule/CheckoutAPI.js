@@ -1,7 +1,7 @@
 // import { API_ORDER_BEFORE, API_ADD_CARD, API_ADD_ORDER } from '../../Config/API';
 export default  {
   beforeOrder(io_data){
-    const url = 'https://norgta.com/api/cmclean/v1/before_order';
+    const url = 'https://chanmao.us/api/cmclean/v1/before_order';
 
     let options = {
         method: 'POST',
@@ -25,7 +25,7 @@ export default  {
             .catch((error) => {throw error})
   },
   getCard(io_data){
-    const url = 'https://norgta.com/api/cmclean/v1/card';
+    const url = 'https://chanmao.us/api/cmclean/v1/card';
 
     let options = {
         method: 'GET',
@@ -47,7 +47,7 @@ export default  {
             .catch((error) => {throw error})
   },
   getDeliveryTime(io_data){
-    const url = 'https://norgta.com/api/cmclean/v1/delivery_date_time';
+    const url = 'https://chanmao.us/api/cmclean/v1/delivery_date_time';
 
     let options = {
         method: 'POST',
@@ -72,7 +72,7 @@ export default  {
             .catch((error) => {throw error})
   },
   placeOrder(io_data){
-    const url = 'https://norgta.com/api/cmclean/v1/order';
+    const url = 'https://chanmao.us/api/cmclean/v1/order';
 
     let options = {
         method: 'POST',

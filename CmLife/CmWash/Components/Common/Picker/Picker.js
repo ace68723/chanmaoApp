@@ -19,8 +19,8 @@ export default class Picker extends BaseDialog {
   static defaultProps = {
     removeSubviews: false,
     confirmText: '确定',
-    confirmTextSize: 14,
-    confirmTextColor: '#333333',
+    confirmTextSize: 15,
+    confirmTextColor: 'white',
     cancelText: '取消',
     cancelTextSize: 14,
     cancelTextColor: '#333333',
@@ -158,7 +158,7 @@ export default class Picker extends BaseDialog {
       <View style={{
           width: this.mScreenWidth,
           height: this.getSize(44),
-          backgroundColor: '#ffffff',
+          backgroundColor: "#2ad3be",
           flexDirection: 'row',
           justifyContent: 'space-between',
           position: 'absolute',
@@ -166,33 +166,21 @@ export default class Picker extends BaseDialog {
         }}>
         <TouchableOpacity onPress={() => {
             this.dismiss(() => {
-              this.props.onPickerCancel && this.props.onPickerCancel();
-            });
-          }} style={{
-            width: this.getSize(60),
-            height: this.getSize(44),
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-          <Text style={{
-              fontSize: this.props.cancelTextSize,
-              fontWeight: '400',
-              color: this.props.cancelTextColor
-            }}>{this.props.cancelText}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {
-            this.dismiss(() => {
               this.props.onPickerConfirm && this.props.onPickerConfirm(this.state);
             });
           }} style={{
-            width: this.getSize(60),
-            height: this.getSize(44),
+            width: this.mScreenWidth,
+            height: this.getSize(72),
             justifyContent: 'center',
             alignItems: 'center'
           }}>
           <Text style={{
+              flex: 1,
+              top: this.getSize(14),
+              justifyContent: 'center',
+              alignItems: 'center',
               fontSize: this.props.confirmTextSize,
-              fontWeight: '400',
+              fontWeight: '800',
               color: this.props.confirmTextColor
             }}>{this.props.confirmText}</Text>
         </TouchableOpacity>

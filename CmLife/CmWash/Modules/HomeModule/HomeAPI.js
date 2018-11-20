@@ -1,7 +1,7 @@
 // import { API_ORDER_BEFORE, API_ADD_CARD, API_ADD_ORDER } from '../../Config/API';
 export default  {
   getProductList(){
-    const url = 'https://norgta.com/api/cmclean/v1/homepage';
+    const url = 'https://chanmao.us/api/cmclean/v1/homepage';
 
     let options = {
         method: 'GET',
