@@ -173,7 +173,7 @@ export default class LogoAnimationView extends Component {
       // alert(res.ev_context);
       this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), res.ev_context);
     }
-    this.props.toggleViewTypeReset();
+    this._toggleViewTypeReset();
   }
 
 	_handleRePassword(password){
