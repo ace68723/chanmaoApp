@@ -70,10 +70,10 @@ export default class Cart extends BaseDialog {
       <View style={styles.header}>
         <View style={[styles.clearButton, {flex: 1}]}>
           <TouchableOpacity onPress={this.clearCart}>
-            <Text style={styles.clearButtonText}>全部清空</Text>
+            <Text allowFontScaling={false} style={styles.clearButtonText}>全部清空</Text>
           </TouchableOpacity>
         </View>
-        <Text style={[styles.headerTitle, {flex: 3}]}>购物车</Text>
+        <Text allowFontScaling={false} style={[styles.headerTitle, {flex: 3,fontFamily: 'NotoSans-Black'}]}>购物车</Text>
         <View style={{flex: 1}}></View>
       </View>
     )
@@ -93,7 +93,7 @@ export default class Cart extends BaseDialog {
           { this.state.allowedShipping &&
             <View style={{flexDirection: 'row'}}>
               <Image style={styles.shippingIcon} source={require('./Image/yes.png')}/>
-              <Text style={styles.shippingText}>可配送</Text>
+              <Text allowFontScaling={false} style={styles.shippingText}>可配送</Text>
             </View>
           }
           { !this.state.allowedShipping &&
@@ -101,25 +101,25 @@ export default class Cart extends BaseDialog {
             {(!this.shouldAllowedCheckout()) && <Image style={styles.shippingIcon} source={require('./Image/no.png')}/>}
 
             {(this.shouldAllowedCheckout()) && <Image style={styles.shippingIcon} source={require('./Image/yes.png')}/>}
-            <Text style={styles.shippingText}>满$30起送</Text>
+            <Text allowFontScaling={false} style={styles.shippingText}>满$30起送</Text>
             </View>
           }
           { this.state.allowedPickup &&
             <View style={{flexDirection: 'row'}}>
               <Image style={styles.shippingIcon} source={require('./Image/yes.png')}/>
-              <Text style={styles.shippingText}>可自取</Text>
+              <Text allowFontScaling={false} style={styles.shippingText}>可自取</Text>
             </View>
           }
           { !this.state.allowedPickup &&
             <View style={{flexDirection: 'row'}}>
               <Image style={styles.shippingIcon} source={require('./Image/no.png')}/>
-              <Text style={styles.shippingText}>不可自取</Text>
+              <Text allowFontScaling={false} style={styles.shippingText}>不可自取</Text>
             </View>
           }
         </View>
         <View style={{flex: 1, marginTop: -4}}>
-          <Text style={styles.taxText}> </Text>
-          <Text style={styles.totalText}>总计: ${this.getCartTotal()}</Text>
+          <Text allowFontScaling={false} style={styles.taxText}> </Text>
+          <Text allowFontScaling={false} style={styles.totalText}>总计: ${this.getCartTotal()}</Text>
         </View>
       </View>
     )
@@ -154,7 +154,7 @@ export default class Cart extends BaseDialog {
         onPress={this._goToCheckout}
         style={[styles.checkoutButton, !this.shouldAllowedCheckout() ? {backgroundColor: '#999999'}: {}]}>
         <View style={{flex:1,justifyContent: 'center', alignItems: 'center', }} >
-          <Text style={{color: 'white', fontSize: 15, fontWeight: '700',}}>结算</Text>
+          <Text allowFontScaling={false} style={{color: 'white', fontSize: 15, fontWeight: '700',}}>结算</Text>
         </View>
       </TouchableOpacity>
     )
@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '600',
     marginBottom: 8,
+    fontFamily:'NotoSans-Regular',
   },
   taxText: {
     textAlign: 'right',
@@ -218,11 +219,13 @@ const styles = StyleSheet.create({
     color: 'grey',
     fontWeight: '600',
     marginBottom: 4,
+    fontFamily:'NotoSans-Regular',
   },
   totalText: {
     textAlign: 'right',
     fontSize: 16,
     fontWeight: '600',
+    fontFamily:'NotoSans-Regular',
   },
   checkoutButton: {
     justifyContent: 'center',

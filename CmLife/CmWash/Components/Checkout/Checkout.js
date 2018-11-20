@@ -106,7 +106,7 @@ export default class Checkout extends Component {
       return (
         <TouchableOpacity style={{position:'absolute', bottom:0, backgroundColor:'#2ad3be'}} onPress={this._placeOrder}>
           <View style={{width:width,height: 56,alignItems:'center',justifyContent:'center'}}>
-            <Text style={{fontSize: 16, color:'white', fontWeight: '800'}}>
+            <Text allowFontScaling={false} style={{fontFamily: 'NotoSans-Black',fontSize: 16, color:'white', fontWeight: '800'}}>
               下单
             </Text>
           </View>
@@ -115,7 +115,7 @@ export default class Checkout extends Component {
     }
     return (
         <View style={{position:'absolute', bottom:0, backgroundColor:'grey', width:width, height: 56, alignItems:'center', justifyContent:'center'}}>
-          <Text style={{fontSize: 16, color:'white', fontWeight: '900'}}>
+          <Text allowFontScaling={false} style={{fontFamily: 'NotoSans-Black',fontSize: 16, color:'white', fontWeight: '900'}}>
             下单
           </Text>
         </View>

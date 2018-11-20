@@ -129,7 +129,7 @@ export default class Home extends Component {
 
 
 
-          <Text style={{ flex: 1, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
+          <Text allowFontScaling={false} style={{fontFamily: 'NotoSans-Black', flex: 1, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
             设置
           </Text>
         </View>

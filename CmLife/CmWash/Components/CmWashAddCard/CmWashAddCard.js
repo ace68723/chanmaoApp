@@ -299,6 +299,7 @@ export default class MyComponent extends Component {
                   fontSize:bounceValueCardNumFontSize,
                   fontSize:16,
                   color:'#6d6e71',
+                  fontFamily:'NotoSans-Regular',
                 }}
                 allowFontScaling={false}
                 >
@@ -322,7 +323,7 @@ export default class MyComponent extends Component {
                             marginLeft:40,
                             flexDirection:'row'}} >
                     <Text style={{fontSize:24,
-                                  backgroundColor:'transparent'}}
+                                  backgroundColor:'transparent',}}
                           allowFontScaling={false}>
                           {this.state.cardNumber}
                     </Text>

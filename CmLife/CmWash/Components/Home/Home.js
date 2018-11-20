@@ -87,7 +87,7 @@ export default class Home extends BaseComponent<Props> {
     const _display_price = () => {
       if (item.display_price != item.original_price) {
         return (
-          <Text style={{ marginLeft: 2, marginTop: 3, fontSize: 10, color: '#999999', textDecorationLine: 'line-through' }}>
+          <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',marginLeft: 2, marginTop: 3, fontSize: 10, color: '#999999', textDecorationLine: 'line-through' }}>
             ${parseFloat(item.original_price).toFixed(0) == parseFloat(item.original_price) ? parseFloat(item.original_price).toFixed(0) : item.original_price}
           </Text>
         )
@@ -97,7 +97,7 @@ export default class Home extends BaseComponent<Props> {
       if (HomeStore.getItemAmount(item.sku_id) != 0)
         return (<TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
           <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center', }}>
-            <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
+            <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
               -
             </Text>
           </View>
@@ -106,7 +106,7 @@ export default class Home extends BaseComponent<Props> {
       return (
         <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
           <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#b3b3b3', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
+            <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
               -
             </Text>
           </View>
@@ -121,30 +121,30 @@ export default class Home extends BaseComponent<Props> {
           </View>
           <View style={{ flex: 1, marginTop: 4}}>
             <View style={{ flex: 1, justifyContent: 'center' }}>
-              <Text style={{ marginLeft: 8, fontSize: 13, fontWeight: '800'}}>
+              <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',marginLeft: 8, fontSize: 13, fontWeight: '800'}}>
                 {item.name_zh}
               </Text>
             </View>
           <View style={{ flex: 1, flexDirection: 'row', marginRight: 8}}>
             <View style={{ flex: 3, flexDirection: 'row' }}>
-              <Text style={{ marginLeft: 8, fontSize: 14, color: '#2ad3be', fontWeight: '700'}}>
+              <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',marginLeft: 8, fontSize: 14, color: '#2ad3be', fontWeight: '700'}}>
                 ${parseFloat(item.display_price).toFixed(0) == parseFloat(item.display_price) ? parseFloat(item.display_price).toFixed(0) : item.display_price}
               </Text>
               {_display_price()}
-              <Text style={{fontSize:14,marginLeft:2}}>
+              <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontSize:14,marginLeft:2}}>
                 {item.unit}
               </Text>
             </View>
             <View style={{ flex: 2, flexDirection: 'row' }}>
               {_display_remove()}
               <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ color: '#404041', fontSize: 14, marginBottom: 5, fontWeight: '700'}}>
+                <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',color: '#404041', fontSize: 14, marginBottom: 5, fontWeight: '700'}}>
                   {HomeStore.getItemAmount(item.sku_id)}
                 </Text>
               </View>
               <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 1 }}>
                 <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center'}}>
-                  <Text style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
+                  <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 12, color: 'white' }}>
                     +
                   </Text>
                 </View>
@@ -168,7 +168,7 @@ export default class Home extends BaseComponent<Props> {
             <Image source={require('./image/Cart.png')} style={{ width: 30, height: 30}}/>
           </TouchableOpacity>
           <View style={{position: 'absolute', left: 20, bottom: 20, backgroundColor: '#f24c58', paddingLeft: 4, paddingRight: 4, paddingTop: 1, paddingBottom: 1, textAlign: 'center', borderRadius: 100,}}>
-            <Text style={{fontSize: 9,  color: 'white', fontWeight: '600'}}>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontSize: 9,  color: 'white', fontWeight: '600'}}>
               {itemCount}
             </Text>
           </View>
@@ -191,7 +191,7 @@ export default class Home extends BaseComponent<Props> {
             <Image source={require('./image/icon_back_green.png')} style={{ marginLeft: 12, width: 26, height: 26 }}/>
           </View>
         </TouchableWithoutFeedback>
-        <Text style={{ flex: 2, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
+        <Text allowFontScaling={false} style={{ fontFamily: 'NotoSans-Black',flex: 2, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
           馋猫干洗
         </Text>
         {this.renderCartButton()}
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   card: {
-    width: 0.45 * width,
+    width: 0.43 * width,
     backgroundColor: 'white',
     marginLeft: 12,
     marginRight: 12,

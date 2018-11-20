@@ -35,9 +35,9 @@ export default class CheckoutUserInfo extends Component{
   renderOrderSummary(){
     return (
       <View style={styles.orderSummary}>
-        <Text style={[styles.orderSummaryText, {}]}>运费: ${this.props.delifee}</Text>
-        <Text style={[styles.orderSummaryText, {}]}>税: ${this.props.tax}</Text>
-        <Text style={[styles.orderSummaryText, {fontSize: 14, color: Common.MAIN_COLOR, marginBottom: 0}]}>总计: ${this.props.total}</Text>
+        <Text allowFontScaling={false} style={[styles.orderSummaryText, {}]}>运费: ${this.props.delifee}</Text>
+        <Text allowFontScaling={false} style={[styles.orderSummaryText, {}]}>税: ${this.props.tax}</Text>
+        <Text allowFontScaling={false} style={[styles.orderSummaryText, {fontSize: 14, color: Common.MAIN_COLOR, marginBottom: 0}]}>总计: ${this.props.total}</Text>
       </View>
     )
   }
@@ -63,7 +63,7 @@ export default class CheckoutUserInfo extends Component{
     return (
       <View style={this.props.cardStyle}>
         <View style={styles.content}>
-          <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>订单小计</Text>
+          <Text style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>订单小计</Text>
           {this.renderOrderItems()}
           <Separator/>
           {this.renderOrderSummary()}
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'right',
     marginBottom: 6,
+    fontFamily:'NotoSans-Regular',
   },
   orderCommentText: {
     flex: 1,
@@ -99,5 +100,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     borderRadius: 10,
     color: '#565656',
+    fontFamily:'NotoSans-Regular',
   }
 });

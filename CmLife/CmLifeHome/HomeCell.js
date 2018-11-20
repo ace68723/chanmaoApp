@@ -22,7 +22,7 @@ export default class HomeCell extends Component{
         <Image style={styles.backgroundImage} source={this.props.backgroundImage}/>
           <TouchableOpacity onPress={() => this.props.onPressedCell(this.props.keyNum)} style={{flexDirection: 'column', position: 'absolute', flex: 1, top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center',}}>
             <Image style={styles.icon} source={this.props.icon} />
-            <Text style={{fontWeight: '900', fontSize: 18, color: "white", textAlign: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 8}}> {this.props.title} </Text>
+            <Text style={{fontWeight: '900', fontSize: 18, color: "white", textAlign: 'center', alignItems: 'center', alignSelf: 'center', marginTop: 8,fontFamily: 'NotoSans-Black'}}> {this.props.title} </Text>
           </TouchableOpacity>
       </View>
     )

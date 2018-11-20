@@ -36,23 +36,23 @@ date.getHours() + ":" + date.getMinutes()}</Text>
     return (
       <View style={styles.deliverInfo}>
         <View style={styles.deliverInfoContent}>
-          <Text style={{color: Common.MAIN_COLOR, fontWeight: '800'}}>配送</Text>
+          <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',color: Common.MAIN_COLOR, fontWeight: '800'}}>配送</Text>
           <View style={styles.deliverStatus}>
-            <Text style={styles.deliverStatusText}>{this.props.orderInfo.status_zh}</Text>
+            <Text allowFontScaling={false} style={styles.deliverStatusText}>{this.props.orderInfo.status_zh}</Text>
           </View>
         </View>
         <View style={[styles.deliverInfoContent, {flexDirection: 'column'}]}>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
             <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/1.png")}/>
-            <Text style={{fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_name}</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_name}</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
             <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/1.png")}/>
-            <Text style={{fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_phone}</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_phone}</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
             <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/1.png")}/>
-            <Text style={{fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_addr}</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_addr}</Text>
           </View>
         </View>
       </View>
@@ -63,12 +63,12 @@ date.getHours() + ":" + date.getMinutes()}</Text>
     return (
       <View style={styles.deliverTime}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.deliverTimeText}>取件时间</Text>
-          <Text style={styles.deliverTimeText}>{this.props.orderInfo.pickup_time}</Text>
+          <Text allowFontScaling={false} style={styles.deliverTimeText}>取件时间</Text>
+          <Text allowFontScaling={false} style={styles.deliverTimeText}>{this.props.orderInfo.pickup_time}</Text>
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.deliverTimeText}>送达时间</Text>
-          <Text style={styles.deliverTimeText}>{this.props.orderInfo.delivery_time}</Text>
+          <Text allowFontScaling={false} style={styles.deliverTimeText}>送达时间</Text>
+          <Text allowFontScaling={false} style={styles.deliverTimeText}>{this.props.orderInfo.delivery_time}</Text>
         </View>
       </View>
     )
@@ -83,16 +83,16 @@ date.getHours() + ":" + date.getMinutes()}</Text>
   renderOrderSummary(){
     return (
       <View style={styles.orderSummary}>
-        <Text style={[styles.orderSummaryText, {}]}>运费: ${this.props.orderInfo.delifee}</Text>
-        <Text style={[styles.orderSummaryText, {}]}>税: ${this.props.orderInfo.tax}</Text>
-        <Text style={[styles.orderSummaryText, {fontSize: 14, color: Common.MAIN_COLOR, marginBottom: 0}]}>总计: ${this.props.orderInfo.total}</Text>
+        <Text allowFontScaling={false} style={[styles.orderSummaryText, {}]}>运费: ${this.props.orderInfo.delifee}</Text>
+        <Text allowFontScaling={false} style={[styles.orderSummaryText, {}]}>税: ${this.props.orderInfo.tax}</Text>
+        <Text allowFontScaling={false} style={[styles.orderSummaryText, {fontSize: 14, color: Common.MAIN_COLOR, marginBottom: 0}]}>总计: ${this.props.orderInfo.total}</Text>
       </View>
     )
   }
   renderOrderComment(){
     return (
       <View style={{borderRadius: 4, backgroundColor: '#F0F0F0', marginTop: 6, }}>
-        <Text style={styles.orderCommentText}>{this.props.orderInfo.comment}</Text>
+        <Text allowFontScaling={false} style={styles.orderCommentText}>{this.props.orderInfo.comment}</Text>
       </View>
 
     )
@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     padding: 6,
     color: 'white',
+    fontFamily:'NotoSans-Regular',
   },
   deliverTime: {
     height: 28 * 1.5,
@@ -181,6 +182,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
     marginBottom: 4,
+    fontFamily:'NotoSans-Regular',
   },
   order: {
     marginTop: 6,
@@ -196,6 +198,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'right',
     marginBottom: 6,
+    fontFamily:'NotoSans-Regular',
   },
   orderCommentText: {
     flex: 1,
@@ -204,5 +207,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     borderRadius: 10,
     color: '#565656',
+    fontFamily:'NotoSans-Regular',
   }
 });

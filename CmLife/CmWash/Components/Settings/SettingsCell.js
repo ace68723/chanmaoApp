@@ -23,7 +23,7 @@ export default class SettingsCell extends Component{
           <View style={styles.content}>
             <TouchableOpacity onPress={() => this.props.onPressedCell(this.props.type)} style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image style={styles.icon} source={this.props.icon} />
-              <Text style={{fontWeight: '700', fontSize: 14, marginLeft: 10, color: "#4D4D4D"}}> {this.props.title} </Text>
+              <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 14, marginLeft: 10, color: "#4D4D4D"}}> {this.props.title} </Text>
             </TouchableOpacity>
           </View>
         </View>

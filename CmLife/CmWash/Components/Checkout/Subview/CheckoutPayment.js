@@ -35,11 +35,11 @@ export default class CheckoutUserInfo extends Component{
       <View style={this.props.cardStyle}>
         <TouchableOpacity onPress={this.props.gotoCard}>
           <View style={styles.content}>
-            <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>支付方式</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>支付方式</Text>
             <View style={{flexDirection: 'row', marginBottom: 10,}}>
               {_display_card()}
               <View style={{flex:9,justifyContent:'center',}}>
-                <Text style={{fontWeight: '600', fontSize: 14,marginLeft:15,}}>xxxx {this.props.cardInfo.last4}</Text>
+                <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 14,marginLeft:15,}}>xxxx {this.props.cardInfo.last4}</Text>
               </View>
 
               <View style={{flex:1,}}>
@@ -59,10 +59,10 @@ export default class CheckoutUserInfo extends Component{
       <View style={this.props.cardStyle}>
         <TouchableOpacity onPress={this.props.gotoCard}>
           <View style={styles.content}>
-            <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>支付方式</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>支付方式</Text>
             <View style={{flexDirection: 'row', marginBottom: 10,}}>
               <View style={{flex:9,justifyContent:'center',}}>
-                <Text style={{fontWeight: '600', fontSize: 14,marginLeft:5,}}>请选择支付方式</Text>
+                <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 14,marginLeft:5,}}>请选择支付方式</Text>
               </View>
               <View style={{flex:1,}}>
 

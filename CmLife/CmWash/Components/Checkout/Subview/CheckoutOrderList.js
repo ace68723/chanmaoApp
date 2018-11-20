@@ -17,13 +17,13 @@ export default class CheckoutOrderList extends Component{
     return (
       <View style={{height: 30, flexDirection: 'row', flex: 1}}>
         <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center',alignItems: 'center'}}>
-          <Text style={[styles.text, styles.quantityText]}>{item.amount}</Text>
+          <Text  allowFontScaling={false} style={[styles.text, styles.quantityText]}>{item.amount}</Text>
         </View>
         <View style={{flex: 8,justifyContent: 'center', marginLeft: -4}}>
-          <Text style={[styles.text, {marginLeft: 20,}]}>{item.name_zh}</Text>
+          <Text allowFontScaling={false} style={[styles.text, {marginLeft: 20,}]}>{item.name_zh}</Text>
         </View>
         <View style={{flex: 3,justifyContent: 'flex-end', flexDirection: 'row', alignItems:'center'}}>
-          <Text style={[styles.text, {marginLeft: 10, textAlign: 'right'}]}>$ {item.display_price}</Text>
+          <Text allowFontScaling={false} style={[styles.text, {marginLeft: 10, textAlign: 'right'}]}>$ {item.display_price}</Text>
         </View>
       </View>
     )
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '700',
     fontSize: 13,
+    fontFamily:'NotoSans-Regular',
   },
   quantityText: {
     width: 18,
@@ -58,5 +59,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     textAlign: 'center',
     color: 'white',
+    fontFamily:'NotoSans-Regular',
   }
 });

@@ -36,7 +36,7 @@ class Row extends Component {
 					            {paddingTop:15,paddingBottom:15}]}>
 
 	        <View style={styles.textWrap}>
-	          <Text style={{textAlign:'left', fontSize: 16}}
+	          <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',textAlign:'left', fontSize: 16}}
 									allowFontScaling={false}>{locationText}</Text>
 	        </View>
 

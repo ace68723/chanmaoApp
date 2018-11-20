@@ -21,16 +21,16 @@ export default class CartItemListCell extends Component {
           <TouchableOpacity style={styles.quantityButton} onPress={() => this.props.onPressedQuantity(this.props.item.sku_id, -1) }>
             <Image style={styles.quantityButtonImage} source={require('./Image/minus.png')}/>
           </TouchableOpacity>
-          <Text style={[styles.text, {marginRight: 12}]}>{this.props.item.amount}</Text>
+          <Text allowFontScaling={false} style={[styles.text, {marginRight: 12,fontFamily:'NotoSans-Regular',}]}>{this.props.item.amount}</Text>
           <TouchableOpacity style={styles.quantityButton} onPress={() => this.props.onPressedQuantity(this.props.item.sku_id, 1) }>
             <Image style={styles.quantityButtonImage} source={require('./Image/add.png')}/>
           </TouchableOpacity>
         </View>
         <View style={{flex: 2,justifyContent: 'center',}}>
-          <Text style={[styles.text, {marginLeft: 20,}]}>{this.props.item.name_zh}</Text>
+          <Text allowFontScaling={false} style={[styles.text, {marginLeft: 20,fontFamily:'NotoSans-Regular',}]}>{this.props.item.name_zh}</Text>
         </View>
         <View style={{flex: 1,justifyContent: 'center',}}>
-          <Text style={[styles.text, {marginLeft: 20, textAlign: 'right'}]}>$ {parseFloat(Math.round(this.props.item.display_price * this.props.item.amount * 100) / 100).toFixed(2)}</Text>
+          <Text allowFontScaling={false} style={[styles.text, {marginLeft: 20, textAlign: 'right',fontFamily:'NotoSans-Regular',}]}>$ {parseFloat(Math.round(this.props.item.display_price * this.props.item.amount * 100) / 100).toFixed(2)}</Text>
         </View>
       </View>
     )

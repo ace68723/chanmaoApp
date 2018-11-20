@@ -22,7 +22,7 @@ export default class CheckoutUserInfo extends Component{
       <View style={this.props.cardStyle}>
         <TouchableOpacity onPress={this.props.gotoAddress}>
           <View style={styles.content}>
-            <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>地址</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>地址</Text>
             <View style={{flexDirection: 'row', marginBottom: 10,}}>
               <View style={{flex:1,}}>
                 <Image source={require('../Image/name-01.png')} style={{
@@ -31,7 +31,7 @@ export default class CheckoutUserInfo extends Component{
                   }}/>
               </View>
               <View style={{flex:9,justifyContent:'center',}}>
-              <Text style={{fontWeight: '600', fontSize: 14,marginLeft:5,}}>{this.props.userInfo.name}</Text>
+              <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 14,marginLeft:5,}}>{this.props.userInfo.name}</Text>
               </View>
               <View style={{flex:1,}}>
                 <Image source={require('../Image/arrow-right-green.png')} style={{
@@ -50,7 +50,7 @@ export default class CheckoutUserInfo extends Component{
                   }}/>
               </View>
               <View style={{flex:9,justifyContent:'center',}}>
-              <Text style={{fontWeight: '600', fontSize: 14,marginLeft:5,}}>{this.props.userInfo.phone}</Text>
+              <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 14,marginLeft:5,}}>{this.props.userInfo.phone}</Text>
               </View>
               <View style={{flex:1,}}>
 
@@ -66,7 +66,7 @@ export default class CheckoutUserInfo extends Component{
                   }}/>
               </View>
               <View style={{flex:9,justifyContent:'center',}}>
-              <Text style={{fontWeight: '600', fontSize: 14,marginLeft:5,}}>{this.props.userInfo.addr}</Text>
+              <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 14,marginLeft:5,}}>{this.props.userInfo.addr}</Text>
               </View>
               <View style={{flex:1,}}>
 
@@ -82,10 +82,10 @@ export default class CheckoutUserInfo extends Component{
       <View style={this.props.cardStyle}>
         <TouchableOpacity onPress={this.props.gotoAddress}>
           <View style={styles.content}>
-            <Text style={{fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>地址</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>地址</Text>
             <View style={{flexDirection: 'row', marginBottom: 10,}}>
               <View style={{flex:9,justifyContent:'center',}}>
-                <Text style={{fontWeight: '600', fontSize: 14,marginLeft:5,}}>填写地址</Text>
+                <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 14,marginLeft:5,}}>填写地址</Text>
               </View>
               <View style={{flex:1,}}>
 
