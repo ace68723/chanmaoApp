@@ -99,7 +99,7 @@ export default class Content extends Component {
 //                 paddingRight:40,
 //                 right:10,
 //               }}>
-//     <Text style={{color:'white',fontFamily:'NotoSansCJKsc-Regular'}}>
+//     <Text style={{color:'white'}}>
 //       确认地址
 //     </Text>
 //   </View>
