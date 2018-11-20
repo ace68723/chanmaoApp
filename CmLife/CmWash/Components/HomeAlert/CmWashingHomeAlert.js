@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 const { width,height } = Dimensions.get('window');
 
+import Common from '../../Constants/Common'
+
 export default class CmWashingHomeAlert extends Component {
   static navigatorStyle = {
       screenBackgroundColor: 'transparent',
@@ -51,7 +53,7 @@ export default class CmWashingHomeAlert extends Component {
               style={{
                 bottom:0,
                 width:width*0.7,
-                backgroundColor:'#ff7685',
+                backgroundColor: Common.MAIN_COLOR,
                 height:45,}}
             onPress={this._closeSboHomeAlert}>
             <View style={{flex:1,

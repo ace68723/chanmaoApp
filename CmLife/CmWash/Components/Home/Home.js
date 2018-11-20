@@ -40,12 +40,12 @@ export default class Home extends BaseComponent<Props> {
     //   this.props.navigator.showModal({
     //      screen: "CmWashingHomeAlert",
     //      passProps: {
-    //        message:"1111111"
+    //        message:"馋猫干洗配送范围，具体地址可在填写订单时确认"
     //      },
     //      animated: false,
     //      navigatorStyle: {navBarHidden: true},
     //     });
-    // }, 6000);
+    // }, 600);
     HomeAction.getProductList();
 
   }
@@ -117,6 +117,14 @@ export default class Home extends BaseComponent<Props> {
         <View style={{ width: 0.45 * width, height: 160, backgroundColor: 'white', borderRadius: 6, overflow: 'hidden', }}>
           <View style={{ flex: 2}}>
             <Image source={{ uri: item.image }} style={{ flex: 1 }}/>
+            {
+              item.display_price != item.original_price &&
+              <Image
+                source={require('./image/offer.png')}
+                style={{ position: 'absolute', width: 28 * 1.3, height: 28, marginTop: 8, marginLeft: 8}}
+              />
+            }
+
           </View>
           <View style={{ flex: 1, marginTop: 8}}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start',  }}>
