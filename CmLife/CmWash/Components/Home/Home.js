@@ -87,7 +87,13 @@ export default class Home extends BaseComponent<Props> {
     const _display_price = () => {
       if (item.display_price != item.original_price) {
         return (
-          <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',marginLeft: 2, marginTop: 3, fontSize: 10, color: '#999999', textDecorationLine: 'line-through' }}>
+          <Text allowFontScaling={false}
+                style={{fontFamily:'NotoSans-Regular',
+                        marginLeft: 2,
+                        marginTop: 3,
+                        fontSize: 10,
+                        color: '#999999',
+                        textDecorationLine: 'line-through'}}>
             ${parseFloat(item.original_price).toFixed(0) == parseFloat(item.original_price) ? parseFloat(item.original_price).toFixed(0) : item.original_price}
           </Text>
         )
@@ -167,7 +173,15 @@ export default class Home extends BaseComponent<Props> {
           <TouchableOpacity onPress={() => this.Cart.show()}>
             <Image source={require('./image/Cart.png')} style={{ width: 30, height: 30}}/>
           </TouchableOpacity>
-          <View style={{position: 'absolute', left: 20, bottom: 20, backgroundColor: '#f24c58', paddingLeft: 4, paddingRight: 4, paddingTop: 1, paddingBottom: 1, textAlign: 'center', borderRadius: 100,}}>
+          <View style={{position: 'absolute',
+                        left: 20,
+                        bottom: 20,
+                        backgroundColor: '#f24c58',
+                        paddingLeft: 4,
+                        paddingRight: 4,
+                        paddingTop: 1,
+                        paddingBottom: 1,
+                        borderRadius: 100,}}>
             <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontSize: 9,  color: 'white', fontWeight: '600'}}>
               {itemCount}
             </Text>
@@ -200,7 +214,7 @@ export default class Home extends BaseComponent<Props> {
   }
   renderCategoryTabs(){
     const categories = [
-      {"name": '全部', 'cid': null},
+      {"name": '全部', 'cid': 0},
       {"name": '衣服', 'cid': 1},
       {"name": '鞋子', 'cid': 2},
       {"name": '居家', 'cid': 3},
@@ -208,7 +222,9 @@ export default class Home extends BaseComponent<Props> {
     let content = [];
     for (i of categories){
       content.push(
-        <Animated.View tabLabel={i.name} style={{flex: 1}}>
+        <Animated.View key={i.cid}
+                       tabLabel={i.name}
+                       style={{flex: 1}}>
           <FlatList
             scrollEventThrottle={1}
             ref={(comp) => this._scrollVew = comp}
@@ -218,6 +234,7 @@ export default class Home extends BaseComponent<Props> {
             renderItem={this._renderProduct}
             getItemLayout={(data, index) => ({ length: 250, offset: 250 * index, index})}
             numColumns={2}
+            keyExtractor={(item, index) => item.sku_id}
             columnWrapperStyle={{ marginTop: 10 }}
           />
         </Animated.View>

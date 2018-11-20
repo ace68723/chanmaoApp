@@ -31,7 +31,7 @@ export default class Home extends BaseComponent {
       {
         icon: null,
         title: "",
-        key: "1",
+        key: "2",
         backgroundImage: require("./Image/coming_soon.png"),
       },
     ]
@@ -81,7 +81,9 @@ export default class Home extends BaseComponent {
       <View style={{backgroundColor:'white',flex:1}}>
         <HomeHeader goBack={this._backToHome} />
         <View style={styles.container}>
-          <FlatList style={{marginTop: 6}} data={this.state.cells} renderItem={({item}) => (this.renderCells(item))}/>
+          <FlatList style={{marginTop: 6}}
+                    data={this.state.cells}
+                    renderItem={({item}) => (this.renderCells(item))}/>
         </View>
       </View>
 

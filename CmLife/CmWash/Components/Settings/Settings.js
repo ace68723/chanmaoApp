@@ -31,11 +31,11 @@ export default class Home extends Component {
         title: "馋猫订餐",
         key: "cmeat"
       },
-      {
-        icon: require("./Image/language.png"),
-        title: "选择语言&地区",
-        key: "language"
-      },
+      // {
+      //   icon: require("./Image/language.png"),
+      //   title: "选择语言&地区",
+      //   key: "language"
+      // },
       {
         icon: require("./Image/log-out.png"),
         title: "退出登录",
@@ -111,11 +111,10 @@ export default class Home extends Component {
     });
   }
   onPressedCell(key){
-    console.log(key);
     if (key=='cmeat') {this._goToCmEat();}
 
     if (key=='logout') {this._logout();}
-    if (key=='language') {this._goToLanguageSettings();}
+    // if (key=='language') {this._goToLanguageSettings();}
     if (key=='sbox') {this._goToSbox();}
     if (key=='contact'){this._goToAboutUs();}
   }
@@ -125,16 +124,26 @@ export default class Home extends Component {
   render() {
     return (
       <View style={{flex:1,backgroundColor:'white'}}>
-        <View style={{ width: width, backgroundColor:'white',marginTop:0.02*height,height: 48, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-
-
-
-          <Text allowFontScaling={false} style={{fontFamily: 'NotoSans-Black', flex: 1, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
+        <View style={{width: width,
+                      backgroundColor:'white',
+                      marginTop:0.02*height,
+                      height: 48,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      flexDirection: 'row'}}>
+          <Text allowFontScaling={false}
+                style={{fontFamily: 'NotoSans-Black',
+                        flex: 1,
+                        textAlign: 'center',
+                        fontWeight: '800',
+                        fontSize: 16, }}>
             设置
           </Text>
         </View>
         <View style={styles.container}>
-          <FlatList style={{marginTop: 6}} data={this.state.cells} renderItem={({item}) => (this.renderCells(item))}/>
+          <FlatList style={{marginTop: 6}}
+                    data={this.state.cells}
+                    renderItem={({item}) => (this.renderCells(item))}/>
         </View>
 
       </View>
