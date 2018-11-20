@@ -26,6 +26,8 @@ RCT_EXPORT_METHOD(pay:(NSString *)cardNumber
                   expMonth:(NSInteger *)expMonth
                   expYear:(NSInteger *)expYear
                   cvc:(NSString *)cvc
+                  postal:(NSString *)postal
+                  name:(NSString *)name
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
   {
@@ -34,7 +36,8 @@ RCT_EXPORT_METHOD(pay:(NSString *)cardNumber
     cardParams.expMonth = (NSUInteger)expMonth;
     cardParams.expYear =(NSUInteger)expYear;
     cardParams.cvc = cvc;
-
+    cardParams.name = name;
+    cardParams.address.postalCode = postal;
     
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
       if (token == nil || error != nil) {
