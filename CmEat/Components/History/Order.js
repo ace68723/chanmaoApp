@@ -88,12 +88,17 @@ export default class pastOrderEN extends Component {
         <View key={index} style={{flexDirection:'column',alignItems:'center',paddingTop:10,paddingBottom:10}}>
             <View style={{flexDirection:'row'}}>
                 <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'NotoSans-Regular',}}>{item.amount}</Text></View>
-                <Text style={{fontSize:16,paddingLeft:20,fontFamily:'NotoSans-Regular',color:soldoutColor}}
-                      allowFontScaling={false}>
+                <Text style={{fontSize:16,
+                              paddingLeft:20,
+                              fontFamily:'NotoSans-Regular',
+                              color:soldoutColor,
+                              flex: 0.7}}
+                      allowFontScaling={false}
+                      numberOfLines={1}>
                         {item.ds_name}
                 </Text>
                 {soldoutText()}
-                <View style={{flex:1,alignItems:'flex-end'}}>
+                <View style={{flex:0.3,alignItems:'flex-end'}}>
                   <Text style={{fontSize:16,paddingLeft:20,fontFamily:'NotoSans-Regular',color:soldoutColor}}
                         allowFontScaling={false}>
                           ${(item.amount*item.price).toFixed(2)}
