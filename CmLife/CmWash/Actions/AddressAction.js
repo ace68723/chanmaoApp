@@ -9,7 +9,7 @@ export default {
              geolocation: data,
              addrInfo: addrInfo,
            }
-           console.log(io_data);
+           // console.log(io_data);
            dispatch({
                actionType: AppConstants.CHECK_CAN_DELIVER, io_data
            })

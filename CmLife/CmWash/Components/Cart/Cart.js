@@ -41,7 +41,6 @@ export default class Cart extends BaseDialog {
     for (i of removing){
       this.props.onPressedQuantity(i.id, -i.amount);
     }
-    console.log(this.props.currentCart);
     this.dismiss();
   }
 
@@ -84,7 +83,7 @@ export default class Cart extends BaseDialog {
     )
   }
   renderCartItems(){
-    const cellHeight = 36;
+    const cellHeight = 32;
     return (
       <View style={{height: cellHeight * this.props.currentCart.length, marginTop: 12, marginBottom: 4,}}>
         <CartItemList items={this.props.currentCart} onPressedQuantity={this.props.onPressedQuantity} />

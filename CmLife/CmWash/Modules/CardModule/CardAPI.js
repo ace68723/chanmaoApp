@@ -21,7 +21,6 @@ export default  {
     options.body = JSON.stringify({
       iv_token: io_data.iv_token,
     })
-    console.log(options);
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

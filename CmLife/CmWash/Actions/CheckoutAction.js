@@ -8,7 +8,7 @@ export default {
     async beforeOrder(io_data) {
       try{
         const data = await CheckoutModule.beforeOrder(io_data);
-        console.log(data);
+        // console.log(data);
         if (data.ev_error==0) data.goCheckout=1; else alert('error');
         dispatch({
              actionType: AppConstants.CHECKOUT_INFORMATION,data
@@ -69,7 +69,7 @@ export default {
           selectedDeliveryDate:date,
           selectedDeliveryTime:time,
         }
-        console.log(io_data);
+        // console.log(io_data);
         dispatch({
              actionType: AppConstants.SELECTED_DELIVERY_TIME,io_data
          })

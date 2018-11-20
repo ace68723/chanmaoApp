@@ -17,7 +17,7 @@ export default  {
         iv_phone:  io_data.phoneNumber,
       }
       const result = await UserAPI.putUserAddr(lo_data);
-      console.log(result);
+      // console.log(result);
       if(result.ev_error === 0 ){
         let res={
           eo_user:result.eo_user,

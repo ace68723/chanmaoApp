@@ -21,7 +21,6 @@ export default  {
       iv_lng: lng.toString(),
       iv_lat: lat.toString()
     })
-    console.log(options);
     return fetch(url,options)
             .then((res) => res.json())
             .catch((error) => {throw error})

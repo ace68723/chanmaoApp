@@ -38,13 +38,11 @@ export default class App extends Component {
     }
     componentDidMount() {
       UserStore.addChangeListener(this._onChange);
-      console.log(this.props.addrInfo);
     }
     componentWillUnmount() {
       UserStore.removeChangeListener(this._onChange);
     }
     _onChange() {
-      console.log('change1');
       // const addressObject = this.props.addressObject;
       // const name  = this.state.name;
       // const phoneNumber = this.state.phoneNum;

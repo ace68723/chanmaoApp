@@ -22,7 +22,6 @@ export default class Order extends Component {
   _onChange() {
     const state = Object.assign({}, OrderStore.getState());
     this.setState(state);
-    console.log(this.state);
   }
   componentDidMount() {
     let token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NDA3ODU5NDUsImV4cCI6MTU3MjMyMTk0NSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsInVpZCI6IjEifQ.RIk_KgD_Oq31NkB6FSL0_PsRhmRWA3DwOLz2Fj4bjhI';
@@ -33,7 +32,6 @@ export default class Order extends Component {
     OrderStore.removeChangeListener(this._onChange);
   }
   onPressedCell(key) {
-    console.log(key);
   }
   renderCells(item) {
     return (

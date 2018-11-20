@@ -19,7 +19,6 @@ export default class MyComponent extends Component {
     }
   }
   componentDidMount() {
-    console.log('tabview');
     this.setState({
       initialPage:this.props.fromPage
     })

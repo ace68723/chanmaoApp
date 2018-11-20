@@ -8,7 +8,7 @@ export default {
       async putUserAddr(io_data){
         try{
           const data = await UserModule.putUserAddr(io_data);
-          console.log(data);
+          // console.log(data);
           dispatch({
             actionType: AppConstants.PUT_USER_ADDR, data
           })

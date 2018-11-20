@@ -16,7 +16,7 @@ export default class CartItemListCell extends Component {
   }
   render() {
     return (
-      <View style={{backgroundColor: 'white', height: 40, flexDirection: 'row', flex: 1}}>
+      <View style={{backgroundColor: 'white', flexDirection: 'row', flex: 1}}>
         <View style={{flexDirection: 'row', flex: 1, justifyContent: 'center',alignItems: 'center'}}>
           <TouchableOpacity style={styles.quantityButton} onPress={() => this.props.onPressedQuantity(this.props.item.sku_id, -1) }>
             <Image style={styles.quantityButtonImage} source={require('./Image/minus.png')}/>

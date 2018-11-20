@@ -41,7 +41,6 @@ export default class MyComponent extends Component {
 
   _onChange() {
     const newState = AddressStore.getState();
-    console.log(newState);
     this.setState(Object.assign({}, this.state, {showAlert: newState.showAlert}));
     this.setState(Object.assign({}, this.state, {selectedAddress: newState.selectedAddress}));
     console.log('goto address');

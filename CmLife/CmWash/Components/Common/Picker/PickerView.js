@@ -61,7 +61,6 @@ class PickerView extends BaseComponent {
             listChange = JSON.stringify(list) != JSON.stringify(this.state.list);
             indexChange = nextProps.selectedIndex != this.state.selectedIndex;
             if (listChange || indexChange) {
-                console.log('shouldComponentUpdate');
                 this.path.setValue(-this.props.itemHeight * nextProps.selectedIndex);
                 if (listChange) {
                     this.colorPath = [];

@@ -16,10 +16,10 @@ export default  {
        expMonth = Number(expMonth);
        expYear = Number(expYear);
        cvv = cvv;
-       console.log(cardNumber);
-       console.log(expMonth);
-       console.log(expYear);
-       console.log(cvv);
+       // console.log(cardNumber);
+       // console.log(expMonth);
+       // console.log(expYear);
+       // console.log(cvv);
       const cardToken = await StripeBridge.pay( cardNumber,
                                                 expMonth,
                                                 expYear,
@@ -34,7 +34,7 @@ export default  {
         iv_token: cardToken
       }
       const res = await CardAPI.addCard(lo_data);
-      console.log(res);
+      // console.log(res);
       if(res.ev_error === 1) { throw 'add card fail'}
       const eo_data = res.ea_card_info;
       return eo_data

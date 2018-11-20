@@ -25,7 +25,6 @@ export default  {
       // iv_unit: io_data.iv_unit,
       iv_phone:  io_data.iv_phone,
     })
-    console.log(options);
 
     return fetch(url,options)
             .then((res) => res.json())

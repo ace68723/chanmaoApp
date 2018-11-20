@@ -8,7 +8,7 @@ export default {
     async HistoryOrder(io_data) {
       try{
         const data = await HistoryModule.HistoryOrder(io_data);
-        console.log(data);
+        // console.log(data);
         dispatch({
              actionType: AppConstants.HISTORY_LIST,data
          })

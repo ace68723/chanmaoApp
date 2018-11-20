@@ -63,7 +63,7 @@ const CheckoutStore = Object.assign({},EventEmitter.prototype,{
   },
 
   updateCheckout(data){
-    console.log(data);
+    // console.log(data);
     this.state = Object.assign({},this.state,data);
 
   },
@@ -91,27 +91,27 @@ const CheckoutStore = Object.assign({},EventEmitter.prototype,{
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
 				case AppConstants.CHECKOUT_INFORMATION:
-                console.log(action.data);
+                // console.log(action.data);
 								CheckoutStore.updateCheckout(action.data);
 								CheckoutStore.emitChange();
                 break;
         case AppConstants.CARD_NUMBER:
-                console.log(action.data);
+                // console.log(action.data);
         				CheckoutStore.updateCard(action.data);
         				CheckoutStore.emitChange();
                 break;
         case AppConstants.DELIVERY_TIME:
-                console.log(action.data);
+                // console.log(action.data);
                 CheckoutStore.updateDeliveryTimeList(action.data);
                 CheckoutStore.emitChange();
                 break;
         case AppConstants.SELECTED_DELIVERY_TIME:
-                console.log(action.data);
+                // console.log(action.data);
                 CheckoutStore.updateDeliveryTime(action.io_data);
                 CheckoutStore.emitChange();
                 break;
         case AppConstants.PLACE_INFO:
-                console.log(action.data);
+                // console.log(action.data);
                 CheckoutStore.updateDeliveryTime(action.data);
                 CheckoutStore.emitChange();
                 break;

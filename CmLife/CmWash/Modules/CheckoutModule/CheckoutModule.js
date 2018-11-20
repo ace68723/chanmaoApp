@@ -45,7 +45,7 @@ export default  {
       }
       // console.log(lo_data);
       const res = await CheckoutAPI.getCard(lo_data);
-      console.log(res);
+      // console.log(res);
       const eo_data ={
         ev_error:res.ev_error,
         eo_last4:res.eo_last4,
@@ -66,7 +66,7 @@ export default  {
       }
       // console.log(lo_data);
       const res = await CheckoutAPI.getDeliveryTime(lo_data);
-      console.log(res);
+      // console.log(res);
       const eo_data = {
         delivery_time:res.ea_delivery_time,
       }
@@ -92,7 +92,7 @@ export default  {
       }
       // console.log(lo_data);
       const res = await CheckoutAPI.placeOrder(lo_data);
-      console.log(res);
+      // console.log(res);
       const eo_data = {
         placeOrderStatus:res.ev_error,
       }

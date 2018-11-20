@@ -9,8 +9,8 @@ export default  {
   async getHistoryOrder(authortoken){
     try {
       const {uid,token,version} = GetUserInfo();
-      console.log(token);
-      console.log('OrderModule')
+      // console.log(token);
+      // console.log('OrderModule')
       const lo_data = {
         authortoken:token,
       }
