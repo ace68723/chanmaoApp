@@ -51,7 +51,8 @@ export default class OrderItemList extends Component{
 const styles = StyleSheet.create({
   text: {
     fontWeight: '600',
-    fontSize: 13,
+    fontSize: 14,
+    fontFamily:'NotoSans-Regular',
   },
   quantityText: {
     width: 18,

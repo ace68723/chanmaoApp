@@ -30,8 +30,8 @@ export default class CheckoutUserInfo extends Component{
                   <TouchableOpacity onPress={this.props.onPressedPickupTime}>
                     <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
                     <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10}}>
-                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
-                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedPickUpTime}</Text>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 14, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 13,}}>{this.props.selectedPickUpTime}</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -42,8 +42,8 @@ export default class CheckoutUserInfo extends Component{
                     <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
                       <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
                       <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                        <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedDeliveryDate}</Text>
-                        <Text  allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedDeliveryTime}</Text>
+                        <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 14, marginBottom: 6}}>{this.props.selectedDeliveryDate}</Text>
+                        <Text  allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 13,}}>{this.props.selectedDeliveryTime}</Text>
                       </View>
                     </TouchableOpacity>
                 </View>
@@ -58,8 +58,8 @@ export default class CheckoutUserInfo extends Component{
                   <TouchableOpacity onPress={this.props.onPressedPickupTime}>
                     <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
                     <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
-                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedPickUpTime}</Text>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 14, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 13,}}>{this.props.selectedPickUpTime}</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -70,7 +70,7 @@ export default class CheckoutUserInfo extends Component{
                   <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
                     <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
                     <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>请选择送达时间</Text>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 14, marginBottom: 6}}>请选择送达时间</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -84,14 +84,14 @@ export default class CheckoutUserInfo extends Component{
                 <TouchableOpacity style={{marginLeft: -20}} onPress={this.props.onPressedPickupTime}>
                   <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
                   <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 15, marginBottom: 6}}>请选择取件时间</Text>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 14, marginBottom: 6}}>请选择取件时间</Text>
                   </View>
                 </TouchableOpacity>
                 <View style={{height: 60, width: 1, backgroundColor: '#999999', opacity: 0.4}}></View>
                 <View >
                   <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
                   <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 15, marginBottom: 6}}>请先选择取件时间</Text>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 14, marginBottom: 6}}>请先选择取件时间</Text>
 
                   </View>
                 </View>

@@ -36,23 +36,23 @@ date.getHours() + ":" + date.getMinutes()}</Text>
     return (
       <View style={styles.deliverInfo}>
         <View style={styles.deliverInfoContent}>
-          <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',color: Common.MAIN_COLOR, fontWeight: '800'}}>配送</Text>
+          <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',color: Common.MAIN_COLOR, fontWeight: '800', fontSize: 14}}>配送</Text>
           <View style={styles.deliverStatus}>
             <Text allowFontScaling={false} style={styles.deliverStatusText}>{this.props.orderInfo.status_zh}</Text>
           </View>
         </View>
-        <View style={[styles.deliverInfoContent, {flexDirection: 'column'}]}>
+        <View style={[styles.deliverInfoContent, {flexDirection: 'column', marginRight: 12}]}>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
             <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/name.png")}/>
-            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_name}</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 13,}}>{this.props.orderInfo.user_name}</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
             <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/phone.png")}/>
-            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_phone}</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 13,}}>{this.props.orderInfo.user_phone}</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
             <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/address.png")}/>
-            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_addr}</Text>
+            <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 13,}} >{this.props.orderInfo.user_addr}</Text>
           </View>
         </View>
       </View>
@@ -66,7 +66,7 @@ date.getHours() + ":" + date.getMinutes()}</Text>
           <Text allowFontScaling={false} style={styles.deliverTimeText}>取件时间</Text>
           <Text allowFontScaling={false} style={styles.deliverTimeText}>{this.props.orderInfo.pickup_time}</Text>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12}}>
           <Text allowFontScaling={false} style={styles.deliverTimeText}>送达时间</Text>
           <Text allowFontScaling={false} style={styles.deliverTimeText}>{this.props.orderInfo.delivery_time}</Text>
         </View>
@@ -110,7 +110,7 @@ date.getHours() + ":" + date.getMinutes()}</Text>
             {this.renderOrderItems()}
             <Separator/>
             {this.renderOrderSummary()}
-            {this.renderOrderComment()}
+            {this.props.orderInfo.comment && this.renderOrderComment()}
           </View>
         </View>
       </View>
@@ -122,7 +122,7 @@ date.getHours() + ":" + date.getMinutes()}</Text>
 const styles = StyleSheet.create({
   content: {
     marginTop: 16,
-    marginBottom: 16,
+    marginBottom: 8,
     marginLeft: 24,
     marginRight: 24,
   },
@@ -144,16 +144,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerText: {
-    fontSize: 12,
-    fontWeight: '900',
+    fontSize: 14,
+    fontWeight: '700',
     color: 'white',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontFamily:'NotoSans-Regular',
   },
   deliverInfo: {
-    height: 28 * 3,
     marginTop: 12,
-    marginBottom: 12,
   },
   deliverInfoContent: {
     flexDirection: 'row',
@@ -161,7 +160,6 @@ const styles = StyleSheet.create({
   },
   deliverStatus: {
     width: 76,
-    height: 26,
     backgroundColor: '#F5A84C',
     borderRadius: 16,
   },
@@ -175,11 +173,10 @@ const styles = StyleSheet.create({
     fontFamily:'NotoSans-Regular',
   },
   deliverTime: {
-    height: 28 * 1.5,
     marginTop: 12,
   },
   deliverTimeText: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '700',
     marginBottom: 4,
     fontFamily:'NotoSans-Regular',
@@ -195,9 +192,9 @@ const styles = StyleSheet.create({
   },
   orderSummaryText: {
     fontWeight: '700',
-    fontSize: 12,
+    fontSize: 13,
     textAlign: 'right',
-    marginBottom: 6,
+    marginBottom: 4,
     fontFamily:'NotoSans-Regular',
   },
   orderCommentText: {
