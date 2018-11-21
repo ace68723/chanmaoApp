@@ -301,7 +301,7 @@ export default class Popup extends Component {
       <Animated.View style={{
         zIndex: this.props.zIndex || 999,
         position: 'absolute',
-        top: 0,
+        top: -30,
         left: 0,
         height: height,
         width: width,
@@ -343,7 +343,7 @@ export default class Popup extends Component {
         <View style={{backgroundColor: 'white'}}>
           <Text style={[
               {
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: '900',
                 textAlign: 'center',
                 color: 'black',

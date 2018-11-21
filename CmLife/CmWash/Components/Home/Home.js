@@ -19,6 +19,7 @@ import CheckoutAction from '../../Actions/CheckoutAction';
 import CheckoutStore from '../../Stores/CheckoutStore';
 import Cart from '../Cart/Cart'
 import BaseComponent from '../Common/BaseComponent'
+import PopupView from '../Common/Popup/PopupView'
 
 type Props = {};
 export default class Home extends BaseComponent<Props> {
@@ -33,6 +34,8 @@ export default class Home extends BaseComponent<Props> {
     this._goToCheckout=this._goToCheckout.bind(this);
     this.renderNavigationBar=this.renderNavigationBar.bind(this);
     this._goBack=this._goBack.bind(this);
+
+    this.popupView = PopupView.getInstance();
   }
   componentDidMount() {
     HomeStore.addChangeListener(this._onChange);
@@ -83,6 +86,9 @@ export default class Home extends BaseComponent<Props> {
       this.Cart.dismiss()
     }
   }
+  _showProductDescription(itemName, description){
+    this.popupView.showAlertWithTitle(this, itemName, "1231312312312312312312\ndsadasda\ndsadasdasda\nsdadasdsasa");
+  }
   _renderProduct({item}) {
     const _display_price = () => {
       if (item.display_price != item.original_price) {
@@ -117,6 +123,7 @@ export default class Home extends BaseComponent<Props> {
         <View style={{ width: 0.45 * width, height: 160, backgroundColor: 'white', borderRadius: 6, overflow: 'hidden', }}>
           <View style={{ flex: 2}}>
             <Image source={{ uri: item.image }} style={{ flex: 1 }}/>
+
             {
               item.display_price != item.original_price &&
               <Image
@@ -124,6 +131,20 @@ export default class Home extends BaseComponent<Props> {
                 style={{ position: 'absolute', width: 28 * 1.3, height: 28, marginTop: 8, marginLeft: 8}}
               />
             }
+
+            {
+              item.display_price != item.original_price &&
+              <TouchableOpacity
+                onPress={() => {this._showProductDescription(item.name_zh, item.description_zh)}}
+                style={{ position: 'absolute', alignSelf: 'flex-end', right: 12, marginTop: 8}}>
+                <Image
+                  source={require('./image/info.png')}
+                  style={{ width: 16, height: 16, }}
+                />
+              </TouchableOpacity>
+            }
+
+
 
           </View>
           <View style={{ flex: 1, marginTop: 8}}>
@@ -259,11 +280,14 @@ export default class Home extends BaseComponent<Props> {
     )
   }
   render() {
-    return (<View style={styles.container}>
-      {this.renderNavigationBar()}
-      {this.renderCategoryTabs()}
-      <Cart ref={ref => this.Cart = ref} goToCheckout={this._goToCheckout} currentCart={this.state.cartProducts} onPressedQuantity={this.updateQuantity}/>
-    </View>);
+    return (
+      <View style={styles.container}>
+        {this.state.showPopup && this.popupView.show()}s
+        {this.renderNavigationBar()}
+        {this.renderCategoryTabs()}
+        <Cart ref={ref => this.Cart = ref} goToCheckout={this._goToCheckout} currentCart={this.state.cartProducts} onPressedQuantity={this.updateQuantity}/>
+      </View>
+  );
   }
 }
 

@@ -101,7 +101,7 @@ const CheckoutStore = Object.assign({},EventEmitter.prototype,{
         				CheckoutStore.emitChange();
                 break;
         case AppConstants.DELIVERY_TIME:
-                // console.log(action.data);
+                console.log(action.data);
                 CheckoutStore.updateDeliveryTimeList(action.data);
                 CheckoutStore.emitChange();
                 break;
