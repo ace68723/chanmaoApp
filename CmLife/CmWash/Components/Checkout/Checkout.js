@@ -54,7 +54,7 @@ export default class Checkout extends Component {
   }
 
   _keyboardDidShow (e) {
-    this.setState({viewMarginBottom: e.endCoordinates.height})
+    this.setState({viewMarginBottom: 400})
   }
 
   _keyboardDidHide () {
@@ -202,7 +202,7 @@ export default class Checkout extends Component {
           <FlatList
             data={['delivery', 'userInfo', 'payment', 'orderInfo']}
             renderItem={({item}) => (this.renderItemCells(item))}
-            contentOffset = {{x: 0, y: this.state.viewMarginBottom}}
+            style={{marginTop: -this.state.viewMarginBottom}}
           />
         </View>
 

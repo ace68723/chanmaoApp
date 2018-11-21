@@ -43,15 +43,15 @@ date.getHours() + ":" + date.getMinutes()}</Text>
         </View>
         <View style={[styles.deliverInfoContent, {flexDirection: 'column'}]}>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
-            <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/1.png")}/>
+            <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/name.png")}/>
             <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_name}</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
-            <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/1.png")}/>
+            <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/phone.png")}/>
             <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_phone}</Text>
           </View>
           <View style={{flexDirection: 'row', marginBottom: 8, alignItems: 'center'}}>
-            <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/1.png")}/>
+            <Image style={{width: 15, height: 15, marginRight: 8}} source={require("./Image/address.png")}/>
             <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.orderInfo.user_addr}</Text>
           </View>
         </View>

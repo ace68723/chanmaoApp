@@ -36,16 +36,16 @@ export default class Home extends BaseComponent<Props> {
   }
   componentDidMount() {
     HomeStore.addChangeListener(this._onChange);
-    // setTimeout(() => {
-    //   this.props.navigator.showModal({
-    //      screen: "CmWashingHomeAlert",
-    //      passProps: {
-    //        message:"馋猫干洗配送范围，具体地址可在填写订单时确认"
-    //      },
-    //      animated: false,
-    //      navigatorStyle: {navBarHidden: true},
-    //     });
-    // }, 600);
+    setTimeout(() => {
+      this.props.navigator.showModal({
+         screen: "CmWashingHomeAlert",
+         passProps: {
+           message:"馋猫干洗配送范围，\n具体地址可在填写订单时确认"
+         },
+         animated: false,
+         navigatorStyle: {navBarHidden: true},
+        });
+    }, 1000);
     HomeAction.getProductList();
 
   }

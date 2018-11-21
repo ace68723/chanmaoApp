@@ -47,15 +47,11 @@ export default class Order extends Component {
     return (
       <View style={{flex:1,backgroundColor:'white',}}>
         <View style={{ width: width, backgroundColor:'white',marginTop:0.02*height,height: 48, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-
-
-
           <Text allowFontScaling={false} style={{ fontFamily: 'NotoSans-Black',flex: 1, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
             订单
           </Text>
         </View>
         <View style={styles.container}>
-
           <FlatList style={{marginTop: 6}} data={this.state.historyOrder} renderItem={({item}) => (this.renderCells(item))}/>
         </View>
       </View>

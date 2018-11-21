@@ -25,41 +25,56 @@ export default class CheckoutUserInfo extends Component{
           if (this.props.selectedPickUpDate && this.props.selectedDeliveryDate) content = (
             <View style={[this.props.cardStyle, {flex: 1}]}>
               <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-around', }]}>
-                <TouchableOpacity onPress={this.props.onPressedPickupTime}>
-                  <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
-                  <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedPickUpTime}</Text>
-                  </View>
-                </TouchableOpacity>
+
+                <View style={{flex: 1, marginLeft: 0, marginRight: 12,}}>
+                  <TouchableOpacity onPress={this.props.onPressedPickupTime}>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
+                    <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10}}>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedPickUpTime}</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+
                 <View style={{height: 60, width: 1, backgroundColor: '#999999', opacity: 0.4}}></View>
-                <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
-                  <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
-                  <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedDeliveryDate}</Text>
-                    <Text  allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedDeliveryTime}</Text>
-                  </View>
-                </TouchableOpacity>
+
+                <View style={{flex: 1, marginLeft: 12, marginRight: 0}}>
+                    <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
+                      <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
+                        <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedDeliveryDate}</Text>
+                        <Text  allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedDeliveryTime}</Text>
+                      </View>
+                    </TouchableOpacity>
+                </View>
               </View>
             </View>
           )
           else if (this.props.selectedPickUpDate && (!this.props.selectedDeliveryDate)) content= (
             <View style={[this.props.cardStyle, {flex: 1}]}>
-              <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-around'}]}>
-                <TouchableOpacity onPress={this.props.onPressedPickupTime}>
-                  <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
-                  <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedPickUpTime}</Text>
-                  </View>
-                </TouchableOpacity>
+              <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-between'}]}>
+
+                <View style={{flex: 1, marginLeft: 4, marginRight: 4}}>
+                  <TouchableOpacity onPress={this.props.onPressedPickupTime}>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
+                    <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedPickUpTime}</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+
                 <View style={{height: 60, width: 1, backgroundColor: '#999999', opacity: 0.4}}></View>
-                <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
-                  <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
-                  <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>请选择送达时间</Text>
-                  </View>
-                </TouchableOpacity>
+
+                <View style={{flex: 1, marginLeft: 12, marginRight: 4}}>
+                  <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
+                    <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
+                      <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>请选择送达时间</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+
               </View>
             </View>
           )
