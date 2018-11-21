@@ -13,28 +13,6 @@ import Common from '../../Constants/Common'
 export default class OrderItemList extends Component{
   constructor(props) {
     super(props);
-    this.state = {
-      items: [
-        {
-          name: "加拿大鹅",
-          id: 1,
-          quantity: 1,
-          price: 8.00
-        },
-        {
-          name: "包",
-          id: 2,
-          quantity: 1,
-          price: 8.00
-        },
-        {
-          name: "鞋子",
-          id: 3,
-          quantity: 1,
-          price: 9.00
-        },
-      ],
-    }
   }
   renderCell(item){
     return (
