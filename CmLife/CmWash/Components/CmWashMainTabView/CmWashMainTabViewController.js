@@ -5,9 +5,10 @@ import {
   View,
   Text,
   StyleSheet,
+  Image,
 } from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-
+import TabBar from './TabBar';
 import Home from '../Home/Home';
 import Orders from '../Orders/Orders';
 import Settings from '../Settings/Settings';
@@ -38,10 +39,11 @@ export default class MyComponent extends Component {
         initialPage={this.state.initialPage}
         page={this.state.initialPage}
         style={{flex:1}}
+                renderTabBar={() => <TabBar />}
       >
         <Home tabLabel='主页'
-          activeIconImage={require("./Image/mainpage_green.png")}
-          inactiveIconImage={require("./Image/mainpage_grey.png")}
+          activeIconImage={require("./Image/mainpagegreen.png")}
+          inactiveIconImage={require("./Image/mainpagegrey.png")}
               navigator={this.props.navigator}
               />
         <Orders
