@@ -216,7 +216,7 @@ export default class Home extends BaseComponent<Props> {
     const categories = [
       {"name": '全部', 'cid': 0},
       {"name": '衣服', 'cid': 1},
-      {"name": '鞋子', 'cid': 2},
+      {"name": '鞋子&包', 'cid': 2},
       {"name": '居家', 'cid': 3},
     ]
     let content = [];
