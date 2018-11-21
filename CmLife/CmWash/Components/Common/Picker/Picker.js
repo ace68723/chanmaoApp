@@ -106,9 +106,9 @@ export default class Picker extends BaseDialog {
                   this.updateSecondaryOptions(toValue);
               }}
               selectedIndex={0}
-              fontSize={this.getSize(14)}
+              fontSize={this.getSize(16)}
               itemWidth={this.mScreenWidth / 2}
-              itemHeight={this.getSize(40)} />
+              itemHeight={this.getSize(50)} />
           <PickerView
               list={this.state.displayedSecondaryOptions}
               onPickerSelected={(toValue) => {
@@ -117,9 +117,9 @@ export default class Picker extends BaseDialog {
                   })
               }}
               selectedIndex={0}
-              fontSize={this.getSize(14)}
+              fontSize={this.getSize(16)}
               itemWidth={this.mScreenWidth / 2}
-              itemHeight={this.getSize(40)} />
+              itemHeight={this.getSize(50)} />
       </View>
   }
 

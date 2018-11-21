@@ -136,7 +136,7 @@ class PickerView extends BaseComponent {
 
     onPanResponderEnd(evt, gestureState) {
         let actionTime = Date.now() - this.keyDown;
-        if (actionTime < 300 && Math.abs(gestureState.vy) < 0.1) {
+        if (actionTime < 30 && Math.abs(gestureState.vy) < 0.5) {
             let clickPosition = -(parseInt((gestureState.y0 - this.parentTopY) / this.props.itemHeight) - 2);
             let toValue = this.path._value;
             let number = Math.round(toValue / this.props.itemHeight);
@@ -150,7 +150,7 @@ class PickerView extends BaseComponent {
             if (isNaN(toValue)) {
             } else {
                 //onSeleted
-                Animated.timing(this.path, { toValue: toValue, duration: 200 }).start(() => {
+                Animated.timing(this.path, { toValue: toValue, duration: 10 }).start(() => {
                     this.onSeleted(Math.abs(toValue / this.props.itemHeight - 2));
                 });
             }
@@ -166,7 +166,7 @@ class PickerView extends BaseComponent {
             }
             Animated.decay(this.path, {
                 velocity: gestureState.vy, //通过手势设置相关速度
-                deceleration: 0.995,
+                deceleration: 0,
             }).start(() => {
                 if (this.path._value % this.props.itemHeight == 0) {
                     this.path.removeListener(this.pathListener);
@@ -179,7 +179,7 @@ class PickerView extends BaseComponent {
                         let toValue = Math.round(this.path._value / this.props.itemHeight) * this.props.itemHeight;
                         Animated.timing(this.path, {
                             toValue: toValue,
-                            duration: 50
+                            duration: 5
                         }).start(() => {
                             //onSeleted
                             this.onSeleted(Math.abs(toValue / this.props.itemHeight - 2));

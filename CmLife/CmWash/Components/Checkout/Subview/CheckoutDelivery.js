@@ -22,14 +22,13 @@ export default class CheckoutUserInfo extends Component{
     switch (shippingType) {
       case 0:
         {
-          // console.log(this.props);
           if (this.props.selectedPickUpDate && this.props.selectedDeliveryDate) content = (
-            <View style={this.props.cardStyle}>
-              <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-around'}]}>
-                <TouchableOpacity style={{marginLeft: -20}} onPress={this.props.onPressedPickupTime}>
+            <View style={[this.props.cardStyle, {flex: 1}]}>
+              <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-around', }]}>
+                <TouchableOpacity onPress={this.props.onPressedPickupTime}>
                   <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
-                  <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 15, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
+                  <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10}}>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
                     <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedPickUpTime}</Text>
                   </View>
                 </TouchableOpacity>
@@ -37,7 +36,7 @@ export default class CheckoutUserInfo extends Component{
                 <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
                   <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
                   <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 15, marginBottom: 6}}>{this.props.selectedDeliveryDate}</Text>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedDeliveryDate}</Text>
                     <Text  allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedDeliveryTime}</Text>
                   </View>
                 </TouchableOpacity>
@@ -45,12 +44,12 @@ export default class CheckoutUserInfo extends Component{
             </View>
           )
           else if (this.props.selectedPickUpDate && (!this.props.selectedDeliveryDate)) content= (
-            <View style={this.props.cardStyle}>
+            <View style={[this.props.cardStyle, {flex: 1}]}>
               <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-around'}]}>
-                <TouchableOpacity style={{marginLeft: -20}} onPress={this.props.onPressedPickupTime}>
+                <TouchableOpacity onPress={this.props.onPressedPickupTime}>
                   <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>
                   <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 15, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>{this.props.selectedPickUpDate}</Text>
                     <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '600', fontSize: 12,}}>{this.props.selectedPickUpTime}</Text>
                   </View>
                 </TouchableOpacity>
@@ -58,14 +57,14 @@ export default class CheckoutUserInfo extends Component{
                 <TouchableOpacity onPress={this.props.onPressedDeliverTime}>
                   <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>送达</Text>
                   <View style={{flexDirection: 'column', justifyContent:'space-between', marginBottom: 10,}}>
-                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 15, marginBottom: 6}}>请选择送达时间</Text>
+                    <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '700', fontSize: 13, marginBottom: 6}}>请选择送达时间</Text>
                   </View>
                 </TouchableOpacity>
               </View>
             </View>
           )
           else content=(
-            <View style={this.props.cardStyle}>
+            <View style={[this.props.cardStyle, {flex: 1}]}>
               <View style={[styles.content, {flexDirection: 'row', justifyContent: 'space-around'}]}>
                 <TouchableOpacity style={{marginLeft: -20}} onPress={this.props.onPressedPickupTime}>
                   <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '800', color: Common.MAIN_COLOR, marginBottom: 10, fontSize: 14,}}>取件</Text>

@@ -6,7 +6,8 @@ import {
   View,
   TouchableOpacity,
   FlatList,
-  Dimensions
+  Dimensions,
+  Keyboard
 } from 'react-native';
 const {height, width} = Dimensions.get('window');
 import CheckoutDelivery from './Subview/CheckoutDelivery.js'
@@ -23,6 +24,7 @@ export default class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = CheckoutStore.getState();
+    this.setState({viewMarginBottom: 0});
     this.renderItemCells = this.renderItemCells.bind(this);
     this._onChange = this._onChange.bind(this);
 
@@ -35,11 +37,30 @@ export default class Checkout extends Component {
     this._goToAddress=this._goToAddress.bind(this);
     this._goToCard=this._goToCard.bind(this);
     this.renderPlaceOrderButton=this.renderPlaceOrderButton.bind(this);
+
+    this._keyboardDidShow=this._keyboardDidShow.bind(this);
+    this._keyboardDidHide=this._keyboardDidHide.bind(this);
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
   }
+
   componentDidMount() {
     CheckoutStore.addChangeListener(this._onChange);
     CheckoutAction.getCard()
   }
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow (e) {
+    this.setState({viewMarginBottom: e.endCoordinates.height})
+  }
+
+  _keyboardDidHide () {
+    this.setState({viewMarginBottom: 0})
+  }
+
   _onChange() {
     const state = Object.assign({}, CheckoutStore.getState());
     this.setState(state);
@@ -177,10 +198,11 @@ export default class Checkout extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{height:0.8*height,width:width,}}>
+        <View style={{height:0.8*height,width:width}}>
           <FlatList
             data={['delivery', 'userInfo', 'payment', 'orderInfo']}
             renderItem={({item}) => (this.renderItemCells(item))}
+            contentOffset = {{x: 0, y: this.state.viewMarginBottom}}
           />
         </View>
 

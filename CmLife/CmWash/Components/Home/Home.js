@@ -40,12 +40,12 @@ export default class Home extends BaseComponent<Props> {
     //   this.props.navigator.showModal({
     //      screen: "CmWashingHomeAlert",
     //      passProps: {
-    //        message:"1111111"
+    //        message:"馋猫干洗配送范围，具体地址可在填写订单时确认"
     //      },
     //      animated: false,
     //      navigatorStyle: {navBarHidden: true},
     //     });
-    // }, 6000);
+    // }, 600);
     HomeAction.getProductList();
 
   }
@@ -101,37 +101,38 @@ export default class Home extends BaseComponent<Props> {
     }
     const _display_remove = () => {
       if (HomeStore.getItemAmount(item.sku_id) != 0)
-        return (<TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
-          <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center', }}>
-            <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 14, color: 'white' }}>
-              -
-            </Text>
-          </View>
+        return (
+        <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1,justifyContent: 'center', alignItems: 'center' }}>
+          <Image source={require('./image/minus.png')} style={{ width: 20, height: 20}}/>
         </TouchableOpacity>
       );
       return (
-        <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1 }}>
-          <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#b3b3b3', borderRadius: 40, alignItems: 'center', justifyContent: 'center' }}>
-            <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 14, color: 'white' }}>
-              -
-            </Text>
-          </View>
+        <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1,justifyContent: 'center', alignItems: 'center' }}>
+          <Image source={require('./image/minus-disabled.png')} style={{ width: 20, height: 20}}/>
         </TouchableOpacity>
       )
     }
     return (
       <View style={styles.card}>
-        <View style={{ width: 0.45 * width, height: 190, backgroundColor: 'white', borderRadius: 10, overflow: 'hidden', }}>
-          <View style={{ flex: 3}}>
+        <View style={{ width: 0.45 * width, height: 160, backgroundColor: 'white', borderRadius: 6, overflow: 'hidden', }}>
+          <View style={{ flex: 2}}>
             <Image source={{ uri: item.image }} style={{ flex: 1 }}/>
+            {
+              item.display_price != item.original_price &&
+              <Image
+                source={require('./image/offer.png')}
+                style={{ position: 'absolute', width: 28 * 1.3, height: 28, marginTop: 8, marginLeft: 8}}
+              />
+            }
+
           </View>
-          <View style={{ flex: 1, marginTop: 4}}>
-            <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View style={{ flex: 1, marginTop: 8}}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start',  }}>
               <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',marginLeft: 8, fontSize: 13, fontWeight: '800'}}>
                 {item.name_zh}
               </Text>
             </View>
-          <View style={{ flex: 1, flexDirection: 'row', marginRight: 8, marginBottom: 6}}>
+          <View style={{ flex: 1, flexDirection: 'row', marginRight: 8, marginBottom: 8}}>
             <View style={{ flex: 3, flexDirection: 'row' }}>
               <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',marginLeft: 8, fontSize: 14, color: '#2ad3be', fontWeight: '700'}}>
                 ${parseFloat(item.display_price).toFixed(0) == parseFloat(item.display_price) ? parseFloat(item.display_price).toFixed(0) : item.display_price}
@@ -141,21 +142,19 @@ export default class Home extends BaseComponent<Props> {
                 {item.unit}
               </Text>
             </View>
+
             <View style={{ flex: 2, flexDirection: 'row' }}>
               {_display_remove()}
               <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-                <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',color: '#404041', fontSize: 14, marginBottom: 5, fontWeight: '700'}}>
+                <Text allowFontScaling={false} style={{ fontFamily:'NotoSans-Regular',color: '#404041', fontSize: 14, fontWeight: '700'}}>
                   {HomeStore.getItemAmount(item.sku_id)}
                 </Text>
               </View>
-              <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 1 }}>
-                <View style={{ flex: 1, marginBottom: 2, backgroundColor: '#2ad3be', borderRadius: 40, alignItems: 'center', justifyContent: 'center'}}>
-                  <Text allowFontScaling={false} style={{ marginBottom: 6, fontSize: 14, color: 'white' }}>
-                    +
-                  </Text>
-                </View>
+              <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <Image source={require('./image/add.png')} style={{ width: 20, height: 20}}/>
               </TouchableOpacity>
             </View>
+
           </View>
         </View>
       </View>
@@ -281,7 +280,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     marginBottom: 5,
     marginTop: 5,
-    borderRadius: 10,
+    borderRadius: 6,
     elevation: 5,
     shadowOffset: {width: 0, height: 0},
     shadowColor: 'grey',
