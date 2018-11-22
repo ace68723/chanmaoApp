@@ -50,7 +50,7 @@ class ActivityHeaderWithBanner extends Component {
           passProps: {url: url}
         });
 			}
-			if(banner.navitype == 3){
+			else if(banner.navitype == 3){
           this.props.navigator.showModal({
             screen: 'CmEatMenu',
             animated: false,
@@ -60,6 +60,21 @@ class ActivityHeaderWithBanner extends Component {
               restaurant:banner.naviparam,
             },
           });
+			}
+			else if(advertisement.navitype == 4) {
+				if (advertisement.naviparam.target_page == 'cmwash') {
+					this.props.navigator.resetTo({
+			      screen: 'cmHome',
+			      animated: true,
+			      animationType: 'fade',
+			      navigatorStyle: {
+			        navBarHidden: true
+			      },
+			      passProps: {
+			        goToCmLife: 'cmwash'
+			      }
+			    });
+				}
 			}
 		}
 		_renderBanner(){
@@ -72,7 +87,7 @@ class ActivityHeaderWithBanner extends Component {
                           onPress={this._handleOnPress.bind(null,banner)}>
                 <View style={{flex:1,justifyContent:'center'}}>
                     <Image
-                       style={{height: 200,}}  
+                       style={{height: 200,}}
                        source={{uri: banner.image}}
                     />
                 </View>
