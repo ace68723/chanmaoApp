@@ -6,7 +6,8 @@ import {
   View,
   TouchableOpacity,
   FlatList,
-  Dimensions
+  Dimensions,
+  Keyboard
 } from 'react-native';
 const {height, width} = Dimensions.get('window');
 import CheckoutDelivery from './Subview/CheckoutDelivery.js'
@@ -19,10 +20,13 @@ import CheckoutStore from '../../Stores/CheckoutStore';
 
 import DateTimePicker from '../Common/Picker/Picker'
 
+import PopupView from '../Common/Popup/PopupView'
+
 export default class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = CheckoutStore.getState();
+    this.setState({viewMarginBottom: 0});
     this.renderItemCells = this.renderItemCells.bind(this);
     this._onChange = this._onChange.bind(this);
 
@@ -35,11 +39,32 @@ export default class Checkout extends Component {
     this._goToAddress=this._goToAddress.bind(this);
     this._goToCard=this._goToCard.bind(this);
     this.renderPlaceOrderButton=this.renderPlaceOrderButton.bind(this);
+
+    this._keyboardDidShow=this._keyboardDidShow.bind(this);
+    this._keyboardDidHide=this._keyboardDidHide.bind(this);
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+
+    this.popupView = PopupView.getInstance();
   }
+
   componentDidMount() {
     CheckoutStore.addChangeListener(this._onChange);
     CheckoutAction.getCard()
   }
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow (e) {
+    this.setState({viewMarginBottom: 400})
+  }
+
+  _keyboardDidHide () {
+    this.setState({viewMarginBottom: 0})
+  }
+
   _onChange() {
     const state = Object.assign({}, CheckoutStore.getState());
     this.setState(state);
@@ -57,6 +82,7 @@ export default class Checkout extends Component {
           }
         });
     }
+    console.log(state);
   }
   componentWillUnmount() {
     CheckoutStore.removeChangeListener(this._onChange);
@@ -74,35 +100,50 @@ export default class Checkout extends Component {
       pickedData.selectedSecondaryOptions,
       this.state.ev_wash_time
     );
+
   }
   onConfirmDeliveryTime(deliveryData){
     CheckoutAction.selectDeliveryTime(deliveryData.selectedPrimaryOptions,deliveryData.selectedSecondaryOptions);
   }
   _placeOrder()
   {
-    let productsList=[];
-    for (i of this.state.ea_products)
-    {
-      let product={
-        'sku_id':i.sku_id,
-        'amount':i.amount,
-      }
-      productsList.push(product);
-    }
-    let data={
-      'location_id':this.state.ea_store_info[0].location_id,
-      'pickup_date':this.state.selectedPickUpDate,
-      'pickup_time':this.state.selectedPickUpTime,
-      'delivery_date':this.state.selectedDeliveryDate,
-      'delivery_time':this.state.selectedDeliveryTime,
-      'comment':this.state.comment,
-      'products':productsList,
-    };
-    CheckoutAction.placeOrder(data);
-  }
+    // 提示确认订单
+    this.popupView.setFullPopup(
+      {
+        title: "温馨提示",
+        detailText: "取件时配送员会向您确认纽扣是否有缺失，衣物是否有破损，是否有污渍（红酒，咖啡，橙汁，可乐等有色污渍可能无法完全清除）\n请将衣物内物品提前取出，如出现物品遗失等情况，馋猫干洗不承担责任。敬请谅解~",
+        cancelText: "取消",
+        onConfirm: () => {
+          // 真正下单的逻辑
+          let productsList=[];
+          for (i of this.state.ea_products)
+          {
+            let product={
+              'sku_id':i.sku_id,
+              'amount':i.amount,
+            }
+            productsList.push(product);
+          }
+          let data={
+            'location_id':this.state.ea_store_info[0].location_id,
+            'pickup_date':this.state.selectedPickUpDate,
+            'pickup_time':this.state.selectedPickUpTime,
+            'delivery_date':this.state.selectedDeliveryDate,
+            'delivery_time':this.state.selectedDeliveryTime,
+            'comment':this.state.comment,
+            'products':productsList,
+          };
+          CheckoutAction.placeOrder(data);
+        },
+        onDismiss: () => {this.setState({showPopup: false})}
+      });
+      this.setState({showPopup: true});
+}
+
   renderPlaceOrderButton()
   {
     if (this.state.selectedPickUpDate && this.state.selectedDeliveryDate && this.state.eo_user_info && this.state.eo_last4) {
+
       return (
         <TouchableOpacity style={{position:'absolute', bottom:0, backgroundColor:'#2ad3be'}} onPress={this._placeOrder}>
           <View style={{width:width,height: 56,alignItems:'center',justifyContent:'center'}}>
@@ -177,10 +218,12 @@ export default class Checkout extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{height:0.8*height,width:width,}}>
+        {this.state.showPopup && this.popupView.show()}
+        <View style={{height:0.8*height,width:width}}>
           <FlatList
             data={['delivery', 'userInfo', 'payment', 'orderInfo']}
             renderItem={({item}) => (this.renderItemCells(item))}
+            style={{marginTop: -this.state.viewMarginBottom}}
           />
         </View>
 

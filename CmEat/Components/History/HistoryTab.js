@@ -136,8 +136,8 @@ class HistoryTab extends Component {
 								this._applePaySelected({oid: state.oid,
 																				subtotal: state.fees.ori_pretax.toString(),
 																				shipping: state.fees.dlexp.toString(),
-																				tax: state.fees.tax.toString(),
-																				service_fee: state.fees.service_fee.toString(),
+																				tax: state.fees.ori_tax.toString(),
+																				service_fee: state.fees.ori_service_fee.toString(),
 																				charge_total: state.fees.charge_total,
 																				discount: state.fees.total_off});
 							}, 300);

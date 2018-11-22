@@ -1160,7 +1160,7 @@ class Confirm extends Component {
 
 		_renderPriceTotal() {
 			const _originTotal = () => {
-				if (this.state.selectedCase.using_coupon) {
+				if (this.state.selectedCase.fees.total_off > 0) {
 					return (
 						<Text style={{color:'#9b9b9b',
 													fontSize:19,

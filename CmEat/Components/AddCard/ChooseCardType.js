@@ -285,7 +285,7 @@ export default class ChooseCardType extends Component {
                           textDecorationLine: 'line-through',
   												marginLeft: 6}}
                   allowFontScaling={false}>
-              ${this.state.fees.total}
+              ${this.state.fees.ori_total}
             </Text>
           );
         }

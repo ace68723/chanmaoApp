@@ -11,8 +11,8 @@ import {
   Animated,
   ImageBackground
 } from 'react-native';
-import SboxProductStore from '../../Stores/SboxProductStore';
-import SboxCartStore from '../../Stores/SboxCartStore';
+// import SboxProductStore from '../../Stores/SboxProductStore';
+
 import createReactClass from 'create-react-class';
 import Button from './Button';
 export default class TabBar extends Component {
@@ -22,19 +22,10 @@ export default class TabBar extends Component {
       totalQuantity:0
     }
     this.renderTab = this.renderTab.bind(this);
-    this._onChange = this._onChange.bind(this);
+    // this._onChange = this._onChange.bind(this);
   }
-  componentDidMount(){
-      SboxCartStore.addChangeListener(this._onChange);
-  }
-  componentWillUnmount() {
-    SboxCartStore.removeChangeListener(this._onChange);
-  }
-  _onChange() {
-    this.setState({
-      totalQuantity: SboxCartStore.getTotalQuantity()
-    })
-  }
+
+
 
   renderTab(name, page, isTabActive, onPressHandler,activeIconImage,inactiveIconImage) {
 
@@ -61,9 +52,13 @@ export default class TabBar extends Component {
                       justifyContent: 'center',
                       alignItems: 'center',}}
                     source={iconImage}>
-                <Text style={{textAlign: 'center', backgroundColor:'rgba(0,0,0,0)',height: 22}}
+                <Text style={{textAlign: 'center',
+                              backgroundColor:'rgba(0,0,0,0)',
+                              alignSelf: 'center',
+                              height: 13,
+                              fontSize: 12,
+                              fontFamily:'NotoSans-Regular',}}
                       allowFontScaling={false}>
-                  {iconText}
                 </Text>
           </ImageBackground>
           <Text style={[{color: textColor, fontWeight, }, textStyle, ]}
@@ -78,18 +73,7 @@ export default class TabBar extends Component {
   render() {
     const containerWidth = this.props.containerWidth;
     const numberOfTabs = this.props.tabs.length;
-    const tabUnderlineStyle = {
-      position: 'absolute',
-      width: containerWidth / numberOfTabs,
-      height: 4,
-      backgroundColor: 'navy',
-      bottom: 0,
-    };
 
-    const translateX = this.props.scrollValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0,  containerWidth / numberOfTabs],
-    });
     return (
       <View style={[styles.tabs, {backgroundColor: this.props.backgroundColor, }, this.props.style, ]}>
         {this.props.tabs.map((name, page) => {
@@ -99,17 +83,7 @@ export default class TabBar extends Component {
           const inactiveIconImage = this.props.inactiveIconImages[page];
           return renderTab(name, page, isTabActive, this.props.goToPage,activeIconImage,inactiveIconImage);
         })}
-        <Animated.View
-          style={[
-            tabUnderlineStyle,
-            {
-              transform: [
-                { translateX },
-              ]
-            },
-            this.props.underlineStyle,
-          ]}
-        />
+
       </View>
     );
   }
