@@ -213,4 +213,7 @@ module.exports={
     PLZ_SELECT_REQUIRED_OPTION:'请选择必填选项',
     VERTIFICATION_FAIL_TITLE:'验证码错误',
     VERTIFICATION_FAIL_CONTENT:'请检查您输入的验证码',
+    WECHAT_NO_PASSWORD:'微信用户无需密码, 请直接微信登录',
+    UNKNOW_ERROR:'未知错误, 请联系客服',
+    VCODE_SENT_TO_THIS_NUMBER:'验证码已发送手机上, 尾号为: '
 }

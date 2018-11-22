@@ -66,6 +66,7 @@ export default class SearchByArea extends Component{
                         imageStyle={{ borderRadius: 5}}>
   						<Text style={{backgroundColor:"rgba(0,0,0,0)",
 					    							color:"#ffffff",
+														fontWeight: '600',
 					                  fontSize:18,
 					                  fontFamily:'NotoSans-Regular'}}
 										allowFontScaling={false}>

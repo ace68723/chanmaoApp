@@ -129,18 +129,26 @@ export default class LogoAnimationView extends Component {
   }
 	async _getVcode() {
     let data = {"num": this.state.phone};
-    let res=await AuthModule.getVcode(data);
+    let res = await AuthModule.getVcode(data);
+		let context;
     if (res.ev_noti_msg) {
-			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), res.ev_noti_msg);
-			// alert(res.ev_noti_msg);
+			context = Label.getCMLabel('REMINDING') + res.ev_noti_msg;
+			this.popupView.showAlertWithTitle(this, Label.getCMLabel('REMINDING'), context);
 		}
-    else if (res.ev_error==0) {
+    else if (res.ev_error == 0) {
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('REMINDING'), Label.getCMLabel('VCODE_SENT'));
-			// alert('message sent');
 		}
     else {
-			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), res.ev_context);
-			// alert(res.ev_context);
+			if (res.ev_message == 10020) {
+				context = Label.getCMLabel('REACH_VCODE_MAX');
+			}
+			else if (res.ev_message == 10023) {
+				context = Label.getCMLabel('WECHAT_NO_PASSWORD');
+			}
+			else {
+				context = Label.getCMLabel('UNKNOW_ERROR');
+			}
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), context);
 		}
   }
 
@@ -170,8 +178,8 @@ export default class LogoAnimationView extends Component {
       this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_CONGRA_TITLE'), Label.getCMLabel('PASSWORD_RESET_SUCCESS'));
     }
     else {
-      // alert(res.ev_context);
-      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), res.ev_context);
+			let context = Label.getCMLabel('UNKNOW_ERROR');
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), context);
     }
     this._toggleViewTypeReset();
   }
