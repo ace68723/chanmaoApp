@@ -98,6 +98,12 @@ export default class Home extends Component {
         setTimeout( () => {
           this._handleSboxPress();
         }, 1000);
+      } else if (this.props.goToCmLife && this.props.goToCmLife.length > 0) {
+        if (this.props.goToCmLife == 'cmwash') {
+          setTimeout( () => {
+            this._handleCmLifePress();
+          }, 2000);
+        }
       }
 
   })
@@ -306,20 +312,24 @@ export default class Home extends Component {
       //   // })
       // }, 500);
       setTimeout(() => {
+          let goToCmLife = this.props.goToCmLife;
           this.props.navigator.resetTo({
             screen: 'CmLifeHome',
-            passProps: {handleBackToHome: this._handleBackToHome},
+            passProps: {
+              handleBackToHome: this._handleBackToHome,
+              goToCmLife
+            },
             animated: false,
             navigatorStyle: {
               navBarHidden: true,
               disabledBackGesture: true,
             },
             style: {
-             backgroundBlur: "none",
-             backgroundColor: "rgba(0,0,0,0)"
+              backgroundBlur: "none",
+              backgroundColor: "rgba(0,0,0,0)"
            }
           })
-      }, 0);
+      }, 1000);
     }
 
 

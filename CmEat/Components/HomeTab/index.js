@@ -69,6 +69,21 @@ export default class HomeTab extends Component {
           },
         });
 		}
+		else if(advertisement.navitype == 4) {
+			if (advertisement.naviparam.target_page == 'cmwash') {
+				this.props.navigator.resetTo({
+		      screen: 'cmHome',
+		      animated: true,
+		      animationType: 'fade',
+		      navigatorStyle: {
+		        navBarHidden: true
+		      },
+		      passProps: {
+		        goToCmLife: 'cmwash'
+		      }
+		    });
+			}
+		}
 	}
 	_handleScrollToResCards() {
 		this.refs.flatlist.scrollToIndex({animated: true, index: 0, viewOffset: 50});

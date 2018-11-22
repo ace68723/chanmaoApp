@@ -42,6 +42,13 @@ export default class Home extends BaseComponent {
     this.onPressedCell=this.onPressedCell.bind(this);
     this._backToHome=this._backToHome.bind(this);
   }
+  componentDidMount() {
+    if (this.props.goToCmLife == 'cmwash') {
+      setTimeout(() => {
+        this.onPressedCell('washing');
+      }, 800);
+    }
+  }
   _backToHome() {
     this.props.navigator.resetTo({
         screen: 'cmHome',
@@ -76,7 +83,6 @@ export default class Home extends BaseComponent {
     />)
   }
   render() {
-    console.log(this.state.cells)
     return (
       <View style={{backgroundColor:'white',flex:1}}>
         <HomeHeader goBack={this._backToHome} />
