@@ -120,7 +120,7 @@ export default class Home extends BaseComponent<Props> {
     }
     return (
       <View style={styles.card}>
-        <View style={{ width: 0.465 * width, height: 160, backgroundColor: 'white', borderRadius: 6, overflow: 'hidden', }}>
+        <View style={{ width: 0.47 * width, height: 160, backgroundColor: 'white', borderRadius: 6, overflow: 'hidden', }}>
           <View style={{ flex: 2}}>
             <Image source={{ uri: item.image }} style={{ flex: 1 }}/>
 

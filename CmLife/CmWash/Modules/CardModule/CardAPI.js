@@ -23,7 +23,7 @@ export default  {
     })
     return fetch(url,options)
             .then((res) => res.json())
-            .catch((error) => {throw error})
+            .catch((error) => {console.log(error);throw error})
   },
 
 }

@@ -5,11 +5,15 @@ import CardModule from '../Modules/CardModule/CardModule'
 export default {
     async addCard(reqData) {
       try{
-         await CardModule.addCard(reqData);
+         const data = await CardModule.addCard(reqData);
+         console.log(data);
+         dispatch({
+              actionType: AppConstants.CARD_NUMBER,data
+          })
         // const data = await CardModule.getOrderBefore();
       }catch(error){
         console.log(error)
-        throw 'no cardToken'
+        throw error;
       }
     },
 

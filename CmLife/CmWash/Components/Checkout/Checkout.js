@@ -17,7 +17,8 @@ import CheckoutOrderInfo from './Subview/CheckoutOrderInfo.js'
 
 import CheckoutAction from '../../Actions/CheckoutAction';
 import CheckoutStore from '../../Stores/CheckoutStore';
-
+import CardAction from '../../Actions/CardAction';
+// import CheckoutStore from '../../Stores/CheckoutStore';
 import DateTimePicker from '../Common/Picker/Picker'
 
 import PopupView from '../Common/Popup/PopupView'
@@ -69,7 +70,7 @@ export default class Checkout extends Component {
     const state = Object.assign({}, CheckoutStore.getState());
     this.setState(state);
     // 同步delivery picker的data source
-    this.PickerDelivery.forceReloadDataSource();
+    if (this.state.selectedPickUpTime) this.PickerDelivery.forceReloadDataSource();
     if (this.state.placeOrderStatus==0) {
       // alert('下单成功');
       this.props.navigator.resetTo({

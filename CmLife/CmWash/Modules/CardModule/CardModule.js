@@ -24,8 +24,8 @@ export default  {
                                                 expMonth,
                                                 expYear,
                                                 cvv);
-
-      if(!cardToken) {throw 'no cardToken'}
+      // console.log(cardToken);
+      // if(!cardToken) {throw 'no cardToken'}
       // console.log(cardToken);
       // alert(cardToken);
       const {uid,token,version} = GetUserInfo();
@@ -34,11 +34,15 @@ export default  {
         iv_token: cardToken
       }
       const res = await CardAPI.addCard(lo_data);
-      // console.log(res);
+      console.log(res);
       if(res.ev_error === 1) { throw 'add card fail'}
-      const eo_data = res.ea_card_info;
+      const eo_data ={
+        ev_error:res.ev_error,
+        eo_last4:res.eo_last4,
+      }
       return eo_data
     } catch (e) {
+      console.log(e);
       throw e
     }
   },

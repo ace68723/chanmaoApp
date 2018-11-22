@@ -221,6 +221,7 @@ export default class MyComponent extends Component {
         animationType: 'slide-down'
       });
     } catch (e) {
+      console.log(e);
       this.setState({showLoading:false});
       this.props.navigator.showInAppNotification({
        screen: "Notification",
