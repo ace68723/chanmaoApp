@@ -120,7 +120,7 @@ export default class Home extends BaseComponent<Props> {
     }
     return (
       <View style={styles.card}>
-        <View style={{ width: 0.45 * width, height: 160, backgroundColor: 'white', borderRadius: 6, overflow: 'hidden', }}>
+        <View style={{ width: 0.465 * width, height: 160, backgroundColor: 'white', borderRadius: 6, overflow: 'hidden', }}>
           <View style={{ flex: 2}}>
             <Image source={{ uri: item.image }} style={{ flex: 1 }}/>
 
@@ -298,10 +298,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   card: {
-    width: 0.43 * width,
+    width: 0.47 * width,
     backgroundColor: 'white',
-    marginLeft: 12,
-    marginRight: 12,
+    marginLeft: 5,
+    marginRight: 5,
     marginBottom: 5,
     marginTop: 5,
     borderRadius: 6,
