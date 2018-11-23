@@ -22,6 +22,9 @@ import VersionAction from '../Actions/VersionAction';
 import { GetUserInfo, cme_getRegion } from '../Modules/Database';
 import PopupView from '../../CmEat/Components/Popup/PopupView'
 import StartUpAnimation from './startupAnimation';
+import CodePush from "react-native-code-push";
+
+
 const { height, width } = Dimensions.get('window');
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -46,7 +49,9 @@ export default class Home extends Component {
       super();
       this.state = {
           entryFlag: true,
-          showPopup: false
+          showPopup: false,
+          isUpdating: false,
+          updatePercentage: 0
       };
 
       this._versionCheck = this._versionCheck.bind(this);
@@ -63,15 +68,60 @@ export default class Home extends Component {
 
       this.popupView = PopupView.getInstance();
       this._handleLoginSuccessfulToCmLife = this._handleLoginSuccessfulToCmLife.bind(this);
+      CodePush.sync({ 
+        checkFrequency: CodePush.CheckFrequency.ON_APP_START,
+        installMode: CodePush.InstallMode.IMMEDIATE
+      },
+        (status)=>{
+          switch(status) {
+            case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
+                console.log("Checking for updates.");
+                break;
+            case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
+                console.log("Downloading package.");
+                this.setState({
+                  isUpdating:true,
+                })
+                break;
+            case CodePush.SyncStatus.INSTALLING_UPDATE:
+                console.log("Installing update.");
+                break;
+            case CodePush.SyncStatus.UP_TO_DATE:
+                
+                this.setState({
+                  isUpdating:false,
+                  updatePercentage:100
+                },()=>console.log("Up-to-date."))
+                break;
+            case CodePush.SyncStatus.UPDATE_INSTALLED:
+                console.log("Update installed.");
+                this.setState({
+                  isUpdating:false,
+                  updatePercentage:100
+                })
+                break;
+        }
+
+        },(progress)=>{
+          console.log(progress.receivedBytes + " of " + progress.totalBytes + " received.");
+          this.setState({updatePercentage: parseInt(progress.receivedBytes/progress.totalBytes*100)})
+        }
+      );
   }
   _openStarted = false
   componentDidMount() {
+    CodePush.notifyAppReady();
+    CodePush.allowRestart();//允许重启，否则热更新不会生效
     AppState.addEventListener('change', this._handleAppStateChange);
 
     setTimeout( () => {
       this._versionCheck();
     }, 500);
   }
+  componentWillMount() {
+		CodePush.disallowRestart();//页面加载的禁止重启，在加载完了可以允许重启
+	}
+	
   componentWillUnmount(){
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
@@ -434,12 +484,29 @@ export default class Home extends Component {
       )
     }
   }
-
+  _renderUpdateView() {
+    return (<View style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'orange',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+      <Text style={{fontSize:25}}>{this.state.updatePercentage==100 ? '让您久等啦！！' :'稍等一下，快乐即将到达...'}</Text>
+      <Text style={{fontSize:30}}>%{this.state.updatePercentage}</Text>
+      <View style={{position:'absolute',bottom:0, left:0, height:5,width:width*this.state.updatePercentage/100,backgroundColor:'black' }}></View>
+    </View>)
+  }
+ 
   render() {
       return(
         <View style={{flex: 1}}>
           {this.state.showPopup && this.popupView.show()}
           {this._renderBody()}
+          {this.state.isUpdating ? this._renderUpdateView() : null}
         </View>
       );
 
