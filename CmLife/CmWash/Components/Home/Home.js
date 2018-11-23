@@ -20,6 +20,7 @@ import CheckoutStore from '../../Stores/CheckoutStore';
 import Cart from '../Cart/Cart'
 import BaseComponent from '../Common/BaseComponent'
 import PopupView from '../Common/Popup/PopupView'
+import HomeAlert from '../HomeAlert/CmWashingHomeAlert'
 
 type Props = {};
 export default class Home extends BaseComponent<Props> {
@@ -40,17 +41,9 @@ export default class Home extends BaseComponent<Props> {
   componentDidMount() {
     HomeStore.addChangeListener(this._onChange);
     setTimeout(() => {
-      this.props.navigator.showModal({
-         screen: "CmWashingHomeAlert",
-         passProps: {
-           message:"馋猫干洗配送范围，\n具体地址可在填写订单时确认"
-         },
-         animated: false,
-         navigatorStyle: {navBarHidden: true},
-        });
+      this.HomeAlert.show();
     }, 1000);
     HomeAction.getProductList();
-
   }
   componentWillUnmount() {
     HomeStore.removeChangeListener(this._onChange);
@@ -282,10 +275,11 @@ export default class Home extends BaseComponent<Props> {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.showPopup && this.popupView.show()}s
+        {this.state.showPopup && this.popupView.show()}
         {this.renderNavigationBar()}
         {this.renderCategoryTabs()}
         <Cart ref={ref => this.Cart = ref} goToCheckout={this._goToCheckout} currentCart={this.state.cartProducts} onPressedQuantity={this.updateQuantity}/>
+        <HomeAlert ref={ref => this.HomeAlert = ref} message={"馋猫干洗配送范围，\n具体地址可在填写订单时确认"}/>
       </View>
   );
   }

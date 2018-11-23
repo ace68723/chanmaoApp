@@ -113,6 +113,7 @@ export default class Checkout extends Component {
       {
         title: "温馨提示",
         detailText: "取件时配送员会向您确认纽扣是否有缺失，衣物是否有破损，是否有污渍（红酒，咖啡，橙汁，可乐等有色污渍可能无法完全清除）\n请将衣物内物品提前取出，如出现物品遗失等情况，馋猫干洗不承担责任。敬请谅解~",
+        confirmText: "确认下单",
         cancelText: "取消",
         onConfirm: () => {
           // 真正下单的逻辑
