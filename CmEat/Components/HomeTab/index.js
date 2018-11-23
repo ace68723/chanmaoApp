@@ -58,7 +58,7 @@ export default class HomeTab extends Component {
         passProps: {url: url}
       });
 		}
-		if(advertisement.navitype == 3){
+		else if(advertisement.navitype == 3){
         this.props.navigator.showModal({
           screen: 'CmEatMenu',
           animated: false,

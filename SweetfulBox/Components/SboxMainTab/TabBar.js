@@ -64,7 +64,7 @@ export default class TabBar extends Component {
                 <Text style={{textAlign: 'center',
                               backgroundColor:'rgba(0,0,0,0)',
                               alignSelf: 'center',
-                              height: 13,
+                              lineHeight: 18,
                               fontSize: 12,
                               fontFamily:'NotoSans-Regular',}}
                       allowFontScaling={false}>
