@@ -86,7 +86,8 @@ export default class Cart extends BaseDialog {
     const cellHeight = 32;
     return (
       <View style={{height: cellHeight * this.props.currentCart.length, marginTop: 12, marginBottom: 4,}}>
-        <CartItemList items={this.props.currentCart} onPressedQuantity={this.props.onPressedQuantity} />
+        <CartItemList items={this.props.currentCart}
+                      onPressedQuantity={this.props.onPressedQuantity}/>
       </View>
     )
   }
