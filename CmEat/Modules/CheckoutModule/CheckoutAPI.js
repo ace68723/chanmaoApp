@@ -56,13 +56,7 @@ export default  {
     //               throw error;
     //             })
     return fetch(url,options)
-            .then(
-              // (res) => res.json()
-              (res) => {
-                console.log(res);
-                return res.json();
-              }
-          )
+            .then((res) => res.json())
             .catch((error) => {throw error})
   },
   checkout(io_data){
@@ -201,7 +195,6 @@ export default  {
                             setTimeout(resolve, timeout, {status: 'error', code: 666, data: 'Verbinding met de cloud kon niet tot stand gebracht worden: Timeout.'});
                           });
     return Promise.race([timeoutPromise, fetch(url, options)]).then((result) => {
-                        console.log(result);
                         var Status = result.status;
                         if (result.status === 500 || result.status === 404) {
                           return {status: 'error', code: 666, data: 'server failed'};

@@ -83,7 +83,6 @@ export default class Checkout extends Component {
           }
         });
     }
-    console.log(state);
   }
   componentWillUnmount() {
     CheckoutStore.removeChangeListener(this._onChange);

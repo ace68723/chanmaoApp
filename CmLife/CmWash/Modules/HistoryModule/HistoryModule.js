@@ -9,7 +9,6 @@ export default  {
   async HistoryOrder(io_data){
     try {
       const {uid,token,version} = GetUserInfo();
-      console.log(token);
       const lo_data = {
         token:token,
       }

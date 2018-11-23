@@ -6,7 +6,6 @@ export default {
     async addCard(reqData) {
       try{
          const data = await CardModule.addCard(reqData);
-         console.log(data);
          dispatch({
               actionType: AppConstants.CARD_NUMBER,data
           })
