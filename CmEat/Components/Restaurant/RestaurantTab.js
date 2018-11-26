@@ -70,6 +70,5 @@ export default class RestaurantTab extends Component {
 const styles = StyleSheet.create({
   scrollView:{
     flex: 1,
-    // backgroundColor:'blue'
   },
 });

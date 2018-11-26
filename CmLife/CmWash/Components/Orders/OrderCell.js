@@ -110,7 +110,7 @@ date.getHours() + ":" + date.getMinutes()}</Text>
             {this.renderOrderItems()}
             <Separator/>
             {this.renderOrderSummary()}
-            {this.props.orderInfo.comment && this.renderOrderComment()}
+            {!!this.props.orderInfo.comment && this.renderOrderComment()}
           </View>
         </View>
       </View>

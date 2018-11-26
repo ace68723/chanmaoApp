@@ -126,7 +126,7 @@ export default class Home extends BaseComponent<Props> {
             }
 
             {
-              item.description_zh &&
+              !!item.description_zh &&
               <TouchableOpacity
                 onPress={() => {this._showProductDescription(item.name_zh, item.description_zh)}}
                 style={{ position: 'absolute', alignSelf: 'flex-end', right: 12, marginTop: 8}}>

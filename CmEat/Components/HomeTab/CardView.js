@@ -68,7 +68,6 @@ export default class CardView extends Component {
               // right: 20,
               // width: null,
               // height: 200-30,
-              // backgroundColor:'red'
             }}
             onMomentumScrollEnd={(e) => {
               const offset = e.nativeEvent.contentOffset;

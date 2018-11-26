@@ -156,7 +156,7 @@ export default class Cart extends BaseDialog {
     return (
       <TouchableOpacity
         onPress={this._goToCheckout}
-        style={[styles.checkoutButton, !this.shouldAllowedCheckout() ? {backgroundColor: '#999999'}: {}]}>
+        style={[styles.checkoutButton, !this.shouldAllowedCheckout() ? {backgroundColor: '#999999'}: {backgroundColor: Common.MAIN_COLOR,}]}>
         <View style={{flex:1,justifyContent: 'center', alignItems: 'center', }} >
           <Text allowFontScaling={false} style={{color: 'white', fontSize: 15, fontWeight: '700',}}>结算</Text>
         </View>
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   checkoutButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Common.MAIN_COLOR,
+
     height: 42,
     marginLeft: 0,
     marginRight: 0,
