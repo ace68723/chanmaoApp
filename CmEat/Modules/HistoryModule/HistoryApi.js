@@ -148,10 +148,7 @@ const HistoryApi = {
       options.headers.authortoken = reqData.token;
       options.headers.oid = reqData.io_data.oid;
       return fetch(url,options)
-              .then((res) => {
-                console.log(res);
-                return res.json();
-              })
+              .then((res) => res.json())
               .catch((error) => {throw error})
     },
     viewOrderCase(reqData) {

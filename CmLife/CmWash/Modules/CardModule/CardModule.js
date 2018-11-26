@@ -34,7 +34,6 @@ export default  {
         iv_token: cardToken
       }
       const res = await CardAPI.addCard(lo_data);
-      console.log(res);
       if(res.ev_error === 1) { throw 'add card fail'}
       const eo_data ={
         ev_error:res.ev_error,

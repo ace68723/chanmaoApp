@@ -133,7 +133,6 @@ export default  {
       return eo_data
 
     } catch ({ev_message}) {
-      console.log(ev_message);
       throw `getOrderBefore ${ev_message} `
     }
   },

@@ -22,7 +22,9 @@ export default class CartItemList extends Component {
     }
     for (i of this.props.items){
       cells.push(
-        <CartItemListCell item={i} onPressedQuantity={this.props.onPressedQuantity} />
+        <CartItemListCell key={i.sku_id}
+                          item={i}
+                          onPressedQuantity={this.props.onPressedQuantity} />
       );
     }
     return cells;

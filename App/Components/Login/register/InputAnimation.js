@@ -283,6 +283,7 @@ export default class InputAnimation extends Component {
 											autoCorrect= { false}
 											textContentType = 'telephoneNumber'
 											returnKeyType={'next'}
+											maxLength={10}
 											ref={this.props.ir_PHONE_INPUTREF}
 											onChangeText={this.props.if_handlePhone}
 											underlineColorAndroid={"rgba(0,0,0,0)"}
