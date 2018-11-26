@@ -7,11 +7,14 @@ import {
   StyleSheet,
   FlatList,
   KeyboardAvoidingView,
+  Platform,
+  Alert,
 } from 'react-native';
 import Header from "./header";
 import Row from "./row";
 import Separator from "./separator";
 
+import PopupView from '../Common/Popup/PopupView';
 import { GOOGLE_API_KEY } from '../../../Config/API';
 import AddressStore from '../../Stores/AddressStore';
 import AddressAction from '../../Actions/AddressAction';
@@ -26,6 +29,7 @@ export default class MyComponent extends Component {
         // showAlert: 0,
         selectedAddress: '',
       }
+          this.popupView = PopupView.getInstance();
       this._goBack = this._goBack.bind(this);
       this.handleAddressSelected = this.handleAddressSelected.bind(this);
       this.onChangeTextInput = this.onChangeTextInput.bind(this);
@@ -34,6 +38,7 @@ export default class MyComponent extends Component {
 
   componentDidMount() {
       AddressStore.addChangeListener(this._onChange);
+        // this.popupView.showAlertWithTitle(this, '地址错误', '对不起, 您输入的地址暂时无法配送');
   }
   componentWillUnmount() {
       AddressStore.removeChangeListener(this._onChange)
@@ -43,8 +48,15 @@ export default class MyComponent extends Component {
     const newState = AddressStore.getState();
     this.setState(Object.assign({}, this.state, {showAlert: newState.showAlert}));
     this.setState(Object.assign({}, this.state, {selectedAddress: newState.selectedAddress}));
-    console.log('goto address');
+    // console.log('goto address');
     if (this.state.showAlert == 0) {
+
+
+      if (Platform.OS === 'android'){
+        Alert.alert( '地址错误', '对不起, 您输入的地址暂时无法配送');
+        // this.popupView.showAlertWithTitle(this, '地址错误', '对不起, 您输入的地址暂时无法配送');
+        // this.popupView.show();
+      }
       this.props.navigator.showLightBox({
          screen: "CmWashAddressAlert",
          passProps: {
