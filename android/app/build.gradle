@@ -102,7 +102,7 @@ android {
         applicationId "ca.chanmao.app"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 9
+        versionCode 10
         versionName "2.9.4"
         ndk {
             abiFilters "armeabi-v7a", "x86"
