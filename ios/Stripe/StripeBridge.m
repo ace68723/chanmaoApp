@@ -38,11 +38,10 @@ RCT_EXPORT_METHOD(pay:(NSString *)cardNumber
     cardParams.cvc = cvc;
     cardParams.name = name;
     cardParams.address.postalCode = postal;
-    
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
       if (token == nil || error != nil) {
         // Present error to user...
-//        printf((NSString *)error);
+//        printf("%s\n", [error.localizedDescription UTF8String]);
         reject(@"no_token", @"There were no token",error);
       } else {
         NSString *tokenId = [token valueForKey:@"_tokenId"];

@@ -69,6 +69,7 @@ export default class MyComponent extends Component {
       this._inputCVV = this._inputCVV.bind(this);
       this._inputDate = this._inputDate.bind(this);
       this._goBack = this._goBack.bind(this);
+      this._valid = this._valid.bind(this);
       this._handleSubmitPress = this._handleSubmitPress.bind(this);
   }
   _AnimatedValue
@@ -187,7 +188,12 @@ export default class MyComponent extends Component {
   }
 
   _valid(){
-    if(this.state.cardNumber.length == 19 && this.state.cvv.length == 3 && this.state.expYear != "YYYY" && this.state.expMonth !="MM"){
+    if(this.state.cardNumber.length == 19 && 
+      this.state.cvv.length == 3 && 
+      this.state.expYear != "YYYY" && 
+      this.state.expMonth !="MM" && 
+      this.state.clientName != '' &&
+      this.state.postalCode.length >=6 ){
       this.setState({infoFilled:true})
     }else{
       this.setState({infoFilled:false})
@@ -258,6 +264,7 @@ export default class MyComponent extends Component {
       const postal = this.state.postalCode;
       const reqData = {cardNumber,expMonth,expYear,cvv,name,postal};
       const result = await CheckoutAction.addCard(reqData);
+      console.log(result)
       this.props.navigator.pop();
       // CheckoutAction.updatePaymentStatus(1);
       this.props.stripeCardAdded();
@@ -532,11 +539,13 @@ export default class MyComponent extends Component {
             marginLeft:20,
             marginRight:20,
           }}
-          onChangeText={(clientName) => this.setState({clientName})}
+          onChangeText={(clientName) => this.setState({clientName},()=>this._valid())}
           value={this.state.clientName}
           onFocus={()=>{
             this._showKeyboard(this.state.nameAnimated,'name');
           }}
+          onSubmitEditing={this._handleSubmitPress}
+          returnKeyType={'send'}
         />
      </View> 
     )
@@ -574,11 +583,13 @@ export default class MyComponent extends Component {
             borderColor:'#d9d9d9',
             marginLeft:20,
             marginRight:20}}
-          onChangeText={(postalCode) => this.setState({postalCode})}
+          onChangeText={(postalCode) => this.setState({postalCode},()=>this._valid())}
           value={this.state.postalCode}
           onFocus={()=>{
            this._showKeyboard(this.state.posAnimated,'postal');
           }}
+          onSubmitEditing={this._handleSubmitPress}
+          returnKeyType={'send'}
         />
      </View> 
     )
