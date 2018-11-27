@@ -77,6 +77,9 @@
 		F963FD2720B4B8DA00C1C422 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F963FD2620B4B8DA00C1C422 /* Foundation.framework */; };
 		F963FD2920B4B8DE00C1C422 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F963FD2820B4B8DE00C1C422 /* QuartzCore.framework */; };
 		F963FD2B20B4B8E800C1C422 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F963FD2A20B4B8E800C1C422 /* UIKit.framework */; };
+		F9925A3321ADD1D90012D1BA /* Intercom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9925A0221ADD1D90012D1BA /* Intercom.framework */; };
+		F9925A3421ADD1D90012D1BA /* Intercom.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9925A0221ADD1D90012D1BA /* Intercom.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F9925A3D21ADD2630012D1BA /* libRNIntercom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9925A3C21ADD23C0012D1BA /* libRNIntercom.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,7 +419,28 @@
 			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
 			remoteInfo = "RNSVG-tvOS";
 		};
+		F9925A3B21ADD23C0012D1BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F9925A3721ADD23C0012D1BA /* RNIntercom.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 112EE36D1CC0AB8A00BF6BB8;
+			remoteInfo = RNIntercom;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F9925A3521ADD1DA0012D1BA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F9925A3421ADD1D90012D1BA /* Intercom.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -512,6 +536,8 @@
 		F963FD2620B4B8DA00C1C422 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F963FD2820B4B8DE00C1C422 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F963FD2A20B4B8E800C1C422 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F9925A0221ADD1D90012D1BA /* Intercom.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Intercom.framework; sourceTree = "<group>"; };
+		F9925A3721ADD23C0012D1BA /* RNIntercom.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNIntercom.xcodeproj; path = "../node_modules/react-native-intercom/iOS/RNIntercom.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -519,6 +545,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9925A3D21ADD2630012D1BA /* libRNIntercom.a in Frameworks */,
 				DFE86E0221964A4F000B8A5F /* libRNSVG.a in Frameworks */,
 				F963FD2B20B4B8E800C1C422 /* UIKit.framework in Frameworks */,
 				31E09C9720A3A61A007902C5 /* SystemConfiguration.framework in Frameworks */,
@@ -546,6 +573,7 @@
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
+				F9925A3321ADD1D90012D1BA /* Intercom.framework in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				D7067B9C9D904789ABDE3188 /* libCodePush.a in Frameworks */,
 				7AE9BD1B5738447EA59C5C74 /* libRNDeviceInfo.a in Frameworks */,
@@ -843,6 +871,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F9925A3721ADD23C0012D1BA /* RNIntercom.xcodeproj */,
 				DFE86DCB219649E8000B8A5F /* RNSVG.xcodeproj */,
 				3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */,
 				31CC7A8920A4CE74001561DB /* RCTWeChat.xcodeproj */,
@@ -878,6 +907,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F9925A0221ADD1D90012D1BA /* Intercom.framework */,
 				13B07FAE1A68108700A75B9A /* chanmao */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* chanmaoTests */,
@@ -947,6 +977,14 @@
 			path = Alipay;
 			sourceTree = "<group>";
 		};
+		F9925A3821ADD23C0012D1BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F9925A3C21ADD23C0012D1BA /* libRNIntercom.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -960,6 +998,8 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				F273C9AF99F57547A19A885C /* [CP] Copy Pods Resources */,
+				F9925A3521ADD1DA0012D1BA /* Embed Frameworks */,
+				F9925A3621ADD1E40012D1BA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1068,6 +1108,10 @@
 				{
 					ProductGroup = 3122F85520B88FC900C388FF /* Products */;
 					ProjectRef = 3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = F9925A3821ADD23C0012D1BA /* Products */;
+					ProjectRef = F9925A3721ADD23C0012D1BA /* RNIntercom.xcodeproj */;
 				},
 				{
 					ProductGroup = DFE86DCC219649E8000B8A5F /* Products */;
@@ -1422,6 +1466,13 @@
 			remoteRef = DFE86DFF219649E9000B8A5F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F9925A3C21ADD23C0012D1BA /* libRNIntercom.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNIntercom.a;
+			remoteRef = F9925A3B21ADD23C0012D1BA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1517,6 +1568,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chanmao/Pods-chanmao-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F9925A3621ADD1E40012D1BA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Intercom.framework/strip-frameworks.sh\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1559,6 +1623,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Alipay",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1594,6 +1659,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Alipay",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

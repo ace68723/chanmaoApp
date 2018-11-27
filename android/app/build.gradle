@@ -157,6 +157,7 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':react-native-intercom')
     compile project(':react-native-svg')
     compile project(':react-native-maps')
     compile project(':react-native-wechat')

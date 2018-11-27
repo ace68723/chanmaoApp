@@ -22,6 +22,7 @@
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
 
+#import "Intercom/Intercom.h"
 
 @implementation AppDelegate
 
@@ -45,6 +46,9 @@
   //for stripe configure pk_live_XQlHKvkQ8N9yPEHlslQvaS7U   pk_test_MsgqDWzRTfpOKl5mBwX0J0u2
   [[STPPaymentConfiguration sharedConfiguration] setAppleMerchantIdentifier:@"merchant.ca.chanmao.applypay"];
   [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_live_XQlHKvkQ8N9yPEHlslQvaS7U"];
+  
+  [Intercom setApiKey:@"ios_sdk-4776ceb34c5637f49137ec4cf8fd57237bf0fb12" forAppId:@"g18rss68"];
+  
   return YES;
 }
 
