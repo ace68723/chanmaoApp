@@ -87,10 +87,12 @@ export default class Picker extends BaseDialog {
   }
 
   updateSecondaryOptions(newValue){
+
     for (i of this.props.items){
       if (i[this.props.primaryKey] == newValue){
         this.setState({
           displayedSecondaryOptions: i[this.props.secondaryKey],
+          selectedSecondaryOptions: i[this.props.secondaryKey][0],
           selectedPrimaryOptions: newValue,
         })
         return;
@@ -109,6 +111,7 @@ export default class Picker extends BaseDialog {
               fontSize={this.getSize(16)}
               itemWidth={this.mScreenWidth / 2}
               itemHeight={this.getSize(50)} />
+
           <PickerView
               list={this.state.displayedSecondaryOptions}
               onPickerSelected={(toValue) => {
