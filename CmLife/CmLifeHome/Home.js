@@ -41,9 +41,7 @@ export default class Home extends BaseComponent {
     this.onPressedCell=this.onPressedCell.bind(this);
   }
   onPressedCell(key){
-    console.log(key);
     if (key=='washing') {
-      console.log('111');
       this.props.navigator.push({
         screen: 'CmLifeMainTab',
         navigatorStyle: {navBarHidden: true},
@@ -51,7 +49,6 @@ export default class Home extends BaseComponent {
     }
   }
   renderCells(item) {
-    console.log(item.key);
     return (<HomeCell
       keyNum={item.key}
       cardStyle={styles.card}

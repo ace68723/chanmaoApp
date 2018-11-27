@@ -391,7 +391,7 @@ export default class StartupAnimation extends Component {
         <TouchableWithoutFeedback
           onPressIn={()=>this.setState({isBottomRightButtonPressed:true})}
           onPressOut={()=>this.setState({isBottomRightButtonPressed:false})}
-          disabled={true}
+          disabled={this.state.isAnimationRunning}
           onPress={()=>{
             clearInterval(intervalIndicator)
             this.props.onPressCMLife();

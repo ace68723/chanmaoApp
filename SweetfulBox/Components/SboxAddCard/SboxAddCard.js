@@ -11,6 +11,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Animated,
+  Keyboard
 } from 'react-native';
 
 import Label from '../../../App/Constants/AppLabel';
@@ -36,6 +37,8 @@ export default class MyComponent extends Component {
         expMonth:"MM",
         expYear:"YYYY",
         cvv:"",
+        postalCode:'',
+        clientName:'',
         focus:'cardNumber',
         //判断是否全部填满信息
         infoFilled:false,
@@ -46,9 +49,17 @@ export default class MyComponent extends Component {
         bounceValueCVVTop: new Animated.Value(0.05*height),
         bounceValueCVVFontSize: new Animated.Value(20),
 
+        bounceValueNameFontSize: new Animated.Value(20),
+        bounceValueNameTop:new Animated.Value(0.05*height),
+
+        bounceValuePosFontSize: new Animated.Value(20),
+        bounceValuePosTop:new Animated.Value(0.05*height),
+
         cardNumAnimated: new Animated.Value(0),
         CVVAnimated:  new Animated.Value(0),
         dateAnimated:  new Animated.Value(0),
+        nameAnimated: new Animated.Value(0),
+        posAnimated: new Animated.Value(0),
 
         showLoading:false,
       }
@@ -57,42 +68,48 @@ export default class MyComponent extends Component {
       this._inputCVV = this._inputCVV.bind(this);
       this._inputDate = this._inputDate.bind(this);
       this._goBack = this._goBack.bind(this);
+      this._valid = this._valid.bind(this);
       this._handleSubmitPress = this._handleSubmitPress.bind(this);
 
   }
   _AnimatedValue
   _currentType
-  _showKeyboard(type) {
+  _showKeyboard(AnimatedValue, type) {
     // 选中输入后进行提示字动画效果
     // let _AnimatedValue
+    if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType);
+    this._currentType = type;
+    this._AnimatedValue = AnimatedValue; 
     switch (type) {
       case 'cardNum':
-          if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
-          this._currentType = type;
-          this._AnimatedValue = this.state.cardNumAnimated;
-          this.setState({isNumOpen:true,isDateOpen:false,isCVVOpen:false},()=>{
-            this.refs._KeyboardView.scrollTo('number');
-          });
-        break;
+      if(this.nameTextInput.isFocused() || this.posTextInput.isFocused()) Keyboard.dismiss(); 
+        this.setState({isNumOpen:true,isDateOpen:false,isCVVOpen:false},()=>{
+          this._KeyboardView.scrollTo('number');
+        });
+      break;
       case 'CVV':
-        if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
-          this._currentType = type;
-          this._AnimatedValue = this.state.CVVAnimated;
-          this.setState({isNumOpen:false,isDateOpen:false,isCVVOpen:true},()=>{
-            this.refs._KeyboardView.scrollTo('number');
-          });
-        break;
+      if(this.nameTextInput.isFocused() || this.posTextInput.isFocused()) Keyboard.dismiss();   
+        this.setState({isNumOpen:false,isDateOpen:false,isCVVOpen:true},()=>{
+          this._KeyboardView.scrollTo('number');
+        });
+      break;
       case 'date':
-        if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType)
-          this._currentType = type;
-          this._AnimatedValue = this.state.dateAnimated
-          this.setState({isNumOpen:false,isDateOpen:true,isCVVOpen:false},()=>{
-            setTimeout(() => {
-                this.refs._KeyboardView.scrollTo('date');
-            }, 10);
-
-          });
-        break;
+      if(this.nameTextInput.isFocused() || this.posTextInput.isFocused()) Keyboard.dismiss(); 
+        this.setState({isNumOpen:false,isDateOpen:true,isCVVOpen:false},()=>{
+          setTimeout(() => {
+            this._KeyboardView.scrollTo('date');
+          }, 10);
+        });
+      break;
+      default:
+        if(this.state.isCVVOpen || this.state.isDateOpen || this.state.isNumOpen){
+            this.setState({
+              isCVVOpen:false,
+              isDateOpen:false,
+              isNumOpen:false
+            },this._KeyboardView.closeKeyboard())
+        }
+      break;
     }
 
     Animated.timing(
@@ -142,12 +159,43 @@ export default class MyComponent extends Component {
               }).start()
             }
         break;
+      case 'name':
+          if(this.state.clientName === ''){
+            Animated.timing(
+              this.state.nameAnimated,
+              {
+                toValue:0,
+                friction:1,
+                duration:300
+              }
+            ).start();
+          }
+        break;  
+      case 'postal':
+        if(this.state.postalCode === ''){
+          Animated.timing(
+            this.state.posAnimated,
+            {
+              toValue:0,
+              friction:1,
+              duration:300
+            }
+          ).start();
+        }  
+      break;
     }
 
-  }
 
+  }
   _valid(){
-    if(this.state.cardNumber.length == 19 && this.state.cvv.length == 3 && this.state.expYear != "YYYY" && this.state.expMonth !="MM"){
+    if(
+      this.state.cardNumber.length == 19 && 
+      this.state.cvv.length == 3 && 
+      this.state.expYear != "YYYY" && 
+      this.state.expMonth !="MM" && 
+      this.state.clientName != '' &&
+      this.state.postalCode.length >=6)
+    {
       this.setState({infoFilled:true})
     }else{
       this.setState({infoFilled:false})
@@ -214,7 +262,9 @@ export default class MyComponent extends Component {
       const expMonth = this.state.expMonth;
       const expYear = this.state.expYear;
       const cvv = this.state.cvv;
-      const reqData = {cardNumber,expMonth,expYear,cvv};
+      const name = this.state.clientName;
+      const postal = this.state.postalCode;
+      const reqData = {cardNumber,expMonth,expYear,cvv,name,postal};
       const result = await SboxOrderAction.addCard(reqData);
       this.setState({showLoading:false});
       this.props.navigator.dismissModal({
@@ -254,7 +304,7 @@ export default class MyComponent extends Component {
     let isOpen = isOpenObj.isNumOpen || isOpenObj.isCVVOpen || isOpenObj.isDateOpen;
     if(isOpen){
       return(
-        <KeyboardView ref="_KeyboardView"
+        <KeyboardView ref={(keyboard)=>this._KeyboardView = keyboard}
                     isOpen={isOpen}
                     inputNumber={(num)=>{this.state.isNumOpen?this._inputNumber(num):this._inputCVV(num)}}
                     inputDate={(date)=>this._inputDate(date)}
@@ -290,14 +340,13 @@ export default class MyComponent extends Component {
 
     return (
       <View style={styles.cardNo}>
-        <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"cardNum")} >
+        <TouchableWithoutFeedback onPress={()=>this._showKeyboard(this.state.cardNumAnimated, "cardNum")} >
           <View style={styles.input}>
               <Animated.Text style={{
                   position:'absolute',
                   bottom:bounceValueCardNumbottom,
                   left:bounceValueCardNumLeft,
                   fontSize:bounceValueCardNumFontSize,
-                  fontSize:16,
                   color:'#6d6e71',
                 }}
                 allowFontScaling={false}
@@ -355,14 +404,14 @@ export default class MyComponent extends Component {
               top:bounceValueDateTop,
               left:0,
               fontSize:bounceValueDateFontSize,
-              fontSize:16,color:'#6d6e71',
+              color:'#6d6e71',
             }}
             allowFontScaling={false}
             >
             有效期至
           </Animated.Text>
 
-          <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"date")} >
+          <TouchableWithoutFeedback onPress={()=>this._showKeyboard(this.state.dateAnimated,"date")} >
               <View style={styles.input}>
                   <Animated.View style={{flex:0.9,
                                 marginTop:25,
@@ -394,7 +443,7 @@ export default class MyComponent extends Component {
       outputRange:[0,1],
     })
     return(
-      <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"CVV")} >
+      <TouchableWithoutFeedback onPress={()=>this._showKeyboard(this.state.CVVAnimated,"CVV")} >
           <View style={styles.otherInfo}>
 
                 <Animated.Text style={{
@@ -402,7 +451,7 @@ export default class MyComponent extends Component {
                     left:0,
                     fontSize:bounceValueCVVFontSize,
                     top:bounceValueCVVTop,
-                    fontSize:16,color:'#6d6e71'
+                    color:'#6d6e71'
                     }}
                     allowFontScaling={false}
                   >
@@ -436,11 +485,109 @@ export default class MyComponent extends Component {
       </TouchableWithoutFeedback>
     )
   }
-  _rednerCardDetails() {
+  _renderCardDetails() {
     return(
       <View style={styles.cardDetails}>
         {this._renderCardDate()}
         {this._renderCardCVV()}
+      </View>
+    )
+  }
+  _renderClientName(){
+    const bounceValueNameTop =  this.state.nameAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[0.05*height,0],
+    })
+    const bounceValueNameFontSize =  this.state.nameAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[20,15],
+    })
+    
+    return(
+     <View style={{height:90,width:width/2}}>
+        <Animated.Text style={{
+                    position:'absolute',
+                    left:20,
+                    fontSize:bounceValueNameFontSize,
+                    top:bounceValueNameTop,
+                    color:'#6d6e71'
+                    }}
+                    allowFontScaling={false}
+                  >
+                  姓名
+          </Animated.Text>
+      <TextInput
+          ref={(nameInput)=>this.nameTextInput = nameInput}
+          textContentType={'name'}
+          style={{
+            height:70,
+            fontSize:20,
+            paddingTop:20,
+            borderBottomWidth:1,
+            borderColor:'#d9d9d9',
+            marginLeft:20,
+            marginRight:20,
+          }}
+          onChangeText={(clientName) => this.setState({clientName},()=>this._valid())}
+          value={this.state.clientName}
+          onFocus={()=>{
+            this._showKeyboard(this.state.nameAnimated,'name');
+          }}
+          onSubmitEditing={this._handleSubmitPress}
+          returnKeyType={'send'}
+        />
+     </View> 
+    )
+  }
+  _renderPostal(){
+    const bounceValuePosTop =  this.state.posAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[0.05*height,0],
+    })
+    const bounceValuePosFontSize =  this.state.posAnimated.interpolate({
+      inputRange: [0,1],
+      outputRange:[20,15],
+    })
+    return(
+     <View style={{height:90,width:width/2}}>
+        <Animated.Text style={{
+                    position:'absolute',
+                    left:20,
+                    fontSize:bounceValuePosFontSize,
+                    top:bounceValuePosTop,
+                    color:'#6d6e71'
+                    }}
+                    allowFontScaling={false}
+                  >
+            邮编
+        </Animated.Text>
+        <TextInput
+          ref={(posInput)=>this.posTextInput = posInput}
+          textContentType={'postalCode'}
+          style={{  
+            height:70,
+            fontSize:20,
+            paddingTop:20,
+            borderBottomWidth:1,
+            borderColor:'#d9d9d9',
+            marginLeft:20,
+            marginRight:20}}
+          onChangeText={(postalCode) => this.setState({postalCode},()=>this._valid())}
+          value={this.state.postalCode}
+          onFocus={()=>{
+           this._showKeyboard(this.state.posAnimated,'postal');
+          }}
+          onSubmitEditing={this._handleSubmitPress}
+          returnKeyType={'send'}
+        />
+     </View> 
+    )
+  }
+  _renderNamePostal(){
+    return(
+      <View style={styles.cardDetails}>
+        {this._renderClientName()}
+        {this._renderPostal()}
       </View>
     )
   }
@@ -452,7 +599,8 @@ export default class MyComponent extends Component {
                 leftButtonText={'<'}/>
           <View style={styles.infoContainer}>
             {this._renderCardNo()}
-            {this._rednerCardDetails()}
+            {this._renderCardDetails()}
+            {this._renderNamePostal()}
           </View>
           {this._renderKeyboard({
                         isNumOpen:this.state.isNumOpen,

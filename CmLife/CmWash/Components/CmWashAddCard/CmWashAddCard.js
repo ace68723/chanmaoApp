@@ -11,6 +11,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Animated,
+  Keyboard
 } from 'react-native';
 
 // import Label from '../../../App/Constants/AppLabel';
@@ -67,13 +68,14 @@ export default class MyComponent extends Component {
       this._inputCVV = this._inputCVV.bind(this);
       this._inputDate = this._inputDate.bind(this);
       this._goBack = this._goBack.bind(this);
+      this._valid = this._valid.bind(this);
       this._handleSubmitPress = this._handleSubmitPress.bind(this);
 
   }
   _AnimatedValue
   _currentType
-  _showKeyboard(type) {
-   // 选中输入后进行提示字动画效果
+  _showKeyboard(AnimatedValue,type) {
+    // 选中输入后进行提示字动画效果
     // let _AnimatedValue
     if(this._AnimatedValue) this._blur(this._AnimatedValue,this._currentType);
     this._currentType = type;
@@ -301,7 +303,7 @@ export default class MyComponent extends Component {
     let isOpen = isOpenObj.isNumOpen || isOpenObj.isCVVOpen || isOpenObj.isDateOpen;
     if(isOpen){
       return(
-        <KeyboardView ref="_KeyboardView"
+        <KeyboardView ref={(keyboard)=>this._KeyboardView = keyboard}
                     isOpen={isOpen}
                     inputNumber={(num)=>{this.state.isNumOpen?this._inputNumber(num):this._inputCVV(num)}}
                     inputDate={(date)=>this._inputDate(date)}
@@ -337,7 +339,7 @@ export default class MyComponent extends Component {
 
     return (
       <View style={styles.cardNo}>
-        <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"cardNum")} >
+        <TouchableWithoutFeedback onPress={()=>this._showKeyboard(this.state.cardNumAnimated, "cardNum")} >
           <View style={styles.input}>
               <Animated.Text style={{
                   position:'absolute',
@@ -408,7 +410,7 @@ export default class MyComponent extends Component {
             有效期至
           </Animated.Text>
 
-          <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"date")} >
+          <TouchableWithoutFeedback onPress={()=>this._showKeyboard(this.state.dateAnimated,"date")} >
               <View style={styles.input}>
                   <Animated.View style={{flex:0.9,
                                 marginTop:25,
@@ -440,7 +442,7 @@ export default class MyComponent extends Component {
       outputRange:[0,1],
     })
     return(
-      <TouchableWithoutFeedback onPress={this._showKeyboard.bind(null,"CVV")} >
+      <TouchableWithoutFeedback onPress={()=>this._showKeyboard(this.state.CVVAnimated,"CVV")} >
           <View style={styles.otherInfo}>
 
                 <Animated.Text style={{

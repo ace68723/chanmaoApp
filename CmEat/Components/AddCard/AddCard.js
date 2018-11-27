@@ -343,9 +343,7 @@ export default class MyComponent extends Component {
 
     return (
       <View style={styles.cardNo}>
-        <TouchableWithoutFeedback onPress={()=>{
-          this._showKeyboard(this.state.cardNumAnimated, "cardNum")
-        }}>
+        <TouchableWithoutFeedback onPress={()=>this._showKeyboard(this.state.cardNumAnimated, "cardNum")}>
           <View style={styles.input}>
               <Animated.Text style={{
                   position:'absolute',
@@ -416,9 +414,7 @@ export default class MyComponent extends Component {
             {Label.getCMLabel('EXPIRED_AT')}
           </Animated.Text>
 
-          <TouchableWithoutFeedback onPress={()=>{
-              this._showKeyboard(this.state.dateAnimated, "date")
-            }}>
+          <TouchableWithoutFeedback onPress={()=>this._showKeyboard(this.state.dateAnimated, "date")}>
               <View style={styles.input}>
                   <Animated.View style={{flex:0.9,
                                 marginTop:25,

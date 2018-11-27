@@ -41,7 +41,6 @@ export default class Checkout extends Component {
   }
   _onChange() {
     console.log(this.state);
-    console.log('11111111');
     const state = Object.assign({}, CheckoutStore.getState());
     this.setState(state);
     console.log(state)

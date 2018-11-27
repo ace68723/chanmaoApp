@@ -1,7 +1,7 @@
 'use strict';
 const TestServer = 'https://norgta.com/api/sb/v2/';
 const proructServer = 'https://chanmao.us/api/payment/v2/';
-const Server = TestServer;
+const Server = proructServer;
 const TestLumen = "https://www.cmapi.ca/cm_qa_lumen/backend/index.php/";
 const ProductionLumen = "https://www.cmapi.ca/cm_backend/index.php/";
 const Lumen = ProductionLumen;

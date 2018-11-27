@@ -9,20 +9,18 @@ const StripeBridge = NativeModules.StripeBridge;
 // import AuthAction from '../../../App/Actions/AuthAction';
 export default  {
 
-  async addCard({cardNumber,expMonth,expYear,cvv}){
+  async addCard({cardNumber,expMonth,expYear,cvv,postal,name}){
     try {
        cardNumber = cardNumber.replace(/ /g,'');
        expMonth = Number(expMonth);
        expYear = Number(expYear);
        cvv = cvv;
-       console.log(cardNumber);
-       console.log(expMonth);
-       console.log(expYear);
-       console.log(cvv);
       const cardToken = await StripeBridge.pay( cardNumber,
                                                 expMonth,
                                                 expYear,
-                                                cvv);
+                                                cvv,
+                                                postal,
+                                                name);
 
       if(!cardToken) {throw 'no cardToken'}
       // console.log(cardToken);
