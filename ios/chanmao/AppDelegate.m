@@ -47,7 +47,7 @@
   [[STPPaymentConfiguration sharedConfiguration] setAppleMerchantIdentifier:@"merchant.ca.chanmao.applypay"];
   [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_live_XQlHKvkQ8N9yPEHlslQvaS7U"];
   
-  [Intercom setApiKey:@"ios_sdk-4776ceb34c5637f49137ec4cf8fd57237bf0fb12" forAppId:@"g18rss68"];
+  [Intercom setApiKey:@"ios_sdk-47e71241e84c55312de723dbc2be9d6872d09ea9" forAppId:@"hz77kaf5"];
   
   return YES;
 }
