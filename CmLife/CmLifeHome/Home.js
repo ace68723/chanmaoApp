@@ -12,9 +12,6 @@ import HomeHeader from './HomeHeader'
 import HomeCell from './HomeCell'
 import BaseComponent from '../Common/BaseComponent'
 
-import Intercom from 'react-native-intercom';
-
-
 const {width,height} = Dimensions.get('window');
 export default class Home extends BaseComponent {
   constructor(props) {
@@ -46,8 +43,6 @@ export default class Home extends BaseComponent {
     this.onPressedCell=this.onPressedCell.bind(this);
     this._backToHome=this._backToHome.bind(this);
 
-    Intercom.registerIdentifiedUser({ userId: 'Bob' });
-    Intercom.displayMessageComposer();
   }
   componentDidMount() {
     if (this.props.goToCmLife == 'cmwash') {

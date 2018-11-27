@@ -11,6 +11,8 @@ import {
 import AuthAction from '../../../../App/Actions/AuthAction';
 import SettingsCell from './SettingsCell.js'
 
+import Intercom from 'react-native-intercom';
+
 const {width,height} = Dimensions.get('window');
 export default class Home extends Component {
   constructor(props) {
@@ -116,7 +118,11 @@ export default class Home extends Component {
     if (key=='logout') {this._logout();}
     // if (key=='language') {this._goToLanguageSettings();}
     if (key=='sbox') {this._goToSbox();}
-    if (key=='contact'){this._goToAboutUs();}
+    if (key=='contact'){
+      // this._goToAboutUs();
+      // Intercom.registerIdentifiedUser({ userId: 'Bob' });
+      Intercom.displayMessageComposer();
+    }
   }
   renderCells(item) {
     return (<SettingsCell cardStyle={styles.card} title={item.title} type={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />)
