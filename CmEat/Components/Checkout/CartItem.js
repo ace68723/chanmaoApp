@@ -62,8 +62,8 @@ export default (props) =>{
     return (
 
         <View style={styles.container}>
-            <Text style={{width: 75,
-                          fontSize: 15,
+            <Text style={{fontSize: 15,
+                          marginRight: 20,
                           color: '#666666',
                           fontFamily: 'NotoSans-Black'}}
                   allowFontScaling={false}>

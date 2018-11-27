@@ -563,7 +563,8 @@ class Confirm extends Component {
 			CheckoutAction.beforeCheckoutUpdateCoupon(data);
 		}
 		_renderAndroidCheckoutButton(){
-			if (Platform.OS != 'ios') {
+			if (false) {
+			// if (Platform.OS != 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading) {
 					return(
 						<TouchableOpacity
@@ -602,7 +603,8 @@ class Confirm extends Component {
 		}
 
 		renderCheckoutButton(){
-			if (Platform.OS == 'ios') {
+			if (true) {
+			// if (Platform.OS == 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
 	            <TouchableOpacity activeOpacity={0.4}
@@ -773,7 +775,7 @@ class Confirm extends Component {
 			_couponCode.push(
 				<Text key={'coupon_title'}
 							style={{color:'#666666',
-											marginLeft: 25,
+											marginLeft: 20,
 											marginTop: 20,
 											fontSize:15,
 											fontFamily: 'NotoSans-Black'}}
@@ -833,10 +835,10 @@ class Confirm extends Component {
 					<View key={'coupon_code'}
 								style={{flexDirection: 'row',
 												marginTop: 10,
-												marginLeft: 25,
+												marginLeft: 20,
 												marginRight: 10}}>
 						<TextInput style={{flex: 1,
-															 marginRight: 30,
+															 marginRight: 15,
 															 alignItems:'flex-start',
 															 alignSelf: 'center',
 															 padding: 5,

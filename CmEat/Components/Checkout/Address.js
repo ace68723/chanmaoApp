@@ -77,7 +77,7 @@ export default class Address extends Component {
     return(
 			<View>
 				<Text style={{color:'#666666',
-											marginLeft: 30,
+											marginLeft: 20,
 											marginTop: 20,
 											fontSize:15,
 											fontFamily: 'NotoSans-Black'}}
