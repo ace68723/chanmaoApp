@@ -101,12 +101,12 @@ export default class Home extends BaseComponent<Props> {
     const _display_remove = () => {
       if (HomeStore.getItemAmount(item.sku_id) != 0)
         return (
-        <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1,justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 2,justifyContent: 'center', alignItems: 'center' }}>
           <Image source={require('./image/minus.png')} style={{ width: 20, height: 20}}/>
         </TouchableOpacity>
       );
       return (
-        <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 1,justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => { this._removeItem(item.sku_id) }} style={{ flex: 2,justifyContent: 'center', alignItems: 'center' }}>
           <Image source={require('./image/minus-disabled.png')} style={{ width: 20, height: 20}}/>
         </TouchableOpacity>
       )
@@ -164,8 +164,8 @@ export default class Home extends BaseComponent<Props> {
                   {HomeStore.getItemAmount(item.sku_id)}
                 </Text>
               </View>
-              <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Image source={require('./image/add.png')} style={{ width: 20, height: 20}}/>
+              <TouchableOpacity onPress={() => { this._addItem(item.sku_id) }} style={{ flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+                <Image source={require('./image/add.png')} style={{   width: 20, height: 20}}/>
               </TouchableOpacity>
             </View>
 
