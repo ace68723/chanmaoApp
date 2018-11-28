@@ -27,12 +27,21 @@ import com.facebook.react.ReactInstanceManager;
 import com.microsoft.codepush.react.ReactInstanceHolder;
 import com.microsoft.codepush.react.CodePush;
 
+// Intercom
+import com.robinpowered.react.Intercom.IntercomPackage;
+import io.intercom.android.sdk.Intercom;
+
 public class MainApplication extends NavigationApplication implements ReactInstanceHolder {
     @Override
     public boolean isDebug() {
         return BuildConfig.DEBUG;
     }
 
+    @Override
+    public void onCreate() {
+      super.onCreate();
+      Intercom.initialize(this, "android_sdk-c22c92b36f43ead676c4a4ac73f0aae91b821819", "hz77kaf5");
+    }
 
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
