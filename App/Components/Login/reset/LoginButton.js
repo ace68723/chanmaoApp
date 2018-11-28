@@ -62,13 +62,13 @@ export default class LoginButton extends Component {
 			}, 300);
 			return(
 				<TouchableWithoutFeedback
-						onPress = { this.props.if_handleLogin }>
+						onPress = { this.props.if_handleRegister }>
 							<Animated.View style={[styles.button,
 																		{width:this.state.width,
 																		 height:this.state.height}]}
 														 >
 							 <Animated.Text style={[styles.loginText,{opacity:this.state.textOpacity}]}>
-									{this.props.is_login}
+								 {this.props.is_submit}
 							 </Animated.Text>
 							</Animated.View>
 					</TouchableWithoutFeedback>
@@ -98,7 +98,7 @@ export default class LoginButton extends Component {
 															{width:this.state.width,
 															 height:this.state.height}]}
 											 >
-				 <Animated.Image source={require('./Image/loading.gif')}
+				 <Animated.Image source={require('../Image/loading.gif')}
  												style={{
  												 opacity:this.state.loadingOpacity,
  												 width:height*0.0765,
@@ -108,36 +108,19 @@ export default class LoginButton extends Component {
 			)
 		}
 	}
-	_renderResetPasswork() {
-		return (
-			<TouchableWithoutFeedback onPress={this.props.toggleViewTypeReset}>
-				<View style={{flex:1}}>
-					<Text allowFontScaling={false} style={styles.registerText}>
-						 Forgot password
-					</Text>
-				</View>
-			</TouchableWithoutFeedback>
-		)
-		return;
-	}
   render(){
     return(
       <View style={styles.container} ref={"LOGIN"}>
 						{this._renderLoginButton()}
-					<View style={styles.registerView}>
-						<View style={{flex:1,}}>
-							<TouchableWithoutFeedback onPress={this.props.toggleViewType}>
-								<View style={{flex:1}}>
-									<Text allowFontScaling={false} style={styles.registerText}>
-			               {this.props.is_register}
-			            </Text>
-								</View>
-							</TouchableWithoutFeedback>
-	          </View>
-						<View style={{flex:1,}}>
-							{this._renderResetPasswork()}
-						</View>
-					</View>
+          <View style={styles.registerView}>
+						<TouchableWithoutFeedback onPress={this.props.toggleViewType}>
+							<View style={{flex:1}}>
+								<Text allowFontScaling={false} style={styles.registerText}>
+									{this.props.is_login}
+							  </Text>
+							</View>
+						</TouchableWithoutFeedback>
+          </View>
 
       </View>
     )

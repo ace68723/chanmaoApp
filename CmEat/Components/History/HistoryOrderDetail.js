@@ -59,15 +59,15 @@ export default class orderHistory extends Component {
                 <View style={{flex:1,justifyContent:'center'}}>
                     <Text allowFontScaling={false}
                           style={{color:'#ababb0',
-                                  fontSize:16,
+                                  fontSize:15,
                                   fontFamily:'NotoSansCJKsc-Regular'}}>
                       {tp.tp_name}
                     </Text>
                 </View>
-                <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',marginRight: 10}}>
+                <View style={{flex:1,alignItems:'flex-end',justifyContent:'center'}}>
                   <Text allowFontScaling={false}
                         style={{color:'#ababb0',
-                                fontSize:16,
+                                fontSize:15,
                                 fontFamily:'NotoSansCJKsc-Regular',
                                 textAlign: 'left'}}>
                     ${tp.price} × {tp.amount}
@@ -88,9 +88,17 @@ export default class orderHistory extends Component {
                       {item.amount}
                 </Text>
             </View>
-            <Text style={{fontSize:15,paddingLeft:5,}} allowFontScaling={false}>{item.ds_name}</Text>
-            <View style={{flex:1}}></View>
-            <Text style={{fontSize:15,alignSelf:'flex-end',color:'#969696',marginRight:10}} allowFontScaling={false}>
+            <Text style={{fontSize:15,
+                          paddingHorizontal: 8,
+                          flex: 0.75}}
+                  allowFontScaling={false}>
+                {item.ds_name}
+            </Text>
+            <Text style={{fontSize:15,
+                          flex: 0.25,
+                          textAlign: 'right',
+                          alignSelf:'flex-start'}}
+                  allowFontScaling={false}>
               ${(item.price * item.amount).toFixed(2)}
             </Text>
           </View>
@@ -130,8 +138,7 @@ export default class orderHistory extends Component {
           </Text>
           <Text style={{fontSize:15,
                         fontWeight:'bold',
-                        color:'#ea7b21',
-                        marginRight: 10}}
+                        color:'#ea7b21'}}
                 allowFontScaling={false}>
             ${this.state.tips}
           </Text>

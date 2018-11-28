@@ -87,13 +87,22 @@ export default class pastOrderEN extends Component {
       return(
         <View key={index} style={{flexDirection:'column',alignItems:'center',paddingTop:10,paddingBottom:10}}>
             <View style={{flexDirection:'row'}}>
-                <View style={styles.quantityIcon}><Text style={{fontSize:10,fontFamily:'NotoSansCJKsc-Regular',}}>{item.amount}</Text></View>
-                <Text style={{fontSize:16,paddingLeft:20,fontFamily:'NotoSansCJKsc-Regular',color:soldoutColor}}
-                      allowFontScaling={false}>
+                <View style={styles.quantityIcon}>
+                  <Text style={{fontSize:10,fontFamily:'NotoSansCJKsc-Regular',}}>
+                    {item.amount}
+                  </Text>
+                </View>
+                <Text style={{fontSize:16,
+                              paddingLeft:20,
+                              fontFamily:'NotoSansCJKsc-Regular',
+                              color:soldoutColor,
+                              flex: 0.7}}
+                      allowFontScaling={false}
+                      numberOfLines={1}>
                         {item.ds_name}
                 </Text>
                 {soldoutText()}
-                <View style={{flex:1,alignItems:'flex-end'}}>
+                <View style={{flex:0.3,alignItems:'flex-end'}}>
                   <Text style={{fontSize:16,paddingLeft:20,fontFamily:'NotoSansCJKsc-Regular',color:soldoutColor}}
                         allowFontScaling={false}>
                           ${(item.amount*item.price).toFixed(2)}
@@ -511,6 +520,7 @@ const styles = StyleSheet.create({
   quantityIcon:{
     borderColor:'#d9d9d9',
     borderWidth:1,
+    alignSelf: 'center',
     alignItems:'center',
     justifyContent:'center',
     height:18,

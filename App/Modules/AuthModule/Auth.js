@@ -110,13 +110,7 @@ const AuthModule = {
     async resetPassword(io_data){
       try{
         const res = await AuthApi.resetPassword(io_data);
-        if (res.ev_error === 0) {
-
-          return res;
-        }else{
-
-          throw res;
-        }
+        return res;
       }catch(e) {
         console.log(e)
       }

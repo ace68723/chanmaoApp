@@ -181,5 +181,20 @@ module.exports={
     //MAIN_TAB
     ALERT_PAYMENT:'*通知: 即日起不支持到付刷卡，同时请勿使用Email Transfer(emt)，您可以使用Visa, Mastercard, Debit银行卡或者支付宝在线支付，或使用现金到付，谢谢~',
     ALERT_COMFIRM:'确定',
-    COMFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。'
+    COMFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。',
+
+    //Popup title
+    REGISTER_FAIL:'注册失败, 请重新尝试',
+    PHONE_IS_TAKEN:'该手机号码已注册',
+    AUTH_FAIL:'验证失效,未知错误',
+    VCODE_SENT:'验证码已发送',
+    REACH_VCODE_MAX:'每天最多只能发送3次验证码',
+    SEND_VCODE_FAIL:'验证码发送失败',
+    PLZ_ENTER_PHONE_10:'请输入10位电话号码',
+    PLZ_SELECT_REQUIRED_OPTION:'请选择必填选项',
+    VERTIFICATION_FAIL_TITLE:'验证码错误',
+    VERTIFICATION_FAIL_CONTENT:'请检查您输入的验证码',
+    WECHAT_NO_PASSWORD:'微信用户无需密码, 请直接微信登录',
+    UNKNOW_ERROR:'未知错误, 请联系客服',
+    VCODE_SENT_TO_THIS_NUMBER:'验证码已发送手机上, 尾号为: '
 }

@@ -213,7 +213,7 @@ export default class CmEatAddInfo extends Component {
           )
         })
       return(
-        <View style={{flexDirection:"row",marginTop:18}}>
+        <View style={{flexDirection:"row", justifyContent: 'center'}}>
             {TypeList}
         </View>
       )
@@ -250,19 +250,7 @@ export default class CmEatAddInfo extends Component {
 										<View style= {styles.separator}/>
 										<TouchableWithoutFeedback onPress={this._chooseType}>
 											<View style={[styles.inputBox,{overflow:"hidden",height:50}]}>
-												<Animated.Image source={require("./Image/button_enter.png")}
-																				style={{marginLeft:16,
-																								width:25,
-																								height:28,
-																								transform: [{rotate: interpolatedRotateAnimation}]}}/>
-												<Animated.View style={{flexDirection:"column",flex:1,marginTop:interpolatedMarginTop}}>
-														<Text style={{marginLeft:10,marginTop:12,fontFamily:'NotoSansCJKsc-Regular',}}
-																	allowFontScaling={false}>
-															{Label.getCMLabel('ADD_DEFAULT_ADDRESS')}
-														</Text>
-														{this._renderChooseType()}
-
-												</Animated.View>
+												{this._renderChooseType()}
 											</View>
 										</TouchableWithoutFeedback>
 										<View style= {styles.separator}/>

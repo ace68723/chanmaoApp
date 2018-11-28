@@ -106,6 +106,20 @@ module.exports={
     //MAIN_TAB
     ALERT_PAYMENT:'*通知: 即日起不支持到付刷卡，同时请勿使用Email Transfer(emt)，您可以使用Visa, Mastercard, Debit银行卡或者支付宝在线支付，或使用现金到付，谢谢~',
     ALERT_COMFIRM:'确定',
-    COMFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。'
+    COMFIRM_ADDRESS:'这是正确的地址吗？距离您的位置似乎有点远。',
 
+    //Popup title
+    REGISTER_FAIL:'Registration failed, please try again.',
+    PHONE_IS_TAKEN:'Phone number is registered.',
+    AUTH_FAIL:'Authorize failed, unknown mistake.',
+    VCODE_SENT:'Verification Code Sent.',
+    REACH_VCODE_MAX:'Sending Verification Code No More Than 3 Times a Day.',
+    SEND_VCODE_FAIL:'Sending Verification Code Failed.',
+    PLZ_ENTER_PHONE_10:'Please enter 10-digit phone number.',
+    PLZ_SELECT_REQUIRED_OPTION:'Please choose the required options.',
+    VERTIFICATION_FAIL_TITLE:'Wrong Validation Code',//(新用户用的)
+    VERTIFICATION_FAIL_CONTENT:'Please check the code you entered.',//(新用户用的)
+    WECHAT_NO_PASSWORD:'No passwords for WeChat account, please login with WeChat.',
+    UNKNOW_ERROR:'There is something wrong, please contact customer service.',
+    VCODE_SENT_TO_THIS_NUMBER:'Verification code sent to phone, Last 4 number is: '
 }

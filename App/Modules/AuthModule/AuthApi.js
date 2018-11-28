@@ -192,7 +192,7 @@ const AuthApi = {
       //     Cmuuid:userInfo.uuid,
       //     Cmversion:userInfo.version
       // })
-      options.headers = Object.assign({}, {
+      options.headers = Object.assign(options.headers, {
           appid:2
       })
       // options.body = JSON.stringify({
@@ -200,10 +200,10 @@ const AuthApi = {
       //   password: userInfo.password
       // })
       options.body = JSON.stringify({
-        "iv_verification_code": io_data.iv_verification_code,
-        "iv_password": io_data.iv_password,
-        "iv_cty": "1",
-        "iv_num": io_data.iv_num,
+        iv_verification_code: io_data.iv_verification_code,
+        iv_password: io_data.iv_password,
+        iv_cty: "1",
+        iv_num: io_data.iv_num,
       })
       return fetch(url,options)
               .then((res) => res.json())

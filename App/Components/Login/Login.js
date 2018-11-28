@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import AuthModule from '../../Modules/AuthModule/Auth';
 import AppConstants from '../../Constants/AppConstants';
 import AppString from '../../Constants/AppString';
 import AuthAction from '../../Actions/AuthAction';
@@ -19,7 +20,7 @@ import AuthAction from '../../Actions/AuthAction';
 import Alert from '../General/Alert';
 import InputAnimation from './InputAnimation';
 import RegisterInputAnimation from './register/InputAnimation';
-import ResetPassword from './ResetPassword';
+import ResetPassword from './reset/InputAnimation';
 import PopupView from '../../../CmEat/Components/Popup/PopupView';
 import Label from '../../Constants/AppLabel';
 
@@ -90,6 +91,8 @@ export default class LogoAnimationView extends Component {
 		this._handleBindSuccessful = this._handleBindSuccessful.bind(this);
 		this._getVerification = this._getVerification.bind(this);
 		this._toggleViewTypeReset = this._toggleViewTypeReset.bind(this);
+		this._getVcode = this._getVcode.bind(this);
+		this._resetPassword = this._resetPassword.bind(this);
 
 		this.popupView = PopupView.getInstance();
   }
@@ -125,6 +128,63 @@ export default class LogoAnimationView extends Component {
 			password:password
 		});
   }
+	async _getVcode() {
+    let data = {"num": this.state.phone};
+    let res = await AuthModule.getVcode(data);
+		let context;
+    if (res.ev_noti_msg) {
+			context = Label.getCMLabel('VCODE_SENT_TO_THIS_NUMBER') + res.ev_noti_msg;
+			this.popupView.showAlertWithTitle(this, Label.getCMLabel('REMINDING'), context);
+		}
+    else if (res.ev_error == 0) {
+			this.popupView.showAlertWithTitle(this, Label.getCMLabel('REMINDING'), Label.getCMLabel('VCODE_SENT'));
+		}
+    else {
+			if (res.ev_message == 10020) {
+				context = Label.getCMLabel('REACH_VCODE_MAX');
+			}
+			else if (res.ev_message == 10023) {
+				context = Label.getCMLabel('WECHAT_NO_PASSWORD');
+			}
+			else {
+				context = Label.getCMLabel('UNKNOW_ERROR');
+			}
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), context);
+		}
+  }
+
+	async _resetPassword() {
+		let iv_verification_code=this.state.verification;
+		let iv_num=this.state.phone;
+		let iv_password=this.state.password;
+		let confirm_password=this.state.password;
+    if (iv_verification_code.length == 0 ||
+        iv_password.length == 0 ||
+        iv_num.length == 0 ||
+        confirm_password.length == 0) {
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PLZ_ENTER_PASSWORD'));
+      return;
+    }
+    if (iv_password!=confirm_password){
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PASSWORD_NOT_MATCHING'));
+      return;
+    }
+    let data={
+      "iv_verification_code": iv_verification_code,
+      "iv_password": iv_password,
+      "iv_num": iv_num,
+    }
+    let res = await AuthModule.resetPassword(data);
+    if (res && res.ev_error == 0) {
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_CONGRA_TITLE'), Label.getCMLabel('PASSWORD_RESET_SUCCESS'));
+			this._toggleViewTypeReset();
+    }
+    else {
+			let context = Label.getCMLabel('UNKNOW_ERROR');
+      this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), context);
+    }
+  }
+
 	_handleRePassword(password){
 		this.setState({
 			re_password:password
@@ -133,14 +193,6 @@ export default class LogoAnimationView extends Component {
 	_getVerification() {
 		if (this.state.phone.length < 10 || this.state.phone.match(/^[0-9]+$/) == null) {
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PLZ_ENTER_PHONE_NUM'));
-			// this.popupView.setMessagePopup({
-			//   subtitle: "请填写正确手机号码",
-			//   onDismiss: () => {
-			//     this.setState({showPopup: false})
-			//   }
-			// });
-			// this.setState({showPopup: true});
-
 			return;
 		}
 		this._sendVerification();
@@ -198,28 +250,16 @@ export default class LogoAnimationView extends Component {
 				 this.props.navigator.dismissModal({
 					 animationType: 'slide-down'
 				 });
-	 			 this.props.handleLoginSuccessful();
+				 setTimeout( () => {
+		 			this.props.handleLoginSuccessful();
+		 		}, 800);
 			 }
 			 else{
-				 // this.popupView.setMessagePopup({
-				 //   subtitle: "登录失败，请检查信息",
-				 //   onDismiss: () => {
-				 //     this.setState({showPopup: false})
-				 //   }
-				 // });
-				 // this.setState({showPopup: true});
 				 this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('LOGIN_FAILED'));
 			 }
 		} catch (e) {
 
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('LOGIN_FAILED'));
-		 // this.popupView.setMessagePopup({
-			//  subtitle: "登录失败，请检查信息",
-			//  onDismiss: () => {
-			// 	 this.setState({showPopup: false})
-			//  }
-		 // });
-		 // this.setState({showPopup: true});
 
 		 this.setState({
 			 showLoading:false,
@@ -243,15 +283,6 @@ export default class LogoAnimationView extends Component {
 			});
 
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PLZ_ENTER_ACC_INFO'));
-			// this.popupView.setMessagePopup({
-			// 	subtitle: "请填写账户信息",
-			// 	onDismiss: () => {
-			// 		this.setState({showPopup: false})
-			// 	}
-			// });
-			// this.setState({showPopup: true});
-
-			// Alert.errorAlert('请填写账户信息');
 			return;
 		}
 		else if (this.state.password != this.state.re_password) {
@@ -262,15 +293,6 @@ export default class LogoAnimationView extends Component {
 			});
 
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PASSWORD_NOT_MATCHING'));
-			// this.popupView.setMessagePopup({
-			// 	subtitle: "密码配对不上 请重新输入",
-			// 	onDismiss: () => {
-			// 		this.setState({showPopup: false})
-			// 	}
-			// });
-			// this.setState({showPopup: true});
-
-			// Alert.errorAlert('密码配对不上 请重新输入');
 			return;
 		} else if (this.state.password.length < 8 || this.state.password.length > 32) {
 			this.setState({
@@ -302,8 +324,10 @@ export default class LogoAnimationView extends Component {
 	    		});
 	        this.props.navigator.dismissModal({
 	           animationType: 'slide-down'
-	        })
-	        this.props.handleLoginSuccessful();
+	        });
+					setTimeout( () => {
+						this.props.handleLoginSuccessful();
+					}, 800);
 				} else {
 					this.setState({
 	    			showLoading:false,
@@ -349,8 +373,10 @@ export default class LogoAnimationView extends Component {
 	     })
 	     this.props.navigator.dismissModal({
 	        animationType: 'slide-down'
-	     })
-	     this.props.handleLoginSuccessful();
+	     });
+			 setTimeout( () => {
+	 			this.props.handleLoginSuccessful();
+	 		}, 800);
 		 }
 
      // this.setState({
@@ -497,11 +523,35 @@ export default class LogoAnimationView extends Component {
 				}
 				{this.state.viewType == VIEW_TYPE_RESET &&
 					<ResetPassword
-						toggleViewTypeReset = {this._toggleViewTypeReset}
+						is_username = {AppString('username')}
+						is_password = {AppString('password')}
+						is_login = {AppString('login')}
+						is_submit = {'Submit'}
+
+						is_copyright = {AppString('copyright')}
+						is_version = {AppConstants.CM_VERSION}
+
+						ib_showLoading = {this.state.showLoading}
+						if_handleLogin = {this._handleLogin}
+						if_handleRegister = {this._resetPassword}
+						ir_VERIFICATION_INPUTREF = {VERIFICATION_INPUTREF}
+						ir_PHONE_INPUTREF = {PHONE_INPUTREF}
+						ir_EMAIL_INPUTREF = {EMAIL_INPUTREF}
+						ir_PASSWORD_INPUTREF = {PASSWORD_INPUTREF}
+						ir_RE_PASSWORD_INPUTREF = {RE_PASSWORD_INPUTREF}
+						ir_SUBMIT_BUTTON = {SUBMIT_BUTTON}
+						if_handlePhone = {this._handlePhone}
+						if_handleVerification = {this._handleVerification}
+						if_handlePassword = {this._handlePassword}
+						if_handleRePassword = {this._handleRePassword}
+						if_getVerification = {this._getVcode}
+						if_openAdView = {this._openAdView}
+						viewType = {this.state.viewType}
+						toggleViewType = {this._toggleViewTypeReset}
+						secondLeft = {this.state.secondLeft}
+						isVerificationSent = {this.state.isVerificationSent}
 					/>
 				}
-
-
 
       </View>
     )
