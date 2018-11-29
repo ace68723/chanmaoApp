@@ -18,6 +18,8 @@ import CmEat from './CmEat/Config/Screens';
 
 import CmLifeHome from './CmLife/Config/Screens';
 
+import CodePushUpdate from './App/Components/CodePushUpdate/CodePushUpdate';
+
 export function registerScreens() {
   Navigation.registerComponent('cmHome', () => cmHome);
   Navigation.registerComponent('CmLoading', () => CmLoading);
@@ -37,4 +39,6 @@ export function registerScreens() {
   Navigation.registerComponent('CmPasswordReset', () => CmPasswordReset);
 
   Navigation.registerComponent('CmLifeHome', () => CmLifeHome);
+  
+  Navigation.registerComponent('CodePushUpdate', () => CodePushUpdate);
 }
