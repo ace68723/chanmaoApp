@@ -534,6 +534,7 @@ export default class MyComponent extends Component {
           }}
           onSubmitEditing={this._handleSubmitPress}
           returnKeyType={'send'}
+          underlineColorAndroid={'transparent'}
         />
      </View> 
     )
@@ -578,6 +579,7 @@ export default class MyComponent extends Component {
           }}
           onSubmitEditing={this._handleSubmitPress}
           returnKeyType={'send'}
+          underlineColorAndroid={'transparent'}
         />
      </View> 
     )
