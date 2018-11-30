@@ -262,6 +262,7 @@ export default class MyComponent extends Component {
   _rederFooter() {
     return(
       <CheckoutButton checkoutStatus = {this.state.checkoutStatus}
+                      total = {this.state.total}
                       goToAddress = {this._goToAddress}
                       goToAddCard = {this._goToAddCard}
                       doCheckout = {this._doCheckout}/>
@@ -379,9 +380,16 @@ export default class MyComponent extends Component {
   }
   _renderDeliveryFee()
   {
-    if (this.state.deliFee>0) return (
-      <View style={{flex:0.5,}}>
+    // if (this.state.deliFee>0) return (
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <Image source={require('./Img/deliveryfee.png')}
+               style={{alignSelf: 'center',
+                       width: 25,
+                       height: 25}}/>
         <Text style={{fontSize:16,
+                      marginLeft: 10,
+                      alignSelf: 'center',
                       fontFamily:'NotoSans-Regular',}}
               allowFontScaling={false}>
                 Delivery Fee: ${this.state.deliFee}
@@ -434,14 +442,23 @@ export default class MyComponent extends Component {
                         flexDirection:'row',
                         borderBottomWidth: 1,
                         borderColor: '#DCDCDC',}}>
-            <View style={{flex:0.35,}}>
+            <View style={{flex:0.35,
+                          flexDirection: 'row'}}>
+              <Image source={require('./Img/icon-time.png')}
+                     style={{alignSelf: 'center',
+                             width: 25,
+                             height: 25}}/>
               <Text style={{fontSize:16,
+                            alignSelf: 'center',
+                            marginLeft: 10,
                             fontFamily:'NotoSans-Regular',}}
                     allowFontScaling={false}>
                     {Label.getSboxLabel('DERLIVER_TIME')}：
               </Text>
             </View>
-            <View style={{flex:0.65,alignItems:'flex-end'}}>
+            <View style={{flex:0.65,
+                          alignSelf: 'center',
+                          alignItems:'flex-end'}}>
               <Text style={{fontSize:16,
                             // color:'#ff7685',
                             color: 'black',
@@ -453,28 +470,17 @@ export default class MyComponent extends Component {
 
           </View>
           {this._existDiscount()}
-          <View style={{
+          <View style={{flexDirection: 'row',
+                        justifyContent: 'space-between',
                         padding:10,
                         borderBottomWidth: 1,
                         borderColor: '#DCDCDC',}}>
             {this._renderDeliveryFee()}
-            <View style={{flex:0.5, }}>
+            <View style={{alignSelf: 'center'}}>
               <Text style={{fontSize:16,
                             fontFamily:'NotoSans-Regular',}}
                     allowFontScaling={false}>
-                      Total:
-                      <Text style={{fontSize:16,
-                                    fontFamily:'NotoSans-Regular',color:'#ff7685'}}
-                            allowFontScaling={false}>
-                          ${this.state.total}
-                          <Text style={{fontSize:16,
-                                        fontFamily:'NotoSans-Regular',
-                                        color:'grey',
-                                        textDecorationLine:'line-through'}}
-                                allowFontScaling={false}>
-                              {this._renderOriginalPrice()}
-                          </Text>
-                      </Text>
+                      Tax: ${this.state.tax}
               </Text>
             </View>
           </View>
@@ -486,8 +492,13 @@ export default class MyComponent extends Component {
                         flexDirection:'row',
                         borderBottomWidth: 1,
                         borderColor: '#DCDCDC',}}>
-            <View style={{flex:0.5,}}>
+            <View style={{flex:0.5,flexDirection: 'row'}}>
+              <Image source={require('./Img/icon-fee.png')}
+                     style={{alignSelf: 'center',
+                             width: 25,
+                             height: 20}}/>
               <Text style={{fontSize:16,
+                            marginLeft: 10,
                             fontFamily:'NotoSans-Regular',}}
                     allowFontScaling={false}>
                       {Label.getSboxLabel('PAYMENT_METHOD')}  {this.state.cardBrand}

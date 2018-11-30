@@ -84,10 +84,19 @@ export default class CheckoutButton extends Component {
         onPress={this.props.doCheckout}
         activeOpacity={0.4}>
         <View style={{flex:1,
+                      flexDirection: 'row',
                       alignItems:'center',
-                      justifyContent:'center',}}>
+                      justifyContent:'space-between',}}>
             <Text style={{color:'#ffffff',
                           fontSize:20,
+                          marginLeft: 20,
+                          fontFamily:'NotoSans-Regular'}}
+                  allowFontScaling={false}>
+              实付: ${this.props.total}
+            </Text>
+            <Text style={{color:'#ffffff',
+                          fontSize:20,
+                          marginRight: 20,
                           fontFamily:'NotoSans-Regular'}}
                   allowFontScaling={false}>
               {Label.getSboxLabel('CONFIRM_CHECKOUT')}

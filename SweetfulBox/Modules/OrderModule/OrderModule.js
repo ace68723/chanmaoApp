@@ -96,12 +96,12 @@ export default  {
         version:version,
       }
       const res = await OrderAPI.getOrderBefore(lo_data);
-      // console.log(res);
       const eo_data ={
         prod: res.ea_prod,
         addr: res.eo_addr,
         cusid: res.ev_cusid,
         deliFee: res.ev_deliFee,
+        tax: res.ev_tax,
         last4: res.ev_last4,
         total:res.ev_total,
         ev_original_total:res.ev_original_total,
