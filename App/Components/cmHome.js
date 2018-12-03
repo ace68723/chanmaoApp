@@ -61,7 +61,7 @@ export default class Home extends Component {
       this.finishcodePushCheck = this.finishcodePushCheck.bind(this);
   }
   _openStarted = false
-  componentDidMount() {
+  componentWillMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
     
       this._versionCheck();
@@ -76,8 +76,6 @@ export default class Home extends Component {
       if (versionObject && versionObject.need_update) {
         this._updateAlert(versionObject);
       }else{
-
-        
         this.props.navigator.push({
             screen:'CodePushUpdate',
             animationType: 'fade',
@@ -88,32 +86,7 @@ export default class Home extends Component {
           })
       }
 
-    })
-    // .then((res)=>{
-    //   const region = cme_getRegion();
-    //     if (!region) {
-    //       setTimeout(()=>{
-    //         this.props.navigator.showModal({
-    //           screen: 'LanguagesAndRegions',
-    //           animated: true,
-    //           navigatorStyle: {navBarHidden: true},
-    //           passProps: {
-    //             firstSelection: true
-    //           }
-    //         })
-    //       },500)// after codePushUpdate modal dismissed
-          
-    //     } else if (this.props.goToCmEat) {
-    //       setTimeout( () => {
-    //         this._handleChanmaoPress();
-    //       }, 2000);
-    //     } else if (this.props.goToSweetfulBox) {
-    //       setTimeout( () => {
-    //         this._handleSboxPress();
-    //       }, 1000);
-    //     }
-  
-  .catch((err)=>console.log(err));
+    }).catch((err)=>console.log(err));
   }
   _handleAppStateChange = (appState) =>{
     if(appState == 'active'){
@@ -177,7 +150,8 @@ export default class Home extends Component {
     }
   }
   finishcodePushCheck(needUpdate){  //needUpdate是否需要更新并重启
-    this.props.navigator.pop({animationType: 'fade',})
+    
+    this.props.navigator.popToRoot({screen:'CodePushUpdate', animationType: 'fade'})
     
     this.setState({isCodePushChecked:true},()=>{
       if(!needUpdate){

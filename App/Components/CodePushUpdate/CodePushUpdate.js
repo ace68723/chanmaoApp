@@ -22,7 +22,7 @@ export default class CodePushUpdate extends Component {
 		CodePush.disallowRestart();//页面加载的禁止重启，在加载完了可以允许重启
 	}
     componentDidMount(){
-        CodePush.notifyAppReady();
+        // CodePush.notifyAppReady();
         CodePush.allowRestart() //允许重启，否则热更新不会生效
         CodePush.sync({ 
             checkFrequency: CodePush.CheckFrequency.ON_APP_START,
@@ -108,6 +108,6 @@ const styles = StyleSheet.create({
     loadingFont:{
         fontSize:15, 
         color:'#F8552F', 
-        fontFamily:'NotoSansCJKsc-Black'
+        fontFamily:'NotoSans-Black'
     }
 });

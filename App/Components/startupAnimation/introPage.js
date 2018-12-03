@@ -221,7 +221,7 @@ export default class IntroPage extends Component {
                     opacity:fontOpacity}}>
                 {sloganObj.phrases.map((phrase,index)=>{
                     return(
-                        <Text key={index} style={{fontSize:20, color:'white', fontFamily:'NotoSansCJKsc-Black'}}>{phrase}</Text>
+                        <Text key={index} style={{fontSize:20, color:'white', fontFamily:'NotoSans-Black'}}>{phrase}</Text>
                     )
                 })}
             </Animated.View>
