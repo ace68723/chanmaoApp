@@ -27,6 +27,9 @@ export default class KeyboardView extends Component{
       that = this;
 
     }
+    closeKeyboard(){
+      this.keyboard.close();
+    }
     _rednerBtn() {
       const submitButtonColor = this.props.isInfoFilled? this.props.submitButtonFinishedColor: this.props.submitButtonDefaultColor;
       if(this.props.showLoading){
@@ -54,7 +57,8 @@ export default class KeyboardView extends Component{
 
 
         return(
-          <Modal style={styles.modal}
+          <Modal  ref={(keyboardModal)=> this.keyboard = keyboardModal}
+                  style={styles.modal}
                   position={"bottom"}
                   backdrop={this.props.backDrop}
                   isOpen={this.props.isOpen}
