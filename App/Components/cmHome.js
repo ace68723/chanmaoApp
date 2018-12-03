@@ -78,14 +78,16 @@ export default class Home extends Component {
       if (versionObject && versionObject.need_update) {
         this._updateAlert(versionObject);
       }else{
-        this.props.navigator.showModal({
-          screen:'CodePushUpdate',
-          animationType: 'none',
-          navigatorStyle: {navBarHidden: true},
-          passProps: {
-            codePushUpdateCheck: (isUptoDate)=> this.finishcodePushCheck(isUptoDate)
-          }
-        })
+
+        
+        this.props.navigator.push({
+            screen:'CodePushUpdate',
+            animationType: 'fade',
+            navigatorStyle: {navBarHidden: true},
+            passProps: {
+              codePushUpdateCheck: (isUptoDate)=> this.finishcodePushCheck(isUptoDate)
+            }
+          })
       }
 
     })
@@ -112,15 +114,7 @@ export default class Home extends Component {
     //         this._handleSboxPress();
     //       }, 1000);
     //     }
-    //   this.props.navigator.showModal({
-    //     screen:'CodePushUpdate',
-    //     animationType: 'none',
-    //     navigatorStyle: {navBarHidden: true},
-    //     passProps: {
-    //       codePushUpdateCheck: (isUptoDate)=> this.finishcodePushCheck(isUptoDate)
-    //     }
-    //   })
-    // })
+  
   .catch((err)=>console.log(err));
   }
   _handleAppStateChange = (appState) =>{
@@ -169,9 +163,10 @@ export default class Home extends Component {
         },
         onDismiss: () => {
           this.setState({showPopup: false},()=>{
-            this.props.navigator.showModal({
+        
+             this.props.navigator.push({
               screen:'CodePushUpdate',
-              animationType: 'none',
+              animationType: 'fade',
               navigatorStyle: {navBarHidden: true},
               passProps: {
                 codePushUpdateCheck: (isUptoDate)=> this.finishcodePushCheck(isUptoDate)
@@ -184,9 +179,10 @@ export default class Home extends Component {
     }
   }
   finishcodePushCheck(needUpdate){  //needUpdate是否需要更新并重启
-    this.props.navigator.dismissModal({screen:'CodePushUpdate', animationType: 'none'})
+    this.props.navigator.pop({animationType: 'fade',})
+    
     this.setState({isCodePushChecked:true},()=>{
-      // if(!needUpdate){
+      if(!needUpdate){
         const region = cme_getRegion();
         if (!region) {
           setTimeout(()=>{
@@ -210,8 +206,7 @@ export default class Home extends Component {
           }, 1000);
         }
       }
-    // }
-    )
+    })
   }
   async _handleChanmaoPress() {
       if(this._openStarted) return;
@@ -488,6 +483,7 @@ export default class Home extends Component {
           onPressCMFoodDelivery={this._handleChanmaoPress}
           onPressCMECommerce={this._handleSboxPress}
           onPressCMLife={this._handleCmLifePress}
+          navigator={this.props.navigator}
         />
       )
     }
