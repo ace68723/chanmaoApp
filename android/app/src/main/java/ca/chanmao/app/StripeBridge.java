@@ -29,7 +29,7 @@ public class StripeBridge extends ReactContextBaseJavaModule {
         return "StripeBridge";
     }
     @ReactMethod
-    public void pay(String cardNumber, int expMonth, int expYear, String cvc, final Promise promise){
+    public void pay(String cardNumber, int expMonth, int expYear, String cvc, String postal, String name, final Promise promise){
         try {
             Log.d("teststripe","startreactmethod");
             Log.d("teststripe","gettoken");
@@ -39,11 +39,21 @@ public class StripeBridge extends ReactContextBaseJavaModule {
             int cardExpMonth=expMonth;
             int cardExpYear=expYear;
             String cardCVC=cvc;
+            String cardPostal = postal;
+            String cardName = name;
             Card card = new Card(
                     cardNum, //卡号
                     cardExpMonth, //卡片过期月份
                     cardExpYear, //卡片过期年份
-                    cardCVC //CVC验证码
+                    cardCVC,//CVC验证码
+                    cardName, //持卡人姓名
+                    null,
+                    null,
+                    null,
+                    null,
+                    cardPostal, //邮编
+                    "CA", //国家
+                    "CAD" //货币
             );
             //for stripe configure pk_live_XQlHKvkQ8N9yPEHlslQvaS7U   pk_test_MsgqDWzRTfpOKl5mBwX0J0u2
             String key="pk_live_XQlHKvkQ8N9yPEHlslQvaS7U";

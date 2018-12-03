@@ -151,16 +151,19 @@ export default  {
       throw e;
     }
   },
-  async addCard({cardNumber,expMonth,expYear,cvv}){
+  async addCard({cardNumber,expMonth,expYear,cvv,name,postal}){
     try {
        cardNumber = cardNumber.replace(/ /g,'');
        expMonth = Number(expMonth);
        expYear = Number(expYear);
        cvv = cvv;
+
       const cardToken = await StripeBridge.pay( cardNumber,
                                                 expMonth,
                                                 expYear,
-                                                cvv);
+                                                cvv,
+                                                postal,
+                                                name);
       if(!cardToken) throw 'no cardToken'
       // alert(cardToken);
       const {uid,token,version} = GetUserInfo();

@@ -13,7 +13,7 @@
 
 //  RCT_REMAP_METHOD(pay:(NSString *)name location:(NSString *)location)
 //  {
-//    
+//
 //  }
 //RCT_EXPORT_METHOD(checkEmail: (NSString *)email
 //                  resolver:(RCTPromiseResolveBlock)resolve
@@ -26,6 +26,8 @@ RCT_EXPORT_METHOD(pay:(NSString *)cardNumber
                   expMonth:(NSInteger *)expMonth
                   expYear:(NSInteger *)expYear
                   cvc:(NSString *)cvc
+                  postal:(NSString *)postal
+                  name:(NSString *)name
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
   {
@@ -34,18 +36,18 @@ RCT_EXPORT_METHOD(pay:(NSString *)cardNumber
     cardParams.expMonth = (NSUInteger)expMonth;
     cardParams.expYear =(NSUInteger)expYear;
     cardParams.cvc = cvc;
-
-    
+    cardParams.name = name;
+    cardParams.address.postalCode = postal;
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
       if (token == nil || error != nil) {
         // Present error to user...
-//        printf((NSString *)error);
+//        printf("%s\n", [error.localizedDescription UTF8String]);
         reject(@"no_token", @"There were no token",error);
       } else {
         NSString *tokenId = [token valueForKey:@"_tokenId"];
         resolve(tokenId);
       }
-      
+
     }];
 
   }

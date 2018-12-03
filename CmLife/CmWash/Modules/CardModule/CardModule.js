@@ -10,7 +10,7 @@ const StripeBridge = NativeModules.StripeBridge;
 // import AuthAction from '../../../App/Actions/AuthAction';
 export default  {
 
-  async addCard({cardNumber,expMonth,expYear,cvv}){
+  async addCard({cardNumber,expMonth,expYear,cvv,postal,name}){
     try {
        cardNumber = cardNumber.replace(/ /g,'');
        expMonth = Number(expMonth);

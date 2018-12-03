@@ -3,19 +3,12 @@
 import React, { Component } from 'react';
 import {
   AppState,
-  Animated,
   Dimensions,
-  Image,
-  InteractionManager,
   View,
   Text,
-  TouchableWithoutFeedback,
   StyleSheet,
-  ScrollView,
   Platform,
-  Alert,
   Linking,
-  NativeModules
 } from 'react-native';
 import AuthAction from '../Actions/AuthAction';
 import VersionAction from '../Actions/VersionAction';
@@ -46,7 +39,8 @@ export default class Home extends Component {
       super();
       this.state = {
           entryFlag: true,
-          showPopup: false
+          showPopup: false,
+          isCodePushChecked: false
       };
 
       this._versionCheck = this._versionCheck.bind(this);
@@ -63,50 +57,39 @@ export default class Home extends Component {
 
       this.popupView = PopupView.getInstance();
       this._handleLoginSuccessfulToCmLife = this._handleLoginSuccessfulToCmLife.bind(this);
+
+      this.finishcodePushCheck = this.finishcodePushCheck.bind(this);
   }
   _openStarted = false
   componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
 
-    setTimeout( () => {
       this._versionCheck();
-    }, 500);
+
   }
   componentWillUnmount(){
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
   _versionCheck(){
     let curVersion = GetUserInfo().version;
-    const region = cme_getRegion();
     VersionAction.getLatestVersion(curVersion).then((versionObject)=>{
       if (versionObject && versionObject.need_update) {
         this._updateAlert(versionObject);
-      } else if (!region) {
-        this.props.navigator.showModal({
-          screen: 'LanguagesAndRegions',
-          animated: true,
-          navigatorStyle: {navBarHidden: true},
-          passProps: {
-            firstSelection: true
-          }
-        })
-      } else if (this.props.goToCmEat) {
-        setTimeout( () => {
-          this._handleChanmaoPress();
-        }, 2000);
-      } else if (this.props.goToSweetfulBox) {
-        setTimeout( () => {
-          this._handleSboxPress();
-        }, 1000);
-      } else if (this.props.goToCmLife && this.props.goToCmLife.length > 0) {
-        if (this.props.goToCmLife == 'cmwash') {
-          setTimeout( () => {
-            this._handleCmLifePress();
-          }, 2000);
-        }
+      }else{
+
+
+        this.props.navigator.push({
+            screen:'CodePushUpdate',
+            animationType: 'fade',
+            navigatorStyle: {navBarHidden: true},
+            passProps: {
+              codePushUpdateCheck: (isUptoDate)=> this.finishcodePushCheck(isUptoDate)
+            }
+          })
       }
 
-  })
+    })
+
   .catch((err)=>console.log(err));
   }
   _handleAppStateChange = (appState) =>{
@@ -154,13 +137,52 @@ export default class Home extends Component {
           }, (err) => console.log(err));
         },
         onDismiss: () => {
-          this.setState({showPopup: false})
+          this.setState({showPopup: false},()=>{
+
+             this.props.navigator.push({
+              screen:'CodePushUpdate',
+              animationType: 'fade',
+              navigatorStyle: {navBarHidden: true},
+              passProps: {
+                codePushUpdateCheck: (isUptoDate)=> this.finishcodePushCheck(isUptoDate)
+              }
+            })
+          })
         }
       });
       this.setState({showPopup: true});
     }
   }
+  finishcodePushCheck(needUpdate){  //needUpdate是否需要更新并重启
+    this.props.navigator.pop({animationType: 'fade',})
 
+    this.setState({isCodePushChecked:true},()=>{
+      if(!needUpdate){
+        const region = cme_getRegion();
+        if (!region) {
+          setTimeout(()=>{
+            this.props.navigator.showModal({
+              screen: 'LanguagesAndRegions',
+              animated: true,
+              navigatorStyle: {navBarHidden: true},
+              passProps: {
+                firstSelection: true
+              }
+            })
+          },500)// after codePushUpdate modal dismissed
+
+        } else if (this.props.goToCmEat) {
+          setTimeout( () => {
+            this._handleChanmaoPress();
+          }, 2000);
+        } else if (this.props.goToSweetfulBox) {
+          setTimeout( () => {
+            this._handleSboxPress();
+          }, 1000);
+        }
+      }
+    })
+  }
   async _handleChanmaoPress() {
       if(this._openStarted) return;
       if(!this.state.entryFlag) return;
@@ -440,6 +462,7 @@ export default class Home extends Component {
           onPressCMFoodDelivery={this._handleChanmaoPress}
           onPressCMECommerce={this._handleSboxPress}
           onPressCMLife={this._handleCmLifePress}
+          navigator={this.props.navigator}
         />
       )
     }
@@ -452,7 +475,6 @@ export default class Home extends Component {
           {this._renderBody()}
         </View>
       );
-
   }
 }
 
