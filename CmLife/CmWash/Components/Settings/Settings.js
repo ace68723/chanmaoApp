@@ -120,7 +120,7 @@ export default class Home extends Component {
     if (key=='sbox') {this._goToSbox();}
     if (key=='contact'){
       // this._goToAboutUs();
-      // Intercom.registerIdentifiedUser({ userId: 'Bob' });
+      Intercom.registerIdentifiedUser({ userId: 'Bob' });
       Intercom.displayMessageComposer();
     }
   }

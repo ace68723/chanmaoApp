@@ -24,3 +24,12 @@ allprojects {
         maven { url "https://maven.google.com" }
     }
 }
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            configurations.all {
+                resolutionStrategy.force 'io.intercom.android:intercom-sdk-base:5.1.5'
+            }
+        }
+    }
+}
