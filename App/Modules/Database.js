@@ -199,6 +199,26 @@ export function LogOut() {
   realm.write(() => {
     realm.create('cm_system',{type: 'uid', value: ''}, true);
     realm.create('cm_system',{type: 'token', value: ''}, true);
+    let init_cme_address = {
+      addr:"",
+      apt_no:"",
+      buzz:"",
+      city:"",
+      del:"",
+      loc_la:"",
+      loc_lo:"",
+      name:"",
+      postal:"",
+      province:"",
+      status:"",
+      tel:"",
+      uaid:"",
+      uid:"",
+      selected:false
+    }
+    realm.create('cme_address',Object.assign({},init_cme_address,{type:'H'}), true );
+    realm.create('cme_address',Object.assign({},init_cme_address,{type:'W'}), true );
+    realm.create('cme_address',Object.assign({},init_cme_address,{type:'O'}), true );
   })
 }
 
