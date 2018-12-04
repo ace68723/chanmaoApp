@@ -114,8 +114,8 @@ export default class StartupAnimation extends Component {
         CodePush.checkForUpdate().then((update)=>{
             this.setState({isAnimationRunning:false});
             if(!update){
-              // const introCount = cme_getHomeIntroCount();
-              // if(introCount == 0){
+              const introCount = cme_getHomeIntroCount();
+              if(introCount == 0){
                   this.props.navigator.showLightBox({
                     screen:'IntroPage',
                     navigatorStyle: {
@@ -131,7 +131,7 @@ export default class StartupAnimation extends Component {
                   })
 
 
-              // }
+              }
             }
           })
 

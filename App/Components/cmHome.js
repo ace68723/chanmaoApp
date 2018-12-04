@@ -87,10 +87,7 @@ export default class Home extends Component {
             }
           })
       }
-
-    })
-
-  .catch((err)=>console.log(err));
+    }).catch((err) => console.log(err));
   }
   _handleAppStateChange = (appState) =>{
     if(appState == 'active'){
