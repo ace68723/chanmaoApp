@@ -151,7 +151,7 @@ export default class Home extends Component {
     }
   }
   finishcodePushCheck(needUpdate){  //needUpdate是否需要更新并重启
-    this.props.navigator.pop({animationType: 'fade',})
+    this.props.navigator.popToRoot({screen:'CodePushUpdate', animationType: 'fade'});
 
     this.setState({isCodePushChecked:true},()=>{
       if(!needUpdate){
