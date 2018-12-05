@@ -10,7 +10,7 @@ export default {
 
           const token = await AuthModule.getToken();
           const homeData = await HomeModule.getHomeData(token);
-
+          const homeAlert = await HomeModule.getHomeAlert(token);
           const selectedAddress = cme_getSelectedAddress();
           let userloc;
           if (selectedAddress) {
@@ -33,7 +33,7 @@ export default {
           else {
             showIntroduction = false;
           }
-          const res = {homeData,showIntroduction, restaurantList, zones,categories}
+          const res = {homeData,showIntroduction, restaurantList, zones,categories, homeAlert}
           dispatch({
               actionType: AppConstants.GET_HOME_DATA, res
           });
@@ -41,6 +41,5 @@ export default {
           console.log(e);
         }
       },
-
 
 }

@@ -61,7 +61,7 @@ export default class Home extends Component {
       this.finishcodePushCheck = this.finishcodePushCheck.bind(this);
   }
   _openStarted = false
-  componentWillMount() {
+  componentDidMount() {
     AppState.addEventListener('change', this._handleAppStateChange);
     
       this._versionCheck();
