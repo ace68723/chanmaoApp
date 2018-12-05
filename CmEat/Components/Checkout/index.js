@@ -120,6 +120,7 @@ class Confirm extends Component {
 				this._renderRestaurantName = this._renderRestaurantName.bind(this);
 				this._renderPriceDetail = this._renderPriceDetail.bind(this);
 				this._renderPriceTotal = this._renderPriceTotal.bind(this);
+				this._renderTips = this._renderTips.bind(this);
 				this._beforeCheckoutUpdateItems = this._beforeCheckoutUpdateItems.bind(this);
 
 				this._checkCouponOnPress = this._checkCouponOnPress.bind(this);
@@ -127,6 +128,7 @@ class Confirm extends Component {
 				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
 				this._deliverAnimation = this._deliverAnimation.bind(this);
 				this._updateComment = this._updateComment.bind(this);
+				this._changedTips = this._changedTips.bind(this);
 
 				this.popupView = PopupView.getInstance();
     }
@@ -612,7 +614,7 @@ class Confirm extends Component {
 										<View style={styles.acceptButton}>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
-												 {Label.getCMLabel('ACTUAL_PAYING')}: ${this.state.selectedCase.fees.charge_total}
+												 {Label.getCMLabel('ACTUAL_PAYING')}: ${this.state.selectedCase.fees.charge_total + parseFloat(this.state.tips)}
 											</Text>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
@@ -1151,6 +1153,76 @@ class Confirm extends Component {
 			);
 		}
 
+		_renderTips() {
+			let _tipsOptions = () => {
+				let _tipsOptions = [];
+				let options = [0, 10, 15, 20];
+				for (let _option of options) {
+					_tipsOptions.push(
+						<TouchableOpacity key={'tips_' + _option}
+															onPress={() => this._changedTips(_option)}>
+							<View style={{width: 50,
+														borderWidth: 1,
+														borderColor: this.state.tipsPercentageNumber == _option ?'#ff8b00' :'#808080',
+														backgroundColor: this.state.tipsPercentageNumber == _option ?'#ff8b00' :'white',
+														borderRadius: 15,
+														paddingVertical: 2,
+														paddingHorizontal: 8}}>
+								<Text style={{fontSize: 15,
+															textAlign: 'center',
+															color: this.state.tipsPercentageNumber == _option ?'white' :'#666666',
+															fontFamily: 'NotoSansCJKsc-Regular'}}>
+									{_option}%
+								</Text>
+							</View>
+						</TouchableOpacity>
+					)
+				}
+				return _tipsOptions;
+			}
+			return (
+				<View style={{flexDirection: 'row',
+											marginTop: 10,
+											marginHorizontal: 20,
+											justifyContent: 'space-between'}}>
+					<Text style={{color:'#666666',
+												alignSelf: 'center',
+												marginRight: 10,
+												fontSize:15,
+												fontFamily: 'NotoSansCJKsc-Bold'}}
+								allowFontScaling={false}>
+						{Label.getCMLabel('TIPS')}:
+					</Text>
+					<View style={{flex: 1,
+												flexDirection: 'row',
+												alignSelf: 'center',
+												justifyContent: 'space-around'}}>
+						{_tipsOptions()}
+					</View>
+					<View style={{flexDirection: 'row',
+												alignSelf: 'center',
+												width: 50,
+												justifyContent: 'flex-end'}}>
+						<Text style={{color:'#666666',
+													fontSize:15,
+													fontFamily:'NotoSansCJKsc-Bold'}}
+									allowFontScaling={false}>
+							${this.state.tips}
+						</Text>
+					</View>
+				</View>
+			);
+		}
+
+		_changedTips(tipsPercentageNumber) {
+			// alert(percentage);
+			let tipsPercentage = tipsPercentageNumber / 100;
+			let tips = parseFloat(this.state.selectedCase.fees.total * tipsPercentage).toFixed(2);
+			// alert(tips);
+			this.setState({tips,
+										 tipsPercentageNumber});
+		}
+
 		_renderComment(){
 			return(
 				<CommentModal  style={styles.modal}
@@ -1172,7 +1244,8 @@ class Confirm extends Component {
 
 		}
 		// _renderTipInfo(){
-		// 	if (this.state.payment_channel && this.state.payment_channel != 0) {
+		// 	if (true) {
+		// 	// if (this.state.payment_channel && this.state.payment_channel != 0) {
 		// 		return(
 		// 			<View style={{
 		// 				height:100,
@@ -1403,6 +1476,8 @@ class Confirm extends Component {
 											<View style={styles.seperateLine}>
 											</View>
 											{this._renderPriceTotal()}
+											{this._renderTips()}
+
 								</View>
 
 
