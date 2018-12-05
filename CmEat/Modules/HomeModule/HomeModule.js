@@ -99,5 +99,19 @@ const  HomeMoule = {
         }
 
       },
+      async getHomeAlert(token){
+        try{
+          const region = cme_getRegion();
+          let homeAlert = {};
+          const res = await HomeApi.getHomeAlert({token,region: parseInt(region)});
+          if(res.ev_error == 0){
+            homeAlert = res.eo_alert;
+          }
+          return homeAlert;
+        }catch(e){
+          console.log(e)
+        }
+       
+      }
 }
 module.exports = HomeMoule;

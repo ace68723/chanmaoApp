@@ -15,6 +15,7 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 		filteredList: [],
 		zones: [],
 		tags:[],
+		homeAlert:{}
   },
 	emitChange(){
 			this.emit(CHANGE_EVENT)
@@ -32,6 +33,7 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
     		zones: [],
     		tags:[],
     		showAnimatedView:false,
+				homeAlert:{}
       }
 			this.removeListener(CHANGE_EVENT, callback)
 	},
@@ -42,7 +44,8 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
      const restaurantList = res.restaurantList;
 		 const zones = res.zones;
 		 const tags = res.categories;
-		 this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones, tags})
+		 const homeAlert = res.homeAlert;
+		 this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones, tags, homeAlert})
   },
   getRestaurantWithRid(rid){
   		const restaurantData = _find(this.state.restaurantList, {rid:parseInt(rid)});
@@ -62,6 +65,9 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 	},
 	getRestaurantListByTag(){
 			return this.state.filteredList;
+	},
+	getHomeAlert(){
+		return this.state.homeAlert;
 	},
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){

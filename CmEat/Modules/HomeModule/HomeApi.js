@@ -71,6 +71,22 @@ const HomeApi = {
               .then((res) => res.json())
               .catch((error) => {throw error})
     },
+    getHomeAlert(reqData){
+        const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/cmapp/v1/alert_home_alert';
+        let options = {
+            method: 'GET',
+            mode:'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+        options.headers.authortoken = reqData.token;
+        options.headers.region = reqData.region;
+        return fetch(url,options)
+                .then((res) => res.json())
+                .catch((error) => {throw error})
+      },
 
 }
 

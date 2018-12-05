@@ -10,7 +10,8 @@ import {
   StyleSheet,
 } from 'react-native';
 const { width,height } = Dimensions.get('window');
-
+import HomeStore from '../../../Stores/HomeStore';
+import {cme_getLanguage} from '../../../../App/Modules/Database';
 import Label from '../../../../App/Constants/AppLabel';
 export default class SboxHomeAlert extends Component {
   static navigatorStyle = {
@@ -22,12 +23,37 @@ export default class SboxHomeAlert extends Component {
     this._closeSboHomeAlert = this._closeSboHomeAlert.bind(this);
     this.state = {
       isShow: true,
+      homeAlert:{},
     }
+    this._onChange = this._onChange.bind(this);
+  }
+  componentDidMount(){
+    HomeStore.addChangeListener(this._onChange);
+  }
+  componentWillUnmount(){
+		HomeStore.removeChangeListener(this._onChange);
+  }
+  _onChange(){
+		const newState = Object.assign({},this.state, {homeAlert:HomeStore.getHomeAlert()});
+    this.setState(newState);
   }
   _closeSboHomeAlert() {
     this.setState(
       {isShow: false}
     );
+  }
+  _renderMessageByLanguage(){
+    const lang = cme_getLanguage();
+    switch(lang){
+      case 'chinese_simple':
+        return this.state.homeAlert.message_cn;
+      case 'english':
+        return this.state.homeAlert.message_en;
+      case 'french':
+        return this.state.homeAlert.message_fr;
+      default:
+        return this.state.homeAlert.message_cn;
+    }
   }
   render() {
     if (!this.state.isShow){
@@ -44,12 +70,12 @@ export default class SboxHomeAlert extends Component {
           alignItems: 'center'
         }}>
         <View style={styles.container}>
-          <Image source={require('./Image/header.png')}
+          <Image source={{uri: this.state.homeAlert.image_url}}
                  style={{width:width*0.7,height:width*0.5}}
           />
           <View style={{padding:20,paddingLeft:25,paddingRight:25,}}>
             <Text allowFontScaling={false} style={{fontSize:12,fontFamily:'NotoSans-Regular',textAlign:'center'}}>
-              {Label.getCMLabel('ALERT_PAYMENT')}
+              {this._renderMessageByLanguage()}
             </Text>
           </View>
 
