@@ -16,6 +16,7 @@ import java.util.List;
 //import ca.chanmao.app.AlipayReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.react.ReactApplication;
+import cn.jpush.reactnativejpush.JPushPackage;
 import com.horcrux.svg.SvgPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.theweflex.react.WeChatPackage;
@@ -27,6 +28,8 @@ import com.microsoft.codepush.react.ReactInstanceHolder;
 import com.microsoft.codepush.react.CodePush;
 
 public class MainApplication extends NavigationApplication implements ReactInstanceHolder {
+    private boolean SHUTDOWN_TOAST = false;
+    private boolean SHUTDOWN_LOG = false;
     @Override
     public boolean isDebug() {
         return BuildConfig.DEBUG;
@@ -41,6 +44,8 @@ public class MainApplication extends NavigationApplication implements ReactInsta
                 new VectorIconsPackage(),
                 new AlipayReactPackage(),
                 new MainReactPackage(),
+            new JPushPackage(!BuildConfig.DEBUG, !BuildConfig.DEBUG),
+            new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),
             new SvgPackage(),
                 new NativePackage(),
             new MapsPackage(),

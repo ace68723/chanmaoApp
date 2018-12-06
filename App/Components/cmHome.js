@@ -17,6 +17,7 @@ import {
   Linking,
   NativeModules
 } from 'react-native';
+import JPushModule from 'jpush-react-native';
 import AuthAction from '../Actions/AuthAction';
 import VersionAction from '../Actions/VersionAction';
 import { GetUserInfo, cme_getRegion } from '../Modules/Database';
@@ -66,7 +67,20 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentDidMount() {
+    JPushModule.notifyJSDidLoad((resultCode) => {
+
+            if (resultCode === 0) {
+            }
+
+    });
+    JPushModule.getRegistrationID(registrationId => {console.log('resisterID:'+registrationId)})
     AppState.addEventListener('change', this._handleAppStateChange);
+    JPushModule.addReceiveCustomMsgListener((message) => {
+          this.setState({pushMsg: message});
+        });
+        JPushModule.addReceiveNotificationListener((message) => {
+          console.log("receive notification: " + message);
+        })
 
     setTimeout( () => {
       this._versionCheck();
@@ -74,6 +88,8 @@ export default class Home extends Component {
   }
   componentWillUnmount(){
     AppState.removeEventListener('change', this._handleAppStateChange);
+    JPushModule.removeReceiveCustomMsgListener();
+    JPushModule.removeReceiveNotificationListener();
   }
   _versionCheck(){
     let curVersion = GetUserInfo().version;

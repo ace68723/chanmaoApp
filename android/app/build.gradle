@@ -104,6 +104,11 @@ android {
         targetSdkVersion 26
         versionCode 10
         versionName "2.9.4"
+        manifestPlaceholders = [
+                JPUSH_APPKEY: "98e5a98f01e05ac80c2f87f0",
+                APP_CHANNEL : "default"
+        ]
+
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -157,6 +162,9 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':jpush-react-native')
+    implementation project(':jcore-react-native')
+    implementation project(':jpush-react-native')
     compile project(':react-native-svg')
     compile project(':react-native-maps')
     compile project(':react-native-wechat')
