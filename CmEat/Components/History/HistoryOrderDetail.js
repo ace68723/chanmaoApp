@@ -134,7 +134,7 @@ export default class orderHistory extends Component {
                         fontWeight:'bold',
                         color:'#ea7b21'}}
                 allowFontScaling={false}>
-            {Label.getCMLabel('SERVICE_FEE')}:
+            {Label.getCMLabel('TIPS')}:
           </Text>
           <Text style={{fontSize:15,
                         fontWeight:'bold',

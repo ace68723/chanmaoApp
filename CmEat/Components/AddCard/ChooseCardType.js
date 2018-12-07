@@ -353,7 +353,7 @@ export default class ChooseCardType extends Component {
                           color: "#9b9b9b",
                           fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
-              {Label.getCMLabel('SERVICE_FEE')}:
+              {Label.getCMLabel('SERVICE_FEE')}+{Label.getCMLabel('TIPS')}:
             </Text>
             <Text key={"service_fee"}
                   style={{fontSize: 15,
