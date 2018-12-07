@@ -248,9 +248,14 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 		if(data.result == 0){
 			 checkoutSuccessful = true;
        oidFromUrl = data.oidFromUrl;
+       chargeTotalFromUrl = data.chargeTotalFromUrl;
+       tipsFromUrl = data.tipsFromUrl;
        MenuStore.initMenu();
 		}
-		this.state = Object.assign({},this.state,{checkoutSuccessful, oidFromUrl});
+		this.state = Object.assign({},this.state,{checkoutSuccessful,
+                                              oidFromUrl,
+                                              chargeTotalFromUrl,
+                                              tipsFromUrl});
 
   },
   updateGoToHistory(data){

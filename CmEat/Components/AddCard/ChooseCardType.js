@@ -267,7 +267,7 @@ export default class ChooseCardType extends Component {
                         fontWeight: "800",
                         fontFamily: 'NotoSansCJKsc-Regular'}}
                 allowFontScaling={false}>
-            ${this.state.fees.charge_total}
+            ${this.state.total}
           </Text>
         );
         if (this.state.fees.total_off > 0) {
@@ -360,7 +360,7 @@ export default class ChooseCardType extends Component {
                           color: "#9b9b9b",
                           fontFamily: 'NotoSansCJKsc-Regular'}}
                   allowFontScaling={false}>
-              ${this.state.fees.ori_service_fee}
+              ${this.state.tips}
             </Text>
           </View>
           {_discount()}

@@ -124,19 +124,19 @@ class HistoryTab extends Component {
 						case 1:
 							// data.charge_total
 							this._stripeCardSelected({oid: state.oid,
-																			  charge_total: state.fees.charge_total});
+																			  charge_total: state.total});
 							break;
 						case 10:
 							this._alipaySelected({oid: state.oid,
-																		charge_total: state.fees.charge_total});
+																		charge_total: state.total});
 							break;
 						case 30:
 							this._applePaySelected({oid: state.oid,
 																			subtotal: state.fees.ori_pretax.toString(),
 																			shipping: state.fees.dlexp.toString(),
 																			tax: state.fees.tax.toString(),
-																			service_fee: state.fees.service_fee.toString(),
-																			charge_total: state.fees.charge_total,
+																			service_fee: state.tips.toString(),
+																			charge_total: state.total,
 																			discount: state.fees.total_off});
 							break;
 						default:

@@ -136,20 +136,23 @@ export default {
       }catch (e){
       }
     },
-    async checkout({ticket_id, sign, dltype, payment_channel, charge_total, rid}){
+    async checkout({ticket_id, sign, dltype, payment_channel, charge_total, rid, tips}){
       try{
         const reqData = {ticket_id,
                          sign,
                          dltype: parseInt(dltype),
                          payment_channel: parseInt(payment_channel),
                          charge_total,
-                         rid};
+                         rid,
+                         add_tips: tips};
         const data = {
           result: 1
         };
         const result = await CheckoutModule.checkout(reqData);
         if (result.ev_error == 0) {
           data.result = 0;
+          data.chargeTotalFromUrl = result.after_tips.charge_total_after_tips;
+          data.tipsFromUrl = result.after_tips.all_service_fee;
           data.oidFromUrl = result.oid;
           dispatch({
               actionType: AppConstants.CHECKOUT, data

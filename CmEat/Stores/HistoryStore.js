@@ -87,6 +87,8 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
   showPriceDetailForRepay(data) {
     state.oid = data.oid;
     state.payment_channel = data.payment_channel;
+    state.total = data.after_tips.charge_total_after_tips;
+    state.tips = data.after_tips.all_service_fee;
     state.fees = data.fees;
     state.showPriceDetail = true;
     state.doRepay = false;
@@ -94,6 +96,8 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
   changeOrderCase(data) {
     state.oid = data.oid;
     state.payment_channel = data.payment_channel;
+    state.total = data.after_tips.charge_total_after_tips;
+    state.tips = data.after_tips.all_service_fee;
     state.fees = data.fees;
     state.showPriceDetail = false;
     state.doRepay = true;

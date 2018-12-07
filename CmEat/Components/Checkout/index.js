@@ -74,9 +74,9 @@ class Confirm extends Component {
     constructor(props) {
 				super(props);
         const cart = MenuStore.getCart();
-				const total = MenuStore.getCartTotals().total;
+				// const total = MenuStore.getCartTotals().total;
         const state={ cart,
-                      total,
+                      // total,
 											rid:this.props.restaurant.rid,
                       startAmount:this.props.restaurant.start_amount,
                       viewBottom:new Animated.Value(0),
@@ -87,7 +87,8 @@ class Confirm extends Component {
 											showOrderConfirm:false,
 											paymentStatus: Label.getCMLabel('ADD_PAYMENT'),
 											tips:0,
-											tipsPercentage:0.1,
+											// tipsPercentage:0.1,
+											tipsPercentageNumber: 10,
 											selectedCase: {fees: {},
 							                       payment_channel: 0,
 							                       dltype: 1},
@@ -143,7 +144,8 @@ class Confirm extends Component {
     }
     _onChange(){
 				const state = Object.assign({},CheckoutStore.getState());
-				this.setState(Object.assign({}, state));
+				const tips = parseFloat(state.selectedCase.fees.total * this.state.tipsPercentageNumber / 100).toFixed(2);
+				this.setState(Object.assign({}, state, {tips}));
 				if(!state.selectedAddress || !state.selectedAddress.hasOwnProperty('uaid')){
 					setTimeout( () => {
 						this.props.navigator.showModal({
@@ -227,7 +229,7 @@ class Confirm extends Component {
 					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
 					if (!state.selectedCase.custom_dlexp && state.payment_channel != 0) {
 						if (state.payment_channel == 1) {
-							CheckoutAction.stripeChargeAndUpdate({amount: state.selectedCase.fees.charge_total,
+							CheckoutAction.stripeChargeAndUpdate({amount: state.chargeTotalFromUrl,
 																					 					oid: state.oidFromUrl,
 																										checkoutFrom: 'checkout'});
 						}
@@ -235,7 +237,7 @@ class Confirm extends Component {
 							this.props.navigator.dismissModal({animationType: 'slide-down'});
 							setTimeout(() => {
 								CheckoutAction.afterPayGoToHistory();
-								Alipay.constructAlipayOrder({total: state.selectedCase.fees.charge_total.toString(),
+								Alipay.constructAlipayOrder({total: state.chargeTotalFromUrl.toString(),
 																						 oid: state.oidFromUrl});
 							}, 300);
 						}
@@ -244,9 +246,9 @@ class Confirm extends Component {
 								subtotal: state.selectedCase.fees.ori_pretax.toString(),
 								shipping: state.selectedCase.fees.dlexp.toString(),
 								tax: state.selectedCase.fees.ori_tax.toString(),
-								tips: state.selectedCase.fees.ori_service_fee.toString(),
+								tips: state.tipsFromUrl.toString(),
 								oid: state.oidFromUrl,
-								amount: state.selectedCase.fees.charge_total,
+								amount: state.chargeTotalFromUrl,
 								discount: state.selectedCase.fees.total_off
 							};
 
@@ -303,11 +305,11 @@ class Confirm extends Component {
       CheckoutAction.calculateDeliveryFee()
     }
     _doCheckout(){
-		if (this.state.payment_channel < 0) return;
-		this.setState({
-			loading:true,
-			showOrderConfirm:false,
-		})
+			if (this.state.payment_channel < 0) return;
+			this.setState({
+				loading:true,
+				showOrderConfirm:false,
+			})
       // CheckoutAction.checkout(this.state.comment,
 			// 												this.state.payment_channel,
 			// 												this.state.tips,
@@ -318,7 +320,8 @@ class Confirm extends Component {
 															 dltype: this.state.dltype,
 															 payment_channel: this.state.payment_channel,
 															 charge_total: this.state.selectedCase.fees.charge_total,
-															 rid: this.state.rid
+															 rid: this.state.rid,
+															 tips: this.state.tips
 															});
     }
     _checkout(){
@@ -504,19 +507,19 @@ class Confirm extends Component {
 		}
 		_alipaySelected() {
 			CheckoutAction.updatePaymentStatus(10);
-			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
-										 tipsPercentage:0.1});
+			// this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+			// 							 tipsPercentage:0.1});
 		}
 		_applePaySelected(){
 			CheckoutAction.updatePaymentStatus(30);
-			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
-										 tipsPercentage:0.1});
+			// this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+			// 							 tipsPercentage:0.1});
 		}
 
 		_cashSelected() {
 			CheckoutAction.updatePaymentStatus(0);
-			this.setState({tips: 0,
-										 tipsPercentage:0.1});
+			// this.setState({tips: 0,
+			// 							 tipsPercentage:0.1});
 		}
 
 		_previousCardSelected() {
@@ -606,6 +609,7 @@ class Confirm extends Component {
 
 		renderCheckoutButton(){
 			if (true) {
+				const charge_total = parseFloat(this.state.selectedCase.fees.charge_total + parseFloat(this.state.tips)).toFixed(2);
 			// if (Platform.OS == 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
@@ -614,7 +618,7 @@ class Confirm extends Component {
 										<View style={styles.acceptButton}>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
-												 {Label.getCMLabel('ACTUAL_PAYING')}: ${this.state.selectedCase.fees.charge_total + parseFloat(this.state.tips)}
+												 {Label.getCMLabel('ACTUAL_PAYING')}: ${charge_total}
 											</Text>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
@@ -1068,7 +1072,7 @@ class Confirm extends Component {
 														color: '#9b9b9b',
 														fontFamily: 'NotoSansCJKsc-Regular'}}
 										allowFontScaling={false}>
-								{Label.getCMLabel('SERVICE_FEE')} ({Label.getCMLabel('SERVICE_FEE_REMINDER')})
+								{Label.getCMLabel('SERVICE_FEE')}
 							</Text>
 							<TouchableOpacity activeOpacity={0.4}
 																style={{alignSelf: 'center'}}
@@ -1163,6 +1167,7 @@ class Confirm extends Component {
 															onPress={() => this._changedTips(_option)}>
 							<View style={{width: 50,
 														borderWidth: 1,
+														justifyContent: 'center',
 														borderColor: this.state.tipsPercentageNumber == _option ?'#ff8b00' :'#808080',
 														backgroundColor: this.state.tipsPercentageNumber == _option ?'#ff8b00' :'white',
 														borderRadius: 15,
@@ -1170,8 +1175,10 @@ class Confirm extends Component {
 														paddingHorizontal: 8}}>
 								<Text style={{fontSize: 15,
 															textAlign: 'center',
+															alignSelf: 'center',
 															color: this.state.tipsPercentageNumber == _option ?'white' :'#666666',
-															fontFamily: 'NotoSansCJKsc-Regular'}}>
+															fontFamily: 'NotoSansCJKsc-Regular'}}
+											allowFontScaling={false}>
 									{_option}%
 								</Text>
 							</View>
@@ -1187,7 +1194,7 @@ class Confirm extends Component {
 											justifyContent: 'space-between'}}>
 					<Text style={{color:'#666666',
 												alignSelf: 'center',
-												marginRight: 10,
+												marginRight: 5,
 												fontSize:15,
 												fontFamily: 'NotoSansCJKsc-Bold'}}
 								allowFontScaling={false}>
@@ -1202,6 +1209,7 @@ class Confirm extends Component {
 					<View style={{flexDirection: 'row',
 												alignSelf: 'center',
 												width: 50,
+												marginLeft: 5,
 												justifyContent: 'flex-end'}}>
 						<Text style={{color:'#666666',
 													fontSize:15,
@@ -1321,11 +1329,12 @@ class Confirm extends Component {
 		// 	}
 		// }
 		_renderOrderConfirm() {
+			const charge_total = parseFloat(this.state.selectedCase.fees.charge_total + parseFloat(this.state.tips)).toFixed(2)
 			if(this.state.showOrderConfirm) {
 				return(<OrderConfirm doCheckout={this._doCheckout}
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
-														 total={this.state.selectedCase.fees.charge_total}
+														 total={charge_total}
 														 tips={this.state.selectedCase.fees.charge_total.service_fee}
 														 visaFee={this.state.visa_fee}
 														 paymentChannel={this.state.payment_channel}
