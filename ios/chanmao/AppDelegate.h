@@ -7,6 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
+static NSString *appKey = @"98e5a98f01e05ac80c2f87f0";     //填写appkey
+static NSString *channel = @"";    //填写channel   一般为nil
+static BOOL isProduction = false;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;

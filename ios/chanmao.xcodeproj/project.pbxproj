@@ -64,7 +64,12 @@
 		D01E587654124B71AC8501D4 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE911AA013FF4B98910487D1 /* Feather.ttf */; };
 		D7067B9C9D904789ABDE3188 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8F54AE4BDD44159B23D420 /* libCodePush.a */; };
 		D9ECDA9D5595465B9B858F7C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DF937DD84A748DB8ED1D5CD /* Entypo.ttf */; };
-		DFE86E0221964A4F000B8A5F /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFE86DFE219649E9000B8A5F /* libRNSVG.a */; };
+		DF5CC4F521BB2106004C4073 /* CodePush.h in Frameworks */ = {isa = PBXBuildFile; fileRef = DF5CC4C321BB2106004C4073 /* CodePush.h */; };
+		DFCD21BD21BB101E00991C29 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCD21BC21BB101E00991C29 /* CoreFoundation.framework */; };
+		DFCD21BF21BB108500991C29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCD21BE21BB108500991C29 /* Security.framework */; };
+		DFCD21C121BB109300991C29 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCD21C021BB109300991C29 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DFCD21C321BB109B00991C29 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DFCD21C221BB109B00991C29 /* libresolv.tbd */; };
+		DFE86E0221964A4F000B8A5F /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFE86DFE219649E9000B8A5F /* libRNSVG.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		E3ACE0070FC5416AA3CC6F1A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 153D270FD29641D5BB5BCDB8 /* libz.tbd */; };
 		EBE8C3DF20C5E563002EE5C3 /* cmApplePay.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE8C3AF20C5E563002EE5C3 /* cmApplePay.m */; };
 		F963FD1A20B4B86300C1C422 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F963FCE520B4B86200C1C422 /* AlipaySDK.bundle */; };
@@ -402,6 +407,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		DFCD214D21B9E51000991C29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFCD213F21B9E51000991C29 /* RCTJPushModule.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6280980A1CEDC407000D3A81;
+			remoteInfo = RCTJPushModule;
+		};
 		DFE86DFD219649E9000B8A5F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DFE86DCB219649E8000B8A5F /* RNSVG.xcodeproj */;
@@ -496,6 +508,12 @@
 		D3EE8E983E40E5E7D59B9634 /* Pods-chanmao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chanmao.release.xcconfig"; path = "Pods/Target Support Files/Pods-chanmao/Pods-chanmao.release.xcconfig"; sourceTree = "<group>"; };
 		D8AB24399EE942769B9531AD /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		DA5D159499404C78A139D022 /* NotoSans-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Regular.otf"; path = "../node_modules/react-native-vector-icons/Fonts/NotoSans-Regular.otf"; sourceTree = "<group>"; };
+		DF5CC4C321BB2106004C4073 /* CodePush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CodePush.h; path = "../node_modules/react-native-code-push/ios/CodePush/CodePush.h"; sourceTree = "<group>"; };
+		DFCD213F21B9E51000991C29 /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTJPushModule.xcodeproj; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; };
+		DFCD21BC21BB101E00991C29 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		DFCD21BE21BB108500991C29 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DFCD21C021BB109300991C29 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		DFCD21C221BB109B00991C29 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		DFE86DCB219649E8000B8A5F /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		E1C568599B7346BA95206564 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		EBE8C3AF20C5E563002EE5C3 /* cmApplePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cmApplePay.m; sourceTree = "<group>"; };
@@ -519,16 +537,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFE86E0221964A4F000B8A5F /* libRNSVG.a in Frameworks */,
+				DF5CC4F521BB2106004C4073 /* CodePush.h in Frameworks */,
+				DFCD21C321BB109B00991C29 /* libresolv.tbd in Frameworks */,
+				DFCD21C121BB109300991C29 /* UserNotifications.framework in Frameworks */,
+				DFCD21BF21BB108500991C29 /* Security.framework in Frameworks */,
 				F963FD2B20B4B8E800C1C422 /* UIKit.framework in Frameworks */,
-				31E09C9720A3A61A007902C5 /* SystemConfiguration.framework in Frameworks */,
-				F963FD2920B4B8DE00C1C422 /* QuartzCore.framework in Frameworks */,
 				F963FD2720B4B8DA00C1C422 /* Foundation.framework in Frameworks */,
-				F963FD2520B4B8D300C1C422 /* CoreText.framework in Frameworks */,
-				31E09C9920A3A62B007902C5 /* CoreTelephony.framework in Frameworks */,
-				F963FD2320B4B8C900C1C422 /* CoreMotion.framework in Frameworks */,
 				F963FD2120B4B8C500C1C422 /* CoreGraphics.framework in Frameworks */,
+				31E09C9720A3A61A007902C5 /* SystemConfiguration.framework in Frameworks */,
+				31E09C9920A3A62B007902C5 /* CoreTelephony.framework in Frameworks */,
+				DFCD21BD21BB101E00991C29 /* CoreFoundation.framework in Frameworks */,
 				F963FD1F20B4B8C000C1C422 /* CFNetwork.framework in Frameworks */,
+				DFE86E0221964A4F000B8A5F /* libRNSVG.a in Frameworks */,
+				F963FD2920B4B8DE00C1C422 /* QuartzCore.framework in Frameworks */,
+				F963FD2520B4B8D300C1C422 /* CoreText.framework in Frameworks */,
+				F963FD2320B4B8C900C1C422 /* CoreMotion.framework in Frameworks */,
 				E3ACE0070FC5416AA3CC6F1A /* libz.tbd in Frameworks */,
 				31E09C9D20A3A650007902C5 /* libc++.tbd in Frameworks */,
 				31E09C9B20A3A640007902C5 /* libsqlite3.0.tbd in Frameworks */,
@@ -706,6 +729,11 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DF5CC4C321BB2106004C4073 /* CodePush.h */,
+				DFCD21C221BB109B00991C29 /* libresolv.tbd */,
+				DFCD21C021BB109300991C29 /* UserNotifications.framework */,
+				DFCD21BE21BB108500991C29 /* Security.framework */,
+				DFCD21BC21BB101E00991C29 /* CoreFoundation.framework */,
 				F963FD2A20B4B8E800C1C422 /* UIKit.framework */,
 				F963FD2820B4B8DE00C1C422 /* QuartzCore.framework */,
 				F963FD2620B4B8DA00C1C422 /* Foundation.framework */,
@@ -843,6 +871,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				DFCD213F21B9E51000991C29 /* RCTJPushModule.xcodeproj */,
 				DFE86DCB219649E8000B8A5F /* RNSVG.xcodeproj */,
 				3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */,
 				31CC7A8920A4CE74001561DB /* RCTWeChat.xcodeproj */,
@@ -905,6 +934,14 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFCD214021B9E51000991C29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFCD214E21B9E51000991C29 /* libRCTJPushModule.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -985,6 +1022,9 @@
 							com.apple.ApplePay = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -1024,6 +1064,10 @@
 				{
 					ProductGroup = 00C302BC1ABCB91800DB3ED1 /* Products */;
 					ProjectRef = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
+				},
+				{
+					ProductGroup = DFCD214021B9E51000991C29 /* Products */;
+					ProjectRef = DFCD213F21B9E51000991C29 /* RCTJPushModule.xcodeproj */;
 				},
 				{
 					ProductGroup = 78C398B11ACF4ADC00677621 /* Products */;
@@ -1408,6 +1452,13 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		DFCD214E21B9E51000991C29 /* libRCTJPushModule.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTJPushModule.a;
+			remoteRef = DFCD214D21B9E51000991C29 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		DFE86DFE219649E9000B8A5F /* libRNSVG.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1569,6 +1620,7 @@
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios",
+					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
 				);
 				INFOPLIST_FILE = chanmao/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1604,6 +1656,7 @@
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios",
+					"$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule",
 				);
 				INFOPLIST_FILE = chanmao/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1652,6 +1705,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1687,6 +1741,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/jpush-react-native/ios/RCTJPushModule";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;

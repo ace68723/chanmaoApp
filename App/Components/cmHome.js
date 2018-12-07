@@ -15,6 +15,7 @@ import VersionAction from '../Actions/VersionAction';
 import { GetUserInfo, cme_getRegion } from '../Modules/Database';
 import PopupView from '../../CmEat/Components/Popup/PopupView'
 import StartUpAnimation from './startupAnimation';
+import JPushModule from 'jpush-react-native';
 const { height, width } = Dimensions.get('window');
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -62,13 +63,31 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentDidMount() {
+    // JPushModule.notifyJSDidLoad((resultCode) => {
+    //
+    //     if (resultCode === 0) {
+    //     }
+    //
+    // });
+    JPushModule.initPush()
+    // console.log(JPushModule);
+    JPushModule.getRegistrationID(registrationId => {console.log('resisterID:'+registrationId)})
     AppState.addEventListener('change', this._handleAppStateChange);
+    JPushModule.addReceiveCustomMsgListener((message) => {
+         this.setState({pushMsg: message});
+       });
+       JPushModule.addReceiveNotificationListener((message) => {
+         console.log("receive notification: " + message);
+       })
+
 
       this._versionCheck();
 
   }
   componentWillUnmount(){
     AppState.removeEventListener('change', this._handleAppStateChange);
+    JPushModule.removeReceiveCustomMsgListener();
+   JPushModule.removeReceiveNotificationListener();
   }
   _versionCheck(){
     let curVersion = GetUserInfo().version;
