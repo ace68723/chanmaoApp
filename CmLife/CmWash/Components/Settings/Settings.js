@@ -11,6 +11,7 @@ import {
 import AuthAction from '../../../../App/Actions/AuthAction';
 import SettingsCell from './SettingsCell.js'
 
+import { GetUserInfo } from '../../../../App/Modules/Database';
 import Intercom from 'react-native-intercom';
 
 const {width,height} = Dimensions.get('window');
@@ -120,9 +121,29 @@ export default class Home extends Component {
     if (key=='sbox') {this._goToSbox();}
     if (key=='contact'){
       // this._goToAboutUs();
-      Intercom.registerIdentifiedUser({ userId: 'Bob' });
-      Intercom.displayMessageComposer();
+      this.displayCustomerService();
     }
+  }
+  displayCustomerService(){
+    const {uid, token, version} = GetUserInfo();
+    Intercom.registerIdentifiedUser({ userId: uid });
+    // Intercom.updateUser({
+    //     email: 'mimi@intercom.com',
+    //     user_id: 'user_id',
+    //     name: 'your name',
+    //     phone: '010-1234-5678',
+    //     language_override: 'language_override',
+    //     signed_up_at: 1004,
+    //     unsubscribed_from_emails: true,
+    //     companies: [{
+    //         company_id: 'your company id',
+    //         name: 'your company name'
+    //     }],
+    //     custom_attributes: {
+    //         my_custom_attribute: 123
+    //     },
+    // });
+    Intercom.displayMessageComposer();
   }
   renderCells(item) {
     return (<SettingsCell cardStyle={styles.card} title={item.title} type={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />)
