@@ -1160,7 +1160,7 @@ class Confirm extends Component {
 		_renderTips() {
 			let _tipsOptions = () => {
 				let _tipsOptions = [];
-				let options = [0, 10, 15, 20];
+				let options = [10, 12, 15];
 				for (let _option of options) {
 					_tipsOptions.push(
 						<TouchableOpacity key={'tips_' + _option}
