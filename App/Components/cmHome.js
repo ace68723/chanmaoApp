@@ -63,13 +63,16 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentDidMount() {
-    // JPushModule.notifyJSDidLoad((resultCode) => {
-    //
-    //     if (resultCode === 0) {
-    //     }
-    //
-    // });
+    if (Platform.OS==='android'){
+    JPushModule.notifyJSDidLoad((resultCode) => {
+
+        if (resultCode === 0) {
+        }
+
+    });
+    }    
     JPushModule.initPush()
+
     // console.log(JPushModule);
     JPushModule.getRegistrationID(registrationId => {console.log('resisterID:'+registrationId)})
     AppState.addEventListener('change', this._handleAppStateChange);

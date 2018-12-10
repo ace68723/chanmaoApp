@@ -5,6 +5,8 @@ package ca.chanmao.app;
 import android.support.annotation.Nullable;
 import com.facebook.react.BuildConfig;
 import com.facebook.react.ReactPackage;
+
+import cn.jpush.reactnativejpush.JPushPackage;
 import io.realm.react.RealmReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.theweflex.react.WeChatPackage;
@@ -27,6 +29,8 @@ import com.microsoft.codepush.react.ReactInstanceHolder;
 import com.microsoft.codepush.react.CodePush;
 
 public class MainApplication extends NavigationApplication implements ReactInstanceHolder {
+    private boolean SHUTDOWN_TOAST = false;
+    private boolean SHUTDOWN_LOG = false;
     @Override
     public boolean isDebug() {
         return BuildConfig.DEBUG;
@@ -45,8 +49,8 @@ public class MainApplication extends NavigationApplication implements ReactInsta
                 new NativePackage(),
             new MapsPackage(),
                 new WeChatPackage(),
-                new CodePush("wxAMv-nMqU-Z_07d7hJUUGbhQflU842cf145-347a-42da-b8ba-6819059e5be5", MainApplication.this, BuildConfig.DEBUG)
-
+                new CodePush("wxAMv-nMqU-Z_07d7hJUUGbhQflU842cf145-347a-42da-b8ba-6819059e5be5", MainApplication.this, BuildConfig.DEBUG),
+                new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG)
         );
     }
 

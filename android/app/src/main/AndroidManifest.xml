@@ -47,5 +47,7 @@
             android:exported="false"
             android:screenOrientation="behind" >
         </activity>
+        <meta-data android:name="JPUSH_CHANNEL" android:value="${APP_CHANNEL}"/>
+        <meta-data android:name="JPUSH_APPKEY" android:value="${JPUSH_APPKEY}"/>
     </application>
 </manifest>

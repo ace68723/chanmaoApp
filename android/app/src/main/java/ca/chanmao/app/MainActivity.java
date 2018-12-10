@@ -9,6 +9,8 @@ import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.soloader.SoLoader;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class MainActivity extends SplashActivity {
 
     private static Activity mCurrentMainActivity = null;
@@ -26,10 +28,22 @@ public class MainActivity extends SplashActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCurrentMainActivity = this;
+        JPushInterface.init(this);
     }
 
     public static Activity getActivity() {
         Activity activity = mCurrentMainActivity;
         return activity;
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 }

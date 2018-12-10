@@ -103,10 +103,15 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 10
-        versionName "2.9.4"
+        versionName "2.9.8"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [
+                JPUSH_APPKEY: "98e5a98f01e05ac80c2f87f0", //在此替换你的APPKey
+                APP_CHANNEL: "developer-default"    //应用渠道号
+        ]
+
     }
     signingConfigs {
         release {
@@ -175,6 +180,8 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:11.0.4'
     compile project(':react-native-code-push')
     compile 'com.stripe:stripe-android:3.0.1'
+    compile project(':jpush-react-native')
+    compile project(':jcore-react-native')
 }
 
 // Run this once to be able to run the application with BUCK
