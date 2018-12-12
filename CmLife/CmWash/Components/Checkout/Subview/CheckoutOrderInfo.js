@@ -24,6 +24,11 @@ export default class CheckoutUserInfo extends Component{
   updateSize(height){
     this.setState({ height });
   }
+
+  shouldAllowedDiscount(){
+    return this.getCartTotal() >= 60;
+  }
+
   renderOrderItems(){
     return (
       <View style={styles.order}>
@@ -33,6 +38,7 @@ export default class CheckoutUserInfo extends Component{
   }
 
   renderOrderSummary(){
+    // console.log(this.props);
     return (
       <View style={styles.orderSummary}>
         <Text allowFontScaling={false} style={[styles.orderSummaryText, {}]}>运费: ${this.props.delifee}</Text>
