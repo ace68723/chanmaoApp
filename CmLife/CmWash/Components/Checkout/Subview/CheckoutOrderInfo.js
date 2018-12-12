@@ -38,7 +38,6 @@ export default class CheckoutUserInfo extends Component{
   }
 
   renderOrderSummary(){
-    // console.log(this.props);
     return (
       <View style={styles.orderSummary}>
         <Text allowFontScaling={false} style={[styles.orderSummaryText, {}]}>运费: ${this.props.delifee}</Text>

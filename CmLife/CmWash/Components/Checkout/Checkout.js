@@ -139,10 +139,9 @@ export default class Checkout extends Component {
         onDismiss: () => {this.setState({showPopup: false})}
       });
       this.setState({showPopup: true});
-}
+  }
 
-  renderPlaceOrderButton()
-  {
+  renderPlaceOrderButton() {
     if (this.state.selectedPickUpDate && this.state.selectedDeliveryDate && this.state.eo_user_info && this.state.eo_last4) {
 
       return (
@@ -188,12 +187,19 @@ export default class Checkout extends Component {
         return (<CheckoutPayment gotoCard={this._goToCard} cardInfo={this.state.eo_last4} cardStyle={styles.card}/>)
         break;
       case "orderInfo":
+        // Update order info by discount
+        const discountMinimum = 60;
+        let cartTotal = this.state.ev_pretax;
+        let deliveryFee = (cartTotal >= discountMinimum) ? 0 : this.state.ev_delifee;
+        let tax = (cartTotal >= discountMinimum) ? this.state.ev_tax_no_deli : this.state.ev_tax_w_deli;
+        let total = (cartTotal >= discountMinimum) ? this.state.ev_total_no_deli : this.state.ev_total_w_deli;
+
         return (
           <CheckoutOrderInfo
             productList={this.state.ea_products}
-            delifee={this.state.ev_delifee}
-            tax={this.state.ev_tax_w_deli}
-            total={this.state.ev_total_w_deli}
+            delifee={deliveryFee}
+            tax={tax}
+            total={total}
             cardStyle={styles.card}
             onChangeComment={this.onChangeComment}
           />
