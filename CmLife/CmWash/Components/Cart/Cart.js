@@ -43,9 +43,11 @@ export default class Cart extends BaseDialog {
     }
     this.dismiss();
   }
-
   shouldAllowedCheckout(){
     return this.getCartTotal() >= 30;
+  }
+  shouldAllowedDiscount(){
+    return this.getCartTotal() >= 60;
   }
   getCartTotal(){
     let total = 0;
@@ -91,6 +93,22 @@ export default class Cart extends BaseDialog {
       </View>
     )
   }
+  renderDiscount(){
+    const discountText = "满$60免运费";
+    return (
+      <View style={{flexDirection: 'row'}}>
+        {
+          this.shouldAllowedDiscount() &&
+          <Image style={styles.shippingIcon} source={require('./Image/yes.png')}/>
+        }
+        {
+          !this.shouldAllowedDiscount() &&
+          <Image style={styles.shippingIcon} source={require('./Image/no.png')}/>
+        }
+        <Text allowFontScaling={false} style={styles.shippingText}>{discountText}</Text>
+      </View>
+    )
+  }
   renderCartFooter(){
     return (
       <View style={{height: 22, marginTop: 20, flexDirection: 'row'}}>
@@ -109,18 +127,7 @@ export default class Cart extends BaseDialog {
             <Text allowFontScaling={false} style={styles.shippingText}>满$30起送</Text>
             </View>
           }
-          { this.state.allowedPickup &&
-            <View style={{flexDirection: 'row'}}>
-              <Image style={styles.shippingIcon} source={require('./Image/yes.png')}/>
-              <Text allowFontScaling={false} style={styles.shippingText}>可自取</Text>
-            </View>
-          }
-          { !this.state.allowedPickup &&
-            <View style={{flexDirection: 'row'}}>
-              <Image style={styles.shippingIcon} source={require('./Image/no.png')}/>
-              <Text allowFontScaling={false} style={styles.shippingText}>不可自取</Text>
-            </View>
-          }
+          { this.renderDiscount() }
         </View>
         <View style={{flex: 1, marginTop: -4}}>
           <Text allowFontScaling={false} style={styles.taxText}> </Text>
