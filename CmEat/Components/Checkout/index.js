@@ -913,7 +913,7 @@ class Confirm extends Component {
 																onPress={this._goToChoosePayment}>
 								<CartItem title={Label.getCMLabel('PAY')}
 													rightIcon={require('./Image/right.png')}
-													paymentChannel={this.state.payment_channel}
+													paymentChannel={this.state.selectedCase.payment_channel}
 													value={payment_description}/>
 							</TouchableOpacity>
 						)
@@ -952,7 +952,7 @@ class Confirm extends Component {
 						payment_section.push(
 							<View key={'showPayment'}>
 								<CartItem title={Label.getCMLabel('PAY')}
-													paymentChannel={this.state.payment_channel}
+													paymentChannel={this.state.selectedCase.payment_channel}
 													value={Label.getCMLabel('CASH')}/>
 							</View>
 						)
@@ -966,7 +966,7 @@ class Confirm extends Component {
 																onPress={this._goToChoosePayment}>
 								<CartItem title={Label.getCMLabel('PAY')}
 													rightIcon={require('./Image/right.png')}
-													paymentChannel={this.state.payment_channel}
+													paymentChannel={this.state.selectedCase.payment_channel}
 													value={payment_description}/>
 							</TouchableOpacity>
 						)
