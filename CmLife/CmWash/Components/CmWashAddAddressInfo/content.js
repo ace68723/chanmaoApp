@@ -78,12 +78,12 @@ export default class Content extends Component {
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/name.png')}/></View>
                     <Text style={styles.tips}
-                          allowFontScaling={false}>联系人:</Text>
+                          allowFontScaling={false}>联系人: </Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         value={this.props.name}
                         onChangeText={this.props.onNameChange}
-                        placeholder={'请用英文填写姓名'}
+                        placeholder={' 请用英文填写姓名'}
                         selectionColor={'#ff7685'}
                         returnKeyType="next"
                         autoCorrect={false}
@@ -95,7 +95,7 @@ export default class Content extends Component {
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/phoneNum.png')}/></View>
                     <Text style={styles.tips}
-                          allowFontScaling={false}>电话:+1</Text>
+                          allowFontScaling={false}>电话:+1 </Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         ref={(ref)=>{ this.telRef = ref}}
@@ -104,25 +104,42 @@ export default class Content extends Component {
                         maxLength = {13}
                         keyboardType={'phone-pad'}
                         selectionColor={'#ff7685'}
-                        placeholder="Phone Number"
+                        placeholder=" Phone Number"
                         style={styles.input}
                     />
                 </View>
                 <View style={styles.info}>
                     <View style={styles.image}><Image source={require('./img/unitNum.png')}/></View>
                     <Text style={styles.tips}
-                          allowFontScaling={false}>Unit No.:</Text>
+                          allowFontScaling={false}>Unit No.: </Text>
                     <TextInput
                         underlineColorAndroid={"rgba(0,0,0,0)"}
                         value={this.props.unitNum}
                         onChangeText={this.props.onUnitNumChange}
-                        placeholder="Optional（选填）"
+                        placeholder=" Optional（选填）"
                         selectionColor={'#ff7685'}
                         returnKeyType="send"
                         style={styles.input}
                         autoCorrect={false}
                     />
                 </View>
+
+                <View style={styles.info}>
+                    <View style={styles.image}><Image source={require('./img/buzz.png')}/></View>
+                    <Text style={styles.tips}
+                          allowFontScaling={false}>Buzz Code: </Text>
+                    <TextInput
+                        underlineColorAndroid={"rgba(0,0,0,0)"}
+                        value={this.props.buzz}
+                        onChangeText={this.props.onBuzzChange}
+                        placeholder=" Optional（选填）"
+                        selectionColor={'#ff7685'}
+                        returnKeyType="send"
+                        style={styles.input}
+                        autoCorrect={false}
+                    />
+                </View>
+
                 <View style={styles.horizontalSpace} />
                 <View style={styles.submit}>
                     <View style={styles.verticalSpace}/>

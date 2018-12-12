@@ -29,6 +29,7 @@ export default class App extends Component {
             name: '',
             phoneNumDisplay: '',
             unitNum: '',
+            buzz: '',
             addressInfo: [],
         };
         this.handlePhoneNumChange = this.handlePhoneNumChange.bind(this);
@@ -88,12 +89,13 @@ export default class App extends Component {
         const name  = this.state.name;
         const phoneNumber = this.state.phoneNum;
         const unitNumber = this.state.unitNum;
-        const userInfo = {addressObject,name,phoneNumber,unitNumber}
+        const buzz = this.state.buzz;
+        const userInfo = {addressObject,name,phoneNumber,unitNumber,buzz}
         UserAction.putUserAddr(userInfo);
 
-          this.props.navigator.dismissModal({
-            animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
-          });
+        this.props.navigator.dismissModal({
+          animationType: 'slide-down' // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
+        });
     }
     _goBack(){
       this.props.navigator.pop();
@@ -114,6 +116,8 @@ export default class App extends Component {
                     onPhoneNumChange={this.handlePhoneNumChange}
                     unitNum={this.state.unitNum}
                     onUnitNumChange={(unitNum) => this.setState({ unitNum: unitNum })}
+                    buzz={this.state.buzz}
+                    onBuzzChange={(buzz) => this.setState({ buzz: buzz })}
                     onSubmit={this.handleSubmit}
                 />
             </View>
