@@ -63,7 +63,7 @@ const CheckoutStore = Object.assign({},EventEmitter.prototype,{
   },
 
   updateCheckout(data){
-    // console.log(data);
+    console.log(data);
     this.state = Object.assign({},this.state,data);
 
   },
