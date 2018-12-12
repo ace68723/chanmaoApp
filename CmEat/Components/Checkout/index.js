@@ -301,7 +301,7 @@ class Confirm extends Component {
       CheckoutAction.calculateDeliveryFee()
     }
     _doCheckout(){
-		if (this.state.payment_channel < 0) return;
+		if (this.state.selectedCase.payment_channel < 0) return;
 		this.setState({
 			loading:true,
 			showOrderConfirm:false,
@@ -314,7 +314,7 @@ class Confirm extends Component {
 															 ticket_id: this.state.ticket_id,
 															 sign: this.state.selectedCase.sign,
 															 dltype: this.state.dltype,
-															 payment_channel: this.state.payment_channel,
+															 payment_channel: this.state.selectedCase.payment_channel,
 															 charge_total: this.state.selectedCase.fees.charge_total,
 															 rid: this.state.rid
 															});
@@ -891,13 +891,13 @@ class Confirm extends Component {
 		_renderChoosePayment() {
 			if (this.state.cases) {
 				let payment_description = '';
-				if (this.state.payment_channel == 1) {
+				if (this.state.selectedCase.payment_channel == 1) {
 					payment_description = ' **** **** **** ' + this.state.last_payment.stripe_last4;
 				}
-				else if (this.state.payment_channel == 10) {
+				else if (this.state.selectedCase.payment_channel == 10) {
 					// payment_description = '支付宝';
 				}
-				else if (this.state.payment_channel == 30) {
+				else if (this.state.selectedCase.payment_channel == 30) {
 					// payment_description = 'Apple Pay';
 				}
 				else {
@@ -1304,7 +1304,7 @@ class Confirm extends Component {
 														 total={this.state.selectedCase.fees.charge_total}
 														 tips={this.state.selectedCase.fees.service_fee}
 														 visaFee={this.state.visa_fee}
-														 paymentChannel={this.state.payment_channel}
+														 paymentChannel={this.state.selectedCase.payment_channel}
 														 dltype={this.state.dltype}/>)
 			}
 		}
