@@ -100,15 +100,26 @@ export default class Home extends Component {
   }
   _goToAboutUs() {
     this.props.navigator.push({
-      screen: 'CmEatAboutUs',
+      screen: 'CustomerService',
       animated: true,
       navigatorStyle: {
         navBarHidden: true
       },
       passProps: {
-        fromCmWash:true
+
       }
     });
+
+    // this.props.navigator.push({
+    //   screen: 'CmEatAboutUs',
+    //   animated: true,
+    //   navigatorStyle: {
+    //     navBarHidden: true
+    //   },
+    //   passProps: {
+    //     fromCmWash:true
+    //   }
+    // });
   }
   onPressedCell(key){
     if (key=='cmeat') {this._goToCmEat();}
