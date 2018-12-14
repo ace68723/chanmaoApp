@@ -70,27 +70,27 @@ export default class Home extends Component {
         }
 
     });
-    }    
+    }
     JPushModule.initPush()
 
     // console.log(JPushModule);
     JPushModule.getRegistrationID(registrationId => {console.log('resisterID:'+registrationId)})
     AppState.addEventListener('change', this._handleAppStateChange);
+
     JPushModule.addReceiveCustomMsgListener((message) => {
-         this.setState({pushMsg: message});
-       });
-       JPushModule.addReceiveNotificationListener((message) => {
-         console.log("receive notification: " + message);
-       })
+      this.setState({pushMsg: message});
+    });
+    JPushModule.addReceiveNotificationListener((message) => {
+      console.log("receive notification: " + message);
+    });
 
-
-      this._versionCheck();
+    this._versionCheck();
 
   }
   componentWillUnmount(){
     AppState.removeEventListener('change', this._handleAppStateChange);
     JPushModule.removeReceiveCustomMsgListener();
-   JPushModule.removeReceiveNotificationListener();
+    JPushModule.removeReceiveNotificationListener();
   }
   _versionCheck(){
     let curVersion = GetUserInfo().version;
