@@ -269,6 +269,7 @@ export default class LogoAnimationView extends Component {
   }
 
 	async _handleRegister() {
+		// console.log('resisterFunction:11111111');
 		if(this.state._registerStarted) return;
 		this.setState({
 			showLoading:true,
@@ -281,6 +282,7 @@ export default class LogoAnimationView extends Component {
 				_registerStarted:false,
 			});
 
+				// console.log('resisterFunction:11111111');
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PLZ_ENTER_ACC_INFO'));
 			return;
 		}
@@ -291,6 +293,7 @@ export default class LogoAnimationView extends Component {
 				_registerStarted:false,
 			});
 
+				// console.log('resisterFunction:2222222');
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('PASSWORD_NOT_MATCHING'));
 			return;
 		} else if (this.state.password.length < 8 || this.state.password.length > 32) {
@@ -300,6 +303,7 @@ export default class LogoAnimationView extends Component {
 				_registerStarted:false,
 			});
 
+				// console.log('resisterFunction:333333333');
 			this.popupView.showAlertWithTitle(this, Label.getCMLabel('ALERT_ERROR_TITLE'), Label.getCMLabel('INVALID_PASSWORD_LENGTH'));
 			// this.popupView.setMessagePopup({
 			// 	subtitle: "密码必须在8到32位之间",
@@ -312,10 +316,12 @@ export default class LogoAnimationView extends Component {
 			// Alert.errorAlert('密码必须在8到32位之间');
 			return;
 		}
+						// console.log('function111: start');
 		const {phone,verification,email,password} = this.state;
 		const io_data	= {phone,verification,email,password}
     try {
         const res = await AuthAction.phoneRegister(io_data);
+				// console.log('function111:'+ res);
 				if (res == 'success') {
 					this.setState({
 	    			showLoading:false,
@@ -335,7 +341,7 @@ export default class LogoAnimationView extends Component {
 	    		});
 				}
     } catch (e) {
-      console.log(e)
+      console.log('function111:'+e)
       this.setState({
         showLoading:false,
         loginSuccess:false,
@@ -345,9 +351,12 @@ export default class LogoAnimationView extends Component {
 	}
 	async _handleWechatLogin(event){
 		try {
-		 const version = await WeChat.getApiVersion();
 
+ 		 // console.log('wechat result: ');
+		 const version = await WeChat.getApiVersion();
+		 // console.log('wechat result1: '+version);
 		 const result = await WeChat.sendAuthRequest(scope, state);
+		 // console.log('wechat result2: '+result);
 		 const resCode = result.code;
 		 // const deviceToken = this.state.deviceToken;
 		 // const data = {resCode,deviceToken};

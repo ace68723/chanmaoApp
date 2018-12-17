@@ -1,4 +1,4 @@
-/* @flow */
+  /* @flow */
 
 import React, { Component } from 'react';
 import {
@@ -70,7 +70,7 @@ export default class Home extends Component {
         }
 
     });
-    }    
+    }
     JPushModule.initPush()
 
     // console.log(JPushModule);
