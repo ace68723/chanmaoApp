@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>馋猫CMEOW</string>
+	<string>馋猫生活</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -74,8 +74,6 @@
 	<string>You location will help us to determine the available restaurants that near you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>You location will help us to determine the available restaurants that near you.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Send photos to help resolve app issues</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NotoSans-Regular.ttf</string>
@@ -108,6 +106,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Send photos to help resolve app issues</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
