@@ -37,8 +37,9 @@ target 'chanmao' do
   # react-native-maps dependencies
   pod 'react-native-maps', path: rn_maps_path
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
-pod 'JPushRN', :path => '../node_modules/jpush-react-native'
-pod 'JCoreRN', :path => '../node_modules/jcore-react-native'
+  pod 'JPushRN', :path => '../node_modules/jpush-react-native'
+  pod 'JCoreRN', :path => '../node_modules/jcore-react-native'
+  pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'
 end
 
 post_install do |installer|

@@ -134,6 +134,9 @@ export default class StartupAnimation extends Component {
               }
             }
           })
+          .catch((error) => {
+            this.setState({isAnimationRunning:false});
+          })
 
 
       },3300)
