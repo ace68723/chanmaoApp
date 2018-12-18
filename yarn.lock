@@ -4899,6 +4899,10 @@ react-native-device-info@^0.21.5:
   version "0.21.5"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.21.5.tgz#99478a2d68182e012297f2d63f2bd1b788106dee"
 
+react-native-intercom@^12.3.0:
+  version "12.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-intercom/-/react-native-intercom-12.4.0.tgz#31ca76c01f1cbd3133b4b02e8a8827416c5d6a96"
+
 react-native-maps@^0.21.0:
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.21.0.tgz#005f58e93d7623ad59667e8002101970ddf235c2"
