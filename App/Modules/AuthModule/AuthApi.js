@@ -14,8 +14,8 @@ const AuthApi = {
     AppLogin(userInfo){
         // const url = AuthConstants.API_LOGIN
 
-        // const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_login_phone';
-        const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_login_phone';
+        const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_login_phone';
+        // const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_login_phone';
         let options = {
             method: 'POST',
             mode:'cors',
@@ -49,7 +49,8 @@ const AuthApi = {
     },
     phoneRegister(io_data) {
       // const url = AuthConstants.API_LOGIN
-      const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_register_user';
+      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_register_user';
+      // const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_register_user';
       let options = {
           method: 'POST',
           mode:'cors',
@@ -85,7 +86,8 @@ const AuthApi = {
               .catch((error) => {throw ERROR_NETWORK})
     },
     sendVerification(io_data) {
-      const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_send_vcode';
+      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_send_vcode';
+      // const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_send_vcode';
       let options = {
           method: 'GET',
           mode:'cors',
@@ -105,7 +107,8 @@ const AuthApi = {
     AppAuth(userInfo){
       console.log('idinfunction:'+jpushid);
       // const url = AuthConstants.API_AUTH;
-      const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_login_wc';
+      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_login_wc';
+      // const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_login_wc';
       let options = {
         method: 'GET',
         mode:'cors',
