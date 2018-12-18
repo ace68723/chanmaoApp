@@ -368,6 +368,10 @@ class Menu extends Component {
 
 		}
     render(){
+			let menuListMarginTop = 0;
+			if (this.state.restaurant.discount_message.length > 0) {
+				menuListMarginTop = 19;
+			}
       if(this.state.renderBackgroundCover){
         return(
           <View style={{
@@ -403,7 +407,7 @@ class Menu extends Component {
                   end_time = {this.props.restaurant.end_time}
                   />
             </Animated.View>
-            <View style={{position:'absolute',left:0,top:0,right:0,bottom:0,}}>
+            <View style={{position:'absolute',left:0,top:26 + menuListMarginTop,right:0,bottom:0,}}>
               {this._renderMenuList()}
             </View>
 
