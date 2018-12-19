@@ -161,7 +161,7 @@ export default class MenuHeader extends Component {
 				</Animated.View>
 				<Animated.View style={{opacity:this.state.rrOpacity,marginTop:-25,}}>
 					<Text style={{color:'#363646',
-												fontSize:24,
+												fontSize:22,
 												fontFamily:'NotoSansCJKsc-Bold',
 												textAlign:'center',}}
 								allowFontScaling={false}>
