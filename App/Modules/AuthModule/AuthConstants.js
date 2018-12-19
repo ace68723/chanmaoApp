@@ -2,11 +2,23 @@
 // const TestServer = 'http://cmtest.littlesailing.com/index.php?r=';
 const proructServer = 'https://www.chanmao.ca/index.php?r=';
 const Server = proructServer;
+
+const backendProductionServer = 'https://www.cmapi.ca/cm_backend/';
+const backendTestingServer = 'https://www.cmapi.ca/cm_qa_lumen/backend/';
+const backendServer = backendProductionServer;
+
 const AppConstants ={
     //chanmao login api,{username: , password: }
     // MobAddress10Test
-    API_LOGIN:Server + 'MobLogin10/login',
-    API_AUTH: Server + 'MobLogin10/loginwc',
+    // API_LOGIN:Server + 'MobLogin10/login',
+    // API_AUTH: Server + 'MobLogin10/loginwc',
+    API_LOGIN_PHONE: backendServer + 'index.php/api/v1/auth_login_phone',
+    API_RESIGTER_USER: backendServer + 'index.php/api/v1/auth_register_user',
+    API_SEND_VCODE: backendServer + 'index.php/api/v1/auth_send_vcode',
+    API_AUTH: backendServer + 'index.php/api/v1/auth_login_wc',
+    API_SEND_VCODE_RESET_PASSWORD: backendServer + 'index.php/api/v1/auth_send_vcode_reset_password',
+    API_RESET_PASSWORD: backendServer + 'index.php/api/v1/reset_password',
+    API_BIND_PHONE: backendServer + 'index.php/api/v1/auth_register_addphone',
 
     API_AREALIST: Server + 'MobOrder10/RrAreaNew',
     API_RESTAURANTLIST: Server + 'MobOrder10/Rrlist',

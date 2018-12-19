@@ -12,9 +12,9 @@ let jpushid='';
 JPushModule.getRegistrationID(registrationId => {jpushid=registrationId;});
 const AuthApi = {
     AppLogin(userInfo){
-        // const url = AuthConstants.API_LOGIN
+        const url = AuthConstants.API_LOGIN_PHONE;
 
-        const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_login_phone';
+        // const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_login_phone';
         // const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_login_phone';
         let options = {
             method: 'POST',
@@ -25,9 +25,10 @@ const AuthApi = {
             }
         }
         options.headers = Object.assign(options.headers,{
-          'jpushid':jpushid,
+            jpushid:jpushid,
             cmos:userInfo.os,
             cmuuid:userInfo.uuid,
+            appid:1,
         })
         options.body = JSON.stringify({
           iv_username: userInfo.username,
@@ -48,14 +49,13 @@ const AuthApi = {
                 .catch((error) => {throw ERROR_NETWORK})
     },
     phoneRegister(io_data) {
-      // const url = AuthConstants.API_LOGIN
-      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_register_user';
+      const url = AuthConstants.API_RESIGTER_USER;
+      // const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_register_user';
       // const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_register_user';
       let options = {
           method: 'POST',
           mode:'cors',
           headers: {
-            'jpushid':jpushid,
               'Accept': 'application/json',
               'Content-Type': 'application/json'
           }
@@ -79,14 +79,17 @@ const AuthApi = {
         })
       }
       options.headers = Object.assign(options.headers,{
+          jpushid:jpushid,
           cmos:io_data.cmos,
+          appid:1
       })
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
     sendVerification(io_data) {
-      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_send_vcode';
+      const url = AuthConstants.API_SEND_VCODE;
+      // const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_send_vcode';
       // const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_send_vcode';
       let options = {
           method: 'GET',
@@ -105,15 +108,13 @@ const AuthApi = {
               .catch((error) => {throw ERROR_NETWORK})
     },
     AppAuth(userInfo){
-      console.log('idinfunction:'+jpushid);
-      // const url = AuthConstants.API_AUTH;
-      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_login_wc';
+      const url = AuthConstants.API_AUTH;
+      // const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_login_wc';
       // const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/v1/auth_login_wc';
       let options = {
         method: 'GET',
         mode:'cors',
         headers: {
-          'jpushid':jpushid,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
@@ -129,6 +130,10 @@ const AuthApi = {
               rescode:userInfo.resCode,
           })
       }
+      options.headers = Object.assign(options.headers,{
+          jpushid:jpushid,
+          appid:1
+      });
       // if(userInfo.token){
       //
       //     options.headers = Object.assign(options.headers,{
@@ -151,10 +156,9 @@ const AuthApi = {
               .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
-    getVcode(io_data)
-    {
-
-      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_send_vcode_reset_password';
+    getVcode(io_data) {
+      const url = AuthConstants.API_SEND_VCODE_RESET_PASSWORD;
+      // const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_send_vcode_reset_password';
       let options = {
           method: 'GET',
           mode:'cors',
@@ -180,9 +184,9 @@ const AuthApi = {
               .then((res) => res.json())
               .catch((error) => {throw ERROR_NETWORK})
     },
-    resetPassword(io_data)
-    {
-      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/reset_password';
+    resetPassword(io_data) {
+      const url = AuthConstants.API_RESET_PASSWORD;
+      // const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/reset_password';
       let options = {
           method: 'POST',
           mode:'cors',
@@ -212,7 +216,8 @@ const AuthApi = {
               .catch((error) => {throw ERROR_NETWORK})
     },
     bindPhone(io_data) {
-      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_register_addphone';
+      const url = AuthConstants.API_BIND_PHONE;
+      // const url = 'https://www.cmapi.ca/cm_backend/index.php/api/v1/auth_register_addphone';
       let options = {
         method: 'POST',
         mode:'cors',
