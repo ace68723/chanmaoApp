@@ -198,6 +198,18 @@ export function GetUserInfo() {
   }
 
 }
+
+export function GetVersion() {
+  try {
+    const version = realm.objectForPrimaryKey('cm_system','version').value;
+    return version;
+  } catch (e) {
+    console.log(e)
+    return "e"
+  }
+
+}
+
 export function LogOut() {
   realm.write(() => {
     realm.create('cm_system',{type: 'uid', value: ''}, true);

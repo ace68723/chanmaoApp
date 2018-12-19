@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import AuthAction from '../Actions/AuthAction';
 import VersionAction from '../Actions/VersionAction';
-import { GetUserInfo, cme_getRegion } from '../Modules/Database';
+import { GetVersion, GetUserInfo, cme_getRegion } from '../Modules/Database';
 import PopupView from '../../CmEat/Components/Popup/PopupView'
 import StartUpAnimation from './startupAnimation';
 import JPushModule from 'jpush-react-native';
@@ -93,8 +93,8 @@ export default class Home extends Component {
     JPushModule.removeReceiveNotificationListener();
   }
   _versionCheck(){
-    let curVersion = GetUserInfo().version;
-    VersionAction.getLatestVersion(curVersion).then((versionObject)=>{
+    let curVersion = GetVersion();
+    VersionAction.getLatestVersion(curVersion, Platform.OS).then((versionObject)=>{
       if (versionObject && versionObject.need_update) {
         this._updateAlert(versionObject);
       }else{

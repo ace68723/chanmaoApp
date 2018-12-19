@@ -81,7 +81,7 @@ export default class CodePushUpdate extends Component {
                     <Image source={require('./image/rocket.png')} style={{width:rocketHeight*0.6, height:rocketHeight, position:'absolute',bottom:loadingBarLength*this.state.updatePercentage/100 + parseInt(140 * sizeScale)}} />
                     <View style={{marginTop:50 * sizeScale, justifyContent:'center', alignItems:'center'}}>
                         <Text style={styles.loadingFont}>Loading</Text>
-                        <Text style={styles.loadingFont}>%{this.state.updatePercentage}</Text>
+                        <Text style={styles.loadingFont}>{this.state.updatePercentage}%</Text>
                     </View>
 
                 </View>
