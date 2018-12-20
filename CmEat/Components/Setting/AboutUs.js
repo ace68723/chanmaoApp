@@ -100,7 +100,7 @@ export default class InfoPage extends Component {
       <View style={styles.container}>
         {this.state.showPopup && this.popupView.show()}
         <Header title={Label.getCMLabel('ABOUT_US')} goBack={this._goBack}/>
-        <ScrollView style={{flex:1, paddingTop:64,paddingLeft:20,paddingRight:20, paddingBottom: 20}}>
+        <ScrollView style={{flex:1, paddingTop:12,paddingLeft:20,paddingRight:20, paddingBottom: 20}}>
 
             {(!this.props.fromCmWash) && <View style={styles.fontContainer}>
                 <Text style={styles.headerFont} allowFontScaling={false} >

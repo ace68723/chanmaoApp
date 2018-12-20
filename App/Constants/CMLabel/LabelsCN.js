@@ -184,9 +184,9 @@ module.exports={
     PAYMENT_TYPE:"支付方式",
     //About us
     ABOUT_US:'关于我们',
-    CHANMAO_INFO:'这是一个致力于打造多伦多最佳订餐平台，为自己理想奋斗的热血团队。我们愿真诚的接纳您的意见，也邀请志同道合的你加入我们。',
+    CHANMAO_INFO:'馋猫是一个神奇的网上购物体验平台。自2013年成立以来，馋猫已经成为加拿大公认的亚洲美食配送行业的领跑者。我们的愿景是通过科技和互联网改变商家服务消费者的方式，进而改变人们的生活方式。我们一直致力于为平台增添新的元素以革新人们的日常生活，让生活越来越方便。',
     CHANMAO_KEFU:'微信客服：chanmao_kefu',
-    CHANMAO_BUSINESE:'商务合作：marketing@chanmao.ca',
+    CHANMAO_BUSINESE:'info@cmeow.com',
     CHANMAO_COPYRIGHT:'Chanmao Inc. 版权所有',
     APP_VERSION:'版本号',
 
