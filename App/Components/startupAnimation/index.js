@@ -20,8 +20,8 @@ if(height == 812){
   iconMargin = 0;
   headerHeight = 0;
 }
-const sizeScale = parseInt(width / 375);
-const heightScale = parseInt(height / 667);
+const sizeScale = (width / 375).toFixed(2);
+const heightScale = (height / 667).toFixed(2);
 let isDaytime = true;
 let intervalIndicator;
 let language;
@@ -233,7 +233,7 @@ export default class StartupAnimation extends Component {
         picSize = 310 * sizeScale;
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
-          outputRange: [  parseInt(-300*sizeScale),  parseInt(20*sizeScale),  parseInt(10*sizeScale),  parseInt(20*sizeScale),  parseInt(15*sizeScale) ,  parseInt(20*sizeScale)]
+          outputRange: [  -300*sizeScale,  20*sizeScale,  10*sizeScale,  20*sizeScale,  15*sizeScale ,  20*sizeScale]
         })
       }
 

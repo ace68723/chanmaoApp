@@ -10,9 +10,9 @@ import {
     Alert
 } from 'react-native';
 const {width,height} = Dimensions.get('window');
-const sizeScale = parseInt(width / 375);
-const heightScale = parseInt(height / 667);
-const picSize = parseInt(310* sizeScale);
+const sizeScale = (width / 375).toFixed(2);
+const heightScale = (height / 667).toFixed(2);
+const picSize = parseFloat(310 * sizeScale);
 let iconMargin;
 if(height == 812){
     iconMargin = 50;
