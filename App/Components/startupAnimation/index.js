@@ -226,7 +226,12 @@ export default class StartupAnimation extends Component {
         picSize = 310 * sizeScale;
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
-          outputRange: [  -300*sizeScale,  -picSize/5, -picSize/5-10,  -picSize/5,  -picSize/5-5 ,  -picSize/5]
+          outputRange: [  -300*sizeScale,
+                          (-picSize/5).toFixed(2),
+                          (-picSize/5).toFixed(2)-10,
+                          (-picSize/5).toFixed(2),
+                          (-picSize/5).toFixed(2)-5,
+                          (-picSize/5).toFixed(2)]
         })
       }else{
         left = -50* sizeScale;
