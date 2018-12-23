@@ -369,7 +369,7 @@ class Menu extends Component {
 		}
     render(){
 			let menuListMarginTop = 0;
-			if (this.state.restaurant.discount_message.length > 0) {
+			if (this.state.restaurant.discount_message && this.state.restaurant.discount_message.length > 0) {
 				menuListMarginTop = 19;
 			}
       if(this.state.renderBackgroundCover){
