@@ -16,7 +16,7 @@ RCT_EXPORT_METHOD(pay:(NSString *)orderInfo
                   rejecter:(RCTPromiseRejectBlock)reject){
 
   NSLog(@"orderInfo %@", orderInfo);
-  NSString *appScheme = @"chanmao-alipay";
+  NSString *appScheme = @"xiaoming-alipay";
   [[AlipaySDK defaultService] payOrder:orderInfo fromScheme:appScheme callback:^(NSDictionary *resultDic) {
     NSLog(@"ggg %@", resultDic);
     resolve(resultDic);

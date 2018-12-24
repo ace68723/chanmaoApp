@@ -39,7 +39,7 @@
 			<string>alipay</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>chanmao-alipay</string>
+				<string>xiaoming-alipay</string>
 			</array>
 		</dict>
 	</array>
