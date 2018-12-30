@@ -50,6 +50,13 @@ class CustomerService extends Component {
 			}
 		}
 
+		// Custom logic
+		if (selected.key == "rushOrder"){
+			this.rushOrder();
+			return;
+		}
+
+		// Default types
 		switch (selected.type) {
 			case "message":
 				this.showMessager(selected.message)
@@ -85,6 +92,21 @@ class CustomerService extends Component {
 		    },
 		});
 		Intercom.displayMessageComposerWithInitialMessage(message);
+	}
+
+	rushOrder(){
+		const orderPlacedTime = 1246149390;
+		const diffMinutes = (Math.round((new Date()).getTime() / 1000) - orderPlacedTime) / 60;
+		console.log(diffMinutes);
+		if (diffMinutes <= 40){
+			alert('您的订单正在准备中，请耐心等待');
+		}
+		else if (diffMinutes >= 40 && diffMinutes <= 60){
+			alert('您的订单正在配送中，请耐心等待');
+		}
+		else if (diffMinutes >= 60){
+			this.showMessager("你好，我想催单");
+		}
 	}
 
 	renderCells(item) {
