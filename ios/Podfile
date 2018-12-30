@@ -38,6 +38,8 @@ target 'chanmao' do
   pod 'react-native-maps', path: rn_maps_path
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'react-native-intercom', :path => '../node_modules/react-native-intercom'
+
 end
 
 post_install do |installer|
