@@ -102,8 +102,9 @@ android {
         applicationId "ca.chanmao.app"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 10
-        versionName "2.9.4"
+        multiDexEnabled true
+        versionCode 7
+        versionName "2.9.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -154,9 +155,11 @@ configurations.all {
             details.useVersion('11.+')
         }
     }
+
 }
 
 dependencies {
+    compile project(':react-native-intercom')
     compile project(':react-native-svg')
     compile project(':react-native-maps')
     compile project(':react-native-wechat')
@@ -167,6 +170,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.facebook.react:react-native:+'
+    compile 'io.intercom.android:intercom-sdk-base:5.+'
     // From node_modules
     compile project(':react-native-navigation')
     compile files('libs/alipaySdk-20180403.jar')
