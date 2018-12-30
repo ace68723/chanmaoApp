@@ -13,22 +13,30 @@ import {
 
 import Header from '../General/Header';
 import Cell from './cell.js'
-import Options from './data.js'
 
 const { height, width } = Dimensions.get('window');
 
-class CustomerService extends Component {
+class CustomerServiceContentView extends Component {
   constructor(props){
     super(props);
-
-		const options = Options.cmEat;
+		const cellsData = [
+			{
+				title: "联系客服",
+				key: "contact"
+			},
+			{
+				title: "甜满箱 全场免运费 满$25起送",
+				key: "sbox"
+			},
+			{
+				title: "馋猫订餐",
+				key: "cmeat"
+			},
+		]
     this.state={
-			cells: options.unfinishedOptions
+			cells: cellsData
 		}
     this.goBack = this.goBack.bind(this);
-		this.onPressedCell = this.onPressedCell.bind(this);
-		this.pushScreen = this.pushScreen.bind(this);
-		this.showMessager = this.showMessager.bind(this);
   }
   goBack(){
     this.props.navigator.pop();
@@ -38,41 +46,9 @@ class CustomerService extends Component {
 			}, 500);
 		}
   }
-	onPressedCell(key) {
-		let selected;
-		for (let i of this.state.cells){
-			if (i.key == key){
-				selected = i;
-				break;
-			}
-		}
-		switch (selected.type) {
-			case "message":
-				this.showMessager(selected.message)
-				break;
-			case "options":
-				this.pushScreen(selected.options)
-				break;
-			default:
-
-		}
-	}
-	pushScreen(options){
-		this.props.navigator.push({
-			screen: 'CustomerServiceListView',
-			animated: true,
-			navigatorStyle: {navBarHidden: true},
-			passProps: {
-				options: options
-			}
-		});
-	}
-	showMessager(message){
-
-	}
 	renderCells(item) {
 		return (
-			<Cell cellStyle={styles.cellStyle} title={item.title} cellKey={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />
+			<Cell cardStyle={styles.card} title={item.title} type={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />
 		)
 	}
   render() {
@@ -82,12 +58,12 @@ class CustomerService extends Component {
 				<View style={{width: width, height: width * 0.35}}>
 					<Image style={{flex: 1}} source={{uri: 'https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg'}}/>
 				</View>
-				<View style={{marginTop: 18, marginBottom: 18, backgroundColor: "#EDF3FB"}}>
+				<View style={{marginTop: 18, marginBottom: 18}}>
 					<Text style={{color: 'grey', textAlign: 'center', fontWeight: '600', fontSize: 12}}>- 选择问题 -</Text>
 				</View>
 
 				<FlatList
-					style={{marginTop: 6, backgroundColor: '#f3f3f3', borderTopWidth: 0.7, borderColor: '#CCCCD3',}}
+					style={{marginTop: 6, backgroundColor: 'grey'}}
 					data={this.state.cells}
 					renderItem={({item}) => (this.renderCells(item))}
 				/>
@@ -101,9 +77,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor:'#f3f3f3',
   },
-	cellStyle: {
-		height: 48,
-	}
 });
 
-module.exports = CustomerService;
+module.exports = CustomerServiceContentView;

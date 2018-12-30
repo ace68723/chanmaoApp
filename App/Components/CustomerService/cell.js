@@ -18,10 +18,10 @@ export default class Cell extends Component{
     // console.log(this.props)
     return (
       <View>
-        <View style={this.props.cardStyle}>
+        <View style={this.props.cellStyle}>
           <View style={styles.content}>
-            <TouchableOpacity onPress={() => this.props.onPressedCell(this.props.type)} style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '500', fontSize: 13, marginLeft: 10, }}> {this.props.title} </Text>
+            <TouchableOpacity onPress={() => this.props.onPressedCell(this.props.cellKey)} style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '500', fontSize: 13, marginLeft: 10, color: "#393947"}}> {this.props.title} </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -32,10 +32,12 @@ export default class Cell extends Component{
 
 const styles = StyleSheet.create({
   content: {
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     height: 32,
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderBottomWidth: 0.7,
+    borderColor: '#CCCCD3',
   },
   icon: {
     width: 24,
