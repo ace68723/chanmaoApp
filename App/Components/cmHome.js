@@ -314,7 +314,8 @@ export default class Home extends Component {
       setTimeout(() => {
           let goToCmLife = this.props.goToCmLife;
           this.props.navigator.resetTo({
-            screen: 'CmLifeHome',
+            // CmLifeHome
+            screen: 'CustomerService',
             passProps: {
               handleBackToHome: this._handleBackToHome,
               goToCmLife

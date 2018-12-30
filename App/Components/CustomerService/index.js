@@ -15,6 +15,9 @@ import Header from '../General/Header';
 import Cell from './cell.js'
 import Options from './data.js'
 
+import { GetUserInfo } from '../../Modules/Database';
+import Intercom from 'react-native-intercom';
+
 const { height, width } = Dimensions.get('window');
 
 class CustomerService extends Component {
@@ -46,6 +49,7 @@ class CustomerService extends Component {
 				break;
 			}
 		}
+
 		switch (selected.type) {
 			case "message":
 				this.showMessager(selected.message)
@@ -57,19 +61,32 @@ class CustomerService extends Component {
 
 		}
 	}
-	pushScreen(options){
+	pushScreen(passingOptions){
+		console.log('333', passingOptions);
 		this.props.navigator.push({
 			screen: 'CustomerServiceListView',
 			animated: true,
 			navigatorStyle: {navBarHidden: true},
 			passProps: {
-				options: options
+				options: passingOptions
 			}
 		});
 	}
 	showMessager(message){
+		const {uid, version} = GetUserInfo();
+		const oid = '1234';
 
+		Intercom.registerIdentifiedUser({ userId: uid });
+		Intercom.updateUser({
+		    user_id: uid,
+		    custom_attributes: {
+		        version: version,
+						oid: oid,
+		    },
+		});
+		Intercom.displayMessageComposerWithInitialMessage(message);
 	}
+
 	renderCells(item) {
 		return (
 			<Cell cellStyle={styles.cellStyle} title={item.title} cellKey={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />

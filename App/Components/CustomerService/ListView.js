@@ -14,6 +14,9 @@ import {
 import Header from '../General/Header';
 import Cell from './cell.js'
 
+import { GetUserInfo } from '../../Modules/Database';
+import Intercom from 'react-native-intercom';
+
 const { height, width } = Dimensions.get('window');
 
 class CustomerServiceListView extends Component {
@@ -34,31 +37,53 @@ class CustomerServiceListView extends Component {
 		}
   }
 	onPressedCell(key) {
+		let selected;
+		for (let i of this.state.cells){
+			if (i.key == key){
+				selected = i;
+				break;
+			}
+		}
+		switch (selected.type) {
+			case "message":
+				this.showMessager(selected.message)
+				break;
+			case "options":
+				this.pushScreen(selected.options)
+				break;
+			default:
+
+		}
+	}
+	pushScreen(options){
+
 		this.props.navigator.push({
 			screen: 'CustomerServiceListView',
 			animated: true,
 			navigatorStyle: {navBarHidden: true},
 			passProps: {
-				options: [
-					{
-						title: "联系客服",
-						key: "contact"
-					},
-					{
-						title: "甜满箱 全场免运费 满$25起送",
-						key: "sbox"
-					},
-					{
-						title: "馋猫订餐",
-						key: "cmeat"
-					},
-				]
+				options: options
 			}
 		});
 	}
+	showMessager(message){
+		const {uid, version} = GetUserInfo();
+		const oid = '1234';
+
+		Intercom.registerIdentifiedUser({ userId: uid });
+		Intercom.updateUser({
+		    user_id: uid,
+		    custom_attributes: {
+		        version: version,
+						oid: oid,
+		    },
+		});
+		Intercom.displayMessageComposerWithInitialMessage(message);
+	}
+
 	renderCells(item) {
 		return (
-			<Cell cellStyle={styles.cellStyle} title={item.title} type={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />
+			<Cell cellStyle={styles.cellStyle} title={item.title} cellKey={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />
 		)
 	}
   render() {
