@@ -30,6 +30,14 @@ Type Other - With custom logic *Use with Caution*
   type: "other",
 }
 
+Type Url
+{
+  key: key,
+  title: title,
+  type: "url",
+  url: url
+}
+
 */
 
 // Unfinished order options
@@ -129,8 +137,35 @@ const finishedOptions = [
   }
 ]
 
+const settingsOptions = [
+  {
+    key: "orderGuide",
+    title: "馋猫订餐下单流程",
+    type: "url",
+    url: "http://google.ca"
+  },
+  {
+    key: "couponGuide",
+    title: "如何使用优惠码",
+    type: "url",
+    url: "http://google.ca"
+  },
+  {
+    key: "paymentIssues",
+    title: "订单支付相关",
+    type: "message",
+    message: "你好，我想询问订单支付相关的问题"
+  },
+  {
+    key: "otherIssues",
+    title: "其他",
+    type: "message",
+    message: ""
+  }
+]
+
 export const Options = {
-  cmEat: {unfinishedOptions, finishedOptions}
+  cmEat: {unfinishedOptions, finishedOptions, settingsOptions}
 };
 
 export default Options;

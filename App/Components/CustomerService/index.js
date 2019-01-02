@@ -28,9 +28,17 @@ class CustomerService extends Component {
 		this.onPressedCell = this.onPressedCell.bind(this);
 		this.pushScreen = this.pushScreen.bind(this);
 		this.showMessager = this.showMessager.bind(this);
+		this.openUrl = this.openUrl.bind(this);
+
 		this.initPageData();
   }
 	initPageData(){
+		if (this.props.fromSettings){
+			this.state = {
+				cells: Options.cmEat.settingsOptions,
+			}
+			return;
+		}
 		const finishedStatus = [40, 5, 90, ];
 		const orderStatus = this.props.order.order_status;
 		console.log(this.props.order);
@@ -43,7 +51,8 @@ class CustomerService extends Component {
 			options = Options.cmEat.unfinishedOptions;
 		}
 		this.state = {
-			cells: options
+			cells: options,
+			headerImage: this.props.order.rr_url
 		}
 	}
   goBack(){
@@ -77,6 +86,9 @@ class CustomerService extends Component {
 			case "options":
 				this.pushScreen(selected.options)
 				break;
+			case "url":
+				this.openUrl(selected.url)
+				break;
 			default:
 
 		}
@@ -94,23 +106,39 @@ class CustomerService extends Component {
 	}
 	showMessager(message){
 		const {uid, version} = GetUserInfo();
-		const oid = this.props.order.order_oid;
-
 		Intercom.registerIdentifiedUser({ userId: uid });
-		Intercom.updateUser({
-		    user_id: uid,
-		    custom_attributes: {
-		        version: version,
-						order_id: oid,
-						contact_name: this.props.order.user_name,
-						phone_number: this.props.order.user_tel,
-						address: this.props.order.user_address,
-						order_status: this.props.order.order_status,
-		    },
-		});
+		if (this.props.fromSettings){
+			Intercom.updateUser({
+					user_id: uid,
+					custom_attributes: {
+							version: version,
+					},
+			});
+		}
+		else{
+			const oid = this.props.order.order_oid;
+			Intercom.updateUser({
+					user_id: uid,
+					custom_attributes: {
+							version: version,
+							order_id: oid,
+							contact_name: this.props.order.user_name,
+							phone_number: this.props.order.user_tel,
+							address: this.props.order.user_address,
+							order_status: this.props.order.order_status,
+					},
+			});
+		}
 		Intercom.displayMessageComposerWithInitialMessage(message);
 	}
-
+	openUrl(url){
+		this.props.navigator.showModal({
+			screen: 'AdView',
+			animated: true,
+			navigatorStyle: {navBarHidden: true},
+			passProps: {url: url,},
+		})
+	}
 	rushOrder(){
 		const orderPlacedTime = moment(this.props.order.order_created).unix();
 		// console.log(orderPlacedTime);
@@ -136,9 +164,12 @@ class CustomerService extends Component {
     return (
       <View style={styles.container} >
         <Header goBack={this.goBack}/>
-				<View style={{width: width, height: width * 0.35}}>
-					<Image style={{flex: 1}} source={{uri: this.props.order.rr_url}}/>
-				</View>
+				{
+					this.state.headerImage &&
+					<View style={{width: width, height: width * 0.35}}>
+						<Image style={{flex: 1}} source={{uri: this.state.headerImage}}/>
+					</View>
+				}
 				<View style={{marginTop: 18, marginBottom: 18, backgroundColor: "#f3f3f3"}}>
 					<Text style={{color: 'grey', textAlign: 'center', fontWeight: '600', fontSize: 12}}>- 选择问题 -</Text>
 				</View>

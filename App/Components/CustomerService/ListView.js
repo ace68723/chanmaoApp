@@ -24,6 +24,8 @@ class CustomerServiceListView extends Component {
     super(props);
     this.goBack = this.goBack.bind(this);
 		this.onPressedCell = this.onPressedCell.bind(this);
+		this.openUrl = this.openUrl.bind(this);
+
 		this.initPageData();
   }
 	initPageData(){
@@ -58,6 +60,9 @@ class CustomerServiceListView extends Component {
 			case "options":
 				this.pushScreen(selected.options)
 				break;
+			case "url":
+				this.openUrl(selected.url)
+				break;
 			default:
 
 		}
@@ -76,23 +81,39 @@ class CustomerServiceListView extends Component {
 	}
 	showMessager(message){
 		const {uid, version} = GetUserInfo();
-		const oid = this.props.order.order_oid;
-
 		Intercom.registerIdentifiedUser({ userId: uid });
-		Intercom.updateUser({
-		    user_id: uid,
-		    custom_attributes: {
-		        version: version,
-						order_id: oid,
-						contact_name: this.props.order.user_name,
-						phone_number: this.props.order.user_tel,
-						address: this.props.order.user_address,
-						order_status: this.props.order.order_status,
-		    },
-		});
+		if (this.props.fromSettings){
+			Intercom.updateUser({
+					user_id: uid,
+					custom_attributes: {
+							version: version,
+					},
+			});
+		}
+		else{
+			const oid = this.props.order.order_oid;
+			Intercom.updateUser({
+					user_id: uid,
+					custom_attributes: {
+							version: version,
+							order_id: oid,
+							contact_name: this.props.order.user_name,
+							phone_number: this.props.order.user_tel,
+							address: this.props.order.user_address,
+							order_status: this.props.order.order_status,
+					},
+			});
+		}
 		Intercom.displayMessageComposerWithInitialMessage(message);
 	}
-
+	openUrl(url){
+		this.props.navigator.showModal({
+			screen: 'AdView',
+			animated: true,
+			navigatorStyle: {navBarHidden: true},
+			passProps: {url: url,},
+		})
+	}
 	renderCells(item) {
 		return (
 			<Cell cellStyle={styles.cellStyle} title={item.title} cellKey={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />
