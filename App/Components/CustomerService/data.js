@@ -139,6 +139,11 @@ const finishedOptions = [
 
 const settingsOptions = [
   {
+    key: "chatHistory",
+    title: "历史记录",
+    type: "other",
+  },
+  {
     key: "orderGuide",
     title: "馋猫订餐下单流程",
     type: "url",

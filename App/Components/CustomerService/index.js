@@ -77,6 +77,10 @@ class CustomerService extends Component {
 			this.rushOrder();
 			return;
 		}
+		else if (selected.key == "chatHistory"){
+			Intercom.displayMessenger();
+			return;
+		}
 
 		// Default types
 		switch (selected.type) {
