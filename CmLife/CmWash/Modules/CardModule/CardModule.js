@@ -23,9 +23,7 @@ export default  {
       const cardToken = await StripeBridge.pay( cardNumber,
                                                 expMonth,
                                                 expYear,
-                                                cvv,
-                                                postal,
-                                                name);
+                                                cvv);
       // console.log(cardToken);
       // if(!cardToken) {throw 'no cardToken'}
       // console.log(cardToken);
