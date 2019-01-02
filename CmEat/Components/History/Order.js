@@ -211,8 +211,7 @@ export default class pastOrderEN extends Component {
                             onPress={
                               this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}
                             disabled={this.props.isRefreshing}>
-            <Text style={{marginLeft:5,
-                          fontSize:15,
+            <Text style={{fontSize:15,
                           color:'white',
                           fontFamily:'NotoSans-Regular',}}
                   allowFontScaling={false}>
@@ -230,8 +229,7 @@ export default class pastOrderEN extends Component {
                                       justifyContent:'center',
                                       alignItems:'center'}}
                               onPress={this._handleContactCustomerService}>
-              <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
-              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontFamily:'NotoSans-Regular',}} allowFontScaling={false}>{Label.getCMLabel('CONTACT_SUPPORT')}</Text>
+              <Text style={{marginLeft:5,fontSize:15,color:'#666666',fontFamily:'NotoSans-Regular',}} allowFontScaling={false}>{Label.getCMLabel('CONTACT_SUPPORT')}</Text>
 
             </TouchableOpacity>
         </View>
