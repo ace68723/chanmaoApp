@@ -19,6 +19,9 @@ import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 import Label from '../../../App/Constants/AppLabel';
+
+import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+
 // import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
 
 
@@ -121,25 +124,116 @@ export default class HomeTab extends Component {
       )
     }
   }
+	_renderCarouselItem ({item, index}) {
+
+		return (
+			<ParallaxImage
+					source={{ uri: item.thumbnail }}
+					containerStyle={{
+						flex: 1,
+						marginBottom: true ? 0 : -1,
+						backgroundColor: 'white',
+						borderRadius: 8,
+					}}
+					style={{
+						...StyleSheet.absoluteFillObject,
+						resizeMode: 'center',
+						borderRadius: 8,
+					}}
+			/>
+		)
+
+		// return (
+		// 	<TouchableOpacity
+		// 		activeOpacity={1}
+		// 		style={{
+		// 			width: width - 32 * 2,
+		// 			height: 160,
+		// 			paddingHorizontal: 8,
+		// 			paddingBottom: 18 // needed for shadow
+		// 		}}
+		// 		onPress={() => { alert(`You've clicked '${index}'`); }}
+		// 		>
+		// 			<View style={{
+		// 				position: 'absolute',
+		// 				top: 0,
+		// 				left: 8,
+		// 				right: 8,
+		// 				bottom: 18,
+		// 				shadowColor: 'black',
+		// 				shadowOpacity: 0.25,
+		// 				shadowOffset: { width: 0, height: 10 },
+		// 				shadowRadius: 10,
+		// 				borderRadius: 8
+		// 			}} />
+		// 			<View style={{
+		// 					flex: 1,
+		// 	        marginBottom: 0, // Prevent a random Android rendering issue
+		// 	        backgroundColor: 'white',
+		// 	        borderTopLeftRadius: 8,
+		// 	        borderTopRightRadius: 8
+		// 				}}>
+		// 					<ParallaxImage
+		// 							source={{ uri: "https://i.imgur.com/DDajebx.png" }}
+		// 							containerStyle={{
+		// 								flex: 1,
+		// 								marginBottom: true ? 0 : -1,
+		// 								backgroundColor: 'white',
+		// 								borderRadius: 8,
+		// 							}}
+		// 							style={{
+		// 								...StyleSheet.absoluteFillObject,
+		// 								resizeMode: 'center',
+		// 								borderRadius: 8,
+		// 							}}
+		// 					/>
+		// 				</View>
+		// 				<View style={{
+		// 					position: 'absolute',
+		// 					bottom: 0,
+		// 					left: 0,
+		// 					right: 0,
+		// 					height: 8,
+		// 					backgroundColor: 'white'
+		// 					}}
+		// 				/>
+		// 	</TouchableOpacity>
+		//
+		//
+		// );
+	}
 
 	_renderHeader() {
+		const items = [
+			{thumbnail: "https://i.imgur.com/DDajebx.png"},
+			{thumbnail: "https://i.imgur.com/DDajebx.png"},
+			{thumbnail: "https://i.imgur.com/DDajebx.png"}
+		]
 		return(
-			<View style={{paddingBottom: 8}}>
-      <HeaderWithBanner
-           bannerList={this.props.bannerList}
-           navigator={this.props.navigator}/>
-				{this._renderAdv()}
-				<View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 8}}>
-					<Image style={{height: 25, width: 25}} source={require('./Image/order.png')}/>
-					<Text allowFontScaling={false}
-								style={{alignSelf: 'center',
-												fontSize: 16,
-												fontWeight: '500',
-												fontFamily:'NotoSans-Regular'}}>{Label.getCMLabel('ORDER_BELOW')}</Text>
-				</View>
-				<View style={{justifyContent: 'center'}}>
-					<Image style={{height: 12, width: 12, alignSelf: 'center'}} source={require('./Image/order_down.png')}/>
-				</View>
+			<View style={{height: 160}}>
+				<Carousel
+					data={items}
+					renderItem={this._renderCarouselItem}
+					hasParallaxImages={true}
+					sliderWidth={width}
+					itemWidth={width - 32 * 2}
+					hasParallaxImages={false}
+					firstItem={0}
+					inactiveSlideScale={0.9}
+					inactiveSlideOpacity={0.3}
+					containerCustomStyle={{
+		        overflow: 'visible'
+	    		}}
+					contentContainerCustomStyle={{
+	        	paddingVertical: 10
+	    		}}
+					loop={true}
+					loopClonesPerSide={2}
+					autoplay={true}
+					autoplayDelay={500}
+					autoplayInterval={3000}
+					onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
+				/>
 			</View>
 		)
 	}
