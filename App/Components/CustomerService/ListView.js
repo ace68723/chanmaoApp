@@ -22,12 +22,19 @@ const { height, width } = Dimensions.get('window');
 class CustomerServiceListView extends Component {
   constructor(props){
     super(props);
-    this.state={
-			cells: this.props.options
-		}
     this.goBack = this.goBack.bind(this);
 		this.onPressedCell = this.onPressedCell.bind(this);
+		this.initPageData();
   }
+	initPageData(){
+		const finishedStatus = [40, 5, 90, ];
+		const orderStatus = this.props.order.order_status;
+		// console.log(this.props.order);
+		// order_created rr_url order_oid
+		this.state = {
+			cells: this.props.options
+		}
+	}
   goBack(){
     this.props.navigator.pop();
 		if(this.props.unmount){
@@ -62,20 +69,25 @@ class CustomerServiceListView extends Component {
 			animated: true,
 			navigatorStyle: {navBarHidden: true},
 			passProps: {
-				options: options
+				options: options,
+				order: this.props.order
 			}
 		});
 	}
 	showMessager(message){
 		const {uid, version} = GetUserInfo();
-		const oid = '1234';
+		const oid = this.props.order.order_oid;
 
 		Intercom.registerIdentifiedUser({ userId: uid });
 		Intercom.updateUser({
 		    user_id: uid,
 		    custom_attributes: {
 		        version: version,
-						oid: oid,
+						order_id: oid,
+						contact_name: this.props.order.user_name,
+						phone_number: this.props.order.user_tel,
+						address: this.props.order.user_address,
+						order_status: this.props.order.order_status,
 		    },
 		});
 		Intercom.displayMessageComposerWithInitialMessage(message);

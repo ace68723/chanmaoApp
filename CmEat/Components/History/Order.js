@@ -25,6 +25,7 @@ export default class pastOrderEN extends Component {
           page: props.page
       };
       this._renderDetialButton = this._renderDetialButton.bind(this);
+      this._handleContactCustomerService = this._handleContactCustomerService.bind(this);
   }
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -111,15 +112,17 @@ export default class pastOrderEN extends Component {
     })
   }
 
-  _handleWechatBtn(){
-     Clipboard.setString('chanmao_kefu');
-     Alert.alert(
-            Label.getCMLabel('COPY_TO_CLIPBOARD'),
-            Label.getCMLabel('CHANMAO_KEFU'),
-            [
-              {text: 'OK', onPress: () => {}},
-            ]
-          )
+  _handleContactCustomerService(){
+    this.props.handleContactCustomerService(this.state.orderInfo);
+
+     // Clipboard.setString('chanmao_kefu');
+     // Alert.alert(
+     //        Label.getCMLabel('COPY_TO_CLIPBOARD'),
+     //        Label.getCMLabel('CHANMAO_KEFU'),
+     //        [
+     //          {text: 'OK', onPress: () => {}},
+     //        ]
+     //      )
   }
 
   _phoneNumberVerify (){
@@ -226,9 +229,9 @@ export default class pastOrderEN extends Component {
                                       flexDirection:'row',
                                       justifyContent:'center',
                                       alignItems:'center'}}
-                              onPress={this._handleWechatBtn}>
+                              onPress={this._handleContactCustomerService}>
               <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
-              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontFamily:'NotoSans-Regular',}} allowFontScaling={false}>chanmao_kefu</Text>
+              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontFamily:'NotoSans-Regular',}} allowFontScaling={false}>{Label.getCMLabel('CONTACT_SUPPORT')}</Text>
 
             </TouchableOpacity>
         </View>

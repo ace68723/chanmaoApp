@@ -17,22 +17,35 @@ import Options from './data.js'
 
 import { GetUserInfo } from '../../Modules/Database';
 import Intercom from 'react-native-intercom';
+import moment from 'moment'
 
 const { height, width } = Dimensions.get('window');
 
 class CustomerService extends Component {
   constructor(props){
     super(props);
-
-		const options = Options.cmEat;
-    this.state={
-			cells: options.unfinishedOptions
-		}
     this.goBack = this.goBack.bind(this);
 		this.onPressedCell = this.onPressedCell.bind(this);
 		this.pushScreen = this.pushScreen.bind(this);
 		this.showMessager = this.showMessager.bind(this);
+		this.initPageData();
   }
+	initPageData(){
+		const finishedStatus = [40, 5, 90, ];
+		const orderStatus = this.props.order.order_status;
+		console.log(this.props.order);
+		// order_created rr_url order_oid
+		let options;
+		if (finishedStatus.includes(orderStatus)){
+			options = Options.cmEat.finishedOptions;
+		}
+		else{
+			options = Options.cmEat.unfinishedOptions;
+		}
+		this.state = {
+			cells: options
+		}
+	}
   goBack(){
     this.props.navigator.pop();
 		if(this.props.unmount){
@@ -69,35 +82,40 @@ class CustomerService extends Component {
 		}
 	}
 	pushScreen(passingOptions){
-		console.log('333', passingOptions);
 		this.props.navigator.push({
 			screen: 'CustomerServiceListView',
 			animated: true,
 			navigatorStyle: {navBarHidden: true},
 			passProps: {
-				options: passingOptions
+				options: passingOptions,
+				order: this.props.order
 			}
 		});
 	}
 	showMessager(message){
 		const {uid, version} = GetUserInfo();
-		const oid = '1234';
+		const oid = this.props.order.order_oid;
 
 		Intercom.registerIdentifiedUser({ userId: uid });
 		Intercom.updateUser({
 		    user_id: uid,
 		    custom_attributes: {
 		        version: version,
-						oid: oid,
+						order_id: oid,
+						contact_name: this.props.order.user_name,
+						phone_number: this.props.order.user_tel,
+						address: this.props.order.user_address,
+						order_status: this.props.order.order_status,
 		    },
 		});
 		Intercom.displayMessageComposerWithInitialMessage(message);
 	}
 
 	rushOrder(){
-		const orderPlacedTime = 1246149390;
+		const orderPlacedTime = moment(this.props.order.order_created).unix();
+		// console.log(orderPlacedTime);
 		const diffMinutes = (Math.round((new Date()).getTime() / 1000) - orderPlacedTime) / 60;
-		console.log(diffMinutes);
+
 		if (diffMinutes <= 40){
 			alert('您的订单正在准备中，请耐心等待');
 		}
@@ -119,9 +137,9 @@ class CustomerService extends Component {
       <View style={styles.container} >
         <Header goBack={this.goBack}/>
 				<View style={{width: width, height: width * 0.35}}>
-					<Image style={{flex: 1}} source={{uri: 'https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg'}}/>
+					<Image style={{flex: 1}} source={{uri: this.props.order.rr_url}}/>
 				</View>
-				<View style={{marginTop: 18, marginBottom: 18, backgroundColor: "#EDF3FB"}}>
+				<View style={{marginTop: 18, marginBottom: 18, backgroundColor: "#f3f3f3"}}>
 					<Text style={{color: 'grey', textAlign: 'center', fontWeight: '600', fontSize: 12}}>- 选择问题 -</Text>
 				</View>
 

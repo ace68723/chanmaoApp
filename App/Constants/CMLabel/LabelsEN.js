@@ -144,6 +144,7 @@ module.exports={
     CS_WILL_CONTACT:'Customer Service Will Contact you about the Delivery Fee',
     DISH_OUT_OF_ORDER:'Dish Sold out',
     ORDER_CANCELED:'Order Canceled',
+    CONTACT_SUPPORT:'Contact Support',
 
     //Comment
     CONFIRM_COMMENT:'Confirm',
