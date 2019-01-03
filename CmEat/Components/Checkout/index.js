@@ -144,7 +144,10 @@ class Confirm extends Component {
     }
     _onChange(){
 				const state = Object.assign({},CheckoutStore.getState());
-				const tips = parseFloat(state.selectedCase.fees.total * this.state.tipsPercentageNumber / 100).toFixed(2);
+				let tips = 0;
+				if (this.state.selectedCase.dltype !== 1) {
+					tips = parseFloat(state.selectedCase.fees.total * this.state.tipsPercentageNumber / 100).toFixed(2);
+				}
 				this.setState(Object.assign({}, state, {tips}));
 				if(!state.selectedAddress || !state.selectedAddress.hasOwnProperty('uaid')){
 					setTimeout( () => {
@@ -1158,6 +1161,9 @@ class Confirm extends Component {
 		}
 
 		_renderTips() {
+			if (this.state.selectedCase.dltype == 0) {
+				return;
+			}
 			let _tipsOptions = () => {
 				let _tipsOptions = [];
 				let options = [10, 12, 15];
