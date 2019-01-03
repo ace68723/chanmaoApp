@@ -336,7 +336,7 @@ class HistoryTab extends Component {
 						onPress={() => this.setState({renderingPage: 0})}>
 						<Text style={{textAlign: 'center',
 													color: firstFilterColor,
-													fontFamily:'NotoSansCJKsc-Regular'}}
+													fontFamily:'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('ALL_ORDER')}
 						</Text>
@@ -346,7 +346,7 @@ class HistoryTab extends Component {
 						onPress={() => this.setState({renderingPage: 1})}>
 						<Text style={{textAlign: 'center',
 													color: secondFilterColor,
-													fontFamily:'NotoSansCJKsc-Regular'}}
+													fontFamily:'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('YET_COMMENT')}
 						</Text>
@@ -371,7 +371,7 @@ class HistoryTab extends Component {
 	 			        tabBarActiveTextColor={'#ff8b00'}
 	 			        tabBarUnderlineColor={'#ff8b00'}
 	 			        tabBarUnderlineStyle={{'backgroundColor':'#ff8b00'}}
-	 			        tabBarTextStyle={{fontSize:12,fontFamily:'NotoSansCJKsc-Regular',}}
+	 			        tabBarTextStyle={{fontSize:12,fontFamily:'NotoSans-Regular',}}
 	 			        tabBarInactiveTextColor={'#666666'}
 	 			        prerenderingSiblingsNumber={3}
 	 			        tabBarPosition = "top"
@@ -442,7 +442,7 @@ class HistoryTab extends Component {
 //  <TextInput
 // 		 style={{height: 40,
 // 						 borderColor: '#d9d9d9',
-// 						 fontFamily:'NotoSansCJKsc-Regular',
+// 						 fontFamily:'NotoSans-Regular',
 // 						 fontSize:13,
 // 						 borderWidth: 1,
 // 						 paddingLeft:10,
@@ -475,7 +475,7 @@ let styles = StyleSheet.create({
   orderTitle:{
     color: "#fff",
     fontSize:20,
-		fontFamily:'NotoSansCJKsc-Black',
+		fontFamily:'NotoSans-Black',
   },
 	modal: {
 		justifyContent: 'center',

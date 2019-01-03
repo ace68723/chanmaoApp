@@ -42,7 +42,7 @@ export default class CheckoutButton extends Component {
                         justifyContent:'center',}}>
               <Text style={{color:'#ffffff',
                             fontSize:20,
-                            fontFamily:'NotoSansCJKsc-Regular'}}
+                            fontFamily:'NotoSans-Regular'}}
                     allowFontScaling={false}>
                 {La}
               </Text>
@@ -65,7 +65,7 @@ export default class CheckoutButton extends Component {
                         justifyContent:'center',}}>
               <Text style={{color:'#ffffff',
                             fontSize:20,
-                            fontFamily:'NotoSansCJKsc-Regular'}}
+                            fontFamily:'NotoSans-Regular'}}
                     allowFontScaling={false}>
                 {Label.getSboxLabel('ADD_DELIVERY_ADDRESS')}
               </Text>
@@ -88,7 +88,7 @@ export default class CheckoutButton extends Component {
                       justifyContent:'center',}}>
             <Text style={{color:'#ffffff',
                           fontSize:20,
-                          fontFamily:'NotoSansCJKsc-Regular'}}
+                          fontFamily:'NotoSans-Regular'}}
                   allowFontScaling={false}>
               {Label.getSboxLabel('ADD_PAYMENT_METHOD')}
             </Text>

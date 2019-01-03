@@ -67,7 +67,7 @@ export default class SboxHomeHeader extends Component {
 //     <Image source={require('./Images/search.png')}
 //            style={{height:height*0.032,
 //                    width:height*0.032,}}/>
-//     <Animated.Text style={{paddingLeft:10,color:fontColor,fontFamily:'NotoSansCJKsc-Regular'}}>
+//     <Animated.Text style={{paddingLeft:10,color:fontColor,fontFamily:'NotoSans-Regular'}}>
 //       搜索你想找的餐馆
 //     </Animated.Text>
 // </Animated.View>

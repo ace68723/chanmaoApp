@@ -308,7 +308,7 @@ export default class CmEatAddress extends Component {
 										source={require('./Image/icon_address_home.png')}/>
 							<Text style={{fontSize:18,
 														marginLeft:15,
-														fontFamily:'NotoSansCJKsc-Black',}}
+														fontFamily:'NotoSans-Black',}}
 										allowFontScaling={false}>
 								Home
 							</Text>
@@ -325,7 +325,7 @@ export default class CmEatAddress extends Component {
 							</TouchableOpacity>
 							<Text style={{fontSize:18,
 														marginLeft:15,
-														fontFamily:'NotoSansCJKsc-Black',}}
+														fontFamily:'NotoSans-Black',}}
 										allowFontScaling={false}>
 								Work
 							</Text>
@@ -343,7 +343,7 @@ export default class CmEatAddress extends Component {
 							</TouchableOpacity>
 							<Text style={{fontSize:20,
 														marginLeft:15,
-														fontFamily:'NotoSansCJKsc-Black',}}
+														fontFamily:'NotoSans-Black',}}
 										allowFontScaling={false}>
 								Other
 							</Text>
@@ -401,11 +401,11 @@ export default class CmEatAddress extends Component {
 
   						</View>
   					</View>
-  					<Text style={{fontSize:15,fontFamily:'NotoSansCJKsc-Regular',}}
+  					<Text style={{fontSize:15,fontFamily:'NotoSans-Regular',}}
 									allowFontScaling={false}>
   						{address.name} {this._formatPhoneNumber(address.tel)}
   					</Text>
-  					<Text style={{fontFamily:'NotoSansCJKsc-Regular',}}
+  					<Text style={{fontFamily:'NotoSans-Regular',}}
 									allowFontScaling={false}>
   						{apt_no}{address.addr}
   					</Text>
@@ -479,7 +479,7 @@ export default class CmEatAddress extends Component {
                       marginTop:15,
 											marginBottom: 5,
 											fontSize: 16,
-											fontFamily:'NotoSansCJKsc-Regular',
+											fontFamily:'NotoSans-Regular',
 											color: '#A5A5A5',}}
 							allowFontScaling={false}>{Label.getCMLabel('CHOOSE')}: </Text>
 
@@ -517,7 +517,7 @@ export default class CmEatAddress extends Component {
 								<View style={{flex:1,flexDirection:"row",alignItems:"flex-end"}}>
 										<Image style={{width:22.5,height:30, marginLeft: 3.75, marginRight: 3.75}}
 													source={require('./Image/icon_address.png')}/>
-												<Text style={{fontSize:18,marginLeft:15,fontFamily:'NotoSansCJKsc-Black',}}
+												<Text style={{fontSize:18,marginLeft:15,fontFamily:'NotoSans-Black',}}
 													allowFontScaling={false}>
 											Current Location
 										</Text>
@@ -525,7 +525,7 @@ export default class CmEatAddress extends Component {
 								<View style={{flex:0.1,flexDirection:"row",alignItems:"flex-end",justifyContent:"flex-end"}}>
 								</View>
 						</View>
-						<Text style={{fontFamily:'NotoSansCJKsc-Regular',marginLeft: 3.75,}}
+						<Text style={{fontFamily:'NotoSans-Regular',marginLeft: 3.75,}}
 									allowFontScaling={false}>
 							{this.state.currentLocation}
 						</Text>
@@ -613,7 +613,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     color: '#ea7b21',
     marginTop:5,
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
   },
   button:{
     width:width,
@@ -627,6 +627,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     marginBottom: 5,
     fontSize:20,
-    fontFamily:'NotoSansCJKsc-Black',
+    fontFamily:'NotoSans-Black',
   },
 });

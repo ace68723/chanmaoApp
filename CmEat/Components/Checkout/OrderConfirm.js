@@ -84,7 +84,7 @@ export default class orderConfirm extends Component {
                      onClosed={this.props.closeOrderConfirm}>
                 <View style={{flex:1}}>
                       <View style={styles.modalHearder}>
-                          <Text style={{fontSize:20, fontFamily: 'NotoSansCJKsc-Bold'}}
+                          <Text style={{fontSize:20, fontFamily: 'NotoSans-Bold'}}
                                 allowFontScaling={false}>{dldec}</Text>
                       </View>
                       <View style={styles.modalContent}>
@@ -127,7 +127,7 @@ export default class orderConfirm extends Component {
                                                 onPress={this.props.doCheckout}>
                                 <Text style={{fontSize:18,
                                               color:'#ea7b21',
-                                              fontFamily: 'NotoSansCJKsc-Regular'}}
+                                              fontFamily: 'NotoSans-Regular'}}
                                       allowFontScaling={false}>{Label.getCMLabel('CONFIRM')}</Text>
                               </TouchableOpacity>
                           </View>
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     color:'#ea7b21',
     fontSize:18,
     flex:1,
-    fontFamily: 'NotoSansCJKsc-Regular'
+    fontFamily: 'NotoSans-Regular'
   },
   modalButton:{
     flex:1,
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   },
   buttonFont:{
     fontSize:18,
-    fontFamily: 'NotoSansCJKsc-Regular'
+    fontFamily: 'NotoSans-Regular'
   },
   modalFooter:{
     flex:1,

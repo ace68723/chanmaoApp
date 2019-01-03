@@ -131,19 +131,19 @@ const styles = StyleSheet.create({
   itemTitle:{
     color:'#4d4d4d',
     fontSize:16,
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
   },
   price:{
     marginTop:10,
     color:'#ff8b00',
     fontSize:15,
     fontWeight:'500',
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
   },
   quantity:{
     color:'#4d4d4d',
     fontSize:18,
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
   },
   decreaseButton:{
     width:50,

@@ -46,7 +46,7 @@ class OrderInfo extends Component {
             <Text style={{textAlign:'center',
                           fontSize: 16,
                           fontWeight: "500",
-                          fontFamily:'NotoSansCJKsc-Regular'}}
+                          fontFamily:'NotoSans-Regular'}}
                   allowFontScaling={false}>
                   {Label.getSboxLabel('DELIVERY_FEE')}{this.props.delifee}
               </Text>
@@ -56,7 +56,7 @@ class OrderInfo extends Component {
             <Text style={{textAlign:'center',
                           fontSize: 16,
                           fontWeight: "500",
-                          fontFamily:'NotoSansCJKsc-Regular'}}
+                          fontFamily:'NotoSans-Regular'}}
                   allowFontScaling={false}>{Label.getSboxLabel('ORDER_TOTAL')}{this.props.total}</Text>
           </View>
         </View>
@@ -70,7 +70,7 @@ class OrderInfo extends Component {
                           fontSize: 13,
                           color: "#6D6E71",
                           fontWeight: "500",
-                          fontFamily:'NotoSansCJKsc-Regular'}}
+                          fontFamily:'NotoSans-Regular'}}
                   allowFontScaling={false}>{Label.getSboxLabel('DETAIL')}</Text>
           </TouchableOpacity>
 
@@ -83,7 +83,7 @@ class OrderInfo extends Component {
                           fontSize: 13,
                           color: "#6D6E71",
                           fontWeight: "500",
-                          fontFamily:'NotoSansCJKsc-Regular'}}
+                          fontFamily:'NotoSans-Regular'}}
                   allowFontScaling={false}>{Label.getSboxLabel('SERVICE')}</Text>
           </TouchableOpacity>
         </View>

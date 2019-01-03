@@ -204,7 +204,7 @@ export default class CmEatAddInfo extends Component {
                             marginRight:5,
                             padding:5
                           }}>
-                <Text style={{color:type.textColor,fontFamily:'NotoSansCJKsc-Regular',}}
+                <Text style={{color:type.textColor,fontFamily:'NotoSans-Regular',}}
 											allowFontScaling={false}>
                   {type.text}
                 </Text>
@@ -392,7 +392,7 @@ let styles = StyleSheet.create({
     fontSize:18,
     marginLeft:20,
     marginRight:10,
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
   },
   fistInput:{
     // marginLeft:10,
@@ -401,7 +401,7 @@ let styles = StyleSheet.create({
     height:50,
     borderRadius: 8,
     color: '#000',
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
   },
   secondInput:{
     marginLeft:10,
@@ -420,7 +420,7 @@ let styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: '#fff',
-		fontFamily:'NotoSansCJKsc-Bold',
+		fontFamily:'NotoSans-Bold',
   },
   button: {
     flex:1,

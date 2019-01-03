@@ -38,7 +38,7 @@ export default class TabBar extends Component {
   // <Text style={{textAlign: 'center',
   //               color: textColor,
   //               fontWeight: fontWeight,
-  //               fontFamily:'NotoSansCJKsc-Regular',
+  //               fontFamily:'NotoSans-Regular',
   //               marginRight: 5}}
   //       allowFontScaling={false}>
   //       {this.props.orderData.length}
@@ -73,14 +73,14 @@ export default class TabBar extends Component {
             <Text style={{fontSize:15,
                           textAlign:"center",
                           color:"#ffffff",
-                          fontFamily:'NotoSansCJKsc-Medium'}}
+                          fontFamily:'NotoSans-Medium'}}
                   allowFontScaling={false}>
               {numOfOrderNotReviewed}
             </Text>
           </View>
           <Text style={{textAlign: 'center',
                         color: textColor,
-                        fontFamily:'NotoSansCJKsc-Medium'}}
+                        fontFamily:'NotoSans-Medium'}}
                 allowFontScaling={false}>
             {name}
           </Text>
@@ -94,7 +94,7 @@ export default class TabBar extends Component {
         onPress={() => this.props.goToPage(page)}>
         <Text style={{textAlign: 'center',
                       color: textColor,
-                      fontFamily:'NotoSansCJKsc-Medium'}}
+                      fontFamily:'NotoSans-Medium'}}
               allowFontScaling={false}>
           {name}
         </Text>

@@ -38,13 +38,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: 'center',
     color:'white',
-    fontFamily:'NotoSansCJKsc-Regular',
+    fontFamily:'NotoSans-Regular',
   },
   content: {
     fontSize: 15,
     textAlign: 'center',
     marginTop: 10,
     color:'white',
-    fontFamily:'NotoSansCJKsc-Regular',
+    fontFamily:'NotoSans-Regular',
   },
 });

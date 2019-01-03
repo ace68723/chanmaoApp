@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   text:{
     margin:10,
     fontSize:16,
-    fontFamily:'NotoSansCJKsc-Regular',
+    fontFamily:'NotoSans-Regular',
   },
   row:{
     flex:1,

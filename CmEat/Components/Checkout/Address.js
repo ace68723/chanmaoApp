@@ -80,7 +80,7 @@ export default class Address extends Component {
 											marginLeft: 30,
 											marginTop: 20,
 											fontSize:15,
-											fontFamily: 'NotoSansCJKsc-Black'}}
+											fontFamily: 'NotoSans-Black'}}
 							allowFontScaling={false}>
 					{Label.getCMLabel('DELIVER_ADDRESS')}
 				</Text>
@@ -106,15 +106,15 @@ export default class Address extends Component {
 
 					<TouchableWithoutFeedback onPress={this.props.goToAddressList}>
 						<View style={{flex:1,margin:10, justifyContent: 'space-around'}}>
-							<Text style={{fontFamily:'NotoSansCJKsc-Regular'}}
+							<Text style={{fontFamily:'NotoSans-Regular'}}
 										allowFontScaling={false}>
 									{this.state.address.name}
 							</Text>
-							<Text style={{fontFamily:'NotoSansCJKsc-Regular'}}
+							<Text style={{fontFamily:'NotoSans-Regular'}}
 										allowFontScaling={false}>
 									{this.state.address.tel}
 							</Text>
-							<Text numberOfLines={2} style={{fontFamily:'NotoSansCJKsc-Regular'}}
+							<Text numberOfLines={2} style={{fontFamily:'NotoSans-Regular'}}
 										allowFontScaling={false}>
 									{this.state.address.addr}
 							</Text>

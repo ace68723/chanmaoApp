@@ -99,7 +99,7 @@ class AllOrders extends Component {
 //  <TextInput
 // 		 style={{height: 40,
 // 						 borderColor: '#d9d9d9',
-// 						 fontFamily:'NotoSansCJKsc-Regular',
+// 						 fontFamily:'NotoSans-Regular',
 // 						 fontSize:13,
 // 						 borderWidth: 1,
 // 						 paddingLeft:10,
@@ -132,7 +132,7 @@ let styles = StyleSheet.create({
   orderTitle:{
     color: "#fff",
     fontSize:20,
-		fontFamily:'NotoSansCJKsc-Black',
+		fontFamily:'NotoSans-Black',
   },
 	modal: {
 		justifyContent: 'center',

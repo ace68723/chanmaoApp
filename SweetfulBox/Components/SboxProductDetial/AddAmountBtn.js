@@ -58,7 +58,7 @@ export default class AddAmountBtn extends Component {
                       }}>
                       <Text style={{
                                 fontSize: 20,
-                                fontFamily:'NotoSansCJKsc-Regular',
+                                fontFamily:'NotoSans-Regular',
                                 color:'#ff768b',
                               }}
                             allowFontScaling={false}>
@@ -79,7 +79,7 @@ export default class AddAmountBtn extends Component {
                     }}>
                 <Text style={{
                           fontSize: 18,
-                          fontFamily:'NotoSansCJKsc-Regular',
+                          fontFamily:'NotoSans-Regular',
                           color:'#ff768b',
                         }}
                       allowFontScaling={false}>
@@ -101,7 +101,7 @@ export default class AddAmountBtn extends Component {
                       }}>
                   <Text style={{
                             fontSize: 20,
-                            fontFamily:'NotoSansCJKsc-Regular',
+                            fontFamily:'NotoSans-Regular',
                             color:'#ff768b',
                           }}
                         allowFontScaling={false}>

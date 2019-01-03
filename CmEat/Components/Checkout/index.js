@@ -597,7 +597,7 @@ class Confirm extends Component {
 															style={{marginBottom: 60}}
 															onPress={()=>{this._goToAddressList()}}>
 	            <View style={[styles.acceptButton, {justifyContent: 'center'}]}>
-	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'NotoSansCJKsc-Regular',}}
+	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'NotoSans-Regular',}}
 											allowFontScaling={false}>{Label.getCMLabel('ADD_ADDRESS')}</Text>
 	            </View>
 	          </TouchableOpacity>
@@ -638,7 +638,7 @@ class Confirm extends Component {
 	          <TouchableOpacity activeOpacity={0.4}
 															onPress={()=>{this._goToAddressList()}}>
 	            <View style={styles.pendingButton}>
-	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'NotoSansCJKsc-Regular',}}
+	              <Text style={{color:'#ffffff',fontSize:20,fontFamily:'NotoSans-Regular',}}
 											allowFontScaling={false}>
 									{Label.getCMLabel('ADD_ADDRESS')}
 								</Text>
@@ -672,7 +672,7 @@ class Confirm extends Component {
 													marginTop: 15,
 													marginLeft: 20,
 													marginRight: 20,
-													fontFamily:'NotoSansCJKsc-Regular',}}
+													fontFamily:'NotoSans-Regular',}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('LONG_D_ORDER_REMINDER')}
 						</Text>
@@ -737,7 +737,7 @@ class Confirm extends Component {
 									alignSelf:'center',
 									justifyContent:'center',
 								}}>
-                <Text style={{color:deliverType.textColor,fontFamily:'NotoSansCJKsc-Regular',}}
+                <Text style={{color:deliverType.textColor,fontFamily:'NotoSans-Regular',}}
 											allowFontScaling={false}>
                   {deliverType.text}
                 </Text>
@@ -783,7 +783,7 @@ class Confirm extends Component {
 											marginLeft: 25,
 											marginTop: 20,
 											fontSize:15,
-											fontFamily: 'NotoSansCJKsc-Black'}}
+											fontFamily: 'NotoSans-Black'}}
 							allowFontScaling={false}>
 					{Label.getCMLabel('PROMOTION')}
 				</Text>
@@ -885,7 +885,7 @@ class Confirm extends Component {
 												marginTop: 15}}>
 						<Text style={{fontSize: 14,
 													color:'#666666',
-													fontFamily:'NotoSansCJKsc-Regular'}}
+													fontFamily:'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('COUPON_CODE_INVALID_REMINDER')}
 						</Text>
@@ -932,7 +932,7 @@ class Confirm extends Component {
 										 				 alignSelf: 'flex-start'}}/>
  						  <Text style={{fontSize: 14,
 														color: '#ea7b21',
-														fontFamily:'NotoSansCJKsc-Regular',
+														fontFamily:'NotoSans-Regular',
 														marginHorizontal: 10}}
 										allowFontScaling={false}>
 							 {Label.getCMLabel('ONLINE_PAYMENT_WARNING')}
@@ -963,7 +963,7 @@ class Confirm extends Component {
 												fontWeight:'bold',
 												textAlign:'center',
 												marginTop:20,
-												fontFamily:'NotoSansCJKsc-Black',
+												fontFamily:'NotoSans-Black',
 											}}
 								allowFontScaling={false}>
 						{this.props.restaurant.name}
@@ -985,7 +985,7 @@ class Confirm extends Component {
 											marginLeft: 20,
 											marginTop: 20,
 											fontSize:15,
-											fontFamily: 'NotoSansCJKsc-Black',}}
+											fontFamily: 'NotoSans-Black',}}
 							allowFontScaling={false}>
 					{Label.getCMLabel('PRICE_SUBTOTAL')}
 				</Text>
@@ -1000,13 +1000,13 @@ class Confirm extends Component {
 												marginHorizontal: 20}}>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('PRETAX_PRICE')}
 						</Text>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							${this.state.selectedCase.fees.ori_pretax}
 						</Text>
@@ -1023,13 +1023,13 @@ class Confirm extends Component {
 												marginHorizontal: 20}}>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('DELIVER_FEE')}
 						</Text>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							${this.state.selectedCase.fees.dlexp}
 						</Text>
@@ -1046,13 +1046,13 @@ class Confirm extends Component {
 												marginHorizontal: 20}}>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('TAX')}
 						</Text>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							${this.state.selectedCase.fees.ori_tax}
 						</Text>
@@ -1070,7 +1070,7 @@ class Confirm extends Component {
 						<View style={{flexDirection: 'row'}}>
 							<Text style={{fontSize: 15,
 														color: '#9b9b9b',
-														fontFamily: 'NotoSansCJKsc-Regular'}}
+														fontFamily: 'NotoSans-Regular'}}
 										allowFontScaling={false}>
 								{Label.getCMLabel('SERVICE_FEE')}
 							</Text>
@@ -1085,7 +1085,7 @@ class Confirm extends Component {
 						</View>
 						<Text style={{fontSize: 15,
 													color: '#9b9b9b',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							${this.state.selectedCase.fees.ori_service_fee}
 						</Text>
@@ -1102,13 +1102,13 @@ class Confirm extends Component {
 												marginHorizontal: 20}}>
 						<Text style={{fontSize: 15,
 													color: '#40a2e7',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							{Label.getCMLabel('DISCOUNT')}
 						</Text>
 						<Text style={{fontSize: 15,
 													color: '#40a2e7',
-													fontFamily: 'NotoSansCJKsc-Regular'}}
+													fontFamily: 'NotoSans-Regular'}}
 									allowFontScaling={false}>
 							- ${this.state.selectedCase.fees.total_off}
 						</Text>
@@ -1124,7 +1124,7 @@ class Confirm extends Component {
 					return (
 						<Text style={{color:'#9b9b9b',
 													fontSize:19,
-													fontFamily:'NotoSansCJKsc-Regular',
+													fontFamily:'NotoSans-Regular',
 													textDecorationLine: 'line-through',
 													marginLeft: 6}}
 									allowFontScaling={false}>
@@ -1140,14 +1140,14 @@ class Confirm extends Component {
 											justifyContent: 'space-between'}}>
 					<Text style={{color:'#666666',
 												fontSize:19,
-												fontFamily: 'NotoSansCJKsc-Bold'}}
+												fontFamily: 'NotoSans-Bold'}}
 								allowFontScaling={false}>
 						{Label.getCMLabel('CHARGE_TOTAL')}
 					</Text>
 					<View style={{flexDirection: 'row'}}>
 						<Text style={{color:'#666666',
 													fontSize:19,
-													fontFamily:'NotoSansCJKsc-Bold'}}
+													fontFamily:'NotoSans-Bold'}}
 									allowFontScaling={false}>
 							${this.state.selectedCase.fees.charge_total}
 						</Text>
@@ -1177,7 +1177,7 @@ class Confirm extends Component {
 															textAlign: 'center',
 															alignSelf: 'center',
 															color: this.state.tipsPercentageNumber == _option ?'white' :'#666666',
-															fontFamily: 'NotoSansCJKsc-Regular'}}
+															fontFamily: 'NotoSans-Regular'}}
 											allowFontScaling={false}>
 									{_option}%
 								</Text>
@@ -1196,7 +1196,7 @@ class Confirm extends Component {
 												alignSelf: 'center',
 												marginRight: 5,
 												fontSize:15,
-												fontFamily: 'NotoSansCJKsc-Bold'}}
+												fontFamily: 'NotoSans-Bold'}}
 								allowFontScaling={false}>
 						{Label.getCMLabel('TIPS')}:
 					</Text>
@@ -1213,7 +1213,7 @@ class Confirm extends Component {
 												justifyContent: 'flex-end'}}>
 						<Text style={{color:'#666666',
 													fontSize:15,
-													fontFamily:'NotoSansCJKsc-Bold'}}
+													fontFamily:'NotoSans-Bold'}}
 									allowFontScaling={false}>
 							${this.state.tips}
 						</Text>
@@ -1262,7 +1262,7 @@ class Confirm extends Component {
 		// 			 <Text style={{marginLeft:20,
 		// 										 fontSize:15,
 		// 										 color:'#808080',
-		// 										 fontFamily:'NotoSansCJKsc-Regular',
+		// 										 fontFamily:'NotoSans-Regular',
 		// 									}}
 		// 							allowFontScaling={false}>
 	  //             {Label.getCMLabel('TIPS')}:
@@ -1270,7 +1270,7 @@ class Confirm extends Component {
 	  //           <Text style={{marginLeft:5,
 		// 											  fontSize:15,
 		// 											  color:'#ff8b00',
-		// 											  fontFamily:'NotoSansCJKsc-Regular',
+		// 											  fontFamily:'NotoSans-Regular',
 		// 											}}
 		// 								allowFontScaling={false}>
     //           {this.state.tips}
@@ -1601,7 +1601,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
     color: '#ffffff',
     fontSize:20,
-		fontFamily:'NotoSansCJKsc-Bold',
+		fontFamily:'NotoSans-Bold',
   },
 	modal: {
 	 justifyContent: 'center',
@@ -1629,7 +1629,7 @@ let styles = StyleSheet.create({
 	},
 	tipsFont:{
 		fontSize:15,
-		fontFamily:'NotoSansCJKsc-Regular',
+		fontFamily:'NotoSans-Regular',
 	},
 	seperateLine: {
 		marginTop: 20,

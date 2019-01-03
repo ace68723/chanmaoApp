@@ -20,7 +20,7 @@ export default (props) => {
                 <View style={{flex:1,justifyContent:'center'}}>
                     <Text style={{color:'#ababb0',
                                   fontSize:14,
-                                  fontFamily:'NotoSansCJKsc-Regular'}}
+                                  fontFamily:'NotoSans-Regular'}}
                           allowFontScaling={false}>
                       {props.dish.tpgs[tpg_id].tps[tp_id].tp_name} × {props.dish.tpgs[tpg_id].tps[tp_id].quantity}
                     </Text>
@@ -28,7 +28,7 @@ export default (props) => {
                 <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',}}>
                   <Text style={{color:'#ababb0',
                                 fontSize:16,
-                                fontFamily:'NotoSansCJKsc-Regular',
+                                fontFamily:'NotoSans-Regular',
                                 textAlign: 'left'}}
                         allowFontScaling={false}>
                     ${props.dish.tpgs[tpg_id].tps[tp_id].tp_price}
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color:'#4d4d4d',
     fontSize:16,
-    fontFamily:'NotoSansCJKsc-Regular',
+    fontFamily:'NotoSans-Regular',
     alignSelf: 'center',
   },
   price:{
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   quantity:{
     color:'#4d4d4d',
     fontSize:16,
-    fontFamily:'NotoSansCJKsc-Regular',
+    fontFamily:'NotoSans-Regular',
     width: 60,
     marginLeft: 10,
     justifyContent: 'center',

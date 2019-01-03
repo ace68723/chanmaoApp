@@ -21,11 +21,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		3122F7F920B76AA900C388FF /* StripeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3122F7CC20B76AA700C388FF /* StripeBridge.m */; };
-		3144855521BEBFC6007CA46F /* NotoSansCJKsc-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3144855021BEBFC4007CA46F /* NotoSansCJKsc-Bold.otf */; };
-		3144855621BEBFC6007CA46F /* NotoSansMonoCJKsc-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3144855121BEBFC5007CA46F /* NotoSansMonoCJKsc-Regular.otf */; };
-		3144855721BEBFC6007CA46F /* NotoSansCJKsc-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3144855221BEBFC5007CA46F /* NotoSansCJKsc-Black.otf */; };
-		3144855821BEBFC6007CA46F /* NotoSansCJKsc-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3144855321BEBFC6007CA46F /* NotoSansCJKsc-Regular.otf */; };
-		3144855921BEBFC6007CA46F /* NotoSansCJKsc-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3144855421BEBFC6007CA46F /* NotoSansCJKsc-Medium.otf */; };
+		3137536D21DE9AA600331D73 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3137536821DE9AA500331D73 /* NotoSans-Bold.ttf */; };
+		3137536E21DE9AA600331D73 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3137536921DE9AA600331D73 /* NotoSans-Regular.ttf */; };
+		3137536F21DE9AA600331D73 /* NotoSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3137536A21DE9AA600331D73 /* NotoSans-Medium.ttf */; };
+		3137537021DE9AA600331D73 /* NotoSans-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3137536B21DE9AA600331D73 /* NotoSans-Black.ttf */; };
 		3154E57120A39BED000F4758 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3154E57020A39BA0000F4758 /* libReactNativeNavigation.a */; };
 		31CC7ABF20A4CEF9001561DB /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CC7AA720A4CE75001561DB /* libRCTWeChat.a */; };
 		31CC7B5520A4DADD001561DB /* 方正准圆简体.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 31CC7AFC20A4D401001561DB /* 方正准圆简体.TTF */; };
@@ -432,11 +431,10 @@
 		3122F7CC20B76AA700C388FF /* StripeBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripeBridge.m; sourceTree = "<group>"; };
 		3122F7FA20B76ABC00C388FF /* StripeBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StripeBridge.h; sourceTree = "<group>"; };
 		3122F85420B88FC900C388FF /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
-		3144855021BEBFC4007CA46F /* NotoSansCJKsc-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Bold.otf"; sourceTree = "<group>"; };
-		3144855121BEBFC5007CA46F /* NotoSansMonoCJKsc-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansMonoCJKsc-Regular.otf"; sourceTree = "<group>"; };
-		3144855221BEBFC5007CA46F /* NotoSansCJKsc-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Black.otf"; sourceTree = "<group>"; };
-		3144855321BEBFC6007CA46F /* NotoSansCJKsc-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Regular.otf"; sourceTree = "<group>"; };
-		3144855421BEBFC6007CA46F /* NotoSansCJKsc-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKsc-Medium.otf"; sourceTree = "<group>"; };
+		3137536821DE9AA500331D73 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSans-Bold.ttf"; path = "Fonts/NotoSans-Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		3137536921DE9AA600331D73 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSans-Regular.ttf"; path = "Fonts/NotoSans-Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		3137536A21DE9AA600331D73 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSans-Medium.ttf"; path = "Fonts/NotoSans-Medium.ttf"; sourceTree = SOURCE_ROOT; };
+		3137536B21DE9AA600331D73 /* NotoSans-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSans-Black.ttf"; path = "Fonts/NotoSans-Black.ttf"; sourceTree = SOURCE_ROOT; };
 		3154E56B20A39BA0000F4758 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		31CC7A8920A4CE74001561DB /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
 		31CC7AFC20A4D401001561DB /* 方正准圆简体.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "方正准圆简体.TTF"; path = "Fonts/方正准圆简体.TTF"; sourceTree = SOURCE_ROOT; };
@@ -766,12 +764,11 @@
 		31E09C4120A3A29C007902C5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				3144855221BEBFC5007CA46F /* NotoSansCJKsc-Black.otf */,
-				3144855021BEBFC4007CA46F /* NotoSansCJKsc-Bold.otf */,
-				3144855421BEBFC6007CA46F /* NotoSansCJKsc-Medium.otf */,
-				3144855321BEBFC6007CA46F /* NotoSansCJKsc-Regular.otf */,
-				3144855121BEBFC5007CA46F /* NotoSansMonoCJKsc-Regular.otf */,
 				31E09C4220A3A29C007902C5 /* Octicons.ttf */,
+				3137536B21DE9AA600331D73 /* NotoSans-Black.ttf */,
+				3137536821DE9AA500331D73 /* NotoSans-Bold.ttf */,
+				3137536A21DE9AA600331D73 /* NotoSans-Medium.ttf */,
+				3137536921DE9AA600331D73 /* NotoSans-Regular.ttf */,
 				31E09C4320A3A29C007902C5 /* Feather.ttf */,
 				31E09C4420A3A29C007902C5 /* Entypo.ttf */,
 				31E09C4520A3A29C007902C5 /* MaterialCommunityIcons.ttf */,
@@ -1378,15 +1375,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				31CC7B8520A4DAE7001561DB /* chanmao.ttf in Resources */,
+				3137536E21DE9AA600331D73 /* NotoSans-Regular.ttf in Resources */,
 				31CC7B8420A4DAE2001561DB /* fzzyjt.TTF in Resources */,
-				3144855721BEBFC6007CA46F /* NotoSansCJKsc-Black.otf in Resources */,
+				3137537021DE9AA600331D73 /* NotoSans-Black.ttf in Resources */,
 				F963FD1A20B4B86300C1C422 /* AlipaySDK.bundle in Resources */,
 				31CC7B5520A4DADD001561DB /* 方正准圆简体.TTF in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				31E09C5520A3A29C007902C5 /* EvilIcons.ttf in Resources */,
 				31E09C5120A3A29C007902C5 /* Foundation.ttf in Resources */,
 				31E09C5420A3A29C007902C5 /* Zocial.ttf in Resources */,
-				3144855521BEBFC6007CA46F /* NotoSansCJKsc-Bold.otf in Resources */,
 				31E09C5720A3A29C007902C5 /* MaterialIcons.ttf in Resources */,
 				31E09C5220A3A29C007902C5 /* Ionicons.ttf in Resources */,
 				31E09C5620A3A29C007902C5 /* SimpleLineIcons.ttf in Resources */,
@@ -1395,9 +1392,9 @@
 				31E09C5320A3A29C007902C5 /* FontAwesome.ttf in Resources */,
 				31E09C4F20A3A29C007902C5 /* Entypo.ttf in Resources */,
 				31E09C5020A3A29C007902C5 /* MaterialCommunityIcons.ttf in Resources */,
-				3144855821BEBFC6007CA46F /* NotoSansCJKsc-Regular.otf in Resources */,
-				3144855921BEBFC6007CA46F /* NotoSansCJKsc-Medium.otf in Resources */,
+				3137536F21DE9AA600331D73 /* NotoSans-Medium.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				3137536D21DE9AA600331D73 /* NotoSans-Bold.ttf in Resources */,
 				D9ECDA9D5595465B9B858F7C /* Entypo.ttf in Resources */,
 				82622CC64D8E4488B5270DBA /* EvilIcons.ttf in Resources */,
 				D01E587654124B71AC8501D4 /* Feather.ttf in Resources */,
@@ -1407,7 +1404,6 @@
 				31FBA814825B46C882C60909 /* MaterialCommunityIcons.ttf in Resources */,
 				A4414E5DC8004D079E507AE4 /* MaterialIcons.ttf in Resources */,
 				6F96AA76E1D64B8DA0CF4E5F /* Octicons.ttf in Resources */,
-				3144855621BEBFC6007CA46F /* NotoSansMonoCJKsc-Regular.otf in Resources */,
 				4E235BA18DCE402EA0F6F657 /* SimpleLineIcons.ttf in Resources */,
 				73BAAFB974544FB7927E3977 /* Zocial.ttf in Resources */,
 			);

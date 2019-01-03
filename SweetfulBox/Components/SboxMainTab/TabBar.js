@@ -61,7 +61,7 @@ export default class TabBar extends Component {
                       justifyContent: 'center',
                       alignItems: 'center',}}
                     source={iconImage}>
-                <Text style={{backgroundColor:'rgba(0,0,0,0)',height: 13.5, fontFamily:'NotoSansCJKsc-Regular',}}
+                <Text style={{backgroundColor:'rgba(0,0,0,0)',height: 13.5, fontFamily:'NotoSans-Regular',}}
                       allowFontScaling={false}>
                   {iconText}
                 </Text>

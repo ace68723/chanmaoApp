@@ -62,11 +62,11 @@ class BoxStatus extends Component {
 		return (
         <View style={styles.container}>
           <View style={{flex: 0.5, justifyContent: "center"}}>
-            <Text style={[styles.text, {fontFamily:'NotoSansCJKsc-Regular'}]}
+            <Text style={[styles.text, {fontFamily:'NotoSans-Regular'}]}
                   allowFontScaling={false}>{Label.getSboxLabel('ORDER_NUMBER')}{this.props.obid}</Text>
           </View>
           <View style={{flex: 0.5, justifyContent: "center"}}>
-            <Text style={[styles.date, {fontFamily:'NotoSansCJKsc-Regular'}]}
+            <Text style={[styles.date, {fontFamily:'NotoSans-Regular'}]}
                   allowFontScaling={false}>{this.props.created}</Text>
           </View>
         </View>

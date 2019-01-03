@@ -248,7 +248,7 @@ export default class CmEatMenuSearch extends Component {
 							}}>
 					<Text style={{fontSize:16,
 												margin:3,
-												fontFamily:'NotoSansCJKsc-Black'}}
+												fontFamily:'NotoSans-Black'}}
 								allowFontScaling={false}>
 								找不到关于 "{this.state.searchText}" 的东西哦
 					</Text>
@@ -276,7 +276,7 @@ export default class CmEatMenuSearch extends Component {
 					<Text style={{color:"#ffffff",
 												fontSize:16,
 												margin:3,
-												fontFamily:'NotoSansCJKsc-Black',}}
+												fontFamily:'NotoSans-Black',}}
 								allowFontScaling={false}>
 								${this.state.cartTotals.total}
 					</Text>
@@ -290,7 +290,7 @@ export default class CmEatMenuSearch extends Component {
 								borderColor:"#ffffff"}}>
 						<Text style={{color:"#ffffff",
 													fontSize:13,
-													fontFamily:'NotoSansCJKsc-Black',}}
+													fontFamily:'NotoSans-Black',}}
 									allowFontScaling={false}>
 									{Label.getCMLabel('GO_CHECKOUT')}
 						</Text>

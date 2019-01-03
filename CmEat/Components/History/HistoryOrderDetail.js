@@ -60,7 +60,7 @@ export default class orderHistory extends Component {
                     <Text allowFontScaling={false}
                           style={{color:'#ababb0',
                                   fontSize:15,
-                                  fontFamily:'NotoSansCJKsc-Regular'}}>
+                                  fontFamily:'NotoSans-Regular'}}>
                       {tp.tp_name}
                     </Text>
                 </View>
@@ -68,7 +68,7 @@ export default class orderHistory extends Component {
                   <Text allowFontScaling={false}
                         style={{color:'#ababb0',
                                 fontSize:15,
-                                fontFamily:'NotoSansCJKsc-Regular',
+                                fontFamily:'NotoSans-Regular',
                                 textAlign: 'left'}}>
                     ${tp.price} × {tp.amount}
                   </Text>

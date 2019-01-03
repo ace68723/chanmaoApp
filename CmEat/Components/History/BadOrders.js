@@ -269,7 +269,7 @@ let styles = StyleSheet.create({
   orderTitle:{
     color: "#fff",
     fontSize:20,
-		fontFamily:'NotoSansCJKsc-Black',
+		fontFamily:'NotoSans-Black',
   },
 	modal: {
 		justifyContent: 'center',

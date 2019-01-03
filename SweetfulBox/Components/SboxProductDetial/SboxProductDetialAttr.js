@@ -40,7 +40,7 @@ export default class SboxProductDetialAttr extends Component {
                                   paddingTop:5,
                                   paddingBottom:5,
                                 }}>
-                      <Text style={{ fontSize: 14, fontFamily:'NotoSansCJKsc-Regular', }}
+                      <Text style={{ fontSize: 14, fontFamily:'NotoSans-Regular', }}
                             allowFontScaling={false}>
                         {sku.sku_name}
                       </Text>

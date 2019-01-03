@@ -72,11 +72,10 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NotoSansMonoCJKsc-Regular.otf</string>
-		<string>NotoSansCJKsc-Regular.otf</string>
-		<string>NotoSansCJKsc-Medium.otf</string>
-		<string>NotoSansCJKsc-Bold.otf</string>
-		<string>NotoSansCJKsc-Black.otf</string>
+		<string>NotoSans-Medium.ttf</string>
+		<string>NotoSans-Regular.ttf</string>
+		<string>NotoSans-Bold.ttf</string>
+		<string>NotoSans-Black.ttf</string>
 		<string>Octicons.ttf</string>
 		<string>Feather.ttf</string>
 		<string>Entypo.ttf</string>

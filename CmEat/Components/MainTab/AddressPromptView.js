@@ -52,7 +52,7 @@ export default class AddressPromptView extends Component {
                           backgroundColor: '#ea7b21',
                           fontWeight:'bold',
                           textAlignVertical: "center",
-                          fontFamily:"NotoSansCJKsc-Regular",
+                          fontFamily:"NotoSans-Regular",
                           backgroundColor: '#ea7b21',}}
                           numberOfLines={1}
                   allowFontScaling={false}>

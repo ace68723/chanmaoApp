@@ -120,7 +120,7 @@ export default class HomeTab extends Component {
 								style={{alignSelf: 'center',
 												fontSize: 16,
 												fontWeight: '500',
-												fontFamily:'NotoSansCJKsc-Regular'}}>{Label.getCMLabel('ORDER_BELOW')}</Text>
+												fontFamily:'NotoSans-Regular'}}>{Label.getCMLabel('ORDER_BELOW')}</Text>
 				</View>
 				<View style={{justifyContent: 'center'}}>
 					<Image style={{height: 12, width: 12, alignSelf: 'center'}} source={require('./Image/order_down.png')}/>
@@ -181,7 +181,7 @@ export default class HomeTab extends Component {
 															fontSize: 21,
 															fontWeight: '700',
 															color: 'white',
-															fontFamily:'NotoSansCJKsc-Black'}}
+															fontFamily:'NotoSans-Black'}}
 											allowFontScaling={false}>
 											下划点餐~
 								</Text>
