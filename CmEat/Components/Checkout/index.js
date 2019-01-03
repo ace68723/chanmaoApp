@@ -145,7 +145,7 @@ class Confirm extends Component {
     _onChange(){
 				const state = Object.assign({},CheckoutStore.getState());
 				let tips = 0;
-				if (this.state.selectedCase.dltype !== 1) {
+				if (state.selectedCase.dltype == 1) {
 					tips = parseFloat(state.selectedCase.fees.total * this.state.tipsPercentageNumber / 100).toFixed(2);
 				}
 				this.setState(Object.assign({}, state, {tips}));
