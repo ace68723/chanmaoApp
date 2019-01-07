@@ -223,13 +223,13 @@ class Confirm extends Component {
 						checkoutSuccessful: false,
 		      });
 					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
-					if (!state.selectedCase.custom_dlexp && state.payment_channel != 0) {
-						if (state.payment_channel == 1) {
+					if (!state.selectedCase.custom_dlexp && state.selectedCase.payment_channel != 0) {
+						if (state.selectedCase.payment_channel == 1) {
 							CheckoutAction.stripeChargeAndUpdate({amount: state.selectedCase.fees.charge_total,
 																					 					oid: state.oidFromUrl,
 																										checkoutFrom: 'checkout'});
 						}
-						else if (state.payment_channel == 10) {
+						else if (state.selectedCase.payment_channel == 10) {
 							this.props.navigator.dismissModal({animationType: 'slide-down'});
 							setTimeout(() => {
 								CheckoutAction.afterPayGoToHistory();
@@ -237,7 +237,7 @@ class Confirm extends Component {
 																						 oid: state.oidFromUrl});
 							}, 300);
 						}
-						else if(state.payment_channel == 30){
+						else if(state.selectedCase.payment_channel == 30){
 							let paymentData = {
 								subtotal: state.selectedCase.fees.ori_pretax.toString(),
 								shipping: state.selectedCase.fees.dlexp.toString(),
