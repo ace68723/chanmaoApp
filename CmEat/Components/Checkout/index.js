@@ -208,7 +208,7 @@ class Confirm extends Component {
 				// 	}, 500);
 				// }
 				// this.setState(state);
-				// if(state.payment_channel != 0) {
+				// if(state.selectedCase.payment_channel != 0) {
 				// 	setTimeout( () => {
 				// 		this.setState({
 				// 			tips: (parseFloat(state.total)*0.1).toFixed(2),
@@ -230,13 +230,13 @@ class Confirm extends Component {
 						checkoutSuccessful: false,
 		      });
 					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
-					if (!state.selectedCase.custom_dlexp && state.payment_channel != 0) {
-						if (state.payment_channel == 1) {
+					if (!state.selectedCase.custom_dlexp && state.selectedCase.payment_channel != 0) {
+						if (state.selectedCase.payment_channel == 1) {
 							CheckoutAction.stripeChargeAndUpdate({amount: state.chargeTotalFromUrl,
 																					 					oid: state.oidFromUrl,
 																										checkoutFrom: 'checkout'});
 						}
-						else if (state.payment_channel == 10) {
+						else if (state.selectedCase.payment_channel == 10) {
 							this.props.navigator.dismissModal({animationType: 'slide-down'});
 							setTimeout(() => {
 								CheckoutAction.afterPayGoToHistory();
@@ -244,7 +244,7 @@ class Confirm extends Component {
 																						 oid: state.oidFromUrl});
 							}, 300);
 						}
-						else if(state.payment_channel == 30){
+						else if(state.selectedCase.payment_channel == 30){
 							let paymentData = {
 								subtotal: state.selectedCase.fees.ori_pretax.toString(),
 								shipping: state.selectedCase.fees.dlexp.toString(),
@@ -308,20 +308,20 @@ class Confirm extends Component {
       CheckoutAction.calculateDeliveryFee()
     }
     _doCheckout(){
-			if (this.state.payment_channel < 0) return;
+			if (this.state.selectedCase.payment_channel < 0) return;
 			this.setState({
 				loading:true,
 				showOrderConfirm:false,
 			})
       // CheckoutAction.checkout(this.state.comment,
-			// 												this.state.payment_channel,
+			// 												this.state.selectedCase.payment_channel,
 			// 												this.state.tips,
 			// 												this.state.visa_fee);
 			CheckoutAction.checkout({
 															 ticket_id: this.state.ticket_id,
 															 sign: this.state.selectedCase.sign,
 															 dltype: this.state.dltype,
-															 payment_channel: this.state.payment_channel,
+															 payment_channel: this.state.selectedCase.payment_channel,
 															 charge_total: this.state.selectedCase.fees.charge_total,
 															 rid: this.state.rid,
 															 tips: this.state.tips
@@ -900,13 +900,13 @@ class Confirm extends Component {
 			if (this.state.cases && this.state.dltype != 0) {
 				if (this.state.cases.length > 1) {
 					let payment_description = '';
-					if (this.state.payment_channel == 1) {
+					if (this.state.selectedCase.payment_channel == 1) {
 						payment_description = ' **** **** **** ' + this.state.last_payment.stripe_last4;
 					}
-					else if (this.state.payment_channel == 10) {
+					else if (this.state.selectedCase.payment_channel == 10) {
 						// payment_description = '支付宝';
 					}
-					else if (this.state.payment_channel == 30) {
+					else if (this.state.selectedCase.payment_channel == 30) {
 						// payment_description = 'Apple Pay';
 					}
 					else {
@@ -919,7 +919,7 @@ class Confirm extends Component {
 															onPress={this._goToChoosePayment}>
 							<CartItem title={Label.getCMLabel('PAY')}
 												rightIcon={require('./Image/right.png')}
-												paymentChannel={this.state.payment_channel}
+												paymentChannel={this.state.selectedCase.payment_channel}
 												value={payment_description}/>
 						</TouchableOpacity>
 					)
@@ -949,7 +949,7 @@ class Confirm extends Component {
 				payment_section.push(
 					<View key={'showPayment'}>
 						<CartItem title={Label.getCMLabel('PAY')}
-											paymentChannel={this.state.payment_channel}
+											paymentChannel={this.state.selectedCase.payment_channel}
 											value={Label.getCMLabel('CASH')}/>
 					</View>
 				)
@@ -1259,7 +1259,7 @@ class Confirm extends Component {
 		}
 		// _renderTipInfo(){
 		// 	if (true) {
-		// 	// if (this.state.payment_channel && this.state.payment_channel != 0) {
+		// 	// if (this.state.selectedCase.payment_channel && this.state.selectedCase.payment_channel != 0) {
 		// 		return(
 		// 			<View style={{
 		// 				height:100,
@@ -1343,7 +1343,7 @@ class Confirm extends Component {
 														 total={charge_total}
 														 tips={this.state.selectedCase.fees.charge_total.service_fee}
 														 visaFee={this.state.visa_fee}
-														 paymentChannel={this.state.payment_channel}
+														 paymentChannel={this.state.selectedCase.payment_channel}
 														 dltype={this.state.dltype}/>)
 			}
 		}
