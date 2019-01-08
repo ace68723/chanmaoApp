@@ -203,8 +203,26 @@ export default class HomeTab extends Component {
 		        tappableDots={!!this._sliderRef}
 	      	/>
 				</View>
-				<View style={{marginTop: 12, height: 170}}>
+				<View style={{paddingTop: 14, height: 180, backgroundColor: 'white'}}>
 					<DiscountView/>
+				</View>
+
+				<View style={{justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2F2F2', height: 50, flexDirection: 'row'}}>
+					<Image
+						source={require('./Image/arrow-100x100.gif')}
+						style={{height: 20, width: 20, marginRight: 8}}
+					/>
+					<Text
+						style={{
+							textAlign: 'center',
+							fontSize: 14,
+							fontWeight: '700',
+							color: 'black',
+							fontFamily:'NotoSans-Regular'
+						}}
+						allowFontScaling={false}>
+					在下面点餐哟~
+					</Text>
 				</View>
 
 			</View>
@@ -296,6 +314,7 @@ export default class HomeTab extends Component {
 							extraData={all}
 							onScroll={(ref) => this._handleOnScroll(ref)}
 							scrollEventThrottle={200}
+							contentContainerStyle={{backgroundColor: '#F2F2F2'}}
 					/>
 					{this._renderScrollToResCards()}
 			</View>
