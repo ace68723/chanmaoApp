@@ -125,64 +125,82 @@ export default class HomeTab extends Component {
     }
   }
 	_renderCarouselItem ({item, index}) {
+
 		return (
-			<TouchableOpacity
-				activeOpacity={1}
-				style={{
-					width: width - 32 * 2,
-					height: 160,
-					paddingHorizontal: 8,
-					paddingBottom: 18 // needed for shadow
-				}}
-				onPress={() => { alert(`You've clicked '${index}'`); }}
-				>
-					<View style={{
-						position: 'absolute',
-						top: 0,
-						left: 8,
-						right: 8,
-						bottom: 18,
-						shadowColor: 'black',
-						shadowOpacity: 0.25,
-						shadowOffset: { width: 0, height: 10 },
-						shadowRadius: 10,
-						borderRadius: 8
-					}} />
-					<View style={{
-							flex: 1,
-			        marginBottom: 0, // Prevent a random Android rendering issue
-			        backgroundColor: 'white',
-			        borderTopLeftRadius: 8,
-			        borderTopRightRadius: 8
-						}}>
-							<ParallaxImage
-									source={{ uri: "./1.png" }}
-									containerStyle={{
-										flex: 1,
-										marginBottom: true ? 0 : -1,
-										backgroundColor: 'white',
-										borderRadius: 8,
-									}}
-									style={{
-										...StyleSheet.absoluteFillObject,
-										resizeMode: 'center',
-										borderRadius: 8,
-									}}
-							/>
-						</View>
-						<View style={{
-							position: 'absolute',
-							bottom: 0,
-							left: 0,
-							right: 0,
-							height: 8,
-							backgroundColor: 'white'
-							}}
-						/>
-			</TouchableOpacity>
+			<ParallaxImage
+					source={{ uri: item.thumbnail }}
+					containerStyle={{
+						flex: 1,
+						marginBottom: true ? 0 : -1,
+						backgroundColor: 'white',
+						borderRadius: 8,
+					}}
+					style={{
+						...StyleSheet.absoluteFillObject,
+						resizeMode: 'center',
+						borderRadius: 8,
+					}}
+			/>
+		)
 
-
-		);
+		// return (
+		// 	<TouchableOpacity
+		// 		activeOpacity={1}
+		// 		style={{
+		// 			width: width - 32 * 2,
+		// 			height: 160,
+		// 			paddingHorizontal: 8,
+		// 			paddingBottom: 18 // needed for shadow
+		// 		}}
+		// 		onPress={() => { alert(`You've clicked '${index}'`); }}
+		// 		>
+		// 			<View style={{
+		// 				position: 'absolute',
+		// 				top: 0,
+		// 				left: 8,
+		// 				right: 8,
+		// 				bottom: 18,
+		// 				shadowColor: 'black',
+		// 				shadowOpacity: 0.25,
+		// 				shadowOffset: { width: 0, height: 10 },
+		// 				shadowRadius: 10,
+		// 				borderRadius: 8
+		// 			}} />
+		// 			<View style={{
+		// 					flex: 1,
+		// 	        marginBottom: 0, // Prevent a random Android rendering issue
+		// 	        backgroundColor: 'white',
+		// 	        borderTopLeftRadius: 8,
+		// 	        borderTopRightRadius: 8
+		// 				}}>
+		// 					<ParallaxImage
+		// 							source={{ uri: "https://i.imgur.com/DDajebx.png" }}
+		// 							containerStyle={{
+		// 								flex: 1,
+		// 								marginBottom: true ? 0 : -1,
+		// 								backgroundColor: 'white',
+		// 								borderRadius: 8,
+		// 							}}
+		// 							style={{
+		// 								...StyleSheet.absoluteFillObject,
+		// 								resizeMode: 'center',
+		// 								borderRadius: 8,
+		// 							}}
+		// 					/>
+		// 				</View>
+		// 				<View style={{
+		// 					position: 'absolute',
+		// 					bottom: 0,
+		// 					left: 0,
+		// 					right: 0,
+		// 					height: 8,
+		// 					backgroundColor: 'white'
+		// 					}}
+		// 				/>
+		// 	</TouchableOpacity>
+		//
+		//
+		// );
 	}
 
 	_renderHeader() {
