@@ -204,10 +204,9 @@ class RestaurantCard extends Component {
                           shadowOffset: {
                            height: 2,
                            width: 2
-												 },
+												 	},
 												 	marginLeft:7,
 												 	marginRight:7,
-													backgroundColor:'#ffffff',
                           borderRadius:5,
 												 }}>
                 <View  style={{ borderTopLeftRadius:5,borderTopRightRadius:5,height:200,

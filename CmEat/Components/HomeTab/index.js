@@ -20,7 +20,7 @@ import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 import Label from '../../../App/Constants/AppLabel';
 
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 // import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
 
@@ -125,93 +125,47 @@ export default class HomeTab extends Component {
     }
   }
 	_renderCarouselItem ({item, index}) {
-
 		return (
-			<ParallaxImage
-					source={{ uri: item.thumbnail }}
-					containerStyle={{
+				activeOpacity={1}
+				style={{ flex: 1 }}
+				onPress={() => { alert(`You've clicked '${index}'`); }}
+			>
+				<View style={{
 						flex: 1,
-						marginBottom: true ? 0 : -1,
-						backgroundColor: 'white',
-						borderRadius: 8,
-					}}
-					style={{
-						...StyleSheet.absoluteFillObject,
-						resizeMode: 'center',
-						borderRadius: 8,
-					}}
-			/>
-		)
+		        marginBottom: 0, // Prevent a random Android rendering issue
+						width: width - 32 * 2,
+						height: 160,
+						paddingBottom: 18,
+						shadowOpacity: 0.55,
+						shadowRadius: 4,
+						shadowColor: 'grey',
+						shadowOffset: { height: 2, width: 2 },
+					}}>
+						<Image
+	            source={{ uri: item.image }}
+	            style={{
+								...StyleSheet.absoluteFillObject,
+								resizeMode: 'center',
+								borderRadius: 8,
+							}}
+	          />
+				</View>
+			</TouchableOpacity>
 
-		// return (
-		// 	<TouchableOpacity
-		// 		activeOpacity={1}
-		// 		style={{
-		// 			width: width - 32 * 2,
-		// 			height: 160,
-		// 			paddingHorizontal: 8,
-		// 			paddingBottom: 18 // needed for shadow
-		// 		}}
-		// 		onPress={() => { alert(`You've clicked '${index}'`); }}
-		// 		>
-		// 			<View style={{
-		// 				position: 'absolute',
-		// 				top: 0,
-		// 				left: 8,
-		// 				right: 8,
-		// 				bottom: 18,
-		// 				shadowColor: 'black',
-		// 				shadowOpacity: 0.25,
-		// 				shadowOffset: { width: 0, height: 10 },
-		// 				shadowRadius: 10,
-		// 				borderRadius: 8
-		// 			}} />
-		// 			<View style={{
-		// 					flex: 1,
-		// 	        marginBottom: 0, // Prevent a random Android rendering issue
-		// 	        backgroundColor: 'white',
-		// 	        borderTopLeftRadius: 8,
-		// 	        borderTopRightRadius: 8
-		// 				}}>
-		// 					<ParallaxImage
-		// 							source={{ uri: "https://i.imgur.com/DDajebx.png" }}
-		// 							containerStyle={{
-		// 								flex: 1,
-		// 								marginBottom: true ? 0 : -1,
-		// 								backgroundColor: 'white',
-		// 								borderRadius: 8,
-		// 							}}
-		// 							style={{
-		// 								...StyleSheet.absoluteFillObject,
-		// 								resizeMode: 'center',
-		// 								borderRadius: 8,
-		// 							}}
-		// 					/>
-		// 				</View>
-		// 				<View style={{
-		// 					position: 'absolute',
-		// 					bottom: 0,
-		// 					left: 0,
-		// 					right: 0,
-		// 					height: 8,
-		// 					backgroundColor: 'white'
-		// 					}}
-		// 				/>
-		// 	</TouchableOpacity>
-		//
-		//
-		// );
+
+		);
 	}
 
 	_renderHeader() {
 		const items = [
-			{thumbnail: "https://i.imgur.com/DDajebx.png"},
-			{thumbnail: "https://i.imgur.com/DDajebx.png"},
-			{thumbnail: "https://i.imgur.com/DDajebx.png"}
+			{image: "https://i.imgur.com/DDajebx.png"},
+			{image: "https://i.imgur.com/DDajebx.png"},
+			{image: "https://i.imgur.com/DDajebx.png"}
 		]
 		return(
-			<View style={{height: 160}}>
+			<View style={{height: 180, backgroundColor: '#F2F2F2'}}>
 				<Carousel
+					ref={c => this._sliderRef = c}
 					data={items}
 					renderItem={this._renderCarouselItem}
 					hasParallaxImages={true}
@@ -220,7 +174,7 @@ export default class HomeTab extends Component {
 					hasParallaxImages={false}
 					firstItem={0}
 					inactiveSlideScale={0.9}
-					inactiveSlideOpacity={0.3}
+					inactiveSlideOpacity={0.6}
 					containerCustomStyle={{
 		        overflow: 'visible'
 	    		}}
@@ -231,9 +185,21 @@ export default class HomeTab extends Component {
 					loopClonesPerSide={2}
 					autoplay={true}
 					autoplayDelay={500}
-					autoplayInterval={3000}
+					autoplayInterval={5000}
 					onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
 				/>
+				<Pagination
+	        dotsLength={items.length}
+	        activeDotIndex={this.state.slider1ActiveSlide ? this.state.slider1ActiveSlide : 0}
+	        containerStyle={{paddingVertical: 6, marginBottom: 8}}
+	        dotColor={'#D46A36'}
+	        dotStyle={{ width: 6, height: 6, borderRadius: 6, marginHorizontal: -6 }}
+	        inactiveDotColor={"#8E8E8E"}
+	        inactiveDotOpacity={0.6}
+	        inactiveDotScale={1}
+	        carouselRef={this._sliderRef}
+	        tappableDots={!!this._sliderRef}
+      	/>
 			</View>
 		)
 	}
@@ -255,7 +221,7 @@ export default class HomeTab extends Component {
 		let keyExtractor = (item, index) => item.area + item.rid;
 		return (
 			<FlatList
-					style={{marginTop: 8,}}
+					style={{marginTop: 8, backgroundColor: '#F2F2F2'}}
 					key='key'
 					ref={(comp) => this._scrollVew = comp}
 					data={all}
