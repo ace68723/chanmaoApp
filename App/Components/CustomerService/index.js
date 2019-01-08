@@ -41,7 +41,7 @@ class CustomerService extends Component {
 		}
 		const finishedStatus = [40, 5, 90, ];
 		const orderStatus = this.props.order.order_status;
-		console.log(this.props.order);
+		// console.log(this.props.order);
 		// order_created rr_url order_oid
 		let options;
 		if (finishedStatus.includes(orderStatus)){
@@ -92,6 +92,9 @@ class CustomerService extends Component {
 				break;
 			case "url":
 				this.openUrl(selected.url)
+				break;
+			case "alert":
+				alert(selected.alert);
 				break;
 			default:
 

@@ -110,6 +110,27 @@ const orderIssueOptions = [
   },
 ]
 
+const refundIssueOptions = [
+  {
+    key: "requestRefundReceipt",
+    title: "申请提供退款receipt",
+    type: "message",
+    message: "你好，我想申请提供退款receipt，我的邮箱地址是："
+  },
+  {
+    key: "refundSettleTime",
+    title: "退款到账要多久?",
+    type: "alert",
+    alert: "信用卡、借记卡、Apple Pay退款到账时间大约在三个工作日后，支付宝退款到账时间大约在一个工作日后"
+  },
+  {
+    key: "other",
+    title: "其他",
+    type: "message",
+    message: "你好，我想询问退款相关的事情"
+  },
+]
+
 const finishedOptions = [
   {
     key: "orderIssue",
@@ -120,8 +141,8 @@ const finishedOptions = [
   {
     key: "refundRelated",
     title: "退款相关",
-    type: "message",
-    message: "你好，询问退款相关的事情，我的邮箱地址是："
+    type: "options",
+    options: refundIssueOptions
   },
   {
     key: "orderRecepit",

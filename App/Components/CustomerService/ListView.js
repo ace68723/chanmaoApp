@@ -63,6 +63,9 @@ class CustomerServiceListView extends Component {
 			case "url":
 				this.openUrl(selected.url)
 				break;
+			case "alert":
+				alert(selected.alert);
+				break;
 			default:
 
 		}
