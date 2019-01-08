@@ -14,12 +14,12 @@ import DiscountItem from './Discount/DiscountItem'
 import DiscountTypeLabel from './Discount/DiscountTypeLabel'
 
 const {height, width} = Dimensions.get('window');
-const contentHeight = 120;
 
 export default class DiscountView extends Component {
   constructor(props) {
     super(props)
   }
+
   _renderTypeLabel(){
     return (
       <View style={{marginRight: 10}}>
@@ -52,26 +52,27 @@ export default class DiscountView extends Component {
         'title': "炸鸡一元"
       }
     ]
+
     return (
       <View style={styles.container}>
         <View style={{flex: 1}}>
           <FlatList
-            show
             horizontal={true}
             data={types}
             renderItem={this._renderTypeLabel}
             showsHorizontalScrollIndicator={false}
-            contentOffset={{x: -16}}
+            contentContainerStyle={{ marginLeft: 16 }}
           />
         </View>
 
         <View style={{flex: 3}}>
           <FlatList
+            refref={c => this._itemlList = c}
             horizontal={true}
             data={items}
             renderItem={this._renderItem}
             showsHorizontalScrollIndicator={false}
-            contentOffset={{x: -16}}
+            contentContainerStyle={{ marginLeft: 16 }} 
           />
         </View>
 

@@ -178,7 +178,7 @@ export default class HomeTab extends Component {
 						inactiveSlideScale={0.9}
 						inactiveSlideOpacity={0.6}
 						containerCustomStyle={{
-			        overflow: 'visible'
+			        overflow: 'visible',
 		    		}}
 						contentContainerCustomStyle={{
 		        	paddingVertical: 10
