@@ -154,7 +154,6 @@ export default class HomeTab extends Component {
 				</View>
 			</TouchableOpacity>
 
-
 		);
 	}
 
@@ -204,7 +203,10 @@ export default class HomeTab extends Component {
 		        tappableDots={!!this._sliderRef}
 	      	/>
 				</View>
-				<DiscountView/>
+				<View style={{marginTop: 12, height: 170}}>
+					<DiscountView/>
+				</View>
+
 			</View>
 
 		)
