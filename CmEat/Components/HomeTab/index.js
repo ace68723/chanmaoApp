@@ -19,6 +19,7 @@ import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 import Label from '../../../App/Constants/AppLabel';
+import DiscountView from './DiscountView'
 
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
@@ -126,6 +127,7 @@ export default class HomeTab extends Component {
   }
 	_renderCarouselItem ({item, index}) {
 		return (
+			<TouchableOpacity
 				activeOpacity={1}
 				style={{ flex: 1 }}
 				onPress={() => { alert(`You've clicked '${index}'`); }}
@@ -163,44 +165,48 @@ export default class HomeTab extends Component {
 			{image: "https://i.imgur.com/DDajebx.png"}
 		]
 		return(
-			<View style={{height: 180, backgroundColor: '#F2F2F2'}}>
-				<Carousel
-					ref={c => this._sliderRef = c}
-					data={items}
-					renderItem={this._renderCarouselItem}
-					hasParallaxImages={true}
-					sliderWidth={width}
-					itemWidth={width - 32 * 2}
-					hasParallaxImages={false}
-					firstItem={0}
-					inactiveSlideScale={0.9}
-					inactiveSlideOpacity={0.6}
-					containerCustomStyle={{
-		        overflow: 'visible'
-	    		}}
-					contentContainerCustomStyle={{
-	        	paddingVertical: 10
-	    		}}
-					loop={true}
-					loopClonesPerSide={2}
-					autoplay={true}
-					autoplayDelay={500}
-					autoplayInterval={5000}
-					onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
-				/>
-				<Pagination
-	        dotsLength={items.length}
-	        activeDotIndex={this.state.slider1ActiveSlide ? this.state.slider1ActiveSlide : 0}
-	        containerStyle={{paddingVertical: 6, marginBottom: 8}}
-	        dotColor={'#D46A36'}
-	        dotStyle={{ width: 6, height: 6, borderRadius: 6, marginHorizontal: -6 }}
-	        inactiveDotColor={"#8E8E8E"}
-	        inactiveDotOpacity={0.6}
-	        inactiveDotScale={1}
-	        carouselRef={this._sliderRef}
-	        tappableDots={!!this._sliderRef}
-      	/>
+			<View>
+				<View style={{height: 180, backgroundColor: '#F2F2F2'}}>
+					<Carousel
+						ref={c => this._sliderRef = c}
+						data={items}
+						renderItem={this._renderCarouselItem}
+						hasParallaxImages={true}
+						sliderWidth={width}
+						itemWidth={width - 32 * 2}
+						hasParallaxImages={false}
+						firstItem={0}
+						inactiveSlideScale={0.9}
+						inactiveSlideOpacity={0.6}
+						containerCustomStyle={{
+			        overflow: 'visible'
+		    		}}
+						contentContainerCustomStyle={{
+		        	paddingVertical: 10
+		    		}}
+						loop={true}
+						loopClonesPerSide={2}
+						autoplay={true}
+						autoplayDelay={500}
+						autoplayInterval={5000}
+						onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
+					/>
+					<Pagination
+		        dotsLength={items.length}
+		        activeDotIndex={this.state.slider1ActiveSlide ? this.state.slider1ActiveSlide : 0}
+		        containerStyle={{paddingVertical: 6, marginBottom: 8}}
+		        dotColor={'#D46A36'}
+		        dotStyle={{ width: 6, height: 6, borderRadius: 6, marginHorizontal: -6 }}
+		        inactiveDotColor={"#8E8E8E"}
+		        inactiveDotOpacity={0.6}
+		        inactiveDotScale={1}
+		        carouselRef={this._sliderRef}
+		        tappableDots={!!this._sliderRef}
+	      	/>
+				</View>
+				<DiscountView/>
 			</View>
+
 		)
 	}
 
