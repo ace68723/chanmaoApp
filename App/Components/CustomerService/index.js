@@ -78,7 +78,7 @@ class CustomerService extends Component {
 			return;
 		}
 		else if (selected.key == "chatHistory"){
-			Intercom.displayMessenger();
+			Intercom.displayConversationsList();
 			return;
 		}
 
@@ -107,7 +107,8 @@ class CustomerService extends Component {
 			navigatorStyle: {navBarHidden: true},
 			passProps: {
 				options: passingOptions,
-				order: this.props.order
+				order: this.props.order,
+				fromSettings: this.props.fromSettings,
 			}
 		});
 	}

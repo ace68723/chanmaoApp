@@ -29,8 +29,10 @@ class CustomerServiceListView extends Component {
 		this.initPageData();
   }
 	initPageData(){
-		const finishedStatus = [40, 5, 90, ];
-		const orderStatus = this.props.order.order_status;
+		if (!this.props.fromSettings){
+			const finishedStatus = [40, 5, 90, ];
+			const orderStatus = this.props.order.order_status;
+		}
 		// console.log(this.props.order);
 		// order_created rr_url order_oid
 		this.state = {
@@ -53,6 +55,18 @@ class CustomerServiceListView extends Component {
 				break;
 			}
 		}
+		// Custom logic
+		if (selected.key == "paymentRelatedPlacedOrder"){
+			this.props.navigator.push({
+				screen: 'CmEatHistory',
+				animated: true,
+	      navigatorStyle: {
+	        navBarHidden: true
+	      }
+			});
+			return;
+		}
+
 		switch (selected.type) {
 			case "message":
 				this.showMessager(selected.message)

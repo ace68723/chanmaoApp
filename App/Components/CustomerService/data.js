@@ -158,6 +158,20 @@ const finishedOptions = [
   }
 ]
 
+const paymentRelatedOptions = [
+  {
+    key: "paymentRelatedUnplacedOrder",
+    title: "我未能成功下单",
+    type: "message",
+    message: "你好，我想询问订单支付相关的问题"
+  },
+  {
+    key: "paymentRelatedPlacedOrder",
+    title: "我已成功下单，选择有问题的订单",
+    type: "custom",
+  },
+]
+
 const settingsOptions = [
   {
     key: "chatHistory",
@@ -179,8 +193,8 @@ const settingsOptions = [
   {
     key: "paymentIssues",
     title: "订单支付相关",
-    type: "message",
-    message: "你好，我想询问订单支付相关的问题"
+    type: "options",
+    options: paymentRelatedOptions
   },
   {
     key: "otherIssues",
