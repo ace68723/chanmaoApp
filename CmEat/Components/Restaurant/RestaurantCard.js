@@ -43,6 +43,7 @@ class RestaurantCard extends Component {
 				})
 			}
 			_renderDesc() {
+
 				const _discountInfo = () => {
 			    if (this.state.restaurant.discount_message && this.state.restaurant.discount_message.length > 0) {
 			      return (
@@ -53,8 +54,9 @@ class RestaurantCard extends Component {
 			          />
 			          <Text style={{color:'#40a2e7',
 			                        marginLeft:7,
+															fontWeight: '700',
+															fontSize: 13,
 			                        marginRight: 20,
-			                        fontWeight:'200',
 			                        alignSelf: 'center',
 			                        fontFamily:'NotoSans-Regular'}}
 			                allowFontScaling={false}>
@@ -64,17 +66,38 @@ class RestaurantCard extends Component {
 			      )
 			    }
 			  };
+
+				const _resTags = () => {
+					let tags = [];
+					const testData = ["兰州拉面", "经典川菜", "家常菜"];
+					for (let i of testData){
+						tags.push(
+							<View style={{
+									borderStyle: 'dotted',								    borderColor:'grey',
+									borderWidth: 1,
+									padding: 4,
+									marginRight: 6,
+							}}>
+								<Text style={{
+										textAlign: 'center',
+								    fontSize: 10,
+								    fontWeight: '900',
+								    color: "grey",
+									}}
+								>
+									{i}
+								</Text>
+							</View>
+
+						)
+					}
+					return tags;
+			  };
 				return(
 					<View style={{flex:2,}}>
-						<Text style={{color: '#666666',
-													// color:'#ababb0',
-													fontSize:14,
-													fontWeight:'200',
-													marginTop:2,
-													fontFamily:'NotoSans-Regular'}}
-									allowFontScaling={false}>
-								{this.state.restaurant.desc}
-						</Text>
+						<View style={{flexDirection: 'row', marginTop: 6, marginBottom: 6}}>
+							{_resTags()}
+						</View>
 						{_discountInfo()}
 					</View>
 				);
@@ -179,7 +202,7 @@ class RestaurantCard extends Component {
 							/>
               <Text style={{color:'#ababb0',
 														fontSize:12,
-														fontWeight:'400',
+														fontWeight:'600',
 														fontFamily:'NotoSans-Regular',
 														marginLeft:3,
 														textAlign:'right'}}
@@ -238,7 +261,9 @@ class RestaurantCard extends Component {
                               borderRightWidth:StyleSheet.hairlineWidth,}}>
                   <Text style={{color:'#363646',
 																fontSize:15,
-																fontFamily: 'NotoSans-Black',}}
+																fontFamily: 'NotoSans-Black',
+																fontWeight: '900',
+															}}
 												allowFontScaling={false}>
                       {this.state.restaurant.name}
                   </Text>

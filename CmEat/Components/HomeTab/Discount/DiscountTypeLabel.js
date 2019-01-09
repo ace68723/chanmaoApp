@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: "#4398DC",
     borderColor:'#4398DC',
-    borderWidth: 1.5,
+    borderWidth: 1.2,
     padding: 6,
     borderRadius: 6,
   },
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     color: "white",
     borderColor:'#4398DC',
-    borderWidth: 1.5,
+    borderWidth: 1.2,
     padding: 6,
     borderRadius: 6,
   }
