@@ -98,10 +98,10 @@ class CustomerServiceListView extends Component {
 	}
 	showMessager(message){
 		const {uid, version} = GetUserInfo();
-		Intercom.registerIdentifiedUser({ userId: uid });
 		if (this.props.fromSettings){
+			Intercom.registerIdentifiedUser({ userId: uid });
 			Intercom.updateUser({
-					user_id: uid,
+					user_id: `uid: ${uid}`,
 					custom_attributes: {
 							version: version,
 					},
@@ -109,8 +109,9 @@ class CustomerServiceListView extends Component {
 		}
 		else{
 			const oid = this.props.order.order_oid;
+			Intercom.registerIdentifiedUser({ userId: uid });
 			Intercom.updateUser({
-					user_id: uid,
+					user_id: `oid: ${oid} uid: ${uid}`,
 					custom_attributes: {
 							version: version,
 							order_id: oid,
@@ -118,6 +119,7 @@ class CustomerServiceListView extends Component {
 							phone_number: this.props.order.user_tel,
 							address: this.props.order.user_address,
 							order_status: this.props.order.order_status,
+							restaurant_name: this.props.order.rr_name,
 					},
 			});
 		}

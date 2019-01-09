@@ -153,6 +153,30 @@ export default class pastOrderEN extends Component {
           </View>
         )
       }else{
+        if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && (this.state.orderInfo.order_status == 0 || this.state.orderInfo.order_status == 55)) {
+          return (
+              <TouchableOpacity style={{flex:1,
+                                        flexDirection:'row',
+                                        justifyContent:'center',
+                                        alignItems:'center',
+                                        padding:10,
+                                        backgroundColor: '#ff8b00',
+                                        borderColor: '#ff8b00',
+                                        borderTopWidth: 1,
+                                        borderBottomWidth:1}}
+                                onPress={
+                                  this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}
+                                disabled={this.props.isRefreshing}>
+                <Text style={{fontSize:15,
+                              color:'white',
+                              fontFamily:'NotoSans-Regular',}}
+                      allowFontScaling={false}>
+                  {Label.getCMLabel('REPAY')}
+                </Text>
+
+              </TouchableOpacity>
+          )
+        }
         return(
           <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
               <TouchableOpacity style={{flex:1,
@@ -197,7 +221,8 @@ export default class pastOrderEN extends Component {
   }
 
   _renderOptionButton() {
-    if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && (this.state.orderInfo.order_status == 0 || this.state.orderInfo.order_status == 55)) {
+    // if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && (this.state.orderInfo.order_status == 0 || this.state.orderInfo.order_status == 55)) {
+    if (false){
       return (
           <TouchableOpacity style={{flex:1,
                                     flexDirection:'row',
@@ -229,7 +254,10 @@ export default class pastOrderEN extends Component {
                                       justifyContent:'center',
                                       alignItems:'center'}}
                               onPress={this._handleContactCustomerService}>
-              <Text style={{marginLeft:5,fontSize:15,color:'#666666',fontFamily:'NotoSans-Regular',}} allowFontScaling={false}>{Label.getCMLabel('CONTACT_SUPPORT')}</Text>
+              <Image
+                style={{width: 16, height: 16,}}
+                source={require('./Image/support.png')}></Image>
+              <Text style={{marginLeft:6,fontSize:15,color:'#666666',fontFamily:'NotoSans-Regular',}} allowFontScaling={false}>{Label.getCMLabel('CONTACT_SUPPORT')}</Text>
 
             </TouchableOpacity>
         </View>
