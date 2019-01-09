@@ -35,6 +35,9 @@ if(height == 812){
 }else{
   marginTop = 84;
 }
+
+const AD_INTERVAL = 7; // For every 7 cell, one cell of ad showed
+
 export default class HomeTab extends Component {
 
   constructor(){
@@ -213,7 +216,7 @@ export default class HomeTab extends Component {
 	_renderRestaurant({index, item}) {
 		// Determine if ad will be inserted
 		let adCell;
-		if (index % 7 == 0 && index != 0){
+		if (index % AD_INTERVAL == 0 && index != 0){
 			adCell = this._renderRestaurantAd(index);
 		}
 
@@ -229,12 +232,11 @@ export default class HomeTab extends Component {
 		)
 	}
 
-
 	_renderRestaurantAd(index) {
 		index -= 1;
-		let adIndex = ~~(index / 7);
+		let adIndex = ~~(index / AD_INTERVAL);
 		adIndex += adIndex
-		console.log(adIndex);
+
 		if (adIndex > this.props.advertisement.length - 2){
 			return;
 		}
