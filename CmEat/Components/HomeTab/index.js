@@ -43,7 +43,7 @@ export default class HomeTab extends Component {
 			showScrollToResCards: true,
 			scrollToResCardsOpacity: new Animated.Value(1),
 		}
-		this._handleOnPress = this._handleOnPress.bind(this);
+		this._handleOnPressAd = this._handleOnPressAd.bind(this);
 		this._handleScrollToResCards = this._handleScrollToResCards.bind(this);
 		this._handleOnScroll = this._handleOnScroll.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
@@ -52,7 +52,7 @@ export default class HomeTab extends Component {
 
   }
 
-	_handleOnPress(advertisement){
+	_handleOnPressAd(advertisement){
 		if(advertisement.navitype == 2){
       const {url} = advertisement.naviparam;
       this.props.navigator.showModal({
@@ -105,26 +105,6 @@ export default class HomeTab extends Component {
 		this.props.onScrollRestaurantsList(event);
 	}
 
-  _renderAdv(){
-    if(this.props.advertisement && this.props.advertisement.length>0){
-				let Ad = this.props.advertisement.map((advertisement,index)=>{
-					return(
-						<TouchableWithoutFeedback key={index} onPress={this._handleOnPress.bind(null,advertisement)}>
-							<View style={styles.autoViewStyle}>
-								<Image source={{uri:advertisement.image}} style={styles.adLarger}/>
-							</View>
-						</TouchableWithoutFeedback>
-					)
-
-				})
-      return(
-        <View style={styles.container}>
-					{Ad}
-        </View>
-
-      )
-    }
-  }
 	_renderCarouselItem ({item, index}) {
 		return (
 			<TouchableOpacity
@@ -230,33 +210,55 @@ export default class HomeTab extends Component {
 		)
 	}
 
-	_renderRestaurant({item}) {
+	_renderRestaurant({index, item}) {
+		// Determine if ad will be inserted
+		let adCell;
+		if (index % 7 == 0 && index != 0){
+			adCell = this._renderRestaurantAd(index);
+		}
+
 		const restaurant = item;
-			if(restaurant){
-				return (<RestaurantCard
-					restaurant={restaurant}
-					navigator={this.props.navigator}
-					/>);
-			}
+		return (
+			<View>
+				{adCell}
+				<RestaurantCard
+				restaurant={restaurant}
+				navigator={this.props.navigator}></RestaurantCard>
+			</View>
+
+		)
 	}
-	_renderRestaurants() {
-		if (this.props.restaurants.length == 0){
+
+
+	_renderRestaurantAd(index) {
+		index -= 1;
+		let adIndex = ~~(index / 7);
+		adIndex += adIndex
+		console.log(adIndex);
+		if (adIndex > this.props.advertisement.length - 2){
 			return;
 		}
-		let all = this.props.restaurants[0].restaurantList;
-		let keyExtractor = (item, index) => item.area + item.rid;
-		return (
-			<FlatList
-					style={{marginTop: 8, backgroundColor: '#F2F2F2'}}
-					key='key'
-					ref={(comp) => this._scrollVew = comp}
-					data={all}
-					ListHeaderComponent={this._renderHeader}
-					renderItem={this._renderRestaurant}
-					keyExtractor={keyExtractor}
-					extraData={all}
-			/>
-		);
+		const advertisementLeft = this.props.advertisement[adIndex];
+		const advertisementRight = this.props.advertisement[adIndex + 1];
+		const adHeight = 110;
+		return(
+			<View style={{flexDirection: 'row', height: adHeight, marginBottom: 6}}>
+
+				<TouchableWithoutFeedback onPress={this._handleOnPressAd.bind(null, advertisementLeft)}>
+					<View style={[styles.adViewStyle, {marginLeft: 6, marginRight: 3}]}>
+						<Image source={{uri: advertisementLeft.image}} style={styles.adLarger}/>
+					</View>
+				</TouchableWithoutFeedback>
+
+				<TouchableWithoutFeedback onPress={this._handleOnPressAd.bind(null, advertisementRight)}>
+					<View style={[styles.adViewStyle, {marginRight: 6, marginLeft: 3}]}>
+						<Image source={{uri: advertisementRight.image}} style={styles.adLarger}/>
+					</View>
+				</TouchableWithoutFeedback>
+
+			</View>
+
+		)
 	}
 
 	_renderScrollToResCards() {
@@ -348,20 +350,13 @@ const styles = StyleSheet.create({
 	scrollView:{
 		flex: 1,
 	},
-	autoViewStyle:{
+	adViewStyle:{
 		alignItems:'center',
-		width:(width-9)/2,
-		height:(width-9)/(2*1.157),
-		marginLeft:3,
-		marginTop:3,
+		flex: 1,
+		borderRadius: 6,
+		overflow: 'hidden',
 	},
   adLarger:{
-    borderRadius:5,
-    width:(width-9)/2,
-    height:(width-9)/(2*1.157),
-  },
-  adSmall:{
-    width:(width-7)/2,
-    height:(width-7)/(2*2.358),
+		...StyleSheet.absoluteFillObject,
   },
 });
