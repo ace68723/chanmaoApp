@@ -40,11 +40,11 @@ let languages = [
         title: 'English',
         value: 'english'
     },
-    {
-        lid: 2,
-        title: 'Français',
-        value: 'french'
-    }
+    // {
+    //     lid: 2,
+    //     title: 'Français',
+    //     value: 'french'
+    // }
 ]
 let regions = [
     {
@@ -188,7 +188,7 @@ export default class SelectRegionAndLanguage extends Component {
     renderRegionAndLanguage(){
         return(
             <View style={{flex:0.6,  width: width}}>
-                <View style={{flex:0.2, flexDirection:'row'}}>
+                <View style={{flex:0.18, flexDirection:'row'}}>
                    {this.renderRegionButton()}
                 </View>
                 <View style={{flex:0.7, justifyContent:'center', alignItems:'center', paddingVertical:20}}>
@@ -198,7 +198,7 @@ export default class SelectRegionAndLanguage extends Component {
                         width:width/2,
                         borderTopWidth:4,
                         borderTopColor:'#ea7b21',
-                        top:5,
+                        top:0,
                         left: this.state.regionIndicatorLeft
                     }}>
                     </Animated.View>

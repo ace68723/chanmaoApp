@@ -33,6 +33,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
     selectedCoupon: '',
     alertMsg: '',
     ticket_id: '',
+    custom_tips: false
 
   },
   initState(){
@@ -54,6 +55,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
         selectedCoupon: '',
         alertMsg: '',
         ticket_id: '',
+        custom_tips: false,
       };
   },
 	emitChange(){
@@ -199,6 +201,7 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
       // this.state.couponCodeTextInput = "";
       this.state.loading = false;
       this.state.showPopup = false;
+      this.state.custom_tips = data.result.custom_tips;
   },
   // beforCheckout(data){
   // 		const pretax = parseFloat(data.result.pretax);
@@ -265,9 +268,14 @@ const RestaurantStore = Object.assign({},EventEmitter.prototype,{
 		if(data.result == 0){
 			 checkoutSuccessful = true;
        oidFromUrl = data.oidFromUrl;
+       chargeTotalFromUrl = data.chargeTotalFromUrl;
+       tipsFromUrl = data.tipsFromUrl;
        MenuStore.initMenu();
 		}
-		this.state = Object.assign({},this.state,{checkoutSuccessful, oidFromUrl});
+		this.state = Object.assign({},this.state,{checkoutSuccessful,
+                                              oidFromUrl,
+                                              chargeTotalFromUrl,
+                                              tipsFromUrl});
 
   },
   updateGoToHistory(data){

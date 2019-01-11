@@ -87,7 +87,8 @@ class Confirm extends Component {
 											showOrderConfirm:false,
 											paymentStatus: Label.getCMLabel('ADD_PAYMENT'),
 											tips:0,
-											tipsPercentage:0.1,
+											// tipsPercentage:0.1,
+											tipsPercentageNumber: 10,
 											selectedCase: {fees: {},
 							                       payment_channel: 0,
 							                       dltype: 1},
@@ -120,6 +121,7 @@ class Confirm extends Component {
 				this._renderRestaurantName = this._renderRestaurantName.bind(this);
 				this._renderPriceDetail = this._renderPriceDetail.bind(this);
 				this._renderPriceTotal = this._renderPriceTotal.bind(this);
+				this._renderTips = this._renderTips.bind(this);
 				this._beforeCheckoutUpdateItems = this._beforeCheckoutUpdateItems.bind(this);
 
 				this._checkCouponOnPress = this._checkCouponOnPress.bind(this);
@@ -127,6 +129,7 @@ class Confirm extends Component {
 				this._applyCouponOnPress = this._applyCouponOnPress.bind(this);
 				this._deliverAnimation = this._deliverAnimation.bind(this);
 				this._updateComment = this._updateComment.bind(this);
+				this._changedTips = this._changedTips.bind(this);
 
 				this.popupView = PopupView.getInstance();
     }
@@ -141,7 +144,11 @@ class Confirm extends Component {
     }
     _onChange(){
 				const state = Object.assign({},CheckoutStore.getState());
-				this.setState(Object.assign({}, state));
+				let tips = 0;
+				if (state.selectedCase.dltype == 1 && state.custom_tips) {
+					tips = parseFloat(state.selectedCase.fees.charge_total * this.state.tipsPercentageNumber / 100).toFixed(2);
+				}
+				this.setState(Object.assign({}, state, {tips}));
 				if(!state.selectedAddress || !state.selectedAddress.hasOwnProperty('uaid')){
 					setTimeout( () => {
 						this.props.navigator.showModal({
@@ -225,7 +232,7 @@ class Confirm extends Component {
 					// if the distance is < 8km (which means dlexp > 0) and payment_channel is not 0, do the charging
 					if (!state.selectedCase.custom_dlexp && state.selectedCase.payment_channel != 0) {
 						if (state.selectedCase.payment_channel == 1) {
-							CheckoutAction.stripeChargeAndUpdate({amount: state.selectedCase.fees.charge_total,
+							CheckoutAction.stripeChargeAndUpdate({amount: state.chargeTotalFromUrl,
 																					 					oid: state.oidFromUrl,
 																										checkoutFrom: 'checkout'});
 						}
@@ -233,18 +240,23 @@ class Confirm extends Component {
 							this.props.navigator.dismissModal({animationType: 'slide-down'});
 							setTimeout(() => {
 								CheckoutAction.afterPayGoToHistory();
-								Alipay.constructAlipayOrder({total: state.selectedCase.fees.charge_total.toString(),
+								Alipay.constructAlipayOrder({total: state.chargeTotalFromUrl.toString(),
 																						 oid: state.oidFromUrl});
 							}, 300);
 						}
 						else if(state.selectedCase.payment_channel == 30){
+							// let tips = state.selectedCase.fees.ori_service_fee;
+							// if (this.state.custom_tips) {
+							// 	tips = this.state.tips;
+							// }
 							let paymentData = {
 								subtotal: state.selectedCase.fees.ori_pretax.toString(),
 								shipping: state.selectedCase.fees.dlexp.toString(),
 								tax: state.selectedCase.fees.ori_tax.toString(),
-								tips: state.selectedCase.fees.ori_service_fee.toString(),
+								// tips: state.selectedCase.fees.ori_service_fee.toString(),
+								tips: state.tipsFromUrl.toString(),
 								oid: state.oidFromUrl,
-								amount: state.selectedCase.fees.charge_total,
+								amount: state.chargeTotalFromUrl,
 								discount: state.selectedCase.fees.total_off
 							};
 
@@ -306,18 +318,15 @@ class Confirm extends Component {
 			loading:true,
 			showOrderConfirm:false,
 		})
-      // CheckoutAction.checkout(this.state.comment,
-			// 												this.state.payment_channel,
-			// 												this.state.tips,
-			// 												this.state.visa_fee);
-			CheckoutAction.checkout({
-															 ticket_id: this.state.ticket_id,
-															 sign: this.state.selectedCase.sign,
-															 dltype: this.state.dltype,
-															 payment_channel: this.state.selectedCase.payment_channel,
-															 charge_total: this.state.selectedCase.fees.charge_total,
-															 rid: this.state.rid
-															});
+		CheckoutAction.checkout({
+														 ticket_id: this.state.ticket_id,
+														 sign: this.state.selectedCase.sign,
+														 dltype: this.state.dltype,
+														 payment_channel: this.state.selectedCase.payment_channel,
+														 charge_total: this.state.selectedCase.fees.charge_total,
+														 rid: this.state.rid,
+														 tips: this.state.tips
+														});
     }
     _checkout(){
 
@@ -502,19 +511,19 @@ class Confirm extends Component {
 		}
 		_alipaySelected() {
 			CheckoutAction.updatePaymentStatus(10);
-			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
-										 tipsPercentage:0.1});
+			// this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+			// 							 tipsPercentage:0.1});
 		}
 		_applePaySelected(){
 			CheckoutAction.updatePaymentStatus(30);
-			this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
-										 tipsPercentage:0.1});
+			// this.setState({tips: parseFloat(this.state.total*0.1).toFixed(2),
+			// 							 tipsPercentage:0.1});
 		}
 
 		_cashSelected() {
 			CheckoutAction.updatePaymentStatus(0);
-			this.setState({tips: 0,
-										 tipsPercentage:0.1});
+			// this.setState({tips: 0,
+			// 							 tipsPercentage:0.1});
 		}
 
 		_previousCardSelected() {
@@ -604,6 +613,7 @@ class Confirm extends Component {
 
 		renderCheckoutButton(){
 			if (true) {
+				const charge_total = parseFloat(this.state.selectedCase.fees.charge_total + parseFloat(this.state.tips)).toFixed(2);
 			// if (Platform.OS == 'ios') {
 				if(this.state.selectedAddress && this.state.selectedAddress.hasOwnProperty("uaid") && !this.state.loading){
 	        return(
@@ -612,7 +622,7 @@ class Confirm extends Component {
 										<View style={styles.acceptButton}>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
-												 {Label.getCMLabel('ACTUAL_PAYING')}: ${this.state.selectedCase.fees.charge_total}
+												 {Label.getCMLabel('ACTUAL_PAYING')}: ${charge_total}
 											</Text>
 											<Text style={styles.acceptText}
 														allowFontScaling={false}>
@@ -1200,6 +1210,83 @@ class Confirm extends Component {
 			);
 		}
 
+		_renderTips() {
+			if (this.state.selectedCase.dltype == 0 || !this.state.custom_tips) {
+				return;
+			}
+			let _tipsOptions = () => {
+				let _tipsOptions = [];
+				let options = [10, 12, 15];
+				for (let _option of options) {
+					_tipsOptions.push(
+						<TouchableOpacity key={'tips_' + _option}
+															onPress={() => this._changedTips(_option)}>
+							<View style={{width: 50,
+														borderWidth: 1,
+														justifyContent: 'center',
+														borderColor: this.state.tipsPercentageNumber == _option ?'#ff8b00' :'#808080',
+														backgroundColor: this.state.tipsPercentageNumber == _option ?'#ff8b00' :'white',
+														borderRadius: 15,
+														paddingVertical: 2,
+														paddingHorizontal: 8}}>
+								<Text style={{fontSize: 15,
+															textAlign: 'center',
+															alignSelf: 'center',
+															color: this.state.tipsPercentageNumber == _option ?'white' :'#666666',
+															fontFamily: 'NotoSans-Regular'}}
+											allowFontScaling={false}>
+									{_option}%
+								</Text>
+							</View>
+						</TouchableOpacity>
+					)
+				}
+				return _tipsOptions;
+			}
+			return (
+				<View style={{flexDirection: 'row',
+											marginTop: 10,
+											marginHorizontal: 20,
+											justifyContent: 'space-between'}}>
+					<Text style={{color:'#666666',
+												alignSelf: 'center',
+												marginRight: 5,
+												fontSize:15,
+												fontFamily: 'NotoSans-Bold'}}
+								allowFontScaling={false}>
+						{Label.getCMLabel('TIPS')}:
+					</Text>
+					<View style={{flex: 1,
+												flexDirection: 'row',
+												alignSelf: 'center',
+												justifyContent: 'space-around'}}>
+						{_tipsOptions()}
+					</View>
+					<View style={{flexDirection: 'row',
+												alignSelf: 'center',
+												width: 50,
+												marginLeft: 5,
+												justifyContent: 'flex-end'}}>
+						<Text style={{color:'#666666',
+													fontSize:15,
+													fontFamily:'NotoSans-Bold'}}
+									allowFontScaling={false}>
+							${this.state.tips}
+						</Text>
+					</View>
+				</View>
+			);
+		}
+
+		_changedTips(tipsPercentageNumber) {
+			// alert(percentage);
+			let tipsPercentage = tipsPercentageNumber / 100;
+			let tips = parseFloat(this.state.selectedCase.fees.charge_total * tipsPercentage).toFixed(2);
+			// alert(tips);
+			this.setState({tips,
+										 tipsPercentageNumber});
+		}
+
 		_renderComment(){
 			return(
 				<CommentModal  style={styles.modal}
@@ -1298,10 +1385,11 @@ class Confirm extends Component {
 		// }
 		_renderOrderConfirm() {
 			if(this.state.showOrderConfirm) {
+				const charge_total = parseFloat(this.state.selectedCase.fees.charge_total + parseFloat(this.state.tips)).toFixed(2)
 				return(<OrderConfirm doCheckout={this._doCheckout}
 														 closeOrderConfirm={this._closeOrderConfirm}
 														 selectedAddress={this.state.selectedAddress}
-														 total={this.state.selectedCase.fees.charge_total}
+														 total={charge_total}
 														 tips={this.state.selectedCase.fees.service_fee}
 														 visaFee={this.state.visa_fee}
 														 paymentChannel={this.state.selectedCase.payment_channel}
@@ -1452,6 +1540,7 @@ class Confirm extends Component {
 											<View style={styles.seperateLine}>
 											</View>
 											{this._renderPriceTotal()}
+											{this._renderTips()}
 								</View>
 
 

@@ -22,7 +22,7 @@ export default class SboxHomeAlert extends Component {
     super();
     this._closeSboHomeAlert = this._closeSboHomeAlert.bind(this);
     this.state = {
-      isShow: true,
+      isShow: false,
       homeAlert:{},
     }
     this._onChange = this._onChange.bind(this);
@@ -56,7 +56,7 @@ export default class SboxHomeAlert extends Component {
     }
   }
   render() {
-    if (!this.state.isShow){
+    if (!this.state.isShow || !this.state.homeAlert){
       return (<View></View>)
     }
     return (

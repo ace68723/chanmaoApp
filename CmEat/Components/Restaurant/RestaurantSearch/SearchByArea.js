@@ -23,7 +23,7 @@ export default class SearchByArea extends Component{
     _renderHeader(label) {
 
         return(
-            <View style={{padding:10,paddingTop:20,paddingBottom:0}}>
+            <View style={{padding:10,paddingTop:10,paddingBottom:0}}>
                 <Text style={{fontSize:18,
 															fontFamily:"NotoSans-Regular"}}
                       allowFontScaling={false}>

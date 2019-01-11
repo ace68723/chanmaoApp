@@ -90,7 +90,7 @@ export default class SearchByTag extends Component{
 	}
     _renderHeader() {
 		return(
-			<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
+			<View style={{padding:10,paddingTop:10,paddingBottom:0}}>
 				<Text style={{fontSize:18,fontFamily:"NotoSans-Regular"}}
 							allowFontScaling={false}>
 					{Label.getCMLabel('RES_TAG')}
