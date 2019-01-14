@@ -25,6 +25,7 @@ export default class pastOrderEN extends Component {
           page: props.page
       };
       this._renderDetialButton = this._renderDetialButton.bind(this);
+      this._handleContactCustomerService = this._handleContactCustomerService.bind(this);
   }
   componentWillReceiveProps(nextProps){
     this.setState({
@@ -111,15 +112,17 @@ export default class pastOrderEN extends Component {
     })
   }
 
-  _handleWechatBtn(){
-     Clipboard.setString('chanmao_kefu');
-     Alert.alert(
-            Label.getCMLabel('COPY_TO_CLIPBOARD'),
-            Label.getCMLabel('CHANMAO_KEFU'),
-            [
-              {text: 'OK', onPress: () => {}},
-            ]
-          )
+  _handleContactCustomerService(){
+    this.props.handleContactCustomerService(this.state.orderInfo);
+
+     // Clipboard.setString('chanmao_kefu');
+     // Alert.alert(
+     //        Label.getCMLabel('COPY_TO_CLIPBOARD'),
+     //        Label.getCMLabel('CHANMAO_KEFU'),
+     //        [
+     //          {text: 'OK', onPress: () => {}},
+     //        ]
+     //      )
   }
 
   _phoneNumberVerify (){
@@ -150,6 +153,30 @@ export default class pastOrderEN extends Component {
           </View>
         )
       }else{
+        if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && (this.state.orderInfo.order_status == 0 || this.state.orderInfo.order_status == 55)) {
+          return (
+              <TouchableOpacity style={{flex:1,
+                                        flexDirection:'row',
+                                        justifyContent:'center',
+                                        alignItems:'center',
+                                        padding:10,
+                                        backgroundColor: '#ff8b00',
+                                        borderColor: '#ff8b00',
+                                        borderTopWidth: 1,
+                                        borderBottomWidth:1}}
+                                onPress={
+                                  this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}
+                                disabled={this.props.isRefreshing}>
+                <Text style={{fontSize:15,
+                              color:'white',
+                              fontFamily:'NotoSans-Regular',}}
+                      allowFontScaling={false}>
+                  {Label.getCMLabel('REPAY')}
+                </Text>
+
+              </TouchableOpacity>
+          )
+        }
         return(
           <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
               <TouchableOpacity style={{flex:1,
@@ -194,7 +221,8 @@ export default class pastOrderEN extends Component {
   }
 
   _renderOptionButton() {
-    if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && (this.state.orderInfo.order_status == 0 || this.state.orderInfo.order_status == 55)) {
+    // if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && (this.state.orderInfo.order_status == 0 || this.state.orderInfo.order_status == 55)) {
+    if (false){
       return (
           <TouchableOpacity style={{flex:1,
                                     flexDirection:'row',
@@ -208,8 +236,7 @@ export default class pastOrderEN extends Component {
                             onPress={
                               this.props.handlePaymentRetry.bind(null,this.state.orderInfo)}
                             disabled={this.props.isRefreshing}>
-            <Text style={{marginLeft:5,
-                          fontSize:15,
+            <Text style={{fontSize:15,
                           color:'white',
                           fontFamily:'NotoSans-Regular',}}
                   allowFontScaling={false}>
@@ -226,9 +253,11 @@ export default class pastOrderEN extends Component {
                                       flexDirection:'row',
                                       justifyContent:'center',
                                       alignItems:'center'}}
-                              onPress={this._handleWechatBtn}>
-              <Image style={{width:25,height:25}}source={require('./Image/wechat3.png')}/>
-              <Text style={{marginLeft:5,fontSize:13,color:'#666666',fontFamily:'NotoSans-Regular',}} allowFontScaling={false}>chanmao_kefu</Text>
+                              onPress={this._handleContactCustomerService}>
+              <Image
+                style={{width: 16, height: 16,}}
+                source={require('./Image/support.png')}></Image>
+              <Text style={{marginLeft:6,fontSize:15,color:'#666666',fontFamily:'NotoSans-Regular',}} allowFontScaling={false}>{Label.getCMLabel('CONTACT_SUPPORT')}</Text>
 
             </TouchableOpacity>
         </View>

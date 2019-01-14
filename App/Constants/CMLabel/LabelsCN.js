@@ -144,6 +144,7 @@ module.exports={
     CS_WILL_CONTACT:'客服稍后联系您改运费',
     DISH_OUT_OF_ORDER:'糟糕, 有的菜没了',
     ORDER_CANCELED:'订单已取消',
+    CONTACT_SUPPORT:'联系客服',
 
     //Comment
     CONFIRM_COMMENT:'确认评价',
