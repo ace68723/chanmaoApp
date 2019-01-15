@@ -119,23 +119,37 @@ class CustomerService extends Component {
 			Intercom.updateUser({
 					user_id: `uid: ${uid}`,
 					custom_attributes: {
-							version: version,
+							"版本号": version,
 					},
 			});
 		}
 		else{
+			const orderStatusMapping = {
+				0: "等待商家确认",
+				10: "商家已确认，准备中",
+				20: "商家已确认，准备中",
+				30: "送餐员已开始送餐",
+				40: "已送到",
+				55: "新用户订单确认中",
+				60: "需要改运费",
+				5: "售完打回",
+				90: "订单已取消",
+			}
+			const statusId = parseInt(this.props.order.order_status);
+			const orderStatus = statusId in orderStatusMapping ? orderStatusMapping[statusId] : statusId;
 			const oid = this.props.order.order_oid;
+
 			Intercom.registerIdentifiedUser({ userId: uid });
 			Intercom.updateUser({
 					user_id: `oid: ${oid} uid: ${uid}`,
 					custom_attributes: {
-							version: version,
-							order_id: oid,
-							contact_name: this.props.order.user_name,
-							phone_number: this.props.order.user_tel,
-							address: this.props.order.user_address,
-							order_status: this.props.order.order_status,
-							restaurant_name: this.props.order.rr_name,
+							"版本号": version,
+							"订单ID": oid,
+							"联系人": this.props.order.user_name,
+							"电话号码": this.props.order.user_tel,
+							"下单地址": this.props.order.user_address,
+							"订单状态": orderStatus,
+							"餐馆名": this.props.order.rr_name,
 					},
 			});
 		}
