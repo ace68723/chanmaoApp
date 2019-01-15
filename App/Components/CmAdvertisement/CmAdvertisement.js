@@ -113,27 +113,27 @@ export default class CmAdvertisement extends Component {
     }
   }
   _renderAdLogo(){
-    return(
-      <View style={styles.logoBox}>
-          <Image source={require('./Image/logo.png')} style={{width:180,height:60}} />
-     </View>
-    )
+    // return(
+    //   <View style={styles.logoBox}>
+    //       <Image source={require('./Image/logo.png')} style={{width:180,height:60}} />
+    //  </View>
+    // )
   }
   _renderAddress(){
-    if(this.state.addr){
-      return(
-        <View style={{alignItems:'center',justifyContent:'center',padding:5,marginBottom:0}}>
-          <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600'}}
-                allowFontScaling={false}>
-            {Label.getCMLabel('DELIVER_TO')}
-          </Text>
-          <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600',marginTop:5,}}
-                allowFontScaling={false}>
-            {this.state.addr}
-          </Text>
-        </View>
-      )
-    }
+    // if(this.state.addr){
+    //   return(
+    //     <View style={{alignItems:'center',justifyContent:'center',padding:5,marginBottom:0}}>
+    //       <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600'}}
+    //             allowFontScaling={false}>
+    //         {Label.getCMLabel('DELIVER_TO')}
+    //       </Text>
+    //       <Text style={{color:'#ff8b00',fontSize:13,fontWeight:'600',marginTop:5,}}
+    //             allowFontScaling={false}>
+    //         {this.state.addr}
+    //       </Text>
+    //     </View>
+    //   )
+    // }
   }
 
   render() {

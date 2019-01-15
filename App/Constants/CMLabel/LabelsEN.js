@@ -22,7 +22,7 @@ module.exports={
     SAVE_ADDRESS:'Save Address',
     CUSTOMER_SERVICE:'Contact Us',
     LANGUAGE_SETTING: 'Select Language',
-    SWEETBOX: 'Sweetful Box, free shipping with purchase over $25',
+    SWEETBOX: 'Sweetful Box',
     LOG_OUT: 'Log Out',
 
     //Order
