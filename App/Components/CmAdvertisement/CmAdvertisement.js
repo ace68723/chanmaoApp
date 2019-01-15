@@ -112,7 +112,7 @@ export default class CmAdvertisement extends Component {
   _renderAdLogo(){
     return(
       <View style={styles.logoBox}>
-          <Image source={require('./Image/logo.png')} style={{width:180,height:60}} />
+          <Image source={require('./Image/logo.png')} style={{width:120,height:60}} />
      </View>
     )
   }
