@@ -241,9 +241,9 @@ export default class InputAnimation extends Component {
 
 
 							<Animated.View style={{opacity:this.state.logoOpacity,marginTop:height*0.1042}}>
-							<View style={styles.logoBox}>
-									<Image source={require('./Image/logo.png')} style={{width:240,height:80}} />
-						 </View>
+								<View style={styles.logoBox}>
+										<Image source={require('./Image/login_logo.png')} style={{width:192,height:90}} />
+							  </View>
 							</Animated.View>
 
 	            <TextInput
@@ -257,6 +257,7 @@ export default class InputAnimation extends Component {
 	                  ref={this.props.ir_USERNAME_INPUTREF}
 	                  onChangeText={this.props.if_handleUsername}
                     underlineColorAndroid={"rgba(0,0,0,0)"}
+										allowFontScaling={false}
 	              />
 	             <View style={{height:1,
 	                           backgroundColor:'#ffffff',}}>
@@ -273,6 +274,7 @@ export default class InputAnimation extends Component {
 	                    onChangeText={this.props.if_handlePassword}
                       underlineColorAndroid={"rgba(0,0,0,0)"}
 											onSubmitEditing={() => this._handleLogin()}
+											allowFontScaling={false}
 	                />
 								<View ref={this.props.ir_SUBMIT_BUTTON} >
 									<LoginButton is_login = {this.props.is_login}

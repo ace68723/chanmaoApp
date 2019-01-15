@@ -92,15 +92,23 @@ export default class InputAnimation extends Component {
 				<TouchableOpacity onPress={this.props.if_getVerification}>
 					<View style={{borderRadius:8,borderColor:'#ea7b21',borderWidth:2,height:40,marginTop:6
 					,alignItems:'center',justifyContent:'center',width:90}}>
-						<Text style={{fontSize:15,color:'#ea7b21'}}>Get Code</Text>
+						<Text style={{fontSize:15,color:'#ea7b21'}}
+									allowFontScaling={false}>Get Code</Text>
 					</View>
 				</TouchableOpacity>
 			)
 			else return(
 				<TouchableOpacity onPress={this.props.if_getVerification} disabled={true}>
-					<View style={{borderRadius:8,borderColor:'#9f9f9f',borderWidth:2,height:40,marginTop:6
-					,alignItems:'center',justifyContent:'center',width:90}}>
-						<Text style={{fontSize:15,color:'#9f9f9f'}}>Resend {this.props.secondLeft}s</Text>
+					<View style={{borderRadius:8,
+												borderColor:'#9f9f9f',
+												borderWidth:2,
+												height:40,
+												marginTop:6,
+												alignItems:'center',
+												justifyContent:'center',
+												width:90}}>
+						<Text style={{fontSize:15,color:'#9f9f9f'}}
+									allowFontScaling={false}>Resend {this.props.secondLeft}s</Text>
 					</View>
 				</TouchableOpacity>
 			);
@@ -255,7 +263,7 @@ export default class InputAnimation extends Component {
 
 							<Animated.View style={{opacity:this.state.logoOpacity,marginTop:height*0.1042}}>
 							<View style={styles.logoBox}>
-									<Image source={require('../Image/logo.png')} style={{width:240,height:80}} />
+									<Image source={require('../Image/login_logo.png')} style={{width:192,height:90}} />
 						 </View>
 							</Animated.View>
 
@@ -272,6 +280,7 @@ export default class InputAnimation extends Component {
 											onChangeText={this.props.if_handlePhone}
 											underlineColorAndroid={"rgba(0,0,0,0)"}
 											keyboardType = 'number-pad'
+											allowFontScaling={false}
 									/>
 	             <View style={{height:1,
 	                           backgroundColor:'#ffffff',}}>
@@ -294,6 +303,7 @@ export default class InputAnimation extends Component {
 												onChangeText={this.props.if_handleVerification}
 												underlineColorAndroid={"rgba(0,0,0,0)"}
 												keyboardType = 'number-pad'
+												allowFontScaling={false}
 											/>
 									{this._renderSentCode()}
 							 </View>
@@ -315,6 +325,7 @@ export default class InputAnimation extends Component {
 												ref={this.props.ir_PASSWORD_INPUTREF}
 		                    onChangeText={this.props.if_handlePassword}
 												underlineColorAndroid={"rgba(0,0,0,0)"}
+												allowFontScaling={false}
 										/>
 								<View style={{height:1, backgroundColor:'#ffffff',}}/>
 								<TextInput
@@ -329,6 +340,7 @@ export default class InputAnimation extends Component {
 												ref={this.props.ir_RE_PASSWORD_INPUTREF}
 		                    onChangeText={this.props.if_handleRePassword}
 												underlineColorAndroid={"rgba(0,0,0,0)"}
+												allowFontScaling={false}
 										/>
 
 

@@ -270,7 +270,7 @@ export default class InputAnimation extends Component {
 
 							<Animated.View style={{opacity:this.state.logoOpacity,marginTop:height*0.1042}}>
 							<View style={styles.logoBox}>
-									<Image source={require('../Image/logo.png')} style={{width:240,height:80}} />
+									<Image source={require('../Image/login_logo.png')} style={{width:192,height:90}} />
 						 </View>
 							</Animated.View>
 
@@ -288,6 +288,7 @@ export default class InputAnimation extends Component {
 											onChangeText={this.props.if_handlePhone}
 											underlineColorAndroid={"rgba(0,0,0,0)"}
 											keyboardType = 'number-pad'
+											allowFontScaling={false}
 									/>
 	             <View style={{height:1,
 	                           backgroundColor:'#ffffff',}}>
@@ -310,6 +311,7 @@ export default class InputAnimation extends Component {
 												onChangeText={this.props.if_handleVerification}
 												underlineColorAndroid={"rgba(0,0,0,0)"}
 												keyboardType = 'number-pad'
+												allowFontScaling={false}
 											/>
 									{this._renderSentCode()}
 							 </View>
@@ -333,6 +335,7 @@ export default class InputAnimation extends Component {
 	                    onChangeText={this.props.if_handleEmail}
                       underlineColorAndroid={"rgba(0,0,0,0)"}
 											keyboardType = 'email-address'
+											allowFontScaling={false}
 	                />
 
 								<View style={{height:1, backgroundColor:'#ffffff',}}/>
@@ -348,6 +351,7 @@ export default class InputAnimation extends Component {
 												ref={this.props.ir_PASSWORD_INPUTREF}
 		                    onChangeText={this.props.if_handlePassword}
 												underlineColorAndroid={"rgba(0,0,0,0)"}
+												allowFontScaling={false}
 										/>
 								<View style={{height:1, backgroundColor:'#ffffff',}}/>
 								<TextInput
@@ -362,6 +366,7 @@ export default class InputAnimation extends Component {
 												ref={this.props.ir_RE_PASSWORD_INPUTREF}
 		                    onChangeText={this.props.if_handleRePassword}
 												underlineColorAndroid={"rgba(0,0,0,0)"}
+												allowFontScaling={false}
 										/>
 
 
