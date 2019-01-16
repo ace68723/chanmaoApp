@@ -24,9 +24,9 @@ export default class Home extends BaseComponent {
         backgroundImage: require("./Image/washing-background.png"),
       },
       {
-        icon: null,
-        title: "",
-        key: '1',
+        icon: require("./Image/washing-icon.png"),
+        title: "卡包",
+        key: 'ewallet',
         backgroundImage: require("./Image/coming_soon.png"),
       },
       {
@@ -70,6 +70,14 @@ export default class Home extends BaseComponent {
           }
         })
         break;
+      case "ewallet":
+        this.props.navigator.push({
+          screen: 'EwalletMainTab',
+          navigatorStyle: {navBarHidden: true},
+          passProps:{
+            fromPage:0,
+          }
+        })
       default:
 
     }
