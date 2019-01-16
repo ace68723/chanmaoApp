@@ -21,7 +21,8 @@ export default class Cell extends Component{
         <View style={this.props.cellStyle}>
           <View style={styles.content}>
             <TouchableOpacity onPress={() => this.props.onPressedCell(this.props.cellKey)} style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text allowFontScaling={false} style={{fontFamily:'NotoSans-Regular',fontWeight: '500', fontSize: 13, marginLeft: 10, color: "#393947"}}> {this.props.title} </Text>
+              <Text allowFontScaling={false}
+                    style={{fontFamily:'NotoSans-Regular',fontWeight: '500', fontSize: 13, marginLeft: 10, color: "#393947"}}> {this.props.title} </Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -59,7 +59,8 @@ class CustomerServiceContentView extends Component {
 					<Image style={{flex: 1}} source={{uri: 'https://www.mcdonalds.com/content/dam/usa/documents/mcdelivery/mcdelivery_new11.jpg'}}/>
 				</View>
 				<View style={{marginTop: 18, marginBottom: 18}}>
-					<Text style={{color: 'grey', textAlign: 'center', fontWeight: '600', fontSize: 12}}>- 选择问题 -</Text>
+					<Text allowFontScaling={false}
+								style={{color: 'grey', textAlign: 'center', fontWeight: '600', fontSize: 12}}>- 选择问题 -</Text>
 				</View>
 
 				<FlatList

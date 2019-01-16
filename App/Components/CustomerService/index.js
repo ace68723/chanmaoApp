@@ -195,7 +195,8 @@ class CustomerService extends Component {
 					</View>
 				}
 				<View style={{marginTop: 18, marginBottom: 18, backgroundColor: "#f3f3f3"}}>
-					<Text style={{color: 'grey', textAlign: 'center', fontWeight: '600', fontSize: 12}}>- 选择问题 -</Text>
+					<Text style={{color: 'grey', textAlign: 'center', fontWeight: '600', fontSize: 12}}
+								allowFontScaling={false}>- 选择问题 -</Text>
 				</View>
 
 				<FlatList
