@@ -103,13 +103,13 @@ export default class Home extends Component {
   }
   _goToAboutUs() {
     this.props.navigator.push({
-      screen: 'CustomerService',
+      screen: 'CmEatAboutUs',
       animated: true,
       navigatorStyle: {
         navBarHidden: true
       },
       passProps: {
-
+        fromCmWash:true
       }
     });
 
