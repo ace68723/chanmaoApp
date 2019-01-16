@@ -112,6 +112,17 @@ export default class Home extends Component {
         fromCmWash:true
       }
     });
+
+    // this.props.navigator.push({
+    //   screen: 'CmEatAboutUs',
+    //   animated: true,
+    //   navigatorStyle: {
+    //     navBarHidden: true
+    //   },
+    //   passProps: {
+    //     fromCmWash:true
+    //   }
+    // });
   }
   onPressedCell(key){
     if (key=='cmeat') {this._goToCmEat();}

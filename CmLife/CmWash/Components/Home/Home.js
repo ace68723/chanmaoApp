@@ -218,9 +218,9 @@ export default class Home extends BaseComponent<Props> {
             <Image source={require('./image/icon_back_green.png')} style={{ marginLeft: 12, width: 26, height: 26 }}/>
           </View>
         </TouchableWithoutFeedback>
-        <Text allowFontScaling={false} style={{ fontFamily: 'NotoSans-Black',flex: 2, textAlign: 'center', fontWeight: '800', fontSize: 16, }}>
-          馋猫干洗
-        </Text>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <Image source={require('./image/header.jpeg')} style={{ width: 129, height: 45}}/>
+        </View>
         {this.renderCartButton()}
       </View>
     )

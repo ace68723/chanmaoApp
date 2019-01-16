@@ -18,7 +18,7 @@ class SettingTab extends Component {
     super(props);
     this._goToHistory = this._goToHistory.bind(this);
     this._goToAddress = this._goToAddress.bind(this);
-    this._goToAboutUs = this._goToAboutUs.bind(this);
+    this._goToCustomerService = this._goToCustomerService.bind(this);
     this._cmeLogOut = this._cmeLogOut.bind(this);
     this._goToSbox = this._goToSbox.bind(this);
     this._goToLanguageSettings = this._goToLanguageSettings.bind(this);
@@ -44,12 +44,15 @@ class SettingTab extends Component {
       }
     });
   }
-  _goToAboutUs() {
+  _goToCustomerService() {
     this.props.navigator.push({
-      screen: 'CmEatAboutUs',
+      screen: 'CustomerService',
       animated: true,
       navigatorStyle: {
         navBarHidden: true
+      },
+      passProps: {
+        fromSettings: true,
       }
     });
   }
@@ -101,8 +104,8 @@ class SettingTab extends Component {
           }}/>
         <SettingCate title={Label.getCMLabel('MY_ORDER')} onPress={this._goToHistory.bind(this)} icon={require('./Image/icon_setting-01.png')}/>
         <SettingCate title={Label.getCMLabel('ADD_ADDRESS')} onPress={this._goToAddress.bind(this)} icon={require('./Image/icon_setting_icon_setting_address-management.png')}/>
-        <SettingCate title={Label.getCMLabel('CUSTOMER_SERVICE')} icon={require('./Image/icon_setting_icon_setting_customer-service.png')} onPress={this._goToAboutUs}/>
-        <SettingCate title={Label.getCMLabel('LANGUAGE_SETTING')} icon={require('./Image/icon_language.png')} onPress={this._goToLanguageSettings}/>
+        <SettingCate title={Label.getCMLabel('CUSTOMER_SERVICE')} icon={require('./Image/icon_setting_icon_setting_customer-service.png')} onPress={this._goToCustomerService}/>
+
         <SettingCate title={Label.getCMLabel('SWEETBOX')} icon={require('./Image/icon_setting_icon_setting_sweetful-box.png')} onPress={this._goToSbox}/>
         <SettingCate title={Label.getCMLabel('LOG_OUT')} icon={require('./Image/icon_setting_icon_setting_log-out.png')} onPress={this._cmeLogOut}/>
       </ScrollView>

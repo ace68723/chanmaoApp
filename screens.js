@@ -8,6 +8,10 @@ import Notification from './screens/Notification';
 import AdView from './App/Components/General/AdView';
 import Loading from './App/Components/General/Loading';
 
+import CustomerService from './App/Components/CustomerService/index';
+import CustomerServiceListView from './App/Components/CustomerService/ListView';
+import CustomerServiceContentView from './App/Components/CustomerService/ContentView';
+
 import SboxHome from './SweetfulBox/Config/Screens';
 import SboxLoading from './screens/SboxLoading';
 import SboxNotification from './SweetfulBox/Components/SboxNotification/SboxNotification';
@@ -28,6 +32,11 @@ export function registerScreens() {
   Navigation.registerComponent('Notification', () => Notification);
   Navigation.registerComponent('CmAdvertisement', () => CmAdvertisement);
   Navigation.registerComponent('Loading', () => Loading);
+
+  Navigation.registerComponent('CustomerService', () => CustomerService);
+  Navigation.registerComponent('CustomerServiceListView', () => CustomerServiceListView);
+  Navigation.registerComponent('CustomerServiceContentView', () => CustomerServiceContentView);
+
 
   Navigation.registerComponent('SboxHome', () => SboxHome);
   Navigation.registerComponent('SboxLoading', () => SboxLoading);

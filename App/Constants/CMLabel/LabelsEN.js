@@ -22,7 +22,7 @@ module.exports={
     SAVE_ADDRESS:'Save Address',
     CUSTOMER_SERVICE:'Contact Us',
     LANGUAGE_SETTING: 'Select Language',
-    SWEETBOX: 'Sweetful Box, free shipping with purchase over $25',
+    SWEETBOX: 'Sweetful Box',
     LOG_OUT: 'Log Out',
 
     //Order
@@ -144,6 +144,7 @@ module.exports={
     CS_WILL_CONTACT:'Customer Service Will Contact you about the Delivery Fee',
     DISH_OUT_OF_ORDER:'Dish Sold out',
     ORDER_CANCELED:'Order Canceled',
+    CONTACT_SUPPORT:'Contact Support',
 
     //Comment
     CONFIRM_COMMENT:'Confirm',

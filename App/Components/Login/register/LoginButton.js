@@ -67,7 +67,8 @@ export default class LoginButton extends Component {
 																		{width:this.state.width,
 																		 height:this.state.height}]}
 														 >
-							 <Animated.Text style={[styles.loginText,{opacity:this.state.textOpacity}]}>
+							 <Animated.Text style={[styles.loginText,{opacity:this.state.textOpacity}]}
+								 							allowFontScaling={false}>
 								 {this.props.is_register}
 							 </Animated.Text>
 							</Animated.View>

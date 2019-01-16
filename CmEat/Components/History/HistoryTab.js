@@ -76,6 +76,7 @@ class HistoryTab extends Component {
 				this._cashSelected = this._cashSelected.bind(this);
 				this._applePaySelected = this._applePaySelected.bind(this);
 				this._stripeCardSelected = this._stripeCardSelected.bind(this);
+				this._handleContactCustomerService = this._handleContactCustomerService.bind(this);
 
 				this.popupView = PopupView.getInstance();
     }
@@ -306,6 +307,16 @@ class HistoryTab extends Component {
         },
       });
 		}
+		_handleContactCustomerService(order) {
+			this.props.navigator.push({
+				screen: 'CustomerService',
+				animated: true,
+				navigatorStyle: {navBarHidden: true},
+				passProps: {
+					order: order
+				}
+			});
+		}
 		_renderFilter(renderingPage) {
 			let firstFilterColor = 'black';
 			let secondFilterColor = 'black';
@@ -385,6 +396,7 @@ class HistoryTab extends Component {
 										reorder={this._reorder}
 										orderOnClick={this._HistoryOrderDetailVisible}
 										handlePaymentRetry={this._handlePaymentRetry}
+										handleContactCustomerService={this._handleContactCustomerService}
 										tabLabel={Label.getCMLabel('ALL_ORDER')}/>
 								<OrdersNotReviewed
 										navigator={this.props.navigator}

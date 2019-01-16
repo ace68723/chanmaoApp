@@ -51,7 +51,9 @@ class AllOrders extends Component {
 									 page={0}
 									 handlePaymentRetry={this.props.handlePaymentRetry}
 									 reorder={this.props.reorder}
-									 isRefreshing={this.props.isRefreshing}/>
+									 isRefreshing={this.props.isRefreshing}
+									 handleContactCustomerService={this.props.handleContactCustomerService}
+									 />
 					)
 				});
 				return(
