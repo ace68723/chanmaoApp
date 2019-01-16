@@ -75,11 +75,11 @@ const unfinishedOptions = [
     type: "options",
     options: updateOrderOptions
   },
-  {
-    key: "rushOrder",
-    title: "我想催单",
-    type: "other",
-  },
+  // {
+  //   key: "rushOrder",
+  //   title: "我想催单",
+  //   type: "other",
+  // },
   {
     key: "paymentIssues",
     title: "订单支付有问题",
@@ -182,13 +182,13 @@ const settingsOptions = [
     key: "orderGuide",
     title: "馋猫订餐下单流程",
     type: "url",
-    url: "http://google.ca"
+    url: "https://mp.weixin.qq.com/s/ti6XkIXMo_5sTRYXp6MTNA"
   },
   {
     key: "couponGuide",
     title: "如何使用优惠码",
     type: "url",
-    url: "http://google.ca"
+    url: "https://mp.weixin.qq.com/s/dlF0Q3epnooDdvgHECBuXA"
   },
   {
     key: "paymentIssues",
