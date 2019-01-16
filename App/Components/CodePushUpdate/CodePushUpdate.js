@@ -56,7 +56,7 @@ export default class CodePushUpdate extends Component {
                     this.setState({
                       isUpdating:false,
                       updatePercentage:100
-                    },()=>this.props.codePushUpdateCheck(true)) //true 为需要更新， false 为不需要更新
+                    }) //true 为需要更新， false 为不需要更新
                     break;
             }
 
