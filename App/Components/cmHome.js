@@ -62,6 +62,9 @@ export default class Home extends Component {
       this.finishcodePushCheck = this.finishcodePushCheck.bind(this);
   }
   _openStarted = false
+  componentWillMount() {
+    this._versionCheck();
+  }
   componentDidMount() {
     if (Platform.OS==='android'){
     JPushModule.notifyJSDidLoad((resultCode) => {
@@ -84,7 +87,6 @@ export default class Home extends Component {
       console.log("receive notification: " + message);
     });
 
-    this._versionCheck();
 
   }
   componentWillUnmount(){
@@ -173,10 +175,9 @@ export default class Home extends Component {
     }
   }
   finishcodePushCheck(needUpdate){  //needUpdate是否需要更新并重启
-    this.props.navigator.popToRoot({screen:'CodePushUpdate', animationType: 'fade'});
-
+    
     this.setState({isCodePushChecked:true},()=>{
-      if(!needUpdate){
+      // if(!needUpdate){
         const region = cme_getRegion();
         if (!region) {
           setTimeout(()=>{
@@ -199,7 +200,7 @@ export default class Home extends Component {
             this._handleSboxPress();
           }, 1000);
         }
-      }
+      // }
     })
   }
   async _handleChanmaoPress() {
