@@ -18,47 +18,39 @@ const {height, width} = Dimensions.get('window');
 export default class DiscountView extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      selectedIndex: 0,
+    }
+    this._renderTypeLabel = this._renderTypeLabel.bind(this);
+    this._onPressedTypeLabel = this._onPressedTypeLabel.bind(this);
   }
 
-  _renderTypeLabel(){
+  _onPressedTypeLabel(index){
+    this.setState({selectedIndex: index});
+  }
+  _renderTypeLabel({index, item}){
     return (
       <View style={{marginRight: 10}}>
-        <DiscountTypeLabel selected={false}/>
+        <DiscountTypeLabel selected={index == this.state.selectedIndex} labelName={item} index={index} onPressed={this._onPressedTypeLabel}/>
       </View>
     )
   }
-  _renderItem(){
+  _renderItem({item}){
     return (
       <View style={{marginRight: 18}}>
-        <DiscountItem/>
+        <DiscountItem data={item}/>
       </View>)
   }
   render() {
-    const types = ["一元特价", "新进商家", "限时优惠", ];
-    const items = [
-      {
-        'image': 'http://ronntorossian.com/wp-content/uploads/2018/11/kfc-pr-stunt.png',
-        'resName': "开封菜",
-        'title': "炸鸡一元"
-      },
-      {
-        'image': 'http://ronntorossian.com/wp-content/uploads/2018/11/kfc-pr-stunt.png',
-        'resName': "开封菜",
-        'title': "炸鸡一元"
-      },
-      {
-        'image': 'http://ronntorossian.com/wp-content/uploads/2018/11/kfc-pr-stunt.png',
-        'resName': "开封菜",
-        'title': "炸鸡一元"
-      }
-    ]
+    const discountTypes = this.props.discountData.map(value => value.theme_name);
+    const discountItems = this.props.discountData[this.state.selectedIndex].adlist;
 
     return (
       <View style={styles.container}>
         <View style={{flex: 1}}>
           <FlatList
             horizontal={true}
-            data={types}
+            data={discountTypes}
             renderItem={this._renderTypeLabel}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ marginLeft: 16 }}
@@ -69,10 +61,10 @@ export default class DiscountView extends Component {
           <FlatList
             refref={c => this._itemlList = c}
             horizontal={true}
-            data={items}
+            data={discountItems}
             renderItem={this._renderItem}
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ marginLeft: 16 }} 
+            contentContainerStyle={{ marginLeft: 16 }}
           />
         </View>
 

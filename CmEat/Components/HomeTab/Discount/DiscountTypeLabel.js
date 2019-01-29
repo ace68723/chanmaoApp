@@ -21,8 +21,8 @@ export default class DiscountTypeLabel extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity>
-          <Text style={this.props.selected ? styles.selectedText : styles.text}>一元特价</Text>
+        <TouchableOpacity onPress={() => this.props.onPressed(this.props.index)}>
+          <Text style={this.props.selected ? styles.selectedText : styles.text}>{this.props.labelName}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -31,11 +31,11 @@ export default class DiscountTypeLabel extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-    width: width / 5,
+    width: width / 4.8,
 	},
   text: {
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '900',
     color: "#4398DC",
     borderColor:'#4398DC',

@@ -22,13 +22,13 @@ export default class DiscountItem extends Component {
       <View style={styles.container}>
         <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 8, backgroundColor: 'black', borderRadius: 8}}>
           <Image
-            source={{uri: "http://ronntorossian.com/wp-content/uploads/2018/11/kfc-pr-stunt.png"}}
+            source={{uri: this.props.data.image_url}}
             style={styles.image}
             >
           </Image>
-          <Text style={styles.resName}>开封菜</Text>
+          <Text style={styles.resName}>{this.props.data.theme_name}</Text>
         </View>
-        <Text style={styles.text}>炸鸡一元爱咋吃咋吃，吃不死你</Text>
+        <Text style={styles.text}>{this.props.data.description}</Text>
       </View>
     )
   }
