@@ -12,10 +12,11 @@ import {
 } from 'react-native';
 import AuthAction from '../Actions/AuthAction';
 import VersionAction from '../Actions/VersionAction';
-import { GetVersion, GetUserInfo, cme_getRegion } from '../Modules/Database';
+import { GetVersion, GetUserInfo, cme_getRegion,cme_saveMessageData } from '../Modules/Database';
 import PopupView from '../../CmEat/Components/Popup/PopupView'
 import StartUpAnimation from './startupAnimation';
 import JPushModule from 'jpush-react-native';
+// import Database from '../Modules/Database';
 const { height, width } = Dimensions.get('window');
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -63,6 +64,12 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentDidMount() {
+    const res={
+      type:1,
+      messageid:1,
+      content:'testMessage',
+    }
+    cme_saveMessageData(res);
     if (Platform.OS==='android'){
     JPushModule.notifyJSDidLoad((resultCode) => {
 

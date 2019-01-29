@@ -1,6 +1,6 @@
 export default  {
 getOrderBefore(io_data){
-    const url = 'http://norgta.com/api/blackhawk/v1/order_before';
+    const url = 'https://www.chanmao.us/api/blackhawk/v1/order_before';
 
     let options = {
         method: 'POST',
@@ -45,7 +45,7 @@ getOrderBefore(io_data){
   },
   checkUaid(uid) {
 
-    const url = 'https://norgta.com/api/blackhawk/v1/ckeck_uaid';
+    const url = 'https://www.chanmao.us/api/blackhawk/v1/ckeck_uaid';
 
     let options = {
         method: 'POST',

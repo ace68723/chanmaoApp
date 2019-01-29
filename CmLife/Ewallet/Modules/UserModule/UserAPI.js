@@ -25,7 +25,7 @@ export default  {
             .catch((error) => {throw error})
   },
   putUserAddr(io_data){
-    const url = 'https://norgta.com/api/blackhawk/v1/put_user_addr';
+    const url = 'https://www.chanmao.us/api/blackhawk/v1/put_user_addr';
     let options = {
         method: 'POST',
         mode:'cors',

@@ -14,7 +14,7 @@ import {
   Image,
 	FlatList
 } from 'react-native';
-
+import { cme_getMessageData, cme_saveMessageData } from '../../../App/Modules/Database';
 import _forEach from 'lodash/forEach';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -66,6 +66,7 @@ export default class MainTab extends Component {
 			restaurantList: [],
 			fadeInOpacity: new Animated.Value(0),
       animatedHeaderHeight: new Animated.Value(headerHeight + 12),
+			message:[],
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
@@ -78,8 +79,10 @@ export default class MainTab extends Component {
 		this._onScrollRestaurantsList = this._onScrollRestaurantsList.bind(this);
 		this._startRenderAddressPrompt = this._startRenderAddressPrompt.bind(this);
 		this.hideAddressPrompt = this.hideAddressPrompt.bind(this);
+		this._goToMessage=this._goToMessage.bind(this);
   }
 	async componentDidMount(){
+		HomeAction.getMessageData();
     await AddressAction.getAddress();
     HomeAction.getHomeData();
     HomeStore.addChangeListener(this._onChange);
@@ -175,7 +178,20 @@ export default class MainTab extends Component {
 			this.hideAddressPrompt();
 		}
 	}
-
+	_goToMessage()
+	{
+			console.log(this.state);
+		  this.props.navigator.showModal({
+		    screen: 'CmMessage',
+		    animated: false,
+		    navigatorStyle: {navBarHidden: true},
+		    passProps: {
+		      // restaurant:this.state.areaList[0].restaurantList,
+		      // areaList: this.state.areaList
+					message:this.state.message,
+		    },
+		  });
+	}
   render(){
     return(
       <View style={{flex: 1, marginTop: marginTop}}>
@@ -193,6 +209,7 @@ export default class MainTab extends Component {
 			       showAddressPrompt={this._showAddressPrompt}
 						 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
 						 renderAddressPrompt={this.state.renderAddressPrompt}
+						 goToMessage={this._goToMessage}
 				 />
 				 <AddressPromptView
 					 ref='AddressPrompt'

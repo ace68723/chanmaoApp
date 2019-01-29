@@ -3,8 +3,15 @@ import {dispatch, register} from '../Dispatchers/AppDispatcher';
 import HomeModule from '../Modules/HomeModule/HomeModule';
 import LocationModule from '../../App/Modules/System/LocationModule';
 import AuthModule from '../../App/Modules/AuthModule/Auth';
-import { cme_getSelectedAddress, cme_getHomeIntroCount, cme_updateHomeIntroCount } from '../../App/Modules/Database';
+import { cme_getSelectedAddress, cme_getHomeIntroCount, cme_updateHomeIntroCount,cme_getMessageData, cme_saveMessageData } from '../../App/Modules/Database';
 export default {
+      getMessageData(type){
+        const res = cme_getMessageData(type);
+        console.log(res);
+        dispatch({
+            actionType: AppConstants.GET_MESSAGE_DATA, res
+        });
+      },
      async getHomeData(){
         try{
 
@@ -24,7 +31,7 @@ export default {
           const restaurantList = restaurantListInfo.restaurantList;
           const zones = restaurantListInfo.zones;
           const categories = restaurantListInfo.categories;
-          
+
           let showIntroduction = true;
           const introCount = await cme_getHomeIntroCount();
           if (introCount < 3) {

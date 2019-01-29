@@ -15,7 +15,8 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 		filteredList: [],
 		zones: [],
 		tags:[],
-		homeAlert:{}
+		homeAlert:{},
+    message:[],
   },
 	emitChange(){
 			this.emit(CHANGE_EVENT)
@@ -33,7 +34,8 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
     		zones: [],
     		tags:[],
     		showAnimatedView:false,
-				homeAlert:{}
+				homeAlert:{},
+        message:[],
       }
 			this.removeListener(CHANGE_EVENT, callback)
 	},
@@ -69,6 +71,9 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 	getHomeAlert(){
 		return this.state.homeAlert;
 	},
+  getMessageData(res){
+    this.state.message=res;
+  },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
 				case AppConstants.GET_HOME_DATA:
@@ -83,11 +88,16 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 						HomeStore.setRestaurantListByTag(action.menuData)
 						HomeStore.emitChange()
 				break;
+        case AppConstants.GET_MESSAGE_DATA:
+            HomeStore.getMessageData(action.res)
+            HomeStore.emitChange()
 				// case AppConstants.CHECKOUT:
 				// 				HomeStore.closeMenu();
 				// 				setTimeout( () => {
 				// 					HomeStore.emitChange();
 				// 				}, 1000);
+        break;
+        default:
 				break;
 
 		  }

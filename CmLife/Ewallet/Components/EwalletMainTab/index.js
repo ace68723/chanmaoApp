@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Home from '../Home';
-import About from '../About/AboutContact';
+import About from '../About/index';
 import EwalletBag from '../EwalletBag'
 import TabBar from './TabBar';
 export default class MyComponent extends Component {
@@ -19,14 +19,14 @@ export default class MyComponent extends Component {
     }
   }
   componentDidMount() {
-  
+
   }
   goToPage(pageId) {
     this.tabView.goToPage(pageId);
   }
   render() {
     return (
-      
+
       <ScrollableTabView
         tabBarBackgroundColor={'#fff'}
         tabBarActiveTextColor={'#ff7685'}

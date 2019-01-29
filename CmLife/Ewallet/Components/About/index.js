@@ -1,228 +1,212 @@
-'use strict';
-import React, {
-	Component,
-} from 'react';
+import React, {Component} from 'react';
 import {
-  Dimensions,
-	ListView,
-	StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-	Text,
+  Platform,
+  StyleSheet,
+  Text,
   View,
+  TouchableOpacity,
+  FlatList,
+  Dimensions
 } from 'react-native';
+import AuthAction from '../../../../App/Actions/AuthAction';
+import SettingsCell from './AboutContact.js'
 
-// import UserAction from '../../Actions/UserAction';
+import { GetUserInfo } from '../../../../App/Modules/Database';
+import Intercom from 'react-native-intercom';
 
-const { height, width } = Dimensions.get('window');
-
-export default class About extends Component {
+const {width,height} = Dimensions.get('window');
+export default class Home extends Component {
   constructor(props) {
     super(props);
+    const cellsData = [
+      {
+        icon: require("./Image/customer_service.png"),
+        title: "联系客服",
+        key: "contact"
+      },
+      {
+        icon: require("./Image/sweetfulBox.png"),
+        title: "甜满箱",
+        key: "sbox"
+      },
+      {
+        icon: require("./Image/chanmao.png"),
+        title: "馋猫订餐",
+        key: "cmeat"
+      },
+      // {
+      //   icon: require("./Image/language.png"),
+      //   title: "选择语言&地区",
+      //   key: "language"
+      // },
+      {
+        icon: require("./Image/log-out.png"),
+        title: "退出登录",
+        key: "logout"
+      },
+    ]
     this.state = {
-        shouldDoAuth: true,
-    }
-    this._goToHistory = this._goToHistory.bind(this);
-    this._login = this._login.bind(this);
-    this._handleLoginSuccessful = this._handleLoginSuccessful.bind(this);
-    this._goBack = this._goBack.bind(this);
-    this._contact = this._contact.bind(this);
-    this._onChange = this._onChange.bind(this);
-    this._logout = this._logout.bind(this);
-		this._goToCmEat = this._goToCmEat.bind(this);
+      cells: cellsData
+    };
+    this._goToCmEat=this._goToCmEat.bind(this);
+    this.renderCells=this.renderCells.bind(this);
+    this.onPressedCell=this.onPressedCell.bind(this);
+    this._logout=this._logout.bind(this);
+    this._goToLanguageSettings=this._goToLanguageSettings.bind(this);
+    this._goToSbox=this._goToSbox.bind(this);
+    this._goToAboutUs=this._goToAboutUs.bind(this);
   }
-	componentDidMount() {
-		// UserAction.checkUserLogin();
-	}
-  componentWillUnmount() {
-  }
-
-  _goToHistory() {
-    this.props.navigator.push({
-      screen: 'SboxHistory',
-      navigatorStyle: {navBarHidden: true},
-    })
-  }
-  _login() {
-    this.props.navigator.showModal({
-      screen: 'CmLogin',
-      animated: false,
-      navigatorStyle: {navBarHidden: true},
-      passProps: {handleBackToHome: this._goBack,handleLoginSuccessful: this._handleLoginSuccessful},
-    })
-  }
-
   _logout() {
     AuthAction.logout();
-    this.props.handleBackToHome();
+    this.props.navigator.resetTo({
+        screen: 'cmHome',
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+        // passProps:{goToCmEat: true}
+      });
   }
-
-	_goToCmEat() {
-		this.props.navigator.resetTo({
-				screen: 'cmHome',
-				animated: true,
-				animationType: 'fade',
-				navigatorStyle: {navBarHidden: true},
-				passProps:{goToCmEat: true}
-			});
-	}
-
-  _contact() {
+  _goToLanguageSettings() {
     this.props.navigator.push({
-      screen: 'SboxAboutContact',
-      navigatorStyle: {navBarHidden: true},
-    })
+      screen: 'LanguagesAndRegions',
+      animated: true,
+      navigatorStyle: {
+        navBarHidden: true
+      },
+      passProps: {
+        firstSelection: false,
+        goToCmWash: true
+      }
+    });
   }
-
-  _handleLoginSuccessful() {
-    // UserAction.checkUserLogin();
-    // this.props.navigator.dismissModal();
+  _goToCmEat() {
+    this.props.navigator.resetTo({
+        screen: 'cmHome',
+        animated: true,
+        animationType: 'fade',
+        navigatorStyle: {navBarHidden: true},
+        passProps:{goToCmEat: true}
+      });
   }
-
-  _goBack() {
-    // this.props.navigator.dismissModal();
+  _goToSbox() {
+    this.props.navigator.resetTo({
+      screen: 'cmHome',
+      animated: true,
+      animationType: 'fade',
+      navigatorStyle: {
+        navBarHidden: true
+      },
+      passProps: {
+        goToSweetfulBox: true
+      }
+    });
   }
+  _goToAboutUs() {
+    this.props.navigator.push({
+      screen: 'CmEatAboutUs',
+      animated: true,
+      navigatorStyle: {
+        navBarHidden: true
+      },
+      passProps: {
+        fromCmWash:true
+      }
+    });
 
-  _renderLoginOrHistory() {
-    if (this.state.shouldDoAuth == false) {
-      return (
-        <TouchableOpacity onPress={this._goToHistory}
-            activeOpacity={0.4}
-            style={{flexDirection: 'row',
-										paddingTop: 10,
-										paddingBottom: 10,
-										alignItems: 'center',
-										backgroundColor: 'white'}}>
-            <Image style={{height: 30,
-													 width: 30,
-													 marginLeft: 20,
-													 marginRight: 20,}} source={require('./img/login.png')}/>
-            <Text style={{flex: 1,
-													fontSize: 18,
-													textAlign: 'left'}}
-									allowFontScaling={false}>
-									我的订单
-						</Text>
-            <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
-        </TouchableOpacity>
-      )
-    }else {
-      return (
-        <TouchableOpacity onPress={this._login}
-            activeOpacity={0.4}
-            style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
-            <Image style={{height: 30, width: 30,
-													 marginLeft: 20,
-													 marginRight: 20,}}
-									 source={require('./img/login.png')}/>
-            <Text style={{flex: 1,
-													fontSize: 18,
-													textAlign: 'left'}}
-									allowFontScaling={false}>登入</Text>
-            <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
-        </TouchableOpacity>
-      )
-    }
+    // this.props.navigator.push({
+    //   screen: 'CmEatAboutUs',
+    //   animated: true,
+    //   navigatorStyle: {
+    //     navBarHidden: true
+    //   },
+    //   passProps: {
+    //     fromCmWash:true
+    //   }
+    // });
   }
+  onPressedCell(key){
+    if (key=='cmeat') {this._goToCmEat();}
 
-  _renderContact() {
-    return (
-      <TouchableOpacity onPress={this._contact}
-          activeOpacity={0.4}
-          style={{flexDirection: 'row',
-									paddingTop: 10,
-									paddingBottom: 10,
-									alignItems: 'center',
-									backgroundColor: 'white'}}>
-          <Image style={{height: 30,
-												 width: 30,
-												 marginLeft: 20,
-												 marginRight: 20,}}
-								 source={require('./img/contact.png')}/>
-          <Text style={{flex: 1,
-												fontSize: 18,
-												textAlign: 'left'}}
-								allowFontScaling={false}>联系客服</Text>
-          <Image style={{height: 20,
-												 width: 20,
-												 marginRight:20,}}
-								 source={require('./img/right.png')}/>
-      </TouchableOpacity>
-    )
+    if (key=='logout') {this._logout();}
+    // if (key=='language') {this._goToLanguageSettings();}
+    if (key=='sbox') {this._goToSbox();}
+    if (key=='contact'){this._goToAboutUs();}
+    // if (key=='contact'){
+    //   // this._goToAboutUs();
+    //   this.displayCustomerService();
+    // }
   }
-
-  _renderLogout() {
-    if (this.state.shouldDoAuth == false) {
-      return (
-        <TouchableOpacity onPress={this._logout}
-            activeOpacity={0.4}
-            style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
-            <Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/exit.png')}/>
-            <Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}
-									allowFontScaling={false}>登出</Text>
-            <Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
-        </TouchableOpacity>
-      )
-    }
+  displayCustomerService(){
+    const {uid, token, version} = GetUserInfo();
+    Intercom.registerIdentifiedUser({ userId: uid });
+    // Intercom.updateUser({
+    //     email: 'mimi@intercom.com',
+    //     user_id: 'user_id',
+    //     name: 'your name',
+    //     phone: '010-1234-5678',
+    //     language_override: 'language_override',
+    //     signed_up_at: 1004,
+    //     unsubscribed_from_emails: true,
+    //     companies: [{
+    //         company_id: 'your company id',
+    //         name: 'your company name'
+    //     }],
+    //     custom_attributes: {
+    //         my_custom_attribute: 123
+    //     },
+    // });
+    Intercom.displayMessageComposer();
   }
-
-	_renderCmEat() {
-
-	   if (this.state.shouldDoAuth == false) {
-			return(
-				<TouchableOpacity onPress={this._goToCmEat}
-						activeOpacity={0.4}
-						style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignItems: 'center', backgroundColor: 'white'}}>
-						<Image style={{height: 30, width: 30, marginLeft: 20, marginRight: 20,}} source={require('./img/chanmao.png')}/>
-						<Text style={{flex: 1, fontSize: 18, textAlign: 'left'}}
-									allowFontScaling={false}>馋猫订餐</Text>
-						<Image style={{height: 20, width: 20, marginRight:20,}} source={require('./img/right.png')}/>
-				</TouchableOpacity>
-			)
-		}
-	}
-
+  renderCells(item) {
+    return (<SettingsCell cardStyle={styles.card} title={item.title} type={item.key} icon={item.icon} onPressedCell={this.onPressedCell} />)
+  }
   render() {
-    return(
-      <View style={styles.viewController}>
-          <SboxHeader title={"设置"}
-                  goBack={this._renderGoBackBtn}
-                  leftButtonText={'none'}/>
-					<ScrollView style={{backgroundColor: '#efefef'}}>
-              {this._renderLoginOrHistory()}
-              <View style={styles.separator}></View>
-              {this._renderContact()}
-							<View style={styles.separator}></View>
-							{this._renderCmEat()}
-              <View style={styles.separator}></View>
-              {this._renderLogout()}
-          </ScrollView>
+    return (
+      <View style={{flex:1,backgroundColor:'black'}}>
+        <View style={{width: width,
+                      backgroundColor:'white',
+                      marginTop:0.02*height,
+                      height: 48,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      flexDirection: 'row'}}>
+          <Text allowFontScaling={false}
+                style={{fontFamily: 'NotoSans-Black',
+                        flex: 1,
+                        textAlign: 'center',
+                        fontWeight: '800',
+                        fontSize: 16, }}>
+            设置
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <FlatList style={{marginTop: 6}}
+                    data={this.state.cells}
+                    renderItem={({item}) => (this.renderCells(item))}/>
+        </View>
+
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  viewController:{
-    flex:1,
-    // backgroundColor: '#D5D5D5',
-  },
-  navigation: {
-    flexDirection:'row'
-  },
-  back: {
+  container: {
     flex: 1,
-    justifyContent:'center',
+    backgroundColor: '#F0F0F0',
   },
-  title: {
-    flex:1,
+  card: {
+    flex: 1,
     backgroundColor: 'white',
-    justifyContent:'center',
-    // backgroundColor: "blue",
+    marginLeft: 12,
+    marginRight: 12,
+    marginBottom: 5,
+    marginTop: 5,
+    borderRadius: 6,
+    elevation: 5,
+    shadowOffset: {width: 0, height: 0},
+    shadowColor: 'grey',
+    shadowOpacity: 0.3,
+    shadowRadius: 2
   },
-  separator: {
-		borderBottomWidth: 1,
-		borderColor: "#D5D5D5"
-	},
 });

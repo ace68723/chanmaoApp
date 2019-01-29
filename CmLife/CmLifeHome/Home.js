@@ -24,10 +24,10 @@ export default class Home extends BaseComponent {
         backgroundImage: require("./Image/washing-background.png"),
       },
       {
-        icon: require("./Image/washing-icon.png"),
-        title: "卡包",
+        icon: require("./Image/ewallet-icon.png"),
+        title: "礼卡商城",
         key: 'ewallet',
-        backgroundImage: require("./Image/coming_soon.png"),
+        backgroundImage: require("./Image/ewallet-background.png"),
       },
       {
         icon: null,

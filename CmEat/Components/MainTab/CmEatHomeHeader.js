@@ -55,6 +55,18 @@ export default class SboxHomeHeader extends Component {
             showAddressPrompt={this.props.showAddressPrompt}
             />
         </View>
+        <TouchableWithoutFeedback onPress={this.props.goToMessage}>
+          <View style={{flex:0.17, }}>
+            <Image source={require('./Images/megaphone.png')}
+                   style={{
+                           position:'absolute',
+                           left:10,
+                           bottom:15,
+                           height:20,
+                           width:20,}}/>
+
+          </View>
+        </TouchableWithoutFeedback>
 
 
       </View>

@@ -13,6 +13,15 @@ const cm_system_scheam = {
 }
 
 //馋猫订餐
+const cme_message_schema = {
+  name: 'cme_message',
+  primaryKey: 'messageid',
+  properties: {
+      type:"int",
+      messageid:"int",
+      content:"string",
+  }
+}
 const cme_address_schema = {
   name: 'cme_address',
   primaryKey: 'type',
@@ -129,6 +138,7 @@ export function DatabaseInit() {
                 card_info,
                 SboxSearchKeywordHistory,
                 sbox_cache_scheam,
+                cme_message_schema,
               ],
       schemaVersion: 1,
   })
@@ -329,12 +339,59 @@ export function cme_GetRestaurantWithRid(rid) {
 export function cme_getRestaurantData(area) {
   if(area == undefined){
     const restaurantDataAll = realm.objects('cme_restaurant').filtered('zone == 0 OR zone == 99').sorted([['rank',true],['open',true],['distance',false]]);
+
+    // console.log(restaurantDataAll);
     return restaurantDataAll
   }else{
     const restaurantDataAll = realm.objects('cme_restaurant').filtered('area = '+area +' AND zone != 0').sorted([['rank',true],['open',true],['distance',false]]);
+    // console.log(restaurantDataAll);
     return restaurantDataAll
   }
 }
+export function cme_getMessageData(type) {
+    console.log(realm.path);
+    const messageDataAll = realm.objects('cme_message');
+    let message=[];
+    let messagei={}
+    for (let i of messageDataAll)
+    {
+
+      messagei.messageid=i.messageid;
+      messagei.type=i.type;
+      messagei.content=i.content;
+      message.push(messagei);
+    }
+    console.log(message);
+    return message
+
+}
+
+export function cme_saveMessageData(io_data) {
+  const data = {
+      type:io_data.type,
+      messageid:io_data.messageid,
+      content:io_data.content,
+    }
+
+    // console.log(data);
+    // transaction_products:{
+    //   product_id:io_data.transaction_products.product_id,
+    //   product_internal_id:io_data.transaction_products.product_internal_id,
+    //   product_name:io_data.transaction_products.product_name,
+    //   product_quantity:io_data.transaction_products.product_quantity,
+    // },
+    // transaction_customer:{
+    //   customer_name:io_data.transaction_customer.customer_name,
+    //   customer_tel:io_data.transaction_customer.customer_tel,
+    // },
+  // }
+  realm.write(() => {
+    realm.create('cme_message',data,true);
+  })
+
+  // console.log(data);
+}
+
 export function cme_getSelectedAddress() {
   if (!realm.objects('cme_address').filtered('selected == true' )[0]) return "";
   const selectedAddress = realm.objects('cme_address').filtered('selected == true' )[0]

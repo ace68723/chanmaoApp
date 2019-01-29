@@ -1,7 +1,7 @@
 export default  {
   addCard(io_data) {
 
-    const url = 'https://norgta.com/api/blackhawk/v1/stripe_card';
+    const url = 'https://www.chanmao.us/api/blackhawk/v1/stripe_card';
 
     let options = {
         method: 'POST',
@@ -23,7 +23,7 @@ export default  {
   },
   addOrder(io_data) {
 
-    const url = 'https://norgta.com/api/blackhawk/v1/buy_ecard';
+    const url = 'https://www.chanmao.us/api/blackhawk/v1/buy_ecard';
 
     let options = {
         method: 'POST',
@@ -44,7 +44,7 @@ export default  {
             .catch((error) => {throw error})
   },
   getOrderBefore(io_data){
-    const url = 'https://norgta.com/api/blackhawk/v1/order_before';
+    const url = 'https://www.chanmao.us/api/blackhawk/v1/order_before';
 
     let options = {
         method: 'POST',
