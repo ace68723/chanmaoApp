@@ -61,8 +61,8 @@ class ActivityHeaderWithBanner extends Component {
             },
           });
 			}
-			else if(advertisement.navitype == 4) {
-				if (advertisement.naviparam.target_page == 'cmwash') {
+			else if(banner.navitype == 4) {
+				if (banner.naviparam.target_page == 'cmwash') {
 					this.props.navigator.resetTo({
 			      screen: 'cmHome',
 			      animated: true,

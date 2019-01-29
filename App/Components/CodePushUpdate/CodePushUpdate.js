@@ -3,7 +3,8 @@ import {
     Text,
     Dimensions,
     Image,
-    StyleSheet
+    StyleSheet,
+    Alert
 } from 'react-native';
 import CodePush from "react-native-code-push";
 import React, { Component } from 'react';
@@ -45,18 +46,21 @@ export default class CodePushUpdate extends Component {
                     break;
                 case CodePush.SyncStatus.UP_TO_DATE:
                     console.log("Up-to-date.")
+                    // this.props.codePushUpdateCheck(false)
+                    this.props.navigator.popToRoot({ animationType: 'fade'});
                     this.setState({
                       isUpdating:false,
                       updatePercentage:100,
                       needUpdate: false
-                    },()=>this.props.codePushUpdateCheck(false))//true 为需要更新， false 为不需要更新
+                    })//true 为需要更新， false 为不需要更新
                     break;
                 case CodePush.SyncStatus.UPDATE_INSTALLED:
                     console.log("Update installed.");
+                    this.props.navigator.popToRoot({ animationType: 'fade'});
                     this.setState({
                       isUpdating:false,
                       updatePercentage:100
-                    },()=>this.props.codePushUpdateCheck(true)) //true 为需要更新， false 为不需要更新
+                    }) //true 为需要更新， false 为不需要更新
                     break;
             }
 

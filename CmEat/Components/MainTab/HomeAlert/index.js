@@ -34,7 +34,12 @@ export default class SboxHomeAlert extends Component {
 		HomeStore.removeChangeListener(this._onChange);
   }
   _onChange(){
-		const newState = Object.assign({},this.state, {homeAlert:HomeStore.getHomeAlert()});
+		const state = Object.assign({},this.state, {homeAlert:HomeStore.getHomeAlert()});
+    let isShow = false;
+    if(state.homeAlert) {
+      isShow = true;
+    }
+    const newState = Object.assign({}, state, {isShow});
     this.setState(newState);
   }
   _closeSboHomeAlert() {
