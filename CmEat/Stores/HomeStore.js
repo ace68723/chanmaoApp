@@ -9,6 +9,8 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
     updatePosition:false,
 		currentTab:1,
 		bannerList:[],
+    bannerInterval: 0,
+    discountData: {},
 		showAnimatedView:false,
     showIntroduction: true,
 		restaurantList: [],
@@ -28,6 +30,8 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
         updatePosition:false,
     		currentTab:1,
     		bannerList:[],
+        bannerInterval: null,
+        discountData: null,
         restaurantList: [],
     		filteredList: [],
     		zones: [],
@@ -38,14 +42,16 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 			this.removeListener(CHANGE_EVENT, callback)
 	},
   saveHomeData(res){
-     const showIntroduction = res.showIntroduction;
-		 const bannerList = res.homeData.zone1;
-		 const advertisement = res.homeData.zone2;
-     const restaurantList = res.restaurantList;
-		 const zones = res.zones;
-		 const tags = res.categories;
-		 const homeAlert = res.homeAlert;
-		 this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones, tags, homeAlert})
+    const showIntroduction = res.showIntroduction;
+    const bannerList = res.homeAdData.RRLIST;
+    const advertisement = res.homeAdData.BANNER;
+    const restaurantList = res.restaurantList;
+    const bannerInterval = res.homeAdData.rrlist_skip;
+    const discountData = res.homeAdData.THEME;
+    const zones = res.zones;
+    const tags = res.categories;
+    const homeAlert = res.homeAlert;
+    this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones, tags, homeAlert, bannerInterval, discountData})
   },
   getRestaurantWithRid(rid){
   		const restaurantData = _find(this.state.restaurantList, {rid:parseInt(rid)});
@@ -73,7 +79,7 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 	   switch(action.actionType){
 				case AppConstants.GET_HOME_DATA:
 					  HomeStore.saveHomeData(action.res)
-             HomeStore.emitChange()
+            HomeStore.emitChange()
 				break;
 				case AppConstants.GET_TAG:
 						HomeStore.saveTags(action.menuData.ea_category_list)

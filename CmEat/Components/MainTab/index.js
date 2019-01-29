@@ -96,6 +96,7 @@ export default class MainTab extends Component {
 	}
   _onChange(){
     const newState = Object.assign({},HomeStore.getHomeState(),{renderAddressPrompt:true,});
+		console.log('ggg', newState);
     this.setState(newState);
   }
   _handleBackToHome(){
@@ -183,7 +184,9 @@ export default class MainTab extends Component {
 									navigator={this.props.navigator}
 									advertisement={this.state.advertisement}
                   bannerList={this.state.bannerList}
+									bannerInterval={this.state.bannerInterval}
 									restaurantList = {this.state.restaurantList}
+									discountData={this.state.discountData}
 									onScrollRestaurantsList = {this._onScrollRestaurantsList}
 									showIntroduction={this.state.showIntroduction}
 									/>

@@ -30,6 +30,22 @@ const HomeApi = {
               .then((res) => res.json())
               .catch((error) => {throw error})
     },
+    getHomeAdData(reqData){
+      const url = 'https://www.cmapi.ca/cm_backend/index.php/api/cmapp/v1/get_ad_apphome';
+      let options = {
+          method: 'GET',
+          mode:'cors',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      }
+      options.headers.Authortoken = reqData.token;
+      options.headers.region = reqData.region;
+      return fetch(url,options)
+              .then((res) => res.json())
+              .catch((error) => {throw error})
+    },
     getAreaList(reqData){
       const url = AuthConstants.API_AREALIST;
       let options = {

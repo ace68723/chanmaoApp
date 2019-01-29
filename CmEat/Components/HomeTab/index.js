@@ -36,8 +36,6 @@ if(height == 812){
   marginTop = 84;
 }
 
-const AD_INTERVAL = 7; // For every 7 cell, one cell of ad showed
-
 export default class HomeTab extends Component {
 
   constructor(){
@@ -46,50 +44,49 @@ export default class HomeTab extends Component {
 			showScrollToResCards: true,
 			scrollToResCardsOpacity: new Animated.Value(1),
 		}
-		this._handleOnPressAd = this._handleOnPressAd.bind(this);
+		this._handleOnPressRestaurantAd = this._handleOnPressRestaurantAd.bind(this);
 		this._handleScrollToResCards = this._handleScrollToResCards.bind(this);
 		this._handleOnScroll = this._handleOnScroll.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
 		this._renderScrollToResCards = this._renderScrollToResCards.bind(this);
-
+		this._renderCarouselItem = this._renderCarouselItem.bind(this);
   }
 
-	_handleOnPressAd(advertisement){
-		if(advertisement.navitype == 2){
-      const {url} = advertisement.naviparam;
+	_handleOnPressRestaurantAd(advertisement){
+		if(advertisement.navi_type == 2){
       this.props.navigator.showModal({
         screen: 'AdView',
         animated: true,
         navigatorStyle: {navBarHidden: true},
-        passProps: {url: url}
+        passProps: advertisement.navi_param
       });
 		}
-		else if(advertisement.navitype == 3){
+		else if(advertisement.navi_type == 3){
         this.props.navigator.showModal({
           screen: 'CmEatMenu',
           animated: false,
           navigatorStyle: {navBarHidden: true},
           passProps: {
             py:height,
-            restaurant:advertisement.naviparam,
+            restaurant:advertisement.navi_param,
           },
         });
 		}
-		else if(advertisement.navitype == 4) {
-			if (advertisement.naviparam.target_page == 'cmwash') {
-				this.props.navigator.resetTo({
-		      screen: 'cmHome',
-		      animated: true,
-		      animationType: 'fade',
-		      navigatorStyle: {
-		        navBarHidden: true
-		      },
-		      passProps: {
-		        goToCmLife: 'cmwash'
-		      }
-		    });
-			}
+		else if(advertisement.navi_type == 4) {
+			// if (advertisement.navi_param.target_page == 'cmwash') {
+			// 	this.props.navigator.resetTo({
+		  //     screen: 'cmHome',
+		  //     animated: true,
+		  //     animationType: 'fade',
+		  //     navigatorStyle: {
+		  //       navBarHidden: true
+		  //     },
+		  //     passProps: {
+		  //       goToCmLife: 'cmwash'
+		  //     }
+		  //   });
+			// }
 		}
 	}
 	_handleScrollToResCards() {
@@ -113,7 +110,7 @@ export default class HomeTab extends Component {
 			<TouchableOpacity
 				activeOpacity={1}
 				style={{ flex: 1 }}
-				onPress={() => { alert(`You've clicked '${index}'`); }}
+				onPress={this._handleOnPressRestaurantAd.bind(null, item)}
 			>
 				<View style={{
 						flex: 1,
@@ -127,7 +124,7 @@ export default class HomeTab extends Component {
 						shadowOffset: { height: 2, width: 2 },
 					}}>
 						<Image
-	            source={{ uri: item.image }}
+	            source={{ uri: item.image_url }}
 	            style={{
 								...StyleSheet.absoluteFillObject,
 								resizeMode: 'center',
@@ -141,11 +138,7 @@ export default class HomeTab extends Component {
 	}
 
 	_renderHeader() {
-		const items = [
-			{image: "https://i.imgur.com/DDajebx.png"},
-			{image: "https://i.imgur.com/DDajebx.png"},
-			{image: "https://i.imgur.com/DDajebx.png"}
-		]
+		const items = this.props.advertisement;
 		return(
 			<View>
 				<View style={{height: 180, backgroundColor: '#F2F2F2'}}>
@@ -216,7 +209,7 @@ export default class HomeTab extends Component {
 	_renderRestaurant({index, item}) {
 		// Determine if ad will be inserted
 		let adCell;
-		if (index % AD_INTERVAL == 0 && index != 0){
+		if (index % this.props.bannerInterval == 0 && index != 0){
 			adCell = this._renderRestaurantAd(index);
 		}
 
@@ -234,7 +227,7 @@ export default class HomeTab extends Component {
 
 	_renderRestaurantAd(index) {
 		index -= 1;
-		let adIndex = ~~(index / AD_INTERVAL);
+		let adIndex = ~~(index / this.props.bannerInterval);
 		adIndex += adIndex
 
 		if (adIndex > this.props.advertisement.length - 2){
@@ -246,15 +239,15 @@ export default class HomeTab extends Component {
 		return(
 			<View style={{flexDirection: 'row', height: adHeight, marginBottom: 6}}>
 
-				<TouchableWithoutFeedback onPress={this._handleOnPressAd.bind(null, advertisementLeft)}>
+				<TouchableWithoutFeedback onPress={this._handleOnPressRestaurantAd.bind(null, advertisementLeft)}>
 					<View style={[styles.adViewStyle, {marginLeft: 6, marginRight: 3}]}>
-						<Image source={{uri: advertisementLeft.image}} style={styles.adLarger}/>
+						<Image source={{uri: advertisementLeft.image_url}} style={styles.adLarger}/>
 					</View>
 				</TouchableWithoutFeedback>
 
-				<TouchableWithoutFeedback onPress={this._handleOnPressAd.bind(null, advertisementRight)}>
+				<TouchableWithoutFeedback onPress={this._handleOnPressRestaurantAd.bind(null, advertisementRight)}>
 					<View style={[styles.adViewStyle, {marginRight: 6, marginLeft: 3}]}>
-						<Image source={{uri: advertisementRight.image}} style={styles.adLarger}/>
+						<Image source={{uri: advertisementRight.image_url}} style={styles.adLarger}/>
 					</View>
 				</TouchableWithoutFeedback>
 
