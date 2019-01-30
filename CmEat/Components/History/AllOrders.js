@@ -60,6 +60,21 @@ class AllOrders extends Component {
 	          },
 	        });
 			}
+			else if(advertisement.navi_type == 4) {
+				if (advertisement.navi_param.target_page == 'cmwash') {
+					this.props.navigator.resetTo({
+						screen: 'cmHome',
+						animated: true,
+						animationType: 'fade',
+						navigatorStyle: {
+							navBarHidden: true
+						},
+						passProps: {
+							goToCmLife: 'cmwash'
+						}
+					});
+				}
+			}
 		}
 		_renderContent(){
 			if (this.props.orderData.length > 0) {
