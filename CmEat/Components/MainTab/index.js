@@ -100,7 +100,6 @@ export default class MainTab extends Component {
 	}
   _onChange(){
     const newState = Object.assign({},HomeStore.getHomeState(),{renderAddressPrompt:true,});
-		console.log('ggg', newState);
     this.setState(newState);
   }
   _handleBackToHome(){

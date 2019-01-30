@@ -149,7 +149,6 @@ export default class HomeTab extends Component {
 						hasParallaxImages={true}
 						sliderWidth={width}
 						itemWidth={width - 32 * 2}
-						hasParallaxImages={false}
 						firstItem={0}
 						inactiveSlideScale={0.9}
 						inactiveSlideOpacity={0.6}
@@ -209,7 +208,7 @@ export default class HomeTab extends Component {
 	_renderRestaurant({index, item}) {
 		// Determine if ad will be inserted
 		let adCell;
-		const initOffset = 3;
+		const initOffset = 2;
 		if (index >= initOffset && (index - initOffset) % this.props.bannerInterval == 0 && index != 0){
 			adCell = this._renderRestaurantAd(index);
 		}
@@ -226,10 +225,11 @@ export default class HomeTab extends Component {
 	}
 
 	_renderRestaurantAd(index) {
+
 		index -= 1;
 		let adIndex = ~~(index / this.props.bannerInterval);
 		adIndex += adIndex
-
+		// console.log(adIndex, this.props.advertisement.length);
 		if (adIndex > this.props.advertisement.length - 2){
 			return;
 		}

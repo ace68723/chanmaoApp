@@ -46,8 +46,8 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 	},
   saveHomeData(res){
     const showIntroduction = res.showIntroduction;
-    const bannerList = res.homeAdData.RRLIST;
-    const advertisement = res.homeAdData.BANNER;
+    const bannerList = res.homeAdData.BANNER;
+    const advertisement = res.homeAdData.RRLIST;
     const restaurantList = res.restaurantList;
     const bannerInterval = res.homeAdData.rrlist_skip;
     const discountData = res.homeAdData.THEME;
