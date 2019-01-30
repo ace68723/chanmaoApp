@@ -180,7 +180,7 @@ export default class HomeTab extends Component {
 	      	/>
 				</View>
 				<View style={{paddingTop: 14, height: 180, backgroundColor: 'white'}}>
-					<DiscountView discountData={this.props.discountData}/>
+					<DiscountView discountData={this.props.discountData} onPressedCell={this._handleOnPressRestaurantAd}/>
 				</View>
 
 				<View style={{justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2F2F2', height: 50, flexDirection: 'row'}}>

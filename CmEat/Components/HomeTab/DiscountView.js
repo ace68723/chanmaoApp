@@ -21,6 +21,7 @@ export default class DiscountView extends Component {
     this.state = {
       selectedIndex: 0,
     }
+    this._renderItem = this._renderItem.bind(this);
     this._renderTypeLabel = this._renderTypeLabel.bind(this);
     this._onPressedTypeLabel = this._onPressedTypeLabel.bind(this);
   }
@@ -31,14 +32,18 @@ export default class DiscountView extends Component {
   _renderTypeLabel({index, item}){
     return (
       <View style={{marginRight: 10}}>
-        <DiscountTypeLabel selected={index == this.state.selectedIndex} labelName={item} index={index} onPressed={this._onPressedTypeLabel}/>
+        <DiscountTypeLabel
+          selected={index == this.state.selectedIndex}
+          labelName={item}
+          index={index}
+          onPressed={this._onPressedTypeLabel}/>
       </View>
     )
   }
   _renderItem({item}){
     return (
       <View style={{marginRight: 18}}>
-        <DiscountItem data={item}/>
+        <DiscountItem data={item} onPressedCell={this.props.onPressedCell}/>
       </View>)
   }
   render() {

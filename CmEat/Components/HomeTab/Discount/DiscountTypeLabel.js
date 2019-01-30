@@ -31,11 +31,11 @@ export default class DiscountTypeLabel extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-    width: width / 4,
+    width: width / 4.5,
 	},
   text: {
     textAlign: 'center',
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '900',
     color: "#4398DC",
     borderColor:'#4398DC',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   selectedText: {
     textAlign: 'center',
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '900',
     backgroundColor: '#4398DC',
     overflow: 'hidden',

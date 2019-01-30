@@ -8,6 +8,7 @@ import {
   Text,
   StyleSheet,
   Image,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 const {height, width} = Dimensions.get('window');
@@ -20,15 +21,19 @@ export default class DiscountItem extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 8, backgroundColor: 'black', borderRadius: 8}}>
-          <Image
-            source={{uri: this.props.data.image_url}}
-            style={styles.image}
-            >
-          </Image>
-          <Text style={styles.resName}>{this.props.data.theme_name}</Text>
-        </View>
-        <Text style={styles.text}>{this.props.data.description}</Text>
+        <TouchableWithoutFeedback onPress={() => this.props.onPressedCell(this.props.data)}>
+          <View>
+            <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 8, backgroundColor: 'black', borderRadius: 8}}>
+              <Image
+                source={{uri: this.props.data.image_url}}
+                style={styles.image}
+                >
+              </Image>
+              <Text style={styles.resName}>{this.props.data.theme_name}</Text>
+            </View>
+            <Text style={styles.text}>{this.props.data.description ? this.props.data.description : "我是一个很长很长很长的优惠信息"}</Text>
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     )
   }
