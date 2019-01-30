@@ -352,13 +352,14 @@ export function cme_getMessageData(type) {
     console.log(realm.path);
     const messageDataAll = realm.objects('cme_message');
     let message=[];
-    let messagei={}
     for (let i of messageDataAll)
     {
-
+      let messagei={}
       messagei.messageid=i.messageid;
       messagei.type=i.type;
       messagei.content=i.content;
+
+        console.log('data posted: ' + messagei.content);
       message.push(messagei);
     }
     console.log(message);
@@ -367,6 +368,7 @@ export function cme_getMessageData(type) {
 }
 
 export function cme_saveMessageData(io_data) {
+  console.log('data received: ' + io_data.content);
   const data = {
       type:io_data.type,
       messageid:io_data.messageid,

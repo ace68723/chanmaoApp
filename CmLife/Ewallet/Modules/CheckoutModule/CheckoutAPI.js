@@ -1,7 +1,7 @@
 export default  {
   addCard(io_data) {
 
-    const url = 'https://www.chanmao.us/api/blackhawk/v1/stripe_card';
+    const url = 'https://chanmao.us/api/blackhawk/v1/stripe_card';
 
     let options = {
         method: 'POST',
@@ -13,7 +13,7 @@ export default  {
     }
 
     options.body = JSON.stringify({
-      iv_uid: 1,
+      iv_uid: 2,
       iv_token: io_data.iv_token,
     })
     console.log(options)
@@ -23,7 +23,7 @@ export default  {
   },
   addOrder(io_data) {
 
-    const url = 'https://www.chanmao.us/api/blackhawk/v1/buy_ecard';
+    const url = 'https://chanmao.us/api/blackhawk/v1/buy_ecard';
 
     let options = {
         method: 'POST',
@@ -44,7 +44,7 @@ export default  {
             .catch((error) => {throw error})
   },
   getOrderBefore(io_data){
-    const url = 'https://www.chanmao.us/api/blackhawk/v1/order_before';
+    const url = 'https://chanmao.us/api/blackhawk/v1/order_before';
 
     let options = {
         method: 'POST',

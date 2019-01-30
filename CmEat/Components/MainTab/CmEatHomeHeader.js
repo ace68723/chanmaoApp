@@ -13,7 +13,6 @@ import {
 
 import AddressForHomeHeader from '../Address/AddressForHomeHeader';
 import AddressPromptView from './AddressPromptView';
-
 const {width,height} = Dimensions.get('window');
 const HEADER_MAX_HEIGHT = height*0.4106;
 // const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
@@ -34,6 +33,37 @@ if(height == 812){
 
 export default class SboxHomeHeader extends Component {
 
+  componentDidMount()
+  {
+    this._rendermega=this._rendermega.bind(this);
+  }
+  _rendermega(){
+    // console.log('messagedetail: '+this.props.newMessage);
+    if (!this.props.newMessage) return(
+      <View style={{flex:0.17, }}>
+        <Image source={require('./Images/megaphone.png')}
+               style={{
+                       position:'absolute',
+                       left:10,
+                       bottom:15,
+                       height:20,
+                       width:20,}}/>
+
+      </View>
+    );
+    return (
+      <View style={{flex:0.17, }}>
+        <Image source={require('./Images/megaphone2.png')}
+               style={{
+                       position:'absolute',
+                       left:10,
+                       bottom:15,
+                       height:20,
+                       width:20,}}/>
+
+      </View>
+    );
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -56,16 +86,8 @@ export default class SboxHomeHeader extends Component {
             />
         </View>
         <TouchableWithoutFeedback onPress={this.props.goToMessage}>
-          <View style={{flex:0.17, }}>
-            <Image source={require('./Images/megaphone.png')}
-                   style={{
-                           position:'absolute',
-                           left:10,
-                           bottom:15,
-                           height:20,
-                           width:20,}}/>
+          {this._rendermega()}
 
-          </View>
         </TouchableWithoutFeedback>
 
 

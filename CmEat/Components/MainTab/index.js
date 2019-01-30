@@ -67,6 +67,7 @@ export default class MainTab extends Component {
 			fadeInOpacity: new Animated.Value(0),
       animatedHeaderHeight: new Animated.Value(headerHeight + 12),
 			message:[],
+			newMessage:false,
 		}
 
 		this.state = Object.assign({},state,HomeStore.getHomeState());
@@ -181,6 +182,7 @@ export default class MainTab extends Component {
 	_goToMessage()
 	{
 			console.log(this.state);
+			HomeAction.readNewMessage();
 		  this.props.navigator.showModal({
 		    screen: 'CmMessage',
 		    animated: false,
@@ -210,6 +212,7 @@ export default class MainTab extends Component {
 						 shouldRenderAddressPrompt={this.state.shouldRenderAddressPrompt}
 						 renderAddressPrompt={this.state.renderAddressPrompt}
 						 goToMessage={this._goToMessage}
+						 newMessage={this.state.newMessage}
 				 />
 				 <AddressPromptView
 					 ref='AddressPrompt'

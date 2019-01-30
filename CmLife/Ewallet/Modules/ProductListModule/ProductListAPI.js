@@ -1,7 +1,7 @@
 export default  {
 
   getProductList(){
-    const url = 'https://www.chanmao.us/api/blackhawk/v1/get_product_list';
+    const url = 'https://chanmao.us/api/blackhawk/v1/get_product_list';
 
     let options = {
         method: 'GET',

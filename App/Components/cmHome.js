@@ -11,6 +11,7 @@ import {
   Linking,
 } from 'react-native';
 import AuthAction from '../Actions/AuthAction';
+import HomeAction from '../../CmEat/Actions/HomeAction'
 import VersionAction from '../Actions/VersionAction';
 import { GetVersion, GetUserInfo, cme_getRegion,cme_saveMessageData } from '../Modules/Database';
 import PopupView from '../../CmEat/Components/Popup/PopupView'
@@ -85,12 +86,12 @@ export default class Home extends Component {
   // }
 
     componentDidMount() {
-      const res={
-        type:1,
-        messageid:1,
-        content:'testMessage',
-      }
-      cme_saveMessageData(res);
+      // const res={
+      //   type:1,
+      //   messageid:1,
+      //   content:'testMessage',
+      // }
+      // cme_saveMessageData(res);
       if (Platform.OS==='android'){
       JPushModule.notifyJSDidLoad((resultCode) => {
 
@@ -107,9 +108,22 @@ export default class Home extends Component {
 
       JPushModule.addReceiveCustomMsgListener((message) => {
         this.setState({pushMsg: message});
+          console.log("receive custom notification: " + message);
       });
       JPushModule.addReceiveNotificationListener((message) => {
-        console.log("receive notification: " + message);
+        console.log("receive notification: " + JSON.stringify(message));
+        let times=(new Date()).valueOf();
+        // let times=100000;
+        console.log('timestamp: '+times)
+        let currentmessage={
+          type:1,
+          messageid:times,
+          content:message.alertContent,
+        }
+
+        cme_saveMessageData(currentmessage);
+        HomeAction.getMessageData(1);
+        HomeAction.getNewMessage();
       });
 
 

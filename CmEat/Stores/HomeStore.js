@@ -17,6 +17,7 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 		tags:[],
 		homeAlert:{},
     message:[],
+    newMessage:false,
   },
 	emitChange(){
 			this.emit(CHANGE_EVENT)
@@ -74,6 +75,15 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
   getMessageData(res){
     this.state.message=res;
   },
+  getNewMessage()
+  {
+    this.state.newMessage=true;
+  },
+  readNewMessage()
+  {
+    this.state.newMessage=false;
+    this.state.homeAlert=false;
+  },
 	dispatcherIndex: register(function(action) {
 	   switch(action.actionType){
 				case AppConstants.GET_HOME_DATA:
@@ -88,6 +98,14 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 						HomeStore.setRestaurantListByTag(action.menuData)
 						HomeStore.emitChange()
 				break;
+        case AppConstants.GET_NEW_MESSAGE:
+            HomeStore.getNewMessage();
+            HomeStore.emitChange()
+        break;
+        case AppConstants.READ_NEW_MESSAGE:
+            HomeStore.readNewMessage();
+            HomeStore.emitChange()
+        break;
         case AppConstants.GET_MESSAGE_DATA:
             HomeStore.getMessageData(action.res)
             HomeStore.emitChange()

@@ -12,6 +12,18 @@ export default {
             actionType: AppConstants.GET_MESSAGE_DATA, res
         });
       },
+      getNewMessage(){
+        const res=true;
+        dispatch({
+            actionType: AppConstants.GET_NEW_MESSAGE, res
+        });
+      },
+      readNewMessage(){
+              const res=false;
+              dispatch({
+                  actionType: AppConstants.READ_NEW_MESSAGE, res
+              });
+            },
      async getHomeData(){
         try{
 

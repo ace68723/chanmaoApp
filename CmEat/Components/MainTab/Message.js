@@ -34,13 +34,28 @@ export default class Message extends Component {
   componentDidMount()
   {
     console.log(this.props);
+    for (let i=0;i<this.props.message.length;i++)
+    {
+      console.log('messagelist: '+this.props.message[i].content);
+    }
   }
   _renderMessage({item}){
+    let date=new Date(item.messageid);
+    let formatted = (date.getFullYear()) + "/" + (date.getMonth()+1) + "/" + date.getDate();
+    console.log('timeconv: '+date);
     return(
-      <View style={{width:0.9*width,height:0.12*height,marginTop:10,backgroundColor:'white'}}>
-        <Text style={{padding:5,fontSize:15,}}>
-          {item.content}
-        </Text>
+      <View style={{width:0.9*width,height:0.12*height,marginTop:10,backgroundColor:'white',padding:5}}>
+        <View style={{width:0.9*width,height:0.07*height,marginTop:0,}} >
+          <Text style={{padding:5,fontSize:17,}}>
+            {item.content}
+          </Text>
+
+        </View>
+        <View style={{width:0.85*width,height:0.03*height,}}>
+          <Text style={{padding:5,fontSize:15,textAlign:'right',color:'808285',marginBottom:5,}}>
+            {formatted}
+          </Text>
+        </View>
       </View>
     )
   }
@@ -61,7 +76,7 @@ export default class Message extends Component {
                          ref={(comp) => this._scrollVew = comp}
                          onEndReached={this._onEndReached}
                          onEndReachedThreshold={0.3}
-                         data={this.props.message}
+                         data={this.props.message.filter(message=>message.type==i.cid)}
                          renderItem={this._renderMessage}
                          getItemLayout={(data, index) => ({ length: 250, offset: 250 * index, index})}
                          numColumns={1}
@@ -78,7 +93,7 @@ export default class Message extends Component {
           tabBarUnderlineStyle={{backgroundColor: '#2ad3be', height: 2, width: 0.4*width, marginLeft: 25}}
           tabBarTextStyle={{ fontSize: 14, top: 5, fontWeight: '700'}}
           tabBarInactiveTextColor={'#666666'}
-          initialPage={0}
+          initialPage={1}
           prerenderingSiblingsNumber={3}
           tabBarPosition={'top'}
           ref={(scrollView) => {this.scrollView = scrollView}}

@@ -1,7 +1,7 @@
 export default  {
     getCardList(io_data) {
 
-      const url = 'https://www.chanmao.us/api/blackhawk/v1/get_card_list';
+      const url = 'https://chanmao.us/api/blackhawk/v1/get_card_list';
 
       let options = {
           method: 'POST',
@@ -21,7 +21,7 @@ export default  {
     },
     getCardBalance(io_data) {
 
-      const url = 'https://www.chanmao.us/api/blackhawk/v1/get_card_balance';
+      const url = 'https://chanmao.us/api/blackhawk/v1/get_card_balance';
 
       let options = {
           method: 'POST',

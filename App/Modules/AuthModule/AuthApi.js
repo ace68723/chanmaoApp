@@ -24,6 +24,7 @@ const AuthApi = {
                 'Content-Type': 'application/json'
             }
         }
+        console.log('tokenid: '+jpushid)
         options.headers = Object.assign(options.headers,{
             jpushid:jpushid,
             cmos:userInfo.os,
