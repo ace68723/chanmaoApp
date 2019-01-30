@@ -9,7 +9,8 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
     updatePosition:false,
 		currentTab:1,
 		bannerList:[],
-    bannerInterval: 0,
+    adInterval: 0,
+    adOffset: 0,
     discountData: {},
 		showAnimatedView:false,
     showIntroduction: true,
@@ -32,8 +33,9 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
         updatePosition:false,
     		currentTab:1,
     		bannerList:[],
-        bannerInterval: null,
-        discountData: null,
+        adInterval: 0,
+        adOffset: 0,
+        discountData: {},
         restaurantList: [],
     		filteredList: [],
     		zones: [],
@@ -49,12 +51,13 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
     const bannerList = res.homeAdData.BANNER;
     const advertisement = res.homeAdData.RRLIST;
     const restaurantList = res.restaurantList;
-    const bannerInterval = res.homeAdData.rrlist_skip;
+    const adInterval = res.homeAdData.rrlist_skip;
+    const adOffset = res.homeAdData.rrlist_shift;
     const discountData = res.homeAdData.THEME;
     const zones = res.zones;
     const tags = res.categories;
     const homeAlert = res.homeAlert;
-    this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones, tags, homeAlert, bannerInterval, discountData})
+    this.state = Object.assign({},this.state,{bannerList,advertisement,showIntroduction, restaurantList, zones, tags, homeAlert, adInterval, adOffset, discountData})
   },
   getRestaurantWithRid(rid){
   		const restaurantData = _find(this.state.restaurantList, {rid:parseInt(rid)});

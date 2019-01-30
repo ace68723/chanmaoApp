@@ -201,7 +201,8 @@ export default class MainTab extends Component {
 									navigator={this.props.navigator}
 									advertisement={this.state.advertisement}
                   bannerList={this.state.bannerList}
-									bannerInterval={this.state.bannerInterval}
+									adInterval={this.state.adInterval}
+									adOffset={this.state.adOffset}
 									restaurantList = {this.state.restaurantList}
 									discountData={this.state.discountData}
 									onScrollRestaurantsList = {this._onScrollRestaurantsList}
