@@ -209,7 +209,6 @@ export default class HomeTab extends Component {
 		// Determine if ad will be inserted
 		let adCell;
 		const initOffset = this.props.adOffset;
-		console.log(initOffset);
 		if (index >= initOffset && (index - initOffset) % this.props.adInterval == 0 && index != 0){
 			adCell = this._renderRestaurantAd(index);
 		}
