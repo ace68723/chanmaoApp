@@ -209,7 +209,8 @@ export default class HomeTab extends Component {
 	_renderRestaurant({index, item}) {
 		// Determine if ad will be inserted
 		let adCell;
-		if (index % this.props.bannerInterval == 0 && index != 0){
+		const initOffset = 3;
+		if (index >= initOffset && (index - initOffset) % this.props.bannerInterval == 0 && index != 0){
 			adCell = this._renderRestaurantAd(index);
 		}
 
@@ -221,7 +222,6 @@ export default class HomeTab extends Component {
 				restaurant={restaurant}
 				navigator={this.props.navigator}></RestaurantCard>
 			</View>
-
 		)
 	}
 
@@ -233,6 +233,7 @@ export default class HomeTab extends Component {
 		if (adIndex > this.props.advertisement.length - 2){
 			return;
 		}
+
 		const advertisementLeft = this.props.advertisement[adIndex];
 		const advertisementRight = this.props.advertisement[adIndex + 1];
 		const adHeight = 110;
