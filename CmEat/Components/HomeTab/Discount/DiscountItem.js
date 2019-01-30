@@ -29,7 +29,7 @@ export default class DiscountItem extends Component {
                 style={styles.image}
                 >
               </Image>
-              <Text style={styles.resName}>{this.props.data.theme_name}</Text>
+              <Text style={styles.resName}>{this.props.data.ad_name}</Text>
             </View>
             <Text style={styles.text}>{this.props.data.description ? this.props.data.description : "我是一个很长很长很长的优惠信息"}</Text>
           </View>
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     width: itemWidth * 0.9,
   },
   resName: {
+    textAlign: 'center',
     position: 'absolute',
     fontWeight: '900',
     color: 'white',
