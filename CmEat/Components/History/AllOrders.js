@@ -14,7 +14,7 @@ import {
   ScrollView,
   Text,
   View,
-
+	TouchableWithoutFeedback
 } from 'react-native';
 
 import {cme_getLanguage} from '../../../App/Modules/Database';
@@ -27,17 +27,40 @@ import Header from '../General/Header';
 import HistoryOrderDetail from './HistoryOrderDetail';
 import Modal from 'react-native-modalbox';
 
+const {width,height} = Dimensions.get('window');
+
 class AllOrders extends Component {
     constructor(props) {
         super(props);
 				this._getCurrentPosition = this._getCurrentPosition.bind(this);
 				this._renderContent = this._renderContent.bind(this);
+				this._handleOnPressedAd = this._handleOnPressedAd.bind(this);
     }
 
 		_getCurrentPosition(){
 			return this.currentPosition
 		}
-
+		_handleOnPressedAd(advertisement){
+			if(advertisement.navi_type == 2){
+	      this.props.navigator.showModal({
+	        screen: 'AdView',
+	        animated: true,
+	        navigatorStyle: {navBarHidden: true},
+	        passProps: advertisement.navi_param
+	      });
+			}
+			else if(advertisement.navi_type == 3){
+	        this.props.navigator.showModal({
+	          screen: 'CmEatMenu',
+	          animated: false,
+	          navigatorStyle: {navBarHidden: true},
+	          passProps: {
+	            py:height,
+	            restaurant:advertisement.navi_param,
+	          },
+	        });
+			}
+		}
 		_renderContent(){
 			if (this.props.orderData.length > 0) {
 				let orderList = this.props.orderData.map( order => {
@@ -54,6 +77,22 @@ class AllOrders extends Component {
 									 isRefreshing={this.props.isRefreshing}/>
 					)
 				});
+				// show order ad
+				if (this.props.orderAdData.length > 0){
+					console.log(123);
+					const adHeight = 110;
+					const ad = this.props.orderAdData[0];
+					const adCell = (
+						<View style={{flexDirection: 'row', height: adHeight,}}>
+							<TouchableWithoutFeedback onPress={this._handleOnPressedAd.bind(null, ad)}>
+								<View style={[styles.adViewStyle, {marginLeft: 10, marginRight: 10}]}>
+									<Image source={{uri: ad.image_url}} style={styles.adLarger}/>
+								</View>
+							</TouchableWithoutFeedback>
+						</View>
+					)
+					orderList.splice(1, 0, adCell);
+				}
 				return(
 					orderList
 				)
@@ -122,7 +161,6 @@ class AllOrders extends Component {
 // 	 />
 // </ScrollView>
 
-
 let styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -149,7 +187,15 @@ let styles = StyleSheet.create({
 		height: 400,
 		width: 300,
 	},
-
+	adViewStyle:{
+		alignItems:'center',
+		flex: 1,
+		borderRadius: 6,
+		overflow: 'hidden',
+	},
+  adLarger:{
+		...StyleSheet.absoluteFillObject,
+  },
 });
 
 module.exports = AllOrders;

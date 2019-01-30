@@ -7,6 +7,7 @@ const ERRROR_TITLE = AppConstants.ERRROR_TITLE;
 let state = {
           historylist:[],
           orderData:[],
+          orderAdData:[],
           current:null,
           unavailable:[],
           isRefreshing:false,
@@ -44,6 +45,9 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
 	},
   getOrders(orderData){
     state = Object.assign({},state,{orderData},{doRefresh:false})
+  },
+  getOrderAd(data){
+    state.orderAdData = data;
   },
   getState(){
     return state
@@ -109,6 +113,10 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
 	   switch(action.actionType){
          case AppConstants.GET_ORDERS:
               HistoryStore.getOrders(action.orderData)
+              HistoryStore.emitChange()
+              break;
+         case AppConstants.GET_ORDER_AD:
+              HistoryStore.getOrderAd(action.data)
               HistoryStore.emitChange()
               break;
 				 case AppConstants.VERIFY_PHONE:

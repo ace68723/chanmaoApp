@@ -19,6 +19,23 @@ export default {
         console.log(e);
       }
     },
+    async getOrderAdData(){
+      try{
+        const token = await AuthModule.getToken();
+        const res = await HistoryModule.getOrderAdData(token);
+        if (res.ev_error == 0) {
+          const data = res.result;
+          dispatch({
+              actionType: AppConstants.GET_ORDER_AD, data
+          });
+        }
+        else{
+          throw data.ev_message;
+        }
+      }catch (e){
+        console.log(e);
+      }
+    },
     async getLast4(){
       try{
         const token = await AuthModule.getToken();
