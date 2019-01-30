@@ -34,7 +34,10 @@ export default class orderConfirm extends Component {
 
   _renderPaymentChannel() {
     let payment_channel = "";
-    if(this.props.paymentChannel == 1) {
+    if(this.props.paymentChannel == 0) {
+      payment_channel = Label.getCMLabel('CASH');
+    }
+    else if(this.props.paymentChannel == 1) {
       payment_channel = Label.getCMLabel('CREDIT_CARD') + '/' + Label.getCMLabel('DEBIT_CARD');
     }
     else if(this.props.paymentChannel == 10) {
@@ -43,10 +46,10 @@ export default class orderConfirm extends Component {
     else if(this.props.paymentChannel == 30) {
       payment_channel = "Apple Pay";
     }
-    if(this.props.paymentChannel > 0) {
+    if(this.props.paymentChannel >= 0) {
       return(
         <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>
-            <Image source={require('./Image/alipay.png')} style={{width:24,height:25,marginRight:15,marginLeft:15}}/>
+            <Image source={require('./Image/alipay.png')} style={{width:22,height:22,marginRight:15,marginLeft:15}}/>
             <Text style={styles.contentFont} allowFontScaling={false}>{payment_channel}</Text>
         </View>
       )

@@ -189,6 +189,7 @@ class HistoryTab extends Component {
         })
 				HistoryAction.getLast4();
         HistoryAction.getOrderData();
+				HistoryAction.getOrderAdData();
     }
 		_setOnRefresh() {
 			this.setState({
@@ -390,6 +391,7 @@ class HistoryTab extends Component {
 		 			      <AllOrders
 										navigator={this.props.navigator}
 										orderData={this.state.orderData}
+										orderAdData={this.state.orderAdData}
 										isRefreshing={this.state.isRefreshing}
 										onRefresh={this._doAutoRefresh}
 										goToRestaurant={this._goToRestaurant}

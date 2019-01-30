@@ -19,6 +19,10 @@ import RestaurantTab from '../Restaurant/RestaurantTab'
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 import Label from '../../../App/Constants/AppLabel';
+import DiscountView from './DiscountView'
+
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+
 // import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
 
 
@@ -31,6 +35,7 @@ if(height == 812){
 }else{
   marginTop = 84;
 }
+
 export default class HomeTab extends Component {
 
   constructor(){
@@ -39,50 +44,49 @@ export default class HomeTab extends Component {
 			showScrollToResCards: true,
 			scrollToResCardsOpacity: new Animated.Value(1),
 		}
-		this._handleOnPress = this._handleOnPress.bind(this);
+		this._handleOnPressRestaurantAd = this._handleOnPressRestaurantAd.bind(this);
 		this._handleScrollToResCards = this._handleScrollToResCards.bind(this);
 		this._handleOnScroll = this._handleOnScroll.bind(this);
 		this._renderRestaurant = this._renderRestaurant.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
 		this._renderScrollToResCards = this._renderScrollToResCards.bind(this);
-
+		this._renderCarouselItem = this._renderCarouselItem.bind(this);
   }
 
-	_handleOnPress(advertisement){
-		if(advertisement.navitype == 2){
-      const {url} = advertisement.naviparam;
+	_handleOnPressRestaurantAd(advertisement){
+		if(advertisement.navi_type == 2){
       this.props.navigator.showModal({
         screen: 'AdView',
         animated: true,
         navigatorStyle: {navBarHidden: true},
-        passProps: {url: url}
+        passProps: advertisement.navi_param
       });
 		}
-		else if(advertisement.navitype == 3){
+		else if(advertisement.navi_type == 3){
         this.props.navigator.showModal({
           screen: 'CmEatMenu',
           animated: false,
           navigatorStyle: {navBarHidden: true},
           passProps: {
             py:height,
-            restaurant:advertisement.naviparam,
+            restaurant:advertisement.navi_param,
           },
         });
 		}
-		else if(advertisement.navitype == 4) {
-			if (advertisement.naviparam.target_page == 'cmwash') {
-				this.props.navigator.resetTo({
-		      screen: 'cmHome',
-		      animated: true,
-		      animationType: 'fade',
-		      navigatorStyle: {
-		        navBarHidden: true
-		      },
-		      passProps: {
-		        goToCmLife: 'cmwash'
-		      }
-		    });
-			}
+		else if(advertisement.navi_type == 4) {
+			// if (advertisement.navi_param.target_page == 'cmwash') {
+			// 	this.props.navigator.resetTo({
+		  //     screen: 'cmHome',
+		  //     animated: true,
+		  //     animationType: 'fade',
+		  //     navigatorStyle: {
+		  //       navBarHidden: true
+		  //     },
+		  //     passProps: {
+		  //       goToCmLife: 'cmwash'
+		  //     }
+		  //   });
+			// }
 		}
 	}
 	_handleScrollToResCards() {
@@ -101,76 +105,156 @@ export default class HomeTab extends Component {
 		this.props.onScrollRestaurantsList(event);
 	}
 
-  _renderAdv(){
-    if(this.props.advertisement && this.props.advertisement.length>0){
-				let Ad = this.props.advertisement.map((advertisement,index)=>{
-					return(
-						<TouchableWithoutFeedback key={index} onPress={this._handleOnPress.bind(null,advertisement)}>
-							<View style={styles.autoViewStyle}>
-								<Image source={{uri:advertisement.image}} style={styles.adLarger}/>
-							</View>
-						</TouchableWithoutFeedback>
-					)
+	_renderCarouselItem ({item, index}) {
+		return (
+			<TouchableOpacity
+				activeOpacity={1}
+				style={{ flex: 1 }}
+				onPress={this._handleOnPressRestaurantAd.bind(null, item)}
+			>
+				<View style={{
+						flex: 1,
+		        marginBottom: 0, // Prevent a random Android rendering issue
+						width: width - 32 * 2,
+						height: 160,
+						paddingBottom: 18,
+						shadowOpacity: 0.55,
+						shadowRadius: 4,
+						shadowColor: 'grey',
+						shadowOffset: { height: 2, width: 2 },
+					}}>
+						<Image
+	            source={{ uri: item.image_url }}
+	            style={{
+								...StyleSheet.absoluteFillObject,
+								resizeMode: 'center',
+								borderRadius: 8,
+							}}
+	          />
+				</View>
+			</TouchableOpacity>
 
-				})
-      return(
-        <View style={styles.container}>
-					{Ad}
-        </View>
-
-      )
-    }
-  }
+		);
+	}
 
 	_renderHeader() {
+		const items = this.props.advertisement;
 		return(
-			<View style={{paddingBottom: 8}}>
-      <HeaderWithBanner
-           bannerList={this.props.bannerList}
-           navigator={this.props.navigator}/>
-				{this._renderAdv()}
-				<View style={{flexDirection: 'row', justifyContent: 'center', marginTop: 8}}>
-					<Image style={{height: 25, width: 25}} source={require('./Image/order.png')}/>
-					<Text allowFontScaling={false}
-								style={{alignSelf: 'center',
-												fontSize: 16,
-												fontWeight: '500',
-												fontFamily:'NotoSans-Regular'}}>{Label.getCMLabel('ORDER_BELOW')}</Text>
+			<View>
+				<View style={{height: 180, backgroundColor: '#F2F2F2'}}>
+					<Carousel
+						ref={c => this._sliderRef = c}
+						data={items}
+						renderItem={this._renderCarouselItem}
+						hasParallaxImages={true}
+						sliderWidth={width}
+						itemWidth={width - 32 * 2}
+						hasParallaxImages={false}
+						firstItem={0}
+						inactiveSlideScale={0.9}
+						inactiveSlideOpacity={0.6}
+						containerCustomStyle={{
+			        overflow: 'visible',
+		    		}}
+						contentContainerCustomStyle={{
+		        	paddingVertical: 10
+		    		}}
+						loop={true}
+						loopClonesPerSide={2}
+						autoplay={true}
+						autoplayDelay={500}
+						autoplayInterval={5000}
+						onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
+					/>
+					<Pagination
+		        dotsLength={items.length}
+		        activeDotIndex={this.state.slider1ActiveSlide ? this.state.slider1ActiveSlide : 0}
+		        containerStyle={{paddingVertical: 6, marginBottom: 8}}
+		        dotColor={'#D46A36'}
+		        dotStyle={{ width: 6, height: 6, borderRadius: 6, marginHorizontal: -6 }}
+		        inactiveDotColor={"#8E8E8E"}
+		        inactiveDotOpacity={0.6}
+		        inactiveDotScale={1}
+		        carouselRef={this._sliderRef}
+		        tappableDots={!!this._sliderRef}
+	      	/>
 				</View>
-				<View style={{justifyContent: 'center'}}>
-					<Image style={{height: 12, width: 12, alignSelf: 'center'}} source={require('./Image/order_down.png')}/>
+				<View style={{paddingTop: 14, height: 180, backgroundColor: 'white'}}>
+					<DiscountView discountData={this.props.discountData} onPressedCell={this._handleOnPressRestaurantAd}/>
 				</View>
+
+				<View style={{justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2F2F2', height: 50, flexDirection: 'row'}}>
+					<Image
+						source={require('./Image/arrow-100x100.gif')}
+						style={{height: 20, width: 20, marginRight: 8}}
+					/>
+					<Text
+						style={{
+							textAlign: 'center',
+							fontSize: 14,
+							fontWeight: '700',
+							color: 'black',
+							fontFamily:'NotoSans-Regular'
+						}}
+						allowFontScaling={false}>
+					在下面点餐哟~
+					</Text>
+				</View>
+
+			</View>
+
+		)
+	}
+
+	_renderRestaurant({index, item}) {
+		// Determine if ad will be inserted
+		let adCell;
+		const initOffset = 3;
+		if (index >= initOffset && (index - initOffset) % this.props.bannerInterval == 0 && index != 0){
+			adCell = this._renderRestaurantAd(index);
+		}
+
+		const restaurant = item;
+		return (
+			<View>
+				{adCell}
+				<RestaurantCard
+				restaurant={restaurant}
+				navigator={this.props.navigator}></RestaurantCard>
 			</View>
 		)
 	}
 
-	_renderRestaurant({item}) {
-		const restaurant = item;
-			if(restaurant){
-				return (<RestaurantCard
-					restaurant={restaurant}
-					navigator={this.props.navigator}
-					/>);
-			}
-	}
-	_renderRestaurants() {
-		if (this.props.restaurants.length == 0){
+	_renderRestaurantAd(index) {
+		index -= 1;
+		let adIndex = ~~(index / this.props.bannerInterval);
+		adIndex += adIndex
+
+		if (adIndex > this.props.advertisement.length - 2){
 			return;
 		}
-		let all = this.props.restaurants[0].restaurantList;
-		let keyExtractor = (item, index) => item.area + item.rid;
-		return (
-			<FlatList
-					style={{marginTop: 8,}}
-					key='key'
-					ref={(comp) => this._scrollVew = comp}
-					data={all}
-					ListHeaderComponent={this._renderHeader}
-					renderItem={this._renderRestaurant}
-					keyExtractor={keyExtractor}
-					extraData={all}
-			/>
-		);
+
+		const advertisementLeft = this.props.advertisement[adIndex];
+		const advertisementRight = this.props.advertisement[adIndex + 1];
+		const adHeight = 110;
+		return(
+			<View style={{flexDirection: 'row', height: adHeight, marginBottom: 6}}>
+
+				<TouchableWithoutFeedback onPress={this._handleOnPressRestaurantAd.bind(null, advertisementLeft)}>
+					<View style={[styles.adViewStyle, {marginLeft: 6, marginRight: 3}]}>
+						<Image source={{uri: advertisementLeft.image_url}} style={styles.adLarger}/>
+					</View>
+				</TouchableWithoutFeedback>
+
+				<TouchableWithoutFeedback onPress={this._handleOnPressRestaurantAd.bind(null, advertisementRight)}>
+					<View style={[styles.adViewStyle, {marginRight: 6, marginLeft: 3}]}>
+						<Image source={{uri: advertisementRight.image_url}} style={styles.adLarger}/>
+					</View>
+				</TouchableWithoutFeedback>
+
+			</View>
+
+		)
 	}
 
 	_renderScrollToResCards() {
@@ -228,6 +312,7 @@ export default class HomeTab extends Component {
 							extraData={all}
 							onScroll={(ref) => this._handleOnScroll(ref)}
 							scrollEventThrottle={200}
+							contentContainerStyle={{backgroundColor: '#F2F2F2'}}
 					/>
 					{this._renderScrollToResCards()}
 			</View>
@@ -261,20 +346,13 @@ const styles = StyleSheet.create({
 	scrollView:{
 		flex: 1,
 	},
-	autoViewStyle:{
+	adViewStyle:{
 		alignItems:'center',
-		width:(width-9)/2,
-		height:(width-9)/(2*1.157),
-		marginLeft:3,
-		marginTop:3,
+		flex: 1,
+		borderRadius: 6,
+		overflow: 'hidden',
 	},
   adLarger:{
-    borderRadius:5,
-    width:(width-9)/2,
-    height:(width-9)/(2*1.157),
-  },
-  adSmall:{
-    width:(width-7)/2,
-    height:(width-7)/(2*2.358),
+		...StyleSheet.absoluteFillObject,
   },
 });

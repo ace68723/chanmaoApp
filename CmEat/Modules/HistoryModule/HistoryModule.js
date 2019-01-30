@@ -1,6 +1,9 @@
 'use strict';
 const   HistoryApi        = require( './HistoryApi');
 const  Alert          = require('../System/Alert');
+import  {
+  cme_getRegion
+} from '../../../App/Modules/Database';
 const  HistoryModule = {
 
   // ===================================
@@ -48,6 +51,15 @@ const  HistoryModule = {
                 reject(error);
               })
           })
+    },
+    async getOrderAdData(data){
+      try {
+        const region = parseInt(cme_getRegion());
+        const res = await HistoryApi.getOrderAdData({data, region});
+        return res;
+      } catch (e) {
+        console.log(e)
+      }
     },
     async getLast4(token){
       try {

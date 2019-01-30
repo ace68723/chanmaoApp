@@ -34,6 +34,22 @@ const HistoryApi = {
             .then((res) => res.json())
             .catch((error) => {throw error})
   },
+  getOrderAdData(data){
+    const url = AuthConstants.API_GET_ORDER_AD;
+    let options = {
+        method: 'GET',
+        mode:'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    options.headers.Authortoken = data.token;
+    options.headers.region = data.region;
+    return fetch(url,options)
+            .then((res) => res.json())
+            .catch((error) => {throw error})
+  },
   getLast4(token){
     const url = AuthConstants.API_GET_LAST4;
     let options = {

@@ -1,7 +1,7 @@
 'use strict';
 const   HomeApi        = require( './HomeApi');
 import orderBy from 'lodash/orderBy';
-import  {  
+import  {
   cme_getRegion
 } from '../../../App/Modules/Database';
 const  HomeMoule = {
@@ -24,7 +24,7 @@ const  HomeMoule = {
   async getHomeData(token){
         const region = cme_getRegion();
         const HomeData = await HomeApi.getHomeData({token,region: parseInt(region)});
-        
+
         if(HomeData.result === 0){
             HomeData.zone1.forEach((banner) => {
                 const naviparam = banner.naviparam;
@@ -49,6 +49,16 @@ const  HomeMoule = {
         }
   },
 
+  async getHomeAdData(token){
+        const region = cme_getRegion();
+        const homeAdData = await HomeApi.getHomeAdData({token,region: parseInt(region)});
+
+        if(homeAdData.ev_error === 0){
+            return homeAdData.result
+        }else{
+          throw 'homeAdData error';
+        }
+  },
   // ===================================================
   // getAreaList API INTERFACE
   // API             Module        Notes
@@ -111,7 +121,7 @@ const  HomeMoule = {
         }catch(e){
           console.log(e)
         }
-       
+
       }
 }
 module.exports = HomeMoule;

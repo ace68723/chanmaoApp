@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import {cme_getSelectedAddress} from '../../Modules/Database';
 import Label from '../../Constants/AppLabel';
+import { GetUserInfo, cme_getRegion } from '../../Modules/Database';
 
 const {width,height} = Dimensions.get('window')
 
@@ -25,7 +26,7 @@ export default class CmAdvertisement extends Component {
       addr = cme_getSelectedAddress().addr.split(",", 1);
     }
     this.state = {
-      AdImage:'',
+      adImage: null,
       addr:addr,
       showingAd: true
     }
@@ -48,66 +49,76 @@ export default class CmAdvertisement extends Component {
     // })
   }
   _getAd() {
-  		const url = "https://chanmao.ca/index.php?r=MobAd10/AdLaunch";
+  		const url = "https://www.cmapi.ca/cm_backend/index.php/api/cmapp/v1/get_ad_launch";
+      const {token} = GetUserInfo();
   		let options = {
   				method: 'GET',
   				mode:'cors',
   				headers: {
   						'Accept': 'application/json',
-  						'Content-Type': 'application/json'
+  						'Content-Type': 'application/json',
+              'Authortoken': token,
+              'region': parseInt(cme_getRegion()),
   				}
   		}
+      console.log(options);
   		fetch(url,options)
   			.then((res) => res.json())
   			.then((res)=>{
-  				if(res.result == 0 ){
-
-  					if(res.image){
-              Image.getSize(res.image, (width, height) => {
-                const ratio = height/width;
-                const adHeight = Dimensions.get('window').width * ratio;
-                const adWidth = Dimensions.get('window').width;
-                this.setState({
-    							AdImage: res.image,
-    							AdUrl: res.navigation,
-    							showAd:true,
-                  adHeight,
-                  adWidth
-    						})
-              });
-
-  					}else{
-  						this.setState({
-  							showAd:false,
-  						})
+  				if(res.ev_error == 0){
+  					if(res.result){
+              const adHeight = Dimensions.get('window').height;
+              const adWidth = Dimensions.get('window').width;
+              // select image by its ratio, otherwise select the first one
+              let image = res.result[0];
+              for (let i of res.result){
+                let ratio = i.image_width / i.image_height
+                if (ratio == (adWidth / adHeight)){
+                  image = i;
+                  break;
+                }
+              }
+              this.setState({
+                adImage: image,
+                adHeight,
+                adWidth
+              })
   					}
-  				}else{
-  					this.setState({
-  						showAd:false,
-  					})
   				}
   			})
   			.catch((error) => { console.log(error); throw error})
 	}
   _openAdView() {
+    const ad = this.state.adImage;
     this.setState({showingAd: false});
-      this.props.navigator.showModal({
+    if(ad.navi_type == 2){
+      const {url} = ad.navi_param;
+      Navigation.showModal({
         screen: 'AdView',
         animated: true,
         navigatorStyle: {navBarHidden: true},
-        passProps: {
-          url: this.state.AdUrl,
-          tag:"forChanmaoLaunchAd"
-        }
-      })
+        passProps: {url: url}
+      });
+    }
+    else if(ad.navi_type == 3){
+        this.props.navigator.showModal({
+          screen: 'CmEatMenu',
+          animated: false,
+          navigatorStyle: {navBarHidden: true},
+          passProps: {
+            py:height,
+            restaurant:ad.navi_param,
+          },
+        });
+    }
   }
   _renderAdvertisement(){
-    if(this.state.AdImage){
+    if(this.state.adImage){
       return(
           <TouchableWithoutFeedback onPress={this._openAdView}>
             <Image style={{top:0,left:0,position:'absolute',width:this.state.adWidth,height:this.state.adHeight,opacity:this.state.adOpacity}}
                     resizeMode={'cover'}
-                    source={{uri:this.state.AdImage}}/>
+                    source={{uri:this.state.adImage.image_url}}/>
           </TouchableWithoutFeedback>
       )
     }
