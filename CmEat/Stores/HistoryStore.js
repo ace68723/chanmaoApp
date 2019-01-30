@@ -47,7 +47,7 @@ const HistoryStore = Object.assign({},EventEmitter.prototype,{
     state = Object.assign({},state,{orderData},{doRefresh:false})
   },
   getOrderAd(data){
-    state.orderAdData = data;
+    state = Object.assign({},state,{orderAdData: data})
   },
   getState(){
     return state
