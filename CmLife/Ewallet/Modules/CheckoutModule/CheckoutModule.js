@@ -3,6 +3,7 @@ import {
   NativeModules,
 } from 'react-native';
 import OrderAPI from '../OrderModule/OrderAPI';
+import {GetUserInfo} from '../../../../App/Modules/Database';
 const StripeBridge = NativeModules.StripeBridge;
 
 // import {GetUserInfo} from '../../../App/Modules/Database';
@@ -23,9 +24,12 @@ export default  {
 
       if(!cardToken) throw 'no cardToken'
       // alert(cardToken);
+        const {uid,token,version} = GetUserInfo();
       const lo_data = {
-        iv_token: cardToken
+        iv_token: cardToken,
+        authortoken:token,
       }
+
       const res = await CheckoutAPI.addCard(lo_data);
       console.log(res)
       if(res.ev_error === 1) { throw 'add card fail'}
@@ -48,7 +52,7 @@ export default  {
       const eo_data ={
         last4: res.ev_last4,
       }
-      console.log(res)
+      console.log('last4dgs: '+res.ev_last4)
       return eo_data
 
     } catch (e) {

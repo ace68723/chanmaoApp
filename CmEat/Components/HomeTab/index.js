@@ -149,7 +149,6 @@ export default class HomeTab extends Component {
 						hasParallaxImages={true}
 						sliderWidth={width}
 						itemWidth={width - 32 * 2}
-						hasParallaxImages={false}
 						firstItem={0}
 						inactiveSlideScale={0.9}
 						inactiveSlideOpacity={0.6}

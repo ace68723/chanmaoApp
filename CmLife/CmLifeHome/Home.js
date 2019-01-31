@@ -70,14 +70,14 @@ export default class Home extends BaseComponent {
           }
         })
         break;
-      // case "ewallet":
-      //   this.props.navigator.push({
-      //     screen: 'EwalletMainTab',
-      //     navigatorStyle: {navBarHidden: true},
-      //     passProps:{
-      //       fromPage:0,
-      //     }
-      //   })
+      case "ewallet":
+        this.props.navigator.push({
+          screen: 'EwalletMainTab',
+          navigatorStyle: {navBarHidden: true},
+          passProps:{
+            fromPage:0,
+          }
+        })
       default:
 
     }

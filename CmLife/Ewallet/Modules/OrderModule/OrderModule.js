@@ -57,6 +57,7 @@ export default  {
                                                 cvv);
 
       if(!cardToken) throw 'no cardToken'
+      console.log('card token: '+cardToken);
       // alert(cardToken);
       const {uid,token,version} = GetUserInfo();
       const lo_data = {
@@ -64,8 +65,9 @@ export default  {
         iv_token: cardToken
       }
       const res = await OrderAPI.addCard(lo_data);
-      if(res.ev_error === 1) { throw 'add card fail'}
+      if(res.ev_error === 1) { console.log('ev_error card');throw 'add card fail'}
       const eo_data = res.ea_card_info;
+      console.log('card data: '+eo_data);
       return eo_data
     } catch (e) {
       throw e
@@ -75,14 +77,14 @@ export default  {
     try {
       const uid = 1;
       const res = await OrderAPI.checkUaid(uid);
-      if(res.ev_error === 0) { 
+      if(res.ev_error === 0) {
         console.log(res);
         return res.userInfo;
       } else {
         const errorMessage = res.ev_message;
         throw errorMessage
       }
-    
+
     } catch (e) {
       throw e
     }
