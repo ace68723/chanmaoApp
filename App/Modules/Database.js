@@ -360,7 +360,7 @@ export function cme_getMessageData(type) {
       messagei.content=i.content;
 
         console.log('data posted: ' + messagei.content);
-      message.push(messagei);
+      message.unshift(messagei);
     }
     console.log(message);
     return message
