@@ -44,15 +44,15 @@ export default class Message extends Component {
     let formatted = (date.getFullYear()) + "/" + (date.getMonth()+1) + "/" + date.getDate();
     console.log('timeconv: '+date);
     return(
-      <View style={{width:0.9*width,height:0.12*height,marginTop:10,backgroundColor:'white',padding:5}}>
+      <View style={{width:0.9*width,height:0.15*height,marginTop:10,backgroundColor:'white',padding:5}}>
         <View style={{width:0.9*width,height:0.07*height,marginTop:0,}} >
           <Text style={{padding:5,fontSize:17,}}>
             {item.content}
           </Text>
 
         </View>
-        <View style={{width:0.85*width,height:0.03*height,}}>
-          <Text style={{padding:5,fontSize:15,textAlign:'right',color:'808285',marginBottom:5,}}>
+        <View style={{width:0.85*width,height:0.06*height,}}>
+          <Text style={{padding:5,fontSize:13,textAlign:'right',color:'#808285',marginBottom:5,}}>
             {formatted}
           </Text>
         </View>

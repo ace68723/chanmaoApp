@@ -107,18 +107,26 @@ export default class Home extends Component {
       AppState.addEventListener('change', this._handleAppStateChange);
 
       JPushModule.addReceiveCustomMsgListener((message) => {
+
+
         this.setState({pushMsg: message});
           console.log("receive custom notification: " + message);
       });
       JPushModule.addReceiveNotificationListener((message) => {
         console.log("receive notification: " + JSON.stringify(message));
+        // alert('11112');
+
+        let iv_message='';
+        if (Platform.OS === 'ios') {iv_message=message.aps.alert;}
+        else {iv_message=message.alertContent;}
         let times=(new Date()).valueOf();
         // let times=100000;
-        console.log('timestamp: '+times)
+        // console.log('timestamp: '+times)
         let currentmessage={
           type:1,
           messageid:times,
-          content:message.alertContent,
+          // content:message.alertContent,
+          content:iv_message,
         }
 
         cme_saveMessageData(currentmessage);
