@@ -74,19 +74,19 @@ export default class HomeTab extends Component {
         });
 		}
 		else if(advertisement.navi_type == 4) {
-			// if (advertisement.navi_param.target_page == 'cmwash') {
-			// 	this.props.navigator.resetTo({
-		  //     screen: 'cmHome',
-		  //     animated: true,
-		  //     animationType: 'fade',
-		  //     navigatorStyle: {
-		  //       navBarHidden: true
-		  //     },
-		  //     passProps: {
-		  //       goToCmLife: 'cmwash'
-		  //     }
-		  //   });
-			// }
+			if (advertisement.navi_param.target_page == 'cmwash') {
+				this.props.navigator.resetTo({
+		      screen: 'cmHome',
+		      animated: true,
+		      animationType: 'fade',
+		      navigatorStyle: {
+		        navBarHidden: true
+		      },
+		      passProps: {
+		        goToCmLife: 'cmwash'
+		      }
+		    });
+			}
 		}
 	}
 	_handleScrollToResCards() {
@@ -208,8 +208,8 @@ export default class HomeTab extends Component {
 	_renderRestaurant({index, item}) {
 		// Determine if ad will be inserted
 		let adCell;
-		const initOffset = 3;
-		if (index >= initOffset && (index - initOffset) % this.props.bannerInterval == 0 && index != 0){
+		const initOffset = this.props.adOffset;
+		if (index >= initOffset && (index - initOffset) % this.props.adInterval == 0 && index != 0){
 			adCell = this._renderRestaurantAd(index);
 		}
 
@@ -225,10 +225,11 @@ export default class HomeTab extends Component {
 	}
 
 	_renderRestaurantAd(index) {
-		index -= 1;
-		let adIndex = ~~(index / this.props.bannerInterval);
-		adIndex += adIndex
 
+		index -= 1;
+		let adIndex = ~~(index / this.props.adInterval);
+		adIndex += adIndex
+		// console.log(adIndex, this.props.advertisement.length);
 		if (adIndex > this.props.advertisement.length - 2){
 			return;
 		}
