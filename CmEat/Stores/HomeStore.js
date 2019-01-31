@@ -87,6 +87,8 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
   getNewMessage()
   {
     this.state.newMessage=true;
+
+    this.state.homeAlert=false;
   },
   readNewMessage()
   {
