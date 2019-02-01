@@ -138,7 +138,7 @@ export default class HomeTab extends Component {
 	}
 
 	_renderHeader() {
-		const items = this.props.advertisement;
+		const items = this.props.bannerList;
 		return(
 			<View>
 				<View style={{height: 180, backgroundColor: '#F2F2F2'}}>
