@@ -10,7 +10,8 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   Image,
-  FlatList
+  FlatList,
+  ScrollView
 } from 'react-native';
 
 const {width,height} = Dimensions.get('window');
@@ -44,15 +45,15 @@ export default class Message extends Component {
     let formatted = (date.getFullYear()) + "/" + (date.getMonth()+1) + "/" + date.getDate();
     console.log('timeconv: '+date);
     return(
-      <View style={{width:0.9*width,height:0.12*height,marginTop:10,backgroundColor:'white',padding:5}}>
-        <View style={{width:0.9*width,height:0.07*height,marginTop:0,}} >
+      <View style={{width:0.9*width,height:0.18*height,marginTop:10,backgroundColor:'white',padding:5}}>
+        <ScrollView style={{width:0.9*width,height:0.12*height,marginTop:0,}} >
           <Text style={{padding:5,fontSize:17,}}>
             {item.content}
           </Text>
 
-        </View>
-        <View style={{width:0.85*width,height:0.03*height,}}>
-          <Text style={{padding:5,fontSize:15,textAlign:'right',color:'808285',marginBottom:5,}}>
+        </ScrollView>
+        <View style={{width:0.85*width,height:0.05*height,}}>
+          <Text style={{padding:5,fontSize:12,textAlign:'right',color:'#808285',marginBottom:5,}}>
             {formatted}
           </Text>
         </View>
@@ -87,7 +88,7 @@ export default class Message extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#f4f4f4'}}>
         <ScrollableTabView
-          style={{height: 40,marginTop:10}}
+          style={{height: 40,marginTop:15}}
           tabBarBackgroundColor={'#f4f4f4'}
           tabBarActiveTextColor={'#2ad3be'}
           tabBarUnderlineStyle={{backgroundColor: '#2ad3be', height: 2, width: 0.4*width, marginLeft: 25}}
@@ -110,7 +111,9 @@ export default class Message extends Component {
         <TouchableWithoutFeedback onPress={()=>{this.props.navigator.dismissModal()}}>
           <View style={{position:'absolute',
                         left:10,
-                        top:25,
+                        top:28.5,
+                          height:25,
+                          width:35,
                         }}>
             <Image
               source={require('./Images/icon_back.png')}
