@@ -17,6 +17,7 @@ import { GetVersion, GetUserInfo, cme_getRegion,cme_saveMessageData } from '../M
 import PopupView from '../../CmEat/Components/Popup/PopupView'
 import StartUpAnimation from './startupAnimation';
 import JPushModule from 'jpush-react-native';
+import CodePush from "react-native-code-push";
 // import Database from '../Modules/Database';
 import CodePush from 'react-native-code-push';
 const { height, width } = Dimensions.get('window');
