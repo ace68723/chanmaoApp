@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     fontWeight: '900',
     color: 'white',
-    fontSize: 15,
+    fontSize: 12,
   }
 });
