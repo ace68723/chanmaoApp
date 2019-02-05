@@ -66,6 +66,7 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentWillMount() {
+    CodePush.notifyAppReady();
     this._versionCheck();
   }
   // componentDidMount() {
