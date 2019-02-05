@@ -109,13 +109,13 @@ export default class HomeTab extends Component {
 		return (
 			<TouchableOpacity
 				activeOpacity={1}
-				style={{ flex: 1 }}
+				style={{ flex: 1, }}
 				onPress={this._handleOnPressRestaurantAd.bind(null, item)}
 			>
 				<View style={{
 						flex: 1,
 		        marginBottom: 0, // Prevent a random Android rendering issue
-						width: width - 32 * 2,
+						width: width - 32 * 2.7,
 						height: 160,
 						paddingBottom: 18,
 						shadowOpacity: 0.55,
@@ -148,7 +148,7 @@ export default class HomeTab extends Component {
 						renderItem={this._renderCarouselItem}
 						hasParallaxImages={true}
 						sliderWidth={width}
-						itemWidth={width - 32 * 2}
+						itemWidth={width - 32 * 2.7}
 						firstItem={0}
 						inactiveSlideScale={0.9}
 						inactiveSlideOpacity={0.6}
