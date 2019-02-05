@@ -265,8 +265,8 @@ export default class MyComponent extends Component {
       const postal = this.state.postalCode;
       const reqData = {cardNumber,expMonth,expYear,cvv,name,postal};
       const result = await CheckoutModule.addCard(reqData);
-      const last4 = await CheckoutModule.getOrderBefore();
-      this.props.changeLast4(last4.last4);
+      // const last4 = await CheckoutModule.getOrderBefore();
+      // this.props.changeLast4(last4.last4);
       this.props.navigator.pop({
        navigatorStyle: {navBarHidden:true},
       });

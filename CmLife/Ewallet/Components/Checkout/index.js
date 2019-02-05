@@ -88,7 +88,8 @@ export default class MyComponent extends Component {
     this._checkCardInfo();
   }
   async _checkCardInfo() {
-    const last4 = await CheckoutModule.getOrderBefore();
+    // const last4 = await CheckoutModule.getOrderBefore();
+    const last4 = '1111';
     if(last4.last4.length === 0){
       this.props.navigator.push({
         screen: "EwalletAddCard",
