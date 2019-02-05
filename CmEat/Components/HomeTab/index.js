@@ -115,8 +115,6 @@ export default class HomeTab extends Component {
 				<View style={{
 						flex: 1,
 		        marginBottom: 0, // Prevent a random Android rendering issue
-						width: width - 32 * 2.7,
-						height: 160,
 						paddingBottom: 18,
 						shadowOpacity: 0.55,
 						shadowRadius: 4,
@@ -127,6 +125,7 @@ export default class HomeTab extends Component {
 	            source={{ uri: item.image_url }}
 	            style={{
 								...StyleSheet.absoluteFillObject,
+								margin: 4,
 								resizeMode: 'center',
 								borderRadius: 8,
 							}}
