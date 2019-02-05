@@ -73,7 +73,7 @@ export default class CmAdvertisement extends Component {
               let image = res.result[0];
               for (let i of res.result){
                 let ratio = i.image_width / i.image_height
-                if (ratio == (adWidth / adHeight)){
+                if (Math.round(ratio, 2) == Math.round(adWidth / adHeight, 2)){
                   image = i;
                   break;
                 }
