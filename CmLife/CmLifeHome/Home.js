@@ -23,11 +23,17 @@ export default class Home extends BaseComponent {
         key: "washing",
         backgroundImage: require("./Image/washing-background.png"),
       },
+      // {
+      //   icon: require("./Image/ewallet-icon.png"),
+      //   title: "礼卡商城",
+      //   key: 'ewallet',
+      //   backgroundImage: require("./Image/ewallet-background.png"),
+      // },
       {
-        icon: require("./Image/ewallet-icon.png"),
-        title: "礼卡商城",
-        key: 'ewallet',
-        backgroundImage: require("./Image/ewallet-background.png"),
+        icon: null,
+        title: "",
+        key: "3",
+        backgroundImage: require("./Image/coming_soon.png"),
       },
       {
         icon: null,
