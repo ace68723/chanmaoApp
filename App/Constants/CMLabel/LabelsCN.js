@@ -142,7 +142,7 @@ module.exports={
     DELIVERED:'已送到, 满意吗？',
     NEW_USER_CONFIRMING:'新用户订单确认中',
     CS_WILL_CONTACT:'客服稍后联系您改运费',
-    DISH_OUT_OF_ORDER:'糟糕, 有的菜没了',
+    DISH_OUT_OF_ORDER:'有菜品售完，已取消',
     ORDER_CANCELED:'订单已取消',
     CONTACT_SUPPORT:'联系客服',
 
