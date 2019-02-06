@@ -407,6 +407,7 @@ class HistoryTab extends Component {
 										onRefresh={this._doAutoRefresh}
 										goToComments={this._goToComments}
 										goToRestaurant={this._goToRestaurant}
+										handleContactCustomerService={this._handleContactCustomerService}
 										reorder={this._reorder}
 										tabLabel={Label.getCMLabel('YET_COMMENT')}/>
 	 			     </ScrollableTabView>
