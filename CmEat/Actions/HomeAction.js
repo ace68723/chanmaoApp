@@ -30,7 +30,7 @@ export default {
           const token = await AuthModule.getToken();
           const homeData = await HomeModule.getHomeData(token);
           const homeAlert = await HomeModule.getHomeAlert(token);
-          const homeAdData = await HomeModule.getHomeAdData(token);
+
 
           const selectedAddress = cme_getSelectedAddress();
           let userloc;
@@ -41,6 +41,7 @@ export default {
           }
           const reqData = {token,userloc}
           // const areaList = await HomeModule.getAreaList(reqData);
+          const homeAdData = await HomeModule.getHomeAdData(reqData);
           const restaurantListInfo = await HomeModule.getRestaurantList(reqData);
           const restaurantList = restaurantListInfo.restaurantList;
           const zones = restaurantListInfo.zones;
