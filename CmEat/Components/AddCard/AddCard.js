@@ -600,6 +600,26 @@ export default class MyComponent extends Component {
       </View>
     )
   }
+  _rednerBtn() {
+    const submitButtonColor = this.state.infoFilled ? "#ea7b21": "#d9d9d9";
+    if(this.state.showLoading){
+      return(
+        <View style={[styles.submitButton,
+              {backgroundColor:submitButtonColor}]}>
+              <Image source={require('./Img/Loading_dots_white.gif')}  style={{width:45,height:15}}/>
+        </View>
+      )
+    }else{
+      return(
+        <TouchableWithoutFeedback onPress={this._handleSubmitPress}>
+          <View style={[styles.submitButton,
+                {backgroundColor:submitButtonColor}]}>
+                <Text style={{color:'white', fontSize:27}} allowFontScaling={false}>SAVE</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      )
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -611,11 +631,15 @@ export default class MyComponent extends Component {
             {this._rednerCardDetails()}
             {this._renderNamePostal()}
           </View>
+
           {this._renderKeyboard({
-                        isNumOpen:this.state.isNumOpen,
-                        isDateOpen:this.state.isDateOpen,
-                        isCVVOpen:this.state.isCVVOpen,
-                      })}
+            isNumOpen:this.state.isNumOpen,
+            isDateOpen:this.state.isDateOpen,
+            isCVVOpen:this.state.isCVVOpen, })}
+
+          <View style={{flex: 1, position: 'absolute', left: 0, right: 0, bottom: 0}}>
+            {this._rednerBtn()}
+          </View>
       </View>
     );
   }
@@ -656,4 +680,9 @@ const styles = StyleSheet.create({
     marginLeft:20,
     marginRight:20,
   },
+  submitButton: {
+    height:60,
+    alignItems:'center',
+    justifyContent:'center',
+  }
 });
