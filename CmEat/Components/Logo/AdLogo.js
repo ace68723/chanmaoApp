@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 export default (props) => {
         return(
           <View style={styles.logoBox}>
-              <Image source={require('./Image/logo.png')} style={{width:props.width,height:props.height}} />
+              <Image source={require('./Image/login_logo.png')} style={{width:props.width,height:props.height}} />
          </View>
         )
 

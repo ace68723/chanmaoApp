@@ -88,7 +88,7 @@ const HomeApi = {
               .catch((error) => {throw error})
     },
     getHomeAlert(reqData){
-        const url = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/cmapp/v1/alert_home_alert';
+        const url = 'https://www.cmapi.ca/cm_backend/index.php/api/cmapp/v1/alert_home_alert';
         let options = {
             method: 'GET',
             mode:'cors',

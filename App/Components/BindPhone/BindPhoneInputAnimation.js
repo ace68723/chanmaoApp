@@ -273,7 +273,7 @@ export default class BindPhoneInputAnimation extends Component {
 
 							<Animated.View style={{opacity:this.state.logoOpacity,marginTop:height*0.1042}}>
 							<View style={styles.logoBox}>
-									<Image source={require('./Image/logo.png')} style={{width:240,height:80}} />
+									<Image source={require('./Image/login_logo.png')} style={{width:240,height:80}} />
 						 </View>
 							</Animated.View>
 
