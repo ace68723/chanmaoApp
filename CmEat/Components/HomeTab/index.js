@@ -109,7 +109,7 @@ export default class HomeTab extends Component {
 		return (
 			<TouchableOpacity
 				activeOpacity={1}
-				style={{ flex: 1, }}
+				style={{ flex: 1, width: width - width * 0.15, height: height * 0.28}}
 				onPress={this._handleOnPressRestaurantAd.bind(null, item)}
 			>
 				<View style={{
@@ -120,15 +120,15 @@ export default class HomeTab extends Component {
 						shadowColor: 'grey',
 						shadowOffset: { height: 2, width: 2 },
 					}}>
-						<Image
-	            source={{ uri: item.image_url }}
-	            style={{
-								...StyleSheet.absoluteFillObject,
-								margin: 5,
-								resizeMode: 'center',
-								borderRadius: 8,
-							}}
-	          />
+
+					<Image
+					  source={{ uri: item.image_url }}
+					  style={{
+							flex: 1,
+							margin: 5,
+							borderRadius: 8,
+						}}
+					/>
 				</View>
 			</TouchableOpacity>
 
@@ -139,22 +139,19 @@ export default class HomeTab extends Component {
 		const items = this.props.bannerList;
 		return(
 			<View>
-				<View style={{height: 180, backgroundColor: '#F2F2F2'}}>
+				<View style={{height: height * 0.28, backgroundColor: '#F2F2F2'}}>
 					<Carousel
 						ref={c => this._sliderRef = c}
 						data={items}
 						renderItem={this._renderCarouselItem}
 						hasParallaxImages={true}
 						sliderWidth={width}
-						itemWidth={width - 32 * 2.7}
+						itemWidth={width - width * 0.15}
 						firstItem={0}
-						inactiveSlideScale={0.9}
-						inactiveSlideOpacity={0.6}
-						containerCustomStyle={{
-			        overflow: 'visible',
-		    		}}
+						inactiveSlideScale={0.95}
+						inactiveSlideOpacity={0.5}
 						contentContainerCustomStyle={{
-		        	paddingVertical: 10
+		        	paddingVertical: 2,
 		    		}}
 						loop={true}
 						loopClonesPerSide={2}
@@ -166,7 +163,7 @@ export default class HomeTab extends Component {
 					<Pagination
 		        dotsLength={items.length}
 		        activeDotIndex={this.state.slider1ActiveSlide ? this.state.slider1ActiveSlide : 0}
-		        containerStyle={{paddingVertical: 6, marginBottom: 8}}
+		        containerStyle={{paddingVertical: 3, marginBottom: 4}}
 		        dotColor={'#D46A36'}
 		        dotStyle={{ width: 6, height: 6, borderRadius: 6, marginHorizontal: -6 }}
 		        inactiveDotColor={"#8E8E8E"}
@@ -176,7 +173,8 @@ export default class HomeTab extends Component {
 		        tappableDots={!!this._sliderRef}
 	      	/>
 				</View>
-				<View style={{paddingTop: 14, height: 180, backgroundColor: 'white'}}>
+
+				<View style={{paddingTop: 10, height: 180, backgroundColor: 'white'}}>
 					<DiscountView discountData={this.props.discountData} onPressedCell={this._handleOnPressRestaurantAd}/>
 				</View>
 

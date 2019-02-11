@@ -49,9 +49,9 @@ const  HomeMoule = {
         }
   },
 
-  async getHomeAdData(token){
+  async getHomeAdData(reqData){
         const region = cme_getRegion();
-        const homeAdData = await HomeApi.getHomeAdData({token,region: parseInt(region)});
+        const homeAdData = await HomeApi.getHomeAdData({...reqData, region: parseInt(region)});
 
         if(homeAdData.ev_error === 0){
             return homeAdData.result

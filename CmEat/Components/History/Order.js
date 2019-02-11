@@ -140,17 +140,23 @@ export default class pastOrderEN extends Component {
     if (this.props.page == 0) {
       if(this.state.orderInfo.order_status == '5' && !this.state.orderInfo.payment_status){
         return (
-          <View style={[styles.ButtonStyle,{borderRightWidth:0.5,padding:6,}]}>
-              <TouchableOpacity style={{flex:1,
-                                        justifyContent:'center',
-                                        alignItems:'center'}}
-                                 onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
-                <Text style={{fontSize:13,color:'#ef473a',fontWeight:'bold',fontFamily:'NotoSans-Regular',}}
+            <TouchableOpacity style={{flex:1,
+                                      flexDirection:'row',
+                                      justifyContent:'center',
+                                      alignItems:'center',
+                                      padding:10,
+                                      backgroundColor: '#ff8b00',
+                                      borderColor: '#ff8b00',
+                                      borderTopWidth: 1,
+                                      borderBottomWidth:1}}
+                               onPress={this.props.reorder.bind(null,this.state.orderInfo.rr_rid)}>
+                <Text style={{fontSize:15,
+                              color:'white',
+                              fontFamily:'NotoSans-Regular',}}
                       allowFontScaling={false}>
                       {Label.getCMLabel('REORDER')}
                 </Text>
               </TouchableOpacity>
-          </View>
         )
       }else{
         if (this.state.orderInfo.payment_channel > 0 && !this.state.orderInfo.payment_status && (this.state.orderInfo.order_status == 0 || this.state.orderInfo.order_status == 55)) {

@@ -61,7 +61,9 @@ class OrdersNotReviewed extends Component {
 										 scrollRef={this._scrollView}
 										 getCurrentPosition={this._getCurrentPosition}
 										 page={1}
-										 reorder={this.props.reorder}/>
+										 reorder={this.props.reorder}
+										 handleContactCustomerService={() => this.props.handleContactCustomerService(order)}
+										 />
 						)
 					}
 				}

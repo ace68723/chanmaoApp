@@ -49,13 +49,12 @@ class RestaurantCard extends Component {
 			        <View style={{flex:2, flexDirection:'row', marginTop: 3}}>
 			          <Image
 			            source={require('./Image/icon_coupon_small.png')}
-			            style={{height:14,width:23,alignSelf: 'center'}}
+			            style={{height:14,width:23, marginTop: 3}}
 			          />
 			          <Text style={{color:'#40a2e7',
 			                        marginLeft:7,
 			                        marginRight: 20,
 			                        fontWeight:'200',
-			                        alignSelf: 'center',
 			                        fontFamily:'NotoSans-Regular'}}
 			                allowFontScaling={false}>
 			              {this.state.restaurant.discount_message}

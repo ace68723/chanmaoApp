@@ -42,6 +42,11 @@ const HomeApi = {
       }
       options.headers.Authortoken = reqData.token;
       options.headers.region = reqData.region;
+      if(reqData.userloc){
+          options.headers.userloc = reqData.userloc
+      }else{
+          options.headers.userloc = "000000,000000"
+      }
       return fetch(url,options)
               .then((res) => res.json())
               .catch((error) => {throw error})
