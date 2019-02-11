@@ -304,7 +304,7 @@ export default class BindPhoneInputAnimation extends Component {
 	             </View>
 							 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 								 <TextInput
-												style={{fontSize: 18,
+												style={{fontSize: 15,
 												    borderRadius: 8,
 												    color: '#ffffff',
 												    height:50,
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
     marginTop:-3,
   },
 	input:{
-    fontSize: 18,
+    fontSize: 15,
     borderRadius: 8,
     color: '#ffffff',
     height:50,

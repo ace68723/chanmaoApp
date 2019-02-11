@@ -52,7 +52,7 @@ export default class DiscountView extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1,marginTop:2,marginBottom:5}}>
           <FlatList
             horizontal={true}
             data={discountTypes}

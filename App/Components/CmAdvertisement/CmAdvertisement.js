@@ -147,6 +147,21 @@ export default class CmAdvertisement extends Component {
           },
         });
     }
+    // else if(ad.navi_type == 4) {
+    //     if (ad.navi_param.target_page == 'cmwash') {
+    //         this.props.navigator.resetTo({
+    //             screen: 'cmHome',
+    //             animated: true,
+    //             animationType: 'fade',
+    //             navigatorStyle: {
+    //                 navBarHidden: true
+    //             },
+    //             passProps: {
+    //                 goToCmLife: 'cmwash'
+    //             }
+    //         });
+    //     }
+    // }
     else if(ad.navi_type == 7){
       if(ad.navi_param){
         const {url, title, desc} = ad.navi_param;
@@ -183,6 +198,7 @@ export default class CmAdvertisement extends Component {
                       .then(()=>this._closeAd())
                       .catch((error) => {
                         console.log(error);
+                        this._closeAd()
                       })
                       .finally(()=>this.setState({
                         isLoading:false
@@ -272,6 +288,9 @@ export default class CmAdvertisement extends Component {
     return (
       <View style={styles.mainContainer}>
           {this._renderAdvertisement()}
+          {this._renderAddress()}
+          {this._renderAdLogo()}
+          {this._renderLoading()}
           <TouchableOpacity style={{position:'absolute',
                                     top:30,
                                     right:20,
@@ -284,9 +303,7 @@ export default class CmAdvertisement extends Component {
               {Label.getCMLabel('SKIP')}
             </Text>
           </TouchableOpacity>
-          {this._renderAddress()}
-          {this._renderAdLogo()}
-          {this._renderLoading()}
+
       </View>
     );
   }

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 11,
     color: 'grey',
-    fontWeight: '900',
+    fontWeight: '700',
     width: itemWidth * 0.9,
   },
   resName: {
