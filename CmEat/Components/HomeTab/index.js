@@ -109,7 +109,7 @@ export default class HomeTab extends Component {
 		return (
 			<TouchableOpacity
 				activeOpacity={1}
-				style={{ flex: 1, width: width - width * 0.15, height: height * 0.28}}
+				style={{ flex: 1, width: width - width * 0.15, height: width / 2.3}}
 				onPress={this._handleOnPressRestaurantAd.bind(null, item)}
 			>
 				<View style={{
@@ -139,7 +139,7 @@ export default class HomeTab extends Component {
 		const items = this.props.bannerList;
 		return(
 			<View>
-				<View style={{height: height * 0.25, backgroundColor: '#F2F2F2'}}>
+				<View style={{height: width / 2.3, backgroundColor: '#F2F2F2'}}>
 					<Carousel
 						ref={c => this._sliderRef = c}
 						data={items}
@@ -174,7 +174,7 @@ export default class HomeTab extends Component {
 	      	/>
 				</View>
 
-				<View style={{paddingTop: 10, height: 190, backgroundColor: 'white'}}>
+				<View style={{paddingTop: 10, height: 180, backgroundColor: 'white'}}>
 					<DiscountView discountData={this.props.discountData} onPressedCell={this._handleOnPressRestaurantAd}/>
 				</View>
 
