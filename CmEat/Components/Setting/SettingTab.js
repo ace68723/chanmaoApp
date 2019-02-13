@@ -108,6 +108,7 @@ class SettingTab extends Component {
 
         <SettingCate title={Label.getCMLabel('SWEETBOX')} icon={require('./Image/icon_setting_icon_setting_sweetful-box.png')} onPress={this._goToSbox}/>
         <SettingCate title={Label.getCMLabel('LOG_OUT')} icon={require('./Image/icon_setting_icon_setting_log-out.png')} onPress={this._cmeLogOut}/>
+        <SettingCate title={Label.getCMLabel('LANGUAGE_SETTING')} icon={require('./Image/icon_language.png')} onPress={this._goToLanguageSettings}/>
       </ScrollView>
     </View>)
   }

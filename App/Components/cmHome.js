@@ -18,7 +18,7 @@ import PopupView from '../../CmEat/Components/Popup/PopupView'
 import StartUpAnimation from './startupAnimation';
 import JPushModule from 'jpush-react-native';
 // import Database from '../Modules/Database';
-import CodePush from 'react-native-code-push';
+// import CodePush from 'react-native-code-push';
 const { height, width } = Dimensions.get('window');
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
@@ -66,7 +66,7 @@ export default class Home extends Component {
   }
   _openStarted = false
   componentWillMount() {
-    CodePush.notifyAppReady();
+    // CodePush.notifyAppReady();
     this._versionCheck();
   }
   // componentDidMount() {
@@ -103,6 +103,7 @@ export default class Home extends Component {
       });
       }
       JPushModule.initPush()
+
 
       // console.log(JPushModule);
       JPushModule.getRegistrationID(registrationId => {console.log('resisterID:'+registrationId)})

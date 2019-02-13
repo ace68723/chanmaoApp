@@ -7,8 +7,10 @@ import {
   Dimensions,
   TouchableOpacity,
   Animated,
-  Platform
+  Platform,
+  ImageBackground,
 } from 'react-native';
+import JPushModule from 'jpush-react-native';
 import {cme_updateLanguage,
         cme_getLanguage,
         cme_getSelectedAddress,
@@ -54,7 +56,7 @@ let regions = [
     },
     {
         rgid: 2,
-        title: 'Montreal',
+        title: 'Hamilton',
         value: '2'
     },
 ]
@@ -70,6 +72,7 @@ export default class SelectRegionAndLanguage extends Component {
       this.chooseRegion = this.chooseRegion.bind(this);
       this._confirm = this._confirm.bind(this);
       this._goBack = this._goBack.bind(this);
+      this.renderImageBackground=this.renderImageBackground.bind(this);
     }
     componentDidMount() {
       // let result = cme_getRegion();
@@ -92,34 +95,67 @@ export default class SelectRegionAndLanguage extends Component {
 
     }
     _confirm() {
+     //  JPushModule.cleanTags(map => {
+     //   if (map.errorCode === 0) {
+     //     console.log('clean tags succeed')
+     //   } else {
+     //     console.log('clean tags failed, error code: ' + map.errorCode)
+     //   }
+     // })
       cme_updateLanguage(this.state.chosenLanguage);
       cme_updateRegion(this.state.chosenRegion);
-      if (this.props.firstSelection) {
-        this.props.navigator.resetTo({
-    			screen: 'cmHome',
-    			animated: true,
-    			animationType: 'fade',
-    			navigatorStyle: {navBarHidden: true},
-    		});
-      } else {
-        let data;
-        if (this.props.goToSbox) {
-          data = {goToSweetfulBox: true};
-        }
-        else if (this.props.goToCmWash){
-          data={goToCmWash:true};
-        }
-        else {
-          data = {goToCmEat: true};
-        }
-        this.props.navigator.resetTo({
-    			screen: 'cmHome',
-    			animated: true,
-    			animationType: 'fade',
-    			navigatorStyle: {navBarHidden: true},
-    			passProps:data
-    		});
+      if (this.state.chosenRegion=='1')
+      {
+        let tagselected=['toronto'];
+        JPushModule.setTags(tagselected, map => {
+         if (map.errorCode === 0) {
+           console.log('Add tags succeed, tags: ' + map.tags)
+                 this.props.navigator.pop();
+         } else {
+           console.log('Add tags failed, error code: ' + map.errorCode)
+         }
+       })
+
       }
+      else if (this.state.chosenRegion=='2')
+      {
+
+          let tagselected=['hamilton'];
+        JPushModule.setTags(tagselected, map => {
+         if (map.errorCode === 0) {
+           console.log('Add tags succeed, tags: ' + map.tags)
+                 this.props.navigator.pop();
+         } else {
+           console.log('Add tags failed, error code: ' + map.errorCode)
+         }
+       })
+      }
+      // if (this.props.firstSelection) {
+      //   this.props.navigator.resetTo({
+    	// 		screen: 'cmHome',
+    	// 		animated: true,
+    	// 		animationType: 'fade',
+    	// 		navigatorStyle: {navBarHidden: true},
+    	// 	});
+      // } else {
+      //   let data;
+      //   if (this.props.goToSbox) {
+      //     data = {goToSweetfulBox: true};
+      //   }
+      //   else if (this.props.goToCmWash){
+      //     data={goToCmWash:true};
+      //   }
+      //   else {
+      //     data = {goToCmEat: true};
+      //   }
+      //   this.props.navigator.resetTo({
+    	// 		screen: 'cmHome',
+    	// 		animated: true,
+    	// 		animationType: 'fade',
+    	// 		navigatorStyle: {navBarHidden: true},
+    	// 		passProps:data
+    	// 	});
+      // }
     }
     _goBack() {
       // this.props.navigator.dismissModal({
@@ -130,7 +166,7 @@ export default class SelectRegionAndLanguage extends Component {
     renderBody(){
         return(
             <View style={{
-                flex:0.9,
+                flex:1,
                 alignItems:'center'}}>
                 {this.renderImage()}
                 {this.renderRegionAndLanguage()}
@@ -185,31 +221,63 @@ export default class SelectRegionAndLanguage extends Component {
             );
         })
     }
+    renderImageBackground(){
+      console.log(this.state.chosenRegion);
+      if (this.state.chosenRegion==regions[0].value) {
+        return (
+          <ImageBackground style={{flex:0.9,backgroundColor:'#e6e6e6',}}
+            source={require('./image/Toronto.png')} >
+            <View style={{flex:0.7, justifyContent:'center', alignItems:'center', paddingVertical:20,}}>
+
+
+            </View>
+            <View style={{flex:0.1,alignItems:'center'}}>
+                <TouchableOpacity onPress={this._confirm}>
+                    <Image style ={{width:220, height:220*0.198}} source={require('./image/languages_confirm.png')} />
+                </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        )
+      }
+      else {
+        return (
+          <ImageBackground style={{flex:0.9,backgroundColor:'#e6e6e6',}}
+            source={require('./image/Hamilton.png')} >
+            <View style={{flex:0.7, justifyContent:'center', alignItems:'center', paddingVertical:20,}}>
+
+
+            </View>
+            <View style={{flex:0.1,alignItems:'center'}}>
+                <TouchableOpacity onPress={this._confirm}>
+                    <Image style ={{width:220, height:220*0.198}} source={require('./image/languages_confirm.png')} />
+                </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        )
+      }
+    }
     renderRegionAndLanguage(){
         return(
-            <View style={{flex:0.6,  width: width}}>
-                <View style={{flex:0.18, flexDirection:'row'}}>
+            <View style={{flex:0.8,  width: width,}}>
+                <View style={{flex:0.1, flexDirection:'row',}}>
                    {this.renderRegionButton()}
+                   <Animated.View style={{
+                       position:'absolute',
+                       height:0,
+                       width:width/2,
+                       borderTopWidth:4,
+                       borderTopColor:'#ea7b21',
+                       bottom:0,
+                       left: this.state.regionIndicatorLeft,
+                       backgroundColor:'blue',
+                   }}>
+                   </Animated.View>
                 </View>
-                <View style={{flex:0.7, justifyContent:'center', alignItems:'center', paddingVertical:20}}>
-                    <Animated.View style={{
-                        position:'absolute',
-                        height:50,
-                        width:width/2,
-                        borderTopWidth:4,
-                        borderTopColor:'#ea7b21',
-                        top:0,
-                        left: this.state.regionIndicatorLeft
-                    }}>
-                    </Animated.View>
-                    {this.renderLanguageButton()}
+
+                {this.renderImageBackground()}
+
                 </View>
-                <View style={{flex:0.1,alignItems:'center'}}>
-                    <TouchableOpacity onPress={this._confirm}>
-                        <Image style ={{width:220, height:220*0.198}} source={require('./image/languages_confirm.png')} />
-                    </TouchableOpacity>
-                </View>
-            </View>
+
         )
     }
 
