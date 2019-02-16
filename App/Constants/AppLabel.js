@@ -1,17 +1,35 @@
-import { cme_getLanguage } from '../../App/Modules/Database';
+import { cme_getLanguage, cme_getRegion } from '../../App/Modules/Database';
 const Label = {
     getCMLabel(key) {
         // console.log(cme_getLanguage());
         const language = cme_getLanguage();
+        const region = cme_getRegion();
+        let labelPackagel
         if (language == 'chinese_simple') {
-          let labelPackage = require('./CMLabel/LabelsCN');
+          switch(region){
+            case '1':
+              labelPackage = require('./CMLabel/LabelsCN');
+            case '3':
+              labelPackage = require('./CMLabel/hamilton/LabelsCNHM');
+          }
           return labelPackage[key];
         } else if (language == 'english') {
-          let labelPackage = require('./CMLabel/LabelsEN');
+          
+          switch(region){
+            case '1':
+              labelPackage = require('./CMLabel/LabelsEN');
+            case '3':
+              labelPackage = require('./CMLabel/hamilton/LabelsENHM');
+          }
           return labelPackage[key];
         }
         else if (language == 'french') {
-          let labelPackage = require('./CMLabel/LabelsFR');
+          switch(region){
+            case '1':
+              labelPackage = require('./CMLabel/LabelsFR');
+            case '3':
+              labelPackage = require('./CMLabel/hamilton/LabelsFRHM');
+          }
           return labelPackage[key];
         }
     },

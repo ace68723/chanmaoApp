@@ -57,7 +57,7 @@ let regions = [
     {
         rgid: 2,
         title: 'Hamilton',
-        value: '2'
+        value: '3'
     },
 ]
 export default class SelectRegionAndLanguage extends Component {
@@ -66,7 +66,7 @@ export default class SelectRegionAndLanguage extends Component {
       this.state = {
         chosenLanguage: cme_getLanguage().length > 0 ? cme_getLanguage() : 'chinese_simple',
         chosenRegion: cme_getRegion().length > 0 ? cme_getRegion() : regions[0].value,
-        regionIndicatorLeft: cme_getRegion() === '2' ? new Animated.Value(width/2) : new Animated.Value(0)
+        regionIndicatorLeft: cme_getRegion() === '3' ? new Animated.Value(width/2) : new Animated.Value(0)
       }
 
       this.chooseRegion = this.chooseRegion.bind(this);
@@ -117,7 +117,7 @@ export default class SelectRegionAndLanguage extends Component {
        })
 
       }
-      else if (this.state.chosenRegion=='2')
+      else if (this.state.chosenRegion=='3')
       {
 
           let tagselected=['hamilton'];
@@ -130,32 +130,32 @@ export default class SelectRegionAndLanguage extends Component {
          }
        })
       }
-      // if (this.props.firstSelection) {
-      //   this.props.navigator.resetTo({
-    	// 		screen: 'cmHome',
-    	// 		animated: true,
-    	// 		animationType: 'fade',
-    	// 		navigatorStyle: {navBarHidden: true},
-    	// 	});
-      // } else {
-      //   let data;
-      //   if (this.props.goToSbox) {
-      //     data = {goToSweetfulBox: true};
-      //   }
-      //   else if (this.props.goToCmWash){
-      //     data={goToCmWash:true};
-      //   }
-      //   else {
-      //     data = {goToCmEat: true};
-      //   }
-      //   this.props.navigator.resetTo({
-    	// 		screen: 'cmHome',
-    	// 		animated: true,
-    	// 		animationType: 'fade',
-    	// 		navigatorStyle: {navBarHidden: true},
-    	// 		passProps:data
-    	// 	});
-      // }
+      if (this.props.firstSelection) {
+        this.props.navigator.resetTo({
+    			screen: 'cmHome',
+    			animated: true,
+    			animationType: 'fade',
+    			navigatorStyle: {navBarHidden: true},
+    		});
+      } else {
+        let data;
+        if (this.props.goToSbox) {
+          data = {goToSweetfulBox: true};
+        }
+        else if (this.props.goToCmWash){
+          data={goToCmWash:true};
+        }
+        // else {
+        //   data = {goToCmEat: true}; //自动跳转有问题
+        // }
+        this.props.navigator.resetTo({
+    			screen: 'cmHome',
+    			animated: true,
+    			animationType: 'fade',
+    			navigatorStyle: {navBarHidden: true},
+    			passProps:data
+    		});
+      }
     }
     _goBack() {
       // this.props.navigator.dismissModal({
@@ -222,39 +222,25 @@ export default class SelectRegionAndLanguage extends Component {
         })
     }
     renderImageBackground(){
-      console.log(this.state.chosenRegion);
+        let imgSource;
       if (this.state.chosenRegion==regions[0].value) {
-        return (
-          <ImageBackground style={{flex:0.9,backgroundColor:'#e6e6e6',}}
-            source={require('./image/Toronto.png')} >
-            <View style={{flex:0.7, justifyContent:'center', alignItems:'center', paddingVertical:20,}}>
-
-
-            </View>
-            <View style={{flex:0.1,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._confirm}>
-                    <Image style ={{width:220, height:220*0.198}} source={require('./image/languages_confirm.png')} />
-                </TouchableOpacity>
-            </View>
-          </ImageBackground>
-        )
+        imgSource = require('./image/Toronto.png')
       }
       else {
-        return (
-          <ImageBackground style={{flex:0.9,backgroundColor:'#e6e6e6',}}
-            source={require('./image/Hamilton.png')} >
-            <View style={{flex:0.7, justifyContent:'center', alignItems:'center', paddingVertical:20,}}>
-
-
-            </View>
-            <View style={{flex:0.1,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._confirm}>
-                    <Image style ={{width:220, height:220*0.198}} source={require('./image/languages_confirm.png')} />
-                </TouchableOpacity>
-            </View>
-          </ImageBackground>
-        )
+        imgSource = require('./image/Hamilton.png')
       }
+      return (
+        <ImageBackground style={{width, height:parseFloat(width*0.77)}}
+          source={imgSource} >
+          <View style={{flex:0.7, justifyContent:'center', alignItems:'center', paddingVertical:20,}}>
+          </View>
+          <View style={{flex:0.1,alignItems:'center'}}>
+              <TouchableOpacity onPress={this._confirm}>
+                  <Image style ={{width:220, height:220*0.198}} source={require('./image/languages_confirm.png')} />
+              </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      )
     }
     renderRegionAndLanguage(){
         return(
@@ -273,10 +259,10 @@ export default class SelectRegionAndLanguage extends Component {
                    }}>
                    </Animated.View>
                 </View>
-
-                {this.renderImageBackground()}
-
-                </View>
+                    <View style={{flex:0.9,backgroundColor:'#e6e6e6',justifyContent:'flex-end'}}>
+                    {this.renderImageBackground()}
+                    </View>
+            </View>
 
         )
     }

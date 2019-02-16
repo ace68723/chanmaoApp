@@ -84,7 +84,7 @@ class Menu extends Component {
 
     }
     _openMenuAnimation(){
-      	InteractionManager.runAfterInteractions(() => {
+      	// InteractionManager.runAfterInteractions(() => {
 
           Animated.parallel([
             Animated.timing(this.state.restaurantCardTop, {
@@ -109,14 +109,14 @@ class Menu extends Component {
               renderHeader:true,
             })
           }, 400);
-        })
+        // })
     }
 
     _closeMenuAnimation(){
       MenuStore.initMenu();
 			this.state.anim.setValue(0);
       this.setState({renderMenuList:false,renderHeader:false,})
-      InteractionManager.runAfterInteractions(() => {
+      // InteractionManager.runAfterInteractions(() => {
         Animated.parallel([
           Animated.timing(this.state.restaurantCardTop, {
             toValue: this.state.top,
@@ -145,7 +145,7 @@ class Menu extends Component {
             return
           };
         }, 500);
-      })
+      // })
 
 
 

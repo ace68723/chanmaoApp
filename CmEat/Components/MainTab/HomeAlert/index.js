@@ -61,7 +61,7 @@ export default class SboxHomeAlert extends Component {
     }
   }
   render() {
-    if (!this.state.isShow || !this.state.homeAlert){
+    if (!this.state.isShow || !this.state.homeAlert || !this.state.homeAlert.region){
       return (<View></View>)
     }
     return (

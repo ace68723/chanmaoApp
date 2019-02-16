@@ -33,11 +33,11 @@ import RestaurantAction from '../../Actions/RestaurantAction';
 
 import findIndex from 'lodash/findIndex';
 import Label from '../../../App/Constants/AppLabel';
-
+import { cme_getRegion } from '../../../App/Modules/Database'
 
 const {width,height} = Dimensions.get('window');
 const EMPTY_CELL_HEIGHT = Dimensions.get('window').height > 600 ? 200 : 150;
-
+let region;
 class Menu extends Component {
     constructor(props) {
         super(props);
@@ -63,7 +63,7 @@ class Menu extends Component {
 
 				this._renderHeader = this._renderHeader.bind(this);
 
-
+        region = cme_getRegion();
 				this.categoryRefList = [];
     }
     componentDidMount(){
@@ -147,7 +147,7 @@ class Menu extends Component {
     _renderItem ({item,index})  {
       if(item.category_name){
         return  (
-              <View style={{height:100,flex:1,backgroundColor:'#ffffff',overflow:"hidden"}}>
+              <View key={index} style={{height:100,flex:1,backgroundColor:'#ffffff',overflow:"hidden"}}>
                 <View style={{alignSelf:'center',marginTop:30,marginBottom:10}}>
                     <Text style={{fontSize:18,
 																	color:'#3a3b47',
@@ -293,13 +293,14 @@ class Menu extends Component {
           )
         }
       }
+  
       return(
 				<View style={{flex:1}}>
               <FlatList
                   ref={'_menuList'}
                   scrollEventThrottle={1}
                   onScroll={this.props.handleScroll()}
-                  style={this.props.style}
+                  style={{flex:1}}
                   ListHeaderComponent={this._renderHeader}
 									ListFooterComponent={this._renderFooter}
                   data={this.state.menu}

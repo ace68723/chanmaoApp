@@ -24,7 +24,7 @@ import {
     filter,
 } from 'lodash';
 
-import {cme_getLanguage} from '../../../../App/Modules/Database';
+import {cme_getLanguage,cme_getRegion} from '../../../../App/Modules/Database';
 
 import HomeStore from '../../../Stores/HomeStore';
 import HomeAction from '../../../Actions/HomeAction';
@@ -266,6 +266,7 @@ export default class CmRestaurantSearch extends Component {
 		)
 	}
 	_renderSearchInput() {
+		const region = cme_getRegion()
 		return (
 			<View style={{flexDirection: 'row',
 										justifyContent: 'flex-start',
@@ -346,30 +347,6 @@ export default class CmRestaurantSearch extends Component {
 				/>
 			)
 	  }
-  _renderHeader(label) {
-		if(label == "area"){
-			return(
-				<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
-					<Text style={{fontSize:18,
-												fontFamily:"NotoSans-Regular"}}
-								allowFontScaling={false}>
-						{Label.getCMLabel('CITY_AREA')}
-					</Text>
-				</View>
-			)
-		}else{
-			return(
-				<View style={{padding:10,paddingTop:20,paddingBottom:0}}>
-					<Text style={{fontSize:18,
-												fontFamily:"NotoSans-Regular"}}
-								allowFontScaling={false}>
-						{Label.getCMLabel('RES_TAG')}
-					</Text>
-				</View>
-			)
-		}
-
-  }
 
 	_renderResult() {
 		if(this.state.restaurantList.length>0){
@@ -393,6 +370,8 @@ export default class CmRestaurantSearch extends Component {
 				</View>
 			)
 		}else{
+			const region = cme_getRegion()
+			
 			let _searchByTag = () => {
 				if (this.state.tags.length > 0) {
 					return (
@@ -416,18 +395,23 @@ export default class CmRestaurantSearch extends Component {
 					return;
 				}
 			}
-			return(
-				<ScrollView
-					keyboardDismissMode={"on-drag"}
-					keyboardShouldPersistTaps={'always'}
-					style={{flex:1}}
-					ref={'searchPage'}>
-					{_searchByTag()}
-					{_searchByArea()}
-					<View style={{height: 10}}>
-					</View>
-				</ScrollView>
-			)
+			if(region === '1'){
+				return(
+					<ScrollView
+						keyboardDismissMode={"on-drag"}
+						keyboardShouldPersistTaps={'always'}
+						style={{flex:1}}
+						ref={'searchPage'}>
+						{_searchByTag()}
+						{_searchByArea()}
+						<View style={{height: 10}}>
+						</View>
+					</ScrollView>
+				)
+			}else {
+				return;
+			}
+			
 		}
 	}
 	render() {

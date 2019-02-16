@@ -26,51 +26,51 @@ export default class MenuHeader extends Component {
 
   }
 	componentDidMount(){
-			InteractionManager.runAfterInteractions(() => {
-				Animated.parallel([
-					Animated.timing(this.state.margin, {
-						toValue: 20,
-						duration: 300,
-					}),
-					Animated.timing(this.state.intrOpacity, {
-						toValue: 0,
-						duration: 300,
-					}),
-					Animated.timing(this.state.rrOpacity, {
-						toValue: 1,
-						delay:100,
-						duration: 200,
-					}),
-					Animated.timing(this.state.height, {
-						toValue: 200,
-						duration: 300,
-					}),
-				]).start()
-			})
+			// InteractionManager.runAfterInteractions(() => {
+		Animated.parallel([
+			Animated.timing(this.state.margin, {
+				toValue: 20,
+				duration: 300,
+			}),
+			Animated.timing(this.state.intrOpacity, {
+				toValue: 0,
+				duration: 300,
+			}),
+			Animated.timing(this.state.rrOpacity, {
+				toValue: 1,
+				delay:100,
+				duration: 200,
+			}),
+			Animated.timing(this.state.height, {
+				toValue: 200,
+				duration: 300,
+			}),
+		]).start()
+			// })
 	}
 	close(){
-		InteractionManager.runAfterInteractions(() => {
-			Animated.parallel([
-				Animated.timing(this.state.margin, {
-					toValue: 0,
-					delay:100,
-					duration: 200,
-				}),
-				Animated.timing(this.state.intrOpacity, {
-					toValue: 1,
-					duration: 300,
-				}),
-				Animated.timing(this.state.rrOpacity, {
-					toValue: 0,
-					duration: 300,
-				}),
-				Animated.timing(this.state.height, {
-					toValue: 53,
-					delay:100,
-					duration: 200,
-				}),
-			]).start()
-		})
+		// InteractionManager.runAfterInteractions(() => {
+		Animated.parallel([
+			Animated.timing(this.state.margin, {
+				toValue: 0,
+				delay:100,
+				duration: 200,
+			}),
+			Animated.timing(this.state.intrOpacity, {
+				toValue: 1,
+				duration: 300,
+			}),
+			Animated.timing(this.state.rrOpacity, {
+				toValue: 0,
+				duration: 300,
+			}),
+			Animated.timing(this.state.height, {
+				toValue: 53,
+				delay:100,
+				duration: 200,
+			}),
+		]).start()
+		// })
 	}
 	_renderStartMount(){
 		if(Number(this.props.restaurant.start_amount)!=0){

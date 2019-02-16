@@ -115,7 +115,7 @@ export default class StartupAnimation extends Component {
             this.setState({isAnimationRunning:false});
             if(!update){
               const introCount = cme_getHomeIntroCount();
-              if(introCount == 0){
+              if(introCount == 0 && region === '1'){
                   this.props.navigator.showLightBox({
                     screen:'IntroPage',
                     navigatorStyle: {
@@ -298,7 +298,7 @@ export default class StartupAnimation extends Component {
         right = -50* sizeScale;
         jump = this.state.topRightIconTop.interpolate({
           inputRange:[0, 80, 90, 95 , 97.5 ,100],
-          outputRange: [ (height +100) * sizeScale, 275*sizeScale, 285*sizeScale, 275*sizeScale, 280*sizeScale , 275*sizeScale]
+          outputRange: [ (height +100) * sizeScale, 70*sizeScale, 80*sizeScale, 70*sizeScale, 75*sizeScale , 70*sizeScale]
         })
       }
 

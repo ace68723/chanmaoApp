@@ -20,7 +20,7 @@ import RestaurantCard from '../Restaurant/RestaurantCard';
 import HeaderWithBanner from './HeaderWithBanner';
 import Label from '../../../App/Constants/AppLabel';
 import DiscountView from './DiscountView'
-
+import {  cme_getRegion } from '../../../App/Modules/Database';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 // import CheckoutModule from '../../Modules/CheckoutModule/CheckoutModule';
@@ -173,10 +173,13 @@ export default class HomeTab extends Component {
 		        tappableDots={!!this._sliderRef}
 	      	/>
 				</View>
-
-				<View style={{paddingTop: 10, height: 180, backgroundColor: 'white'}}>
-					<DiscountView discountData={this.props.discountData} onPressedCell={this._handleOnPressRestaurantAd}/>
-				</View>
+				{
+					this.props.discountData && this.props.discountData.length > 0 && 
+					<View style={{paddingTop: 10, height: 180, backgroundColor: 'white'}}>
+						<DiscountView discountData={this.props.discountData} onPressedCell={this._handleOnPressRestaurantAd}/>
+					</View>
+				}
+				
 
 				<View style={{justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2F2F2', height: 50, flexDirection: 'row'}}>
 					<Image
@@ -290,12 +293,12 @@ export default class HomeTab extends Component {
 
 
   render(){
-
+		const region = cme_getRegion()
     if (!this.props.restaurantList || this.props.restaurantList.length == 0){
 			return <Image  style={{marginTop: 20, height: height, width: width}} source={require('./Image/no_restaurants_main.png')}/>;
 		}
 		let all = this.props.restaurantList;
-		let keyExtractor = (item, index) => item.rid.toString();
+		let keyExtractor = (item, index) => `${item.rid.toString()}${region}`;
 		return (
 			<View style={{marginTop: marginTop}}>
 					<FlatList

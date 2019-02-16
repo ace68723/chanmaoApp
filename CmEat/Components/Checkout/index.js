@@ -75,26 +75,28 @@ class Confirm extends Component {
 				super(props);
         const cart = MenuStore.getCart();
 				const total = MenuStore.getCartTotals().total;
-        const state={ cart,
-                      total,
-											rid:this.props.restaurant.rid,
-                      startAmount:this.props.restaurant.start_amount,
-                      viewBottom:new Animated.Value(0),
-											anim: new Animated.Value(0), //for background image
-											AnimatedImage:props.restaurant.mob_banner,
-											renderAddress:true,
-											loading: true,
-											showOrderConfirm:false,
-											paymentStatus: Label.getCMLabel('ADD_PAYMENT'),
-											tips:0,
-											// tipsPercentage:0.1,
-											tipsPercentageNumber: 10,
-											selectedCase: {fees: {},
-							                       payment_channel: 0,
-							                       dltype: 1},
-											couponCodeTextInput: "",
-											coupon_code: "",
-											tabAnim: new Animated.Value(12)
+		const state={ 	cart,
+						total,
+												rid:this.props.restaurant.rid,
+						startAmount:this.props.restaurant.start_amount,
+						viewBottom:new Animated.Value(0),
+						anim: new Animated.Value(0), //for background image
+						AnimatedImage:props.restaurant.mob_banner,
+						renderAddress:true,
+						loading: true,
+						showOrderConfirm:false,
+						paymentStatus: Label.getCMLabel('ADD_PAYMENT'),
+						tips:0,
+						tipsStr:'0',
+						// tipsPercentage:0.1,
+						tipsPercentageNumber: 10,
+						selectedCase: {fees: {},
+								payment_channel: 0,
+								dltype: 1},
+						couponCodeTextInput: "",
+						coupon_code: "",
+						tabAnim: new Animated.Value(12),
+						isTipsInputPressed:false
                     }
 				this.state = Object.assign({},state,CheckoutStore.getState())
         this._onChange = this._onChange.bind(this);
@@ -145,10 +147,12 @@ class Confirm extends Component {
     _onChange(){
 				const state = Object.assign({},CheckoutStore.getState());
 				let tips = 0;
+				let tipsStr = '0';
 				if (state.selectedCase.dltype == 1 && state.custom_tips) {
 					tips = parseFloat(state.selectedCase.fees.charge_total * this.state.tipsPercentageNumber / 100).toFixed(2);
+					tipsStr = tips.toString();
 				}
-				this.setState(Object.assign({}, state, {tips}));
+				this.setState(Object.assign({}, state, {tips,tipsStr}));
 				if(!state.selectedAddress || !state.selectedAddress.hasOwnProperty('uaid')){
 					setTimeout( () => {
 						this.props.navigator.showModal({
@@ -1124,7 +1128,7 @@ class Confirm extends Component {
 														color: '#9b9b9b',
 														fontFamily: 'NotoSans-Regular'}}
 										allowFontScaling={false}>
-								{Label.getCMLabel('SERVICE_FEE')} ({Label.getCMLabel('SERVICE_FEE_REMINDER')})
+								{Label.getCMLabel('SERVICE_FEE')} {Label.getCMLabel('SERVICE_FEE_REMINDER')}
 							</Text>
 							<TouchableOpacity activeOpacity={0.4}
 																style={{alignSelf: 'center'}}
@@ -1220,8 +1224,11 @@ class Confirm extends Component {
 				for (let _option of options) {
 					_tipsOptions.push(
 						<TouchableOpacity key={'tips_' + _option}
-															onPress={() => this._changedTips(_option)}>
-							<View style={{width: 50,
+															onPress={() => {
+																this._tipsInput.blur();
+																this._changedTips(_option)
+															}}>
+							<View style={{width: 50,height:30,
 														borderWidth: 1,
 														justifyContent: 'center',
 														borderColor: this.state.tipsPercentageNumber == _option ?'#ff8b00' :'#808080',
@@ -1241,6 +1248,59 @@ class Confirm extends Component {
 						</TouchableOpacity>
 					)
 				}
+				_tipsOptions.push(
+						<View 
+							key={'tips_' + 0}
+							style={{width: 100,
+							height:30,
+							flexDirection:'row',
+							borderWidth: 1,
+							justifyContent: 'center',
+							alignItems:'center',
+							borderColor:  this.state.isTipsInputPressed ? '#ff8b00': '#808080',
+							backgroundColor: 'white',
+							borderRadius: 15,
+							paddingVertical: 2,
+							paddingHorizontal: 8}}>
+							<Text style={{fontSize: 13,
+														color: '#808080',
+														fontFamily: 'NotoSans-Regular'}}>
+								$
+							</Text>						
+							<TextInput style={{fontSize: 15,
+														textAlign: 'center',
+														alignSelf: 'center',
+														color:  '#808080',
+														fontFamily: 'NotoSans-Regular'}}
+										ref={input => this._tipsInput = input}
+										allowFontScaling={false}
+										onChangeText={(tips) => {
+											if(tips !== '') {
+												this.setState({
+												tips:parseFloat(tips),
+												tipsStr:tips,
+												})
+											}
+										}}
+										value={this.state.tipsStr}
+										placeholder='自定义'
+										placeholderTextColor={'#808080'}
+										keyboardType={'numeric'}
+										onFocus={()=>this.setState({
+											tipsPercentageNumber:0,
+											isTipsInputPressed:true
+										})}
+										onBlur={
+											()=>this.setState({
+												isTipsInputPressed:false
+											})}
+										
+							>
+								
+							</TextInput>
+						
+						</View>
+				)
 				return _tipsOptions;
 			}
 			return (
@@ -1262,7 +1322,7 @@ class Confirm extends Component {
 												justifyContent: 'space-around'}}>
 						{_tipsOptions()}
 					</View>
-					<View style={{flexDirection: 'row',
+					{/* <View style={{flexDirection: 'row',
 												alignSelf: 'center',
 												width: 50,
 												marginLeft: 5,
@@ -1273,7 +1333,7 @@ class Confirm extends Component {
 									allowFontScaling={false}>
 							${this.state.tips}
 						</Text>
-					</View>
+					</View> */}
 				</View>
 			);
 		}
@@ -1283,8 +1343,7 @@ class Confirm extends Component {
 			let tipsPercentage = tipsPercentageNumber / 100;
 			let tips = parseFloat(this.state.selectedCase.fees.charge_total * tipsPercentage).toFixed(2);
 			// alert(tips);
-			this.setState({tips,
-										 tipsPercentageNumber});
+			this.setState({tips,tipsPercentageNumber,tipsStr:tips.toString()});
 		}
 
 		_renderComment(){

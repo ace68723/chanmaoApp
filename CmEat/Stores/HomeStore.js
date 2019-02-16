@@ -11,7 +11,7 @@ const HomeStore = Object.assign({},EventEmitter.prototype,{
 		bannerList:[],
     adInterval: 0,
     adOffset: 0,
-    discountData: {},
+    discountData: [],
 		showAnimatedView:false,
     showIntroduction: true,
 		restaurantList: [],
