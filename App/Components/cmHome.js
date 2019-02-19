@@ -243,7 +243,7 @@ export default class Home extends Component {
           const region = cme_getRegion();
           if (!region) {
             setTimeout(()=>{
-              this.props.navigator.showModal({
+              this.props.navigator.push({
                 screen: 'LanguagesAndRegions',
                 animated: true,
                 navigatorStyle: {navBarHidden: true},

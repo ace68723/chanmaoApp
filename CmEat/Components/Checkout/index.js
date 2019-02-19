@@ -1269,7 +1269,7 @@ class Confirm extends Component {
 							</Text>						
 							<TextInput style={{fontSize: 15,
 														textAlign: 'center',
-														alignSelf: 'center',
+														paddingVertical: 0,
 														color:  '#808080',
 														fontFamily: 'NotoSans-Regular'}}
 										ref={input => this._tipsInput = input}
@@ -1294,7 +1294,7 @@ class Confirm extends Component {
 											()=>this.setState({
 												isTipsInputPressed:false
 											})}
-										
+										underlineColorAndroid={"rgba(0,0,0,0)"}
 							>
 								
 							</TextInput>
