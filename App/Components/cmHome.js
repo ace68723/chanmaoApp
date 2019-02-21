@@ -128,10 +128,11 @@ export default class Home extends Component {
         let currentmessage={
           type:1,
           messageid:times,
+          date:times,
           // content:message.alertContent,
           content:iv_message,
         }
-
+        if (Platform.OS === 'ios'){currentmessage.messageid=message._j_msgid}
         cme_saveMessageData(currentmessage);
         HomeAction.getMessageData(1);
         HomeAction.getNewMessage();

@@ -20,6 +20,7 @@ const cme_message_schema = {
       type:"int",
       messageid:"int",
       content:"string",
+      date:"int",
   }
 }
 const cme_address_schema = {
@@ -358,9 +359,9 @@ export function cme_getMessageData(type) {
       messagei.messageid=i.messageid;
       messagei.type=i.type;
       messagei.content=i.content;
-
+      messagei.date=i.date;
         console.log('data posted: ' + messagei.content);
-      message.unshift(messagei);
+      if (message.indexOf(messagei) == -1) {message.unshift(messagei);}
     }
     console.log(message);
     return message
@@ -373,6 +374,7 @@ export function cme_saveMessageData(io_data) {
       type:io_data.type,
       messageid:io_data.messageid,
       content:io_data.content,
+      date:io_data.date,
     }
 
     // console.log(data);

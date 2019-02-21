@@ -6,7 +6,8 @@ import {
   View,
   TouchableOpacity,
   FlatList,
-  Dimensions
+  Dimensions,
+  Linking
 } from 'react-native';
 import AuthAction from '../../../../App/Actions/AuthAction';
 import SettingsCell from './SettingsCell.js'
@@ -21,7 +22,7 @@ export default class Home extends Component {
     const cellsData = [
       {
         icon: require("./Image/customer_service.png"),
-        title: "联系客服",
+        title: "联系客服:4168324489",
         key: "contact"
       },
       {
@@ -102,16 +103,7 @@ export default class Home extends Component {
     });
   }
   _goToAboutUs() {
-    this.props.navigator.push({
-      screen: 'CmEatAboutUs',
-      animated: true,
-      navigatorStyle: {
-        navBarHidden: true
-      },
-      passProps: {
-        fromCmWash:true
-      }
-    });
+    return Linking.openURL('tel:4168324489');
 
     // this.props.navigator.push({
     //   screen: 'CmEatAboutUs',

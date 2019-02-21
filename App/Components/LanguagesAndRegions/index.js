@@ -268,10 +268,10 @@ export default class SelectRegionAndLanguage extends Component {
     }
 
     render() {
-      let title = "选择语言和地区";
+      let title = "选择地区";
       switch(this.state.chosenLanguage) {
         case 'chinese_simple':
-          title = "选择语言和地区";
+          title = "选择地区";
           break;
         case 'english':
           title = "Languages and Regions";

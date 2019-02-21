@@ -27,7 +27,7 @@ export default class CodePushUpdate extends Component {
         CodePush.allowRestart() //允许重启，否则热更新不会生效
         CodePush.sync({
             checkFrequency: CodePush.CheckFrequency.ON_APP_START,
-            installMode: CodePush.InstallMode.IMMEDIATE
+            installMode: CodePush.InstallMode.ON_NEXT_RESTART
           },
             (status)=>{
               switch(status) {

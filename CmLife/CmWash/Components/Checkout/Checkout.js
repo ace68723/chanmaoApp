@@ -169,15 +169,11 @@ export default class Checkout extends Component {
     switch (item) {
       case "delivery":
         return (
-          <CheckoutDelivery
-          cardStyle={styles.card}
-          onPressedPickupTime={this.onPressedPickupTime}
-          onPressedDeliverTime={this.onPressedDeliveryTime}
-          selectedPickUpDate={this.state.selectedPickUpDate}
-          selectedPickUpTime={this.state.selectedPickUpTime}
-          selectedDeliveryDate={this.state.selectedDeliveryDate}
-          selectedDeliveryTime={this.state.selectedDeliveryTime}
-          />
+          <View style={{width:width*0.97,height:height*0.08,}}>
+            <Text style={{marginTop:0.02*height,marginLeft:0.05*width}}>
+              请填写正确的联系方式，下单后24小时内我们会联系您确认取送件时间~
+            </Text>
+          </View>
         )
         break;
       case "userInfo":
@@ -236,26 +232,7 @@ export default class Checkout extends Component {
 
         {this.renderPlaceOrderButton()}
 
-        {
-          this.state.ea_pickup_time.length != 0 &&
-          <DateTimePicker
-            ref={ref => this.Picker = ref}
-            items={this.state.ea_pickup_time}
-            linked={true}
-            primaryKey={"date"}
-            secondaryKey={"available_time"}
-            onPickerConfirm={this.onConfirmPickupTime}
-          /> }
 
-        { this.state.delivery_time.length != 0 &&
-          <DateTimePicker
-            ref={ref => this.PickerDelivery = ref}
-            items={this.state.delivery_time}
-            linked={true}
-            primaryKey={"date"}
-            secondaryKey={"available_time"}
-            onPickerConfirm={this.onConfirmDeliveryTime}
-          /> }
 
       </View>
     )
