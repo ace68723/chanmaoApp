@@ -22,7 +22,7 @@ export default class Home extends Component {
     const cellsData = [
       {
         icon: require("./Image/customer_service.png"),
-        title: "联系客服:4168324489",
+        title: "联系客服: (416)832-4489",
         key: "contact"
       },
       {

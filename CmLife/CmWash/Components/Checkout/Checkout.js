@@ -170,7 +170,7 @@ export default class Checkout extends Component {
       case "delivery":
         return (
           <View style={{width:width*0.97,height:height*0.08,}}>
-            <Text style={{marginTop:0.02*height,marginLeft:0.05*width}}>
+            <Text style={{marginTop:0.02*height,marginLeft:0.05*width,fontFamily: 'NotoSans-Black',fontSize: 14, fontWeight: '800'}}>
               请填写正确的联系方式，下单后24小时内我们会联系您确认取送件时间~
             </Text>
           </View>
