@@ -128,7 +128,7 @@ const sbox_cache_scheam = {
 let realm
 export function DatabaseInit() {
   realm = new Realm({
-      path: 'cm_2.9.12.realm',
+      path: 'cm_2.9.13.realm',
       schema: [
                 cme_address_schema,
                 cme_cart_schema,
@@ -179,6 +179,12 @@ export function DatabaseInit() {
     }
     // if(!realm.objectForPrimaryKey('cm_system','cme_region')){
     //     realm.create('cm_system',{type:"cme_region", value: '1' }, true );
+    // }
+
+    // if(realm.objectForPrimaryKey('cm_system','cme_region')){
+    //     // realm.create('cm_system',{type:"cme_region", value: '1' }, true );
+    //     let region = realm.objectForPrimaryKey('cm_system','cme_region');
+    //     realm.delete(region);
     // }
     realm.create('cm_system',{type: 'version', value: '2.9.12'}, true );
   })

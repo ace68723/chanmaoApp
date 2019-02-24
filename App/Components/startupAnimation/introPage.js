@@ -193,7 +193,16 @@ export default class IntroPage extends Component {
                 ]).start();
                 break;
             default:
-                this.props.dismissIntro();
+                Animated.timing(
+                    this.state.IntroOpacity,
+                    {
+                        toValue:0,
+                        duration:100
+                    }
+                ).start(() => {
+                  this.props.dismissIntro();
+                });
+                // this.props.dismissIntro();
                 break;
         }
     }

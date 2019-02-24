@@ -106,7 +106,7 @@ export default class Home extends Component {
 
 
       // console.log(JPushModule);
-      JPushModule.getRegistrationID(registrationId => {console.log('resisterID:'+registrationId)})
+      // JPushModule.getRegistrationID(registrationId => {console.log('resisterID:'+registrationId)})
       AppState.addEventListener('change', this._handleAppStateChange);
 
       JPushModule.addReceiveCustomMsgListener((message) => {
@@ -239,14 +239,15 @@ export default class Home extends Component {
     }
     finishcodePushCheck(needUpdate){  //needUpdate是否需要更新并重启
 
-      this.setState({isCodePushChecked:true},()=>{
+      this.setState({isCodePushChecked:true},async ()=>{
         // if(!needUpdate){
           const region = cme_getRegion();
           if (!region) {
             setTimeout(()=>{
               this.props.navigator.push({
                 screen: 'LanguagesAndRegions',
-                animated: true,
+                // animated: true,
+                animationType: 'fade',
                 navigatorStyle: {navBarHidden: true},
                 passProps: {
                   firstSelection: true
@@ -262,6 +263,32 @@ export default class Home extends Component {
             setTimeout( () => {
               this._handleSboxPress();
             }, 1000);
+          } else {
+            // this.startUpAnimation._fadeOut();
+            // const res =  await AuthAction.isAuthed();
+            // if(res.ev_error !== 0) {
+            //   setTimeout(() => {
+            //     this.props.navigator.showModal({
+            //       screen: 'CmLogin',
+            //       animationType: 'slide-up',
+            //       navigatorStyle: {navBarHidden: true},
+            //       passProps: {handleBackToHome: this._handleBackToHome,
+            //                   handleLoginSuccessful: () => {},
+            //       },
+            //     })
+            //   },1000)
+            // } else if (res.ev_error === 0 && res.ev_missing_phone && res.ev_missing_phone === 1) {
+            //   setTimeout(() => {
+            //     this.props.navigator.showModal({
+            //       screen: 'CmBindPhone',
+            //       animationType: 'slide-up',
+            //       navigatorStyle: {navBarHidden: true},
+            //       passProps: {handleBackToHome: this._handleBackToHome,
+            //                   handleBindSuccessful: () => {},
+            //       },
+            //     })
+            //   },1000)
+            // }
           }
         // }
       })
