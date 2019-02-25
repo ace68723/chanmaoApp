@@ -356,7 +356,6 @@ export function cme_getRestaurantData(area) {
   }
 }
 export function cme_getMessageData(type) {
-    console.log(realm.path);
     const messageDataAll = realm.objects('cme_message');
     let message=[];
     for (let i of messageDataAll)
@@ -366,10 +365,10 @@ export function cme_getMessageData(type) {
       messagei.type=i.type;
       messagei.content=i.content;
       messagei.date=i.date;
-        console.log('data posted: ' + messagei.content);
-      if (message.indexOf(messagei) == -1) {message.unshift(messagei);}
+      if (message.indexOf(messagei) == -1) {
+        message.unshift(messagei);
+      }
     }
-    console.log(message);
     return message
 
 }
