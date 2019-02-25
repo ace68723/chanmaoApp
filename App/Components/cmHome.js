@@ -265,30 +265,31 @@ export default class Home extends Component {
             }, 1000);
           } else {
             // this.startUpAnimation._fadeOut();
-            // const res =  await AuthAction.isAuthed();
-            // if(res.ev_error !== 0) {
-            //   setTimeout(() => {
-            //     this.props.navigator.showModal({
-            //       screen: 'CmLogin',
-            //       animationType: 'slide-up',
-            //       navigatorStyle: {navBarHidden: true},
-            //       passProps: {handleBackToHome: this._handleBackToHome,
-            //                   handleLoginSuccessful: () => {},
-            //       },
-            //     })
-            //   },1000)
-            // } else if (res.ev_error === 0 && res.ev_missing_phone && res.ev_missing_phone === 1) {
-            //   setTimeout(() => {
-            //     this.props.navigator.showModal({
-            //       screen: 'CmBindPhone',
-            //       animationType: 'slide-up',
-            //       navigatorStyle: {navBarHidden: true},
-            //       passProps: {handleBackToHome: this._handleBackToHome,
-            //                   handleBindSuccessful: () => {},
-            //       },
-            //     })
-            //   },1000)
-            // }
+            const res =  await AuthAction.isAuthed();
+            if(res.ev_error !== 0) {
+              setTimeout(() => {
+                this.props.navigator.showModal({
+                  screen: 'CmLogin',
+                  animationType: 'slide-up',
+                  navigatorStyle: {navBarHidden: true},
+                  passProps: {handleBackToHome: this._handleBackToHome,
+                              handleLoginSuccessful: () => {},
+                              hideGoBack: true
+                  },
+                })
+              },1000)
+            } else if (res.ev_error === 0 && res.ev_missing_phone && res.ev_missing_phone === 1) {
+              setTimeout(() => {
+                this.props.navigator.showModal({
+                  screen: 'CmBindPhone',
+                  animationType: 'slide-up',
+                  navigatorStyle: {navBarHidden: true},
+                  passProps: {handleBackToHome: this._handleBackToHome,
+                              handleBindSuccessful: () => {},
+                  },
+                })
+              },1000)
+            }
           }
         // }
       })
