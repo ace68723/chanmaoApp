@@ -266,7 +266,6 @@ export default class CmEatAddress extends Component {
     "json?input="+ text +
     "&language=en" +
     "&components=country:ca"+
-    "&types=address" +
     "&key=AIzaSyDpms3QxNnZNxDq5aqkalcRkYn16Kfqix8"
     let options = {
         method: 'GET',
