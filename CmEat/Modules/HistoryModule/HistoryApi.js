@@ -151,7 +151,6 @@ const HistoryApi = {
               .catch((error) => {throw error})
     },
     changePaymentToCash(reqData){
-      // const url = AuthConstants.API_ADDREVIEW
       const url = AuthConstants.API_CHANGE_ORDER_TO_CASH;
       let options = {
           method: 'GET',

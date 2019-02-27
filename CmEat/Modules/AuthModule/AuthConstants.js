@@ -2,9 +2,15 @@
 // const TestServer = 'http://cmtest.littlesailing.com/index.php?r=';
 const productServer = 'https://www.chanmao.ca/index.php?r=';
 const APIProductServer = 'https://chanmao.us/api/';
+const backendProductionServer = 'https://www.cmapi.ca/cm_backend/index.php/api/';
+const backendTestingServer = 'https://www.cmapi.ca/cm_qa_lumen/backend/index.php/api/';
+
 
 const APIServer= APIProductServer;
 const Server = productServer;
+const backendServer = backendProductionServer;
+
+
 const AppConstants ={
     //chanmao login api,{username: , password: }
     // MobAddress10Test
@@ -15,18 +21,17 @@ const AppConstants ={
     API_RESTAURANTLIST: Server + 'MobOrder10/Rrlist',
     API_MENU: APIServer + 'cmapp/v2/get_menu',
     // API_MENU: Server + 'MobOrder10/Rrmenu',
-    // API_HISTORYLIST: Server + 'MobOrder10/historylist',
-    // API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',
-    API_HISTORYORDER: APIServer + 'cmapp/v3/get_history_list',
-    // API_HISTORYORDER: 'https://norgta.com/api/cmapp/v2/get_history_list',
-    // API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
-    API_GETHISTORYDETAIL: APIServer + 'cmapp/v2/get_history_order_detail',
+    // API_HISTORYORDER: APIServer + 'cmapp/v3/get_history_list',
+    API_HISTORYORDER: backendServer + 'cmapp/v1/get_history_list',
+    // API_GETHISTORYDETAIL: APIServer + 'cmapp/v2/get_history_order_detail',
+    API_GETHISTORYDETAIL: backendServer + 'cmapp/v1/get_history_order_detail',
     API_GET_LAST4: APIServer + "payment/v2/get_last4",
     API_GET_ORDER_AD: 'https://www.cmapi.ca/cm_backend/index.php/api/cmapp/v1/get_ad_histlist',
     API_CHANGE_ORDER_TO_CASH: APIServer + "cmapp/v2/change_payment_to_cash",
     //restaurant
     API_CATEGORY_LIST: APIServer + 'cmapp/v2/get_category_list',
-    API_RESTAURANT_LIST: APIServer + 'cmapp/v2/get_restaurant_list',
+    // API_RESTAURANT_LIST: APIServer + 'cmapp/v2/get_restaurant_list',
+    API_RESTAURANT_LIST: backendServer + 'cmapp/v1/get_restaurant_list',
 
     API_ADDRESS: Server + 'MobAddress10/addresslist',
     API_CREATE_ADDRESS: Server + 'MobAddress10/Addresscreate',
@@ -38,7 +43,8 @@ const AppConstants ={
     API_CHECKOUT:Server + 'MobOrder10/checkout',
     API_GETVERIFYCODE: Server + 'MobOrder10/sendcode',
     API_VERIFYCODE: Server + 'MobOrder10/verifysms',
-    API_ADDREVIEW: APIServer + 'cmapp/v2/set_order_review',
+    // API_ADDREVIEW: APIServer + 'cmapp/v2/set_order_review',
+    API_ADDREVIEW: backendServer + 'cmapp/v1/set_order_review',
 
     GET_ATICLE_LIST: Server + 'MobContent10/PostList',
     GET_ARTICLE_AUTHOR: Server + 'MobContent10/ArticleOV',

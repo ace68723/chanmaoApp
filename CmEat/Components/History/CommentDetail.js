@@ -49,7 +49,7 @@ export default class pastOrderEN extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          complete_time: new Date(props.orderInfo.complete_time),
+          complete_time: props.orderInfo.complete_time ? new Date(props.orderInfo.complete_time) : '',
           driver_score: 0,
           driver_comment: "",
           restaurant_score: 0,
@@ -405,7 +405,7 @@ export default class pastOrderEN extends Component {
               <TouchableOpacity  onPress={this._handleChangeTime}>
                 <View style={{flexDirection: 'row',
                               alignItems: 'center',
-                              marginRight:10,
+                              marginRight:20,
                             }}>
                   <Text style={{color: '#ff8b00', fontSize: 14, fontFamily:'NotoSans-Regular'}}
                         allowFontScaling={false}>
@@ -413,8 +413,10 @@ export default class pastOrderEN extends Component {
                   <Text allowFontScaling={false}
                         style={{width: 14,
                                 height: 14,
+                                lineHeight: 14,
                                 fontSize: 11,
                                 textAlign: 'center',
+                                alignSelf: 'center',
                                 color: '#ff8b00',
                                 borderWidth: StyleSheet.hairlineWidth,
                                 borderColor: '#ff8b00',
@@ -687,7 +689,6 @@ export default class pastOrderEN extends Component {
                 />
               <TouchableOpacity
                 style={{backgroundColor: '#ff8b00',
-                        padding: 15,
                         height: acceptButtonHeight,
                         justifyContent: 'center'}}
                 onPress={() => this.setState({modalVisible: false})}>
