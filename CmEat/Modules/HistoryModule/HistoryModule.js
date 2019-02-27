@@ -52,10 +52,10 @@ const  HistoryModule = {
               })
           })
     },
-    async getOrderAdData(data){
+    async getOrderAdData(token){
       try {
         const region = parseInt(cme_getRegion());
-        const res = await HistoryApi.getOrderAdData({data, region});
+        const res = await HistoryApi.getOrderAdData({token, region});
         return res;
       } catch (e) {
         console.log(e)
