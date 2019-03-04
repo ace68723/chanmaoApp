@@ -426,23 +426,25 @@ export default class LogoAnimationView extends Component {
     })
   }
   _renderGoBackBtn() {
-    return(
-      <TouchableOpacity style={{paddingTop:0,
-                                paddingLeft:8,
-                                paddingRight:20,
-                                paddingBottom:20,
-                                position:'absolute',
-                                top:marginTop,
-                                left:0,}}
-                        onPress={this._handleBackToHome}>
-        <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
-          <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}
-								allowFontScaling={false}>
-            ×
-          </Text>
-        </View>
-      </TouchableOpacity>
-    )
+		if (!this.props.hideGoBack) {
+	    return(
+	      <TouchableOpacity style={{paddingTop:0,
+	                                paddingLeft:8,
+	                                paddingRight:20,
+	                                paddingBottom:20,
+	                                position:'absolute',
+	                                top:marginTop,
+	                                left:0,}}
+	                        onPress={this._handleBackToHome}>
+	        <View style={{width:30,height:30,borderRadius:15,backgroundColor:"rgba(0,0,0,0.4)"}}>
+	          <Text style={{fontSize:25,textAlign:"center",color:"#ffffff",marginTop:-2}}
+									allowFontScaling={false}>
+	            ×
+	          </Text>
+	        </View>
+	      </TouchableOpacity>
+	    )
+		}
   }
 	_toggleViewType(){
 		if (this.state.viewType == VIEW_TYPE_LOGIN){

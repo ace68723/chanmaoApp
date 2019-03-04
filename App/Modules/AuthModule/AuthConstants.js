@@ -21,11 +21,7 @@ const AppConstants ={
     API_BIND_PHONE: backendServer + 'index.php/api/v1/auth_register_addphone',
 
     API_AREALIST: Server + 'MobOrder10/RrAreaNew',
-    API_RESTAURANTLIST: Server + 'MobOrder10/Rrlist',
     API_MENU: Server + 'MobOrder10/Rrmenu',
-    API_HISTORYLIST: Server + 'MobOrder10/historylist',
-    API_HISTORYORDER: Server + 'MobOrder10/HistoryOrder',
-    API_GETHISTORYDETAIL : Server + 'MobOrder10/OrderHistory',
 
 
     API_ADDRESS: Server + 'MobAddress10/addresslist',

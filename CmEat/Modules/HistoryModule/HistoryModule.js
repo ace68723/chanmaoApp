@@ -52,10 +52,10 @@ const  HistoryModule = {
               })
           })
     },
-    async getOrderAdData(data){
+    async getOrderAdData(token){
       try {
         const region = parseInt(cme_getRegion());
-        const res = await HistoryApi.getOrderAdData({data, region});
+        const res = await HistoryApi.getOrderAdData({token, region});
         return res;
       } catch (e) {
         console.log(e)
@@ -121,7 +121,7 @@ const  HistoryModule = {
   },
   async addReview(io_data){
     try{
-      if (!io_data.io_data.complete_time) {
+      if (!io_data.io_data.complete_time || io_data.io_data.complete_time.length == 0) {
         io_data.io_data.complete_time = 0;
       }
       const res = await HistoryApi.addReview(io_data);

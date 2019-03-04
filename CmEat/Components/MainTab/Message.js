@@ -41,7 +41,7 @@ export default class Message extends Component {
     }
   }
   _renderMessage({item}){
-    let date=new Date(item.messageid);
+    let date=new Date(item.date);
     let formatted = (date.getFullYear()) + "/" + (date.getMonth()+1) + "/" + date.getDate();
     console.log('timeconv: '+date);
     return(

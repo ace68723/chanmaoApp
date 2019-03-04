@@ -20,6 +20,7 @@ const cme_message_schema = {
       type:"int",
       messageid:"int",
       content:"string",
+      date:"int",
   }
 }
 const cme_address_schema = {
@@ -127,7 +128,7 @@ const sbox_cache_scheam = {
 let realm
 export function DatabaseInit() {
   realm = new Realm({
-      path: 'cm_2.9.12.realm',
+      path: 'cm_2.9.13.realm',
       schema: [
                 cme_address_schema,
                 cme_cart_schema,
@@ -178,6 +179,12 @@ export function DatabaseInit() {
     }
     // if(!realm.objectForPrimaryKey('cm_system','cme_region')){
     //     realm.create('cm_system',{type:"cme_region", value: '1' }, true );
+    // }
+
+    // if(realm.objectForPrimaryKey('cm_system','cme_region')){
+    //     // realm.create('cm_system',{type:"cme_region", value: '1' }, true );
+    //     let region = realm.objectForPrimaryKey('cm_system','cme_region');
+    //     realm.delete(region);
     // }
     realm.create('cm_system',{type: 'version', value: '2.9.12'}, true );
   })
@@ -349,7 +356,6 @@ export function cme_getRestaurantData(area) {
   }
 }
 export function cme_getMessageData(type) {
-    console.log(realm.path);
     const messageDataAll = realm.objects('cme_message');
     let message=[];
     for (let i of messageDataAll)
@@ -358,11 +364,11 @@ export function cme_getMessageData(type) {
       messagei.messageid=i.messageid;
       messagei.type=i.type;
       messagei.content=i.content;
-
-        console.log('data posted: ' + messagei.content);
-      message.unshift(messagei);
+      messagei.date=i.date;
+      if (message.indexOf(messagei) == -1) {
+        message.unshift(messagei);
+      }
     }
-    console.log(message);
     return message
 
 }
@@ -373,6 +379,7 @@ export function cme_saveMessageData(io_data) {
       type:io_data.type,
       messageid:io_data.messageid,
       content:io_data.content,
+      date:io_data.date,
     }
 
     // console.log(data);
