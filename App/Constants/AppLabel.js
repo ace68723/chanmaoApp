@@ -9,17 +9,21 @@ const Label = {
           switch(region){
             case '1':
               labelPackage = require('./CMLabel/LabelsCN');
+              break;
             case '3':
               labelPackage = require('./CMLabel/hamilton/LabelsCNHM');
+              break;
           }
           return labelPackage[key];
         } else if (language == 'english') {
-          
+
           switch(region){
             case '1':
               labelPackage = require('./CMLabel/LabelsEN');
+              break;
             case '3':
               labelPackage = require('./CMLabel/hamilton/LabelsENHM');
+              break;
           }
           return labelPackage[key];
         }
@@ -27,8 +31,10 @@ const Label = {
           switch(region){
             case '1':
               labelPackage = require('./CMLabel/LabelsFR');
+              break;
             case '3':
               labelPackage = require('./CMLabel/hamilton/LabelsFRHM');
+              break;
           }
           return labelPackage[key];
         }
