@@ -115,18 +115,19 @@ export default class StartupAnimation extends Component {
             this.setState({isAnimationRunning:false});
             if(!update){
               const introCount = cme_getHomeIntroCount();
+              // if (true) {
               if(introCount == 0 && region === '1'){
                   this.props.navigator.showLightBox({
                     screen:'IntroPage',
                     navigatorStyle: {
                       navBarHidden: true
                     },
-                    animationType:'none',
+                    animationType:'fade',
                     style: {
                       tapBackgroundToDismiss: false,
                     },
                     passProps:{
-                      dismissIntro:()=>this.props.navigator.dismissLightBox({animationType:'none'})
+                      dismissIntro:()=>this.props.navigator.dismissLightBox({animationType:'fade'})
                     }
                   })
 

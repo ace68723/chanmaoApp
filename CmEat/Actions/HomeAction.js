@@ -7,7 +7,6 @@ import { cme_getSelectedAddress, cme_getHomeIntroCount, cme_updateHomeIntroCount
 export default {
       getMessageData(type){
         const res = cme_getMessageData(type);
-        console.log(res);
         dispatch({
             actionType: AppConstants.GET_MESSAGE_DATA, res
         });

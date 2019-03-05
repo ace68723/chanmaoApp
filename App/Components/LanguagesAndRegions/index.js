@@ -19,6 +19,7 @@ import {cme_updateLanguage,
         cme_updateRegion,
         cme_getRegion} from '../../Modules/Database';
 import Header from '../../../CmEat/Components/General/Header';
+import AuthAction from '../../Actions/AuthAction';
 let langPadding = Platform.OS == 'ios' ? 10:0;
 const {width,height} = Dimensions.get('window');
 // let marginTop,headerHeight;
@@ -100,7 +101,7 @@ export default class SelectRegionAndLanguage extends Component {
             regionListOpen:false,
         })
     }
-    _confirm() {
+    async _confirm() {
      //  JPushModule.cleanTags(map => {
      //   if (map.errorCode === 0) {
      //     console.log('clean tags succeed')
@@ -110,46 +111,98 @@ export default class SelectRegionAndLanguage extends Component {
      // })
       cme_updateLanguage(this.state.chosenLanguage);
       cme_updateRegion(this.state.chosenRegion);
-      if (this.state.chosenRegion=='1')
-      {
-        let tagselected=['toronto'];
-        JPushModule.setTags(tagselected, map => {
+      let tagselected;
+      if (this.state.chosenRegion=='1') {
+          tagselected = ['toronto'];
+       //  JPushModule.setTags(tagselected, map => {
+       //   if (map.errorCode === 0) {
+       //     console.log('Add tags succeed, tags: ' + map.tags)
+       //           this.props.navigator.pop();
+       //   } else {
+       //     console.log('Add tags failed, error code: ' + map.errorCode)
+       //   }
+       // })
+      }
+      else if (this.state.chosenRegion=='3') {
+          tagselected = ['hamilton'];
+
+      }
+      JPushModule.setTags(tagselected, map => {
          if (map.errorCode === 0) {
            console.log('Add tags succeed, tags: ' + map.tags)
-                 this.props.navigator.pop();
+                 // this.props.navigator.pop();
          } else {
            console.log('Add tags failed, error code: ' + map.errorCode)
          }
-       })
-
-      }
-      else if (this.state.chosenRegion=='3')
-      {
-
-          let tagselected=['hamilton'];
-        JPushModule.setTags(tagselected, map => {
-         if (map.errorCode === 0) {
-           console.log('Add tags succeed, tags: ' + map.tags)
-                 this.props.navigator.pop();
-         } else {
-           console.log('Add tags failed, error code: ' + map.errorCode)
-         }
-       })
-      }
+         // this.props.navigator.pop();
+      })
       if (this.props.firstSelection) {
-        this.props.navigator.resetTo({
-    			screen: 'cmHome',
-    			animated: true,
-    			animationType: 'fade',
-    			navigatorStyle: {navBarHidden: true},
-    		});
+        // this.props.navigator.resetTo({
+    		// 	screen: 'cmHome',
+    		// 	animated: true,
+    		// 	animationType: 'fade',
+    		// 	navigatorStyle: {navBarHidden: true},
+    		// });
+        const res = await AuthAction.isAuthed();
+        if(res.ev_error !== 0) {
+          this.props.navigator.push({
+            screen: 'CmLogin',
+            // animationType: 'slide-up',
+            animated: true,
+            navigatorStyle: {navBarHidden: true},
+            passProps: {handleBackToHome: () => {
+                          this.props.navigator.pop({
+                            animated: true,
+                            animationType: 'slide-horizontal',
+                          });
+                        },
+                        handleLoginSuccessful: () => {
+                          this.props.navigator.resetTo({
+                            screen: 'cmHome',
+                            animated: true,
+                            animationType: 'fade',
+                            navigatorStyle: {navBarHidden: true},
+                          });
+                        },
+            },
+          });
+        } else if (res.ev_error === 0 && res.ev_missing_phone && res.ev_missing_phone === 1) {
+          this.props.navigator.push({
+            screen: 'CmBindPhone',
+            // animationType: 'slide-up',
+            animated: true,
+            navigatorStyle: {navBarHidden: true},
+            passProps: {handleBackToHome: () => {
+                          this.props.navigator.pop({
+                            animated: true,
+                            animationType: 'slide-horizontal',
+                          });
+                        },
+                        handleBindSuccessful: () => {
+                          this.props.navigator.resetTo({
+                            screen: 'cmHome',
+                            animated: true,
+                            animationType: 'fade',
+                            navigatorStyle: {navBarHidden: true},
+                          });
+                        },
+            },
+          });
+        } else {
+          this.props.navigator.resetTo({
+      			screen: 'cmHome',
+      			animated: true,
+      			animationType: 'fade',
+      			navigatorStyle: {navBarHidden: true},
+      		});
+        }
       } else {
         let data;
         if (this.props.goToSbox) {
           data = {goToSweetfulBox: true};
         }
         else if (this.props.goToCmWash){
-          data={goToCmWash:true};
+          data = {goToCmWash:true};
         }
         // else {
         //   data = {goToCmEat: true}; //自动跳转有问题

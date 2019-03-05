@@ -49,13 +49,15 @@ export default class DiscountView extends Component {
   render() {
     const discountTypes = this.props.discountData.map(value => value.theme_name);
     const discountItems = this.props.discountData[this.state.selectedIndex].adlist;
-
+    let typeKeyExtractor = (item, index) => item;
+    let itemKeyExtractor = (item, index) => item.id.toString();
     return (
       <View style={styles.container}>
         <View style={{flex: 1,marginTop:2,marginBottom:5}}>
           <FlatList
             horizontal={true}
             data={discountTypes}
+            keyExtractor={typeKeyExtractor}
             renderItem={this._renderTypeLabel}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ marginLeft: 16 }}
@@ -67,6 +69,7 @@ export default class DiscountView extends Component {
             refref={c => this._itemlList = c}
             horizontal={true}
             data={discountItems}
+            keyExtractor={itemKeyExtractor}
             renderItem={this._renderItem}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ marginLeft: 16 }}
