@@ -20,9 +20,10 @@ import {
 	Platform,
 	StatusBar,
 	KeyboardAvoidingView,
-	NativeModules
+	NativeModules,
+	Picker,
 } from 'react-native';
-
+import DateTimePicker from '../Common/Picker/Picker'
 import Background from '../General/Background';
 import CheckoutCard from './CheckoutCard';
 import Address from './Address';
@@ -78,6 +79,7 @@ class Confirm extends Component {
 		const state={ 	cart,
 						total,
 												rid:this.props.restaurant.rid,
+												selectedTime:'1:30',
 						startAmount:this.props.restaurant.start_amount,
 						viewBottom:new Animated.Value(0),
 						anim: new Animated.Value(0), //for background image
@@ -132,8 +134,9 @@ class Confirm extends Component {
 				this._deliverAnimation = this._deliverAnimation.bind(this);
 				this._updateComment = this._updateComment.bind(this);
 				this._changedTips = this._changedTips.bind(this);
-
+				this._showTimePicker=this._showTimePicker.bind(this);
 				this.popupView = PopupView.getInstance();
+				this.onConfirmTime=this.onConfirmTime.bind(this);
     }
 
     componentDidMount(){
@@ -1249,7 +1252,7 @@ class Confirm extends Component {
 					)
 				}
 				_tipsOptions.push(
-						<View 
+						<View
 							key={'tips_' + 0}
 							style={{width: 100,
 							height:30,
@@ -1266,7 +1269,7 @@ class Confirm extends Component {
 														color: '#808080',
 														fontFamily: 'NotoSans-Regular'}}>
 								$
-							</Text>						
+							</Text>
 							<TextInput style={{fontSize: 15,
 														textAlign: 'center',
 														paddingVertical: 0,
@@ -1296,9 +1299,9 @@ class Confirm extends Component {
 											})}
 										underlineColorAndroid={"rgba(0,0,0,0)"}
 							>
-								
+
 							</TextInput>
-						
+
 						</View>
 				)
 				return _tipsOptions;
@@ -1442,6 +1445,10 @@ class Confirm extends Component {
 		// 		)
 		// 	}
 		// }
+		_showTimePicker()
+		{
+			// this.Picker.show();
+		}
 		_renderOrderConfirm() {
 			if(this.state.showOrderConfirm) {
 				const charge_total = parseFloat(this.state.selectedCase.fees.charge_total + parseFloat(this.state.tips)).toFixed(2)
@@ -1452,10 +1459,52 @@ class Confirm extends Component {
 														 tips={this.state.selectedCase.fees.service_fee}
 														 visaFee={this.state.visa_fee}
 														 paymentChannel={this.state.selectedCase.payment_channel}
+														 selectedTime={this.state.selectedTime}
 														 dltype={this.state.dltype}/>)
 			}
 		}
+		onConfirmTime(pickedData){
+			// CheckoutAction.resetDeliveryTime();
+			// CheckoutAction.getDeliveryTime(
+			// 	pickedData.selectedPrimaryOptions,
+			// 	pickedData.selectedSecondaryOptions,
+			// 	this.state.ev_wash_time
+			// );
+			console.log(pickedData)
+			this.setState({
+				selectedTime:pickedData.selectedValue
+			})
+		}
     render(){
+			// <TouchableOpacity onPress={this._showTimePicker}>
+			// 	<View style={{width:width*0.97,height:height*0.04,
+			// 	alignItems:'center',marginTop:0.02*height,flexDirection:'row'}}>
+			// 		<View style={{flex:1,alignItems:'center'}}>
+			// 			<Text style={{		fontWeight: '700',
+			// 					fontFamily:'NotoSans-Regular',fontSize:16,}}>
+			// 				配送时间
+			// 			</Text>
+			// 		</View>
+			// 		<View style={{flex:3,alignItems:'center'}}>
+			// 			<Text style={{		fontWeight: '700',
+			// 					fontFamily:'NotoSans-Regular',fontSize:16,}}>
+			// 				{this.state.selectedTime? this.state.selectedTime : '请选择配送时间'}
+			// 			</Text>
+			// 		</View>
+			// 		<View style={{flex:1,alignItems:'center' }}>
+			// 			<Image source={require('./Image/right.png')}
+			// 						 style={{width:10,height:20,}}/>
+			// 		</View>
+			//
+			// 	</View>
+			// </TouchableOpacity>
+			let timeList = [{
+				'times':'2:30',
+			},
+			{
+				'times':'3:00',
+			}
+		]
       let cartList = this.state.cart.map((item,index) => {
 
           const dish = item;
@@ -1582,6 +1631,15 @@ class Confirm extends Component {
 											</View>
 											{this._renderAddress()}
 											{this._renderAddressReminder()}
+
+											<View style={styles.seperateLine}>
+											</View>
+
+
+
+
+
+
 											<View style={styles.seperateLine}>
 											</View>
 											{this._renderCoupeCode()}
@@ -1611,7 +1669,13 @@ class Confirm extends Component {
 					{this.renderCheckoutButton()}
 					{this._renderComment()}
 					{this._renderOrderConfirm()}
-
+					<DateTimePicker
+            ref={ref => this.Picker = ref}
+            items={timeList}
+            linked={true}
+            primaryKey={"times"}
+            onPickerConfirm={this.onConfirmTime}
+          />
         </View>
       )
 

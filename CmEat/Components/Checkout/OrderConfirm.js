@@ -76,7 +76,10 @@ export default class orderConfirm extends Component {
       else{
         visa_fee = 0;
       }
-
+      // <View style={{flexDirection:'row',paddingTop:20,alignItems: 'center',paddingLeft:0}}>
+      //     <Image source={require('./Image/clock.png')} style={{width:23,height:25,marginRight:15,marginLeft:15}}/>
+      //     <Text style={styles.contentFont} allowFontScaling={false}>{this.props.selectedTime}</Text>
+      // </View>
 
       return(
 
@@ -110,6 +113,8 @@ export default class orderConfirm extends Component {
                               <Image source={require('./Image/icon_address.png')} style={{width:19,height:25,marginRight:15,marginLeft:15}}/>
                               <Text style={styles.contentFont} allowFontScaling={false}>{this.props.selectedAddress.addr}</Text>
                           </View>
+
+
                           {this._renderPaymentChannel()}
 
                       </View>
@@ -189,7 +194,7 @@ const styles = StyleSheet.create({
 
   modal: {
     justifyContent: 'center',
-    height: 400,
+    height: 450,
     width: 300,
     borderRadius: 8
   },

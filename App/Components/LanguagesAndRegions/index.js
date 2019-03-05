@@ -9,7 +9,9 @@ import {
   Animated,
   Platform,
   ImageBackground,
+  FlatList,
 } from 'react-native';
+import RegionPicker from './Picker/RegionPicker';
 import JPushModule from 'jpush-react-native';
 import {cme_updateLanguage,
         cme_getLanguage,
@@ -59,6 +61,11 @@ let regions = [
         title: 'Hamilton',
         value: '3'
     },
+    {
+        rgid:3,
+        title: 'Edmonton',
+        value:'4'
+    }
 ]
 export default class SelectRegionAndLanguage extends Component {
     constructor(props){
@@ -66,33 +73,32 @@ export default class SelectRegionAndLanguage extends Component {
       this.state = {
         chosenLanguage: cme_getLanguage().length > 0 ? cme_getLanguage() : 'chinese_simple',
         chosenRegion: cme_getRegion().length > 0 ? cme_getRegion() : regions[0].value,
-        regionIndicatorLeft: cme_getRegion() === '3' ? new Animated.Value(width/2) : new Animated.Value(0)
+        regionIndicatorLeft: cme_getRegion() === '3' ? new Animated.Value(width/2) : new Animated.Value(0),
+        regionListOpen:false,
       }
-
+      this._renderItem=this._renderItem.bind(this);
       this.chooseRegion = this.chooseRegion.bind(this);
       this._confirm = this._confirm.bind(this);
       this._goBack = this._goBack.bind(this);
       this.renderImageBackground=this.renderImageBackground.bind(this);
+      this._onPressRegion=this._onPressRegion.bind(this);
+      this._getRegion=this._getRegion.bind(this);
     }
     componentDidMount() {
       // let result = cme_getRegion();
     }
+    _getRegion()
+    {
+      for (let i=0;i<regions.length;i++)
+      {
+        if (regions[i].value==this.state.chosenRegion) return regions[i].title;
+      }
+    }
     chooseRegion(region){
         this.setState({
             chosenRegion: region,
-        },()=>{
-
-            Animated.timing(
-                this.state.regionIndicatorLeft,
-                {
-                    toValue: this.state.chosenRegion === '1' ? 0 : width/2,
-                    duration: 200
-                }
-            ).start();
-
-
+            regionListOpen:false,
         })
-
     }
     _confirm() {
      //  JPushModule.cleanTags(map => {
@@ -266,7 +272,36 @@ export default class SelectRegionAndLanguage extends Component {
 
         )
     }
+    _renderItem({item})
+    {
+      if (item.value!=this.state.chosenRegion){
+      return (
+        <TouchableOpacity onPress={()=>this.chooseRegion(item.value)}>
+          <View style={{width:0.5*width,height:40,justifyContent:'center'}}>
+            <Text style={{fontFamily: 'NotoSans-Black',marginLeft:15,fontSize: 18, color:'grey', fontWeight: '700'}}>
+              {item.title}
+            </Text>
+          </View>
 
+        </TouchableOpacity>
+      )
+      }
+      else {
+        return(
+          <TouchableOpacity onPress={()=>this.chooseRegion(item.value)}>
+            <View style={{width:0.5*width,height:40,backgroundColor:'orange',justifyContent:'center'}}>
+              <Text style={{fontFamily: 'NotoSans-Black',marginLeft:15,fontSize: 18, color:'grey', fontWeight: '700'}}>
+                {item.title}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )
+      }
+    }
+    _onPressRegion()
+    {
+      this.setState({regionListOpen:(!this.state.regionListOpen)})
+    }
     render() {
       let title = "选择地区";
       switch(this.state.chosenLanguage) {
@@ -280,11 +315,52 @@ export default class SelectRegionAndLanguage extends Component {
           title = "Langues et Régions";
           break;
       };
+      // <Header title={title}
+      //         goBack={this.props.firstSelection ? null : this._goBack}/>
+      // {this.renderBody()}
       return (
         <View style={styles.container}>
-            <Header title={title}
-                    goBack={this.props.firstSelection ? null : this._goBack}/>
-            {this.renderBody()}
+          <View style={{height:0.06*height,width:width,marginTop:0.05*height,alignItems:'center'}}>
+            <Text style={{fontFamily: 'NotoSans-Black',fontSize: 18, color:'black', fontWeight: '800'}}>
+              地区和语言
+            </Text>
+            <View style={{marginTop:10,borderTopWidth:1,borderTopColor:'grey',width:width,height:0,}}>
+            </View>
+          </View>
+          <View style={{marginTop:0.03*height,height:0.65*height,width:width,}}>
+            <View style={{width:width,height:0.04*height,flexDirection:'row'}}>
+              <RegionPicker getRegion={this._getRegion} pressButton={this._onPressRegion} buttonStyle={{marginLeft:20}} />
+              <View style={{marginLeft:30,width:0.33*width,backgroundColor:'white',
+              alignItems:'center',
+              flexDirection:'row',}}>
+                <Text style={{marginLeft:15,fontFamily: 'NotoSans-Black',fontSize: 18, color:'black', fontWeight: '600'}} >简体中文</Text>
+                <Image style={{height:10, width: 20,right:5,top:10 ,position:'absolute'}} source={require('./image/login_language_btn_open.png')} />
+              </View>
+            </View>
+
+            <View style={{marginTop:0.05*height,height:0.55*height,width:width,}}>
+              <Image style={{height:height*0.55, width: width}} source={require('./image/login_language_bg_img.png')}/>
+            </View>
+            {this.state.regionListOpen && <View style={{position:'absolute',
+            top:0.04*height,left:20,width:0.5*width,height:0.3*height,backgroundColor:'white'}}>
+                <FlatList
+                    scrollEventThrottle={1}
+                    style={{flex:1}}
+                    data={regions}
+                    renderItem={this._renderItem}
+                    getItemLayout={(data, index) => (
+                       {length: 100, offset: 100 * index, index}
+                    )}
+                />
+              </View>
+            }
+          </View>
+          <TouchableOpacity onPress={this._confirm}>
+            <View style={{width:width,height:0.1*height,alignItems:'center',justifyContent:'center',marginTop:0.03*height}}>
+              <Image style={{height:height*0.078, width: width*0.7}} source={require('./image/login_language_btn_default.png')}/>
+            </View>
+
+          </TouchableOpacity>
         </View>
       );
     }
@@ -296,6 +372,7 @@ export default class SelectRegionAndLanguage extends Component {
       flex: 1,
       // justifyContent: 'center',
       // alignItems: 'center',
+      backgroundColor:'#e6e6e6',
     },
     languageButtonStyle: {
         // flex:0.2,
