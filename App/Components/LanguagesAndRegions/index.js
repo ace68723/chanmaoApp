@@ -368,18 +368,13 @@ export default class SelectRegionAndLanguage extends Component {
           title = "Langues et Régions";
           break;
       };
-      // <Header title={title}
-      //         goBack={this.props.firstSelection ? null : this._goBack}/>
-      // {this.renderBody()}
+        // <Header title={title}
+        //         goBack={this.props.firstSelection ? null : this._goBack}/>
+        // {this.renderBody()}
       return (
         <View style={styles.container}>
-          <View style={{height:0.06*height,width:width,marginTop:0.05*height,alignItems:'center'}}>
-            <Text style={{fontFamily: 'NotoSans-Black',fontSize: 18, color:'black', fontWeight: '800'}}>
-              地区和语言
-            </Text>
-            <View style={{marginTop:10,borderTopWidth:1,borderTopColor:'grey',width:width,height:0,}}>
-            </View>
-          </View>
+        <Header title={title}
+                goBack={this.props.firstSelection ? null : this._goBack}/>
           <View style={{marginTop:0.03*height,height:0.65*height,width:width,}}>
             <View style={{width:width,height:40,flexDirection:'row',}}>
               <RegionPicker getRegion={this._getRegion} pressButton={this._onPressRegion} buttonStyle={{marginLeft:20}} />
@@ -410,7 +405,7 @@ export default class SelectRegionAndLanguage extends Component {
           </View>
           <TouchableOpacity onPress={this._confirm}>
             <View style={{width:width,height:0.1*height,alignItems:'center',justifyContent:'center',marginTop:0.03*height}}>
-              <Image style={{height:height*0.09, width: width*0.75}} source={require('./image/login_language_btn_default.png')}/>
+              <Image style={{height:height*0.08,resizeMode:'contain', width: height*0.43}} source={require('./image/login_language_btn_default.png')}/>
             </View>
 
           </TouchableOpacity>
