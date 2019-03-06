@@ -33,7 +33,6 @@ export default class Picker extends BaseDialog {
 
   constructor(props) {
     super(props);
-    // console.log(this.props);
     // init picker selected
     if (!this.props.linked){
       this.state = {
@@ -45,11 +44,9 @@ export default class Picker extends BaseDialog {
       // This this linked datasource
       let primaryOptions = [];
       // let secondaryOptions = this.props.items[0][this.props.secondaryKey];
-      // console.log('1111111');
       for (i of this.props.items){
         primaryOptions.push(i[this.props.primaryKey])
       }
-      console.log(primaryOptions)
       this.state = {
         displayedPrimaryOptions: primaryOptions,
         // displayedSecondaryOptions: secondaryOptions,

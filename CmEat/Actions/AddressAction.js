@@ -84,7 +84,11 @@ export default {
             if (!addrInfo.city) {
               addrInfo.city = 'GTA';
             }
-            addrInfo.address = placeDetails.formatted_address
+            if (placeDetails.formatted_address.split(',')[0] != description.split(',')[0]) {
+              addrInfo.address = description;
+            } else {
+              addrInfo.address = placeDetails.formatted_address;
+            }
             dispatch({
               actionType: AppConstants.FORMAT_ADDRESS,
               addrInfo

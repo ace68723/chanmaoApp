@@ -31,9 +31,7 @@ class PickerView extends BaseComponent {
 
     constructor(props) {
         super(props);
-        console.log(props);
         list = ['', ''].concat(props.list).concat(['', '']);
-        console.log(list);
         this.colorPath = [];
         let length = list.length;
         for (let i = 0; i < length; i++) {
