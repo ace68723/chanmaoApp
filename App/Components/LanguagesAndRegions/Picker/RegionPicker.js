@@ -34,7 +34,7 @@ export default class RegionPicker extends Component {
 const styles = StyleSheet.create({
   container: {
     width:0.5*width,
-    height:0.04*height,
+    height:40,
     alignItems:'center',
     flexDirection:'row',
     backgroundColor:'white',

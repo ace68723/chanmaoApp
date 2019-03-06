@@ -381,13 +381,13 @@ export default class SelectRegionAndLanguage extends Component {
             </View>
           </View>
           <View style={{marginTop:0.03*height,height:0.65*height,width:width,}}>
-            <View style={{width:width,height:0.04*height,flexDirection:'row'}}>
+            <View style={{width:width,height:40,flexDirection:'row',}}>
               <RegionPicker getRegion={this._getRegion} pressButton={this._onPressRegion} buttonStyle={{marginLeft:20}} />
               <View style={{marginLeft:30,width:0.33*width,backgroundColor:'white',
               alignItems:'center',
               flexDirection:'row',}}>
                 <Text style={{marginLeft:15,fontFamily: 'NotoSans-Black',fontSize: 18, color:'black', fontWeight: '600'}} >简体中文</Text>
-                <Image style={{height:10, width: 20,right:5,top:10 ,position:'absolute'}} source={require('./image/login_language_btn_open.png')} />
+                <Image style={{height:10, width: 20,right:5,top:15 ,position:'absolute'}} source={require('./image/login_language_btn_open.png')} />
               </View>
             </View>
 
@@ -395,7 +395,7 @@ export default class SelectRegionAndLanguage extends Component {
               <Image style={{height:height*0.55, width: width}} source={require('./image/login_language_bg_img.png')}/>
             </View>
             {this.state.regionListOpen && <View style={{position:'absolute',
-            top:0.04*height,left:20,width:0.5*width,height:0.3*height,backgroundColor:'white'}}>
+            top:40,left:20,width:0.5*width,height:0.3*height,backgroundColor:'white'}}>
                 <FlatList
                     scrollEventThrottle={1}
                     style={{flex:1}}
@@ -410,7 +410,7 @@ export default class SelectRegionAndLanguage extends Component {
           </View>
           <TouchableOpacity onPress={this._confirm}>
             <View style={{width:width,height:0.1*height,alignItems:'center',justifyContent:'center',marginTop:0.03*height}}>
-              <Image style={{height:height*0.078, width: width*0.7}} source={require('./image/login_language_btn_default.png')}/>
+              <Image style={{height:height*0.09, width: width*0.75}} source={require('./image/login_language_btn_default.png')}/>
             </View>
 
           </TouchableOpacity>
