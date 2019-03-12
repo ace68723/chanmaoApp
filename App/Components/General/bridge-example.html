@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div style="text-align: center">
+        <button id="button">发送数据到react native</button>
+        <p style="text-align: center">收到react native发送的数据: <span id="data"></span></p>
+    </div>
+    <script>
+        function sendData(data) {
+            if (window.originalPostMessage) {
+                window.postMessage(data);
+            } else {
+                throw Error('postMessage接口还未注入');
+            }
+        }
+        window.onload = function () {
+            document.addEventListener('message', function (e) {
+                const data = JSON.parse(e.data)
+                // alert(data)
+                document.getElementById('data').textContent = data.data;
+            });
+            document.getElementById('button').onclick = function () {
+                sendData(JSON.stringify({ "key": "getToken" }));
+            }
+            setTimeout(() => {
+                sendData(JSON.stringify({ "key": "getToken" }));
+            }, 100); // Give time to RN to properly render webview
+        }
+    </script>
+</body>
+
+</html>
