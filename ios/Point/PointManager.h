@@ -11,4 +11,7 @@
 
 @interface PointManager : NSObject <RKDropdownAlertDelegate>
 
++ (id)sharedInstance;
+- (void)showReceivedNotification: (NSDictionary *)data;
+
 @end
